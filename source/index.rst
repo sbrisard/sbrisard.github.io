@@ -3,14 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Blog of Sebastien Brisard's documentation!
-=====================================================
+Welcome to the Blog of Sebastien Brisard's!
+===========================================
 
 Contents:
 
 .. toctree::
     :maxdepth: 2
 
+    2013/10/scientific-computing-under-windows-7
     2013/09/scientific-computing-under-windows-7_29
     2013/09/scientific-computing-under-windows-7_27
     2013/09/scientific-computing-under-windows-7_18
