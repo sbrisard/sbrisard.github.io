@@ -13,6 +13,7 @@ Contents:
 
    2013/09/scientific-computing-under-windows-7_29
    2013/09/scientific-computing-under-windows-7_27
+   2013/09/scientific-computing-under-windows-7
 
 Indices and tables
 ==================

@@ -1,0 +1,130 @@
+***************************************************
+Scientific computing under Windows 7, part 1: MinGW
+***************************************************
+
+The natural OS of choice for scientific computing is of course Linux. However, running Linux on a laptop means short battery life, problems with drivers, and so on. Do not mistake me: I LOVE Linux, and have been using it since 1998 (my first distro was actually Mandrake 1.0, long gone!). However, I must admit that Linux has made little progress in terms of energy management, while Windows has improved a lot in terms of stability, to the point that it now becomes possible to use under Windows (almost) all the tools that I came to love under Linux.
+
+I recently reverted to Windows 7 on my professional laptop. This means that a lot of scientific tools, which come as packages in any decent Linux distro, must be installed by hand. In this series, I intend to report on the installation of these tools, and the manual tweaking that is sometimes (well, often okay, most of the times) required.
+
+The first tool, or rather set of tools I'm going to describe is `MinGW <http://www.mingw.org/>`_, a contraction of "Minimalist GNU for Windows". It provides Windows binaries of all GNU compilation tools (``gcc``, ``automake``, ``autoconf``, ...). In turn, this suite will be extensively used to compile the libraries and programs that I need.
+
+Installation of MinGW, through the GUI ``mingw-get-setup.exe`` is fairly smooth. I chose ``C:\MinGW\`` as root directory for the MinGW system. Feel free to change this location, but avoid spaces in the full path. At the time of writing, I have installed the following packages
+
+  - ``mingw-developer-toolkit (bin)``
+  - ``mingw32-autoconf (bin)``
+  - ``mingw32-autoconf2.1 (bin)``
+  - ``mingw32-autoconf2.5 (bin)``
+  - ``mingw32-automake (bin)``
+  - ``mingw32-automake1.10 (bin)``
+  - ``mingw32-automake1.11 (bin)``
+  - ``mingw32-automake1.4 (bin)``
+  - ``mingw32-automake1.5 (bin)``
+  - ``mingw32-automake1.6 (bin)``
+  - ``mingw32-automake1.7 (bin)``
+  - ``mingw32-automake1.8 (bin)``
+  - ``mingw32-automake1.9 (bin)``
+  - ``mingw32-autotools (bin)``
+  - ``mingw32-base (bin)``
+  - ``mingw32-binutils (bin, dev)``
+  - ``mingw32-gcc (bin, dev)``
+  - ``mingw32-gcc-fortran (bin, dev)``
+  - ``mingw32-gcc-g++ (bin, dev)``
+  - ``mingw32-gdb (bin)``
+  - ``mingw32-gettext (bin, dev)``
+  - ``mingw32-libasprintf (dll)``
+  - ``mingw32-libexpat (dll)``
+  - ``mingw32-libgcc (dll)``
+  - ``mingw32-libgettextpo (dll)``
+  - ``mingw32-libgfortran (dll)``
+  - ``mingw32-libgmp (dll)``
+  - ``mingw32-libgomp (dll)``
+  - ``mingw32-libiconv (bin, dev, dll)``
+  - ``mingw32-libintl (dll)``
+  - ``mingw32-libltdl (dev, dll)``
+  - ``mingw32-libmpc (dll)``
+  - ``mingw32-libmpfr (dll)``
+  - ``mingw32-libpthread-old (dll)``
+  - ``mingw32-libpthreadgc (dll)``
+  - ``mingw32-libstdc++ (dll)``
+  - ``mingw32-libtool (bin)``
+  - ``mingw32-libz (dll)``
+  - ``mingw32-make (bin)``
+  - ``mingw32-mingw-get (bin, gui, lic)``
+  - ``mingw32-mingwrt (dev, dll)``
+  - ``mingw32-pthreads-w32 (dev)``
+  - ``mingw32-w32api (dev)``
+  - ``msys-autogen (bin)``
+  - ``msys-base (bin)``
+  - ``msys-bash (bin)``
+  - ``msys-bison (bin)``
+  - ``msys-bsdcpio (bin)``
+  - ``msys-bsdtar (bin)``
+  - ``msys-bzip2 (bin)``
+  - ``msys-console (bin)``
+  - ``msys-core (bin, doc, ext, lic)``
+  - ``msys-coreutils (bin, ext)``
+  - ``msys-cvs (bin)``
+  - ``msys-cygutils (bin)``
+  - ``msys-diffstat (bin)``
+  - ``msys-diffutils (bin)``
+  - ``msys-dos2unix (bin)``
+  - ``msys-file (bin)``
+  - ``msys-findutils (bin)``
+  - ``msys-flex (bin)``
+  - ``msys-gawk (bin)``
+  - ``msys-grep (bin)``
+  - ``msys-guile (bin)``
+  - ``msys-gzip (bin)``
+  - ``msys-inetutils (bin)``
+  - ``msys-less (bin)``
+  - ``msys-libarchive (dll)``
+  - ``msys-libbz2 (dll)``
+  - ``msys-libcrypt (dll)``
+  - ``msys-libexpat (dll)``
+  - ``msys-libgdm (dll)``
+  - ``msys-libgmp (dll)``
+  - ``msys-libguile (dll, rtm)``
+  - ``msys-libiconv (dll)``
+  - ``msys-libintl (dll)``
+  - ``msys-libltdl (dll)``
+  - ``msys-liblzma (dll)``
+  - ``msys-libmagic (dll)``
+  - ``msys-libminires (dll)``
+  - ``msys-libopenssl (dll)``
+  - ``msys-libopts (dll)``
+  - ``msys-libpopt (dll)``
+  - ``msys-libregex (dll)``
+  - ``msys-libtermcap (dll)``
+  - ``msys-libxml2 (dll)``
+  - ``msys-lndir (bin)``
+  - ``msys-m4 (bin)``
+  - ``msys-make (bin)``
+  - ``msys-mktemp (bin)``
+  - ``msys-openssh (bin)``
+  - ``msys-openssl (bin)``
+  - ``msys-patch (bin)``
+  - ``msys-perl (bin)``
+  - ``msys-rsync (bin)``
+  - ``msys-sed (bin)``
+  - ``msys-tar (bin)``
+  - ``msys-termcap (bin)``
+  - ``msys-texinfo (bin)``
+  - ``msys-unzip (bin)``
+  - ``msys-vim (bin)``
+  - ``msys-wget (bin)``
+  - ``msys-xz (bin)``
+  - ``msys-zlib (dll)``
+
+After installation, you must edit ``C:\MinGW\msys\1.0\etc\fstab``, and add the following line::
+
+  C:\MinGW  /mingw
+
+By default, MinGW sets up your home directory to point to ``/home/$LOGNAME/``. If you want it to point to your Windows home instead, edit ``C:\MinGW\msys\1.0\etc\profile``, and replace the line::
+
+  HOME = "/home/$LOGNAME"
+
+with::
+
+  HOME="$USERPROFILE"
+
+... and you should be ready to go!
