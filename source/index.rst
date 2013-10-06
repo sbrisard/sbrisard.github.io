@@ -9,12 +9,13 @@ Welcome to Blog of Sebastien Brisard's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   2013/09/scientific-computing-under-windows-7_29
-   2013/09/scientific-computing-under-windows-7_27
-   2013/09/scientific-computing-under-windows-7_18
-   2013/09/scientific-computing-under-windows-7
+    2013/09/scientific-computing-under-windows-7_29
+    2013/09/scientific-computing-under-windows-7_27
+    2013/09/scientific-computing-under-windows-7_18
+    2013/09/scientific-computing-under-windows-7
+    2013/09/latex-bug-with-subequations
 
 Indices and tables
 ==================
