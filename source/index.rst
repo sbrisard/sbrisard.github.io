@@ -21,6 +21,7 @@ Contents:
     2013/09/latex-bug-with-subequations
     2013/09/watch-it-integer-division-in-python-3
     2013/09/first-things-first-import-petsc4py
+    2011/08/some-gruesome-details
 
 Indices and tables
 ==================
