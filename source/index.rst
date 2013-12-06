@@ -11,6 +11,7 @@ Contents:
 .. toctree::
     :maxdepth: 2
 
+    2013/12/elastic-constants-of-isotropic-material
     2013/11/new-accepted-manuscript
     2013/10/scientific-computing-under-windows-7
     2013/09/scientific-computing-under-windows-7_29
