@@ -1,0 +1,128 @@
+* Modifications au modèle de document Blogger
+
+** Mathjax et Sphinx
+Les délimiteurs des formules mathématiques sont \(...\) et \[...]\. Il faut donc mettre à jour le modèle de document de la façon suivante
+
+Juste après <head>
+
+    <!-- MathJax configuration -->
+    <script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' type='text/javascript'>
+      MathJax.Hub.Config({
+        extensions: [&#39;tex2jax.js&#39;,
+                     &#39;TeX/AmsMath.js&#39;,
+                     &#39;TeX/AMSsymbols.js&#39;],
+                     jax: [&#39;input/TeX&#39;,
+                     &#39;output/HTML-CSS&#39;],
+                     tex2jax: {
+                     inlineMath: [ [&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;] ],
+                     displayMath: [ [&#39;$$&#39;,&#39;$$&#39;], [&#39;\\[&#39;, &#39;\\]&#39;] ],
+                     processEscapes: true,
+                     },
+                     TeX: {
+                     TagSide: &#39;left&#39;,
+                     Macros: {
+                     bracki: [&#39;\\left(#1\\right)&#39;, 1],
+                     brackii: [&#39;\\left[#1\\right]&#39;, 1],
+                     brackiii: [&#39;\\left\\{#1\\right\\}&#39;, 1],
+                     abs: [&#39;\\left\|#1\\right\|&#39;, 1],
+                     volavg: [&#39;\\overline{#1}&#39;, 1],
+                     vec: [&#39;{\\mathbf{#1}}&#39;, 1],
+                     tensii: [&#39;\\vec{#1}&#39;, 1],
+                     tensiv: [&#39;\\vec{#1}&#39;, 1],
+                     svec: [&#39;{\\boldsymbol{#1}}&#39;, 1],
+                     stensii: [&#39;\\svec{#1}&#39;, 1],
+                     stensiv: [&#39;\\svec{#1}&#39;, 1],
+                     identii: &#39;\\tensii{i}&#39;,
+                     identiv: &#39;\\tensiv{I}&#39;,
+                     sphprojiv: &#39;\\tensiv{J}&#39;,
+                     devprojiv: &#39;\\tensiv{K}&#39;,
+                     diff: &#39;\\operatorname{d}&#39;,
+                     div: &#39;\\operatorname{div}&#39;,
+                     naturals: &#39;\\mathbb N&#39;,
+                     integers: &#39;\\mathbb Z&#39;,
+                     rationals: &#39;\\mathbb Q&#39;,
+                     reals: &#39;\\mathbb R&#39;,
+                     complexes: &#39;\\mathbb C&#39;,
+                     indicator: &#39;\\boldsymbol{1}&#39;,
+                     strain: &#39;\\stensii{\\varepsilon}&#39;,
+                     stress: &#39;\\stensii{\\sigma}&#39;,
+                     polarization: &#39;\\stensii{\\tau}&#39;,
+                     prestress: &#39;\\stensii{\\varpi}&#39;,
+                     macrostrain: &#39;\\tensii{E}&#39;,
+                     macrostress: &#39;\\stensii{\\Sigma}&#39;,
+                     macroprestress: &#39;\\stensii{\\Pi}&#39;,
+                     stiffness: &#39;\\tensiv{C}&#39;,
+                     bulkmod: &#39;\\kappa&#39;,
+                     shearmod: &#39;\\mu&#39;,
+                     macrobulkmod: &#39;K&#39;,
+                     macroshearmod: &#39;G&#39;,
+                     straincomp: &#39;\\varepsilon&#39;,
+                     stresscomp: &#39;\\sigma&#39;,
+                     polarizationcomp: &#39;\\tau&#39;,
+                     prestresscomp: &#39;\\varpi&#39;,
+                     greeniv: &#39;\\stensiv{\\Gamma}&#39;,
+                     greenivcomp: &#39;\\Gamma&#39;,
+                     hill: &#39;\\tensiv{P}&#39;,
+                     eshelby: &#39;\\tensiv{S}&#39;,
+                     }
+                     },
+                     &#39;HTML-CSS&#39;: { availableFonts: [&#39;TeX&#39;] }
+                     });
+    </script>
+    <!-- End of MathJax configuration -->
+
+Modifier la définition de la variable main.section.margin (mettre à zero), car Sphinx inclue toute section dans un <div class="section">...</div>.
+
+<Variable name="main.section.margin" description="Main Section Margin" type="length" default="15px" value="0em"/>
+
+
+#alert{
+text-align: center;
+color: red;
+}
+.theorem:before{
+content: "Theorem.";
+font-weight: bold;
+}
+.theorem{
+background-color:#eeeeee;
+}
+.proof{
+font-size:1.0em;
+margin-left:25px;
+}
+div.math {
+    text-align: center;
+}
+span.eqno {
+    float: right;
+}
+
+avant
+
+    ]]></b:skin>
+
+* Equations numérotées
+** Sous blogger
+Ajouter les lignes suivantes
+
+#+BEGIN_SRC html
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});
+</script>
+#+END_SRC html
+
+avant de charger MathJax
+
+** Sous orgmode
+
+Dans l'en-tête, ajouter les commandes suivantes
+
+#+BEGIN_SRC
+#+HTML_HEAD_EXTRA: <script type="text/x-mathjax-config">
+#+HTML_HEAD_EXTRA:   MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});
+#+HTML_HEAD_EXTRA: </script>
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX: path:"http://cdn.mathjax.org/mathjax/latest/MathJax.js"
+#+END_SRC
