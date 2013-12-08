@@ -1,0 +1,34 @@
+#+TITLE: Welcome!
+#+DATE: <2013-12-06 Fri>
+#+AUTHOR: Sébastien Brisard
+#+EMAIL: sb@new-host.home
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:t todo:t |:t
+#+CREATOR: Emacs 24.3.1 (Org mode 8.2.1)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD:
+#+INCLUDE: "./header.org"
+
+You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
+
+[[./essai.org][Essai]]
+[[./p/home.org][My professional background]]
+
+# Local Variables:
+# org-publish-project-alist: (("blog"
+#          :base-directory "~/Documents/blog/org/"
+#          :base-extension "org"
+#          :publishing-directory "~/Documents/blog/html/"
+#          :recursive t
+#          :publishing-function org-html-publish-to-html
+#          :section-numbers nil
+#          :with-toc nil))
+# End:

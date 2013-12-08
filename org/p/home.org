@@ -1,0 +1,62 @@
+#+TITLE: My professional background
+#+DATE: <2013-12-06 Fri>
+#+AUTHOR: Sébastien Brisard
+#+EMAIL: sebastien.brisard@ifsttar.fr
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:nil p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:nil todo:t |:t
+#+CREATOR: Emacs 24.3.1 (Org mode 8.2.1)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto
+#+OPTIONS: html-preamble:t html-scripts:t html-style:t
+#+OPTIONS: html5-fancy:nil tex:t
+#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.1)
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD:
+#+HTML_HEAD_EXTRA:
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+
+I am currently a research scientist at [[http://navier.enpc.fr/][Navier laboratory]], [[http://www.ifsttar.fr/][IFSTTAR]] (/Institut Français des Sciences et Techniques du Transport, de l'Aménagement et des Réseaux/, French Institute of Sciences and Technology for Transport, Development and Networks).
+
+* Research interests
+
+  - Theoretical and numerical homogenization of the mechanical properties
+  - Characterization by non-destructive techniques (small-angle X-ray scattering, micro-tomography) of heterogeneous materials
+  - Simulation of random microstructures
+  - Image analysis
+
+* Curriculum
+
+  - sept. 2010 - now :: Research scientist at [[http://www.ifsttar.fr/][IFSTTAR]]. Joined [[http://navier.enpc.fr/][Navier laboratory]] nov. 2011.
+  - sept. 2007 - aug. 2010 :: PhD at [[http://www.enpc.fr/][Ecole des Ponts ParisTech]], Paris, France, [[http://navier.enpc.fr/][Navier laboratory]]. /Morphological analysis and numerical homogenization: application to cement paste/ (under the supervision of Pr. Luc Dormieux and Pr. Pierre Levitz).
+  - march 2007 - aug. 2007 :: Visiting scholar at the [[http://berkeley.edu/][University of California]], Berkeley, [[http://www.ce.berkeley.edu][Civil and Environmental Engineering]] dept. /Characterization of the orientation of fibers by Digital Laminography in Ultra-High Performance, Fiber Reinforced Concrete/ (under the supervision of Pr. Paulo J. M. Monteiro).
+  - sept. 2003 - feb. 2007 :: Bridge engineer at [[http://www.setra.equipement.gouv.fr][Sétra]], Bagneux, France (french highway administration).
+  - jul. 2001 - aug. 2002 :: Structural engineer (intern) at [[http://www.arup.com][ARUP]], London, UK.
+  - sept. 2000 - aug. 2003 :: M. Eng. in civil engineering at [[http://www.enpc.fr][Ecole des Ponts ParisTech]], Champs-sur-Marne, France
+  - sept. 1998 - aug. 2000 :: B. Sc. at [[http://www.polytechnique.fr][Ecole Polytechnique]], Palaiseau, France.
+
+* Teaching
+
+Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole des Ponts ParisTech for the following classes
+
+  - Theory of Plates and Shells
+  - Structural analysis (until 2012)
+
+* Publications
+
+  - <<BRIS2013A>> [[http://dx.doi.org/10.1016/j.jmps.2013.08.009][Brisard et al (2013)]] :: S. Brisard, K. Sab and L. Dormieux, /New boundary conditions for the computation of the apparent stiffness of statistical volume elements/, Journal of the Mechanics and Physics of Solids 61(12): 2638-2658, 2013 ([[http://hal-enpc.archives-ouvertes.fr/hal-00871767][preprint]])
+  - <<BRIS2013>> [[http://link.aps.org/doi/10.1103/PhysRevE.87.013305][Brisard and Levitz (2013)]] :: S. Brisard and P. Levitz, /Small-angle scattering of dense, polydisperse granular porous media: Computation free of size effects/, Physical Review E 87(1): 013305, 2013 ([[http://hal-enpc.archives-ouvertes.fr/hal-00779317][preprint]])
+  - [[http://dx.doi.org/10.1016/j.cma.2012.01.003][Brisard and Dormieux (2012)]] :: S. Brisard and L. Dormieux, /Combining Galerkin approximation techniques with the principle of Hashin and Shtrikman to derive a new FFT-based numerical method for the homogenization of composites/, Computer Methods in Applied Mechanics and Engineering 217-220: 197-212, 2012 ([[http://hal-enpc.archives-ouvertes.fr/hal-00722361][preprint]])
+  - [[http://www.minsocam.org/msa/ammin/TOC/2012/FM12.html][Brisard et al (2012)]] :: S. Brisard, R. S. Chae, I. Bihannic, L. Michot, P. Guttmann, J. Thieme, G. Schneider, P. J. M. Monteiro and P. Levitz, /Morphological quantification of hierarchical geomaterials by X-ray nano-CT bridges the gap from nano to micro length scales/, American Mineralogist 97(203): 480-483, 2012
+  - <<BRIS2010B>> [[http://dx.doi.org/10.1016/j.commatsci.2010.08.032][Brisard et al (2010a)]] :: S. Brisard, L. Dormieux and D. Kondo, /Hashin-Shtrikman bounds on the shear modulus of a nanocomposite with spherical inclusions and interface effects/, Computational Materials Science 50(2): 403-410, 2010 ([[http://hal.archives-ouvertes.fr/hal-00539812][preprint]])
+  - <<BRIS2010A>> [[http://dx.doi.org/10.1016/j.commatsci.2010.06.009][Brisard and Dormieux (2010)]] :: S. Brisard and L. Dormieux, /FFT-based methods for the mechanics of composites: a general variational framework/, Computational Materials Science 49(3): 663-671, 2010 ([[http://hal-enpc.archives-ouvertes.fr/hal-00722339][preprint]])
+  - <<BRIS2010>> [[http://dx.doi.org/10.1016/j.commatsci.2010.02.027][Brisard et al (2010)]] :: S. Brisard, L. Dormieux and D. Kondo, /Hashin-Shtrikman bounds on the bulk modulus of a nanocomposite with spherical inclusions and interface effects/, Computational Materials Science 48(3): 589-596, 2010 ([[][preprint]])
+  - <<COUS2009>> [[http://dx.doi.org/10.2140/jomms.2009.4.263][Coussy and Brisard (2009)]] :: O. P. Coussy and S. Brisard, /Prediction of drying shrinkage beyond the pore isodeformation assumption/, Journal of Mechanics of Materials and Structures 4(2): 263-279, 2009
