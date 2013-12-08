@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Blog of Sebastien Brisard'
+project = 'Blog of Sébastien Brisard'
 copyright = '2013, S. Brisard'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -167,7 +167,7 @@ html_add_permalinks = None
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'BlogofSebastienBrisarddoc'
+htmlhelp_basename = 'BlogofSebastienBrisard'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -186,7 +186,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'BlogofSebastienBrisard.tex', 'Blog of Sebastien Brisard Documentation',
+  ('index', 'BlogofSebastienBrisard.tex', 'Blog of Sébastien Brisard',
    'S. Brisard', 'manual'),
 ]
 
@@ -216,7 +216,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'blogofsebastienbrisard', 'Blog of Sebastien Brisard Documentation',
+    ('index', 'blogofsebastienbrisard', 'Blog of Sébastien Brisard',
      ['S. Brisard'], 1)
 ]
 
@@ -230,7 +230,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'BlogofSebastienBrisard', 'Blog of Sebastien Brisard Documentation',
+  ('index', 'BlogofSebastienBrisard', 'Blog of Sébastien Brisard',
    'S. Brisard', 'BlogofSebastienBrisard', 'One line description of project.',
    'Miscellaneous'),
 ]

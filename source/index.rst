@@ -1,10 +1,12 @@
-.. Blog of Sebastien Brisard documentation master file, created by
+.. Blog of Sebastien Brisard master file, created by
    sphinx-quickstart on Sat Sep 28 09:28:42 2013.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the Blog of Sebastien Brisard's!
-===========================================
+Welcome!
+========
+
+You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
 Contents:
 
@@ -22,6 +24,7 @@ Contents:
     2013/09/watch-it-integer-division-in-python-3
     2013/09/first-things-first-import-petsc4py
     2011/08/some-gruesome-details
+    p/home
 
 Indices and tables
 ==================
