@@ -14,3 +14,70 @@
 #+HTML_HEAD:
 #+HTML_HEAD_EXTRA: <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
 #+HTML_MATHJAX: path:"http://cdn.mathjax.org/mathjax/latest/MathJax.js"
+#+HTML_HEAD_EXTRA: <script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' type='text/javascript'>
+#+HTML_HEAD_EXTRA:   MathJax.Hub.Config({
+#+HTML_HEAD_EXTRA:       extensions: ['tex2jax.js', 'TeX/AmsMath.js',
+#+HTML_HEAD_EXTRA:                    'TeX/AMSsymbols.js'],
+#+HTML_HEAD_EXTRA:       jax: ['input/TeX', 'output/HTML-CSS'],
+#+HTML_HEAD_EXTRA:       tex2jax: {
+#+HTML_HEAD_EXTRA:           inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+#+HTML_HEAD_EXTRA:           displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+#+HTML_HEAD_EXTRA:           processEscapes: true,
+#+HTML_HEAD_EXTRA:       },
+#+HTML_HEAD_EXTRA:       TeX: {
+#+HTML_HEAD_EXTRA:       TagSide: 'left',
+#+HTML_HEAD_EXTRA:       Macros: {
+#+HTML_HEAD_EXTRA:           abs: ['\\left\|#1\\right\|', 1],
+#+HTML_HEAD_EXTRA:           bulkmod: '\\kappa',
+#+HTML_HEAD_EXTRA:           complexes: '\\mathbb C',
+#+HTML_HEAD_EXTRA:           devprojiv: '\\tensiv{K}',
+#+HTML_HEAD_EXTRA:           diff: '\\operatorname{d}',
+#+HTML_HEAD_EXTRA:           eshelby: '\\tensiv{S}',
+#+HTML_HEAD_EXTRA:           greeniv: '\\stensiv{\\Gamma}',
+#+HTML_HEAD_EXTRA:           greenivcomp: '\\Gamma',
+#+HTML_HEAD_EXTRA:           hill: '\\tensiv{P}',
+#+HTML_HEAD_EXTRA:           identii: '\\tensii{i}',
+#+HTML_HEAD_EXTRA:           identiv: '\\tensiv{I}',
+#+HTML_HEAD_EXTRA:           indicator: '\\boldsymbol{1}',
+#+HTML_HEAD_EXTRA:           integers: '\\mathbb Z',
+#+HTML_HEAD_EXTRA:           naturals: '\\mathbb N',
+#+HTML_HEAD_EXTRA:           polarization: '\\stensii{\\tau}',
+#+HTML_HEAD_EXTRA:           polarizationcomp: '\\tau',
+#+HTML_HEAD_EXTRA:           prestress: '\\stensii{\\varpi}',
+#+HTML_HEAD_EXTRA:           prestresscomp: '\\varpi',
+#+HTML_HEAD_EXTRA:           rationals: '\\mathbb Q',
+#+HTML_HEAD_EXTRA:           reals: '\\mathbb R',
+#+HTML_HEAD_EXTRA:           shearmod: '\\mu',
+#+HTML_HEAD_EXTRA:           sphprojiv: '\\tensiv{J}',
+#+HTML_HEAD_EXTRA:           stensii: ['\\svec{#1}', 1],
+#+HTML_HEAD_EXTRA:           stensiv: ['\\svec{#1}', 1],
+#+HTML_HEAD_EXTRA:           stiffness: '\\tensiv{C}',
+#+HTML_HEAD_EXTRA:           strain: '\\stensii{\\varepsilon}',
+#+HTML_HEAD_EXTRA:           straincomp: '\\varepsilon',
+#+HTML_HEAD_EXTRA:           stress: '\\stensii{\\sigma}',
+#+HTML_HEAD_EXTRA:           stresscomp: '\\sigma',
+#+HTML_HEAD_EXTRA:           svec: ['{\\boldsymbol{#1}}', 1],
+#+HTML_HEAD_EXTRA:           tensii: ['\\vec{#1}', 1],
+#+HTML_HEAD_EXTRA:           tensiv: ['\\vec{#1}', 1],
+#+HTML_HEAD_EXTRA:           vec: ['{\\mathbf{#1}}', 1],
+#+HTML_HEAD_EXTRA:           volavg: ['\\overline{#1}', 1],
+#+HTML_HEAD_EXTRA:           Prestress: '\\stensii{\\Pi}',
+#+HTML_HEAD_EXTRA:           Strain: '\\tensii{E}',
+#+HTML_HEAD_EXTRA:           Stress: '\\stensii{\\Sigma}',
+#+HTML_HEAD_EXTRA:       }
+#+HTML_HEAD_EXTRA:   },
+#+HTML_HEAD_EXTRA:   'HTML-CSS': { availableFonts: ['TeX'] }
+#+HTML_HEAD_EXTRA: });
+#+HTML_HEAD_EXTRA: </script>
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
