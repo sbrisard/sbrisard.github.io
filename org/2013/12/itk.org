@@ -1,0 +1,78 @@
+#+TITLE: Scientific computing under Windows 7, part 6: ~ITK~ (prerequisites)
+#+INCLUDE: "../../header.org"
+
+From the [[http://www.itk.org][official website]]
+
+#+BEGIN_QUOTE
+ITK is an open-source, cross-platform system that provides developers with an extensive suite of software tools for image analysis.  Developed through extreme programming methodologies, ITK employs leading-edge algorithms for registering and segmenting multidimensional data.
+#+END_QUOTE
+
+Building ~ITK~ under Windows 7 is quite a trip, and will actually require several posts. We start with all prerequisites for this project.
+
+* ~SWIG~ (Simplified Wrapper and Interface Generator)
+
+From the [[http://www.swig.org/][official website]]
+
+#+BEGIN_QUOTE
+SWIG is a software development tool that connects programs written in C and C++ with a variety of high-level programming languages. SWIG is used with different types of target languages including common scripting languages such as Perl, PHP, Python, Tcl and Ruby. 
+#+END_QUOTE
+
+As I would like to use ~ITK~ with Python, I need to build the Python bindings, which requires ~SWIG~. Under Windows, the recommended procedure is to install the pre-built binaries (~swigwin~). Download the archive, and unzip it to the place of your choice (for example, ~C:\opt\~). The executable program ~swig.exe~ should be available.
+
+* ~Doxygen~
+
+From the [[http://www.stack.nl/~dimitri/doxygen/index.html][official website]]
+
+#+BEGIN_QUOTE
+Doxygen is the de facto standard tool for generating documentation from annotated C++ sources, but it also supports other popular programming languages such as C, Objective-C, C#, PHP, Java, Python, IDL (Corba, Microsoft, and UNO/OpenOffice flavors), Fortran, VHDL, Tcl, and to some extent D.
+#+END_QUOTE
+
+Use the windows installer.
+
+* ~libjpeg~
+
+From the [[http://www.ijg.org/][official website]]
+
+#+BEGIN_QUOTE
+ IJG is an informal group that writes and distributes a widely used free library for JPEG image compression. The first version was released on 7-Oct-1991. 
+#+END_QUOTE
+
+Download and unarchive the source code. Then, from the =MSYS= console
+
+#+BEGIN_EXAMPLE
+$ ./configure --prefix=/mingw
+$ make
+$ make install
+#+END_EXAMPLE
+
+* ~libpng~
+
+From the [[http://www.libpng.org/pub/png/libpng.html][official website]]
+
+#+BEGIN_QUOTE
+~libpng~ is the official PNG reference library. It supports almost all PNG features, is extensible, and has been extensively tested for over 18 years. 
+#+END_QUOTE
+
+Make sure you have installed the ~mingw32-libz~ (~dev~ /and/ ~dll~). Download and unarchive the source code. Then, from the ~MSYS~ console
+
+#+BEGIN_EXAMPLE
+$ ./configure --prefix=/mingw
+$ make
+$ make install
+#+END_EXAMPLE
+
+* ~libtiff~
+
+From the [[http://www.libtiff.org/][official website]]
+
+#+BEGIN_QUOTE
+ This software provides support for the Tag Image File Format (TIFF), a widely used format for storing image data. The latest version of the TIFF specification is available on-line in several different formats, as are a number of Technical Notes (TTN's). 
+#+END_QUOTE
+
+Make sure you have installed the ~mingw32-libzma~ (~dev~ /and/ ~dll~). Download and unarchive the source code. Then, from the ~MSYS~ console.
+
+#+BEGIN_EXAMPLE
+./configure --prefix=/mingw
+make
+make install
+#+END_EXAMPLE
