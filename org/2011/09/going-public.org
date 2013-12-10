@@ -1,0 +1,4 @@
+#+TITLE: Going public
+#+INCLUDE: "../../header.org"
+
+So here we go. This website goes public. It will build up little by little (be patient). 
