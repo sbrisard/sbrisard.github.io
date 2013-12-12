@@ -1,108 +1,116 @@
-.. highlight:: none
+#+TITLE: Scientific computing under Windows 7, part 4: FFTW with support for MPI
+#+INCLUDE: "../../header.org"
 
-***********************************************************************
-Scientific computing under Windows 7, part 4: FFTW with support for MPI
-***********************************************************************
+From the  [[http://www.fftw.org/][official website]]
 
-From the `official website <http://www.fftw.org/>`_
+#+BEGIN_QUOTE
+FFTW is a C subroutine library for computing the discrete Fourier transform (DFT) in one or more dimensions, of arbitrary input size, and of both real and complex data (as well as of even/odd data, i.e. the discrete cosine/sine transforms or DCT/DST).
+#+END_QUOTE
 
-  FFTW is a C subroutine library for computing the discrete Fourier transform (DFT) in one or more dimensions, of arbitrary input size, and of both real and complex data (as well as of even/odd data, i.e. the discrete cosine/sine transforms or DCT/DST).
+If you do not need MPI support with FFTW, I recommend you download and install the [[http://www.fftw.org/install/windows.html][precompiled binaries]]. Incidentally, here are the options used to produce these precompiled binaries (found in the script [[ftp://ftp.fftw.org/pub/fftw/BUILD-MINGW32.sh][BUILD-MINGW32.sh]])
 
-If you do not need MPI support with FFTW, I recommend you download and installed the `precompiled binaries <http://www.fftw.org/install/windows.html>`_. Incidentally, here are the options used to produce these precompiled binaries (found in the script `BUILD-MINGW32.sh <ftp://ftp.fftw.org/pub/fftw/BUILD-MINGW32.sh>`_)::
+#+BEGIN_EXAMPLE
+--prefix=`pwd`/mingw32 --host=i686-w64-mingw32 --with-our-malloc --with-windows-f77-mangling --enable-shared --disable-static --enable-threads --with-combined-threads --with-incoming-stack-boundary=2
+#+END_EXAMPLE
 
-  --prefix=`pwd`/mingw32 --host=i686-w64-mingw32 --with-our-malloc --with-windows-f77-mangling --enable-shared --disable-static --enable-threads --with-combined-threads --with-incoming-stack-boundary=2
+If you do, however, need support for MPI, be warned that you are going to get your hands real dirty. Compilation of the MPI version of FFTW indeed fails
 
-If you do, however, need support for MPI, be warned that you are going to get your hands real dirty. Compilation of the MPI version of FFTW indeed fails::
+#+BEGIN_EXAMPLE
+$ ./configure --prefix=/mingw --with-our-malloc --with-windows-f77-mangling --enable-shared --disable-static --enable-threads --with-combined-threads --with-incoming-stack-boundary=2 --enable-sse2 --enable-avx --enable-mpi MPILIBS="-lmsmpi" LDFLAGS="-L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386" CPPFLAGS="-I/c/opt/Microsoft_HPC_Pack_2012/Inc"
+$ mingw32-make -j4 > make_fftw3_mpi_shared.log
+#+END_EXAMPLE
 
-  $ ./configure --prefix=/mingw --with-our-malloc --with-windows-f77-mangling --enable-shared --disable-static --enable-threads --with-combined-threads --with-incoming-stack-boundary=2 --enable-sse2 --enable-avx --enable-mpi MPILIBS="-lmsmpi" LDFLAGS="-L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386" CPPFLAGS="-I/c/opt/Microsoft_HPC_Pack_2012/Inc"
-  $ mingw32-make -j4 > make_fftw3_mpi_shared.log
+produces the following error messages (please note that we have logged all steps of the build in a file =make_fftw3_mpi_shared.log=, this will be usefull later on)
 
-produces the following error messages (please note that we have logged all steps of the build in a file ``make_fftw3_mpi_shared.log``, this will be usefull later on)::
+#+BEGIN_EXAMPLE
+C:/MinGW/msys/1.0/bin/sh.exe ../libtool --tag=CC   --mode=link gcc -std=gnu99 -pthread -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math -L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386 -o mpi -bench.exe mpi_bench-mpi-bench.o mpi_bench-fftw-bench.o mpi_bench-hook.o libfftw3_mpi.la ../libfftw3.la ../libbench2/libbench2.a -lmsmpi -lm libtool: link: gcc -std=gnu99 -pthread -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math -o .libs/mpi-bench.exe mpi_bench-mpi-bench.o mpi_bench-fftw-bench.o mpi_bench-hook.o -L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386 ./.libs/libfftw3_mpi.a c:/src/fftw-3.3.3/.libs/libfftw3.dll.a ../.libs/libfftw3.dll.a ../libbench2/libbench2.a -lmsmpi -pthread -L/mingw/lib
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x4f4): undefined reference to `fftw_is_prime'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x6c0): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xb23): undefined reference to `fftw_is_prime'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xdff): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xe0e): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xf35): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xf95): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x1105): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x14d7): more undefined references to `fftw_imax' follow
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x236a): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x26f2): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2863): undefined reference to `fftw_map_r2r_kind'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x28fe): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x290b): undefined reference to `fftw_ifree0'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2a30): undefined reference to `fftw_map_r2r_kind'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2acb): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2ada): undefined reference to `fftw_ifree0'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2c05): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2d83): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2f30): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x32c2): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x367a): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3c07): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3c16): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3e10): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3e2b): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3e60): undefined reference to `fftw_imax'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x415c): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x4316): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x45a5): undefined reference to `fftw_map_r2r_kind'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x4645): undefined reference to `fftw_mkapiplan'
+./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x464f): undefined reference to `fftw_ifree0'
+c:/mingw/bin/../lib/gcc/mingw32/4.8.1/../../../../mingw32/bin/ld.exe: ./.libs/libfftw3_mpi.a(api.o): bad reloc address 0x20 in section `.eh_frame'
+collect2.exe: error: ld returned 1 exit status
+Makefile:420: recipe for target 'mpi-bench.exe' failed
+mingw32-make[3]: *** [mpi-bench.exe] Error 1
+mingw32-make[3]: Leaving directory 'c:/src/fftw-3.3.3/mpi'
+Makefile:342: recipe for target 'all' failed
+mingw32-make[2]: *** [all] Error 2
+mingw32-make[2]: Leaving directory 'c:/src/fftw-3.3.3/mpi'
+Makefile:548: recipe for target 'all-recursive' failed
+mingw32-make[1]: *** [all-recursive] Error 1
+mingw32-make[1]: Leaving directory 'c:/src/fftw-3.3.3'
+Makefile:416: recipe for target 'all' failed
+mingw32-make: *** [all] Error 2
+#+END_EXAMPLE
 
-  C:/MinGW/msys/1.0/bin/sh.exe ../libtool --tag=CC   --mode=link gcc -std=gnu99 -pthread -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math -L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386 -o mpi -bench.exe mpi_bench-mpi-bench.o mpi_bench-fftw-bench.o mpi_bench-hook.o libfftw3_mpi.la ../libfftw3.la ../libbench2/libbench2.a -lmsmpi -lm libtool: link: gcc -std=gnu99 -pthread -O3 -fomit-frame-pointer -mtune=native -malign-double -fstrict-aliasing -fno-schedule-insns -ffast-math -o .libs/mpi-bench.exe mpi_bench-mpi-bench.o mpi_bench-fftw-bench.o mpi_bench-hook.o -L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386 ./.libs/libfftw3_mpi.a c:/src/fftw-3.3.3/.libs/libfftw3.dll.a ../.libs/libfftw3.dll.a ../libbench2/libbench2.a -lmsmpi -pthread -L/mingw/lib
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x4f4): undefined reference to `fftw_is_prime'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x6c0): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xb23): undefined reference to `fftw_is_prime'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xdff): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xe0e): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xf35): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0xf95): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x1105): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x14d7): more undefined references to `fftw_imax' follow
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x236a): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x26f2): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2863): undefined reference to `fftw_map_r2r_kind'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x28fe): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x290b): undefined reference to `fftw_ifree0'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2a30): undefined reference to `fftw_map_r2r_kind'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2acb): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2ada): undefined reference to `fftw_ifree0'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2c05): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2d83): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x2f30): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x32c2): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x367a): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3c07): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3c16): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3e10): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3e2b): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x3e60): undefined reference to `fftw_imax'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x415c): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x4316): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x45a5): undefined reference to `fftw_map_r2r_kind'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x4645): undefined reference to `fftw_mkapiplan'
-  ./.libs/libfftw3_mpi.a(api.o):api.c:(.text+0x464f): undefined reference to `fftw_ifree0'
-  c:/mingw/bin/../lib/gcc/mingw32/4.8.1/../../../../mingw32/bin/ld.exe: ./.libs/libfftw3_mpi.a(api.o): bad reloc address 0x20 in section `.eh_frame'
-  collect2.exe: error: ld returned 1 exit status
-  Makefile:420: recipe for target 'mpi-bench.exe' failed
-  mingw32-make[3]: *** [mpi-bench.exe] Error 1
-  mingw32-make[3]: Leaving directory 'c:/src/fftw-3.3.3/mpi'
-  Makefile:342: recipe for target 'all' failed
-  mingw32-make[2]: *** [all] Error 2
-  mingw32-make[2]: Leaving directory 'c:/src/fftw-3.3.3/mpi'
-  Makefile:548: recipe for target 'all-recursive' failed
-  mingw32-make[1]: *** [all-recursive] Error 1
-  mingw32-make[1]: Leaving directory 'c:/src/fftw-3.3.3'
-  Makefile:416: recipe for target 'all' failed
-  mingw32-make: *** [all] Error 2
+This is probably due to the same problem that led the developers of FFTW to add the =--with-combine-threads=. From the [[http://www.fftw.org/install/windows.html][official website]]
 
-This is probably due to the same problem that led the developers of FFTW to add the ``--with-combine-threads``. From the `official website <http://www.fftw.org/install/windows.html>`_
+#+BEGIN_QUOTE
+=--enable-threads --with-combined-threads=: this will include multi-threading support. The second option puts the multi-threading functions into the main FFTW DLL rather than into a separate DLL (the default under Unix); *this is required because MinGW can't create DLLs that depend on one another*. 
+#+END_QUOTE
 
-    ``--enable-threads --with-combined-threads``: this will include multi-threading support. The second option puts the multi-threading functions into the main FFTW DLL rather than into a separate DLL (the default under Unix); **this is required because MinGW can't create DLLs that depend on one another**. 
+So, what we are going to do is build our own /combined/ (single-threaded + multi-threaded + MPI) version of FFTW. We start from the static libraries, which we install in a local folder (e.g. =/C/src/fftw-3.3.3/build=)
 
-So, what we are going to do is build our own *combined* (single-threaded + multi-threaded + MPI) version of FFTW. We start from the static libraries, which we install in a local folder (e.g. ``/C/src/fftw-3.3.3/build``)::
+#+BEGIN_EXAMPLE
+$ mingw32-make -j4 distclean
+$ ./configure --prefix=/C/src/fftw-3.3.3/build --with-our-malloc --with-windows-f77-mangling --enable-threads --with-combined-threads --with-incoming-stack-boundary=2 --enable-sse2 --enable-avx --enable-mpi MPILIBS="-lmsmpi" LDFLAGS="-L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386" CPPFLAGS="-I/c/opt/Microsoft_HPC_Pack_2012/Inc"
+$ mingw32-make -j4 install > make_fftw3_mpi_static.log
+#+END_EXAMPLE
 
-  $ mingw32-make -j4 distclean
-  $ ./configure --prefix=/C/src/fftw-3.3.3/build --with-our-malloc --with-windows-f77-mangling --enable-threads --with-combined-threads --with-incoming-stack-boundary=2 --enable-sse2 --enable-avx --enable-mpi MPILIBS="-lmsmpi" LDFLAGS="-L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386" CPPFLAGS="-I/c/opt/Microsoft_HPC_Pack_2012/Inc"
-  $ mingw32-make -j4 install > make_fftw3_mpi_static.log
+please note that we record all operations in a log file, =make_fftw3_mpi_static.log=. To test the installation of this library, we try to compile the simple C code (=fftw_mpi_c_demo.c=)
 
-please note that we record all operations in a log file, ``make_fftw3_mpi_static.log``. To test the installation of this library, we try to compile the simple C code (``fftw_mpi_c_demo.c``)
-
-.. code-block:: c
-
+#+BEGIN_SRC c
   #include <math.h>
   #include <fftw3.h>
   #include <fftw3-mpi.h>
-
+  
   int main(int argc, char** argv) {
     const ptrdiff_t n0 = 1024;
     const ptrdiff_t n1 = 2048;
-
+    
     MPI_Init(&argc, &argv);
     fftw_mpi_init();
-
+    
     int rank;
     ptrdiff_t i, j, global_offset;
     ptrdiff_t local_n0, local_start, alloc_local, local_offset;
     double norm = 0., re, im;
-
+    
     fftw_complex *a, *expected, *actual;
     fftw_plan p;
-
+    
     a = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * n0 * n1);
     expected = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * n0 * n1);
     p = fftw_plan_dft_2d(n0, n1, a, expected, FFTW_FORWARD, FFTW_ESTIMATE);
-
+    
     for (i = 0; i < n0; i++) {
       for (j = 0; j < n1; j++) {
         global_offset = i * n1 + j;
@@ -111,16 +119,16 @@ please note that we record all operations in a log file, ``make_fftw3_mpi_static
         a[global_offset][1] = sin(arg);
       }
     }
-
+    
     fftw_execute(p);
     fftw_destroy_plan(p);
-
+    
     alloc_local = fftw_mpi_local_size_2d(n0, n1, MPI_COMM_WORLD,
                                          &local_n0, &local_start);
     actual = fftw_malloc(sizeof(fftw_complex) * alloc_local);
     p = fftw_mpi_plan_dft_2d(n0, n1, actual, actual, MPI_COMM_WORLD,
                              FFTW_FORWARD, FFTW_ESTIMATE);
-
+    
     for (i = 0; i < local_n0; ++i) {
       for (j = 0; j < n1; j++) {
         local_offset = i * n1 + j;
@@ -129,10 +137,10 @@ please note that we record all operations in a log file, ``make_fftw3_mpi_static
         actual[local_offset][1] = a[global_offset][1];
       }
     }
-
+    
     fftw_execute(p);
     fftw_destroy_plan(p);
-
+    
     for (i = 0; i < local_n0; i++) {
       for (j = 0; j < n1; j++) {
         local_offset = i * n1 + j;
@@ -142,84 +150,105 @@ please note that we record all operations in a log file, ``make_fftw3_mpi_static
         norm += re * re + im * im;
       }
     }
-
+    
     norm = sqrt(norm);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     printf("I'm process %d, local size is %d x %d, norm = %g\n",
            rank, local_n0, n1, norm);
-
+    
     fftw_free(a);
     fftw_free(expected);
     fftw_free(actual);
-
+    
     MPI_Finalize();
   }
+#+END_SRC
 
-And compile it as follows::
+And compile it as follows
 
-  $ gcc fftw_mpi_c_demo.c -I/C/opt/Microsoft_HPC_Pack_2012/Inc -I/C/src/fftw-3.3.3/build/include -L/C/opt/Microsoft_HPC_Pack_2012/Lib/i386 -L/C/src/fftw-3.3.3/build/lib -lfftw3_mpi -lfftw3 -lm -lmsmpi
+#+BEGIN_EXAMPLE
+$ gcc fftw_mpi_c_demo.c -I/C/opt/Microsoft_HPC_Pack_2012/Inc -I/C/src/fftw-3.3.3/build/include -L/C/opt/Microsoft_HPC_Pack_2012/Lib/i386 -L/C/src/fftw-3.3.3/build/lib -lfftw3_mpi -lfftw3 -lm -lmsmpi
+#+END_EXAMPLE
 
-(paths need to be adjusted according to your own system). This produces an executable ``a.exe`` which can be run::
+(paths need to be adjusted according to your own system). This produces an executable =a.exe= which can be run
 
-  $ mpiexec -np 4 a.exe
-  I'm process 0, local size is 256 x 2048, norm = 0
-  I'm process 2, local size is 256 x 2048, norm = 0
-  I'm process 3, local size is 256 x 2048, norm = 0
-  I'm process 1, local size is 256 x 2048, norm = 0
+#+BEGIN_EXAMPLE
+$ mpiexec -np 4 a.exe
+I'm process 0, local size is 256 x 2048, norm = 0
+I'm process 2, local size is 256 x 2048, norm = 0
+I'm process 3, local size is 256 x 2048, norm = 0
+I'm process 1, local size is 256 x 2048, norm = 0
+#+END_EXAMPLE
 
-If you can live with static libraries, you can stop right there, and proceed to installation. In my case, I plan to call FFTW from within Python, so I do need a shared library. So, what we are going to do is *merge* the two static libraries, ``libfftw3.a`` and ``libfftw3_mpi.a``, into one single, combined library. ``cd`` to the local directory where the static libraries where actually built::
+If you can live with static libraries, you can stop right there, and proceed to installation. In my case, I plan to call FFTW from within Python, so I do need a shared library. So, what we are going to do is /merge/ the two static libraries, =libfftw3.a= and =libfftw3_mpi.a=, into one single, combined library. =cd= to the local directory where the static libraries where actually built
 
-  $ cd /C/src/fftw-3.3.3/build/lib
-  $ mkdir libfftw3_obj
-  $ cd libfftw3_obj
-  $ ar -x ../libfftw3.a
-  $ cd ..
-  $ mkdir libfftw3_mpi_obj
-  $ cd libfftw3_mpi_obj
-  $ ar -x ../libfftw3_mpi.a
-  $ cd ..
-  $ mkdir combined
-  $ ar cru libfftw3.a ./libfftw3_obj/*.o ./libfftw3_mpi_obj/*.o
-  $ ranlib libfftw3.a
+#+BEGIN_EXAMPLE
+$ cd /C/src/fftw-3.3.3/build/lib
+$ mkdir libfftw3_obj
+$ cd libfftw3_obj
+$ ar -x ../libfftw3.a
+$ cd ..
+$ mkdir libfftw3_mpi_obj
+$ cd libfftw3_mpi_obj
+$ ar -x ../libfftw3_mpi.a
+$ cd ..
+$ mkdir combined
+$ ar cru libfftw3.a ./libfftw3_obj/*.o ./libfftw3_mpi_obj/*.o
+$ ranlib libfftw3.a
+#+END_EXAMPLE
 
-To check the newly created combined static library, the program ``fftw_mpi_c_demo.c`` is now compiled as follows::
+To check the newly created combined static library, the program =fftw_mpi_c_demo.c= is now compiled as follows
 
-  $ gcc fftw_mpi_c_demo.c -I/C/opt/Microsoft_HPC_Pack_2012/Inc -I/C/src/fftw-3.3.3/build/include -L/C/opt/Microsoft_HPC_Pack_2012/Lib/i386 -L/C/src/fftw-3.3.3/build/lib/combined -lfftw3 -lm -lmsmpi
+#+BEGIN_EXAMPLE
+$ gcc fftw_mpi_c_demo.c -I/C/opt/Microsoft_HPC_Pack_2012/Inc -I/C/src/fftw-3.3.3/build/include -L/C/opt/Microsoft_HPC_Pack_2012/Lib/i386 -L/C/src/fftw-3.3.3/build/lib/combined -lfftw3 -lm -lmsmpi
+#+END_EXAMPLE
 
-Again, running ``a.exe`` leads to the expected output::
+Again, running =a.exe= leads to the expected output
 
-  $ mpiexec -np 4 a.exe
-  I'm process 0, local size is 256 x 2048, norm = 0
-  I'm process 2, local size is 256 x 2048, norm = 0
-  I'm process 3, local size is 256 x 2048, norm = 0
-  I'm process 1, local size is 256 x 2048, norm = 0
+#+BEGIN_EXAMPLE
+$ mpiexec -np 4 a.exe
+I'm process 0, local size is 256 x 2048, norm = 0
+I'm process 2, local size is 256 x 2048, norm = 0
+I'm process 3, local size is 256 x 2048, norm = 0
+I'm process 1, local size is 256 x 2048, norm = 0
+#+END_EXAMPLE
 
-We can now move to the generation of a dynamic library from the static, combined library. To do this, it will be useful to have a look to the first log-file we created, in order to check the exact options used to generate the ``--with-combined-threads``, ``libfftw3-3.dll`` library (in my case, the log-file was called ``make_fftw3_mpi_shared.log``). The line we are looking for is::
+We can now move to the generation of a dynamic library from the static, combined library. To do this, it will be useful to have a look to the first log-file we created, in order to check the exact options used to generate the =--with-combined-threads=, =libfftw3-3.dll= library (in my case, the log-file was called =make_fftw3_mpi_shared.log=). The line we are looking for is
 
-  libtool: link: gcc -std=gnu99 -shared  -Wl,--whole-archive kernel/.libs/libkernel.a dft/.libs/libdft.a dft/scalar/.libs/libdft_scalar.a dft/scalar/codelets/.libs/libdft_scalar_codelets.a rdft/.libs/librdft.a rdft/scalar/.libs/librdft_scalar.a rdft/scalar/r2cf/.libs/librdft_scalar_r2cf.a rdft/scalar/r2cb/.libs/librdft_scalar_r2cb.a rdft/scalar/r2r/.libs/librdft_scalar_r2r.a reodft/.libs/libreodft.a api/.libs/libapi.a simd-support/.libs/libsimd_support.a simd-support/.libs/libsimd_sse2_nonportable.a dft/simd/sse2/.libs/libdft_sse2_codelets.a rdft/simd/sse2/.libs/librdft_sse2_codelets.a dft/simd/avx/.libs/libdft_avx_codelets.a rdft/simd/avx/.libs/librdft_avx_codelets.a threads/.libs/libfftw3_threads.a -Wl,--no-whole-archive  -L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386  -O3 -mtune=native -malign-double   -pthread -o .libs/libfftw3-3.dll -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker .libs/libfftw3.dll.a
+#+BEGIN_EXAMPLE
+libtool: link: gcc -std=gnu99 -shared  -Wl,--whole-archive kernel/.libs/libkernel.a dft/.libs/libdft.a dft/scalar/.libs/libdft_scalar.a dft/scalar/codelets/.libs/libdft_scalar_codelets.a rdft/.libs/librdft.a rdft/scalar/.libs/librdft_scalar.a rdft/scalar/r2cf/.libs/librdft_scalar_r2cf.a rdft/scalar/r2cb/.libs/librdft_scalar_r2cb.a rdft/scalar/r2r/.libs/librdft_scalar_r2r.a reodft/.libs/libreodft.a api/.libs/libapi.a simd-support/.libs/libsimd_support.a simd-support/.libs/libsimd_sse2_nonportable.a dft/simd/sse2/.libs/libdft_sse2_codelets.a rdft/simd/sse2/.libs/librdft_sse2_codelets.a dft/simd/avx/.libs/libdft_avx_codelets.a rdft/simd/avx/.libs/librdft_avx_codelets.a threads/.libs/libfftw3_threads.a -Wl,--no-whole-archive  -L/c/opt/Microsoft_HPC_Pack_2012/Lib/i386  -O3 -mtune=native -malign-double   -pthread -o .libs/libfftw3-3.dll -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker .libs/libfftw3.dll.a
+#+END_EXAMPLE
 
-So the command we are going to use to produce the shared library is::
+So the command we are going to use to produce the shared library is
 
-  $ cd /C/src/fftw-3.3.3/build/lib/combined
-  $ gcc -std=gnu99 -shared  -Wl,--whole-archive libfftw3.a -Wl,--no-whole-archive -L/C/opt/Microsoft_HPC_Pack_2012/Lib/i386 -O3 -mtune=native -malign-double -pthread -o libfftw3.dll -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker libfftw3.dll.a -lmsmpi
+#+BEGIN_EXAMPLE
+$ cd /C/src/fftw-3.3.3/build/lib/combined
+$ gcc -std=gnu99 -shared  -Wl,--whole-archive libfftw3.a -Wl,--no-whole-archive -L/C/opt/Microsoft_HPC_Pack_2012/Lib/i386 -O3 -mtune=native -malign-double -pthread -o libfftw3.dll -Wl,--enable-auto-image-base -Xlinker --out-implib -Xlinker libfftw3.dll.a -lmsmpi
+#+END_EXAMPLE
 
-``gcc`` does not complain. Let's see if we can compile ``fftw_mpi_c_demo.c`` against the shared library. To do so, we will first manually install all files::
+=gcc= does not complain. Let's see if we can compile =fftw_mpi_c_demo.c= against the shared library. To do so, we will first manually install all files
 
-  $ cp /C/src/fftw-3.3.3/build/bin/* /mingw/bin
-  $ cp /C/src/fftw-3.3.3/build/include/* /mingw/include
-  $ cp /C/src/fftw-3.3.3/build/lib/combined/libfftw3.dll.a /mingw/lib
-  $ cp /C/src/fftw-3.3.3/build/lib/combined/libfftw3.dll /mingw/bin
+#+BEGIN_EXAMPLE
+$ cp /C/src/fftw-3.3.3/build/bin/* /mingw/bin
+$ cp /C/src/fftw-3.3.3/build/include/* /mingw/include
+$ cp /C/src/fftw-3.3.3/build/lib/combined/libfftw3.dll.a /mingw/lib
+$ cp /C/src/fftw-3.3.3/build/lib/combined/libfftw3.dll /mingw/bin
+#+END_EXAMPLE
 
-Then we move back to the directory where ``fftw_mpi_c_demo.c`` lives, and compile as follows::
+Then we move back to the directory where =fftw_mpi_c_demo.c= lives, and compile as follows
 
-  $ gcc fftw_mpi_c_demo.c -I/C/opt/Microsoft_HPC_Pack_2012/Inc -L/C/opt/Microsoft_HPC_Pack_2012/Lib/i386 -lfftw3 -lm -lmsmpi
+#+BEGIN_EXAMPLE
+$ gcc fftw_mpi_c_demo.c -I/C/opt/Microsoft_HPC_Pack_2012/Inc -L/C/opt/Microsoft_HPC_Pack_2012/Lib/i386 -lfftw3 -lm -lmsmpi
+#+END_EXAMPLE
 
-Seems to compile OK! Again, running ``a.exe`` leads to the expected output::
+Seems to compile OK! Again, running =a.exe= leads to the expected output
 
-  $ mpiexec -np 4 a.exe
-  I'm process 0, local size is 256 x 2048, norm = 0
-  I'm process 2, local size is 256 x 2048, norm = 0
-  I'm process 3, local size is 256 x 2048, norm = 0
-  I'm process 1, local size is 256 x 2048, norm = 0
+#+BEGIN_EXAMPLE
+$ mpiexec -np 4 a.exe
+I'm process 0, local size is 256 x 2048, norm = 0
+I'm process 2, local size is 256 x 2048, norm = 0
+I'm process 3, local size is 256 x 2048, norm = 0
+I'm process 1, local size is 256 x 2048, norm = 0
+#+END_EXAMPLE
 
 OK, that was worth the ride, wasn't it?
