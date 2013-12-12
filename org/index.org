@@ -9,6 +9,8 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/12/mathjax-now-accepts-equation-numbers.org][MathJax now accepts equation numbers]]
 
+[[file:2013/10/scientific-computing-under-windows-7.org][Scientific computing under Windows 7, part 5: LAMMPS]]
+
 [[file:2013/09/scientific-computing-under-windows-7_29.org][Scientific computing under Windows 7, part 4: FFTW with support for MPI]]
 
 [[file:2013/09/scientific-computing-under-windows-7_27.org][Scientific computing under Windows 7, part 3: MPI]]
