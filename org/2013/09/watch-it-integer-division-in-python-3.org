@@ -1,0 +1,13 @@
+#+TITLE: Watch it! Integer division in Python 3
+#+INCLUDE: "../../header.org"
+
+As of Python 3, the operator =/= performs a /true/ division (floating-point result). If you are looking for an integer division (quotient of the Euclidean division), you must use =//=. For example
+
+#+BEGIN_SRC python
+  >>> 1 / 2
+  0.5
+  >>> 5 // 2
+  2
+#+END_SRC
+
+As far as I am concerned, I have no doubt that it will lead to endless debugging sessions!
