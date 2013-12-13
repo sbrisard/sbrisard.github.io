@@ -21,6 +21,8 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2011/09/green-operator-for-strains-part-1.org][The Green operator for strains, part 1: definition]]
 
+[[file:2013/09/latex-bug-with-subequations.org][LaTeX: a bug with =subequations=]]
+
 [[file:2011/09/going-public.org][Going public]]
 
 [[file:2011/08/some-gruesome-details.org][Some gruesome details]]
