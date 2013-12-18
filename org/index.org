@@ -5,7 +5,7 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/12/itk-proper.org][Scientific computing under Windows 7, part 7: ITK (proper)]]
 
-[[file:2013/12/itk.org][Scientific computing under Windows 7, part 6: ITK (prerequisites)]]
+[[file:2013/12/scientific-computing-under-windows-7.org][Scientific computing under Windows 7, part 6: ITK (prerequisites)]]
 
 [[file:2013/12/mathjax-now-accepts-equation-numbers.org][MathJax now accepts equation numbers]]
 
