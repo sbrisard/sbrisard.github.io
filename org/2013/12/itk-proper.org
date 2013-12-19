@@ -1,0 +1,226 @@
+#+TITLE: Scientific computing under Windows 7, part 7: ITK (proper)
+#+INCLUDE: "../../header.org"
+
+In the [[file:./scientific-computing-under-windows-7.org][previous installment]] of this series, we installed all prerequisites for the ITK library. We are now ready to install the library itself, using CMake.@@html:<!-- more -->@@
+
+* Retrieving the sources
+Download the latest development version of ITK
+
+#+BEGIN_EXAMPLE
+$ cd /C/src/
+$ mkdir ITK
+$ cd ITK
+$ git clone git://itk.org/ITK.git src
+$ mkdir build
+#+END_EXAMPLE
+
+You now have two different directories
+  - =/C/src/ITK/src= contains the sources
+  - =/C/src/ITK/build= is the place where the binaries are to be built.
+
+Creating two separate directories was necessary, since from the [[http://www.itk.org/Wiki/ITK/Configuring_and_Building/MinGW][Wiki]] 
+#+BEGIN_QUOTE
+This directory MUST NOT be inside the directory where you cloned the repository.
+#+END_QUOTE
+
+* Generating the =Makefile= with CMake
+
+First, make sure that the following directories sit in your =PATH= environment variable (might need to be adapted)
+  - path to MinGW binaries, e.g. =C:\MinGW\bin=,
+  - path to MSYS binaries, e.g. =C:\MinGW\msys\1.0\bin=.
+
+Then, launch the CMake GUI, and fill in the following fields
+  - where is the source code: =C:/src/ITK/src/=,
+  - where to build the binaries: =C:/src/ITK/build=.
+
+Uncheck "Grouped", and check "Advanced", then click "Configure". Select "MSYS Makefiles", and "Use default native compilers" (do not use select "MinGW Makefiles", as compilation /must/ be run from an MSYS console. Indeed, command line tools such as =grep= are invoked during the compilation).
+
+You must then tweak all entries in CMake until you are satisfied, then click "Generate" to produce the =Makefile=. As far as I am concerned, I had to change the following options
+  - =BUILD_DOCUMENTATION:BOOL=OFF=
+  - =BUILD_EXAMPLES:BOOL=OFF=
+  - =BUILD_SHARED_LIBS:BOOL=OFF=
+  - =BUILD_TESTING:BOOL=OFF=
+  - =CMAKE_INSTALL_PREFIX:PATH=C:/opt/ITK=
+  - =GITCOMMAND:FILEPATH=C:/Program Files (x86)/Git/bin/git.exe=
+  - =ITK_BUILD_DEFAULT_MODULES:BOOL=ON=
+  - =ITK_USE_FFTWD:BOOL=ON=
+  - =ITK_USE_FFTWF:BOOL=ON=
+  - =ITK_USE_SYSTEM_FFTW:BOOL=ON=
+  - =ITK_USE_SYSTEM_HDF5:BOOL=ON=
+  - =ITK_USE_SYSTEM_JPEG:BOOL=ON=
+  - =ITK_USE_SYSTEM_PNG:BOOL=ON=
+  - =ITK_USE_SYSTEM_TIFF:BOOL=ON=
+  - =ITK_USE_SYSTEM_ZLIB:BOOL=ON=
+  - =ITK_WRAPPING:BOOL=OFF=
+
+Please note that SimpleITK (which I intended to compile and use) requires static libraries! If you want to try and compile the Python bindings of ITK (which I have still not managed to do), then you must build dynamic libraries. After the first round of configure, I had to furhter specify the following options
+
+  - =FFTWD_LIB:FILEPATH=C:/MinGW/bin/libfftw3-3.dll=
+  - =FFTWD_THREADS_LIB:FILEPATH=C:/MinGW/bin/libfftw3-3.dll=
+  - =FFTWF_LIB:FILEPATH=C:/MinGW/bin/libfftw3f-3.dll=
+  - =FFTWF_THREADS_LIB:FILEPATH=C:/MinGW/bin/libfftw3f-3.dll=
+  - =FFTW_INCLUDE_PATH:PATH=C:/MinGW/include=
+  - =ZLIB_INCLUDE_DIR:PATH=C:/MinGW/include=
+  - =ZLIB_LIBRARY:FILEPATH=C:/MinGW/bin/zlib1.dll=
+
+(remember that in [[file:../09/scientific-computing-under-windows-7_29.org][this post]], FFTW was built with the =--with-combined-threads= option, which means that =FFTW*_LIB= and =FFTW*_THREADS_LIB= are in fact identical).
+
+Then, set the following options
+  - =HDF5_DIR:PATH=C:/opt/HDF5-1.8.12/cmake/hdf5=
+  - =JPEG_INCLUDE_DIR:PATH=C:/MinGW/include=
+  - =JPEG_LIBRARY:FILEPATH=C:/MinGW/bin/libjpeg-9.dll=
+  - =TIFF_INCLUDE_DIR:PATH=C:/MinGW/include=
+  - =TIFF_LIBRARY:FILEPATH=C:/MinGW/bin/libtiff-5.dll=
+  - =PNG_LIBRARY:FILEPATH=C:/MinGW/bin/libpng16-16.dll=
+  - =PNG_PNG_INCLUDE_DIR:PATH=C:/MinGW/include=
+
+Once your are satisfied with all options, click "Generate" to produce the =Makefile=.
+
+* Compiling the library
+
+In the MSYS console
+
+#+BEGIN_SRC
+$ cd /C/src/InsightToolkit-4.4.2/build
+$ mingw32-make
+#+END_SRC
+
+The first compilation error is the following
+
+#+BEGIN_EXAMPLE
+Scanning dependencies of target ITKFFT
+[  9%] Building CXX object Modules/Filtering/FFT/src/CMakeFiles/ITKFFT.dir/itkFF
+TWGlobalConfiguration.cxx.obj
+C:\src\InsightToolkit-4.4.2\src\Modules\Filtering\FFT\src\itkFFTWGlobalConfigura
+tion.cxx: In static member function 'static bool itk::FFTWGlobalConfiguration::I
+mportWisdomFileFloat(const string&)':
+C:\src\InsightToolkit-4.4.2\src\Modules\Filtering\FFT\src\itkFFTWGlobalConfigura
+tion.cxx:334:69: error: '_sopen_s' was not declared in this scope
+   if ( !_sopen_s( &fd, path.c_str(), _O_RDONLY, _SH_DENYNO, _S_IREAD))
+                                                                     ^
+C:\src\InsightToolkit-4.4.2\src\Modules\Filtering\FFT\src\itkFFTWGlobalConfigura
+tion.cxx: In static member function 'static bool itk::FFTWGlobalConfiguration::I
+mportWisdomFileDouble(const string&)':
+C:\src\InsightToolkit-4.4.2\src\Modules\Filtering\FFT\src\itkFFTWGlobalConfigura
+tion.cxx:369:69: error: '_sopen_s' was not declared in this scope
+   if ( !_sopen_s( &fd, path.c_str(), _O_RDONLY, _SH_DENYNO, _S_IREAD))
+                                                                     ^
+C:\src\InsightToolkit-4.4.2\src\Modules\Filtering\FFT\src\itkFFTWGlobalConfigura
+tion.cxx: In static member function 'static bool itk::FFTWGlobalConfiguration::E
+xportWisdomFileFloat(const string&)':
+C:\src\InsightToolkit-4.4.2\src\Modules\Filtering\FFT\src\itkFFTWGlobalConfigura
+tion.cxx:410:69: error: '_sopen_s' was not declared in this scope
+   if ( !_sopen_s( &fd, path.c_str(), _O_RDONLY, _SH_DENYNO, _S_IREAD))
+                                                                     ^
+C:\src\InsightToolkit-4.4.2\src\Modules\Filtering\FFT\src\itkFFTWGlobalConfigura
+tion.cxx: In static member function 'static bool itk::FFTWGlobalConfiguration::E
+xportWisdomFileDouble(const string&)':
+C:\src\InsightToolkit-4.4.2\src\Modules\Filtering\FFT\src\itkFFTWGlobalConfigura
+tion.cxx:446:69: error: '_sopen_s' was not declared in this scope
+   if ( !_sopen_s( &fd, path.c_str(), _O_RDONLY, _SH_DENYNO, _S_IREAD))
+                                                                     ^
+Modules\Filtering\FFT\src\CMakeFiles\ITKFFT.dir\build.make:57: recipe for target
+ 'Modules/Filtering/FFT/src/CMakeFiles/ITKFFT.dir/itkFFTWGlobalConfiguration.cxx
+.obj' failed
+mingw32-make[2]: *** [Modules/Filtering/FFT/src/CMakeFiles/ITKFFT.dir/itkFFTWGlo
+balConfiguration.cxx.obj] Error 1
+CMakeFiles\Makefile2:3905: recipe for target 'Modules/Filtering/FFT/src/CMakeFil
+es/ITKFFT.dir/all' failed
+mingw32-make[1]: *** [Modules/Filtering/FFT/src/CMakeFiles/ITKFFT.dir/all] Error
+ 2
+Makefile:135: recipe for target 'all' failed
+mingw32-make: *** [all] Error 2
+#+END_EXAMPLE
+
+The fix is to replace =_sopen_s()= with =_sopen()=, but this must be done carefully, as the two methods do not share the same signature. Indeed, from the [[http://msdn.microsoft.com/en-us/library/w7sa2b22.aspx][Microsoft Developer Network]], the signature of =_sopen()= is
+
+#+BEGIN_SRC C
+  int _sopen(const char *filename,
+             int oflag,
+             int shflag,
+             int pmode);
+#+END_SRC
+
+with
+
+  - =filename= : file name
+  - =oflag= : type of operations allowed
+  - =shflag= : type of sharing allowed
+  - =pmode= permission setting (optional),
+  - Returns : the file descriptor.
+
+On the other hand, from [[http://msdn.microsoft.com/en-us/library/w64k0ytk.aspx][the same website]], the signature of =_sopen_s()= is
+
+#+BEGIN_SRC C
+  errno_t _sopen_s(int* pfh,
+                   const char *filename,
+                   int oflag,
+                   int shflag,
+                   int pmode);
+#+END_SRC
+
+with
+
+  - =pfh= : the file handle, or -1 in the case of an error,
+  - =filename= : file name,
+  - =oflag= : type of operations allowed,
+  - =shflag= : type of sharing allowed,
+  - =pmode= permission setting.
+
+Therefore, in the file =C:\src\ITK\src\Modules\Filtering\FFT\src\itkFFTWGlobalConfiguration.cxx=, replace the following lines
+
+#+BEGIN_SRC C
+  int  fd;
+  if ( !_sopen_s( &fd, path.c_str(), _O_RDONLY, _SH_DENYNO, _S_IREAD))
+#+END_SRC
+
+with
+
+#+BEGIN_SRC C
+  int  fd;
+  fd = _sopen(path.c_str(), _O_RDONLY, _SH_DENYNO, _S_IREAD);
+  if (!fd)
+#+END_SRC
+
+(four occurences in the same file). The next compilation error is
+
+#+BEGIN_SRC
+[  9%] Building C object Modules/ThirdParty/OpenJPEG/src/openjpeg/CMakeFiles/itk
+openjpeg.dir/openjpeg.c.obj
+C:\src\InsightToolkit-4.4.2\src\Modules\ThirdParty\OpenJPEG\src\openjpeg\openjpe
+g.c:158:1: error: conflicting types for 'DllMain'
+ DllMain(HANDLE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
+ ^
+In file included from c:\mingw\include\windows.h:62:0,
+                 from C:\src\InsightToolkit-4.4.2\src\Modules\ThirdParty\OpenJPE
+G\src\openjpeg\openjpeg.c:29:
+c:\mingw\include\winbase.h:1051:13: note: previous declaration of 'DllMain' was
+here
+ BOOL WINAPI DllMain(HINSTANCE, DWORD, LPVOID);
+             ^
+Modules\ThirdParty\OpenJPEG\src\openjpeg\CMakeFiles\itkopenjpeg.dir\build.make:3
+45: recipe for target 'Modules/ThirdParty/OpenJPEG/src/openjpeg/CMakeFiles/itkop
+enjpeg.dir/openjpeg.c.obj' failed
+mingw32-make[2]: *** [Modules/ThirdParty/OpenJPEG/src/openjpeg/CMakeFiles/itkope
+njpeg.dir/openjpeg.c.obj] Error 1
+CMakeFiles\Makefile2:4964: recipe for target 'Modules/ThirdParty/OpenJPEG/src/op
+enjpeg/CMakeFiles/itkopenjpeg.dir/all' failed
+mingw32-make[1]: *** [Modules/ThirdParty/OpenJPEG/src/openjpeg/CMakeFiles/itkope
+njpeg.dir/all] Error 2
+Makefile:135: recipe for target 'all' failed
+mingw32-make: *** [all] Error 2
+#+END_SRC
+
+To conform with the definition of =DllMain= found in =C:\MinGW\include\winbase.h=, edit =C:\src\ITK\src\Modules\ThirdParty\OpenJPEG\src\openjpeg\openjpeg.c= and replace line 155
+
+#+BEGIN_SRC c
+  DllMain(HANDLE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
+#+END_SRC
+
+with
+
+#+BEGIN_SRC c
+  DllMain(HINSTANCE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
+#+END_SRC
+
+Now, =make= and =make install= should work like a charm!
