@@ -173,4 +173,4 @@ Unfortunately, the =Makefile= does not provide an =uninstall= target. For the re
 
 * Conclusion
 
-We are now ready to compile ITK itself... to be continued in the next installment of this series.
+We are now ready to compile ITK itself... to be continued in the [[file:./scientific-computing-under-windows-7_19.org][next installment]] of this series.
