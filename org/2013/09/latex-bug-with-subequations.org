@@ -1,5 +1,6 @@
 #+TITLE: LaTeX: a bug with =subequations=
-#+INCLUDE: "../../header.org"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 While working on my latest paper, I've come accross what looks like a bug with the =subequations= environment from the [[http://www.ams.org/publications/authors/tex/amslatex][amsmath]] package. Here is a simple code snippet that demonstrates this bug
 
@@ -30,7 +31,7 @@ As it should, the code above results in the following document
 #+ATTR_HTML: :width 400px :height 170px
 [[file:./latex-bug-with-subequations-files/subequations_ok.png]]
 
-Now, assume that Eqs. (2a) and (2b) are never referred to; then the equation numbers might be removed. A natural way to do so would be starring the ``align`` environment
+Now, assume that Eqs. (2a) and (2b) are never referred to; then the equation numbers might be removed. A natural way to do so would be starring the =align= environment
 
 #+BEGIN_SRC latex
   \documentclass{article}
@@ -60,3 +61,7 @@ Here is the result
 [[file:./latex-bug-with-subequations-files/subequations_bug.png]]
 
 The two equations in the =subequations= environment are no longer numbered. However, the equation number is wrongly incremented! Therefore, not only should the =align= environment be starred, but the =subequations= should also be commented out.
+
+* History
+
+  - <2013-12-21 Sat> Syntax highlighting through CSS.
