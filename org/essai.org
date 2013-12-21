@@ -1,9 +1,0 @@
-#+TITLE: essai
-#+INCLUDE: "./header.org"
-
-\begin{equation}
-\label{eq:1}
-a + b = c
-\end{equation}
-
-In Eq. \eqref{eq:1}, c is the sum of a and b.

@@ -31,8 +31,6 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2011/08/some-gruesome-details.org][Some gruesome details]]
 
-[[file:essai.org][Essai]]
-
 [[file:p/home.org][My professional background]]
 
 [[file:p/references.org][References]]
