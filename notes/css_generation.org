@@ -70,6 +70,12 @@ Ce document permet de générer un fichier CSS permettant la coloration syntaxiq
   }
 #+END_SRC
 
+* Org-mode
+
+#+BEGIN_SRC org
+  <2013-12-21 Sat>
+#+END_SRC
+
 * Generation du fichier css correspondant
 
 Il faut exécuter la commande =M-x org-html-htmlize-generate-css=. Elle renvoit normalement le message d'erreur suivant
@@ -85,3 +91,10 @@ Invalid face: ecb-default-general-face
 #+END_EXAMPLE
 
 Dans le fichier =~/.emacs.d/elpa/solarized-theme-yyyymmdd.xxxx/solarized.el=, il suffit de commenter les lignes correspondant à =ecb=, que je n'utilise pas.
+
+Il faut ensuite ajouter les styles suivants à la main
+#+BEGIN_EXAMPLE
+  .timestamp {
+    color: #2aa198;
+  }
+#+END_EXAMPLE

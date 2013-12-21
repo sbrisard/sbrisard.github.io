@@ -3876,5 +3876,8 @@
       a:hover {
         text-decoration: underline;
       }
+      .timestamp {
+        color: #2aa198;
+      }
     -->
 </style>
