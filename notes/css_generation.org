@@ -1,0 +1,87 @@
+#+TITLE: Génération du fichier CSS pour mon blog
+#+DATE: <2013-12-11 Wed>
+#+AUTHOR: Sébastien Brisard
+#+EMAIL: sb@new-host.home
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:t todo:t |:t
+#+CREATOR: Emacs 24.3.1 (Org mode 8.2.1)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto
+#+OPTIONS: html-preamble:t html-scripts:t html-style:t
+#+OPTIONS: html5-fancy:nil tex:t
+#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.1)
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="essai.css" />
+#+HTML_HEAD_EXTRA:
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+INFOJS_OPT:
+
+Ce document permet de générer un fichier CSS permettant la coloration syntaxique des langages utilisés dans mon blog. Pour cela, il faut d'abord s'assurer que tous les langages sont bien chargés.
+
+* LaTeX
+
+#+BEGIN_SRC latex
+  \documentclass{article}
+  \begin{document}
+  \title{Un titre}
+  \author{S. Brisard}
+  \maketitle
+  \section{Un paragraphe}
+  \begin{equation*}
+    (a + b)^2 = a^2 + 2ab + b^2.
+  \end{equation*}
+  \end{document}
+#+END_SRC latex
+
+* Python
+
+#+BEGIN_SRC python
+  def f(x):
+      return 2 * x + 1
+  
+  class A:
+      __init__(self):
+          pass
+  
+      def g(self, x):
+          return x**2
+#+END_SRC
+
+* C
+
+#+BEGIN_SRC c
+  #include <stdio.h>
+  
+  double f(double x) {
+    return 2. * x + 1.
+  }
+  
+  main() {
+      printf("Hello World");
+  }
+#+END_SRC
+
+* Generation du fichier css correspondant
+
+Il faut exécuter la commande =M-x org-html-htmlize-generate-css=. Elle renvoit normalement le message d'erreur suivant
+
+#+BEGIN_EXAMPLE
+  Invalid face: popup-mouse-face
+#+END_EXAMPLE
+
+Il suffit de ne pas charger le module =jedi.el= avant de générer le CSS. Si le thème =solarized= est utilisé, on obtient également le message d'erreur suivant
+
+#+BEGIN_EXAMPLE
+Invalid face: ecb-default-general-face
+#+END_EXAMPLE
+
+Dans le fichier =~/.emacs.d/elpa/solarized-theme-yyyymmdd.xxxx/solarized.el=, il suffit de commenter les lignes correspondant à =ecb=, que je n'utilise pas.
