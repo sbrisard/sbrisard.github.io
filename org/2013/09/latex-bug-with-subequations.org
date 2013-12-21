@@ -64,4 +64,5 @@ The two equations in the =subequations= environment are no longer numbered. Howe
 
 * History
 
+  - <2013-09-17 Tue> Initial version.
   - <2013-12-21 Sat> Syntax highlighting through CSS.
