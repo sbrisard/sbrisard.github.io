@@ -19,13 +19,13 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/09/scientific-computing-under-windows-7.org][Scientific computing under Windows 7, part 1: MinGW]]
 
-[[file:2011/09/green-operator-for-strains-part-1.org][The Green operator for strains, part 1: definition]]
-
 [[file:2013/09/latex-bug-with-subequations.org][LaTeX: a bug with =subequations=]]
 
 [[file:2013/09/watch-it-integer-division-in-python-3.org][Watch it! Integer division in Python 3]]
 
 [[file:2013/09/first-things-first-import-petsc4py.org][First things first: import =petsc4py= correctly]]
+
+[[file:2011/09/green-operator-for-strains-part-1.org][The Green operator for strains, part 1: definition]]
 
 [[file:2011/09/going-public.org][Going public]]
 
