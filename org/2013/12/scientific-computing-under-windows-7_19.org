@@ -1,5 +1,6 @@
 #+TITLE: Scientific computing under Windows 7, part 7: ITK (proper)
-#+INCLUDE: "../../header.org"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 In the [[file:./scientific-computing-under-windows-7.org][previous installment]] of this series, we installed all prerequisites for the ITK library. We are now ready to install the library itself, using CMake.@@html:<!-- more -->@@
 
@@ -224,3 +225,7 @@ with
 #+END_SRC
 
 Now, =make= and =make install= should work like a charm!
+
+* History
+  - <2013-12-19 Thu> Initial version.
+  - <2013-12-26 Thu> Syntax highlighting.
