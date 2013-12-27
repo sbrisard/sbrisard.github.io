@@ -3879,5 +3879,18 @@
       .timestamp {
         color: #268bd2;
       }
+
+      <!-- My own styles -->
+      .theorem:before{
+          content: "Theorem.";
+          font-weight: bold;
+      }
+      .theorem{
+          background-color:#eeeeee;
+      }
+      .proof{
+          font-size:1.0em;
+          margin-left:25px;
+      }
     -->
 </style>
