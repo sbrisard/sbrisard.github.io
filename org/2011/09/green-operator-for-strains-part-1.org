@@ -1,5 +1,6 @@
 #+TITLE:  The Green operator for strains, part 1: definition
-#+INCLUDE: "../../header.org"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 Micromechanics aims at computing the macroscopic properties of heterogeneous materials. In other words, we are looking for a /stress-strain/ relationship, and displacements are of but little use to us. We therefore tend to prefer Green functions for /strains/ to Green functions for /displacements/, which are commonly used in the mathematical theory of elasticity.  The Green operator for strain is the essential ingredient for my main research topic, namely polarization techniques. In the first instalment of this series, I'm going to define the Green operator for strains.@@html:<!-- more -->@@
 
