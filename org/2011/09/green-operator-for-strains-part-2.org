@@ -1,0 +1,72 @@
+#+TITLE:  The Green operator for strains, part 2: elementary properties
+#+INCLUDE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+In [[file:./green-operator-for-strains-part-1.org][part 1]] of this series, we have seen how the Green operator for strains ($\greeniv_0$) was defined as the operator providing the solution to the problem of elastic equilibrium of a /prestressed/ homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.@@html:<!-- more -->@@ We again consider the bounded domain $\domain\subset\reals^d$, occupied by a homogeneous, linearly elastic material with stiffness $\stiffness_0$. $\greeniv_0$ denotes the Green operator for strains for the material $\stiffness_0$, over the domain $\domain$. The first property is a direct consequence of the definition of $\greeniv_0$, given in [[file:./green-operator-for-strains-part-1.org][part 1]].
+
+* Application to self-equilibrated prestresses
+
+We consider a /self-equilibrated/ prestress $\prestress$ (that is, $\nabla\cdot\prestress=\tensii0$). We will prove that $\greeniv_0\circledast\prestress=\tensii0$. By definition of the Green operator, $\greeniv_0\circledast\prestress=-\strain$, where $\strain$ is the strain which solves the following problem
+\begin{align}
+\label{eq:1}
+\nabla_{\vec x}\cdot\left(\stiffness_0:\strain+\prestress\right)&=\vec{0}&&(\vec x\in\domain),\\
+\label{eq:2}
+\strain(\vec x)&=\nabla_\vec x^\text{s}\displ&&(\vec x\in\domain),\\
+\label{eq:3}
+\displ(\vec x)&=\vec 0&&(\vec x\in\partial\domain).
+\end{align}
+
+Since $\nabla\cdot\prestress=\vec 0$, it is found that Eq. \eqref{eq:1} reduces to
+\begin{align*}
+    \nabla_{\vec x}\cdot\left(\stiffness_0:\strain\right)&=\vec{0}&&(\vec x\in\domain).
+\end{align*}
+
+Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\displ=\vec 0$ (and $\strain=\nabla^\text{s}\displ=\tensii0$). Since $\greeniv_0\circledast\prestress=-\strain$, it is finally found that $\greeniv_0\circledast\prestress=\tensiv 0$. To sum up, we have proved the following property
+
+#+BEGIN_THEOREM
+For any self-equilibrated prestress $\prestress$
+\begin{equation*}
+    \greeniv_0\circledast\prestress=\tensii 0.
+\end{equation*}
+#+END_THEOREM
+
+* "Square" of the Green operator
+
+Application of the previous result leads to a useful property, which can be found in e.g. [[file:../../p/references.org::WILL2001][Willis (2001)]], where it is written somewhat abusively (but quite efficiently!) $\greeniv_0\stiffness_0\greeniv_0=\greeniv_0$.
+
+Let $\strain=-\greeniv_0\circledast\prestress$, and $\stress=\stiffness_0:\strain+\prestress$. By definition of $\greeniv_0$, $\strain$ is geometrically compatible and $\stress$ is self-equilibrated: $\nabla\cdot\stress=\tensii 0$. From the previous property, we have $\greeniv_0\circledast\stress=\tensii0$. In other words
+\begin{equation*}
+    \greeniv_0\circledast\left(\stiffness_0:\strain+\prestress\right)=\tensii0
+\end{equation*}
+and, since $\strain=-\greeniv_0\circledast\prestress$, we find the following property:
+
+#+BEGIN_THEOREM
+For any prestress $\prestress$,
+\begin{equation*}
+    \greeniv_0\circledast\left[\stiffness_0:\left(\greeniv_0\circledast\prestress\right)\right]=\greeniv_0\circledast\prestress.
+\end{equation*}
+#+END_THEOREM
+
+* Volume average
+
+To close this instalment, we again consider a prestress $\prestress$, and the associated strain $\strain=-\greeniv_0\circledast\prestress$. We seek the value of $\volavg\strain$, where overlined quantities denote /volume averages/
+\begin{equation*}
+    \volavg{\strain} = \frac 1{\meas{\domain}}\int_\domain\strain(\vec x)\dV{\vec x}.
+\end{equation*}
+
+Using Stokes' theorem, and the definition of $\displ$
+\begin{equation*}
+    \volavg\strain=\frac1{\meas{\domain}}\int_\domain\nabla_\vec x^\text s\displ\dV{\vec x}=\frac1{2\meas{\domain}}\int_{\partial\domain}\left[\displ(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\displ(\vec x)\right]\dS{\vec x},
+\end{equation*}
+where $\displ$ is the displacement associated to the strain $\strain$, and $\vec n$ is the outward normal to the boundary $\partial\domain$ of the domain $\domain$. From the boundary condition \eqref{eq:3}, we finally find $\volavg\strain=\tensii0$. Finally
+
+#+BEGIN_THEOREM
+For any prestress $\prestress$,
+\begin{equation*}
+    \volavg{\greeniv_0\circledast\prestress}=\tensii 0.
+\end{equation*}
+#+END_THEOREM
+
+* History
+  - <2011-09-18 Sun> Initial version.
+  - <2013-12-27 Fri> Major revision.
