@@ -3881,10 +3881,10 @@
       }
 
       <!-- My own styles -->
-      .theorem:before{
+      <!--.theorem:before{
           content: "Theorem.";
           font-weight: bold;
-      }
+      }-->
       .theorem{
           background-color:#eeeeee;
       }
