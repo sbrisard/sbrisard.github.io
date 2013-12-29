@@ -1,0 +1,94 @@
+#+TITLE: Elastic constants of an isotropic material, part 2: plane strain elasticity
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+In the [[file:./elastic-constants-of-isotropic-material.org][previous instalment]] of this series, I introduced the constitutive law of an isotropically elastic material, and the related material constants, within the framework of 3D elasticity. I will now address the case of plane strain elasticity.@@html:<!-- more -->@@
+
+Problems of plane strain elasticity are defined as problems where the following components of the strain tensor are null
+\begin{equation}
+    \label{eq:1}
+    \straincomp_{31} = \straincomp_{23} = \straincomp_{33} = 0.
+\end{equation}
+
+This is typically true of problems for which the geometry /and the loading/ are invariant along the third direction $\vec e_3$. In what follows, it will be covenient to adopt the following classical notation
+
+  - latin indices (e.g. $i, j, k$) can take values in $\{1, 2, 3\}$,
+  - greek indices (e.g. $\alpha, \beta, \gamma$) can take values in $\{1, 2\}$.
+
+In both cases, Einstein's convention applies; in other words, $\straincomp_{kk}$ stands for
+\begin{equation*}
+    \sum_{k=1}^3\straincomp_{kk},
+\end{equation*}
+while $\straincomp_{\gamma\gamma}$ stands for
+\begin{equation*}
+    \sum_{\gamma=1}^2\straincomp_{\gamma\gamma}.
+\end{equation*}
+
+As in the previous instalment, the constitutive laws in isotropic, plane strain elasticity will be derived using various sets of material constants, starting with the bulk modulus $E$ and the Poisso ratio $\nu$.
+
+* Young's modulus and Poisson ratio
+
+We first recall the consitutive law in isotropic, 3D elasticity
+\begin{equation}
+    \label{eq:2}
+    \straincomp_{ij}=\frac{1+\nu}E\stresscomp_{ij}-\frac\nu E\stresscomp_{kk}\delta_{ij}.
+\end{equation}
+
+Combination of Eqs. \eqref{eq:1} and \eqref{eq:2} for $(i, j)=(3, 1)$ and $(i, j)=(2, 3)$, first leads to $\stresscomp_{31}=\stresscomp_{23}=0$. Then, for $(i, j) = (3, 3)$, $\stresscomp_{33}=\nu\stresscomp_{\gamma\gamma}$. The 3D trace of $\stress$ can therefore be expressed as a function of its 2D trace
+\begin{equation*}
+    \stresscomp_{kk}=\left(1+\nu\right)\stresscomp_{\gamma\gamma}.
+\end{equation*}
+
+Substituting in Eq. \eqref{eq:2}
+\begin{equation}
+    \label{eq:3}
+    \straincomp_{\alpha\beta}=\frac{1+\nu}E\left(\stresscomp_{\alpha\beta}-\nu\stresscomp_{\gamma\gamma}\delta_{\alpha\beta}\right),
+\end{equation}
+which is the plane strain constitutive low we were looking for.
+
+* Shear modulus and Poisson ratio
+
+Recalling (see [[file:./elastic-constants-of-isotropic-material.org][previous instalment]]) that $E=2\shearmod\left(1+\nu\right)$, Eq. \eqref{eq:2} can also be cast as follows
+\begin{equation}
+    \label{eq:4}
+    \straincomp_{\alpha\beta}=\frac1{2\shearmod}\left(\stresscomp_{\alpha\beta}-\nu\stresscomp_{\gamma\gamma}\delta_{\alpha\beta}\right).
+\end{equation}
+
+* Bulk and shear moduli
+
+For (2D) isotropic stresses, $\stresscomp_{\alpha\beta}=-p\delta_{\alpha\beta}$, Eq. \eqref{eq:4} reads
+\begin{equation*}
+    \straincomp_{\alpha\beta}=-\frac{1-2\nu}{2\shearmod}p\delta_{\alpha\beta},
+\end{equation*}
+and the relative surface change $\straincomp_\text s$, defined as $\straincomp_\text s=\straincomp_{\gamma\gamma}$, reads
+\begin{equation*}
+    \straincomp_\text s=-\frac p{\bulkmod_\text{2D}},
+\end{equation*}
+with
+\begin{equation}
+    \label{eq:5}
+    \bulkmod_\text{2D}=\frac\shearmod{1-2\nu}.
+\end{equation}
+
+$\bulkmod_\text{2D}$ thus defined is the 2D (plane strain) bulk modulus of the material. Attention should be paid to the fact that, unlike the shear modulus, the bulk modulus of a material /depends on the dimension of the physical space/. More generally, the (2D) trace of the strain tensor is related to the average stress
+\begin{equation}
+    \label{eq:6}
+    \straincomp_{\gamma\gamma}=\frac{1-2\nu}{2\shearmod}\stresscomp_{\gamma\gamma}.
+\end{equation}
+
+Combining Eqs. \eqref{eq:4} and \eqref{eq:6}
+\begin{equation*}
+    \stresscomp_{\alpha\beta}=2\shearmod\straincomp_{\alpha\beta}+\frac{2\shearmod\nu}{1-2\nu}\straincomp_{\gamma\gamma}\delta_{\alpha\beta}=\frac{\shearmod}{1-2\nu}\straincomp_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\straincomp_{\alpha\beta}-\frac{\straincomp_{\gamma\gamma}}2\delta_{\alpha\beta}\right),
+\end{equation*}
+and the stress-strain relationship finally reads
+\begin{equation*}
+    \stresscomp_{\alpha\beta}=\bulkmod_\text{2D}\straincomp_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\straincomp_{\alpha\beta}-\frac{\straincomp_{\gamma\gamma}}2\delta_{\alpha\beta}\right).
+\end{equation*}
+
+* Conclusion
+
+In this instalment, we have seen how the plane strain asumption affects the constitutive law of isotropic, linear and elastic materials. In particular, the bulk modulus which is the ratio of the average stress to the relative surface change appears to be dimension dependent. In the next instalment, we will reconcile the 3D and 2D points of view.
+
+* History
+
+  - <2013-12-29 Sun> Initial version.

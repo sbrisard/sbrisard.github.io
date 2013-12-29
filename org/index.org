@@ -3,6 +3,10 @@
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
+[[file:./2013/12/elastic-constants-of-isotropic-material_29.org][Elastic constants of an isotropic material, part 2: plane strain elasticity]]
+
+[[file:./2013/12/elastic-constants-of-isotropic-material.org][Elastic constants of an isotropic material, part 2: 3D elasticity]]
+
 [[file:2013/12/scientific-computing-under-windows-7_19.org][Scientific computing under Windows 7, part 7: ITK (proper)]]
 
 [[file:2013/12/scientific-computing-under-windows-7.org][Scientific computing under Windows 7, part 6: ITK (prerequisites)]]
