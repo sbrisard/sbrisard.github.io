@@ -1,0 +1,95 @@
+#+TITLE: Towards polarization methods, part 1: the Lippmann--Schwinger equation 
+#+INCLUDE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+In this series, we will enter the heart of the matter. We will look at non-standard ways of numerically solving the local problem of micromechanics, introducing first the Lippmann--Schwinger equation (in this instalment), then the energy principle of Hashin and Shtrikman (in the next instalment).@@html:<!-- more -->@@
+
+We again consider a heterogeneous material, with local stiffness $\stiffness$, located in domain $\domain\subset\reals^d$. As will be discussed elsewhere, the local problem of micromechanics reads
+
+\begin{align}
+    \label{eq:1}
+    \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
+    \label{eq:2}
+    \stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\domain),\\
+    \label{eq:3}
+    \strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
+    \label{eq:4}
+    \displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+\end{align}
+
+where $\Strain$ is the macroscopic (imposed) strain. The solution to this problem defines the effective elastic properties $\stiffness^\text{eff}$, since, by definition
+
+\begin{equation*}
+\Stress=\volavg{\stress}=\stiffness^\text{eff}:\Strain,
+\end{equation*}
+
+where $\Stress$ is the macroscopic stress.
+
+Eqs. \eqref{eq:1} -- \eqref{eq:4} would be trivial if we had $\stiffness(\vec x)=\stiffness_0$ for any $\vec x\in\domain$ ($\stiffness_0$ is a /constant/ stiffness tensor). Indeed, the solution would then be
+
+\begin{equation*}
+\strain(\vec x)=\Strain,\qquad\stress(\vec x)=\stiffness_0:\Strain.
+\end{equation*}
+
+In other words, our life would be easier if we were to homogenize materials which are /already/ homogeneous!
+
+So we see that the complexity of Eqs. \eqref{eq:1} -- \eqref{eq:4} comes from the heterogeneity of the material. We would like to /force/ a homogeneous material /into/ this problem. More precisely, we select a so-called /reference/ material, with /arbitrary/ stiffness $\stiffness_0$. Then the local stress-strain relationship \eqref{eq:2} can always be written as follows
+
+\begin{equation}
+\label{eq:5}
+\stress(\vec x)=\stiffness(\vec x):\strain(\vec x)=\stiffness_0:\strain(\vec x)+\left[\stiffness(\vec x)-\stiffness_0\right]:\strain(\vec x).
+\end{equation}
+
+Introducing the so-called /polarization/ $\polarization$
+
+\begin{equation}
+\label{eq:6}
+\polarization(\vec x)=\left[\stiffness(\vec x)-\stiffness_0\right]:\strain(\vec x),
+\end{equation}
+
+Eq. \eqref{eq:5} then takes the following compact form
+
+\begin{equation}
+\label{eq:7}
+\stress(\vec x)=\stiffness_0:\strain(\vec x)+\polarization(\vec x).
+\end{equation}
+
+Determination of the polarization $\polarization$ requires the solution to Eqs. \eqref{eq:1} -- \eqref{eq:4}; therefore, it would seem that Eq. \eqref{eq:7} achieved nothing! However, let us assume for a moment that we /know/ $\polarization$ beforehand. Then Eqs. (1) -- (4) reduce to
+
+\begin{align*}
+\nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
+\stress(\vec x)&=\stiffness_0:\strain(\vec x)+\polarization(\vec x)&&(\vec x\in\domain),\\
+\strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
+\displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+\end{align*}
+
+which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ linear elastic material $\stiffness_0$. From [[file:../09/green-operator-for-strains-part-1.org][this series]], the solution to the above problem is known (at least, formally)
+
+\begin{equation}
+\label{eq:8}
+\strain(\vec x)=\Strain-(\greeniv_0\circledast\polarization)(\vec x),
+\end{equation}
+
+where the Green operator for strains $\greeniv_0$ associated with $\stiffness_0$ has been introduced. We now need to remember that the polarization $\polarization$ is /not/ known. Rather, it is given by Eq. \eqref{eq:6}. Upon introduction into Eq. \eqref{eq:8}, we get the so-called Lippmann--Schwinger equation
+
+\begin{equation}
+\label{eq:9}
+\strain(\vec x)+\left\{\greeniv_0\circledast\left[\left(\stiffness-\stiffness_0\right):\strain\right]\right\}(\vec x)=\Strain.
+\end{equation}
+
+This equation was first introduced by [[file:../../p/references.org::<<ZELL1973>>][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\polarization$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
+
+\begin{equation}
+\label{eq:10}
+\left[\stiffness(\vec x)-\stiffness_0\right]^{-1}:\polarization(\vec x)+\left(\greeniv_0\circledast\polarization\right)(\vec x)=\Strain.
+\end{equation}
+
+To sum up, we started with the set of partial differential equations \eqref{eq:1} -- \eqref{eq:4}, and ended up with one /single/, /equivalent/, integral equation. Discretization of the Lippmann-Schwinger equation \eqref{eq:9} has already been considered in the past. This leads to some well-known numerical schemes (Moulinec & Suquet, [[file:../../p/references.org::<<MOUL1994>>][1994]], [[file:../../p/references.org::<<MOUL1998>>][1998]]).
+
+However, I do think it is not the best way to proceed. A much more fruitful approach is to consider the variational form of Eq. \eqref{eq:10}. This will be done in the [[file:towards-polarization-methods-part-2.org][next instalment]] of this series.
+
+* History
+
+  - <2011-10-04 Tue> Initial version.
+  - <2013-12-30 Mon> MathJax features are now used for automatic equations numbering.
+

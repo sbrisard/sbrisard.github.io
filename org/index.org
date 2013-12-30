@@ -31,6 +31,8 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/09/first-things-first-import-petsc4py.org][First things first: import =petsc4py= correctly]]
 
+[[file:./2011/10/towards-polarization-methods-part-1.org][Towards polarization methods, part 1: the Lippmann--Schwinger equation]]
+
 [[file:2011/09/green-operator-for-strains-part-2.org][The Green operator for strains, part 2: elementary properties]]
 
 [[file:2011/09/green-operator-for-strains-part-1.org][The Green operator for strains, part 1: definition]]
