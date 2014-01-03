@@ -2,7 +2,7 @@
 #+SETUPFILE: "../../header.org"
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
-Among all classes of materials, the class of linearly elastic and isotropic materials is probably the simplest. Such materials are defined by two elastic constants: for example, Young's modulus $E$ and Poisson's ratio $\nu$. However, depending on the situation, this pair of constants might not be the most appropriate (meaning that they may not lead to the most compact expressions). Alternative sets of elastic constants are
+Among all classes of materials, the class of linearly elastic and isotropic materials is probably the simplest. Such materials are defined by two elastic constants: for example, Young's modulus $E$ and Poisson's ratio $\nu$. However, depending on the situation, this pair of constants might not be the most appropriate@@html:<!-- more -->@@ (meaning that they may not lead to the most compact expressions). Alternative sets of elastic constants are
 
 - Lamé's constants $\lambda$ and $\shearmod$,
 - bulk and shear moduli $\bulkmod$ and $\shearmod$,
