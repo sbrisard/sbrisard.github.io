@@ -1,5 +1,6 @@
 #+TITLE: My professional background
-#+INCLUDE: ../header.org
+#+SETUPFILE: ../header.org
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../solarized.css" />
 
 I am currently a research scientist at [[http://navier.enpc.fr/][Navier laboratory]], [[http://www.ifsttar.fr/][IFSTTAR]] (/Institut Français des Sciences et Techniques du Transport, de l'Aménagement et des Réseaux/, French Institute of Sciences and Technology for Transport, Development and Networks).
 
