@@ -13,9 +13,9 @@
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 
-  - <<HASH1962>> [[http://dx.doi.org/10.1016/0022-5096(62)90004-2][Hashin and Shtrikman (1962)]] :: Z. Hashin and S. Shtrikman, /On some variational principles in anisotropic and nonhomogeneous elasticity/, Journal of the Mechanics and Physics of Solids 10(4):335-342, 1962
-  - <<MOUL1994>> Moulinec and Suquet (1994) :: H. Moulinec and P. Suquet, /A fast numerical method for computing the linear and nonlinear properties of composites/, Comptes-Rendus de l'Académie des Sciences série II 318: 1417-1423, 1994
-  - <<MOUL1998>>  [[http://dx.doi.org/10.1016/S0045-7825(97)00218-1][Moulinec and Suquet (1998)]] :: H. Moulinec and P. Suquet, /A numerical method for computing the overall response of nonlinear composites with complex microstructure/, Computer Methods in Applied Mechanics and Engineering 157(1-2): 69-94, 1998
-  - <<WILL1977>> [[http://dx.doi.org/10.1016/0022-5096(77)90022-9][Willis (1977)]] :: J. R. Willis, /Bounds and self-consistent estimates for the overall properties of anisotropic composites/, Journal of the Mechanics and Physics of Solids 25(3):185-202, 1977
-  - <<WILL2001>> Willis (2001) :: J. R. Willis, /Lectures on mechanics of random media/, in D. Jeulin, M. Ostoja-Starzewski (eds) Mechanics of random and multiscale microstructures, CISM courses and lectures 430:221-267, Springer, 2001
-  - <<ZELL1973>> [[http://dx.doi.org/10.1002/pssb.2220550241][Zeller & Dederichs (1973)]] :: R. Zeller and P. H. Dederichs, /Elastic constants of polycrystals/, Physica Status Solidi (B) 55(2): 831-842, 1973
+  - <<#HASH1962>> [[http://dx.doi.org/10.1016/0022-5096(62)90004-2][Hashin and Shtrikman (1962)]] :: Z. Hashin and S. Shtrikman, /On some variational principles in anisotropic and nonhomogeneous elasticity/, Journal of the Mechanics and Physics of Solids 10(4):335-342, 1962
+  - <<#MOUL1994>> Moulinec and Suquet (1994) :: H. Moulinec and P. Suquet, /A fast numerical method for computing the linear and nonlinear properties of composites/, Comptes-Rendus de l'Académie des Sciences série II 318: 1417-1423, 1994
+  - <<#MOUL1998>>  [[http://dx.doi.org/10.1016/S0045-7825(97)00218-1][Moulinec and Suquet (1998)]] :: H. Moulinec and P. Suquet, /A numerical method for computing the overall response of nonlinear composites with complex microstructure/, Computer Methods in Applied Mechanics and Engineering 157(1-2): 69-94, 1998
+  - <<#WILL1977>> [[http://dx.doi.org/10.1016/0022-5096(77)90022-9][Willis (1977)]] :: J. R. Willis, /Bounds and self-consistent estimates for the overall properties of anisotropic composites/, Journal of the Mechanics and Physics of Solids 25(3):185-202, 1977
+  - <<#WILL2001>> Willis (2001) :: J. R. Willis, /Lectures on mechanics of random media/, in D. Jeulin, M. Ostoja-Starzewski (eds) Mechanics of random and multiscale microstructures, CISM courses and lectures 430:221-267, Springer, 2001
+  - <<#ZELL1973>> [[http://dx.doi.org/10.1002/pssb.2220550241][Zeller & Dederichs (1973)]] :: R. Zeller and P. H. Dederichs, /Elastic constants of polycrystals/, Physica Status Solidi (B) 55(2): 831-842, 1973
