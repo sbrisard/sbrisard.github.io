@@ -1,0 +1,70 @@
+#+TITLE: Towards polarization methods, part 2: the variational principle of Hashin and Shtrikman 
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+In [[file:../../2011/10/towards-polarization-methods-part-1.org][part 1]] of this series, we introduced the Lippmann--Schwinger equation. Direct discretization of this equation can lead to efficient schemes for the numerical solution of the elementary problem of micromechanics. However, my experience shows that taking first the variational form of this equation, and following standard Garlerkin discretization approaches can lead to much more robust and efficient schemes. In this instalment, we will introduce the so-called variational "principle" of [[file:~/Documents/blog/org/p/references.html::HASH1962][Hashin and Shtrikman (1962)]], @@html:<!-- more -->@@ which is nothing but the variational form of the Lippmann-Schwinger equation. The present exposition follows quite closely the approach of [[file:~/Documents/blog/org/p/references.html::WILL1977][Willis (1977)]].
+
+In the [[file:../../2011/10/towards-polarization-methods-part-1.org][previous instalment]], I proved that solving the following elasticity problem on $\domain$
+
+\begin{align}
+\label{eq:1}
+\nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
+\label{eq:2}
+\stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\domain),\\
+\label{eq:3}
+\strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
+\label{eq:4}
+\displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+\end{align}
+
+where $\Strain$ is the macroscopic strain, was equivalent to finding the polarization field $\polarization$ which solves the Lippmann-Schwinger equation
+
+\begin{equation}
+\label{eq:5}
+\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\left(\greeniv_0\circledast\polarization\right)=\Strain.
+\end{equation}
+
+In other words, the boundary value problem \eqref{eq:1} -- \eqref{eq:4} is replaced by a single integral equation \eqref{eq:5}. Classically, both sides of this equation are now multiplied by an arbitrary test field $\prestress$. After integration over the domain $\domain$ we find for all test fields $\prestress$
+
+\begin{equation}
+\label{eq:6}
+\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}+\volavg{\prestress:\left(\greeniv_0\circledast\polarization\right)}=\Strain:\volavg{\prestress}.
+\end{equation}
+
+This is a standard variational problem. Indeed, introducing the bilinear form $a$ and the linear form $\ell$
+
+\begin{align*}
+a(\polarization, \prestress)&=\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}+\volavg{\prestress:\left(\greeniv_0\circledast\polarization\right)},\\
+\ell(\prestress)&=\Strain:\volavg{\prestress},
+\end{align*}
+
+Eq. \eqref{eq:6} can be written
+
+\begin{equation}
+\label{eq:7}
+\text{Find }\polarization\,\text{such as }a(\polarization, \prestress)=\ell(\prestress)\,\text{for all }\prestress.
+\end{equation}
+
+It should be noted that in order to be well-posed, the spaces to which $\polarization$ and $\prestress$ belong should be specified. This can be done, and is actually the topic of a publication being currently reviewed.
+
+Quite interestingly, it can easily be verified that Eq. \eqref{eq:7} in fact characterizes the critical point of the so-called functional of Hashin and Shtrikman, denoted here $\mathcal H$, and defined as
+
+\begin{equation}
+\label{eq:8}
+\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)}.
+\end{equation}
+
+Indeed, for $\prestress$ small enough, we have
+
+\begin{equation}
+\mathcal H(\polarization+\prestress)-\mathcal H(\polarization)\simeq\ell(\prestress)-a(\polarization, \prestress),
+\end{equation}
+
+the right-hand side being zero if the polarization field $\polarization$ is the solution to the Lippmann-Schwinger equation \eqref{eq:5}. Therefore, the first variation of $\mathcal H$ at $\polarization$ is null; in other words, $\polarization$ is a /critical point/ of $\mathcal H$. This result is usually referred to as the variational principle of [[file:../../p/references.org::<<HASH1962>>][Hashin and Shtrikman (1962)]]. It is the fundamental result at the basis of all numerical methods presented in this blog.
+
+So, it is time to sum up. We proved in this instalment that solving the boundary value problem \eqref{eq:1} -- \eqref{eq:4} is actually equivalent to finding the critical point of $\mathcal H$ defined by Eq. \eqref{eq:8}. It can be proved that this critical point is indeed unique. In the [[file:./towards-polarization-methods-part-3.org][next instalment]] of this series, I will introduce the /energy principle/ of [[file:../../p/references.org::<<HASH1962>>][Hashin and Shtrikman (1962)]]. In other words, we will explore under which circumstances this critical point is an /extremum/ of $\mathcal H$.
+
+* History
+
+  - <2011-10-31 Mon> Initial version.
+  - <2014-01-11 Sat> Used MathJax's features for automatic numbering of equations.
