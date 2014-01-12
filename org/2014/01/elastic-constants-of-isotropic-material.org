@@ -1,0 +1,126 @@
+#+TITLE: Elastic constants of an isotropic material, part 3: putting it all together
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+In the previous instalments of this series (see [[file:../..//2013/12/elastic-constants-of-isotropic-material.org][Part 1]] and [[file:../../2013/12/elastic-constants-of-isotropic-material_29.org][Part 2]]), I have shown that regardless of the dimensionality (3D or plane strain elasticity), the constitutive law of an isotropically elastic material reads
+
+\begin{equation}
+\label{eq:1}
+\stresscomp_{ij}=\bulkmod\straincomp_{kk}\delta_{ij}+2\shearmod\left(\straincomp_{ij}-\frac{\straincomp_{kk}}d\delta_{ij}\right),
+\end{equation}
+
+where $d$ is the dimension of the physical space ($d=3$ for 3D elasticity, $d=2$ for plane strain elasticity), $\shearmod$ is the shear modulus, and $\bulkmod$ is the bulk modulus, whose expression depends on $d$
+
+\begin{align}
+\label{eq:2}\bulkmod&=\frac23\frac{1+\nu}{1-2\nu}\shearmod&&(d=3),\\
+\label{eq:3}\bulkmod&=\frac\shearmod{1-2\nu}&&(d=2).
+\end{align}
+
+In this instalment, I am going to introduce some classical isotropic, fourth-rank tensors which will prove extremely useful and will allow us to cast Eq. \eqref{eq:1} in an intrinsic (component-free) form.@@html:<!-- more -->@@ It should be noted that the following developments are restricted to fourth-rank tensors $\tensiv T$ with both /minor/ and /major/ symmetries
+
+\begin{align*}
+T_{ijkl}&=T_{jikl}=T_{ijlk}&&\text{(minor symmetries)},\\
+T_{ijkl}&=T_{klij}&&\text{(major symmetries)}.
+\end{align*}
+
+* Spherical and deviatoric projection tensors
+
+In the present section, I am going to introduce the fourth-rank identity, spherical and deviatoric projection tensors.
+
+** Fourth-rank identity tensor
+
+The fourth-rank identity tensor $\identiv$ maps any second-rank, symmetric tensor $\tensii u$ to itself
+
+\begin{equation*}
+\identiv:\tensii u=\tensii u.
+\end{equation*}
+
+It is straightforward to work out the components of $\identiv$ (accounting for both minor and major symmetries)
+
+\begin{equation*}
+I_{ijkl}=\frac12\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right).
+\end{equation*}
+
+** Fourth-rank spherical projection tensor
+
+The fourth-rank spherical projection tensor $\sphprojiv$ extracts the spherical part of any symmetric, second-rank tensor $\tensii u$
+
+\begin{equation*}
+\sphprojiv:\tensii u=\frac1d\tr(\tensii u)\identii,
+\end{equation*}
+
+where $\identii$ is the second-rank identity tensor (with components $\delta_{ij}$). In particular, $\sphprojiv:\identii=\identii$. In intrinsic form, $\sphprojiv$ reads
+
+\begin{equation*}
+\sphprojiv=\frac1d\identii\otimes\identii,
+\end{equation*}
+
+where $\otimes$ denotes the [[http://en.wikipedia.org/wiki/Tensor_product][tensor product]]. The components of $\sphprojiv$ are
+
+\begin{equation*}
+J_{ijkl} = \frac1d\delta_{ij}\delta_{kl}.
+\end{equation*}
+
+** Fourth-rank deviatoric projection tensor
+
+The fourth-rank deviatoric projection tensor $\devprojiv$ extracts the deviatoric part of any symmetric, second-rank tensor $\tensii u$
+
+\begin{equation*}
+\devprojiv:\tensii u=\tensii u-\frac1d\tr(\tensii u)\identii=\tensii u-\sphprojiv:\tensii u,
+\end{equation*}
+
+from which it results that
+
+\begin{equation*}
+\devprojiv=\identiv-\sphprojiv.
+\end{equation*}
+
+* Stiffness tensor
+
+Going back the constitutive law of the linearly elastic, isotropic material given by Eq. \eqref{eq:1}, it is found that
+
+\begin{equation*}
+\stress=d\bulkmod\sphprojiv:\strain+2\shearmod\devprojiv:\strain=\stiffness:\strain,
+\end{equation*}
+
+where $\stiffness$ is the fourth-rank stiffness tensor of the material
+
+\begin{equation*}
+\stiffness=d\bulkmod\sphprojiv+2\shearmod\devprojiv.
+\end{equation*}
+
+In isotropic elasticity, the stiffness tensor is a linear combination of the two tensors $\sphprojiv$ and $\devprojiv$. This is in fact a general result, which is heavily used in materials science: any /isotropic/ fourth-rank tensor with minor and major symmetries is a linear combination of $\sphprojiv$ and $\devprojiv$. In other words, $\left(\sphprojiv, \devprojiv\right)$ forms a /basis/ of the fourth-rank isotropic tensors with minor and major symmetries. Why this is useful will become obvious in the next section, where I will show that algebra in this basis is dead simple.
+
+* Algebra of the $\sphprojiv$ and $\devprojiv$ tensors
+
+It can readily be verified that
+
+\begin{gather*}
+\sphprojiv:\sphprojiv=\sphprojiv,\\
+\devprojiv:\devprojiv=\devprojiv,\\
+\devprojiv:\sphprojiv=\sphprojiv:\devprojiv=\tensii0.
+\end{gather*}
+
+Therefore, multiplication of two isotropic tensors $\tensiv T_i=a_i\sphprojiv+b_i\devprojiv$ ($i=1,2$) is trivial
+
+\begin{equation*}
+\tensiv T_1:\tensiv T_2=a_1a_2\sphprojiv+b_1b_2\devprojiv.
+\end{equation*}
+
+Also, inversion of an isotropic tensor $\tensiv T=a\sphprojiv+b\devprojiv$ is straightforward
+
+\begin{equation*}
+\tensiv T^{-1}=\frac1a\sphprojiv+\frac1b\devprojiv.
+\end{equation*}
+
+All these expressions will prove extremely useful in due time.
+
+* Conclusion
+
+This is the end of this series on the elastic constants of isotropic materials. I have shown that (regardless of the dimension $d$ of the physical space), such materials are characterized by two constants. The shear modulus $\shearmod$, the Poisson ratio $\nu$ and Young's modulus $E$ do not depend on $d$, while the plane strains expression of the bulk modulus $\bulkmod$ differs from its 3D expression (see Eqs. \eqref{eq:2} and \eqref{eq:3}).
+
+This series was also a good opportunity to introduce the tensors $\sphprojiv$ and $\devprojiv$, which form a basis for the isotropic, fourth-rank tensors. Using this basis is very convenient, as algebra within this basis is extremely simple.
+
+* History
+
+  - <2014-01-12 Sun> Initial version.

@@ -3,6 +3,8 @@
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
+[[file:2014/01/elastic-constants-of-isotropic-material.org][Elastic constants of an isotropic material, part 3: putting it all together]]
+
 [[file:2014/01/extract-images-from-pdf-files.org][Extract images from PDF files]]
 
 [[file:./2013/12/elastic-constants-of-isotropic-material_29.org][Elastic constants of an isotropic material, part 2: plane strain elasticity]]
