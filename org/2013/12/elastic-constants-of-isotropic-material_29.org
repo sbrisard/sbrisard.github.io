@@ -87,8 +87,9 @@ and the stress-strain relationship finally reads
 
 * Conclusion
 
-In this instalment, we have seen how the plane strain asumption affects the constitutive law of isotropic, linear and elastic materials. In particular, the bulk modulus which is the ratio of the average stress to the relative surface change appears to be dimension dependent. In the next instalment, we will reconcile the 3D and 2D points of view.
+In this instalment, we have seen how the plane strain asumption affects the constitutive law of isotropic, linear and elastic materials. In particular, the bulk modulus which is the ratio of the average stress to the relative surface change appears to be dimension dependent. In the [[file:../../2014/01/elastic-constants-of-isotropic-material.org][next instalment]], we will reconcile the 3D and 2D points of view.
 
 * History
 
   - <2013-12-29 Sun> Initial version.
+  - <2014-01-12 Sun> Added link to Part 3.
