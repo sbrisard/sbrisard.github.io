@@ -1,0 +1,46 @@
+#+TITLE: Towards polarization methods, part 3: the energy principle of Hashin and Shtrikman 
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+In the [[file:./towards-polarization-methods-part-2.org][second part]] of this series, I introduced the /variational/ principle of [[file:../../p/references.org::#HASH1962][Hashin and Shtrikman (1962)]]. It should be noted that this principle is valid, regardless of the reference material $\stiffness_0$ (no restriction apply to the elastic moduli of the reference material). In the present instalment, we will see under which circumstances this principle is in fact an /energy/ principle.@@html:<!-- more -->@@ By energy principle, I mean that the functional of Hashin and Shtrikman $\mathcal H$ (see [[file:./towards-polarization-methods-part-2.org][part 2]])
+
+\begin{equation*}
+\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)},
+\end{equation*}
+
+is /extremum/ at the solution of the Lippmann-Schwinger equation (we already know that it is /stationary/).
+
+This instalment will in fact be very short, as you will be spared the proof of the main result. As in [[file:./towards-polarization-methods-part-2.org][part 2]], all details can be found in [[file:../../p/references.org::#HASH1962][Hashin and Shtrikman (1962)]] [see also [[file:../../p/references.org::#WILL1977][Willis (1977)]] for a slightly more modern proof]. So, here goes.
+
+#+BEGIN_THEOREM
+Let $\polarization$ be the unique solution of the Lippmann-Schwinger equation (see [[file:./2011/10/towards-polarization-methods-part-1.org][part 1]])
+
+\begin{equation*}
+\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\greeniv_0\circledast\polarization=\Strain.
+\end{equation*}
+
+If the reference material is stiffer (resp. softer) than the heterogeneous material, then $\mathcal H$ is minimum (resp. maximum) at $\polarization$. More precisely
+  - if $\stiffness(\vec x)-\stiffness_0$ is positive, semi-definite at every point $\vec x\in\domain$, then
+\begin{equation*}
+\text{for all}\;\prestress(\vec x),\mathcal H(\prestress)\leq\mathcal H(\polarization),
+\end{equation*}
+  - if $\stiffness(\vec x)-\stiffness_0$ is negative, semi-definite at every point $\vec x\in\domain$, then
+\begin{equation*}
+\text{for all}\;\prestress(\vec x),\mathcal H(\prestress)\geq\mathcal H(\polarization).
+\end{equation*}
+#+END_THEOREM
+
+Maybe a quick reminder would be useful, here. $\stiffness - \stiffness_0$ is said to be positive, semi-definite, if $\prestress:\stiffness:\prestress\geq\prestress:\stiffness_0:\prestress$ for all $\prestress$. For isotropic heterogeneous (resp. reference) materials with bulk modulus $\bulkmod$ (resp. $\bulkmod_0$) and shear modulus $\shearmod$ (resp. $\shearmod_0$), this is equivalent to
+
+\begin{equation*}
+\bulkmod\geq\bulkmod_0\quad\text{and}\quad\shearmod\geq\shearmod_0.
+\end{equation*}
+
+Note that it is not always possible to find a reference material which complies with the requirements of the above theorem. A typical example would be a heterogeneous material conaining both pores [$\stiffness(\vec x) = \tensiv 0$] and rigid inclusions [$\stiffness(\vec x)\rightarrow+\infty$]. We won't address this issue for the time being.
+
+Extremum principles are very useful in practice, as they usually lead to well-behaved numerical schemes. The energy principle of Hashin and Shtrikman also has deep theoretical consequences, as will be seen in the [[file:../12/towards-polarization-methods-part-4.org][next instalment]] of this series.
+
+* History
+
+  - <2011-10-31 Mon> Initial version.
+  - <2014-01-18 Sat> Slightly revised version.
