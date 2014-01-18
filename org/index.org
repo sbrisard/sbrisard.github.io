@@ -35,6 +35,8 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/09/first-things-first-import-petsc4py.org][First things first: import =petsc4py= correctly]]
 
+[[file:./2011/12/towards-polarization-methods-part-4.org][Towards polarization methods, part 4: bounds on the macroscopic elastic properties]]
+
 [[file:./2011/10/towards-polarization-methods-part-3.org][Towards polarization methods, part 3: the energy principle of Hashin and Shtrikman]]
 
 [[file:2011/10/towards-polarization-methods-part-2.org][Towards polarization methods, part 2: the variational principle of Hashin and Shtrikman]]

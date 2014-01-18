@@ -35,6 +35,7 @@
 #+HTML_HEAD_EXTRA:           domain: '\\Omega',
 #+HTML_HEAD_EXTRA:           dS: ['\\operatorname{dS}_{#1}', 1],
 #+HTML_HEAD_EXTRA:           dV: ['\\operatorname{dV}_{#1}', 1],
+#+HTML_HEAD_EXTRA:           eff: '\\text{eff}',
 #+HTML_HEAD_EXTRA:           eshelby: '\\tensiv{S}',
 #+HTML_HEAD_EXTRA:           greeniv: '\\stensiv{\\Gamma}',
 #+HTML_HEAD_EXTRA:           greenivcomp: '\\Gamma',
