@@ -1,4 +1,6 @@
 #+TITLE: Some gruesome details
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 Formulas on this website are typeset in $\LaTeX$ and rendered with [[http://www.mathjax.org/][MathJax]]. Activating this feature is very simple. The first thing you need to do is@@html:<!-- more -->@@ edit the model of your blog, and insert in the header the following lines
 #+BEGIN_SRC html

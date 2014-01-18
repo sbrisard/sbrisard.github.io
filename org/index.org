@@ -1,5 +1,6 @@
 #+TITLE: Welcome!
-#+INCLUDE: "./header.org"
+#+SETUPFILE: "./header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="./solarized.css" />
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 

@@ -1,4 +1,5 @@
 #+TITLE: Going public
-#+INCLUDE: "../../header.org"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 So here we go. This website goes public. It will build up little by little (be patient). 

@@ -1,5 +1,6 @@
 #+TITLE: Scientific computing under Windows 7, part 6: ITK (prerequisites)
-#+INCLUDE: "../../header.org"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 From the [[http://www.itk.org][official website]]
 

@@ -1,5 +1,6 @@
 #+TITLE: Watch it! Integer division in Python 3
-#+INCLUDE: "../../header.org"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 As of Python 3, the operator =/= performs a /true/ division (floating-point result). If you are looking for an integer division (quotient of the Euclidean division), you must use =//=. For example
 

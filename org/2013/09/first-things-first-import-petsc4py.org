@@ -1,4 +1,6 @@
 #+TITLE: First things first: import =petsc4py= correctly
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 [[https://bitbucket.org/petsc/petsc4py][petsc4py]] can pass command line arguments to =PETSc=, such as the very useful =-log_summary=. This would typically be done by passing these arguments to =petsc4py.init()=. However, this command must be invoked before any other =petsc4py= command. In other words
 

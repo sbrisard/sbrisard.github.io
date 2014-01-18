@@ -1,17 +1,6 @@
 #+TITLE: References
-#+DATE: <2013-12-06 Fri>
-#+AUTHOR: Sébastien Brisard
-#+EMAIL: sebastien.brisard@ifsttar.fr
-#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
-#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
-#+OPTIONS: e:t email:nil f:t inline:t num:t p:nil pri:nil stat:t
-#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:t todo:t |:t
-#+CREATOR: Emacs 24.3.1 (Org mode 8.2.1)
-#+DESCRIPTION:
-#+EXCLUDE_TAGS: noexport
-#+KEYWORDS:
-#+LANGUAGE: en
-#+SELECT_TAGS: export
+#+SETUPFILE: "../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../solarized.css" />
 
   - <<#HASH1962>> [[http://dx.doi.org/10.1016/0022-5096(62)90004-2][Hashin and Shtrikman (1962)]] :: Z. Hashin and S. Shtrikman, /On some variational principles in anisotropic and nonhomogeneous elasticity/, Journal of the Mechanics and Physics of Solids 10(4):335-342, 1962
   - <<#MOUL1994>> Moulinec and Suquet (1994) :: H. Moulinec and P. Suquet, /A fast numerical method for computing the linear and nonlinear properties of composites/, Comptes-Rendus de l'Académie des Sciences série II 318: 1417-1423, 1994

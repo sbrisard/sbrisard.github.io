@@ -1,5 +1,6 @@
 #+TITLE: Scientific computing under Windows 7, part 1: MinGW
-#+INCLUDE: "../../header.org"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 The natural OS of choice for scientific computing is of course Linux. However, running Linux on a laptop means short battery life, problems with drivers, and so on. Do not mistake me: I LOVE Linux, and have been using it since 1998 (my first distro was actually Mandrake 1.0, long gone!). However, I must admit that Linux has made little progress in terms of energy management, while Windows has improved a lot in terms of stability, to the point that it now becomes possible to use under Windows (almost) all the tools that I came to love under Linux.
 

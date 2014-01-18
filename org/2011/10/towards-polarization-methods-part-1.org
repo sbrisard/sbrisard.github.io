@@ -1,5 +1,5 @@
 #+TITLE: Towards polarization methods, part 1: the Lippmann--Schwinger equation 
-#+INCLUDE: "../../header.org"
+#+SETUPFILE: "../../header.org"
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 In this series, we will enter the heart of the matter. We will look at non-standard ways of numerically solving the local problem of micromechanics, introducing first the Lippmann--Schwinger equation (in this instalment), then the energy principle of Hashin and Shtrikman (in the next instalment).@@html:<!-- more -->@@

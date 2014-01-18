@@ -1,5 +1,6 @@
 #+TITLE: MathJax now accepts equation numbers
-#+INCLUDE: "../../header.org"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 As of version 2.0, MathJax can [[http://docs.mathjax.org/en/latest/tex.html#automatic-equation-numbering][number equations automatically]].@@html:<!-- more -->@@ To enable this feature, the following lines must be added /before/ the =<script>= tag that loads MathJax itself
 
