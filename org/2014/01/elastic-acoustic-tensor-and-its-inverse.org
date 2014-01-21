@@ -1,0 +1,96 @@
+#+TITLE: The elastic acoustic tensor and its inverse
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+$\newcommand{\acoustic}{\tensii A}$
+
+We consider a linearly elastic material with stiffness $\stiffness$. For any wave-vector $\vec k$, the elastic acoustic tensor $\acoustic(\vec k)$ is defined as follows
+
+\begin{equation}
+\label{eq:1}
+\acoustic(\vec k)=\vec k\cdot\stiffness\cdot\vec k=k^2\vec n\cdot\stiffness\cdot\vec n,
+\end{equation}
+
+where $k$ is the amplitude of the wave-vector $k$, $k=\lVert\vec k\rVert$, and $\vec n$ is its direction ($\vec k=k\vec n$). The acoustic tensor is used to assess material stability ([[file:../../p/references.org::#BIGO1994][Bigoni and Zaccaria, 1994]]) and study the propagation of waves . As far as we are concerned, the acoustic tensor will appear while deriving the periodic Green operator for strains *Insert hyperlink*.
+
+In this post, we will derive the expression of the acoustic tensor in the case of an isotropic material. It has been seen in a [[file:./elastic-constants-of-isotropic-material.org][previous post]] that the stiffness tensor $\stiffness$ is then a linear combination of the tensors $\sphprojiv,\devprojiv$
+
+\begin{equation}
+\label{eq:2}
+\stiffness=d\bulkmod\sphprojiv+2\shearmod\devprojiv
+\end{equation}
+
+To compute the elastic tensor, we therefore need to find the expressions of $\vec n\cdot\sphprojiv\cdot\vec n$ and $\vec n\cdot\devprojiv\cdot\vec n$, for any unit vector $\vec n$. We start with the computation of
+
+\begin{equation*}
+\vec n\cdot\identiv\cdot\vec n,
+\end{equation*}
+
+where $\identiv$ denotes the fourth-rank identity tensor. We have
+
+\begin{equation*}
+\left(\vec n\cdot\identiv\cdot\vec n\right)_{jk}=n_i\identivcomp_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
+\end{equation*}
+
+Since $\vec n$ is a unit vector, we have $n_in_i=1$, and
+
+\begin{equation*}
+\vec n\cdot\identiv\cdot\vec n=\frac12\left(\identii+\vec n\otimes\vec n\right),
+\end{equation*}
+
+where $\identii$ denotes the second-rank identity tensor. It will be convenient to introduce the projectors $\tensii p$ and $\tensii q$, defined as follows
+
+\begin{equation*}
+\tensii p=\vec n\otimes\vec n\qquad\tensii q=\identii-\tensii p.
+\end{equation*}
+
+It can readily be verified that
+\begin{equation}
+\label{eq:3}
+\tensii p\cdot\tensii p=\tensii p,\qquad\tensii q\cdot\tensii q=\tensii q,\qquad\tensii p\cdot\tensii q=\tensii q\cdot\tensii p,
+\end{equation}
+
+and
+
+\begin{equation}
+\label{eq:4}
+\vec n\cdot\identiv\cdot\vec n=\tensii p+\frac12\tensii q.
+\end{equation}
+
+Similarly
+
+\begin{equation}
+\label{eq:5}
+\vec n\cdot\sphprojiv\cdot\vec n=\frac1d\vec n\cdot\left(\identii\otimes\identii\right)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tensii p.
+\end{equation}
+
+Finally, combining identity $\devprojiv=\identiv-\sphprojiv$ with Eqs. \eqref{eq:4} and \eqref{eq:5}
+
+\begin{equation}
+\label{eq:6}
+\vec n\cdot\devprojiv\cdot\vec n=\frac{d-1}d\tensii p+\frac12\tensii q.
+\end{equation}
+
+The acoustic tensor of a elastic, linear, isotropic material is obtained from Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:5} and \eqref{eq:6}
+
+\begin{equation*}
+\acoustic(\vec n)=\left(\bulkmod+2\shearmod\frac{d-1}d\right)\tensii p+\shearmod\tensii q.
+\end{equation*}
+
+From [[file:./elastic-constants-of-isotropic-material.org][this post]], it can readily be verified that
+
+\begin{equation*}
+\bulkmod+2\shearmod\frac{d-1}d=2\shearmod\frac{1-\nu}{1-2\nu},
+\end{equation*}
+
+this identity being true in both 3D and plane strain elasticity. The acoustic tensor therefore reads
+
+\begin{equation*}
+\acoustic(\vec k)=k^2\shearmod\left(\frac{2\left(1-\nu\right)}{1-2\nu}\tensii p+\tensii q\right).
+\end{equation*}
+
+Finally, using the properties of the projectors $\tensii p$ and $\tensii q$ [see Eq. \eqref{eq:3}], the /inverse/ of the acoustic tensor can be derived
+
+\begin{equation*}
+\acoustic^{-1}(\vec k)=\frac1{k^2\shearmod}\left(\frac{1-2\nu}{2\left(1-\nu\right)}\tensii p+\tensii q\right).
+\end{equation*}
