@@ -1,0 +1,7 @@
+#+TITLE: Review of "Learning Cython Programming"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+I have recently been offered by [[http://www.packtpub.com/][Packt Publishing]] a free electronic copy of the book [[http://www.packtpub.com/learning-cython-programming/book][Learning Cython Programming]] (by Philip Herron) for me to review. This offer arrived just in time for me, as I had just heard of this book and had decided to give it a go. The situation is a bit awckward, though, as I have to admit I was a bit disappointed by this book.
+
+Let me first say that I am no expert in [[http://cython.org/][Cython]] programming. I discovered this superset of the [[http://www.python.org/][Python]] programming language in august, and soon came to love it. I'm currently developping a numerical code in Python, using Cython for efficiency where necessary (I hope to report on this code soon in this blog). Therefore, I am a relatively new Cython user, and had quite high expectations from this book. I would also like to mention that there are some good resources available on the web: the [[http://docs.cython.org/][official documentation]] of course, which can sometimes be a bit arid, a truly excellent tutorial session at [[http://conference.scipy.org/scipy2013/tutorial_detail.php?id=105][SciPy 2013]] by Kurt Smith, and a [[http://blog.enthought.com/general/advanced-cython-recorded-webinar-typed-memoryviews/][webinar on memoryviews]] by the same Kurt Smith.
