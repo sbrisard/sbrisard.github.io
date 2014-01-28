@@ -4,7 +4,7 @@
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
-[[file:./2014/01/review-of-learning-cython-programming.org][Review of "Learning Cython Programming"]]
+[[file:2014/01/review-of-learning-cython-programming.org][Review of /Learning Cython Programming/]]
 
 [[file:./2014/01/elastic-acoustic-tensor-and-its-inverse.org][The elastic acoustic tensor and its inverse]]
 
