@@ -2,7 +2,8 @@
 #+SETUPFILE: "../header.org"
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../solarized.css" />
 
-  - <<#BIGO1994>> [[http://www.ing.unitn.it/~bigoni/paper/eigenvalues.pdf][Bigoni and Zaccariza (1994)]] :: D. Bigoni and D. Zaccaria, /On the eigenvalues of the acoustic tensor in elastoplasticity/, European Journal of Mechanics - A/Solids 13(5):621-638, 1994
+  - <<#BIGO1994>> [[http://www.ing.unitn.it/~bigoni/paper/eigenvalues.pdf][Bigoni and Zaccaria (1994)]] :: D. Bigoni and D. Zaccaria, /On the eigenvalues of the acoustic tensor in elastoplasticity/, European Journal of Mechanics - A/Solids 13(5):621-638, 1994
+  - <<#GENT2013>> [[http://dx.doi.org/10.1016/j.ijengsci.2013.07.006][Gentile and Straughan (2013)]] :: M. Gentile and B. Straughan, /Acceleration waves in nonlinear double porosity elasticity/, International Journal of Engineering Science 73:10-16, 2013
   - <<#HASH1962>> [[http://dx.doi.org/10.1016/0022-5096(62)90004-2][Hashin and Shtrikman (1962)]] :: Z. Hashin and S. Shtrikman, /On some variational principles in anisotropic and nonhomogeneous elasticity/, Journal of the Mechanics and Physics of Solids 10(4):335-342, 1962
   - <<#MOUL1994>> Moulinec and Suquet (1994) :: H. Moulinec and P. Suquet, /A fast numerical method for computing the linear and nonlinear properties of composites/, Comptes-Rendus de l'Académie des Sciences série II 318: 1417-1423, 1994
   - <<#MOUL1998>>  [[http://dx.doi.org/10.1016/S0045-7825(97)00218-1][Moulinec and Suquet (1998)]] :: H. Moulinec and P. Suquet, /A numerical method for computing the overall response of nonlinear composites with complex microstructure/, Computer Methods in Applied Mechanics and Engineering 157(1-2): 69-94, 1998

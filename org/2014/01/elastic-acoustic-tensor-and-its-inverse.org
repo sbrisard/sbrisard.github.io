@@ -11,25 +11,17 @@ We consider a linearly elastic material with stiffness $\stiffness$. For any wav
 \acoustic(\vec k)=\vec k\cdot\stiffness\cdot\vec k=k^2\vec n\cdot\stiffness\cdot\vec n,
 \end{equation}
 
-where $k$ is the amplitude of the wave-vector $k$, $k=\lVert\vec k\rVert$, and $\vec n$ is its direction ($\vec k=k\vec n$). The acoustic tensor is used to assess material stability ([[file:../../p/references.org::#BIGO1994][Bigoni and Zaccaria, 1994]]) and study the propagation of waves . As far as we are concerned, the acoustic tensor will appear while deriving the periodic Green operator for strains *Insert hyperlink*.
-
-In this post, we will derive the expression of the acoustic tensor in the case of an isotropic material. It has been seen in a [[file:./elastic-constants-of-isotropic-material.org][previous post]] that the stiffness tensor $\stiffness$ is then a linear combination of the tensors $\sphprojiv,\devprojiv$
+where $k$ is the amplitude of the wave-vector $\vec k$, $k=\sqrt{\vec k\cdot\vec k}$, and $\vec n$ is its direction ($\vec k=k\vec n$). The acoustic tensor is used to assess material stability ([[file:../../p/references.org::#BIGO1994][Bigoni and Zaccaria, 1994]]) and study the propagation of waves ([[file:../../p/references.org::#GENT2013][Gentile and Straughan, 2013]]). As far as we are concerned, the derivation of the periodic Green operator for strains will require the expressions of the inverse of the acoustic tensor. This is the topic of the present post@@html:<!-- TODO Insert hyperlink -->@@, which is restricted to isotropic materials: the stiffness tensor $\stiffness$ of isotropic materials is therefore a linear combination of the [[file:./elastic-constants-of-isotropic-material.org][isotropic projection tensors]] $\sphprojiv,\devprojiv$
 
 \begin{equation}
 \label{eq:2}
 \stiffness=d\bulkmod\sphprojiv+2\shearmod\devprojiv
 \end{equation}
 
-To compute the elastic tensor, we therefore need to find the expressions of $\vec n\cdot\sphprojiv\cdot\vec n$ and $\vec n\cdot\devprojiv\cdot\vec n$, for any unit vector $\vec n$. We start with the computation of
+To compute the elastic acoustic tensor, we therefore need to find the expressions of $\vec n\cdot\sphprojiv\cdot\vec n$ and $\vec n\cdot\devprojiv\cdot\vec n$, for any unit vector $\vec n$. We start with the computation of $\vec n\cdot\identiv\cdot\vec n$, where $\identiv$ denotes the fourth-rank identity tensor. We have
 
 \begin{equation*}
-\vec n\cdot\identiv\cdot\vec n,
-\end{equation*}
-
-where $\identiv$ denotes the fourth-rank identity tensor. We have
-
-\begin{equation*}
-\left(\vec n\cdot\identiv\cdot\vec n\right)_{jk}=n_i\identivcomp_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
+\left(\vec n\cdot\identiv\cdot\vec n\right)_{jk}=n_i\identivcomp_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta_{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
 \end{equation*}
 
 Since $\vec n$ is a unit vector, we have $n_in_i=1$, and
@@ -47,7 +39,7 @@ where $\identii$ denotes the second-rank identity tensor. It will be convenient 
 It can readily be verified that
 \begin{equation}
 \label{eq:3}
-\tensii p\cdot\tensii p=\tensii p,\qquad\tensii q\cdot\tensii q=\tensii q,\qquad\tensii p\cdot\tensii q=\tensii q\cdot\tensii p,
+\tensii p\cdot\tensii p=\tensii p,\qquad\tensii q\cdot\tensii q=\tensii q,\qquad\tensii p\cdot\tensii q=\tensii q\cdot\tensii p=\tensii0,
 \end{equation}
 
 and
