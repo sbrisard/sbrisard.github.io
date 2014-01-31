@@ -29,6 +29,7 @@
 #+HTML_HEAD_EXTRA:       TagSide: 'left',
 #+HTML_HEAD_EXTRA:       Macros: {
 #+HTML_HEAD_EXTRA:           abs: ['\\left\|#1\\right\|', 1],
+#+HTML_HEAD_EXTRA:           acoustic: '\\tensii A',
 #+HTML_HEAD_EXTRA:           bulkmod: '\\kappa',
 #+HTML_HEAD_EXTRA:           complexes: '\\mathbb C',
 #+HTML_HEAD_EXTRA:           devprojiv: '\\tensiv{K}',
