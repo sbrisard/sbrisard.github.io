@@ -1,3 +1,4 @@
+# -*- coding: utf-8; -*-
 #+TITLE: Welcome!
 #+SETUPFILE: "./header.org"
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="./solarized.css" />
