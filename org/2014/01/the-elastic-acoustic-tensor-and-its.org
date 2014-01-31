@@ -2,8 +2,6 @@
 #+SETUPFILE: "../../header.org"
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
-$\newcommand{\acoustic}{\tensii A}$
-
 We consider a linearly elastic material with stiffness $\stiffness$. For any wave-vector $\vec k$, the elastic acoustic tensor $\acoustic(\vec k)$ is defined as follows
 
 \begin{equation}
@@ -11,7 +9,7 @@ We consider a linearly elastic material with stiffness $\stiffness$. For any wav
 \acoustic(\vec k)=\vec k\cdot\stiffness\cdot\vec k=k^2\vec n\cdot\stiffness\cdot\vec n,
 \end{equation}
 
-where $k$ is the amplitude of the wave-vector $\vec k$, $k=\sqrt{\vec k\cdot\vec k}$, and $\vec n$ is its direction ($\vec k=k\vec n$). The acoustic tensor is used to assess material stability ([[file:../../p/references.org::#BIGO1994][Bigoni and Zaccaria, 1994]]) and study the propagation of waves ([[file:../../p/references.org::#GENT2013][Gentile and Straughan, 2013]]). As far as we are concerned, the derivation of the periodic Green operator for strains will require the expressions of the inverse of the acoustic tensor. This is the topic of the present post@@html:<!-- TODO Insert hyperlink -->@@, which is restricted to isotropic materials: the stiffness tensor $\stiffness$ of isotropic materials is therefore a linear combination of the [[file:./elastic-constants-of-isotropic-material.org][isotropic projection tensors]] $\sphprojiv,\devprojiv$
+where $k$ is the amplitude of the wave-vector $\vec k$, $k=\sqrt{\vec k\cdot\vec k}$, and $\vec n$ is its direction ($\vec k=k\vec n$). The acoustic tensor is used to assess material stability ([[file:../../p/references.org::#BIGO1994][Bigoni and Zaccaria, 1994]]) and study the propagation of waves ([[file:../../p/references.org::#GENT2013][Gentile and Straughan, 2013]]). As far as we are concerned, the derivation of the periodic Green operator for strains will require the expressions of the inverse of the acoustic tensor@@html:<!-- TODO Insert hyperlink -->@@. This is the topic of the present post@@html:<!-- more -->@@, which is restricted to isotropic materials: the stiffness tensor $\stiffness$ of isotropic materials is therefore a linear combination of the [[file:./elastic-constants-of-isotropic-material.org][isotropic projection tensors]] $\sphprojiv,\devprojiv$
 
 \begin{equation}
 \label{eq:2}
@@ -33,7 +31,13 @@ Since $\vec n$ is a unit vector, we have $n_in_i=1$, and
 where $\identii$ denotes the second-rank identity tensor. It will be convenient to introduce the projectors $\tensii p$ and $\tensii q$, defined as follows
 
 \begin{equation*}
-\tensii p=\vec n\otimes\vec n\qquad\tensii q=\identii-\tensii p.
+\tensii p=\vec n\otimes\vec n\qquad\tensii q=\identii-\tensii p,
+\end{equation*}
+
+or, using indices
+
+\begin{equation*}
+p_{ij}=n_in_j\qquad q_{ij}=\delta_{ij}-n_in_j.
 \end{equation*}
 
 It can readily be verified that
@@ -63,7 +67,7 @@ Finally, combining identity $\devprojiv=\identiv-\sphprojiv$ with Eqs. \eqref{eq
 \vec n\cdot\devprojiv\cdot\vec n=\frac{d-1}d\tensii p+\frac12\tensii q.
 \end{equation}
 
-The acoustic tensor of a elastic, linear, isotropic material is obtained from Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:5} and \eqref{eq:6}
+The acoustic tensor of an elastic, linear, isotropic material is obtained from Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:5} and \eqref{eq:6}
 
 \begin{equation*}
 \acoustic(\vec n)=\left(\bulkmod+2\shearmod\frac{d-1}d\right)\tensii p+\shearmod\tensii q.

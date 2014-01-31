@@ -4,9 +4,9 @@
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
-[[file:2014/01/review-of-learning-cython-programming.org][Review of /Learning Cython Programming/]]
+[[file:./2014/01/the-elastic-acoustic-tensor-and-its.org][The elastic acoustic tensor and its inverse]]
 
-[[file:./2014/01/elastic-acoustic-tensor-and-its-inverse.org][The elastic acoustic tensor and its inverse]]
+[[file:2014/01/review-of-learning-cython-programming.org][Review of /Learning Cython Programming/]]
 
 [[file:2014/01/elastic-constants-of-isotropic-material.org][Elastic constants of an isotropic material, part 3: putting it all together]]
 
