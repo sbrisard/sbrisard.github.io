@@ -1,0 +1,60 @@
+#+TITLE: Tensor products
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+In the present post, I will first recall the definition of the tensor product (denoted by $\otimes$) of two vectors. This definition will then be extended to tensors. Finally, I will introduce a new Kronecker product of second-rank tensors. It was defined by e.g. Del Piero ([[file:../../p/references.org::#PIER1979][1979]]), and is denoted by $\boxtimes$.@@html:<!-- more -->@@
+
+* Tensor product of two vectors
+
+It is recalled that $\vec u\otimes\vec v$ denotes the tensor product of two vectors $\vec u$ and $\vec v$. It is a second-rank tensor, defined as follows
+
+\begin{equation*}
+\left(\vec u\otimes\vec v\right)\cdot\vec x=\left(\vec v\cdot\vec x\right)\vec u=\left(v_jx_j\right)u_i\vec e_i=\left(u_iv_j\right)x_j\vec e_i,
+\end{equation*}
+
+for all vector $\vec x$. The above relations show that the components of $\vec u\otimes\vec v$ are $\left(\vec u\otimes\vec v\right)_{ij}=u_iv_j$. Through recursion, this tensor product can be extended to tensors of any rank. In particular, if $\tensii a$ and $\tensii b$ are second-rank tensors, then $\tensii a\otimes\tensii b$ denotes the fourth-rank tensor defined as follows
+
+\begin{equation*}
+\left(\tensii a\otimes\tensii b\right):\tensii x=\left(\tensii b:\tensii x\right)\tensii b=\left(b_{kl}x_{lk}\right)a_{ij}\vec e_i\otimes\vec e_j=\left(a_{ij}b_{kl}\right)x_{lk}\vec e_i\otimes\vec e_j,
+\end{equation*}
+
+from which it results that the components of $\tensii a\otimes\tensii b$ are $\left(\tensii a\otimes\tensii b\right)_{ijkl}=a_{ij}b_{kl}$.
+
+* Tensor product of linear transformations
+
+The /tensor product of linear transformations/, $\boxtimes{}$, was introduced by Del Piero ([[file:../../p/references.org::#PIER1979][1979]]) among others. The tensor product $\tensii a\boxtimes\tensii b$ of the second-rank tensors $\tensii a$ and $\tensii b$ is a fourth-rank tensor, defined by how it operates on second-rank tensors $\tensii x$
+
+\begin{equation}
+\label{eq:1}
+\left(\tensii a\boxtimes\tensii b\right):\tensii x=\tensii a\cdot\tensii x\cdot\transp{\tensii b}.
+\end{equation}
+
+Writing the above definition in terms of the components of $\tensii a$, $\tensii b$ and $\tensii x$, we find $\left(\tensii a\boxtimes\tensii b\right):\tensii x=a_{ik}x_{kl}b_{jl}\vec e_i\otimes\vec e_j$, which shows that the components of $\tensii a\boxtimes\tensii b$ are
+
+\begin{equation}
+\label{eq:2}
+\left(\tensii a\boxtimes\tensii b\right)_{ijkl}=a_{ik}b_{jl}.
+\end{equation}
+
+The tensor product of linear transformations behaves as any product with respect to transposition
+
+\begin{equation}
+\label{eq:3}
+\transp{\left(\tensii a\boxtimes\tensii b\right)}=\transp{\tensii b}\boxtimes\transp{\tensii a}.
+\end{equation}
+
+Indeed, let $\vec u$ and $\vec v$ be two vectors, and $\tensii y$ a second-rank tensor. Then
+
+\begin{align*}
+\left(\vec u\otimes\vec v\right):\left(\left(\tensii a\boxtimes\tensii b\right):\tensii y\right)&=\left(\vec u\otimes\vec v\right):\left(\tensii a\cdot\tensii y\cdot\transp{\tensii b}\right)=\vec v\cdot\left(\tensii a\cdot\tensii y\cdot\transp{\tensii b}\right)\cdot\vec u\\
+&=\left(\vec v\cdot\tensii a\right)\cdot\tensii y\cdot\left(\transp{\tensii b}\cdot\vec u\right)=\left(\left(\transp{\tensii b}\cdot\vec u\right)\otimes\left(\vec v\cdot\tensii a\right)\right):\vec y\\
+&=\left(\transp{\tensii b}\cdot\left(\vec u\otimes\vec v\right)\cdot\tensii a\right):\vec y=\left(\left(\transp{\tensii b}\boxtimes\transp{\tensii a}\right):\left(\vec u\otimes\vec v\right)\right):\tensii y.
+\end{align*}
+
+The above identity is true for any decomposed tensor $\vec u\otimes\vec v$. By linearity, it is therefore true for any second-rank tensor $\tensii x$
+
+\begin{equation*}
+\tensii x:\left(\left(\tensii a\boxtimes\tensii b\right):\tensii y\right)=\left(\left(\transp{\tensii b}\boxtimes\transp{\tensii a}\right):\tensii x\right):\tensii y,
+\end{equation*}
+
+which proves Eq. \eqref{eq:3}. It should be noted that even if $\tensii a$ and $\tensii b$ are /symmetric/, the tensor product $\tensii a\boxtimes\tensii b$ does not necessarily have the minor symmetries [see Eq. \eqref{eq:2}]. We therefore define $\tensii a\boxtimes^\text s\tensii b$, as $\tensii a\boxtimes\tensii b$, /symmetrized with respect to the last two indices/

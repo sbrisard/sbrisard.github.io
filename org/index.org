@@ -5,6 +5,10 @@
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
+[[file:./2014/02/decomposition.org][Decomposition of transverse isotropic, fourth-rank tensors]]
+
+[[file:./2014/02/tensor-products.org][Tensor products]]
+
 [[file:./2014/01/the-elastic-acoustic-tensor-and-its.org][The elastic acoustic tensor and its inverse]]
 
 [[file:2014/01/review-of-learning-cython-programming.org][Review of /Learning Cython Programming/]]

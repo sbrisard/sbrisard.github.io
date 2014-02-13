@@ -1,0 +1,38 @@
+#+TITLE: Decomposition of transverse isotropic, fourth-rank tensors
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+In [[file:../01/elastic-constants-of-isotropic-material.org][a previous post]], I introduced the tensors $\sphprojiv$ and $\devprojiv$ (fourth-rank spherical and deviatoric projection tensors). Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown (Walpole, [[file:../../p/references.org::#WALP1984][1984]]) that the space of /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore, it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on a paper by Walpole ([[file:../../p/references.org::#WALP1984][1984]]).@@html:<!-- more -->@@$\newcommand{\kronecker}{\circledast}$
+
+It is recalled that transverse isotropy is defined by one single preferred direction. In the present post, $\vec n$ denotes the unit vector which indicates this preferred direction. Then, $\tensii p$ and $\tensii q$ are the following second-rank projection tensors
+
+\begin{equation*}
+\tensii p=\vec n\otimes\vec n,\quad\tensii q=\identii-\tensii p,
+\end{equation*}
+
+and it can readily be verified that
+
+\begin{equation*}
+\tensii p:\tensii p=\tensii p,\quad\tensii q:\tensii q=\tensii q,\quad\tensii p:\tensii q=\tensii q:\tensii p=\tensii 0.
+\end{equation*}
+
+Walpole ([[file:../../p/references.org::#WALP1984][1984]]) then shows that any transverse isotropic tensor can be decomposed as a linear combination of the six fourth-rank tensors $\tensiv E_1,\tensiv E_2,\tensiv E_3,\tensiv E_4,\tensiv F,\tensiv G$ defined as follows
+
+\begin{gather*}
+\tensiv E_1=\tensii p\otimes\tensii p,\quad\tensiv E_2=\frac12\tensii q\otimes\tensii q,\quad\tensiv E_3=\frac1{\sqrt2}\tensii p\otimes\tensii q,\quad\tensiv E_4=\frac1{\sqrt2}\tensii q\otimes\tensii p\\
+\tensiv F=\tensii q\kronecker\tensii q-\frac12\tensii q\otimes\tensii q,\quad\tensiv G=\tensii p\kronecker\tensii q+\tensii q\kronecker\tensii p.
+\end{gather*}
+
+In the above relations, $\kronecker$ denotes a Kronecker-type product. More precisely, for any second-rank tensors $\tensii A$ and $\tensii B$, $\tensii A\kronecker\tensii B$ denotes the fourth-rank tensor defined by the way it operates on second-rank tensors
+
+\begin{equation*}
+\left(\tensii A\otimes\tensii B\right):\tensii X=\frac12\left(\tensii A\cdot\tensii X\cdot\tensii B^\text T+\tensii A\cdot\tensii X^\text T\cdot\tensii B^\text T\right)
+\end{equation*}
+
+for all symmetric tensors $\tensii X$.
+
+* A Kronecker product for second-rank tensors
+It will be convenient to introduce the tensor product $\tensii A\overline{\underline{\otimes}}\tensii B$ of two second-rank tensors $\tensii A$ and $\tensii B$, defined as follows
+
+
+$\tensii A\overset{{\underset{\otimes}{\_}}}{\_}\tensii B$
