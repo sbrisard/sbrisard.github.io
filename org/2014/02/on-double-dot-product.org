@@ -1,0 +1,112 @@
+# -*- coding: utf-8; -*-
+#+TITLE: On the double dot product
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+
+The double dot product of two tensors is the contraction of these tensors with respect to the last two indices of the first one, and the first two indices of the second one. Whether or not this contraction is performed on the /closest/ indices is a matter of convention. In this post, I will show that this choice has some important implications.@@html:<!-- more -->@@
+
+Let $\tensii a$ and $\tensii b$ be two second-rank tensors. The following two alternative definitions might be adopted for the double dot product $\tensii a:\tensii b$
+  - <<def:1>> Definition 1 :: $\tensii a:\tensii b=a_{ij}b_{ji}$ (contraction on the closest indices),
+  - <<def:2>> Definition 2 :: $\tensii a:\tensii b=a_{ij}b_{ij}$.
+
+In continuum mechanics, most second-rank tensors (strain, stress) are symmetric, so that both definitions coincide. In the general case of asymmetric tensors however, it is important to check which convention is adopted by the author. In the present post, we examine both definitions in turn, and how they affect the expression of the transpose of fourth-rank tensors, the definition of which is first recalled.
+
+* Transpose of a fourth-rank tensor
+
+Let $\tensiv A$ be a fourth-rank tensor. Then the linear mapping $\tensii x\mapsto\tensiv A:\tensii x$ ($\tensii x$: second-rank tensor) is an endomorphism over the space of second-rank tensors. As such, it is possible to define its transpose $\transp{\tensiv A}$, provided that the space of second-rank tensors is equipped with a scalar product $\langle\cdot,\cdot\rangle$. Then, by definition
+
+\begin{equation}
+\label{eq:1}
+\langle\transp{\tensiv A}:\tensii x,\tensii y\rangle=\langle\tensii x, \tensiv A:\tensii y\rangle
+\end{equation}
+
+How is the scalar product of two second-rank tensors defined? The most obvious choice is
+
+\begin{equation}
+\label{eq:2}
+\langle\tensii x,\tensii y\rangle=x_{ij}y_{ij},
+\end{equation}
+
+so that the scalar product of two second-rank tensors is closely related to either definition of their double dot product. In the next sections, it is shown that each definition of the double dot product induces a different definition of the transpose.
+
+* Definition 1
+In this section, the [[def:1][first definition]] of the double dot product is examined
+
+\begin{equation}
+\label{eq:3}
+\tensii x:\tensii y=x_{ij}y_{ji},
+\end{equation}
+
+where $\tensii x$ and $\tensii y$ are second-rank tensors. Then $\langle\tensii x,\tensii y\rangle=\transp{\tensii x}:\tensii y$. Let $\tensiv A$ be a fourth-rank tensor. Eqs. \eqref{eq:1}, \eqref{eq:2} are used in conjunction with \eqref{eq:3} to find the components of $\transp{\tensiv A}$
+
+\begin{equation*}
+\langle\tensii x, \tensiv A:\tensii y\rangle=\transp{\tensii x}:\left(\tensiv A:\tensii y\right)=\left(\transp{\tensii x}\right)_{ji}\left(\tensiv A:\tensii y\right)_{ij}=x_{ij}A_{ijkl}y_{lk}.
+\end{equation*}
+
+Introducing the fourth-rank tensor $\tilde{\tensiv A}$ defined component-wise by $\tilde A_{ijkl}=A_{lkji}$, the above identity reads
+
+\begin{equation*}
+\langle\tensii x, \tensiv A:\tensii y\rangle=y_{lk}\tilde A_{lkji}x_{ij}=\left(\transp{\tensii y}\right)_{kl}\left(\tilde{\tensiv A}:\tensii x\right)_{lk}=\transp{\tensii y}:\left(\tilde{\tensiv A}:\tensii x\right)=\langle\tilde{\tensiv A}:\tensii x,\tensii y\rangle,
+\end{equation*}
+
+which proves that $\tilde{\tensiv A}$ is the transpose of $\tensiv A$. In other words, if [[def:1][definition 1]] is adopted for the double dot product, then the components of the transpose of any fourth-rank tensor $\tensiv A$ read
+
+\begin{equation}
+\label{eq:4}
+\left(\transp{\tensiv A}\right)_{ijkl}=A_{lkji}.
+\end{equation} 
+
+* Definition 2
+We now examine the [[def:2][second definition]] of the double dot product
+
+\begin{equation}
+\label{eq:5}
+\tensii x:\tensii y=x_{ij}y_{ij},
+\end{equation}
+
+where $\tensii x$ and $\tensii y$ are second-rank tensors. Then $\langle\tensii x,\tensii y\rangle=\tensii x:\tensii y$. Let $\tensiv A$ be a fourth-rank tensor. Eqs. \eqref{eq:1} and \eqref{eq:2} are again used in conjunction with Eq. \eqref{eq:5} to find the components of $\transp{\tensiv A}$
+
+\begin{equation*}
+\langle\tensii x, \tensiv A:\tensii y\rangle=\tensii x:\left(\tensiv A:\tensii y\right)=x_{ij}\left(\tensiv A:\tensii y\right)_{ij}=x_{ij}A_{ijkl}y_{kl}
+\end{equation*}
+
+Introducing the fourth-rank tensor $\tilde{\tensiv A}$ defined component-wise by $\tilde A_{ijkl}=A_{klij}$, the above identity reads
+
+\begin{equation*}
+\langle\tensii x, \tensiv A:\tensii y\rangle=y_{kl}\tilde A_{klij}x_{ij}=y_{kl}\left(\tilde{\tensiv A}:\tensii x\right)_{kl}=\tensii y:\left(\tilde{\tensiv A}:\tensii x\right)=\langle\tilde{\tensiv A}:\tensii x,\tensii y\rangle,
+\end{equation*}
+
+which proves that $\tilde{\tensiv A}$ is the transpose of $\tensiv A$. In other words, if [[def:2][definition 2]] is adopted for the double dot product, then the components of the transpose of a fourth-rank tensor $\tensiv A$ read
+
+\begin{equation}
+\label{eq:6}
+\left(\transp{\tensiv A}\right)_{ijkl}=A_{klij}.
+\end{equation} 
+
+* Which definition to adopt?
+
+... is a pure matter of taste. For aesthetic reasons, I tend to prefer Eq. \eqref{eq:6} over Eq. \eqref{eq:4}. Besides, [[def:2][definition 2]] of the double dot product directly defines a scalar product over the space of second-rank tensors. Therefore, [[def:2][definition 2]] [see Eq. \eqref{eq:5}] /will be adopted in this blog/. In other words, given two tensors $\tens T$ and $\tens U$ of arbitrary rank (≥ 2), the product $\tens T:\tens U$ is defined as follows
+
+\begin{equation}
+\label{eq:7}
+\tens T:\tensii U=T_{\ldots ij}U_{ij\ldots}.
+\end{equation}
+
+With this definition of the double dot product, the components of the transpose of a fourth-rank tensor $\tensiv A$ are found from Eq. \eqref{eq:6}. Furthermore, Eq. \eqref{eq:7} can readily be specialized to the case of a tensor $\tens T$ of arbitrary rank and a decomposed, second-rank tensor $\vec u\otimes\vec v$ ($\vec u$, $\vec v$: vectors)
+
+\begin{align*}
+\tensiv T:\left(\vec u\otimes\vec v\right)&=\left(\tensiv T\cdot\vec v\right)\cdot\vec u,\\
+\left(\vec u\otimes\vec v\right):\tensiv T&=\vec v\cdot\left(\vec u\cdot\tensiv T\right).
+\end{align*}
+
+Finally, for a second-rank tensor $\tensii a$ and a decomposed, second-rank tensor $\vec u\otimes\vec v$ ($\vec u$, $\vec v$: vectors)
+
+\begin{equation*}
+\tensii a:\left(\vec u\otimes\vec v\right)=\left(\vec u\otimes\vec v\right):\tensii a=\vec u\cdot\tensii a\cdot\vec v.
+\end{equation*}
+
+To conclude, two definitions of the double dot product are possible, and one should always checked which is adopted. It should be kept in mind that, while arbitrary, this choice has many consequences, including on the definition of the transpose of fourth-rank tensors.
+
+* History
+
+  - <2014-02-19 Wed> Initial version.

@@ -9,6 +9,8 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:./2014/02/tensor-products.org][Tensor products]]
 
+[[file:2014/02/on-double-dot-product.org][On the double dot product]]
+
 [[file:./2014/01/the-elastic-acoustic-tensor-and-its.org][The elastic acoustic tensor and its inverse]]
 
 [[file:2014/01/review-of-learning-cython-programming.org][Review of /Learning Cython Programming/]]
