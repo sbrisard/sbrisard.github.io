@@ -44,18 +44,40 @@ From the above identity, it is readily found that
 \transp{\left(\tensii a\boxtimes\tensii b\right)}=\transp{\tensii a}\boxtimes\transp{\tensii b}.
 \end{equation}
 
-Eq. \eqref{eq:2} also shows that even if $\tensii a$ and $\tensii b$ are symmetric, the tensor product $\tensii a\boxtimes\tensii b$ does not necessarily have the minor symmetries. It will therefore be convenient to define $\tensii a\boxtimessym\tensii b$, as the tensor $\tensii a\boxtimes\tensii b$, /symmetrized with respect to the last two indices/
+Given four second-rank tensors $\tensii a$, $\tensii b$, $\tensii c$ and $\tensii d$, we have
 
 \begin{equation}
 \label{eq:4}
+\left(\tensii a\boxtimes\tensii b\right):\left(\tensii c\boxtimes\tensii d\right)=\left(\tensii a\cdot\tensii c\right)\boxtimes\left(\tensii b\cdot\tensii d\right).
+\end{equation}
+
+Indeed, let $\tensii x$ be a second-rank tensor. Then, from Eq. \eqref{eq:1}
+
+\begin{equation*}
+\left(\tensii a\boxtimes\tensii b\right):\left(\tensii c\boxtimes\tensii d\right):\tensii x=\left(\tensii a\boxtimes\tensii b\right):\left(\tensii c\cdot\tensii x\cdot\transp{\tensii d}\right)=\tensii a\cdot\left(\tensii c\cdot\tensii x\cdot\transp{\tensii d}\right)\cdot\transp{\tensii b}=\left(\tensii a\cdot\tensii c\right)\cdot\tensii x\cdot\left(\transp{\tensii d}\cdot\transp{\tensii b}\right)=\left(\tensii a\cdot\tensii c\right)\cdot\tensii x\cdot\transp{\left(\tensii b\cdot\tensii d\right)}=\left(\left(\tensii a\cdot\tensii c\right)\boxtimes\left(\tensii b\cdot\tensii d\right)\right):\tensii x.
+\end{equation*}
+
+
+Eq. \eqref{eq:2} shows that even if $\tensii a$ and $\tensii b$ are symmetric, the tensor product $\tensii a\boxtimes\tensii b$ does not necessarily have the minor symmetries. It will therefore be convenient to define $\tensii a\boxtimessym\tensii b$, as the tensor $\tensii a\boxtimes\tensii b$, /symmetrized with respect to the last two indices/
+
+\begin{equation}
+\label{eq:5}
 \left(\tensii a\boxtimessym\tensii b\right)_{ijkl}=\frac12\left(a_{ik}b_{jl}+a_{il}b_{jk}\right),
 \end{equation}
 
 or, in intrinsic form ($\tensii x$: second-rank tensor)
 
 \begin{equation}
-\label{eq:5}
+\label{eq:6}
 \left(\tensii a\boxtimessym\tensii b\right):\tensii x=\frac12\left(\tensii a\boxtimes\tensii b\right):\left(\tensii x+\transp{\tensii x}\right)=\frac12\tensii a:\left(\tensii x+\transp{\tensii x}\right):\transp{\tensii b}.
+\end{equation}
+
+An identity similar to Eq. \eqref{eq:4} can be derived with $\boxtimessym$
+
+\begin{equation}
+\label{eq:7}
+\left(\tensii a\boxtimessym\tensii b\right):\left(\tensii c\boxtimessym\tensii d\right)=\frac12\left(\left(\tensii a\cdot\tensii c\right)\boxtimessym\left(\tensii b\cdot\tensii d\right)+\left(\tensii a\cdot\tensii d\right)\boxtimessym\left(\tensii b\cdot\tensii c\right)\right).
+
 \end{equation}
 
 * Walpole's basis for transverse isotropic tensors
