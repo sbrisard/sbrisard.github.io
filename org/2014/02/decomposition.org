@@ -77,8 +77,9 @@ An identity similar to Eq. \eqref{eq:4} can be derived with $\boxtimessym$
 \begin{equation}
 \label{eq:7}
 \left(\tensii a\boxtimessym\tensii b\right):\left(\tensii c\boxtimessym\tensii d\right)=\frac12\left(\left(\tensii a\cdot\tensii c\right)\boxtimessym\left(\tensii b\cdot\tensii d\right)+\left(\tensii a\cdot\tensii d\right)\boxtimessym\left(\tensii b\cdot\tensii c\right)\right).
-
 \end{equation}
+
+To conclude, we observe that the fourth-rank tensor $\identiv=\identii\boxtimessym\identii$ maps any second-rank tensor to its symmetric part: it reduces to the identity tensor over the space of second-rank, symmetric tensors.
 
 * Walpole's basis for transverse isotropic tensors
 
@@ -88,3 +89,14 @@ Walpole ([[file:../../p/references.org::#WALP1984][1984]]) shows that any transv
 \tensiv E_1=\tensii p\otimes\tensii p,\quad\tensiv E_2=\frac12\tensii q\otimes\tensii q,\quad\tensiv E_3=\frac1{\sqrt2}\tensii p\otimes\tensii q,\quad\tensiv E_4=\frac1{\sqrt2}\tensii q\otimes\tensii p\\
 \tensiv F=\tensii q\boxtimessym\tensii q-\frac12\tensii q\otimes\tensii q,\quad\tensiv G=\tensii p\boxtimessym\tensii q+\tensii q\boxtimessym\tensii p.
 \end{gather*}
+
+The following multiplication table can readily be derived
+
+|     | E_1 | E_2 | E_3 | E_4 | F | G |
+|-----+-----+-----+-----+-----+---+---|
+| E_1 | E_1 | 0   | E_3 |   0 |   |   |
+| E_2 | 0   | E_2 | 0   | E_4 |   |   |
+| E_3 | 0   | E_3 | 0   | E_1 |   |   |
+| E_4 | E_4 | 0   | E_2 | 0   |   |   |
+| F   |     |     |     |     |   |   |
+| G   |     |     |     |     |   |   |
