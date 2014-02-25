@@ -8,16 +8,21 @@ In [[file:../01/elastic-constants-of-isotropic-material.org][a previous post]], 
 
 It is recalled that transverse isotropy is defined by one single preferred direction. In the present post, $\vec n$ denotes the unit vector which indicates this preferred direction. Then, $\tensii p$ and $\tensii q$ are the following second-rank projection tensors
 
-\begin{equation*}
-\tensii p=\vec n\otimes\vec n,\quad\tensii q=\identii-\tensii p,
-\end{equation*}
+\begin{equation}
+\newcommand{\p}{\tensii p}
+\newcommand{\q}{\tensii q}
+\label{eq:1}
+\p=\vec n\otimes\vec n,\quad\q=\identii-\p,
+\end{equation}
 
 and it can readily be verified that
 
-\begin{align*}
-\tensii p\cdot\tensii p&=\tensii p,&\tensii q\cdot\tensii q&=\tensii q,&\tensii p\cdot\tensii q&=\tensii q\cdot\tensii p=\tensii 0,\\
-\tensii p:\tensii p&=1,&\tensii q:\tensii q&=2,&\tensii p:\tensii q&=\tensii q:\tensii p=0.
-\end{align*}
+\begin{align}
+\label{eq:2}
+\p\cdot\p&=\p,&\q\cdot\q&=\q,&\p\cdot\q&=\q\cdot\p=\tensii 0,\\
+\label{eq:3}
+\p:\p&=1,&\q:\q&=2,&\p:\q&=\q:\p=0.
+\end{align}
 
 * Tensor product of linear transformations
 
@@ -26,58 +31,85 @@ It will be convenient to introduce a new, Kronecker-like product of two second-r
 As a preliminary note, it should be observed that any fourth-rank tensor $\tensiv A$ can be viewed as a endomorphism over the space of second-rank tensors, since $\tensii x\mapsto\tensiv A:\tensii x$ is a linear mapping (the convention adopted in this blog for the double dot product has been specified in a [[file:./on-double-dot-product.org][previous post]]). Therefore, the fourth-rank tensor $\tensii a\boxtimes\tensii b$ ($\tensii a, \tensii b$: second-rank tensors) can be defined by how it operates on second-rank tensors $\tensii x$
 
 \begin{equation}
-\label{eq:1}
+\label{eq:4}
 \left(\tensii a\boxtimes\tensii b\right):\tensii x=\tensii a\cdot\tensii x\cdot\transp{\tensii b}.
 \end{equation}
 
 Writing the above definition in terms of the components of $\tensii a$, $\tensii b$ and $\tensii x$, we find $\left(\tensii a\boxtimes\tensii b\right):\tensii x=a_{ik}x_{kl}b_{jl}\vec e_i\otimes\vec e_j$, which shows that the components of $\tensii a\boxtimes\tensii b$ are
 
 \begin{equation}
-\label{eq:2}
+\label{eq:5}
 \left(\tensii a\boxtimes\tensii b\right)_{ijkl}=a_{ik}b_{jl}.
 \end{equation}
 
 From the above identity, it is readily found that
 
 \begin{equation}
-\label{eq:3}
+\label{eq:6}
 \transp{\left(\tensii a\boxtimes\tensii b\right)}=\transp{\tensii a}\boxtimes\transp{\tensii b}.
 \end{equation}
 
 Given four second-rank tensors $\tensii a$, $\tensii b$, $\tensii c$ and $\tensii d$, we have
 
 \begin{equation}
-\label{eq:4}
+\label{eq:7}
 \left(\tensii a\boxtimes\tensii b\right):\left(\tensii c\boxtimes\tensii d\right)=\left(\tensii a\cdot\tensii c\right)\boxtimes\left(\tensii b\cdot\tensii d\right).
 \end{equation}
 
-Indeed, let $\tensii x$ be a second-rank tensor. Then, from Eq. \eqref{eq:1}
+Indeed, let $\tensii x$ be a second-rank tensor. Then, from Eq. \eqref{eq:4}
 
 \begin{equation*}
 \left(\tensii a\boxtimes\tensii b\right):\left(\tensii c\boxtimes\tensii d\right):\tensii x=\left(\tensii a\boxtimes\tensii b\right):\left(\tensii c\cdot\tensii x\cdot\transp{\tensii d}\right)=\tensii a\cdot\left(\tensii c\cdot\tensii x\cdot\transp{\tensii d}\right)\cdot\transp{\tensii b}=\left(\tensii a\cdot\tensii c\right)\cdot\tensii x\cdot\left(\transp{\tensii d}\cdot\transp{\tensii b}\right)=\left(\tensii a\cdot\tensii c\right)\cdot\tensii x\cdot\transp{\left(\tensii b\cdot\tensii d\right)}=\left(\left(\tensii a\cdot\tensii c\right)\boxtimes\left(\tensii b\cdot\tensii d\right)\right):\tensii x.
 \end{equation*}
 
 
-Eq. \eqref{eq:2} shows that even if $\tensii a$ and $\tensii b$ are symmetric, the tensor product $\tensii a\boxtimes\tensii b$ does not necessarily have the minor symmetries. It will therefore be convenient to define $\tensii a\boxtimessym\tensii b$, as the tensor $\tensii a\boxtimes\tensii b$, /symmetrized with respect to the last two indices/
+Eq. \eqref{eq:5} shows that even if $\tensii a$ and $\tensii b$ are symmetric, the tensor product $\tensii a\boxtimes\tensii b$ does not necessarily have the minor symmetries. It will therefore be convenient to define $\tensii a\boxtimessym\tensii b$, as the tensor $\tensii a\boxtimes\tensii b$, /symmetrized with respect to the last two indices/
 
 \begin{equation}
-\label{eq:5}
+\label{eq:8}
 \left(\tensii a\boxtimessym\tensii b\right)_{ijkl}=\frac12\left(a_{ik}b_{jl}+a_{il}b_{jk}\right),
 \end{equation}
 
 or, in intrinsic form ($\tensii x$: second-rank tensor)
 
 \begin{equation}
-\label{eq:6}
+\label{eq:9}
 \left(\tensii a\boxtimessym\tensii b\right):\tensii x=\frac12\left(\tensii a\boxtimes\tensii b\right):\left(\tensii x+\transp{\tensii x}\right)=\frac12\tensii a:\left(\tensii x+\transp{\tensii x}\right):\transp{\tensii b}.
 \end{equation}
 
-An identity similar to Eq. \eqref{eq:4} can be derived with $\boxtimessym$
+An identity similar to Eq. \eqref{eq:7} can be derived with $\boxtimessym$
 
 \begin{equation}
-\label{eq:7}
+\label{eq:10}
 \left(\tensii a\boxtimessym\tensii b\right):\left(\tensii c\boxtimessym\tensii d\right)=\frac12\left(\left(\tensii a\cdot\tensii c\right)\boxtimessym\left(\tensii b\cdot\tensii d\right)+\left(\tensii a\cdot\tensii d\right)\boxtimessym\left(\tensii b\cdot\tensii c\right)\right).
 \end{equation}
+
+The following identities, involving the second-rank projectors $\p$ and $\q$ [see Eq. \eqref{eq:1}], readily follow from Eq. \eqref{eq:9}
+\begin{align}
+\label{eq:11}
+\left(\p\boxtimessym\p\right):\p&=\p, & \left(\p\boxtimessym\p\right):\q&=\tensii 0,\\
+\label{eq:12}
+\left(\q\boxtimessym\q\right):\p&=\tensii 0, & \left(\q\boxtimessym\q\right):\q&=\q,
+\end{align}
+and
+\begin{equation}
+\label{eq:13}
+\left(\p\boxtimessym\q\right):\p=\left(\p\boxtimessym\q\right):\q=\left(\q\boxtimessym\p\right):\p=\left(\q\boxtimessym\p\right):\q=\tensii 0.
+\end{equation}
+
+Besides, the following multiplication table results from Eq. \eqref{eq:10} $\newcommand{\x}{\boxtimessym}$
+
+#+CAPTION: Multiplication table for the tensors $\p\x\p$, $\p\x\q$, $\q\x\p$ and $\q\x\q$.
+#+NAME: tab:1
+#+ATTR_HTML: :class center
+| <c>      | <c>         | <c>         | <c>         | <c>         |
+| $:$      | $\p\x\p$    | $\p\x\q$    | $\q\x\p$    | $\q\x\q$    |
+|----------+-------------+-------------+-------------+-------------|
+| $\p\x\p$ | $\p\x\p$    | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ |
+| $\p\x\q$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ |
+| $\q\x\p$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ |
+| $\q\x\q$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ | $\q\x\q$    |
+|----------+-------------+-------------+-------------+-------------|
 
 To conclude, we observe that the fourth-rank tensor $\identiv=\identii\boxtimessym\identii$ maps any second-rank tensor to its symmetric part: it reduces to the identity tensor over the space of second-rank, symmetric tensors.
 
@@ -85,18 +117,34 @@ To conclude, we observe that the fourth-rank tensor $\identiv=\identii\boxtimess
 
 Walpole ([[file:../../p/references.org::#WALP1984][1984]]) shows that any transverse isotropic tensor is a linear combination of the six fourth-rank tensors $\tensiv E_1,\tensiv E_2,\tensiv E_3,\tensiv E_4,\tensiv F,\tensiv G$ defined as follows
 
-\begin{gather*}
-\tensiv E_1=\tensii p\otimes\tensii p,\quad\tensiv E_2=\frac12\tensii q\otimes\tensii q,\quad\tensiv E_3=\frac1{\sqrt2}\tensii p\otimes\tensii q,\quad\tensiv E_4=\frac1{\sqrt2}\tensii q\otimes\tensii p\\
-\tensiv F=\tensii q\boxtimessym\tensii q-\frac12\tensii q\otimes\tensii q,\quad\tensiv G=\tensii p\boxtimessym\tensii q+\tensii q\boxtimessym\tensii p.
-\end{gather*}
+\begin{gather}
+\label{eq:14}
+\tensiv E_1=\p\otimes\p,\quad\tensiv E_2=\frac12\q\otimes\q,\quad\tensiv E_3=\frac1{\sqrt2}\p\otimes\q,\quad\tensiv E_4=\frac1{\sqrt2}\q\otimes\p\\
+\label{eq:15}
+\tensiv F=\q\boxtimessym\q-\frac12\q\otimes\q,\quad\tensiv G=\p\boxtimessym\q+\q\boxtimessym\p.
+\end{gather}
 
-The following multiplication table can readily be derived
+Multiplication (in the sense of the double product) of these tensors is fairly easy, as shown by the multiplication table [[tab:2]] below. This table must be read as "row double dot column equals cell". For example, $\tensiv E_1:\tensiv E_3=\tensiv E_3$ and $\tensiv E_3:\tensiv E_1=\tensiv 0$.
 
-|     | E_1 | E_2 | E_3 | E_4 | F | G |
-|-----+-----+-----+-----+-----+---+---|
-| E_1 | E_1 | 0   | E_3 |   0 |   |   |
-| E_2 | 0   | E_2 | 0   | E_4 |   |   |
-| E_3 | 0   | E_3 | 0   | E_1 |   |   |
-| E_4 | E_4 | 0   | E_2 | 0   |   |   |
-| F   |     |     |     |     |   |   |
-| G   |     |     |     |     |   |   |
+
+#+CAPTION: Multiplication table for the tensors $\tensiv E_i$, $\tensiv F$ and $\tensiv G$ ($i=1,\ldots,4$).$\newcommand{\t}{\tensiv}$
+#+NAME: tab:2
+#+ATTR_HTML: :class center
+| $:$      | $\t E_1$ | $\t E_2$ | $\t E_3$ | $\t E_4$ | $\t F$ | $\t G$ |
+|----------+----------+----------+----------+----------+--------+--------|
+| <c>      | <c>      | <c>      | <c>      | <c>      | <c>    | <c>    |
+| /        | <        |          |          |          |        | >      |
+| $\t E_1$ | $\t E_1$ | $\t 0$   | $\t E_3$ | $\t 0$   | $\t 0$ | $\t 0$ |
+| $\t E_2$ | $\t 0$   | $\t E_2$ | $\t 0$   | $\t E_4$ | $\t 0$ | $\t 0$ |
+| $\t E_3$ | $\t 0$   | $\t E_3$ | $\t 0$   | $\t E_1$ | $\t 0$ | $\t 0$ |
+| $\t E_4$ | $\t E_4$ | $\t 0$   | $\t E_2$ | $\t 0$   | $\t 0$ | $\t 0$ |
+| $\t F$   | $\t 0$   | $\t 0$   | $\t 0$   | $\t 0$   | $\t F$ | $\t 0$ |
+| $\t G$   | $\t 0$   | $\t 0$   | $\t 0$   | $\t 0$   | $\t 0$ | $\t G$ |
+
+From this multiplication table, Walpole ([[file:../../p/references.org::#WALP1984][1984]]) proposes a convenient representation of any transverse isotropic tensor, as a list of a 4 x 4 matrix and two scalars
+
+\begin{equation}
+\tensiv T=a\tensiv E_1+b\tensiv E_2+c\tensiv E_3+d\tensiv E_4+f\tensiv F+g\tensiv G=\left\{\begin{bmatrix}a&c\\d&b\end{bmatrix}, f, g\right\}
+\end{equation}
+
+This representation is particularly convenient when it comes to inverting transverse isotropic tensors. Indeed,
