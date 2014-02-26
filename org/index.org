@@ -5,9 +5,7 @@
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
-[[file:./2014/02/decomposition.org][Decomposition of transverse isotropic, fourth-rank tensors]]
-
-[[file:./2014/02/tensor-products.org][Tensor products]]
+[[file:./2014/02/decomposition-of-transverse-isotropic.org][Decomposition of transverse isotropic, fourth-rank tensors]]
 
 [[file:2014/02/on-double-dot-product.org][On the double dot product]]
 
