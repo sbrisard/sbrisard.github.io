@@ -66,14 +66,41 @@ The equilibrium equation \eqref{eq:1} finally gives
 \vec 0&=\vec k_b\cdot\hat\stress_b=\imath\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\vec k_b\cdot\hat\prestress_b&(b\in\integers^d).
 \end{align*}
 
-The term in brackets is the [[file:../01/the-elastic-acoustic-tensor-and-its.org][acoustic tensor]] $\acoustic$ associated with the elastic material $\stiffness$, and the above identity provides the equation
+The term in brackets $\vec k\cdot\stiffness\cdot\vec k$ is the [[file:../01/the-elastic-acoustic-tensor-and-its.org][acoustic tensor]] associated with the elastic material $\stiffness$, and the above equation is readily solved for the Fourier modes of the displacement
 
 \begin{align*}
-\imath\acoustic\cdot\hat\displ_b&=-\vec k_b\cdot\hat\prestress_b&(b\in\integers^d),
+\hat\displ_b&=\imath\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)&(b\in\integers^d).
 \end{align*}
 
-which is readily solved
+As a consequence, the Fourier modes of the strain read
 
 \begin{align*}
-\hat\displ_b&=\imath\acoustic^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)&(b\in\integers^d).
+\hat\strain_b&=-\frac12\vec k_b\otimes\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)\right)-\frac12\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)\right)\otimes\vec k_b&(b\in\integers^d).
 \end{align*}
+
+The above expression can be simplified; handling both terms separately, it is successively found
+
+\begin{align*}
+\vec k\otimes\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\prestress\right)\right)&=\vec k\otimes\left(\vec k\cdot\hat\prestress\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)}\right)=\left(\vec k\otimes\vec k\right)\cdot\hat\prestress\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)},\\
+\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\prestress\right)\right)\otimes\vec k&=\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\prestress}\cdot\vec k\right)\otimes\vec k=\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k\otimes\vec k\right),
+\end{align*}
+
+and
+
+\begin{align*}
+\hat\strain_b&=-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\cdot\hat\prestress\cdot\transpinv{\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)}+\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k_b\otimes\vec k_b\right)\right)&(b\in\integers^d).
+\end{align*}
+
+Introducing the [[file:../02/decomposition-of-transverse-isotropic.org][tensor product of linear transformations]] $\boxtimes$, and recalling that the prestress is symmetric, the following compact expression can be found
+
+\begin{align*}
+\hat\strain_b&=-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}+\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\boxtimes\left(\vec k_b\otimes\vec k_b\right)\right):\hat\prestress_b&(b\in\integers^d).
+\end{align*}
+
+In other words, the Fourier modes of the strain are deduced from the Fourier modes of the prestress by application of a fourth-rank tensor, which can be symmetrized with respect to the last two indices (the prestress being symmetric). It is finally found that $\hat\strain_b=-\hat\greeniv(\vec k_b):\hat\prestress_b$ for $b\in\integers^d$, where $\hat\greeniv$ is the periodic Green operator for strains of the homogeneous material $\stiffness$, defined as follows
+
+\begin{equation*}
+\hat\greeniv(\vec k)=\frac12\left(\tensii p\boxtimessym\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}\boxtimessym\tensii p\right),
+\end{equation*}
+
+where $\vec n$ is the direction of the wave-vector $\vec k$ ($\vec n=\vec k/\lVert\vec k\rVert$) and $\tensii p$ is the second-rank projector onto $\vec n$ ($\tensii p=\vec n\otimes\vec n$).

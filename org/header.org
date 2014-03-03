@@ -71,6 +71,7 @@
 #+HTML_HEAD_EXTRA:           tensiv: ['\\vec{#1}', 1],
 #+HTML_HEAD_EXTRA:           tr: '\\operatorname{tr}',
 #+HTML_HEAD_EXTRA:           transp: ['{#1}^{\\text T}', 1],
+#+HTML_HEAD_EXTRA:           transpinv: ['{#1}^{-\\text T}', 1],
 #+HTML_HEAD_EXTRA:           vec: ['{\\mathbf{#1}}', 1],
 #+HTML_HEAD_EXTRA:           volavg: ['\\overline{#1}', 1],
 #+HTML_HEAD_EXTRA:           Prestress: '\\stensii{\\Pi}',
