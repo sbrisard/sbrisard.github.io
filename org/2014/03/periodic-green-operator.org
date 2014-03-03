@@ -3,6 +3,9 @@
 #+SETUPFILE: "../../header.org"
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
+# Equation numbers
+# 1, 2, 3, 4, 5
+
 The Green operator for strains is defined as the linear operator which maps --in a homogeneous material-- the local prestress to the (opposite of the) local strain. Closed-form expressions of this operator can be derived in the case of periodic boundary conditions, as will be demonstrated in the present post.@@html:<!-- more -->@@
 
 Let $\stiffness$ be the stiffness of a homogeneous, linearly elastic material occupying the whole, $d$-dimensional, space $\reals^d$. This material is submitted to the local, $(L_1,\cdots,L_d)$-periodic prestress $\prestress(\vec x)$. The elastic equilibrium of this medium is governed by the following equations over $\reals^d$
@@ -16,15 +19,14 @@ Let $\stiffness$ be the stiffness of a homogeneous, linearly elastic material oc
 \strain(\vec x)&=\nabla_\vec x^\text s\displ&(\vec x\in\reals^d)\\
 \label{eq:4}
 \displ(\vec x+L_i\vec e_i)&=\displ(\vec x)&(\vec x\in\reals^d)\\
-\label{eq:5}
-\stress(\vec x+L_i\vec e_i)\cdot\vec e_i&=\stress(\vec x)\cdot\vec e_i&(\vec x\in\reals^d)
 \end{align}
 
-It should be noted that in Eqs. \eqref{eq:4} and \eqref{eq:5}, no summation should be carried out on the repeated index $i$. This problem is conveniently solved in Fourier space. Indeed, since the local displacement $\displ$ is periodic, it can be decomposed in a Fourier series
+It should be noted that in Eq. \eqref{eq:4}, no summation should be carried out on the repeated index $i$. For this problem to be well-posed, the functional space to which the displacement belongs should be specified; this is beyond the scope of this post. Eqs. \eqref{eq:1} to \eqref{eq:4} are conveniently solved in Fourier space. Indeed, since the local displacement $\displ$ is periodic, it can be decomposed in a Fourier series
 
-\begin{equation*}
+\begin{equation}
+\label{eq:5}
 \displ(\vec x)=\sum_{b\in\integers^d}\hat\displ_b\exp(\imath\vec k_b\cdot\vec x),
-\end{equation*}
+\end{equation}
 
 with
 
@@ -38,4 +40,40 @@ and
 \hat\displ_b=\frac1{\meas{\domain}}\int_\domain\displ(\vec x)\exp(-\imath\vec k_b\cdot\vec x)\dV{\vec x},
 \end{equation*}
 
-where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\domain=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell.
+where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\domain=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\strain$, stress $\stress$ and prestress $\prestress$ are expanded in Fourier series
+
+\begin{align*}
+\strain(\vec x)&=\sum_{b\in\integers^d}\hat\strain_b\exp(\imath\vec k_b\cdot\vec x),\\
+\stress(\vec x)&=\sum_{b\in\integers^d}\hat\stress_b\exp(\imath\vec k_b\cdot\vec x),\\
+\prestress(\vec x)&=\sum_{b\in\integers^d}\hat\prestress_b\exp(\imath\vec k_b\cdot\vec x).
+\end{align*}
+
+Eq. \eqref{eq:3} then reads
+
+\begin{align*}
+\hat\strain_b&=\frac\imath2\left(\vec k_b\otimes\hat\displ_b+\hat\displ_b\otimes\vec k_b\right)&(b\in\integers^d),
+\end{align*}
+
+and, from Eq. \eqref{eq:2} (keeping in mind that $\stiffness$ has minor symmetries)
+
+\begin{align*}
+\hat\stress_b&=\imath\left(\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\hat\prestress_b&(b\in\integers^d).
+\end{align*}
+
+The equilibrium equation \eqref{eq:1} finally gives
+
+\begin{align*}
+\vec 0&=\vec k_b\cdot\hat\stress_b=\imath\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\vec k_b\cdot\hat\prestress_b&(b\in\integers^d).
+\end{align*}
+
+The term in brackets is the [[file:../01/the-elastic-acoustic-tensor-and-its.org][acoustic tensor]] $\acoustic$ associated with the elastic material $\stiffness$, and the above identity provides the equation
+
+\begin{align*}
+\imath\acoustic\cdot\hat\displ_b&=-\vec k_b\cdot\hat\prestress_b&(b\in\integers^d),
+\end{align*}
+
+which is readily solved
+
+\begin{align*}
+\hat\displ_b&=\imath\acoustic^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)&(b\in\integers^d).
+\end{align*}
