@@ -4,7 +4,7 @@
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 # Equation numbers
-# 1, 2, 3, 4, 5
+# 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 
 The Green operator for strains is defined as the linear operator which maps --in a homogeneous material-- the local prestress to the (opposite of the) local strain. Closed-form expressions of this operator can be derived in the case of periodic boundary conditions, as will be demonstrated in the present post.@@html:<!-- more -->@@
 
@@ -30,9 +30,10 @@ It should be noted that in Eq. \eqref{eq:4}, no summation should be carried out 
 
 with
 
-\begin{equation*}
+\begin{equation}
+\label{eq:10}
 \vec k_b=\frac{2\pi b_1}{L_1}\vec e_1+\cdots+\frac{2\pi b_d}{L_d}\vec e_d,
-\end{equation*}
+\end{equation}
 
 and
 
@@ -91,16 +92,71 @@ and
 \hat\strain_b&=-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\cdot\hat\prestress\cdot\transpinv{\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)}+\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k_b\otimes\vec k_b\right)\right)&(b\in\integers^d).
 \end{align*}
 
-Introducing the [[file:../02/decomposition-of-transverse-isotropic.org][tensor product of linear transformations]] $\boxtimes$, and recalling that the prestress is symmetric, the following compact expression can be found
+Introducing the [[file:../02/decomposition-of-transverse-isotropic.org][tensor product of linear transformations]] $\boxtimes$, and recalling that the prestress $\prestress$ is symmetric, the following compact expression can be found
 
 \begin{align*}
 \hat\strain_b&=-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}+\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\boxtimes\left(\vec k_b\otimes\vec k_b\right)\right):\hat\prestress_b&(b\in\integers^d).
 \end{align*}
 
-In other words, the Fourier modes of the strain are deduced from the Fourier modes of the prestress by application of a fourth-rank tensor, which can be symmetrized with respect to the last two indices (the prestress being symmetric). It is finally found that $\hat\strain_b=-\hat\greeniv(\vec k_b):\hat\prestress_b$ for $b\in\integers^d$, where $\hat\greeniv$ is the periodic Green operator for strains of the homogeneous material $\stiffness$, defined as follows
+In other words, the Fourier modes of the strain are deduced from the Fourier modes of the prestress by application of a fourth-rank tensor, which can be symmetrized with respect to the last two indices (the prestress being symmetric). It is finally found that
+
+\begin{align*}
+\hat\strain_b&=-\hat\greeniv(\vec k_b):\hat\prestress_b&(b\in\integers^d),
+\end{align*}
+
+where $\hat\greeniv$ is the periodic Green operator for strains of the homogeneous material $\stiffness$, defined as follows
+
+\begin{equation}
+\label{eq:6}
+\hat\greeniv(\vec k)=\frac12\left(\left(\vec n\otimes\vec n\right)\boxtimessym\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}\boxtimessym\left(\vec n\otimes\vec n\right)\right),
+\end{equation}
+
+where $\vec n$ is the direction of the wave-vector $\vec k$, $\vec n=\vec k/\lVert\vec k\rVert$ ($\vec n\otimes\vec n$ is the second-rank projector onto $\vec n$).
+
+* The case of isotropic materials
+
+I have shown in a the [[file:../01/the-elastic-acoustic-tensor-and-its.org][previous post]] that in this case, the inverse of the acoustic tensor reads
 
 \begin{equation*}
-\hat\greeniv(\vec k)=\frac12\left(\tensii p\boxtimessym\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}\boxtimessym\tensii p\right),
+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}=\frac1\shearmod\left(\frac{1-2\nu}{2\left(1-\nu\right)}\left(\vec n\otimes\vec n\right)+\identii-\left(\vec n\otimes\vec n\right)\right)=\frac1\shearmod\identii-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n,
 \end{equation*}
 
-where $\vec n$ is the direction of the wave-vector $\vec k$ ($\vec n=\vec k/\lVert\vec k\rVert$) and $\tensii p$ is the second-rank projector onto $\vec n$ ($\tensii p=\vec n\otimes\vec n$).
+which leads to the following expression of the periodic Green operator for strains
+
+\begin{equation}
+\label{eq:7}
+\hat\greeniv(\vec k)=\frac1\shearmod\left(\left(\vec n\otimes\vec n\right)\boxtimessym\identii+\identii\boxtimessym\left(\vec n\otimes\vec n\right)\right)-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n\otimes\vec n\otimes\vec n,
+\end{equation}
+
+where the following identity has been used
+
+\begin{equation*}
+\left(\vec n\otimes\vec n\right)\boxtimessym\left(\vec n\otimes\vec n\right)=\vec n\otimes\vec n\otimes\vec n\otimes\vec n.
+\end{equation*}
+
+The components of $\hat\greeniv$ are
+
+\begin{equation}
+\label{eq:8}
+\hat\greenivcomp_{ijkl}=\frac1{4\shearmod}\left(\delta_{ik}n_jn_l+\delta_{il}n_jn_k+\delta_{jk}n_in_l+\delta_{jl}n_in_k\right)-\frac1{2\shearmod\left(1-\nu\right)}n_in_jn_kn_l.
+\end{equation}
+
+
+* Summary
+
+In a homogeneous, linearly elastic material with stiffness $\stiffness$, the $(L_1,\cdot,L_d)$--periodic prestress $\prestress$ given by
+
+\begin{equation*}
+\prestress(\vec x)=\sum_{b\in\integers^d}\hat\prestress_b\exp(\imath\vec k_b\cdot\vec x)
+\end{equation*}
+
+[where $\vec k_b$ is defined by Eq. \eqref{eq:10}] gives rise to the periodic strain
+
+\begin{equation}
+\label{eq:9}
+\strain(\vec x)=-\sum_{b\in\integers^d}\hat\greeniv(\vec k_b):\hat\prestress_b\exp(\imath\vec k_b\cdot\vec x),
+\end{equation}
+
+where $\hat\greeniv$ is the periodic Green operator for strains, defined in Fourier space by Eq. \eqref{eq:6}. It should be noted that this expression is valid regardless of the dimension of the physical space, and the material symmetries. If the material is isotropic, the Fourier modes of the Green operator for strains are given by Eqs. \eqref{eq:7} and \eqref{eq:8}, which are valid in both plane strain and 3D elasticity (since the expression of the inverse of the [[file:../01/the-elastic-acoustic-tensor-and-its.org][acoustic tensor]] is).
+
+Finally, it is worth noting that Eq. \eqref{eq:9} is a direct product in Fourier space. Therefore, it is a /convolution product/ in the real space, and we shall write $\strain=-\greeniv\ast\prestress$. To the best of my knowledge, though, there is no closed-form expression of $\greeniv$ in the real space, and this convenient notation is purely formal.
