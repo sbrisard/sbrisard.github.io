@@ -25,7 +25,7 @@ It should be noted that in Eq. \eqref{eq:4}, no summation should be carried out 
 
 \begin{equation}
 \label{eq:5}
-\displ(\vec x)=\sum_{b\in\integers^d}\hat\displ_b\exp(\imath\vec k_b\cdot\vec x),
+\displ(\vec x)=\sum_{b\in\integers^d}\hat\displ_b\exp(i\vec k_b\cdot\vec x),
 \end{equation}
 
 with
@@ -38,64 +38,69 @@ with
 and
 
 \begin{equation*}
-\hat\displ_b=\frac1{\meas{\domain}}\int_\domain\displ(\vec x)\exp(-\imath\vec k_b\cdot\vec x)\dV{\vec x},
+\hat\displ_b=\frac1{\meas{\domain}}\int_\domain\displ(\vec x)\exp(-i\vec k_b\cdot\vec x)\dV{\vec x},
 \end{equation*}
 
 where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\domain=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\strain$, stress $\stress$ and prestress $\prestress$ are expanded in Fourier series
 
 \begin{align*}
-\strain(\vec x)&=\sum_{b\in\integers^d}\hat\strain_b\exp(\imath\vec k_b\cdot\vec x),\\
-\stress(\vec x)&=\sum_{b\in\integers^d}\hat\stress_b\exp(\imath\vec k_b\cdot\vec x),\\
-\prestress(\vec x)&=\sum_{b\in\integers^d}\hat\prestress_b\exp(\imath\vec k_b\cdot\vec x).
+\strain(\vec x)&=\sum_{b\in\integers^d}\hat\strain_b\exp(i\vec k_b\cdot\vec x),\\
+\stress(\vec x)&=\sum_{b\in\integers^d}\hat\stress_b\exp(i\vec k_b\cdot\vec x),\\
+\prestress(\vec x)&=\sum_{b\in\integers^d}\hat\prestress_b\exp(i\vec k_b\cdot\vec x).
 \end{align*}
 
 Eq. \eqref{eq:3} then reads
 
 \begin{align*}
-\hat\strain_b&=\frac\imath2\left(\vec k_b\otimes\hat\displ_b+\hat\displ_b\otimes\vec k_b\right)&(b\in\integers^d),
+\hat\strain_b&=\frac i2\left(\vec k_b\otimes\hat\displ_b+\hat\displ_b\otimes\vec k_b\right)&(b\in\integers^d),
 \end{align*}
 
 and, from Eq. \eqref{eq:2} (keeping in mind that $\stiffness$ has minor symmetries)
 
 \begin{align*}
-\hat\stress_b&=\imath\left(\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\hat\prestress_b&(b\in\integers^d).
+\hat\stress_b&=i\left(\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\hat\prestress_b&(b\in\integers^d).
 \end{align*}
 
 The equilibrium equation \eqref{eq:1} finally gives
 
 \begin{align*}
-\vec 0&=\vec k_b\cdot\hat\stress_b=\imath\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\vec k_b\cdot\hat\prestress_b&(b\in\integers^d).
+\vec 0&=\vec k_b\cdot\hat\stress_b=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\vec k_b\cdot\hat\prestress_b&(b\in\integers^d).
 \end{align*}
 
 The term in brackets $\vec k\cdot\stiffness\cdot\vec k$ is the [[file:../01/the-elastic-acoustic-tensor-and-its.org][acoustic tensor]] associated with the elastic material $\stiffness$, and the above equation is readily solved for the Fourier modes of the displacement
 
 \begin{align*}
-\hat\displ_b&=\imath\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)&(b\in\integers^d).
+\hat\displ_b&=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)&(b\in\integers^d).
 \end{align*}
 
 As a consequence, the Fourier modes of the strain read
 
 \begin{align*}
-\hat\strain_b&=-\frac12\vec k_b\otimes\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)\right)-\frac12\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)\right)\otimes\vec k_b&(b\in\integers^d).
+\hat\strain_b={}&-\frac12\vec k_b\otimes\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)\right)\\
+&-\frac12\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)\right)\otimes\vec k_b&(b\in\integers^d).
 \end{align*}
 
 The above expression can be simplified; handling both terms separately, it is successively found
 
 \begin{align*}
-\vec k\otimes\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\prestress\right)\right)&=\vec k\otimes\left(\vec k\cdot\hat\prestress\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)}\right)=\left(\vec k\otimes\vec k\right)\cdot\hat\prestress\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)},\\
-\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\prestress\right)\right)\otimes\vec k&=\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\prestress}\cdot\vec k\right)\otimes\vec k=\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k\otimes\vec k\right),
+\vec k\otimes\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\prestress\right)\right)&=\vec k\otimes\left(\vec k\cdot\hat\prestress\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)}\right)\\
+&=\left(\vec k\otimes\vec k\right)\cdot\hat\prestress\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)},\\
+\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\prestress\right)\right)\otimes\vec k&=\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\prestress}\cdot\vec k\right)\otimes\vec k\\
+&=\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k\otimes\vec k\right),
 \end{align*}
 
 and
 
 \begin{align*}
-\hat\strain_b&=-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\cdot\hat\prestress\cdot\transpinv{\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)}+\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k_b\otimes\vec k_b\right)\right)&(b\in\integers^d).
+\hat\strain_b={}&-\frac12\left(\vec k_b\otimes\vec k_b\right)\cdot\hat\prestress\cdot\transpinv{\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)}\\
+&-\frac12\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k_b\otimes\vec k_b\right)&(b\in\integers^d).
 \end{align*}
 
 Introducing the [[file:../02/decomposition-of-transverse-isotropic.org][tensor product of linear transformations]] $\boxtimes$, and recalling that the prestress $\prestress$ is symmetric, the following compact expression can be found
 
 \begin{align*}
-\hat\strain_b&=-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}+\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\boxtimes\left(\vec k_b\otimes\vec k_b\right)\right):\hat\prestress_b&(b\in\integers^d).
+\hat\strain_b={}&-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\right):\hat\prestress_b\\
+&-\frac12\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\boxtimes\left(\vec k_b\otimes\vec k_b\right)\right):\hat\prestress_b&(b\in\integers^d).
 \end{align*}
 
 In other words, the Fourier modes of the strain are deduced from the Fourier modes of the prestress by application of a fourth-rank tensor, which can be symmetrized with respect to the last two indices (the prestress being symmetric). It is finally found that
@@ -147,16 +152,20 @@ The components of $\hat\greeniv$ are
 In a homogeneous, linearly elastic material with stiffness $\stiffness$, the $(L_1,\cdot,L_d)$--periodic prestress $\prestress$ given by
 
 \begin{equation*}
-\prestress(\vec x)=\sum_{b\in\integers^d}\hat\prestress_b\exp(\imath\vec k_b\cdot\vec x)
+\prestress(\vec x)=\sum_{b\in\integers^d}\hat\prestress_b\exp(i\vec k_b\cdot\vec x)
 \end{equation*}
 
 [where $\vec k_b$ is defined by Eq. \eqref{eq:10}] gives rise to the periodic strain
 
 \begin{equation}
 \label{eq:9}
-\strain(\vec x)=-\sum_{b\in\integers^d}\hat\greeniv(\vec k_b):\hat\prestress_b\exp(\imath\vec k_b\cdot\vec x),
+\strain(\vec x)=-\sum_{b\in\integers^d}\hat\greeniv(\vec k_b):\hat\prestress_b\exp(i\vec k_b\cdot\vec x),
 \end{equation}
 
 where $\hat\greeniv$ is the periodic Green operator for strains, defined in Fourier space by Eq. \eqref{eq:6}. It should be noted that this expression is valid regardless of the dimension of the physical space, and the material symmetries. If the material is isotropic, the Fourier modes of the Green operator for strains are given by Eqs. \eqref{eq:7} and \eqref{eq:8}, which are valid in both plane strain and 3D elasticity (since the expression of the inverse of the [[file:../01/the-elastic-acoustic-tensor-and-its.org][acoustic tensor]] is).
 
 Finally, it is worth noting that Eq. \eqref{eq:9} is a direct product in Fourier space. Therefore, it is a /convolution product/ in the real space, and we shall write $\strain=-\greeniv\ast\prestress$. To the best of my knowledge, though, there is no closed-form expression of $\greeniv$ in the real space, and this convenient notation is purely formal.
+
+* History
+
+  - <2014-03-06 Thu> Initial version.
