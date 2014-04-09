@@ -130,7 +130,7 @@ which leads to the following expression of the periodic Green operator for strai
 
 \begin{equation}
 \label{eq:7}
-\hat\greeniv(\vec k)=\frac1\shearmod\left(\left(\vec n\otimes\vec n\right)\boxtimessym\identii+\identii\boxtimessym\left(\vec n\otimes\vec n\right)\right)-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n\otimes\vec n\otimes\vec n,
+\hat\greeniv(\vec k)=\frac1{2\shearmod}\left(\left(\vec n\otimes\vec n\right)\boxtimessym\identii+\identii\boxtimessym\left(\vec n\otimes\vec n\right)\right)-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n\otimes\vec n\otimes\vec n,
 \end{equation}
 
 where the following identity has been used
@@ -169,3 +169,4 @@ Finally, it is worth noting that Eq. \eqref{eq:9} is a direct product in Fourier
 * History
 
   - <2014-03-06 Thu> Initial version.
+  - <2014-04-08 Tue> Corrected Eq. (8) thanks to Vinh.

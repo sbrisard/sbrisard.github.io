@@ -5,7 +5,7 @@
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
-[[file:2014/03/periodic-green-operator.org][The periodic Green operator for strains]]
+[[file:2014/03/the-periodic-green-operator-for-strains.org][The periodic Green operator for strains]]
 
 [[file:./2014/02/decomposition-of-transverse-isotropic.org][Decomposition of transverse isotropic, fourth-rank tensors]]
 
@@ -66,4 +66,3 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 [[file:p/home.org][My professional background]]
 
 [[file:p/references.org][References]]
-
