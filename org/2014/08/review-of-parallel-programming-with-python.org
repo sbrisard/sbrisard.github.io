@@ -1,0 +1,32 @@
+#+TITLE: Review of "Parallel Programming with Python"
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+STARTUP: fninline
+
+I have again recently been offered by [[http://www.packtpub.com/][Packt Publishing]] to review one of their books, entitled [[http://goo.gl/oMUSLW][Parallel Programming with Python]] (by Jan Palach).@@html:<!-- more -->@@
+
+For a long time, programmers have been relying exclusively on [[http://en.wikipedia.org/wiki/Moore%27s_law][Moore's law]] to resolve their performance issues. In other words, they trusted the fact that the CPU frequency would increase, making their program faster /without changing one single line/. Today however, [[http://www.gotw.ca/publications/concurrency-ddj.htm]["the free lunch is over"]], as already argued by Herb Sutter in 2004. The frequency of CPUs tends to stagnate, while the number of cores in even the cheapest laptop has increased. The immediate consequence is
+
+#+BEGIN_QUOTE
+applications will increasingly need to be concurrent if they want to fully exploit CPU throughput gains
+#+END_QUOTE
+
+(see again Sutter's paper). Python is no exception to this and this book introduces several ways to get parallel with Python using the standard library modules [[https://docs.python.org/3/library/threading.html][threading]] and [[https://docs.python.org/3/library/multiprocessing.html][multiprocessing]], and the third-party modules [[http://parallelpython.com][Parallel Python]] and [[http://celeryproject.org][Celery]]. This is no trivial task, since the [[https://wiki.python.org/moin/GlobalInterpreterLock][Global Interpreter Lock (GIL)]] which "prevents multiple native threads from executing Python bytecodes at once" enters the picture, possibly preventing from "taking full advantage of multiprocessor systems". While this issue is briefly mentioned in this book (in a section called "Taking Care of Python GIL"), I think that the author should have made it clearer which applications suffer from this limitation, and which don't. For example, the following statement (which can be found page 30) is far too vague
+
+#+BEGIN_QUOTE
+Within the Python programming language, the use of CPU-bound threads may harm performance of the application due to GIL.
+#+END_QUOTE
+
+"may harm performance"? Could you be more precise, please? The answer can be found in the module's [[https://docs.python.org/3/library/threading.html][official documentation]]
+
+#+BEGIN_QUOTE
+CPython implementation detail: In CPython, due to the /Global Interpreter Lock/, only one thread can execute Python code at once (even though certain performance-oriented libraries might overcome this limitation). If you want your application to make better use of the computational resources of multi-core machines, you are advised to use =multiprocessing= or =concurrent.futures.ProcessPoolExecutor=. However, threading is still an appropriate model if you want to run multiple I/O-bound tasks simultaneously.
+#+END_QUOTE
+
+So the truth is that "may harm" should really read "does harm"... While we are at it, let us mention that (again, from the module's [[https://docs.python.org/3/library/multiprocessing.html][official documentation]])
+
+#+BEGIN_QUOTE
+ The =multiprocessing= package offers both local and remote concurrency, effectively side-stepping the /Global Interpreter Lock/ by using subprocesses instead of threads. Due to this, the =multiprocessing= module allows the programmer to fully leverage multiple processors on a given machine. It runs on both Unix and Windows.
+#+END_QUOTE
+
+After three introductory chapters, the author presents two examples of applications
