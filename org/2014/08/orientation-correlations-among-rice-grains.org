@@ -1,0 +1,18 @@
+# -*- coding: utf-8; -*-
+#+TITLE: Orientation correlations among rice grains, part 1: introduction
+#+SETUPFILE: "../../header.org"
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+STARTUP: fninline]]
+
+In this series of posts, I will explore the notion of orientational order in random packings of anisotropic (flat or elongated), hard particles. By orientational order, I mean the rise of long-range orientation correlations; in other words, particles which are close to each other tend to adopt the same orientation. This leads to strong /local/ anisotropy, while the packing may well be /globally/ isotropic@@html:<!-- more -->@@ (all orientations of single grains are equiprobable [fn:1]). Local orientational order is stronger when the volume fraction of particles, or their aspect ratio increases.
+
+Local orientational order will be illustrated on a "real" packing, and I chose rice grains for this demo. Analysis of orientation correlations requires to go through the following steps
+
+  1. acquisition of a 3D image of the packing through X-ray microtomography,
+  2. segmentation of the 3D image (each grain must be labelled individually) by means of the [[http://www.population-image.fr/][Population]] C++ library,
+  3. computation of the orientation of each rice grain, using the =scipy.ndimage= Python library,
+  4. computation of the orientation correlations.
+
+Before we proceed, I would like to clarify the notion of local orientational order through images of synthetic packings of 10000 hard (flat) spheroids. The aspect ratio (ratio of polar to equatorial radii) of the (flat) spheroids is 0.125. The images below are three realizations of random packing of spheroids, at 40%, 50% and 60% volume fraction. It should be mentioned that generating such compact assemblies is no trivial task. The event-driven molecular dynamics algorithm proposed by Donev, Torquato and Stillinger ([[file:../../p/references.org::#DONE2005][2005]], [[file:../../p/references.org::#DONE2005A][2005a]]) is an attractive, though complex option.
+
+[fn:1] Which is of course not sufficient to insure statistical isotropy!

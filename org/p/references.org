@@ -1,9 +1,12 @@
+# -*- coding: utf-8; -*-
 #+TITLE: References
 #+SETUPFILE: "../header.org"
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../solarized.css" />
 
   - <<#BIGO1994>> [[http://www.ing.unitn.it/~bigoni/paper/eigenvalues.pdf][Bigoni and Zaccaria (1994)]] :: D. Bigoni and D. Zaccaria, /On the eigenvalues of the acoustic tensor in elastoplasticity/, European Journal of Mechanics - A/Solids 13(5):621-638, 1994
   - <<#PIER1979>> [[http://dx.doi.org//10.1007/BF00041097][Del Piero (1979)]] :: P. Del Piero, /Some properties of the set of fourth-order tensors, with application to elasticity/, Journal of Elasticity 9(3):245-261, 1979
+  - <<#DONE2005>> [[http://www.sciencedirect.com/science/article/pii/S0021999104003146][Donev et al. (2005)]] :: A. Donev, S. Torquato and F. H. Stillinger, /Neighbor list collision-driven molecular dynamics simulation for nonspherical hard particles. I. Algorithmic details/, Journal of Computational Physics 202(2):737-764, 2005
+  - <<#DONE2005A>> [[http://www.sciencedirect.com/science/article/pii/S0021999104003948][Donev et al. (2005a)]] :: A. Donev, S. Torquato and F. H. Stillinger, /Neighbor list collision-driven molecular dynamics simulation for nonspherical hard particles.: II. Applications to ellipses and ellipsoids/, Journal of Computational Physics 202(2):765-793, 2005
   - <<#GENT2013>> [[http://dx.doi.org/10.1016/j.ijengsci.2013.07.006][Gentile and Straughan (2013)]] :: M. Gentile and B. Straughan, /Acceleration waves in nonlinear double porosity elasticity/, International Journal of Engineering Science 73:10-16, 2013
   - <<#HASH1962>> [[http://dx.doi.org/10.1016/0022-5096(62)90004-2][Hashin and Shtrikman (1962)]] :: Z. Hashin and S. Shtrikman, /On some variational principles in anisotropic and nonhomogeneous elasticity/, Journal of the Mechanics and Physics of Solids 10(4):335-342, 1962
   - <<#MOUL1994>> Moulinec and Suquet (1994) :: H. Moulinec and P. Suquet, /A fast numerical method for computing the linear and nonlinear properties of composites/, Comptes-Rendus de l'Académie des Sciences série II 318: 1417-1423, 1994
