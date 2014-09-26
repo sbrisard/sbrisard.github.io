@@ -4,13 +4,13 @@
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 #+STARTUP: fninline
 
-In the [[file:./orientation-correlations-among-rice-grains.org][first instalment]] of this series, I briefly introduced orientational order in assemblies of anisotropic particles, and proposed an illustration based on synthetic microstructures. But what I really intend to do in this series is to show how orientational order can be quantified in a "real-life" sample, namely a packing of rice grains. This of course requires a 3D image of the packing. Fortunately, my lab ([[http://navier.enpc.fr/][Laboratoire Navier]]) is the proud owner of a [[http://navier.enpc.fr/Microtomographe,297][microtomogrphay]] and my former colleague Nicolas Lenoir --who was in charge of this instrument-- gave me the opportunity to scan my toy sample in december 2013.@@html:<!-- more -->@@
+In the [[file:./orientation-correlations-among-rice-grains.org][first instalment]] of this series, I briefly introduced orientational order in assemblies of anisotropic particles, and proposed an illustration based on synthetic microstructures. But what I really intend to do in this series is to show how orientational order can be quantified in a "real-life" sample, namely a packing of rice grains. This of course requires a 3D image of the packing. Fortunately, my lab ([[http://navier.enpc.fr/][Laboratoire Navier]]) is the proud host of a [[http://navier.enpc.fr/Microtomographe,297][collaborative microtomography platform]] and my former colleague Nicolas Lenoir --who was in charge of this instrument-- gave me the opportunity to scan my toy sample in december 2013.@@html:<!-- more -->@@
 
 The sample preparation is rather crude. Ordinary, long-grain rice is poured in a plastic container (see picture below), 50mm in diameter. The average length of the grains is about ....... as the image analysis to come will show. Therefore, strong boundary effects are to be expected. This is no big issue for the present study, which is carried out for illustrative purposes only.
 
 file:./images/rice-sample-medium.png
 
-Two X-ray sources are available at Laboratoire Navier. For the present experiment, we used the [[http://www.hamamatsu.com/resources/pdf/etd/MFX_TXPR1007E01.pdf][Hamamatsu L10801]] X-ray source (voltage: 230V, current: 300mA). Combined with the  the [[http://www.varian.com/media/xray/products/pdf/ps2520d.pdf][Paxscan Varian 2520V]] flat-panel X-ray imager (1536x1920 pixels, pixel pitch 127µm²), this setup leads to a voxel size of approx. 0.030mm. The exposure time was 6s per radiograph. To reduce noise, 12 radiographs were averaged to produce one projection; the total number of projections was 1440. The image below shows such a projection.
+Two X-ray sources are available at Laboratoire Navier. For the present experiment, we used the [[http://www.hamamatsu.com/resources/pdf/etd/MFX_TXPR1007E01.pdf][Hamamatsu L10801]] X-ray source (maximum voltage: 230V, maximum current: 1mA). Combined with the  the [[http://www.varian.com/media/xray/products/pdf/ps2520d.pdf][Paxscan Varian 2520V]] flat-panel X-ray imager (1536x1920 pixels, pixel pitch 127µm), this setup leads to a voxel size of approx. 0.030mm. The specimen was scanned at 100kV and 300µA with an imager frame-rate of 6 images per second. To reduce noise, 12 radiographs were averaged to produce one projection; the total number of projections was 1440 (see below a typical projection).
 
 file:./images/rice-projection-00000-medium.png
 
@@ -20,8 +20,8 @@ file:./images/rice-orthoslices.png
 
 The reconstruction is highly contrasted, so that simple thresholding should produce a very convincing segmentation. This will be the topic of the next instalment.
 
-* TODO Acknowledgements
+* Acknowledgements
 
-The present series would not exist without the help of my former colleage Nicolas Lenoir ***TODO: ajouter pointeur vers page web***, now research engineer at Laboratoire ***TODO: à compléter***. His dedication and excellent temper made 3D imaging at Laboratoire Navier a real delight.
+The present series would not exist without the help of my former colleague Nicolas Lenoir, now research engineer at [[http://www.placamat.cnrs.fr/][PLACAMAT]]. His dedication and excellent temper made 3D imaging at Laboratoire Navier a real delight. He also kindly agreed to review this post, which I am grateful for, since he spotted some rather crude mistakes!
 
 [[http://www.paraview.org/][Paraview]] was used to produce the last image of this post.
