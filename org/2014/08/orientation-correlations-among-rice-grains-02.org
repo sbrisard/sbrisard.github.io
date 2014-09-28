@@ -1,7 +1,12 @@
 # -*- coding: utf-8; -*-
 #+TITLE: Orientation correlations among rice grains, part 2: acquisition of tomography images
 #+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+HTML_HEAD_EXTRA: <link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+#+HTML_HEAD_EXTRA: <style>
+#+HTML_HEAD_EXTRA: body {
+#+HTML_HEAD_EXTRA:     padding-top: 50px;
+#+HTML_HEAD_EXTRA: }
+#+HTML_HEAD_EXTRA: </style>
 #+STARTUP: fninline
 
 In the [[file:./orientation-correlations-among-rice-grains.org][first instalment]] of this series, I briefly introduced orientational order in assemblies of anisotropic particles, and proposed an illustration based on synthetic microstructures. But what I really intend to do in this series is to show how orientational order can be quantified in a "real-life" sample, namely a packing of rice grains. This of course requires a 3D image of the packing. Fortunately, my lab ([[http://navier.enpc.fr/][Laboratoire Navier]]) is the proud host of a [[http://navier.enpc.fr/Microtomographe,297][collaborative microtomography platform]] and my former colleague Nicolas Lenoir --who was in charge of this instrument-- gave me the opportunity to scan my toy sample in december 2013.@@html:<!-- more -->@@
