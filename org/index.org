@@ -6,11 +6,11 @@
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
-[[file:./2014/08/orientation-correlations-among-rice-grains-02.org][Orientation correlations among rice grains, part 2: acquisition of tomography images]]
+[[file:./posts/2014XXXX-Orientation_correlations_among_rice_grains-01.org][Orientation correlations among rice grains, part 2: acquisition of tomography images]]
 
-[[file:./2014/08/orientation-correlations-among-rice-grains.org][Orientation correlations among rice grains, part 1: introduction]]
+[[file:./posts/2014XXXX-Orientation_correlations_among_rice_grains-01.org][Orientation correlations among rice grains, part 1: introduction]]
 
-[[file:./2014/08/review-of-parallel-programming-with.org][Review of "Parallel Programming with Python"]]
+[[file:./posts/20140813-Review_of_Parallel_Programming_with_Python.org][Review of "Parallel Programming with Python"]]
 
 [[file:2014/03/the-periodic-green-operator-for-strains.org][The periodic Green operator for strains]]
 
