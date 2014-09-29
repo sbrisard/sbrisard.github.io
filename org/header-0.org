@@ -1,0 +1,4 @@
+# -*- coding: utf-8; -*-
+#+HTML_HEAD_EXTRA: <link href="./solarized.css" rel="stylesheet" />
+#+HTML_HEAD_EXTRA: <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+#+HTML_HEAD_EXTRA: <link href="../css/theme.css" rel="stylesheet" />
