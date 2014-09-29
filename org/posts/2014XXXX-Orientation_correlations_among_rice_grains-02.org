@@ -1,13 +1,8 @@
 # -*- coding: utf-8; -*-
 #+TITLE: Orientation correlations among rice grains, part 2: acquisition of tomography images
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-#+HTML_HEAD_EXTRA: <style>
-#+HTML_HEAD_EXTRA: body {
-#+HTML_HEAD_EXTRA:     padding-top: 50px;
-#+HTML_HEAD_EXTRA: }
-#+HTML_HEAD_EXTRA: </style>
-#+STARTUP: fninline
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 
 In the [[file:./orientation-correlations-among-rice-grains.org][first instalment]] of this series, I briefly introduced orientational order in assemblies of anisotropic particles, and proposed an illustration based on synthetic microstructures. But what I really intend to do in this series is to show how orientational order can be quantified in a "real-life" sample, namely a packing of rice grains. This of course requires a 3D image of the packing. Fortunately, my lab ([[http://navier.enpc.fr/][Laboratoire Navier]]) is the proud host of a [[http://navier.enpc.fr/Microtomographe,297][collaborative microtomography platform]] and my former colleague Nicolas Lenoir --who was in charge of this instrument-- gave me the opportunity to scan my toy sample in december 2013.@@html:<!-- more -->@@
 
@@ -17,7 +12,7 @@ file:./images/rice-sample-medium.png
 
 Two X-ray sources are available at Laboratoire Navier. For the present experiment, we used the [[http://www.hamamatsu.com/resources/pdf/etd/MFX_TXPR1007E01.pdf][Hamamatsu L10801]] X-ray source (maximum voltage: 230V, maximum current: 1mA). Combined with the  the [[http://www.varian.com/media/xray/products/pdf/ps2520d.pdf][Paxscan Varian 2520V]] flat-panel X-ray imager (1536x1920 pixels, pixel pitch 127µm), this setup leads to a voxel size of approx. 0.030mm. The specimen was scanned at 100kV and 300µA with an imager frame-rate of 6 images per second. To reduce noise, 12 radiographs were averaged to produce one projection; the total number of projections was 1440 (see below a typical projection).
 
-file:./images/rice-projection-00000-medium.png
+file:./images/rice-proj0000-medium.png
 
 3D reconstruction was carried out using standard tools developed by [[http://www.rxsolutions.fr/][RX Solutions France]]. Contrast, resolution and signal-to-noise ratio were all excellent, so that the most basic reconstruction procedure resulted in very high quality 3D images (see three orthogonal slices below).
 

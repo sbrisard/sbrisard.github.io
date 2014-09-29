@@ -1,7 +1,7 @@
 #+TITLE: Review of "Parallel Programming with Python"
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
-#+STARTUP: fninline
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 
 I have again recently been offered by [[http://www.packtpub.com/][Packt Publishing]] to review one of their books, entitled [[http://goo.gl/oMUSLW][Parallel Programming with Python]] (by Jan Palach).@@html:<!-- more -->@@
 
