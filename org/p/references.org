@@ -1,7 +1,8 @@
 # -*- coding: utf-8; -*-
 #+TITLE: References
 #+SETUPFILE: "../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../solarized.css" />
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 
   - <<#BIGO1994>> [[http://www.ing.unitn.it/~bigoni/paper/eigenvalues.pdf][Bigoni and Zaccaria (1994)]] :: D. Bigoni and D. Zaccaria, /On the eigenvalues of the acoustic tensor in elastoplasticity/, European Journal of Mechanics - A/Solids 13(5):621-638, 1994
   - <<#PIER1979>> [[http://dx.doi.org//10.1007/BF00041097][Del Piero (1979)]] :: P. Del Piero, /Some properties of the set of fourth-order tensors, with application to elasticity/, Journal of Elasticity 9(3):245-261, 1979
