@@ -3,7 +3,7 @@
 #+SETUPFILE: ../header.org
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../solarized.css" />
 
-I am currently a research scientist at [[http://navier.enpc.fr/][Navier laboratory]], [[http://www.ifsttar.fr/][IFSTTAR]] (/Institut FranÃ§ais des Sciences et Techniques du Transport, de l'AmÃ©nagement et des RÃ©seaux/, French Institute of Sciences and Technology for Transport, Development and Networks).
+I am currently a research scientist at [[http://navier.enpc.fr/][Navier laboratory]], [[http://www.ifsttar.fr/][IFSTTAR]] (/Institut Français des Sciences et Techniques du Transport, de l'Aménagement et des Réseaux/, French Institute of Sciences and Technology for Transport, Development and Networks).
 
 * Research interests
 
@@ -17,7 +17,7 @@ I am currently a research scientist at [[http://navier.enpc.fr/][Navier laborato
   - sept. 2010 - now :: Research scientist at [[http://www.ifsttar.fr/][IFSTTAR]]. Joined [[http://navier.enpc.fr/][Navier laboratory]] nov. 2011.
   - sept. 2007 - aug. 2010 :: PhD at [[http://www.enpc.fr/][Ecole des Ponts ParisTech]], Paris, France, [[http://navier.enpc.fr/][Navier laboratory]]. /Morphological analysis and numerical homogenization: application to cement paste/ (under the supervision of Pr. Luc Dormieux and Pr. Pierre Levitz).
   - march 2007 - aug. 2007 :: Visiting scholar at the [[http://berkeley.edu/][University of California]], Berkeley, [[http://www.ce.berkeley.edu][Civil and Environmental Engineering]] dept. /Characterization of the orientation of fibers by Digital Laminography in Ultra-High Performance, Fiber Reinforced Concrete/ (under the supervision of Pr. Paulo J. M. Monteiro).
-  - sept. 2003 - feb. 2007 :: Bridge engineer at [[http://www.setra.equipement.gouv.fr][SÃ©tra]], Bagneux, France (french highway administration).
+  - sept. 2003 - feb. 2007 :: Bridge engineer at [[http://www.setra.equipement.gouv.fr][Sétra]], Bagneux, France (french highway administration).
   - jul. 2001 - aug. 2002 :: Structural engineer (intern) at [[http://www.arup.com][ARUP]], London, UK.
   - sept. 2000 - aug. 2003 :: M. Eng. in civil engineering at [[http://www.enpc.fr][Ecole des Ponts ParisTech]], Champs-sur-Marne, France
   - sept. 1998 - aug. 2000 :: B. Sc. at [[http://www.polytechnique.fr][Ecole Polytechnique]], Palaiseau, France.
