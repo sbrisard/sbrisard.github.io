@@ -1,0 +1,7 @@
+# -*- coding: utf-8; -*-
+#+TITLE: Going public
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
+
+So here we go. This website goes public. It will build up little by little (be patient).

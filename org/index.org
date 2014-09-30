@@ -66,7 +66,7 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2011/09/green-operator-for-strains-part-1.org][The Green operator for strains, part 1: definition]]
 
-[[file:2011/09/going-public.org][Going public]]
+[[file:./posts/20110903-Going_public.org][Going public]]
 
 [[file:./posts/20110828-Some_gruesome_details.org][Some gruesome details]]
 
