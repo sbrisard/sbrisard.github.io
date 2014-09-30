@@ -1,8 +1,10 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE:  The Green operator for strains, part 2: elementary properties
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
-In [[file:./green-operator-for-strains-part-1.org][part 1]] of this series, we have seen how the Green operator for strains ($\greeniv_0$) was defined as the operator providing the solution to the problem of elastic equilibrium of a /prestressed/ homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.@@html:<!-- more -->@@ We again consider the bounded domain $\domain\subset\reals^d$, occupied by a homogeneous, linearly elastic material with stiffness $\stiffness_0$. $\greeniv_0$ denotes the Green operator for strains for the material $\stiffness_0$, over the domain $\domain$. The first property is a direct consequence of the definition of $\greeniv_0$, given in [[file:./green-operator-for-strains-part-1.org][part 1]].
+In [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]] of this series, we have seen how the Green operator for strains ($\greeniv_0$) was defined as the operator providing the solution to the problem of elastic equilibrium of a /prestressed/ homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.@@html:<!-- more -->@@ We again consider the bounded domain $\domain\subset\reals^d$, occupied by a homogeneous, linearly elastic material with stiffness $\stiffness_0$. $\greeniv_0$ denotes the Green operator for strains for the material $\stiffness_0$, over the domain $\domain$. The first property is a direct consequence of the definition of $\greeniv_0$, given in [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]].
 
 * Application to self-equilibrated prestresses
 
@@ -32,7 +34,7 @@ For any self-equilibrated prestress $\prestress$
 
 * "Square" of the Green operator
 
-Application of the previous result leads to a useful property, which can be found in e.g. [[file:../../p/references.org::WILL2001][Willis (2001)]], where it is written somewhat abusively (but quite efficiently!) $\greeniv_0\stiffness_0\greeniv_0=\greeniv_0$.
+Application of the previous result leads to a useful property, which can be found in e.g. [[file:../p/references.org::WILL2001][Willis (2001)]], where it is written somewhat abusively (but quite efficiently!) $\greeniv_0\stiffness_0\greeniv_0=\greeniv_0$.
 
 Let $\strain=-\greeniv_0\circledast\prestress$, and $\stress=\stiffness_0:\strain+\prestress$. By definition of $\greeniv_0$, $\strain$ is geometrically compatible and $\stress$ is self-equilibrated: $\nabla\cdot\stress=\tensii 0$. From the previous property, we have $\greeniv_0\circledast\stress=\tensii0$. In other words
 \begin{equation*}
@@ -66,7 +68,3 @@ For any prestress $\prestress$,
     \volavg{\greeniv_0\circledast\prestress}=\tensii 0.
 \end{equation*}
 #+END_THEOREM
-
-* History
-  - <2011-09-18 Sun> Initial version.
-  - <2013-12-27 Fri> Major revision.

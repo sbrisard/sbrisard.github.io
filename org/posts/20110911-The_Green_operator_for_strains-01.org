@@ -1,6 +1,8 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE:  The Green operator for strains, part 1: definition
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 Micromechanics aims at computing the macroscopic properties of heterogeneous materials. In other words, we are looking for a /stress-strain/ relationship, and displacements are of but little use to us. We therefore tend to prefer Green operators for /strains/ to Green operators for /displacements/, which are commonly used in the mathematical theory of elasticity.  The Green operator for strain is the essential ingredient for my main research topic, namely polarization techniques. In the first instalment of this series, I'm going to define the Green operator for strains.@@html:<!-- more -->@@
 
@@ -75,10 +77,4 @@ Formula \eqref{eq:8} will be extensively used in subsequent posts, since it lead
 
 In this instalment, I considered the problem of elastic equilibrium of a homogeneous, prestressed material. The solution to this problem is cast in the form of the "convolution product" of the so-called Green operator for strains, and the imposed local prestress. In the next instalments of this series, I will discuss some properties of the thus-defined Green operator.
 
-Follow [[file:../../2011/09/green-operator-for-strains-part-2.org][this link]] to go to part 2 of this series.
-
-* History
-
-  - <2011-09-11 Sun> Initial version.
-  - <2013-12-11 Wed> Used MathJax's features for automatic numbering of equations.
-  - <2013-12-27 Fri> Major revision.
+Follow [[file:./20110911-The_Green_operator_for_strains-02.org][this link]] to go to part 2 of this series.
