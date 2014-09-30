@@ -1,3 +1,4 @@
+# -*- coding: utf-8; -*-
 #+TITLE: Some gruesome details
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
