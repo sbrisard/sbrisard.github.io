@@ -1,6 +1,9 @@
-#+TITLE: Towards polarization methods, part 1: the Lippmann--Schwinger equation 
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
+#+TITLE: Towards polarization methods, part 1: the Lippmann--Schwinger equation
+#+DATE: <2011-10-04 Tue>
 
 In this series, we will enter the heart of the matter. We will look at non-standard ways of numerically solving the local problem of micromechanics, introducing first the Lippmann--Schwinger equation (in this instalment), then the energy principle of Hashin and Shtrikman (in the next instalment).@@html:<!-- more -->@@
 
@@ -63,7 +66,7 @@ Determination of the polarization $\polarization$ requires the solution to Eqs. 
 \displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
 \end{align*}
 
-which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ linear elastic material $\stiffness_0$. From [[file:../09/green-operator-for-strains-part-1.org][this series]], the solution to the above problem is known (at least, formally)
+which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ linear elastic material $\stiffness_0$. From [[file:./20110911-The_Green_operator_for_strains-01.org][this series]], the solution to the above problem is known (at least, formally)
 
 \begin{equation}
 \label{eq:8}
@@ -77,7 +80,7 @@ where the Green operator for strains $\greeniv_0$ associated with $\stiffness_0$
 \strain(\vec x)+\left\{\greeniv_0\circledast\left[\left(\stiffness-\stiffness_0\right):\strain\right]\right\}(\vec x)=\Strain.
 \end{equation}
 
-This equation was first introduced by [[file:../../p/references.org::<<ZELL1973>>][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\polarization$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
+This equation was first introduced by [[file:..//p/references.org::<<ZELL1973>>][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\polarization$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
 
 \begin{equation}
 \label{eq:10}
@@ -86,10 +89,4 @@ This equation was first introduced by [[file:../../p/references.org::<<ZELL1973>
 
 To sum up, we started with the set of partial differential equations \eqref{eq:1} -- \eqref{eq:4}, and ended up with one /single/, /equivalent/, integral equation. Discretization of the Lippmann-Schwinger equation \eqref{eq:9} has already been considered in the past. This leads to some well-known numerical schemes (Moulinec & Suquet, [[file:../../p/references.org::<<MOUL1994>>][1994]], [[file:../../p/references.org::<<MOUL1998>>][1998]]).
 
-However, I do think it is not the best way to proceed. A much more fruitful approach is to consider the variational form of Eq. \eqref{eq:10}. This will be done in the [[file:towards-polarization-methods-part-2.org][next instalment]] of this series.
-
-* History
-
-  - <2011-10-04 Tue> Initial version.
-  - <2013-12-30 Mon> MathJax features are now used for automatic equations numbering.
-
+However, I do think it is not the best way to proceed. A much more fruitful approach is to consider the variational form of Eq. \eqref{eq:10}. This will be done in the [[file:./20111019-Towards_polarization_methods-02.org][next instalment]] of this series.
