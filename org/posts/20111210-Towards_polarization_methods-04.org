@@ -1,0 +1,82 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
+#+TITLE: Towards polarization methods, part 4: bounds on the macroscopic elastic properties
+#+DATE: <2011-12-10 Sat>
+
+Back from a long silent period... In [[file:./20111019-Towards_polarization_methods-02.org][part 2]] of this series, I introduced the /variational/ principle of [[file:..//p/references.org::#HASH1962][Hashin and Shtrikman (1962)]]. Then, in [[file:./20111031-Towards_polarization_methods-03.org][part 3]], I showed how further assumptions on the reference material led to the /energy/ principle of Hashin and Shtrikman. Both principles are great tools to derive numerical methods for the computation of strain/stress fields in highly heterogeneous materials (where other methods -- eg finite elements -- would have a hard time doing the same calculation). But the energy principle also allows the derivation of theoretical results, such as rigorous bounds on the macroscopic properties. Why this is so is the topic of today's instalment.@@html:<!-- more -->@@
+
+Let $\polarization$ be the solution of the Lippmann-Schwinger equation
+
+\begin{equation}
+\label{eq:1}
+\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\greeniv_0\circledast\polarization=\Strain,
+\end{equation}
+
+where $\Strain$ is the (imposed) macroscopic strain. We seek the value $\mathcal H(\polarization)$ of the functional of Hashin and Shtrikman $\mathcal H$ (defined in [[file:./20111019-Towards_polarization_methods-02.org][part 2]] of this series), at point $\polarization$
+
+\begin{equation}
+\label{eq:2}
+\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)}.
+\end{equation}
+
+Substituting Eq. \eqref{eq:1} in Eq. \eqref{eq:2}, we find
+
+\begin{equation}
+\label{eq:3}
+\mathcal H(\polarization)=\frac12\Strain:\volavg{\polarization}.
+\end{equation}
+
+Now is a good time to remember that the polarization $\polarization$ is related to the strain $\strain$ by the following equation
+
+\begin{equation}
+\label{eq:4}
+\polarization=\left(\stiffness-\stiffness_0\right):\strain,
+\end{equation}
+
+Combining Eqs. \eqref{eq:3} and \eqref{eq:4} then leads to
+
+\begin{equation}
+\label{eq:5}
+\mathcal H(\polarization)=\frac12\Strain:\volavg{\left(\stiffness-\stiffness_0\right):\strain}=\frac12\Strain:\volavg{\stiffness:\strain}-\frac12\Strain:\stiffness_0:\volavg{\strain},
+\end{equation}
+
+where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, $\volavg\strain=\Strain$ (this is the very definition of the macroscopic strain $\Strain$). Furthermore, $\volavg{\stiffness:\strain} = \volavg{\stress} = \Stress$, where $\Stress$ is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
+
+\begin{equation}
+\label{eq:6}
+\Stress=\stiffness^\eff:\Strain,
+\end{equation}
+
+where $\stiffness^\eff$ is the macroscopic (or effective, or homogenized) stiffness of the composite. Eq. \eqref{eq:5} finally reduces to
+
+\begin{equation}
+\label{eq:7}
+\mathcal H(\polarization)=\frac12\Strain:\stiffness^\eff:\Strain-\frac12\Strain:\stiffness_0:\Strain.
+\end{equation}
+
+In other words, the value of the functional of Hashin and Shtrikman at the solution of the Lippmann-Schwinger equation is the difference between the strain energy of the composite and the strain energy of the reference material.
+
+While the above result is fully general, we now assume that the reference material is /stiffer/ than the composite. In other words, $\stiffness(\vec x)\leq\stiffness_0$ at any point $\vec x\in\domain$. We then saw in [[file:./20111031-Towards_polarization_methods-03.org][part 3]] of this series that the following inequality holds for /any/ polarization field $\prestress$
+
+\begin{equation}
+\label{eq:8}
+\mathcal H(\polarization)\leq\mathcal H(\prestress).
+\end{equation}
+
+Inserting Eq. \eqref{eq:7} in Eq. \eqref{eq:8} leads for any polarization field $\prestress$ to the following bound on the macroscopic potential energy of the composite
+
+\begin{equation}
+\label{eq:9}
+\frac12\Strain:\stiffness^\eff:\Strain\leq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\prestress).
+\end{equation}
+
+Similarly, if the reference material is /softer/ than the composite, that is $\stiffness(\vec x)\geq\stiffness_0$ for any $\vec x\in\domain$, then Eq. \eqref{eq:9} should be replaced with
+
+\begin{equation}
+\label{eq:10}
+\frac12\Strain:\stiffness^\eff:\Strain\geq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\prestress).
+\end{equation}
+
+Eqs. \eqref{eq:9} and \eqref{eq:10} have deep (deep, deep) implications, which will be explored in the next instalment of this series.
