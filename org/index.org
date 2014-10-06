@@ -52,7 +52,7 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/09/watch-it-integer-division-in-python-3.org][Watch it! Integer division in Python 3]]
 
-[[file:2013/09/first-things-first-import-petsc4py.org][First things first: import =petsc4py= correctly]]
+[[file:./posts/20130904-First_things_first_import_petsc4py_correctly.org][First things first: import =petsc4py= correctly]]
 
 [[file:./posts/20130831-New_accepted_manuscript.org][New accepted manuscript]]
 
