@@ -66,7 +66,7 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:./posts/20111004-Towards_polarization_methods-01.org][Towards polarization methods, part 1: the Lippmann--Schwinger equation]]
 
-[[file:./posts/20110911-The_Green_operator_for_strains-02.org][The Green operator for strains, part 2: elementary properties]]
+[[file:./posts/20110918-The_Green_operator_for_strains-02.org][The Green operator for strains, part 2: elementary properties]]
 
 [[file:./posts/20110911-The_Green_operator_for_strains-01.org][The Green operator for strains, part 1: definition]]
 
