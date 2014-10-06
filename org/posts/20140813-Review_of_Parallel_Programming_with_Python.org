@@ -1,7 +1,9 @@
-#+TITLE: Review of "Parallel Programming with Python"
+# -*- coding: utf-8; -*-
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
 #+INCLUDE: "../navbar-1.org"
+#+TITLE: Review of "Parallel Programming with Python"
+#+DATE: <2014-08-13 Wed>
 
 I have again recently been offered by [[http://www.packtpub.com/][Packt Publishing]] to review one of their books, entitled [[http://goo.gl/oMUSLW][Parallel Programming with Python]] (by Jan Palach).@@html:<!-- more -->@@
 
