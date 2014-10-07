@@ -40,7 +40,7 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/10/scientific-computing-under-windows-7.org][Scientific computing under Windows 7, part 5: LAMMPS]]
 
-[[file:2013/09/scientific-computing-under-windows-7_29.org][Scientific computing under Windows 7, part 4: FFTW with support for MPI]]
+[[file:./posts/20130929-Scientific_computing_under_Windows_7-04.org][Scientific computing under Windows 7, part 4: FFTW with support for MPI]]
 
 [[file:./posts/20130927-Scientific_computing_under_Windows_7-03.org][Scientific computing under Windows 7, part 3: MPI]]
 

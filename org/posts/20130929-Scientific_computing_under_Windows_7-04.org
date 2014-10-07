@@ -1,6 +1,9 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: Scientific computing under Windows 7, part 4: FFTW with support for MPI
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2013-09-29 Sun>
 
 From the  [[http://www.fftw.org/][official website]]
 
@@ -75,7 +78,7 @@ mingw32-make: *** [all] Error 2
 This is probably due to the same problem that led the developers of FFTW to add the =--with-combine-threads=. From the [[http://www.fftw.org/install/windows.html][official website]]
 
 #+BEGIN_QUOTE
-=--enable-threads --with-combined-threads=: this will include multi-threading support. The second option puts the multi-threading functions into the main FFTW DLL rather than into a separate DLL (the default under Unix); *this is required because MinGW can't create DLLs that depend on one another*. 
+=--enable-threads --with-combined-threads=: this will include multi-threading support. The second option puts the multi-threading functions into the main FFTW DLL rather than into a separate DLL (the default under Unix); *this is required because MinGW can't create DLLs that depend on one another*.
 #+END_QUOTE
 
 So, what we are going to do is build our own /combined/ (single-threaded + multi-threaded + MPI) version of FFTW. We start from the static libraries, which we install in a local folder (e.g. =/C/src/fftw-3.3.3/build=)
@@ -92,26 +95,26 @@ please note that we record all operations in a log file, =make_fftw3_mpi_static.
   #include <math.h>
   #include <fftw3.h>
   #include <fftw3-mpi.h>
-  
+
   int main(int argc, char** argv) {
     const ptrdiff_t n0 = 1024;
     const ptrdiff_t n1 = 2048;
-    
+
     MPI_Init(&argc, &argv);
     fftw_mpi_init();
-    
+
     int rank;
     ptrdiff_t i, j, global_offset;
     ptrdiff_t local_n0, local_start, alloc_local, local_offset;
     double norm = 0., re, im;
-    
+
     fftw_complex *a, *expected, *actual;
     fftw_plan p;
-    
+
     a = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * n0 * n1);
     expected = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * n0 * n1);
     p = fftw_plan_dft_2d(n0, n1, a, expected, FFTW_FORWARD, FFTW_ESTIMATE);
-    
+
     for (i = 0; i < n0; i++) {
       for (j = 0; j < n1; j++) {
         global_offset = i * n1 + j;
@@ -120,16 +123,16 @@ please note that we record all operations in a log file, =make_fftw3_mpi_static.
         a[global_offset][1] = sin(arg);
       }
     }
-    
+
     fftw_execute(p);
     fftw_destroy_plan(p);
-    
+
     alloc_local = fftw_mpi_local_size_2d(n0, n1, MPI_COMM_WORLD,
                                          &local_n0, &local_start);
     actual = fftw_malloc(sizeof(fftw_complex) * alloc_local);
     p = fftw_mpi_plan_dft_2d(n0, n1, actual, actual, MPI_COMM_WORLD,
                              FFTW_FORWARD, FFTW_ESTIMATE);
-    
+
     for (i = 0; i < local_n0; ++i) {
       for (j = 0; j < n1; j++) {
         local_offset = i * n1 + j;
@@ -138,10 +141,10 @@ please note that we record all operations in a log file, =make_fftw3_mpi_static.
         actual[local_offset][1] = a[global_offset][1];
       }
     }
-    
+
     fftw_execute(p);
     fftw_destroy_plan(p);
-    
+
     for (i = 0; i < local_n0; i++) {
       for (j = 0; j < n1; j++) {
         local_offset = i * n1 + j;
@@ -151,16 +154,16 @@ please note that we record all operations in a log file, =make_fftw3_mpi_static.
         norm += re * re + im * im;
       }
     }
-    
+
     norm = sqrt(norm);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     printf("I'm process %d, local size is %d x %d, norm = %g\n",
            rank, local_n0, n1, norm);
-    
+
     fftw_free(a);
     fftw_free(expected);
     fftw_free(actual);
-    
+
     MPI_Finalize();
   }
 #+END_SRC
