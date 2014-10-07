@@ -44,7 +44,7 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/09/scientific-computing-under-windows-7_27.org][Scientific computing under Windows 7, part 3: MPI]]
 
-[[file:2013/09/scientific-computing-under-windows-7_18.org][Scientific computing under Windows 7, part 2: OpenMP]]
+[[file:./posts/20130918-Scientific_computing_under_Windows_7-02.org][Scientific computing under Windows 7, part 2: OpenMP]]
 
 [[file:./posts/20130918-Scientific_computing_under_Windows_7-01.org][Scientific computing under Windows 7, part 1: MinGW]]
 
