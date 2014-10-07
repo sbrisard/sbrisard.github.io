@@ -1,8 +1,11 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: Elastic constants of an isotropic material, part 2: plane strain elasticity
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2013-12-29 Sun>
 
-In the [[file:./elastic-constants-of-isotropic-material.org][previous instalment]] of this series, I introduced the constitutive law of an isotropically elastic material, and the related material constants, within the framework of 3D elasticity. I will now address the case of plane strain elasticity.@@html:<!-- more -->@@
+In the [[file:./20131205-Elastic_constants_of_an_isotropic_material-01.org][previous instalment]] of this series, I introduced the constitutive law of an isotropically elastic material, and the related material constants, within the framework of 3D elasticity. I will now address the case of plane strain elasticity.@@html:<!-- more -->@@
 
 Problems of plane strain elasticity are defined as problems where the following components of the strain tensor are null
 \begin{equation}
@@ -48,7 +51,7 @@ which is the plane strain constitutive low we were looking for.
 
 * Shear modulus and Poisson ratio
 
-Recalling (see [[file:./elastic-constants-of-isotropic-material.org][previous instalment]]) that $E=2\shearmod\left(1+\nu\right)$, Eq. \eqref{eq:2} can also be cast as follows
+Recalling (see [[file:./20131205-Elastic_constants_of_an_isotropic_material-01.org][previous instalment]]) that $E=2\shearmod\left(1+\nu\right)$, Eq. \eqref{eq:2} can also be cast as follows
 \begin{equation}
     \label{eq:4}
     \straincomp_{\alpha\beta}=\frac1{2\shearmod}\left(\stresscomp_{\alpha\beta}-\nu\stresscomp_{\gamma\gamma}\delta_{\alpha\beta}\right).
@@ -87,9 +90,4 @@ and the stress-strain relationship finally reads
 
 * Conclusion
 
-In this instalment, we have seen how the plane strain asumption affects the constitutive law of isotropic, linear and elastic materials. In particular, the bulk modulus which is the ratio of the average stress to the relative surface change appears to be dimension dependent. In the [[file:../../2014/01/elastic-constants-of-isotropic-material.org][next instalment]], we will reconcile the 3D and 2D points of view.
-
-* History
-
-  - <2013-12-29 Sun> Initial version.
-  - <2014-01-12 Sun> Added link to Part 3.
+In this instalment, we have seen how the plane strain asumption affects the constitutive law of isotropic, linear and elastic materials. In particular, the bulk modulus which is the ratio of the average stress to the relative surface change appears to be dimension dependent. In the [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][next instalment]], we will reconcile the 3D and 2D points of view.

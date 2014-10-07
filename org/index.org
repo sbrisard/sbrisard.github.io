@@ -22,11 +22,11 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2014/01/review-of-learning-cython-programming.org][Review of /Learning Cython Programming/]]
 
-[[file:2014/01/elastic-constants-of-isotropic-material.org][Elastic constants of an isotropic material, part 3: putting it all together]]
+[[file:./posts/20140112-Elastic_constants_of_an_isotropic_material-03.org][Elastic constants of an isotropic material, part 3: putting it all together]]
 
 [[file:2014/01/extract-images-from-pdf-files.org][Extract images from PDF files]]
 
-[[file:./2013/12/elastic-constants-of-isotropic-material_29.org][Elastic constants of an isotropic material, part 2: plane strain elasticity]]
+[[file:./posts/20131229-Elastic_constants_of_an_isotropic_material-02.org][Elastic constants of an isotropic material, part 2: plane strain elasticity]]
 
 [[file:2013/12/scientific-computing-under-windows-7_19.org][Scientific computing under Windows 7, part 7: ITK (proper)]]
 
@@ -34,7 +34,7 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/12/mathjax-now-accepts-equation-numbers.org][MathJax now accepts equation numbers]]
 
-[[file:./2013/12/elastic-constants-of-isotropic-material.org][Elastic constants of an isotropic material, part 1: 3D elasticity]]
+[[file:./posts/20131205-Elastic_constants_of_an_isotropic_material-01.org][Elastic constants of an isotropic material, part 1: 3D elasticity]]
 
 [[file:posts/20131105-New_accepted_manuscript.org][New accepted manuscript]]
 

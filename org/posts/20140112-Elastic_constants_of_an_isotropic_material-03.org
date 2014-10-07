@@ -1,8 +1,11 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: Elastic constants of an isotropic material, part 3: putting it all together
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2014-01-12 Sun>
 
-In the previous instalments of this series (see [[file:../..//2013/12/elastic-constants-of-isotropic-material.org][Part 1]] and [[file:../../2013/12/elastic-constants-of-isotropic-material_29.org][Part 2]]), I have shown that regardless of the dimensionality (3D or plane strain elasticity), the constitutive law of an isotropically elastic material reads
+In the previous instalments of this series (see [[file:./20131205-Elastic_constants_of_an_isotropic_material-01.org][Part 1]] and [[file:./20131229-Elastic_constants_of_an_isotropic_material-02.org][Part 2]], I have shown that regardless of the dimensionality (3D or plane strain elasticity), the constitutive law of an isotropically elastic material reads
 
 \begin{equation}
 \label{eq:1}
@@ -120,7 +123,3 @@ All these expressions will prove extremely useful in due time.
 This is the end of this series on the elastic constants of isotropic materials. I have shown that (regardless of the dimension $d$ of the physical space), such materials are characterized by two constants. The shear modulus $\shearmod$, the Poisson ratio $\nu$ and Young's modulus $E$ do not depend on $d$, while the plane strains expression of the bulk modulus $\bulkmod$ differs from its 3D expression (see Eqs. \eqref{eq:2} and \eqref{eq:3}).
 
 This series was also a good opportunity to introduce the tensors $\sphprojiv$ and $\devprojiv$, which form a basis for the isotropic, fourth-rank tensors. Using this basis is very convenient, as algebra within this basis is extremely simple.
-
-* History
-
-  - <2014-01-12 Sun> Initial version.

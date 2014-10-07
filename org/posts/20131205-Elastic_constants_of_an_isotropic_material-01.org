@@ -1,6 +1,8 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: Elastic constants of an isotropic material, part 1: 3D elasticity
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
 
 Among all classes of materials, the class of linearly elastic and isotropic materials is probably the simplest. Such materials are defined by two elastic constants: for example, Young's modulus $E$ and Poisson's ratio $\nu$. However, depending on the situation, this pair of constants might not be the most appropriate@@html:<!-- more -->@@ (meaning that they may not lead to the most compact expressions). Alternative sets of elastic constants are
 
@@ -83,7 +85,7 @@ where $\bulkmod_\text{3D}$ denotes the bulk modulus, defined as follows
     \bulkmod_\text{3D} = \lambda + \frac 23\shearmod.
 \end{equation}
 
-As we shall see in the [[file:./elastic-constants-of-isotropic-material_29.org][next instalment]] of this series, the definition of the bulk modulus /depends on the dimension of the physical space/, hence the '3D' subscript. Using $\bulkmod$ and $\shearmod$ as elastic constants, Eq. \eqref{eq:1} reads
+As we shall see in the [[file:./20131229-Elastic_constants_of_an_isotropic_material-02.org][next instalment]] of this series, the definition of the bulk modulus /depends on the dimension of the physical space/, hence the '3D' subscript. Using $\bulkmod$ and $\shearmod$ as elastic constants, Eq. \eqref{eq:1} reads
 \begin{equation}
     \label{eq:8}
     \stresscomp_{ij} = \bulkmod_\text{3D}\straincomp_{kk}\delta_{ij}+2\shearmod\left(\straincomp_{ij}-\frac{\straincomp_{kk}}3\delta_{ij}\right)
@@ -111,9 +113,4 @@ Finally, from Eqs. \eqref{eq:7} and \eqref{eq:9}
 
 * Conclusion
 
-In this instalment, we have defined Lamé's first and second constants, Young's modulus, Poisson's ratio, as well as the (3D) bulk modulus. Expressions relating these various constants have also been derived. In the [[file:./elastic-constants-of-isotropic-material_29.org][next instalment]] of this series, we will discuss the case of 2D (plane strain elasticity).
-
-* History
-
-  - <2013-12-05 Thu> Initial version.
-  - <2013-12-29 Sun> Major revision.
+In this instalment, we have defined Lamé's first and second constants, Young's modulus, Poisson's ratio, as well as the (3D) bulk modulus. Expressions relating these various constants have also been derived. In the [[file:./20131229-Elastic_constants_of_an_isotropic_material-02.org][next instalment]] of this series, we will discuss the case of 2D (plane strain elasticity).
