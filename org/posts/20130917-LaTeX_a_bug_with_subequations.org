@@ -1,25 +1,28 @@
-#+TITLE: LaTeX: a bug with =subequations=
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
+#+TITLE: LaTeX: a bug with subequations
+#+DATE: <2013-09-17 Tue>
 
 While working on my latest paper, I've come accross what looks like a bug with the =subequations= environment from the [[http://www.ams.org/publications/authors/tex/amslatex][amsmath]] package. Here is a simple code snippet that demonstrates this bug
 
 #+BEGIN_SRC latex
   \documentclass{article}
   \usepackage{amsmath}
-  
+
   \begin{document}
   \begin{equation}
     a^2-b^2 = (a-b)(a+b)
   \end{equation}
-  
+
   \begin{subequations}
     \begin{align}
       (a + b)^2 &= a^2 + 2ab + b^2\\
       (a - b)^2 &= a^2 - 2ab + b^2
     \end{align}
   \end{subequations}
-  
+
   \begin{equation}
     a^3 - b^3 = (a - b)(a^2 + ab + b^2)
   \end{equation}
@@ -29,26 +32,26 @@ While working on my latest paper, I've come accross what looks like a bug with t
 As it should, the code above results in the following document
 
 #+ATTR_HTML: :width 400px :height 170px
-[[file:./latex-bug-with-subequations-files/subequations_ok.png]]
+[[file:./20130917-LaTeX_a_bug_with_subequations/subequations_ok.png]]
 
 Now, assume that Eqs. (2a) and (2b) are never referred to; then the equation numbers might be removed. A natural way to do so would be starring the =align= environment
 
 #+BEGIN_SRC latex
   \documentclass{article}
   \usepackage{amsmath}
-  
+
   \begin{document}
   \begin{equation}
     a^2-b^2 = (a-b)(a+b)
   \end{equation}
-  
+
   \begin{subequations}
     \begin{align*}
       (a + b)^2 &= a^2 + 2ab + b^2\\
       (a - b)^2 &= a^2 - 2ab + b^2
     \end{align*}
   \end{subequations}
-  
+
   \begin{equation}
     a^3 - b^3 = (a - b)(a^2 + ab + b^2)
   \end{equation}
@@ -58,11 +61,6 @@ Now, assume that Eqs. (2a) and (2b) are never referred to; then the equation num
 Here is the result
 
 #+ATTR_HTML: :width 400px :height 170px
-[[file:./latex-bug-with-subequations-files/subequations_bug.png]]
+[[file:./20130917-LaTeX_a_bug_with_subequations/subequations_bug.png]]
 
 The two equations in the =subequations= environment are no longer numbered. However, the equation number is wrongly incremented! Therefore, not only should the =align= environment be starred, but the =subequations= should also be commented out.
-
-* History
-
-  - <2013-09-17 Tue> Initial version.
-  - <2013-12-21 Sat> Syntax highlighting through CSS.
