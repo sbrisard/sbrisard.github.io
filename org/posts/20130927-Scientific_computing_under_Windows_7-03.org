@@ -1,6 +1,9 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: Scientific computing under Windows 7, part 3: MPI
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2013-09-27 Fri>
 
 From the [[http://www.mpich.org/][official website]]
 
@@ -15,10 +18,10 @@ I didn't manage to compile MPICH with MinGW and had to resort to precompiled bin
 #+BEGIN_SRC c
   #include <stdio.h>
   #include <mpi.h>
-  
+
   int main(int argc, char **argv) {
     int rank, size;
-  
+
     MPI_Init (&argc, &argv);
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
