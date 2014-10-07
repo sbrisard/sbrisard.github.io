@@ -1,6 +1,9 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: Scientific computing under Windows 7, part 5: LAMMPS
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2013-10-06 Sun>
 
 From the [[http://lammps.sandia.gov/index.html][official website]]
 
@@ -68,4 +71,3 @@ and run one of the applications, for example::
   $ cd micelle
   $ ../../src/lmp_mingw32.exe < in.micelle
 #+END_EXAMPLE
-

@@ -36,9 +36,9 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:./2013/12/elastic-constants-of-isotropic-material.org][Elastic constants of an isotropic material, part 1: 3D elasticity]]
 
-[[file:2013/11/new-accepted-manuscript.org][New accepted manuscript!]]
+[[file:posts/20131105-New_accepted_manuscript.org][New accepted manuscript]]
 
-[[file:2013/10/scientific-computing-under-windows-7.org][Scientific computing under Windows 7, part 5: LAMMPS]]
+[[file:./posts/20131006-Scientific_computing_under_Windows_7-05.org][Scientific computing under Windows 7, part 5: LAMMPS]]
 
 [[file:./posts/20130929-Scientific_computing_under_Windows_7-04.org][Scientific computing under Windows 7, part 4: FFTW with support for MPI]]
 

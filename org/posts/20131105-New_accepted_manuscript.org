@@ -1,6 +1,9 @@
-#+TITLE: New accepted manuscript!
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
+#+TITLE: New accepted manuscript
+#+DATE: <2013-11-05 Tue>
 
 One of my manuscripts has just been accepted for publication in the International Journal of Solids and Structures. It is called /A variational form of the equivalent inclusion method for numerical homogenization/. The abstract is reproduced below
 
@@ -9,8 +12,3 @@ Due to its relatively low computational cost, the equivalent inclusion method is
 #+END_QUOTE
 
 The exact references to this paper can be found in my [[file:~/Documents/blog/org/p/home.org::BRIS2014][list of publications]]. The postprint is available on [[http://hal-enpc.archives-ouvertes.fr/hal-00922779][HAL ENPC]], and the published version is available [[http://dx.doi.org/10.1016/j.ijsolstr.2013.10.037][here]].
-
-* History
-
-  - <2013-11-05 Tue> Initial version.
-  - <2014-01-03 Fri> Update, including references and link to postprint and published version.
