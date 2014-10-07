@@ -32,7 +32,7 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2013/12/scientific-computing-under-windows-7.org][Scientific computing under Windows 7, part 6: ITK (prerequisites)]]
 
-[[file:2013/12/mathjax-now-accepts-equation-numbers.org][MathJax now accepts equation numbers]]
+[[file:./posts/20131210-Mathjax_now_accepts_equation_numbers.org][MathJax now accepts equation numbers]]
 
 [[file:./posts/20131205-Elastic_constants_of_an_isotropic_material-01.org][Elastic constants of an isotropic material, part 1: 3D elasticity]]
 
