@@ -20,11 +20,11 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:./2014/01/the-elastic-acoustic-tensor-and-its.org][The elastic acoustic tensor and its inverse]]
 
-[[file:2014/01/review-of-learning-cython-programming.org][Review of /Learning Cython Programming/]]
+[[file:./posts/20140126-Review_of_Learning_Cython_Programming.org][Review of "Learning Cython Programming"]]
 
 [[file:./posts/20140112-Elastic_constants_of_an_isotropic_material-03.org][Elastic constants of an isotropic material, part 3: putting it all together]]
 
-[[file:2014/01/extract-images-from-pdf-files.org][Extract images from PDF files]]
+[[file:./posts/20140102-Extract_images_from_PDF_files.org][Extract images from PDF files]]
 
 [[file:./posts/20131229-Elastic_constants_of_an_isotropic_material-02.org][Elastic constants of an isotropic material, part 2: plane strain elasticity]]
 

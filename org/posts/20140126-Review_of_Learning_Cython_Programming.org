@@ -1,7 +1,9 @@
-#+TITLE: Review of /Learning Cython Programming/
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
-#+STARTUP: fninline
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
+#+TITLE: Review of "Learning Cython Programming"
+#+DATE: <2014-01-26 Sun>
 
 I have recently been offered by [[http://www.packtpub.com/][Packt Publishing]] a free electronic copy of the book /[[http://www.packtpub.com/learning-cython-programming/book][Learning Cython Programming]]/ (by Philip Herron) for me to review. This offer arrived just in time for me, as I had just heard of it and decided to give it a go. The situation is a bit awckward, though, as I have to admit I was a bit disappointed by the book.@@html:<!-- more -->@@
 
