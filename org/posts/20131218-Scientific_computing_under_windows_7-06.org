@@ -1,6 +1,9 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: Scientific computing under Windows 7, part 6: ITK (prerequisites)
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2013-12-18 Wed>
 
 From the [[http://www.itk.org][official website]]
 
@@ -15,7 +18,7 @@ Building ITK under Windows 7 is quite a trip, and will actually require several 
 From the [[http://www.ijg.org/][official website]]
 
 #+BEGIN_QUOTE
- IJG is an informal group that writes and distributes a widely used free library for JPEG image compression. The first version was released on 7-Oct-1991. 
+ IJG is an informal group that writes and distributes a widely used free library for JPEG image compression. The first version was released on 7-Oct-1991.
 #+END_QUOTE
 
 Download and unarchive the source code. Then, from the MSYS console
@@ -31,7 +34,7 @@ $ make install
 From the [[http://www.libpng.org/pub/png/libpng.html][official website]]
 
 #+BEGIN_QUOTE
-libpng is the official PNG reference library. It supports almost all PNG features, is extensible, and has been extensively tested for over 18 years. 
+libpng is the official PNG reference library. It supports almost all PNG features, is extensible, and has been extensively tested for over 18 years.
 #+END_QUOTE
 
 Make sure you have installed the =mingw32-libz= (=dev= /and/ =dll=). Download and unarchive the source code. Then, from the MSYS console
@@ -47,7 +50,7 @@ $ make install
 From the [[http://www.libtiff.org/][official website]]
 
 #+BEGIN_QUOTE
- This software provides support for the Tag Image File Format (TIFF), a widely used format for storing image data. The latest version of the TIFF specification is available on-line in several different formats, as are a number of Technical Notes (TTN's). 
+ This software provides support for the Tag Image File Format (TIFF), a widely used format for storing image data. The latest version of the TIFF specification is available on-line in several different formats, as are a number of Technical Notes (TTN's).
 #+END_QUOTE
 
 Make sure you have installed the =mingw32-libzma= (=dev= /and/ =dll=). Download and unarchive the source code. Then, from the MSYS console.
@@ -101,16 +104,16 @@ Makefile:135: recipe for target 'all' failed
 mingw32-make: *** [all] Error 2
 #+END_EXAMPLE
 
-This seems to be caused by =H5_HAVE_WIN32_API= not being defined. From this [[http://lists.hdfgroup.org/pipermail/hdf-forum_lists.hdfgroup.org/2012-April/005692.html][mailing list]], 
+This seems to be caused by =H5_HAVE_WIN32_API= not being defined. From this [[http://lists.hdfgroup.org/pipermail/hdf-forum_lists.hdfgroup.org/2012-April/005692.html][mailing list]],
 
 #+BEGIN_QUOTE
 Rob,
 
-   The defines should be in the generated H5pubconf.h file. However, because I 
-could only successfully test CMake on MinGW, I did not want to insert MinGW 
-checks into configure and not be able to verify them. End result is that those 
-defines must be added to your H5pubconf.h.  Also those defines are needed by 
-src/H5win32defs.h so that all the proper defines are set before the defines in  
+   The defines should be in the generated H5pubconf.h file. However, because I
+could only successfully test CMake on MinGW, I did not want to insert MinGW
+checks into configure and not be able to verify them. End result is that those
+defines must be added to your H5pubconf.h.  Also those defines are needed by
+src/H5win32defs.h so that all the proper defines are set before the defines in
 H5private.h/H5public.h.
 
 Allen
@@ -123,7 +126,7 @@ Unfortunately, the fix proposed in the above mailing list does /not/ solve the p
 From the [[http://www.swig.org/][official website]]
 
 #+BEGIN_QUOTE
-SWIG is a software development tool that connects programs written in C and C++ with a variety of high-level programming languages. SWIG is used with different types of target languages including common scripting languages such as Perl, PHP, Python, Tcl and Ruby. 
+SWIG is a software development tool that connects programs written in C and C++ with a variety of high-level programming languages. SWIG is used with different types of target languages including common scripting languages such as Perl, PHP, Python, Tcl and Ruby.
 #+END_QUOTE
 
 As I would like to use ITK with Python, I need to build the Python bindings, which requires SWIG. Under Windows, the recommended procedure is to install the pre-built binaries (swigwin). Download the archive, and unzip it to the place of your choice (for example, =C:\opt\=). The executable program =swig.exe= should be available.
@@ -174,4 +177,4 @@ Unfortunately, the =Makefile= does not provide an =uninstall= target. For the re
 
 * Conclusion
 
-We are now ready to compile ITK itself... to be continued in the [[file:./scientific-computing-under-windows-7_19.org][next installment]] of this series.
+We are now ready to compile ITK itself... to be continued in the [[file:./20131219-Scientific_computing_under_windows_7-07.org][next installment]] of this series.

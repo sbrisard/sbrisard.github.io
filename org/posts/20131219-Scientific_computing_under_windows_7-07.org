@@ -1,8 +1,11 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: Scientific computing under Windows 7, part 7: ITK (proper)
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2013-12-19 Thu>
 
-In the [[file:./scientific-computing-under-windows-7.org][previous installment]] of this series, we installed all prerequisites for the ITK library. We are now ready to install the library itself, using CMake.@@html:<!-- more -->@@
+In the [[file:./20131218-Scientific_computing_under_windows_7-06.org][previous installment]] of this series, we installed all prerequisites for the ITK library. We are now ready to install the library itself, using CMake.@@html:<!-- more -->@@
 
 * Retrieving the sources
 Download the latest development version of ITK
@@ -19,7 +22,7 @@ You now have two different directories
   - =/C/src/ITK/src= contains the sources
   - =/C/src/ITK/build= is the place where the binaries are to be built.
 
-Creating two separate directories was necessary, since from the [[http://www.itk.org/Wiki/ITK/Configuring_and_Building/MinGW][Wiki]] 
+Creating two separate directories was necessary, since from the [[http://www.itk.org/Wiki/ITK/Configuring_and_Building/MinGW][Wiki]]
 #+BEGIN_QUOTE
 This directory MUST NOT be inside the directory where you cloned the repository.
 #+END_QUOTE
@@ -225,7 +228,3 @@ with
 #+END_SRC
 
 Now, =make= and =make install= should work like a charm!
-
-* History
-  - <2013-12-19 Thu> Initial version.
-  - <2013-12-26 Thu> Syntax highlighting.
