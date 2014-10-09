@@ -1,7 +1,9 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: The periodic Green operator for strains
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2014-03-06 Thu>
 
 # Equation numbers
 # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -67,7 +69,7 @@ The equilibrium equation \eqref{eq:1} finally gives
 \vec 0&=\vec k_b\cdot\hat\stress_b=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\vec k_b\cdot\hat\prestress_b&(b\in\integers^d).
 \end{align*}
 
-The term in brackets $\vec k\cdot\stiffness\cdot\vec k$ is the [[file:../01/the-elastic-acoustic-tensor-and-its.org][acoustic tensor]] associated with the elastic material $\stiffness$, and the above equation is readily solved for the Fourier modes of the displacement
+The term in brackets $\vec k\cdot\stiffness\cdot\vec k$ is the [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][acoustic tensor]] associated with the elastic material $\stiffness$, and the above equation is readily solved for the Fourier modes of the displacement
 
 \begin{align*}
 \hat\displ_b&=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)&(b\in\integers^d).
@@ -96,7 +98,7 @@ and
 &-\frac12\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k_b\otimes\vec k_b\right)&(b\in\integers^d).
 \end{align*}
 
-Introducing the [[file:../02/decomposition-of-transverse-isotropic.org][tensor product of linear transformations]] $\boxtimes$, and recalling that the prestress $\prestress$ is symmetric, the following compact expression can be found
+Introducing the [[file:./20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][tensor product of linear transformations]] $\boxtimes$, and recalling that the prestress $\prestress$ is symmetric, the following compact expression can be found
 
 \begin{align*}
 \hat\strain_b={}&-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\right):\hat\prestress_b\\
@@ -120,7 +122,7 @@ where $\vec n$ is the direction of the wave-vector $\vec k$, $\vec n=\vec k/\lVe
 
 * The case of isotropic materials
 
-I have shown in a the [[file:../01/the-elastic-acoustic-tensor-and-its.org][previous post]] that in this case, the inverse of the acoustic tensor reads
+I have shown in a [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][previous post]] that in this case, the inverse of the acoustic tensor reads
 
 \begin{equation*}
 \left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}=\frac1\shearmod\left(\frac{1-2\nu}{2\left(1-\nu\right)}\left(\vec n\otimes\vec n\right)+\identii-\left(\vec n\otimes\vec n\right)\right)=\frac1\shearmod\identii-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n,
@@ -162,11 +164,6 @@ In a homogeneous, linearly elastic material with stiffness $\stiffness$, the $(L
 \strain(\vec x)=-\sum_{b\in\integers^d}\hat\greeniv(\vec k_b):\hat\prestress_b\exp(i\vec k_b\cdot\vec x),
 \end{equation}
 
-where $\hat\greeniv$ is the periodic Green operator for strains, defined in Fourier space by Eq. \eqref{eq:6}. It should be noted that this expression is valid regardless of the dimension of the physical space, and the material symmetries. If the material is isotropic, the Fourier modes of the Green operator for strains are given by Eqs. \eqref{eq:7} and \eqref{eq:8}, which are valid in both plane strain and 3D elasticity (since the expression of the inverse of the [[file:../01/the-elastic-acoustic-tensor-and-its.org][acoustic tensor]] is).
+where $\hat\greeniv$ is the periodic Green operator for strains, defined in Fourier space by Eq. \eqref{eq:6}. It should be noted that this expression is valid regardless of the dimension of the physical space, and the material symmetries. If the material is isotropic, the Fourier modes of the Green operator for strains are given by Eqs. \eqref{eq:7} and \eqref{eq:8}, which are valid in both plane strain and 3D elasticity (since the expression of the inverse of the [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][acoustic tensor]] is).
 
 Finally, it is worth noting that Eq. \eqref{eq:9} is a direct product in Fourier space. Therefore, it is a /convolution product/ in the real space, and we shall write $\strain=-\greeniv\ast\prestress$. To the best of my knowledge, though, there is no closed-form expression of $\greeniv$ in the real space, and this convenient notation is purely formal.
-
-* History
-
-  - <2014-03-06 Thu> Initial version.
-  - <2014-04-08 Tue> Corrected Eq. (8) thanks to Vinh.

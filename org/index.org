@@ -12,7 +12,7 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:./posts/20140813-Review_of_Parallel_Programming_with_Python.org][Review of "Parallel Programming with Python"]]
 
-[[file:2014/03/the-periodic-green-operator-for-strains.org][The periodic Green operator for strains]]
+[[file:./posts/20140306-The_periodic_Green_operator_for_strains.org][The periodic Green operator for strains]]
 
 [[file:./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][Decomposition of transverse isotropic, fourth-rank tensors]]
 
