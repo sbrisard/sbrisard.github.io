@@ -14,9 +14,9 @@ You've reached the personal homepage of Sébastien Brisard. Please follow the li
 
 [[file:2014/03/the-periodic-green-operator-for-strains.org][The periodic Green operator for strains]]
 
-[[file:./2014/02/decomposition-of-transverse-isotropic.org][Decomposition of transverse isotropic, fourth-rank tensors]]
+[[file:./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][Decomposition of transverse isotropic, fourth-rank tensors]]
 
-[[file:2014/02/on-double-dot-product.org][On the double dot product]]
+[[file:./posts/20140219-On_the_double_dot_product.org][On the double dot product]]
 
 [[file:./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse.org][The elastic acoustic tensor and its inverse]]
 

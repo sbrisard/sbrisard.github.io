@@ -1,9 +1,11 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: Decomposition of transverse isotropic, fourth-rank tensors
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2014-02-26 Wed>
 
-In [[file:../01/elastic-constants-of-isotropic-material.org][a previous post]], I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown (Walpole, [[file:../../p/references.org::#WALP1984][1984]]) that the space of three-dimensional, /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole ([[file:../../p/references.org::#WALP1984][1984]]).@@html:<!-- more -->@@$\newcommand{\kronecker}{\circledast}$
+In [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][a previous post]], I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown (Walpole, [[file:../p/references.org::#WALP1984][1984]]) that the space of three-dimensional, /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole ([[file:../p/references.org::#WALP1984][1986]]).@@html:<!-- more -->@@$\newcommand{\kronecker}{\circledast}$
 
 * Two second-rank projection tensors
 
@@ -25,9 +27,9 @@ $\p$ is the projector onto the direction of anisotropy $\vec n$, while $\q$ is t
 
 * Tensor product of linear transformations
 
-It will be convenient to introduce a new, Kronecker-like product of two second-rank tensors, which Del Piero ([[file:../../p/references.org::#PIER1979][1979]]) named /tensor product of linear transformations/, and which will be denoted $\boxtimes{}$.
+It will be convenient to introduce a new, Kronecker-like product of two second-rank tensors, which Del Piero ([[file:../p/references.org::#PIER1979][1979]]) named /tensor product of linear transformations/, and which will be denoted $\boxtimes{}$.
 
-As a preliminary note, it should be observed that any fourth-rank tensor $\tensiv A$ can be viewed as a endomorphism over the space of second-rank tensors, since $\tensii x\mapsto\tensiv A:\tensii x$ is a linear mapping (the convention adopted in this blog for the double dot product has been specified in a [[file:./on-double-dot-product.org][previous post]]). Therefore, the fourth-rank tensor $\tensii a\boxtimes\tensii b$ ($\tensii a, \tensii b$: second-rank tensors) can be defined by how it operates on second-rank tensors $\tensii x$
+As a preliminary note, it should be observed that any fourth-rank tensor $\tensiv A$ can be viewed as a endomorphism over the space of second-rank tensors, since $\tensii x\mapsto\tensiv A:\tensii x$ is a linear mapping (the convention adopted in this blog for the double dot product has been specified in a [[file:./20140219-On_the_double_dot_product.org][previous post]]). Therefore, the fourth-rank tensor $\tensii a\boxtimes\tensii b$ ($\tensii a, \tensii b$: second-rank tensors) can be defined by how it operates on second-rank tensors $\tensii x$
 
 \begin{equation}
 \label{eq:2}
@@ -61,7 +63,6 @@ Indeed, let $\tensii x$ be a second-rank tensor. Then, from Eq. \eqref{eq:2}
 &=\left(\tensii a\cdot\tensii c\right)\cdot\tensii x\cdot\left(\transp{\tensii d}\cdot\transp{\tensii b}\right)=\left(\tensii a\cdot\tensii c\right)\cdot\tensii x\cdot\transp{\left(\tensii b\cdot\tensii d\right)}\\
 &=\left(\left(\tensii a\cdot\tensii c\right)\boxtimes\left(\tensii b\cdot\tensii d\right)\right):\tensii x.
 \end{align*}
-
 
 Eq. \eqref{eq:3} shows that even if $\tensii a$ and $\tensii b$ are symmetric, the tensor product $\tensii a\boxtimes\tensii b$ does not necessarily have the minor symmetries. It will therefore be convenient to define $\tensii a\boxtimessym\tensii b$, as the tensor $\tensii a\boxtimes\tensii b$, /symmetrized with respect to the last two indices/
 
@@ -112,7 +113,7 @@ To conclude, it is observed that the fourth-rank tensor $\identiv=\identii\boxti
 
 * Walpole's basis for transverse isotropic tensors
 
-Walpole ([[file:../../p/references.org::#WALP1984][1984]]) shows that any transverse isotropic tensor is a linear combination of the six fourth-rank tensors $\tensiv E_1,\tensiv E_2,\tensiv E_3,\tensiv E_4,\tensiv F,\tensiv G$ defined as follows
+Walpole ([[file:../p/references.org::#WALP1984][1984]]) shows that any transverse isotropic tensor is a linear combination of the six fourth-rank tensors $\tensiv E_1,\tensiv E_2,\tensiv E_3,\tensiv E_4,\tensiv F,\tensiv G$ defined as follows
 
 \begin{gather*}
 \tensiv E_1=\p\otimes\p,\quad\tensiv E_2=\frac12\q\otimes\q,\quad\tensiv E_3=\frac1{\sqrt2}\p\otimes\q,\quad\tensiv E_4=\frac1{\sqrt2}\q\otimes\p\\
@@ -139,7 +140,7 @@ Multiplication (in the sense of the double product) of these tensors is fairly e
 
 * A convenient representation of transverse isotropic, fourth-rank tensors
 
-Walpole ([[file:../../p/references.org::#WALP1984][1984]]) proposes a convenient representation of any transverse isotropic tensor $\tensiv T$, as the triplet $(A, f, g)$ where $A$ is a 2 × 2 matrix and $f$ and $g$ are two scalars. This representation should be understood as
+Walpole ([[file:../p/references.org::#WALP1984][1984]]) proposes a convenient representation of any transverse isotropic tensor $\tensiv T$, as the triplet $(A, f, g)$ where $A$ is a 2 × 2 matrix and $f$ and $g$ are two scalars. This representation should be understood as
 
 \begin{equation*}
 \tensiv T=a_{11}\tensiv E_1+a_{22}\tensiv E_2+a_{12}\tensiv E_3+a_{21}\tensiv E_4+f\tensiv F+g\tensiv G,
@@ -165,7 +166,7 @@ Transposition is also straightforward
 
 * Decomposition of fourth-rank, isotropic tensors in Walpole's basis
 
-The isotropic tensors $\identiv$, $\sphprojiv$ and $\devprojiv$ introduced [[file:../01/elastic-constants-of-isotropic-material.org][previously]] can be considered as transverse isotropic tensors. As such, they can be decomposed in Walpole's basis. First, the identity tensor $\identiv$ decomposes as follows
+The isotropic tensors $\identiv$, $\sphprojiv$ and $\devprojiv$ introduced [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][previously]] can be considered as transverse isotropic tensors. As such, they can be decomposed in Walpole's basis. First, the identity tensor $\identiv$ decomposes as follows
 
 \begin{align*}
 \identiv&=\identii\boxtimessym\identii=\left(\p+\q\right)\boxtimessym\left(\p+\q\right)\\
@@ -191,8 +192,4 @@ Finally, the decomposition of the deviatoric projection tensor $\devprojiv$ is f
 
 * Conclusion
 
-In the present post, a convenient decomposition of three-dimensional, fourth-rank, transverse isotropic tensors as a linear combination of six basis tensors has been proposed. Multiplication (in the sense of the [[file:./on-double-dot-product.org][double dot product]]) of these basis tensors is straightforward (see Table [[tab:2]]). Besides, representing transverse isotropic tensors as a (matrix, scalar, scalar) triplet eases their multiplication and inversion. Walpole's basis turns out to be very handy in many situations (including the derivation of the Green operator for strains).
-
-* History
-
-  - <2014-02-26 mer.> Initial version.
+In the present post, a convenient decomposition of three-dimensional, fourth-rank, transverse isotropic tensors as a linear combination of six basis tensors has been proposed. Multiplication (in the sense of the [[file:./20140219-On_the_double_dot_product.org][double dot product]]) of these basis tensors is straightforward (see Table [[tab:2]]). Besides, representing transverse isotropic tensors as a (matrix, scalar, scalar) triplet eases their multiplication and inversion. Walpole's basis turns out to be very handy in many situations (including the derivation of the Green operator for strains).

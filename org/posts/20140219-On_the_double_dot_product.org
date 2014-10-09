@@ -1,7 +1,9 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../header.org"
+#+SETUPFILE: "../header-1.org"
+#+INCLUDE: "../navbar-1.org"
 #+TITLE: On the double dot product
-#+SETUPFILE: "../../header.org"
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../solarized.css" />
+#+DATE: <2014-02-19 Wed>
 
 The double dot product of two tensors is the contraction of these tensors with respect to the last two indices of the first one, and the first two indices of the second one. Whether or not this contraction is performed on the /closest/ indices is a matter of convention. In this post, I will show that this choice has some important implications.@@html:<!-- more -->@@
 
@@ -30,6 +32,7 @@ How is the scalar product of two second-rank tensors defined? The most obvious c
 so that the scalar product of two second-rank tensors is closely related to either definition of their double dot product. In the next sections, it is shown that each definition of the double dot product induces a different definition of the transpose.
 
 * Definition 1
+
 In this section, the [[def:1][first definition]] of the double dot product is examined
 
 \begin{equation}
@@ -54,9 +57,10 @@ which proves that $\tilde{\tensiv A}$ is the transpose of $\tensiv A$. In other 
 \begin{equation}
 \label{eq:4}
 \left(\transp{\tensiv A}\right)_{ijkl}=A_{lkji}.
-\end{equation} 
+\end{equation}
 
 * Definition 2
+
 We now examine the [[def:2][second definition]] of the double dot product
 
 \begin{equation}
@@ -81,7 +85,7 @@ which proves that $\tilde{\tensiv A}$ is the transpose of $\tensiv A$. In other 
 \begin{equation}
 \label{eq:6}
 \left(\transp{\tensiv A}\right)_{ijkl}=A_{klij}.
-\end{equation} 
+\end{equation}
 
 * Which definition to adopt?
 
@@ -106,7 +110,3 @@ Finally, for a second-rank tensor $\tensii a$ and a decomposed, second-rank tens
 \end{equation*}
 
 To conclude, two definitions of the double dot product are possible, and one should always checked which is adopted. It should be kept in mind that, while arbitrary, this choice has many consequences, including on the definition of the transpose of fourth-rank tensors.
-
-* History
-
-  - <2014-02-19 Wed> Initial version.
