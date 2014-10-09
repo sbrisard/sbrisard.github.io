@@ -2,3 +2,4 @@ build
 html
 *~
 *.swp
+org/TAGS
