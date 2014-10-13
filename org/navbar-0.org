@@ -13,7 +13,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="./pages/home.html">CV</a></li>
+            <li><a href="./pages/about.html">About</a></li>
             <li><a href="./pages/references.html">References</a></li>
           </ul>
         </div>

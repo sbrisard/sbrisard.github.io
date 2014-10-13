@@ -1,5 +1,5 @@
 # -*- coding: utf-8; -*-
-#+TITLE: My professional background
+#+TITLE: About me
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
 #+INCLUDE: "../navbar-1.org"
