@@ -2,3 +2,6 @@
 body {
     padding-top: 50px;
 }
+blockquote {
+    font-size: 100%;
+}
