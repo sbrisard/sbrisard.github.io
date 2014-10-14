@@ -11,7 +11,6 @@
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 #+HTML_CONTAINER: div
-#+HTML_DOCTYPE: xhtml-strict
 #+HTML_HEAD:
 #+HTML_HEAD_EXTRA: <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
 #+HTML_MATHJAX: path:"http://cdn.mathjax.org/mathjax/latest/MathJax.js"
@@ -82,3 +81,4 @@
 #+HTML_HEAD_EXTRA:   'HTML-CSS': { availableFonts: ['TeX'] }
 #+HTML_HEAD_EXTRA: });
 #+HTML_HEAD_EXTRA: </script>
+#+HTML_HEAD_EXTRA: <meta name="viewport" content="width=device-width, initial-scale=1.0">
