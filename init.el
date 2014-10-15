@@ -35,6 +35,7 @@
 (setq org-publish-project-alist
       `(("blog-orgfiles"
          :html-doctype "html5"
+         :html-postamble nil
          :base-directory ,sb-path-to-blog-base-directory
          :publishing-directory ,sb-path-to-blog-publishing-directory
          :base-extension "org"
