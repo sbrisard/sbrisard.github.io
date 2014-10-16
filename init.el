@@ -35,7 +35,7 @@
 (setq org-publish-project-alist
       `(("blog-orgfiles"
          :html-doctype "html5"
-         :html-postamble nil
+         :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
          :base-directory ,sb-path-to-blog-base-directory
          :publishing-directory ,sb-path-to-blog-publishing-directory
          :base-extension "org"

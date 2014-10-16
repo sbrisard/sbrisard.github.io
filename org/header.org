@@ -81,3 +81,15 @@
 #+HTML_HEAD_EXTRA:   'HTML-CSS': { availableFonts: ['TeX'] }
 #+HTML_HEAD_EXTRA: });
 #+HTML_HEAD_EXTRA: </script>
+
+# Twitter button
+#+HTML_HEAD_EXTRA:  <script type="text/javascript">
+#+HTML_HEAD_EXTRA:    window.twttr = (function (d, s, id) {
+#+HTML_HEAD_EXTRA:    var t, js, fjs = d.getElementsByTagName(s)[0];
+#+HTML_HEAD_EXTRA:    if (d.getElementById(id)) return;
+#+HTML_HEAD_EXTRA:    js = d.createElement(s); js.id = id;
+#+HTML_HEAD_EXTRA:    js.src= "https://platform.twitter.com/widgets.js";
+#+HTML_HEAD_EXTRA:    fjs.parentNode.insertBefore(js, fjs);
+#+HTML_HEAD_EXTRA:    return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+#+HTML_HEAD_EXTRA:    }(document, "script", "twitter-wjs"));
+#+HTML_HEAD_EXTRA:  </script>
