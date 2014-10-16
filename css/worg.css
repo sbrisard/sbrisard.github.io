@@ -934,15 +934,12 @@ content: "*** "
     #show_source {margin: 0; padding: 0;}
 
     #postamble {
-	font-size: 75%;
 	min-width: 700px;
 	max-width: 80%;
 	margin-left: 20px;
 	margin-top: 10px;
-	padding: .2em;
-	border: 1px solid gray;
-	background-color: #ffffff;
-	z-index: -1000;
+	padding: 2em;
+        text-align: center;
     }
 
 
