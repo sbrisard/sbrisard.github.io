@@ -1,6 +1,6 @@
-(defvar sb-path-to-blog (concat sb-path-to-local-documents "blog/"))
-(defvar sb-path-to-blog-base-directory (concat sb-path-to-blog "org/"))
-(defvar sb-path-to-blog-publishing-directory (concat sb-path-to-blog "html/"))
+(defvar sb-blog-path-to-blog (concat sb-path-to-local-documents "blog/"))
+(defvar sb-blog-path-to-blog-base-directory (concat sb-blog-path-to-blog "org/"))
+(defvar sb-blog-path-to-blog-publishing-directory (concat sb-blog-path-to-blog "html/"))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
@@ -39,8 +39,8 @@
          :html-head-include-scripts nil
          :html-preamble "<a href='../pages/about.html'>About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='../pages/references.html'>References</a>"
          :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
-         :base-directory ,sb-path-to-blog-base-directory
-         :publishing-directory ,sb-path-to-blog-publishing-directory
+         :base-directory ,sb-blog-path-to-blog-base-directory
+         :publishing-directory ,sb-blog-path-to-blog-publishing-directory
          :base-extension "org"
          :exclude "header.*\\|navbar.*"
          :recursive t
@@ -50,14 +50,14 @@
          :sitemap-sort-files chronologically
          :with-toc nil)
         ("blog-images"
-         :base-directory ,sb-path-to-blog-base-directory
-         :publishing-directory ,sb-path-to-blog-publishing-directory
+         :base-directory ,sb-blog-path-to-blog-base-directory
+         :publishing-directory ,sb-blog-path-to-blog-publishing-directory
          :base-extension "jpg\\|gif\\|png"
          :recursive t
          :publishing-function org-publish-attachment)
         ("blog-other"
-         :base-directory ,sb-path-to-blog-base-directory
-         :publishing-directory ,sb-path-to-blog-publishing-directory
+         :base-directory ,sb-blog-path-to-blog-base-directory
+         :publishing-directory ,sb-blog-path-to-blog-publishing-directory
          :base-extension "css"
          :recursive t
          :publishing-function org-publish-attachment)
