@@ -37,6 +37,7 @@
          :html-doctype "html5"
          :html-head-include-default-style nil
          :html-head-include-scripts nil
+         :html-preamble "<a href='../pages/about.html'>About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='../pages/references.html'>References</a>"
          :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
          :base-directory ,sb-path-to-blog-base-directory
          :publishing-directory ,sb-path-to-blog-publishing-directory
