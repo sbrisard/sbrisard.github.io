@@ -1,7 +1,6 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
-#+INCLUDE: "../navbar-1.org"
 #+TITLE: On the double dot product
 #+DATE: <2014-02-19 Wed>
 

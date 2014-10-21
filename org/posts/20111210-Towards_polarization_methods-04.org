@@ -1,7 +1,6 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
-#+INCLUDE: "../navbar-1.org"
 #+TITLE: Towards polarization methods, part 4: bounds on the macroscopic elastic properties
 #+DATE: <2011-12-10 Sat>
 

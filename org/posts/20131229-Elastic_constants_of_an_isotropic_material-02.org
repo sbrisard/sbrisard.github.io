@@ -1,7 +1,6 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
-#+INCLUDE: "../navbar-1.org"
 #+TITLE: Elastic constants of an isotropic material, part 2: plane strain elasticity
 #+DATE: <2013-12-29 Sun>
 

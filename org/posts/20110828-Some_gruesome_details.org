@@ -1,7 +1,6 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
-#+INCLUDE: "../navbar-1.org"
 #+TITLE: Some gruesome details
 #+DATE: <2011-08-28 Sun>
 

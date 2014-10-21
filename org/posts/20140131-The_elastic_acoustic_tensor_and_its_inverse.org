@@ -1,7 +1,6 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
-#+INCLUDE: "../navbar-1.org"
 #+TITLE: The elastic acoustic tensor and its inverse
 #+DATE: <2014-01-31 Fri>
 

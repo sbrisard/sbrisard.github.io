@@ -1,7 +1,6 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
-#+INCLUDE: "../navbar-1.org"
 #+TITLE: Towards polarization methods, part 2: the variational principle of Hashin and Shtrikman
 #+DATE: <2011-10-19 Wed>
 

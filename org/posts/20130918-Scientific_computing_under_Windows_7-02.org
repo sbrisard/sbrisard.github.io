@@ -1,7 +1,6 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../header.org"
 #+SETUPFILE: "../header-1.org"
-#+INCLUDE: "../navbar-1.org"
 #+TITLE: Scientific computing under Windows 7, part 2: OpenMP
 #+DATE: <2013-09-18 Wed>
 
