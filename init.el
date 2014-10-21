@@ -1,6 +1,10 @@
 (defvar sb-blog-root (concat sb-path-to-local-documents "blog/"))
 (defvar sb-blog-base-directory (concat sb-blog-root "org/"))
-(defvar sb-blog-path-to-blog-publishing-directory (concat sb-blog-root "html/"))
+(defvar sb-blog-publishing-directory (concat sb-blog-root "html/"))
+(defvar sb-blog-pages-base-directory (concat sb-blog-root "org/pages"))
+(defvar sb-blog-pages-publishing-directory (concat sb-blog-root "html/pages"))
+(defvar sb-blog-posts-base-directory (concat sb-blog-root "org/posts"))
+(defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
@@ -33,11 +37,42 @@
 ;; - Carsten
 ;;
 (setq org-publish-project-alist
-      `(("blog-orgfiles"
+      `(("blog-root"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
          :base-extension "org"
          :exclude "header.*\\|navbar.*"
+         :recursive nil
+         :publishing-function org-html-publish-to-html
+         :auto-sitemap nil
+         :html-doctype "html5"
+         :html-head-include-default-style nil
+         :html-head-include-scripts nil
+         :html-preamble nil
+         :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
+         :section-numbers nil
+         :with-toc nil
+         )
+        ("blog-pages"
+         :base-directory ,sb-blog-pages-base-directory
+         :publishing-directory ,sb-blog-pages-publishing-directory
+         :base-extension "org"
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :auto-sitemap nil
+         :sitemap-sort-files chronologically
+         :html-doctype "html5"
+         :html-head-include-default-style nil
+         :html-head-include-scripts nil
+         :html-preamble nil
+         :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
+         :section-numbers nil
+         :with-toc nil
+         )
+        ("blog-posts"
+         :base-directory ,sb-blog-posts-base-directory
+         :publishing-directory ,sb-blog-posts-publishing-directory
+         :base-extension "org"
          :recursive t
          :publishing-function org-html-publish-to-html
          :auto-sitemap nil
@@ -57,4 +92,7 @@
          :recursive t
          :publishing-function org-publish-attachment)
         ("blog"
-         :components ("blog-orgfiles" "blog-images"))))
+         :components ("blog-root"
+                      "blog-pages"
+                      "blog-posts"
+                      "blog-images"))))
