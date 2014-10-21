@@ -56,11 +56,5 @@
          :base-extension "jpg\\|gif\\|png"
          :recursive t
          :publishing-function org-publish-attachment)
-        ("blog-other"
-         :base-directory ,sb-blog-base-directory
-         :publishing-directory ,sb-blog-publishing-directory
-         :base-extension "css"
-         :recursive t
-         :publishing-function org-publish-attachment)
         ("blog"
-         :components ("blog-orgfiles" "blog-images" "blog-other"))))
+         :components ("blog-orgfiles" "blog-images"))))
