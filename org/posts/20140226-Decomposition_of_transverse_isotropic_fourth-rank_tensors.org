@@ -1,6 +1,6 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../header.org"
-#+SETUPFILE: "../header-1.org"
+#+SETUPFILE: "../include/header.org"
+#+SETUPFILE: "../include/header-1.org"
 #+TITLE: Decomposition of transverse isotropic, fourth-rank tensors
 #+DATE: <2014-02-26 Wed>
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../header.org"
-#+SETUPFILE: "../header-1.org"
+#+SETUPFILE: "../include/header.org"
+#+SETUPFILE: "../include/header-1.org"
 #+TITLE: Some gruesome details
 #+DATE: <2011-08-28 Sun>
 
@@ -23,7 +23,7 @@ $$(a+b)^2=a^2+2ab+b^2$$
 
 As for inline math =$(a+b)^2 = a^2+2ab+b^2$= renders to $(a+b)^2 = a^2+2ab+b^2$.
 
-NOTA: MathJax can also render MathML. You can even mix MathML and $\LaTeX$ in the same webpage! To render MathML as well, you just need to paste the following lines to some place in the =<header>...</header>= section of your webpage
+NOTA: MathJax can also render MathML. You can even mix MathML and $\LaTeX$ in the same webpage! To render MathML as well, you just need to paste the following lines to some place in the =<header>...</include/header>= section of your webpage
 
 #+BEGIN_SRC html
   <script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' type='text/javascript'>

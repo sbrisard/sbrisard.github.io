@@ -1,6 +1,6 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../header.org"
-#+SETUPFILE: "../header-1.org"
+#+SETUPFILE: "../include/header.org"
+#+SETUPFILE: "../include/header-1.org"
 #+TITLE:  The Green operator for strains, part 2: elementary properties
 #+DATE: <2011-09-18 Sun>
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../header.org"
-#+SETUPFILE: "../header-1.org"
+#+SETUPFILE: "../include/header.org"
+#+SETUPFILE: "../include/header-1.org"
 #+TITLE: Review of "Parallel Programming with Python"
 #+DATE: <2014-08-13 Wed>
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../header.org"
-#+SETUPFILE: "../header-1.org"
+#+SETUPFILE: "../include/header.org"
+#+SETUPFILE: "../include/header-1.org"
 #+TITLE: Extract images from PDF files
 #+DATE: <2014-01-02 Thu>
 

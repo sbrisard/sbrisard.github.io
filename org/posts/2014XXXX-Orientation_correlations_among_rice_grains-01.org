@@ -1,7 +1,7 @@
 # -*- coding: utf-8; -*-
 #+TITLE: Orientation correlations among rice grains, part 1: introduction
-#+SETUPFILE: "../header.org"
-#+SETUPFILE: "../header-1.org"
+#+SETUPFILE: "../include/header.org"
+#+SETUPFILE: "../include/header-1.org"
 
 In this series, I will explore the notion of orientational order in random packings of anisotropic (flat or elongated), hard particles. By orientational order, I mean that particles which are close to each other tend to adopt the same orientation. This leads to strong /local/ anisotropy, while the packing may well be /globally/ isotropic@@html:<!-- more -->@@; in particular, all orientations of single grains are equiprobable. Local orientational order is stronger when the volume fraction of particles, or their aspect ratio increases.
 

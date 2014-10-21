@@ -1,7 +1,7 @@
 # -*- coding: utf-8; -*-
 #+TITLE: About me
-#+SETUPFILE: "../header.org"
-#+SETUPFILE: "../header-1.org"
+#+SETUPFILE: "../include/header.org"
+#+SETUPFILE: "../include/header-1.org"
 
 I am currently a research scientist at [[http://navier.enpc.fr/][Navier laboratory]], [[http://www.ifsttar.fr/][IFSTTAR]] (/Institut Français des Sciences et Techniques du Transport, de l'Aménagement et des Réseaux/, French Institute of Sciences and Technology for Transport, Development and Networks).
 
