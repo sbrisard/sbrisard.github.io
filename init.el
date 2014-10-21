@@ -1,4 +1,5 @@
-(defvar sb-blog-root (concat sb-path-to-local-documents "blog/"))
+;; Get path to file being loaded.
+(defvar sb-blog-root (file-name-directory load-file-name))
 (defvar sb-blog-base-directory (concat sb-blog-root "org/"))
 (defvar sb-blog-publishing-directory (concat sb-blog-root "html/"))
 (defvar sb-blog-pages-base-directory (concat sb-blog-root "org/pages"))
