@@ -1,6 +1,7 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/header.org"
 #+SETUPFILE: "../include/header-1.org"
+#+SETUPFILE: "../include/mathjax.org"
 #+TITLE: MathJax now accepts equation numbers
 #+DATE: <2013-12-10 Tue>
 
