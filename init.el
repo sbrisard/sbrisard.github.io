@@ -34,21 +34,22 @@
 ;;
 (setq org-publish-project-alist
       `(("blog-orgfiles"
-         :html-doctype "html5"
-         :html-head-include-default-style nil
-         :html-head-include-scripts nil
-         :html-preamble "<a href='../pages/about.html'>About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='../pages/references.html'>References</a>"
-         :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
          :base-extension "org"
          :exclude "header.*\\|navbar.*"
          :recursive t
          :publishing-function org-html-publish-to-html
-         :section-numbers nil
          :auto-sitemap nil
          :sitemap-sort-files chronologically
-         :with-toc nil)
+         :html-doctype "html5"
+         :html-head-include-default-style nil
+         :html-head-include-scripts nil
+         :html-preamble "<a href='../pages/about.html'>About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='../pages/references.html'>References</a>"
+         :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
+         :section-numbers nil
+         :with-toc nil
+         )
         ("blog-images"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
