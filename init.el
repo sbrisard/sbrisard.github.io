@@ -1,3 +1,4 @@
+;; -*- coding: utf-8 -*-
 ;; Get path to file being loaded.
 (defvar sb-blog-root (file-name-directory load-file-name))
 (defvar sb-blog-base-directory (concat sb-blog-root "org/"))
@@ -58,6 +59,7 @@
          :publishing-function org-html-publish-to-html
          :auto-sitemap nil
          :html-doctype "html5"
+         :html-container "div"
          :html-head ,sb-blog-html-head-0
          :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
@@ -66,6 +68,7 @@
          :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
+         :language "en"
          )
         ("blog-pages"
          :base-directory ,sb-blog-pages-base-directory
@@ -77,6 +80,7 @@
          :auto-sitemap nil
          :sitemap-sort-files chronologically
          :html-doctype "html5"
+         :html-container "div"
          :html-head ,sb-blog-html-head-1
          :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
@@ -85,6 +89,7 @@
          :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
+         :language "en"
          )
         ("blog-posts"
          :base-directory ,sb-blog-posts-base-directory
@@ -99,6 +104,7 @@
          :sitemap-sort-files chronologically
          :sitemap-file-entry-format "%d -- %t"
          :html-doctype "html5"
+         :html-container "div"
          :html-head ,sb-blog-html-head-1
          :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
@@ -107,6 +113,7 @@
          :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
+         :language "en"
          )
         ("blog-images"
          :base-directory ,sb-blog-base-directory

@@ -1,9 +1,3 @@
 # -*- coding: utf-8; -*-
-#+AUTHOR: Sébastien Brisard
-#+EMAIL: sebastien.brisard@ifsttar.fr
-#+DESCRIPTION:
-#+EXCLUDE_TAGS: noexport
-#+KEYWORDS:
-#+LANGUAGE: en
-#+SELECT_TAGS: export
-#+HTML_CONTAINER: div
+# #+AUTHOR: Sébastien Brisard
+# #+EMAIL: sebastien.brisard@ifsttar.fr
