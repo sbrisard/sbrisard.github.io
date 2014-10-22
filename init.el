@@ -12,6 +12,8 @@
 ;; Level 1 html-head
 (defvar sb-blog-html-head-1 "<link href=\"../../css/worg.css\" rel=\"stylesheet\" />")
 
+(defvar sb-blog-html-postamble "<a class=\"twitter-follow-button\" href=\"https://twitter.com/SebBrisard\" data-show-count=\"true\" data-lang=\"en\">Follow @SebBrisard</a>")
+
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
 ;; Hi Richard,
@@ -56,7 +58,7 @@
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
-         :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
+         :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
          )
@@ -74,7 +76,7 @@
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
-         :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
+         :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
          )
@@ -95,7 +97,7 @@
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble "<a href='../pages/about.html'>About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='../pages/references.html'>References</a>"
-         :html-postamble "<a class='twitter-follow-button' href='https://twitter.com/SebBrisard' data-show-count='true' data-lang='en'>Follow @SebBrisard</a>"
+         :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
          )
