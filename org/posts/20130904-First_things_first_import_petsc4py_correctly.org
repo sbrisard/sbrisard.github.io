@@ -1,6 +1,5 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/header.org"
-#+SETUPFILE: "../include/header-1.org"
 #+TITLE: First things first: import =petsc4py= correctly
 #+DATE: <2013-09-04 Wed>
 

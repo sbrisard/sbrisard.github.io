@@ -1,6 +1,5 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/header.org"
-#+SETUPFILE: "../include/header-1.org"
 #+TITLE: Scientific computing under Windows 7, part 1: MinGW
 #+DATE: <2013-09-18 Wed>
 

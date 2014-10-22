@@ -1,6 +1,5 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/header.org"
-#+SETUPFILE: "../include/header-1.org"
 #+TITLE: Review of "Learning Cython Programming"
 #+DATE: <2014-01-26 Sun>
 

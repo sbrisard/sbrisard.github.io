@@ -1,6 +1,5 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/header.org"
-#+SETUPFILE: "../include/header-1.org"
 #+TITLE: Scientific computing under Windows 7, part 6: ITK (prerequisites)
 #+DATE: <2013-12-18 Wed>
 
