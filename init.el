@@ -7,8 +7,10 @@
 (defvar sb-blog-posts-base-directory (concat sb-blog-root "org/posts"))
 (defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
 
-(defvar sb-blog-head-level-0 "<link href=\"../css/worg.css\" rel=\"stylesheet\" />")
-(defvar sb-blog-head-level-1 "<link href=\"../../css/worg.css\" rel=\"stylesheet\" />")
+;; Level 0 html-head
+(defvar sb-blog-html-head-0 "<link href=\"../css/worg.css\" rel=\"stylesheet\" />")
+;; Level 1 html-head
+(defvar sb-blog-html-head-1 "<link href=\"../../css/worg.css\" rel=\"stylesheet\" />")
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
@@ -50,7 +52,7 @@
          :publishing-function org-html-publish-to-html
          :auto-sitemap nil
          :html-doctype "html5"
-         :html-head ,sb-blog-head-level-0
+         :html-head ,sb-blog-html-head-0
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
@@ -67,7 +69,7 @@
          :auto-sitemap nil
          :sitemap-sort-files chronologically
          :html-doctype "html5"
-         :html-head ,sb-blog-head-level-1
+         :html-head ,sb-blog-html-head-1
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
@@ -87,7 +89,7 @@
          :sitemap-sort-files chronologically
          :sitemap-file-entry-format "%d -- %t"
          :html-doctype "html5"
-         :html-head ,sb-blog-head-level-1
+         :html-head ,sb-blog-html-head-1
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble "<a href='../pages/about.html'>About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='../pages/references.html'>References</a>"
