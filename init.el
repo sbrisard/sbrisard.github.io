@@ -12,6 +12,8 @@
 ;; Level 1 html-head
 (defvar sb-blog-html-head-1 "<link href=\"../../css/worg.css\" rel=\"stylesheet\" />")
 
+(defvar sb-blog-html-head-extra "<script type=\"text/javascript\">window.twttr = (function (d, s, id) {var t, js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src= \"https://platform.twitter.com/widgets.js\"; fjs.parentNode.insertBefore(js, fjs); return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } }); }(document, \"script\", \"twitter-wjs\"));</script>")
+
 (defvar sb-blog-html-preamble "<div class=\"navbar\"><a href=\"../pages/about.html\">About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"../pages/references.html\">References</a></div>")
 
 (defvar sb-blog-html-postamble "<a class=\"twitter-follow-button\" href=\"https://twitter.com/SebBrisard\" data-show-count=\"true\" data-lang=\"en\">Follow @SebBrisard</a>")
@@ -57,6 +59,7 @@
          :auto-sitemap nil
          :html-doctype "html5"
          :html-head ,sb-blog-html-head-0
+         :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
@@ -75,6 +78,7 @@
          :sitemap-sort-files chronologically
          :html-doctype "html5"
          :html-head ,sb-blog-html-head-1
+         :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
@@ -96,6 +100,7 @@
          :sitemap-file-entry-format "%d -- %t"
          :html-doctype "html5"
          :html-head ,sb-blog-html-head-1
+         :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble ,sb-blog-html-preamble
