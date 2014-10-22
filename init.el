@@ -47,7 +47,7 @@
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
          :base-extension "org"
-         :exclude "header.*\\|navbar.*"
+         :exclude nil
          :recursive nil
          :publishing-function org-html-publish-to-html
          :auto-sitemap nil
@@ -64,6 +64,7 @@
          :base-directory ,sb-blog-pages-base-directory
          :publishing-directory ,sb-blog-pages-publishing-directory
          :base-extension "org"
+         :exclude nil
          :recursive t
          :publishing-function org-html-publish-to-html
          :auto-sitemap nil
@@ -81,6 +82,7 @@
          :base-directory ,sb-blog-posts-base-directory
          :publishing-directory ,sb-blog-posts-publishing-directory
          :base-extension "org"
+         :exclude nil
          :recursive t
          :publishing-function org-html-publish-to-html
          :auto-sitemap nil
