@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../include/header.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: The periodic Green operator for strains
 #+DATE: <2014-03-06 Thu>

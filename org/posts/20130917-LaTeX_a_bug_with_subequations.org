@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../include/header.org"
 #+TITLE: LaTeX: a bug with subequations
 #+DATE: <2013-09-17 Tue>
 

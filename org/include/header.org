@@ -1,3 +1,0 @@
-# -*- coding: utf-8; -*-
-# #+AUTHOR: Sébastien Brisard
-# #+EMAIL: sebastien.brisard@ifsttar.fr

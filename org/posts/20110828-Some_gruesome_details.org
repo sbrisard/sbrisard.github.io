@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../include/header.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Some gruesome details
 #+DATE: <2011-08-28 Sun>

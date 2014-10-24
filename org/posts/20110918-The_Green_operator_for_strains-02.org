@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../include/header.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE:  The Green operator for strains, part 2: elementary properties
 #+DATE: <2011-09-18 Sun>

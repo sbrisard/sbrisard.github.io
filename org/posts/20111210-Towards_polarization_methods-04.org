@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../include/header.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Towards polarization methods, part 4: bounds on the macroscopic elastic properties
 #+DATE: <2011-12-10 Sat>

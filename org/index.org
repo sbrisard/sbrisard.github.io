@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "./include/header.org"
 #+TITLE: Welcome!
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.

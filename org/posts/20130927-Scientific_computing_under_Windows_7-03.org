@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../include/header.org"
 #+TITLE: Scientific computing under Windows 7, part 3: MPI
 #+DATE: <2013-09-27 Fri>
 

@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../include/header.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: On the double dot product
 #+DATE: <2014-02-19 Wed>

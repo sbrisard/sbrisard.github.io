@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../include/header.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: The elastic acoustic tensor and its inverse
 #+DATE: <2014-01-31 Fri>

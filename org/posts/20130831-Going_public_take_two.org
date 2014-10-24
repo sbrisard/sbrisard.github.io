@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "../include/header.org"
 #+TITLE: Going public (take two)
 #+DATE: <2013-08-31 Sat>
 
