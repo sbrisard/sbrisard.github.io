@@ -13,52 +13,23 @@
 	font-size: 12pt;
 	line-height: 18pt;
 	color: black;
-	margin-top: 0;
-    }
-    body #content {
-	padding-top: 0px;
-	max-width: 80%;
-	min-width: 700px;
-	margin-left: 20px;
-	background-color: white;
+	max-width: 800px;
+        margin: 0px 20px 0px 20px;
 	padding: 30px;
     }
-    body .title {
-	margin-left: 0px;
-	font-size: 22pt;
-        line-height: 25pt;
-    }
-
 
     #postamble {
-	min-width: 700px;
-	max-width: 80%;
-	margin-left: 20px;
-	margin-top: 10px;
-	padding: 2em;
         text-align: center;
     }
 
     .navbar {
-	background-color: white;
 	font-size: 10pt;
-	max-width: 80%;
-	min-width: 700px;
-	margin-left: 50px;
-	padding: 0px;
 	border-bottom: 1px solid #ddd;
     }
 
-    #org-div-home-and-up{
-	position: fixed;
-	right: 0;
-	top: 4em;
-    }
-
-    #license {
-      /* padding: .3em; */
-      /* border: 1px solid gray; */
-      background-color: #eeeeee;
+    .title {
+	font-size: 22pt;
+        line-height: 25pt;
     }
 
     h1 {
@@ -290,8 +261,6 @@
 	padding-bottom:10px;
 	margin-bottom:10px;
     }
-
-
 
     .org-info-search-highlight
     {
