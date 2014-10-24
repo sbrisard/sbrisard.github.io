@@ -21,11 +21,31 @@
 	min-width: 700px;
 	margin-left: 20px;
 	background-color: white;
-	padding: 2em;
+	padding: 30px;
     }
     body .title {
 	margin-left: 0px;
 	font-size: 22pt;
+    }
+
+
+    #postamble {
+	min-width: 700px;
+	max-width: 80%;
+	margin-left: 20px;
+	margin-top: 10px;
+	padding: 2em;
+        text-align: center;
+    }
+
+    .navbar {
+	background-color: white;
+	font-size: 10pt;
+	max-width: 80%;
+	min-width: 700px;
+	margin-left: 50px;
+	padding: 0px;
+	border-bottom: 1px solid #ddd;
     }
 
     #org-div-home-and-up{
@@ -851,24 +871,4 @@
     }
 
     #show_source {margin: 0; padding: 0;}
-
-    #postamble {
-	min-width: 700px;
-	max-width: 80%;
-	margin-left: 20px;
-	margin-top: 10px;
-	padding: 2em;
-        text-align: center;
-    }
-
-    .navbar {
-	padding-top: 0px;
-	max-width: 80%;
-	min-width: 700px;
-	margin-left: 20px;
-	background-color: white;
-        padding-left: 2em;
-	font-size: 10pt;
-	border-bottom: 1px solid #ddd;
-    }
 } /* END OF @media all */
