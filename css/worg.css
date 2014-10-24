@@ -68,6 +68,10 @@
     a:visited {text-decoration: none; font-weight: 400;}
     a:hover {text-decoration: underline;}
 
+    .figure {
+        text-align: center;
+    }
+
     .outline-text-2 {
 	margin-left: 0.1em
     }
