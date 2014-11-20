@@ -1,6 +1,6 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/mathjax.org"
-#+TITLE:  The Green operator for strains, part 2: elementary properties
+#+TITLE: The Green operator for strains, part 2: elementary properties
 #+DATE: <2011-09-18 Sun>
 
 In [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]] of this series, we have seen how the Green operator for strains ($\greeniv_0$) was defined as the operator providing the solution to the problem of elastic equilibrium of a /prestressed/ homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.@@html:<!-- more -->@@ We again consider the bounded domain $\domain\subset\reals^d$, occupied by a homogeneous, linearly elastic material with stiffness $\stiffness_0$. $\greeniv_0$ denotes the Green operator for strains for the material $\stiffness_0$, over the domain $\domain$. The first property is a direct consequence of the definition of $\greeniv_0$, given in [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]].
