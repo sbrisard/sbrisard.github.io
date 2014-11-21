@@ -9,9 +9,9 @@
 (defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
 
 ;; Level 0 html-head
-(defvar sb-blog-html-head-0 "<link href=\"../css/worg.css\" rel=\"stylesheet\" />")
+(defvar sb-blog-html-head-0 "<link href=\"../css/theme.css\" rel=\"stylesheet\" />")
 ;; Level 1 html-head
-(defvar sb-blog-html-head-1 "<link href=\"../../css/worg.css\" rel=\"stylesheet\" />")
+(defvar sb-blog-html-head-1 "<link href=\"../../css/theme.css\" rel=\"stylesheet\" />")
 
 (defvar sb-blog-html-head-extra "<script type=\"text/javascript\">window.twttr = (function (d, s, id) {var t, js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src= \"https://platform.twitter.com/widgets.js\"; fjs.parentNode.insertBefore(js, fjs); return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } }); }(document, \"script\", \"twitter-wjs\"));</script>")
 
