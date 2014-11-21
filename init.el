@@ -85,7 +85,7 @@
          :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
-         :html-preamble nil
+         :html-preamble ,sb-blog-html-preamble
          :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
