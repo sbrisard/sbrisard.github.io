@@ -98,7 +98,7 @@
          :exclude nil
          :recursive t
          :publishing-function org-html-publish-to-html
-         :auto-sitemap t
+         :auto-sitemap nil
          :sitemap-filename "archives.org"
          :sitemap-title "Blog archive"
          :sitemap-sort-files anti-chronologically
