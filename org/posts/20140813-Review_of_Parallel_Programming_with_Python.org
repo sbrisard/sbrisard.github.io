@@ -2,7 +2,9 @@
 #+TITLE: Review of "Parallel Programming with Python"
 #+DATE: <2014-08-13 Wed>
 
-I have again recently been offered by [[http://www.packtpub.com/][Packt Publishing]] to review one of their books, entitled [[http://goo.gl/oMUSLW][Parallel Programming with Python]] (by Jan Palach).@@html:<!-- more -->@@
+#+BEGIN_ABSTRACT
+I have again recently been offered by [[http://www.packtpub.com/][Packt Publishing]] to review one of their books, entitled [[http://goo.gl/oMUSLW][Parallel Programming with Python]] (by Jan Palach).
+#+END_ABSTRACT
 
 For a long time, programmers have been relying exclusively on [[http://en.wikipedia.org/wiki/Moore%27s_law][Moore's law]] to resolve their performance issues. In other words, they trusted the fact that the CPU frequency would increase, making their program faster /without changing one single line/. Today however, [[http://www.gotw.ca/publications/concurrency-ddj.htm]["the free lunch is over"]], as already argued by Herb Sutter in 2004. The frequency of CPUs tends to stagnate, while the number of cores in even the cheapest laptop has increased. For Sutter, the immediate consequence is: "applications will increasingly need to be concurrent if they want to fully exploit CPU throughput gains".
 

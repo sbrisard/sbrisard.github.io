@@ -3,7 +3,9 @@
 #+TITLE: On the double dot product
 #+DATE: <2014-02-19 Wed>
 
-The double dot product of two tensors is the contraction of these tensors with respect to the last two indices of the first one, and the first two indices of the second one. Whether or not this contraction is performed on the /closest/ indices is a matter of convention. In this post, I will show that this choice has some important implications.@@html:<!-- more -->@@
+#+BEGIN_ABSTRACT
+The double dot product of two tensors is the contraction of these tensors with respect to the last two indices of the first one, and the first two indices of the second one. Whether or not this contraction is performed on the /closest/ indices is a matter of convention. In this post, I will show that this choice has some important implications.
+#+END_ABSTRACT
 
 Let $\tensii a$ and $\tensii b$ be two second-rank tensors. The following two alternative definitions might be adopted for the double dot product $\tensii a:\tensii b$
   - <<def:1>> Definition 1 :: $\tensii a:\tensii b=a_{ij}b_{ji}$ (contraction on the closest indices),

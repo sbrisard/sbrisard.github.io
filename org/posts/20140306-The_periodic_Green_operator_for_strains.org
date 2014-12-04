@@ -6,7 +6,9 @@
 # Equation numbers
 # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 
-The Green operator for strains is defined as the linear operator which maps --in a homogeneous material-- the local prestress to the (opposite of the) local strain. Closed-form expressions of this operator can be derived in the case of periodic boundary conditions, as will be demonstrated in the present post.@@html:<!-- more -->@@
+#+BEGIN_ABSTRACT
+The Green operator for strains is defined as the linear operator which maps --in a homogeneous material-- the local prestress to the (opposite of the) local strain. Closed-form expressions of this operator can be derived in the case of periodic boundary conditions, as will be demonstrated in the present post.
+#+END_ABSTRACT
 
 Let $\stiffness$ be the stiffness of a homogeneous, linearly elastic material occupying the whole, $d$-dimensional, space $\reals^d$. This material is submitted to the local, $(L_1,\cdots,L_d)$-periodic prestress $\prestress(\vec x)$. The elastic equilibrium of this medium is governed by the following equations over $\reals^d$
 

@@ -3,7 +3,11 @@
 #+TITLE: Decomposition of transverse isotropic, fourth-rank tensors
 #+DATE: <2014-02-26 Wed>
 
-In [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][a previous post]], I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown ([[file:../pages/references.org::#WALP1984][Walpole, 1984]]) that the space of three-dimensional, /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole ([[file:../pages/references.org::#WALP1984][1984]]).@@html:<!-- more -->@@$\newcommand{\kronecker}{\circledast}$
+#+BEGIN_ABSTRACT
+In [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][a previous post]], I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown ([[file:../pages/references.org::#WALP1984][Walpole, 1984]]) that the space of three-dimensional, /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole ([[file:../pages/references.org::#WALP1984][1984]]).
+#+END_ABSTRACT
+
+$\newcommand{\kronecker}{\circledast}$
 
 * Two second-rank projection tensors
 

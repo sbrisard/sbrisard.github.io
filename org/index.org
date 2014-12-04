@@ -1,76 +1,26 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "./include/mathjax.org"
 #+TITLE: Welcome!
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
 
-[[file:./posts/2014XXXX-Orientation_correlations_among_rice_grains-02.org][Orientation correlations among rice grains, part 2: acquisition of tomography images]]
+* [[file:./posts/20140813-Review_of_Parallel_Programming_with_Python.org][2014-08-13 -- Review of "Parallel Programming with Python"]]
 
-[[file:./posts/2014XXXX-Orientation_correlations_among_rice_grains-01.org][Orientation correlations among rice grains, part 1: introduction]]
+I have again recently been offered by [[http://www.packtpub.com/][Packt Publishing]] to review one of their books, entitled [[http://goo.gl/oMUSLW][Parallel Programming with Python]] (by Jan Palach).
 
-[[file:./posts/20140813-Review_of_Parallel_Programming_with_Python.org][Review of "Parallel Programming with Python"]]
+* [[file:./posts/20140306-The_periodic_Green_operator_for_strains.org][2014-03-06 -- The periodic Green operator for strains]]
 
-[[file:./posts/20140306-The_periodic_Green_operator_for_strains.org][The periodic Green operator for strains]]
+The Green operator for strains is defined as the linear operator which maps --in a homogeneous material-- the local prestress to the (opposite of the) local strain. Closed-form expressions of this operator can be derived in the case of periodic boundary conditions, as will be demonstrated in the present post.
 
-[[file:./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][Decomposition of transverse isotropic, fourth-rank tensors]]
+* [[file:./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][2014-02-26 -- Decomposition of transverse isotropic, fourth-rank tensors]]
 
-[[file:./posts/20140219-On_the_double_dot_product.org][On the double dot product]]
+In [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][a previous post]], I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown ([[file:../pages/references.org::#WALP1984][Walpole, 1984]]) that the space of three-dimensional, /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole ([[file:../pages/references.org::#WALP1984][1984]]).
 
-[[file:./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse.org][The elastic acoustic tensor and its inverse]]
+* [[file:./posts/20140219-On_the_double_dot_product.org][2014-02-19 -- On the double dot product]]
 
-[[file:./posts/20140126-Review_of_Learning_Cython_Programming.org][Review of "Learning Cython Programming"]]
+The double dot product of two tensors is the contraction of these tensors with respect to the last two indices of the first one, and the first two indices of the second one. Whether or not this contraction is performed on the /closest/ indices is a matter of convention. In this post, I will show that this choice has some important implications.
 
-[[file:./posts/20140112-Elastic_constants_of_an_isotropic_material-03.org][Elastic constants of an isotropic material, part 3: putting it all together]]
+* [[file:./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse.org][2014-01-31 -- The elastic acoustic tensor and its inverse]]
 
-[[file:./posts/20140102-Extract_images_from_PDF_files.org][Extract images from PDF files]]
+We consider a linearly elastic material with stiffness $\stiffness$. For any wave-vector $\vec k$, the elastic acoustic tensor $\acoustic(\vec k)$ is defined as follows
 
-[[file:./posts/20131229-Elastic_constants_of_an_isotropic_material-02.org][Elastic constants of an isotropic material, part 2: plane strain elasticity]]
-
-[[file:./posts/20131219-Scientific_computing_under_windows_7-07.org][Scientific computing under Windows 7, part 7: ITK (proper)]]
-
-[[file:./posts/20131218-Scientific_computing_under_windows_7-06.org][Scientific computing under Windows 7, part 6: ITK (prerequisites)]]
-
-[[file:./posts/20131210-Mathjax_now_accepts_equation_numbers.org][MathJax now accepts equation numbers]]
-
-[[file:./posts/20131205-Elastic_constants_of_an_isotropic_material-01.org][Elastic constants of an isotropic material, part 1: 3D elasticity]]
-
-[[file:posts/20131105-New_accepted_manuscript.org][New accepted manuscript]]
-
-[[file:./posts/20131006-Scientific_computing_under_Windows_7-05.org][Scientific computing under Windows 7, part 5: LAMMPS]]
-
-[[file:./posts/20130929-Scientific_computing_under_Windows_7-04.org][Scientific computing under Windows 7, part 4: FFTW with support for MPI]]
-
-[[file:./posts/20130927-Scientific_computing_under_Windows_7-03.org][Scientific computing under Windows 7, part 3: MPI]]
-
-[[file:./posts/20130918-Scientific_computing_under_Windows_7-02.org][Scientific computing under Windows 7, part 2: OpenMP]]
-
-[[file:./posts/20130918-Scientific_computing_under_Windows_7-01.org][Scientific computing under Windows 7, part 1: MinGW]]
-
-[[file:./posts/20130917-LaTeX_a_bug_with_subequations.org][LaTeX: a bug with subequations]]
-
-[[file:./posts/20130910-Watch_it_Integer_division_in_Python_3.org][Watch it! Integer division in Python 3]]
-
-[[file:./posts/20130904-First_things_first_import_petsc4py_correctly.org][First things first: import =petsc4py= correctly]]
-
-[[file:./posts/20130831-New_accepted_manuscript.org][New accepted manuscript]]
-
-[[file:./posts/20130831-Going_public_take_two.org][Going public (take two)]]
-
-[[file:./posts/20111210-Towards_polarization_methods-04.org][Towards polarization methods, part 4: bounds on the macroscopic elastic properties]]
-
-[[file:./posts/20111031-Towards_polarization_methods-03.org][Towards polarization methods, part 3: the energy principle of Hashin and Shtrikman]]
-
-[[file:./posts/20111019-Towards_polarization_methods-02.org][Towards polarization methods, part 2: the variational principle of Hashin and Shtrikman]]
-
-[[file:./posts/20111004-Towards_polarization_methods-01.org][Towards polarization methods, part 1: the Lippmann--Schwinger equation]]
-
-[[file:./posts/20110918-The_Green_operator_for_strains-02.org][The Green operator for strains, part 2: elementary properties]]
-
-[[file:./posts/20110911-The_Green_operator_for_strains-01.org][The Green operator for strains, part 1: definition]]
-
-[[file:./posts/20110903-Going_public.org][Going public]]
-
-[[file:./posts/20110828-Some_gruesome_details.org][Some gruesome details]]
-
-[[file:./pages/about.org][My professional background]]
-
-[[file:./pages/references.org][References]]

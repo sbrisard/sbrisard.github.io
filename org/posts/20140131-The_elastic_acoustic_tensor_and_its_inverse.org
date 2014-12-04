@@ -3,7 +3,9 @@
 #+TITLE: The elastic acoustic tensor and its inverse
 #+DATE: <2014-01-31 Fri>
 
+#+BEGIN_ABSTRACT
 We consider a linearly elastic material with stiffness $\stiffness$. For any wave-vector $\vec k$, the elastic acoustic tensor $\acoustic(\vec k)$ is defined as follows
+#+END_ABSTRACT
 
 \begin{equation}
 \label{eq:1}
