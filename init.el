@@ -7,11 +7,14 @@
 (defvar sb-blog-pages-publishing-directory (concat sb-blog-root "html/pages"))
 (defvar sb-blog-posts-base-directory (concat sb-blog-root "org/posts"))
 (defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
+(defvar sb-blog-css-base-directory (concat sb-blog-root "css/"))
+(defvar sb-blog-css-publishing-directory (concat sb-blog-publishing-directory
+                                                 "css/"))
 
 ;; Level 0 html-head
-(defvar sb-blog-html-head-0 "<link href=\"../css/theme.css\" rel=\"stylesheet\" />")
+(defvar sb-blog-html-head-0 "<link href=\"./css/theme.css\" rel=\"stylesheet\" />")
 ;; Level 1 html-head
-(defvar sb-blog-html-head-1 "<link href=\"../../css/theme.css\" rel=\"stylesheet\" />")
+(defvar sb-blog-html-head-1 "<link href=\"./../css/theme.css\" rel=\"stylesheet\" />")
 
 (defvar sb-blog-html-head-extra "<script type=\"text/javascript\">window.twttr = (function (d, s, id) {var t, js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src= \"https://platform.twitter.com/widgets.js\"; fjs.parentNode.insertBefore(js, fjs); return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } }); }(document, \"script\", \"twitter-wjs\"));</script>")
 
@@ -121,8 +124,15 @@
          :base-extension "jpg\\|gif\\|png"
          :recursive t
          :publishing-function org-publish-attachment)
+        ("blog-css"
+         :base-directory ,sb-blog-css-base-directory
+         :publishing-directory ,sb-blog-css-publishing-directory
+         :base-extension "css"
+         :recursive t
+         :publishing-function org-publish-attachment)
         ("blog"
          :components ("blog-root"
                       "blog-pages"
                       "blog-posts"
-                      "blog-images"))))
+                      "blog-images"
+                      "blog-css"))))
