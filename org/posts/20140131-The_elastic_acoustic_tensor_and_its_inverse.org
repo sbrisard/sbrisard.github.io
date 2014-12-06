@@ -4,8 +4,10 @@
 #+DATE: <2014-01-31 Fri>
 
 #+BEGIN_ABSTRACT
-We consider a linearly elastic material with stiffness $\stiffness$. For any wave-vector $\vec k$, the elastic acoustic tensor $\acoustic(\vec k)$ is defined as follows
+In this post, I will introduce the acoustic tensor of linearly elastic materials. Closed-form expressions of the inverse of this tensor can be derived in the case of /isotropic/ materials. This will later come in handy to derive closed-form expressions of the periodic Green operator for strains.
 #+END_ABSTRACT
+
+We consider a linearly elastic material with stiffness $\stiffness$. For any wave-vector $\vec k$, the elastic acoustic tensor $\acoustic(\vec k)$ is defined as follows
 
 \begin{equation}
 \label{eq:1}
