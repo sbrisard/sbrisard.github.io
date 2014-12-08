@@ -32,6 +32,10 @@
         line-height: 35pt;
     }
 
+    a {text-decoration: none; font-weight: 400;}
+    a:visited {text-decoration: none; font-weight: 400;}
+    a:hover {text-decoration: underline;}
+
     h1 {
 	font-size:2.1em;
 	padding:0 0 30px 0;
@@ -63,9 +67,10 @@
 	color: #A5573E;
     }
 
-    a {text-decoration: none; font-weight: 400;}
-    a:visited {text-decoration: none; font-weight: 400;}
-    a:hover {text-decoration: underline;}
+    h2 a {
+        font-weight: inherit;
+        color: inherit;
+    }
 
     .figure {
         display: block;
