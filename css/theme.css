@@ -1,7 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono|Droid+Serif);
 
-@media all
-{
+@media all {
     html {
 	margin: 0;
 	font: 300 .9em/1.6em "Droid Serif", Cambria, Georgia, "DejaVu Serif", serif;
@@ -18,23 +17,26 @@
 	padding: 30px;
     }
 
-    #postamble {
-        text-align: center;
+    li { margin: .4em; }
+
+    table { border: none; }
+    td { border: none; }
+    th { border: none; }
+
+    a {
+        text-decoration: none;
+        font-weight: 400;
+        color: blue;
     }
 
-    .navbar {
-	font-size: 10pt;
-	border-bottom: 1px solid #ddd;
+    a:visited {
+        text-decoration: none;
+        font-weight: 400;
     }
 
-    .title {
-	font-size: 30pt;
-        line-height: 35pt;
+    a:hover {
+        text-decoration: underline;
     }
-
-    a {text-decoration: none; font-weight: 400;}
-    a:visited {text-decoration: none; font-weight: 400;}
-    a:hover {text-decoration: underline;}
 
     h1 {
 	font-size:2.1em;
@@ -67,9 +69,21 @@
 	color: #A5573E;
     }
 
-    h2 a {
-        font-weight: inherit;
-        color: inherit;
+    h2 a { color: inherit; font-weight: inherit; }
+    h2 a:hover { color: blue; }
+
+    #postamble {
+        text-align: center;
+    }
+
+    .navbar {
+	font-size: 10pt;
+	border-bottom: 1px solid #ddd;
+    }
+
+    .title {
+	font-size: 30pt;
+        line-height: 35pt;
     }
 
     .figure {
@@ -110,23 +124,6 @@
     .tag {
 
     }
-
-    li {
-	margin: .4em;
-    }
-
-    table {
-	border: none;
-    }
-
-    td {
-	border: none;
-    }
-
-    th {
-	border: none;
-    }
-
     code {
 	font-size: 100%;
 	color: black;
