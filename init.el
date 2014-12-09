@@ -18,7 +18,7 @@
 
 (defvar sb-blog-html-head-extra "<script type=\"text/javascript\">window.twttr = (function (d, s, id) {var t, js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src= \"https://platform.twitter.com/widgets.js\"; fjs.parentNode.insertBefore(js, fjs); return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } }); }(document, \"script\", \"twitter-wjs\"));</script>")
 
-(defvar sb-blog-html-preamble "<div class=\"navbar\"><a href=\"../pages/about.html\">About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"../pages/references.html\">References</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"../posts/archives.html\">Archives</a></div>")
+(defvar sb-blog-html-preamble "<div class=\"navbar\"><a href=\"../index.html\">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"../pages/about.html\">About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"../pages/references.html\">References</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"../posts/archives.html\">Archives</a></div>")
 
 (defvar sb-blog-html-postamble "<a class=\"twitter-follow-button\" href=\"https://twitter.com/SebBrisard\" data-show-count=\"true\" data-lang=\"en\">Follow @SebBrisard</a>")
 
