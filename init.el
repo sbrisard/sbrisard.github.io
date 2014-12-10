@@ -11,10 +11,15 @@
 (defvar sb-blog-css-publishing-directory (concat sb-blog-publishing-directory
                                                  "css/"))
 
-;; Level 0 html-head
-(defvar sb-blog-html-head-0 "<link href=\"./css/theme.css\" rel=\"stylesheet\" />")
-;; Level 1 html-head
-(defvar sb-blog-html-head-1 "<link href=\"./../css/theme.css\" rel=\"stylesheet\" />")
+
+(defun sb-blog-path-to-root (level)
+  (let ((path "./"))
+    (dotimes (number level path)
+      (setq path (concat path "../")))))
+
+(defun sb-blog-html-head (level)
+  (format "<link href=\"%scss/theme.css\" rel=\"stylesheet\" />"
+          (sb-blog-path-to-root level)))
 
 (defvar sb-blog-html-head-extra "<script type=\"text/javascript\">window.twttr = (function (d, s, id) {var t, js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src= \"https://platform.twitter.com/widgets.js\"; fjs.parentNode.insertBefore(js, fjs); return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } }); }(document, \"script\", \"twitter-wjs\"));</script>")
 
@@ -63,7 +68,7 @@
          :auto-sitemap nil
          :html-doctype "html5"
          :html-container "div"
-         :html-head ,sb-blog-html-head-0
+         :html-head ,(sb-blog-html-head 0)
          :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
@@ -84,7 +89,7 @@
          :sitemap-sort-files chronologically
          :html-doctype "html5"
          :html-container "div"
-         :html-head ,sb-blog-html-head-1
+         :html-head ,(sb-blog-html-head 1)
          :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
@@ -108,7 +113,7 @@
          :sitemap-file-entry-format "%d -- %t"
          :html-doctype "html5"
          :html-container "div"
-         :html-head ,sb-blog-html-head-1
+         :html-head ,(sb-blog-html-head 1)
          :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
