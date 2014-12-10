@@ -11,11 +11,16 @@
 (defvar sb-blog-css-publishing-directory (concat sb-blog-publishing-directory
                                                  "css/"))
 
-
 (defun sb-blog-path-to-root (level)
   (let ((path "./"))
     (dotimes (number level path)
       (setq path (concat path "../")))))
+
+(defun sb-blog-link (link description)
+  (format "<a href=\"%s\">%s</a>" link description))
+
+(defun sb-blog-rel-link (link description level)
+  (sb-blog-link (concat (sb-blog-path-to-root level) link) description))
 
 (defun sb-blog-html-head (level)
   (format "<link href=\"%scss/theme.css\" rel=\"stylesheet\" />"
@@ -23,7 +28,17 @@
 
 (defvar sb-blog-html-head-extra "<script type=\"text/javascript\">window.twttr = (function (d, s, id) {var t, js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src= \"https://platform.twitter.com/widgets.js\"; fjs.parentNode.insertBefore(js, fjs); return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } }); }(document, \"script\", \"twitter-wjs\"));</script>")
 
-(defvar sb-blog-html-preamble "<div class=\"navbar\"><a href=\"../index.html\">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"../pages/about.html\">About me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"../pages/references.html\">References</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"../posts/archives.html\">Archives</a></div>")
+(defun sb-blog-html-preamble (level)
+  (let ((sep "&nbsp;&nbsp;&nbsp;&nbsp;"))
+    (concat "<div class=\"navbar\">"
+            (sb-blog-rel-link "index.html" "Home" level)
+            sep
+            (sb-blog-rel-link "pages/about.html" "About me" level)
+            sep
+            (sb-blog-rel-link "pages/references.html" "References" level)
+            sep
+            (sb-blog-rel-link "posts/archives.html" "Archives" level)
+            "</div")))
 
 (defvar sb-blog-html-postamble "<a class=\"twitter-follow-button\" href=\"https://twitter.com/SebBrisard\" data-show-count=\"true\" data-lang=\"en\">Follow @SebBrisard</a>")
 
@@ -73,6 +88,7 @@
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
+         :html-preamble ,(sb-blog-html-preamble 0)
          :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
@@ -93,7 +109,7 @@
          :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
-         :html-preamble ,sb-blog-html-preamble
+         :html-preamble ,(sb-blog-html-preamble 1)
          :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
@@ -117,7 +133,7 @@
          :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
-         :html-preamble ,sb-blog-html-preamble
+         :html-preamble ,(sb-blog-html-preamble 1)
          :html-postamble ,sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
