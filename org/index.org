@@ -1,5 +1,4 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "./include/mathjax.org"
 #+TITLE: Welcome!
 
 You've reached the personal homepage of Sébastien Brisard. Please follow the links below.
@@ -14,7 +13,7 @@ The Green operator for strains is defined as the linear operator which maps --in
 
 * [[file:./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][2014-02-26 -- Decomposition of transverse isotropic, fourth-rank tensors]]
 
-In [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][a previous post]], I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown ([[file:../pages/references.org::#WALP1984][Walpole, 1984]]) that the space of three-dimensional, /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole ([[file:../pages/references.org::#WALP1984][1984]]).
+In [[file:./posts/20140112-Elastic_constants_of_an_isotropic_material-03.org][a previous post]], I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown ([[file:./pages/references.org::#WALP1984][Walpole, 1984]]) that the space of three-dimensional, /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole ([[file:./pages/references.org::#WALP1984][1984]]).
 
 * [[file:./posts/20140219-On_the_double_dot_product.org][2014-02-19 -- On the double dot product]]
 
@@ -22,5 +21,4 @@ The double dot product of two tensors is the contraction of these tensors with r
 
 * [[file:./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse.org][2014-01-31 -- The elastic acoustic tensor and its inverse]]
 
-We consider a linearly elastic material with stiffness $\stiffness$. For any wave-vector $\vec k$, the elastic acoustic tensor $\acoustic(\vec k)$ is defined as follows
-
+In this post, I will introduce the acoustic tensor of linearly elastic materials. Closed-form expressions of the inverse of this tensor can be derived in the case of /isotropic/ materials. This will later come in handy to derive closed-form expressions of the periodic Green operator for strains.
