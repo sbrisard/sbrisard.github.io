@@ -93,6 +93,10 @@
         margin: 20px auto 20px auto;
     }
 
+    .MathJax a {
+        color: blue;
+    }
+
     img {
         max-width: 100%;
     }
