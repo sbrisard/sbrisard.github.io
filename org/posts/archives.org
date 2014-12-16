@@ -1,7 +1,5 @@
 #+TITLE: Blog archive
 
-   + [[file:2014XXXX-Orientation_correlations_among_rice_grains-02.org][2014-12-04 -- Orientation correlations among rice grains, part 2: acquisition of tomography images]]
-   + [[file:2014XXXX-Orientation_correlations_among_rice_grains-01.org][2014-10-24 -- Orientation correlations among rice grains, part 1: introduction]]
    + [[file:20131205-Elastic_constants_of_an_isotropic_material-01.org][2014-10-24 -- Elastic constants of an isotropic material, part 1: 3D elasticity]]
    + [[file:20140813-Review_of_Parallel_Programming_with_Python.org][2014-08-13 -- Review of "Parallel Programming with Python"]]
    + [[file:20140306-The_periodic_Green_operator_for_strains.org][2014-03-06 -- The periodic Green operator for strains]]
