@@ -1,6 +1,7 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Elastic constants of an isotropic material, part 1: 3D elasticity
+#+DATE: <2013-12-05 Thu>
 
 Among all classes of materials, the class of linearly elastic and isotropic materials is probably the simplest. Such materials are defined by two elastic constants: for example, Young's modulus $E$ and Poisson's ratio $\nu$. However, depending on the situation, this pair of constants might not be the most appropriate@@html:<!-- more -->@@ (meaning that they may not lead to the most compact expressions). Alternative sets of elastic constants are
 

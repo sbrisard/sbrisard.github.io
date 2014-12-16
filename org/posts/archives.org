@@ -1,6 +1,5 @@
 #+TITLE: Blog archive
 
-   + [[file:20131205-Elastic_constants_of_an_isotropic_material-01.org][2014-10-24 -- Elastic constants of an isotropic material, part 1: 3D elasticity]]
    + [[file:20140813-Review_of_Parallel_Programming_with_Python.org][2014-08-13 -- Review of "Parallel Programming with Python"]]
    + [[file:20140306-The_periodic_Green_operator_for_strains.org][2014-03-06 -- The periodic Green operator for strains]]
    + [[file:20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][2014-02-26 -- Decomposition of transverse isotropic, fourth-rank tensors]]
@@ -13,6 +12,7 @@
    + [[file:20131219-Scientific_computing_under_windows_7-07.org][2013-12-19 -- Scientific computing under Windows 7, part 7: ITK (proper)]]
    + [[file:20131218-Scientific_computing_under_windows_7-06.org][2013-12-18 -- Scientific computing under Windows 7, part 6: ITK (prerequisites)]]
    + [[file:20131210-Mathjax_now_accepts_equation_numbers.org][2013-12-10 -- MathJax now accepts equation numbers]]
+   + [[file:20131205-Elastic_constants_of_an_isotropic_material-01.org][2013-12-05 -- Elastic constants of an isotropic material, part 1: 3D elasticity]]
    + [[file:20131105-New_accepted_manuscript.org][2013-11-05 -- New accepted manuscript]]
    + [[file:20131006-Scientific_computing_under_Windows_7-05.org][2013-10-06 -- Scientific computing under Windows 7, part 5: LAMMPS]]
    + [[file:20130929-Scientific_computing_under_Windows_7-04.org][2013-09-29 -- Scientific computing under Windows 7, part 4: FFTW with support for MPI]]
