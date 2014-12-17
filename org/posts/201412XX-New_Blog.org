@@ -1,0 +1,5 @@
+# -*- coding: utf-8; -*-
+#+TITLE: New Blog!
+#+DATE: [2014-12-17 Wed]
+
+My blog was previously hosted by Blogger. I have now moved to [[https://pages.github.com/][GitHub Pages]], and a statically generated blog. This new website is entirely generated with Emacs' [[http://orgmode.org/][Org mode]] (the source files of my blog can be found [[https://github.com/sbrisard/blog][here]]; see in particular the [[https://github.com/sbrisard/blog/blob/master/init.el][config file]]). The stylesheet is inspired by the [[http://orgmode.org/worg/][Hello Worg]] website, whose simplicity I like. It is a rather exciting experience for me to build a whole website "from scratch". Of course, there are many things I need to learn, and this blog should hopefully improve with time... be patient! Meanwhile, have a look to my previous posts which I have ported to this site. Happy reading!
