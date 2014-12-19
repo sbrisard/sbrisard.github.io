@@ -38,7 +38,7 @@
             (sb-blog-rel-link "pages/references.html" "References" level)
             sep
             (sb-blog-rel-link "posts/archives.html" "Archives" level)
-            "</div")))
+            "</div>")))
 
 (defvar sb-blog-html-postamble "<a class=\"twitter-follow-button\" href=\"https://twitter.com/SebBrisard\" data-show-count=\"true\" data-lang=\"en\">Follow @SebBrisard</a>")
 
