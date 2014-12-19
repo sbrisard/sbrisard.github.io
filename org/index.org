@@ -3,7 +3,7 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
-* [[file:./posts/201412XX-New_Blog.org][2014-12-17 -- New Blog!]]
+* [[file:./posts/20141219-New_Blog.org][2014-12-19 -- New Blog!]]
 
 My blog was previously hosted by Blogger. I have now moved to [[https://pages.github.com/][GitHub Pages]], and a statically generated blog. This new website is entirely generated with Emacs' [[http://orgmode.org/][Org mode]] (the source files of my blog can be found [[https://github.com/sbrisard/blog][here]]; see in particular the [[https://github.com/sbrisard/blog/blob/master/init.el][config file]]). The stylesheet is inspired by the [[http://orgmode.org/worg/][Hello Worg]] website, the simplicity of which I like. It is a rather exciting experience for me to build a whole website "from scratch". Of course, there are many things I need to learn, and this blog should hopefully improve with time... be patient! Meanwhile, have a look to my previous posts which I have ported to this site. Happy reading!
 

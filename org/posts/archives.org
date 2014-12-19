@@ -1,6 +1,6 @@
 #+TITLE: Blog archive
 
-   + [[file:201412XX-New_Blog.org][2014-12-17 -- New Blog!]]
+   + [[file:20141219-New_Blog.org][2014-12-19 -- New Blog!]]
    + [[file:20140813-Review_of_Parallel_Programming_with_Python.org][2014-08-13 -- Review of "Parallel Programming with Python"]]
    + [[file:20140306-The_periodic_Green_operator_for_strains.org][2014-03-06 -- The periodic Green operator for strains]]
    + [[file:20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][2014-02-26 -- Decomposition of transverse isotropic, fourth-rank tensors]]
