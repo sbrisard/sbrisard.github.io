@@ -1,4 +1,8 @@
 ;; -*- coding: utf-8 -*-
+
+;; For string manipulations
+(require 's)
+
 ;; Get path to file being loaded.
 (defvar sb-blog-root (file-name-directory load-file-name))
 (defvar sb-blog-base-directory (concat sb-blog-root "org/"))
@@ -41,6 +45,34 @@
             "</div>")))
 
 (defvar sb-blog-html-postamble "<a class=\"twitter-follow-button\" href=\"https://twitter.com/SebBrisard\" data-show-count=\"true\" data-lang=\"en\">Follow @SebBrisard</a>")
+
+(defvar sb-blog-disqus-script-format "<script type=\"text/javascript\">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = '%s';
+var disqus_title = '%s';
+var disqus_url = '%s';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>")
+
+(defun sb-blog-disqus-script (info)
+  (let (id url)
+    (setq id (s-chop-prefix sb-blog-base-directory
+                            (s-chop-suffix ".org" buffer-file-name)))
+    (setq url (concat "http://sbrisard.github.io/" id ".html"))
+    (format sb-blog-disqus-script-format
+            id
+            (org-export-data (plist-get info :title) info)
+            url)))
+
+(defun sb-blog-html-postamble-posts (info)
+  (concat sb-blog-html-postamble
+          (sb-blog-disqus-script info) "\n"))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
@@ -134,7 +166,7 @@
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble ,(sb-blog-html-preamble 1)
-         :html-postamble ,sb-blog-html-postamble
+         :html-postamble sb-blog-html-postamble-posts
          :section-numbers nil
          :with-toc nil
          :language "en"
