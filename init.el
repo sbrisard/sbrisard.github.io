@@ -1,7 +1,18 @@
 ;; -*- coding: utf-8 -*-
+(require 'ox)
+(require 's) ;; For string manipulations
 
-;; For string manipulations
-(require 's)
+(org-export-define-derived-backend 'sb-blog 'html
+                                   :export-block "SB BLOG"
+                                   :options-alist
+                                   '((:comments-allowed "COMMENTS" nil nil t)))
+
+(defun sb-blog-publish-to-html (plist filename pub-dir)
+  (org-publish-org-to 'sb-blog filename
+		      (concat "." (or (plist-get plist :html-extension)
+				      org-html-extension "html"))
+		      plist pub-dir))
+
 
 ;; Get path to file being loaded.
 (defvar sb-blog-root (file-name-directory load-file-name))
@@ -71,8 +82,11 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             url)))
 
 (defun sb-blog-html-postamble-with-comments (info)
-  (concat sb-blog-html-postamble-without-comments
-          (sb-blog-disqus-script info) "\n" (or (plist-get info :essai) "")))
+  (let ((comments (plist-get info :comments-allowed)))
+    (concat sb-blog-html-postamble-without-comments
+            (sb-blog-disqus-script info) "\n"
+            (org-export-data comments info) "\n"
+            (if comments "coucou" "blabla") "\n")))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
@@ -153,7 +167,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :base-extension "org"
          :exclude nil
          :recursive t
-         :publishing-function org-html-publish-to-html
+         :publishing-function sb-blog-publish-to-html
          :auto-sitemap t
          :sitemap-filename "archives.org"
          :sitemap-title "Blog archive"
@@ -170,6 +184,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :section-numbers nil
          :with-toc nil
          :language "en"
+         :comments-allowed "yes"
          )
         ("blog-images"
          :base-directory ,sb-blog-base-directory
