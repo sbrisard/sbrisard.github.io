@@ -44,7 +44,7 @@
             (sb-blog-rel-link "posts/archives.html" "Archives" level)
             "</div>")))
 
-(defvar sb-blog-html-postamble "<a class=\"twitter-follow-button\" href=\"https://twitter.com/SebBrisard\" data-show-count=\"true\" data-lang=\"en\">Follow @SebBrisard</a>")
+(defvar sb-blog-html-postamble-without-comments "<a class=\"twitter-follow-button\" href=\"https://twitter.com/SebBrisard\" data-show-count=\"true\" data-lang=\"en\">Follow @SebBrisard</a>")
 
 (defvar sb-blog-disqus-script-format "<script type=\"text/javascript\">
 var disqus_shortname = 'sbrisard';
@@ -70,9 +70,9 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (org-export-data (plist-get info :title) info)
             url)))
 
-(defun sb-blog-html-postamble-posts (info)
-  (concat sb-blog-html-postamble
-          (sb-blog-disqus-script info) "\n"))
+(defun sb-blog-html-postamble-with-comments (info)
+  (concat sb-blog-html-postamble-without-comments
+          (sb-blog-disqus-script info) "\n" (or (plist-get info :essai) "")))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
@@ -121,7 +121,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :html-head-include-scripts nil
          :html-preamble nil
          :html-preamble ,(sb-blog-html-preamble 0)
-         :html-postamble ,sb-blog-html-postamble
+         :html-postamble ,sb-blog-html-postamble-without-comments
          :section-numbers nil
          :with-toc nil
          :language "en"
@@ -142,7 +142,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble ,(sb-blog-html-preamble 1)
-         :html-postamble ,sb-blog-html-postamble
+         :html-postamble ,sb-blog-html-postamble-without-comments
          :section-numbers nil
          :with-toc nil
          :language "en"
@@ -166,7 +166,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble ,(sb-blog-html-preamble 1)
-         :html-postamble sb-blog-html-postamble-posts
+         :html-postamble sb-blog-html-postamble-with-comments
          :section-numbers nil
          :with-toc nil
          :language "en"
