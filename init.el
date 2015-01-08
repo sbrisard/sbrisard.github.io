@@ -5,7 +5,7 @@
 (org-export-define-derived-backend 'sb-blog 'html
                                    :export-block "SB BLOG"
                                    :options-alist
-                                   '((:comments-allowed "COMMENTS" nil nil t)))
+                                   '((:comments-allowed nil "comments" nil)))
 
 (defun sb-blog-publish-to-html (plist filename pub-dir)
   (org-publish-org-to 'sb-blog filename
@@ -69,7 +69,8 @@ dsq.async = true;
 dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 })();
-</script>")
+</script>
+")
 
 (defun sb-blog-disqus-script (info)
   (let (id url)
@@ -81,12 +82,11 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (org-export-data (plist-get info :title) info)
             url)))
 
+;; To allow for comments
+;; #+OPTIONS: comments:t
 (defun sb-blog-html-postamble-with-comments (info)
-  (let ((comments (plist-get info :comments-allowed)))
-    (concat sb-blog-html-postamble-without-comments
-            (sb-blog-disqus-script info) "\n"
-            (org-export-data comments info) "\n"
-            (if comments "coucou" "blabla") "\n")))
+  (concat sb-blog-html-postamble-without-comments
+          (when (plist-get info :comments-allowed) (sb-blog-disqus-script info))))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
@@ -184,7 +184,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :section-numbers nil
          :with-toc nil
          :language "en"
-         :comments-allowed "yes"
+         :comments-allowed t
          )
         ("blog-images"
          :base-directory ,sb-blog-base-directory
