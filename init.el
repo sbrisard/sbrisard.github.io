@@ -13,6 +13,41 @@
 				      org-html-extension "html"))
 		      plist pub-dir))
 
+;; Scripts for embedded gadgets
+;; ============================
+
+;; Twitter buttons
+;; ---------------
+(defvar sb-blog-twitter-follow-button-script "<a href=\"https://twitter.com/SebBrisard\" class=\"twitter-follow-button\" data-show-count=\"false\">Follow @SebBrisard</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+")
+
+;; Disqus comments embed
+;; ---------------------
+(defvar sb-blog-disqus-script-format "<script type=\"text/javascript\">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = '%s';
+var disqus_title = '%s';
+var disqus_url = '%s';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+")
+
+(defun sb-blog-disqus-script (info)
+  (let (id url)
+    (setq id (s-chop-prefix sb-blog-base-directory
+                            (s-chop-suffix ".org" buffer-file-name)))
+    (setq url (concat "http://sbrisard.github.io/" id ".html"))
+    (format sb-blog-disqus-script-format
+            id
+            (org-export-data (plist-get info :title) info)
+            url)))
 
 ;; Get path to file being loaded.
 (defvar sb-blog-root (file-name-directory load-file-name))
@@ -41,8 +76,6 @@
   (format "<link href=\"%scss/theme.css\" rel=\"stylesheet\" />"
           (sb-blog-path-to-root level)))
 
-(defvar sb-blog-html-head-extra "<script type=\"text/javascript\">window.twttr = (function (d, s, id) {var t, js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src= \"https://platform.twitter.com/widgets.js\"; fjs.parentNode.insertBefore(js, fjs); return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } }); }(document, \"script\", \"twitter-wjs\"));</script>")
-
 (defun sb-blog-html-preamble (level)
   (let ((sep "&nbsp;&nbsp;&nbsp;&nbsp;"))
     (concat "<div class=\"navbar\">"
@@ -55,37 +88,10 @@
             (sb-blog-rel-link "posts/archives.html" "Archives" level)
             "</div>")))
 
-(defvar sb-blog-html-postamble-without-comments "<a class=\"twitter-follow-button\" href=\"https://twitter.com/SebBrisard\" data-show-count=\"true\" data-lang=\"en\">Follow @SebBrisard</a>")
-
-(defvar sb-blog-disqus-script-format "<script type=\"text/javascript\">
-var disqus_shortname = 'sbrisard';
-var disqus_identifier = '%s';
-var disqus_title = '%s';
-var disqus_url = '%s';
-(function() {
-var dsq = document.createElement('script');
-dsq.type = 'text/javascript';
-dsq.async = true;
-dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-")
-
-(defun sb-blog-disqus-script (info)
-  (let (id url)
-    (setq id (s-chop-prefix sb-blog-base-directory
-                            (s-chop-suffix ".org" buffer-file-name)))
-    (setq url (concat "http://sbrisard.github.io/" id ".html"))
-    (format sb-blog-disqus-script-format
-            id
-            (org-export-data (plist-get info :title) info)
-            url)))
-
 ;; To allow for comments
 ;; #+OPTIONS: comments:t
-(defun sb-blog-html-postamble-with-comments (info)
-  (concat sb-blog-html-postamble-without-comments
+(defun sb-blog-html-postamble (info)
+  (concat sb-blog-twitter-follow-button-script
           (when (plist-get info :comments-allowed) (sb-blog-disqus-script info))))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
@@ -125,20 +131,20 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :base-extension "org"
          :exclude nil
          :recursive nil
-         :publishing-function org-html-publish-to-html
+         :publishing-function sb-blog-publish-to-html
          :auto-sitemap nil
          :html-doctype "html5"
          :html-container "div"
          :html-head ,(sb-blog-html-head 0)
-         :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
          :html-preamble ,(sb-blog-html-preamble 0)
-         :html-postamble ,sb-blog-html-postamble-without-comments
+         :html-postamble sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
          :language "en"
+         :comments-allowed nil
          )
         ("blog-pages"
          :base-directory ,sb-blog-pages-base-directory
@@ -146,20 +152,20 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :base-extension "org"
          :exclude nil
          :recursive t
-         :publishing-function org-html-publish-to-html
+         :publishing-function sb-blog-publish-to-html
          :auto-sitemap nil
          :sitemap-sort-files chronologically
          :html-doctype "html5"
          :html-container "div"
          :html-head ,(sb-blog-html-head 1)
-         :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble ,(sb-blog-html-preamble 1)
-         :html-postamble ,sb-blog-html-postamble-without-comments
+         :html-postamble sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
          :language "en"
+         :comments-allowed nil
          )
         ("blog-posts"
          :base-directory ,sb-blog-posts-base-directory
@@ -176,11 +182,10 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :html-doctype "html5"
          :html-container "div"
          :html-head ,(sb-blog-html-head 1)
-         :html-head-extra ,sb-blog-html-head-extra
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble ,(sb-blog-html-preamble 1)
-         :html-postamble sb-blog-html-postamble-with-comments
+         :html-postamble sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
          :language "en"
