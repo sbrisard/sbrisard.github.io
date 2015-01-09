@@ -1,17 +1,21 @@
 ;; -*- coding: utf-8 -*-
 (require 'ox)
-(require 's) ;; For string manipulations
+(require 's)
 
-(org-export-define-derived-backend 'sb-blog 'html
-                                   :export-block "SB BLOG"
-                                   :options-alist
-                                   '((:comments-allowed nil "comments" nil)))
+;; Global variables
+;; ================
 
-(defun sb-blog-publish-to-html (plist filename pub-dir)
-  (org-publish-org-to 'sb-blog filename
-		      (concat "." (or (plist-get plist :html-extension)
-				      org-html-extension "html"))
-		      plist pub-dir))
+;; Get path to file being loaded.
+(defvar sb-blog-root (file-name-directory load-file-name))
+(defvar sb-blog-base-directory (concat sb-blog-root "org/"))
+(defvar sb-blog-publishing-directory (concat sb-blog-root "html/"))
+(defvar sb-blog-pages-base-directory (concat sb-blog-root "org/pages"))
+(defvar sb-blog-pages-publishing-directory (concat sb-blog-root "html/pages"))
+(defvar sb-blog-posts-base-directory (concat sb-blog-root "org/posts"))
+(defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
+(defvar sb-blog-css-base-directory (concat sb-blog-root "css/"))
+(defvar sb-blog-css-publishing-directory (concat sb-blog-publishing-directory
+                                                 "css/"))
 
 ;; Scripts for embedded gadgets
 ;; ============================
@@ -49,17 +53,19 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (org-export-data (plist-get info :title) info)
             url)))
 
-;; Get path to file being loaded.
-(defvar sb-blog-root (file-name-directory load-file-name))
-(defvar sb-blog-base-directory (concat sb-blog-root "org/"))
-(defvar sb-blog-publishing-directory (concat sb-blog-root "html/"))
-(defvar sb-blog-pages-base-directory (concat sb-blog-root "org/pages"))
-(defvar sb-blog-pages-publishing-directory (concat sb-blog-root "html/pages"))
-(defvar sb-blog-posts-base-directory (concat sb-blog-root "org/posts"))
-(defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
-(defvar sb-blog-css-base-directory (concat sb-blog-root "css/"))
-(defvar sb-blog-css-publishing-directory (concat sb-blog-publishing-directory
-                                                 "css/"))
+;; Custom backend
+;; ==============
+
+(org-export-define-derived-backend 'sb-blog 'html
+                                   :export-block "SB BLOG"
+                                   :options-alist
+                                   '((:comments-allowed nil "comments" nil)))
+
+(defun sb-blog-publish-to-html (plist filename pub-dir)
+  (org-publish-org-to 'sb-blog filename
+		      (concat "." (or (plist-get plist :html-extension)
+				      org-html-extension "html"))
+		      plist pub-dir))
 
 (defun sb-blog-path-to-root (level)
   (let ((path "./"))
