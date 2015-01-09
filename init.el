@@ -97,8 +97,11 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 ;; To allow for comments
 ;; #+OPTIONS: comments:t
 (defun sb-blog-html-postamble (info)
-  (concat sb-blog-twitter-follow-button-script
-          (when (plist-get info :comments-allowed) (sb-blog-disqus-script info))))
+  (concat "<p>This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>.</p>
+"
+          sb-blog-twitter-follow-button-script
+          (when (plist-get info :comments-allowed)
+            (sb-blog-disqus-script info))))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
