@@ -73,6 +73,8 @@
     h2 a:hover { color: blue; }
 
     #postamble {
+        border-top: 1px solid #ddd;
+        font-size:0.8em;
         text-align: center;
     }
 
