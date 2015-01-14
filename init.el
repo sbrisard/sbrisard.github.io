@@ -85,13 +85,12 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 (defun sb-blog-html-preamble (level)
   (let ((sep "&nbsp;&nbsp;&nbsp;&nbsp;"))
     (concat "<div class=\"navbar\">"
-            (sb-blog-rel-link "index.html" "Home" level)
-            sep
-            (sb-blog-rel-link "pages/about.html" "About me" level)
-            sep
-            (sb-blog-rel-link "pages/references.html" "References" level)
-            sep
-            (sb-blog-rel-link "posts/archives.html" "Archives" level)
+            "<ul>"
+            "<li>" (sb-blog-rel-link "index.html" "Home" level) "</li>"
+            "<li>" (sb-blog-rel-link "pages/about.html" "About me" level) "</li>"
+            "<li>" (sb-blog-rel-link "pages/references.html" "References" level) "</li>"
+            "<li>" (sb-blog-rel-link "posts/archives.html" "Archives" level) "</li>"
+            "</ul>"
             "</div>")))
 
 ;; To allow for comments

@@ -78,11 +78,6 @@
         text-align: center;
     }
 
-    .navbar {
-	font-size: 10pt;
-	border-bottom: 1px solid #ddd;
-    }
-
     .title {
 	font-size: 30pt;
         line-height: 35pt;
@@ -161,6 +156,36 @@
 	padding: 1.2em;
 	border: 2px solid #dddddd;
 	overflow: auto;
+    }
+
+    .navbar {
+	font-size: 11pt;
+    }
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .navbar li {
+        float: left;
+        margin: 0;
+    }
+
+    .navbar a {
+        display: block;
+        margin-right: 20px;
+        text-decoration: none;
+    }
+
+    .navbar a:link, .navbar a:visited {
+        color: grey;
+    }
+
+    .navbar a:hover, .navbar a:active {
+        color: black;
     }
 
     .org-info-box {
