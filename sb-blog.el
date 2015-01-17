@@ -136,7 +136,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 ;; - Carsten
 ;;
 (setq org-publish-project-alist
-      `(("blog-root"
+      `(("sb-blog-root"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
          :base-extension "org"
@@ -157,7 +157,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :language "en"
          :comments-allowed nil
          )
-        ("blog-pages"
+        ("sb-blog-pages"
          :base-directory ,sb-blog-pages-base-directory
          :publishing-directory ,sb-blog-pages-publishing-directory
          :base-extension "org"
@@ -178,7 +178,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :language "en"
          :comments-allowed nil
          )
-        ("blog-posts"
+        ("sb-blog-posts"
          :base-directory ,sb-blog-posts-base-directory
          :publishing-directory ,sb-blog-posts-publishing-directory
          :base-extension "org"
@@ -202,21 +202,21 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :language "en"
          :comments-allowed t
          )
-        ("blog-images"
+        ("sb-blog-images"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
          :base-extension "jpg\\|gif\\|png"
          :recursive t
          :publishing-function org-publish-attachment)
-        ("blog-css"
+        ("sb-blog-css"
          :base-directory ,sb-blog-css-base-directory
          :publishing-directory ,sb-blog-css-publishing-directory
          :base-extension "css"
          :recursive t
          :publishing-function org-publish-attachment)
-        ("blog"
-         :components ("blog-root"
-                      "blog-pages"
-                      "blog-posts"
-                      "blog-images"
-                      "blog-css"))))
+        ("sb-blog"
+         :components ("sb-blog-root"
+                      "sb-blog-pages"
+                      "sb-blog-posts"
+                      "sb-blog-images"
+                      "sb-blog-css"))))
