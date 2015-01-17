@@ -12,6 +12,7 @@
 (defvar sb-blog-pages-base-directory (concat sb-blog-root "org/pages"))
 (defvar sb-blog-pages-publishing-directory (concat sb-blog-root "html/pages"))
 (defvar sb-blog-posts-base-directory (concat sb-blog-root "org/posts"))
+(defvar sb-blog-posts-sitemap-filename "archives.org")
 (defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
 (defvar sb-blog-css-base-directory (concat sb-blog-root "css/"))
 (defvar sb-blog-css-publishing-directory (concat sb-blog-publishing-directory
@@ -102,7 +103,9 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   (concat "<p>This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>.</p>
 "
           sb-blog-twitter-follow-button-script
-          (when (plist-get info :comments-allowed)
+          (when (and (plist-get info :comments-allowed)
+                     (not (s-ends-with? sb-blog-posts-sitemap-filename
+                                        buffer-file-name)))
             (sb-blog-disqus-script info))))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
@@ -186,7 +189,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :recursive t
          :publishing-function sb-blog-publish-to-html
          :auto-sitemap t
-         :sitemap-filename "archives.org"
+         :sitemap-filename ,sb-blog-posts-sitemap-filename
          :sitemap-title "Blog archive"
          :sitemap-sort-files anti-chronologically
          :sitemap-file-entry-format "%d -- %t"
