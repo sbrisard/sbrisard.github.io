@@ -88,7 +88,8 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
 (defun sb-blog-html-preamble (level)
   (let ((sep "&nbsp;&nbsp;&nbsp;&nbsp;"))
-    (concat "<div class=\"navbar\">"
+    (concat "<img id=\"banner\" src=\"" (sb-blog-path-to-root level) "images/banner.jpg\"/>"
+            "<div class=\"navbar\">"
             "<ul>"
             "<li>" (sb-blog-rel-link "index.html" "Home" level) "</li>"
             "<li>" (sb-blog-rel-link "pages/about.html" "About me" level) "</li>"
