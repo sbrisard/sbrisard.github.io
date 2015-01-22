@@ -95,6 +95,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             "<li>" (sb-blog-rel-link "pages/about.html" "About me" level) "</li>"
             "<li>" (sb-blog-rel-link "pages/references.html" "References" level) "</li>"
             "<li>" (sb-blog-rel-link "posts/archives.html" "Archives" level) "</li>"
+            "<li>" (sb-blog-rel-link "feed.xml" "RSS" level) "</li>"
             "</ul>"
             "</div>")))
 
@@ -206,10 +207,10 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :language "en"
          :comments-allowed t
          )
-        ("sb-blog-images"
+        ("sb-blog-attachments"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
-         :base-extension "jpg\\|gif\\|png"
+         :base-extension "jpg\\|gif\\|png\\|xml"
          :recursive t
          :publishing-function org-publish-attachment)
         ("sb-blog-css"
@@ -222,5 +223,5 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :components ("sb-blog-root"
                       "sb-blog-pages"
                       "sb-blog-posts"
-                      "sb-blog-images"
+                      "sb-blog-attachments"
                       "sb-blog-css"))))

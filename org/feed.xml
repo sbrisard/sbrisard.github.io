@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Sébastien Brisard's blog</title>
+    <link>http://sbrisard.github.io/</link>
+    <item>
+      <title>New Blog!</title>
+      <link>http://sbrisard.github.io/posts/20141219-New_Blog.html</link>
+      <guid>posts/20141219-New_Blog</guid>
+      <pubDate>Fri, 19 Dec 2014</pubDate>
+    </item>
+    <item>
+      <title>Review of "Parallel Programming with Python"</title>
+      <link>http://sbrisard.github.io/posts/20140813-Review_of_Parallel_Programming_with_Python.html</link>
+      <guid>posts/20140813-Review_of_Parallel_Programming_with_Python.html</guid>
+      <pubDate>Wed, 13 Aug 2014</pubDate>
+    </item>
+    <item>
+      <title>The periodic Green operator for strains</title>
+      <link>http://sbrisard.github.io/posts/20140306-The_periodic_Green_operator_for_strains.html</link>
+      <guid>The_periodic_Green_operator_for_strains.html</guid>
+      <pubDate>Thu, 6 Mar 2014</pubDate>
+    </item>
+    <item>
+      <title>Decomposition of transverse isotropic, fourth-rank tensors</title>
+      <link>http://sbrisard.github.io/posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.html</link>
+      <guid>posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.html</guid>
+      <pubDate>Wed, 26 Feb 2014</pubDate>
+    </item>
+    <item>
+      <title>On the double dot product</title>
+      <link>http://sbrisard.github.io/posts/20140219-On_the_double_dot_product.html</link>
+      <guid>posts/20140219-On_the_double_dot_product.html</guid>
+      <pubDate>Wed, 19 Feb 2014</pubDate>
+    </item>
+  </channel>
+</rss>
