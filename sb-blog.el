@@ -14,9 +14,6 @@
 (defvar sb-blog-posts-base-directory (concat sb-blog-root "org/posts"))
 (defvar sb-blog-posts-sitemap-filename "archives.org")
 (defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
-(defvar sb-blog-css-base-directory (concat sb-blog-root "css/"))
-(defvar sb-blog-css-publishing-directory (concat sb-blog-publishing-directory
-                                                 "css/"))
 
 ;; Scripts for embedded gadgets
 ;; ============================
@@ -83,7 +80,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   (sb-blog-link (concat (sb-blog-path-to-root level) link) description))
 
 (defun sb-blog-html-head (level)
-  (format "<link href=\"%scss/theme.css\" rel=\"stylesheet\" />"
+  (format "<link href=\"%stheme.css\" rel=\"stylesheet\" />"
           (sb-blog-path-to-root level)))
 
 (defun sb-blog-html-preamble (level)
@@ -210,18 +207,11 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         ("sb-blog-attachments"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
-         :base-extension "jpg\\|gif\\|png\\|xml"
-         :recursive t
-         :publishing-function org-publish-attachment)
-        ("sb-blog-css"
-         :base-directory ,sb-blog-css-base-directory
-         :publishing-directory ,sb-blog-css-publishing-directory
-         :base-extension "css"
+         :base-extension "jpg\\|gif\\|png\\|xml\\|css"
          :recursive t
          :publishing-function org-publish-attachment)
         ("sb-blog"
          :components ("sb-blog-root"
                       "sb-blog-pages"
                       "sb-blog-posts"
-                      "sb-blog-attachments"
-                      "sb-blog-css"))))
+                      "sb-blog-attachments"))))
