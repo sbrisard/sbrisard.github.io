@@ -15,6 +15,15 @@
 (defvar sb-blog-posts-sitemap-filename "archives.org")
 (defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
 
+;; Path manipulations
+;; ==================
+
+(defun sb-blog-path-to-root (level)
+  (apply 'concat "./" (make-list level "../")))
+
+(defun sb-blog-get-level (path)
+  (length (s-split "/" (s-chop-prefix sb-blog-base-directory path))))
+
 ;; Scripts for embedded gadgets
 ;; ============================
 
@@ -54,6 +63,21 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (org-export-data (plist-get info :title) info)
             url)))
 
+;; Functions for generation of HTML tags
+;; =====================================
+
+(defun sb-blog-fa (name)
+  (format "<span class=\"fa fa-%s\"></span>" name))
+
+(defun sb-blog-list-item (item)
+  (concat "<li>" item "</li>\n"))
+
+(defun sb-blog-unordered-list (items)
+  (concat "<ul>\n" (mapconcat 'sb-blog-list-item items nil) "</ul>\n"))
+
+(defun sb-blog-link (link title description)
+  (format "<a href=\"%s\" title=\"%s\">%s</a>" link title description))
+
 ;; Custom backend
 ;; ==============
 
@@ -68,14 +92,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 				      org-html-extension "html"))
 		      plist pub-dir))
 
-(defun sb-blog-path-to-root (level)
-  (let ((path "./"))
-    (dotimes (number level path)
-      (setq path (concat path "../")))))
-
-(defun sb-blog-link (link title description)
-  (format "<a href=\"%s\" title=\"%s\">%s</a>" link title description))
-
 (defun sb-blog-rel-link (link title description level)
   (sb-blog-link (concat (sb-blog-path-to-root level) link) title description))
 
@@ -84,21 +100,30 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                   (sb-blog-path-to-root level))
           "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
-(defun sb-blog-fa (name)
-  (format "<span class=\"fa fa-%s\"/>" name))
-
 (defun sb-blog-html-preamble (level)
-  (let ((sep "&nbsp;&nbsp;&nbsp;&nbsp;"))
-    (concat "<img id=\"banner\" src=\"" (sb-blog-path-to-root level) "images/banner.jpg\"/>"
-            "<div class=\"navbar\">"
-            "<ul>"
-            "<li>" (sb-blog-rel-link "index.html" "Home" (sb-blog-fa "home") level) "</li>"
-            "<li>" (sb-blog-rel-link "pages/about.html" "About me" (sb-blog-fa "user") level) "</li>"
-            "<li>" (sb-blog-rel-link "pages/references.html" "References" (sb-blog-fa "book") level) "</li>"
-            "<li>" (sb-blog-rel-link "posts/archives.html" "Archives" (sb-blog-fa "archive") level) "</li>"
-            "<li>" (sb-blog-rel-link "feed.xml" "RSS" (sb-blog-fa "rss") level) "</li>"
-            "</ul>"
-            "</div>")))
+  (concat "<img id=\"banner\" src=\"" (sb-blog-path-to-root level) "images/banner.jpg\"/>\n"
+          "<div class=\"navbar\">\n"
+          (sb-blog-unordered-list `(,(sb-blog-rel-link "index.html"
+                                                       "Home"
+                                                       (sb-blog-fa "home")
+                                                       level)
+                                    ,(sb-blog-rel-link "pages/about.html"
+                                                       "About me"
+                                                       (sb-blog-fa "user")
+                                                       level)
+                                    ,(sb-blog-rel-link "pages/references.html"
+                                                       "References"
+                                                       (sb-blog-fa "book")
+                                                       level)
+                                    ,(sb-blog-rel-link "posts/archives.html"
+                                                       "Archives"
+                                                       (sb-blog-fa "archive")
+                                                       level)
+                                    ,(sb-blog-rel-link "feed.xml"
+                                                       "RSS"
+                                                       (sb-blog-fa "rss")
+                                                       level)))
+          "</div>\n"))
 
 ;; To allow for comments
 ;; #+OPTIONS: comments:t
