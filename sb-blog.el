@@ -73,33 +73,37 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (dotimes (number level path)
       (setq path (concat path "../")))))
 
-(defun sb-blog-link (link description)
-  (format "<a href=\"%s\">%s</a>" link description))
+(defun sb-blog-link (link title description)
+  (format "<a href=\"%s\" title=\"%s\">%s</a>" link title description))
 
-(defun sb-blog-rel-link (link description level)
-  (sb-blog-link (concat (sb-blog-path-to-root level) link) description))
+(defun sb-blog-rel-link (link title description level)
+  (sb-blog-link (concat (sb-blog-path-to-root level) link) title description))
 
 (defun sb-blog-html-head (level)
-  (format "<link href=\"%stheme.css\" rel=\"stylesheet\" />"
-          (sb-blog-path-to-root level)))
+  (concat (format "<link href=\"%stheme.css\" rel=\"stylesheet\" />"
+                  (sb-blog-path-to-root level))
+          "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
+
+(defun sb-blog-fa (name)
+  (format "<span class=\"fa fa-%s\"/>" name))
 
 (defun sb-blog-html-preamble (level)
   (let ((sep "&nbsp;&nbsp;&nbsp;&nbsp;"))
     (concat "<img id=\"banner\" src=\"" (sb-blog-path-to-root level) "images/banner.jpg\"/>"
             "<div class=\"navbar\">"
             "<ul>"
-            "<li>" (sb-blog-rel-link "index.html" "Home" level) "</li>"
-            "<li>" (sb-blog-rel-link "pages/about.html" "About me" level) "</li>"
-            "<li>" (sb-blog-rel-link "pages/references.html" "References" level) "</li>"
-            "<li>" (sb-blog-rel-link "posts/archives.html" "Archives" level) "</li>"
-            "<li>" (sb-blog-rel-link "feed.xml" "RSS" level) "</li>"
+            "<li>" (sb-blog-rel-link "index.html" "Home" (sb-blog-fa "home") level) "</li>"
+            "<li>" (sb-blog-rel-link "pages/about.html" "About me" (sb-blog-fa "user") level) "</li>"
+            "<li>" (sb-blog-rel-link "pages/references.html" "References" (sb-blog-fa "book") level) "</li>"
+            "<li>" (sb-blog-rel-link "posts/archives.html" "Archives" (sb-blog-fa "archive") level) "</li>"
+            "<li>" (sb-blog-rel-link "feed.xml" "RSS" (sb-blog-fa "rss") level) "</li>"
             "</ul>"
             "</div>")))
 
 ;; To allow for comments
 ;; #+OPTIONS: comments:t
 (defun sb-blog-html-postamble (info)
-  (concat "<p>This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>.</p>
+  (concat "<p>This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>. Icons come from the <a href=\"http://fontawesome.io/\">Font Awesome</a> icon set.</p>
 "
           sb-blog-twitter-follow-button-script
           (when (and (plist-get info :comments-allowed)

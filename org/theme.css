@@ -159,7 +159,8 @@
     }
 
     .navbar {
-	font-size: 11pt;
+        font-size: 16pt;
+        margin-bottom: 50px;
     }
 
     .navbar ul {
@@ -176,7 +177,7 @@
 
     .navbar a {
         display: block;
-        margin-right: 20px;
+        margin-right: 16px;
         text-decoration: none;
     }
 
