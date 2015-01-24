@@ -100,29 +100,31 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                   (sb-blog-path-to-root level))
           "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
+(defun sb-blog-link-home (level)
+  (sb-blog-rel-link "index.html" "Home" (sb-blog-fa "home") level))
+
+(defun sb-blog-link-about (level)
+  (sb-blog-rel-link "pages/about.html" "About me" (sb-blog-fa "user") level))
+
+(defun sb-blog-link-references (level)
+  (sb-blog-rel-link "pages/references.html" "References" (sb-blog-fa "book")
+                    level))
+
+(defun sb-blog-link-archives (level)
+  (sb-blog-rel-link "posts/archives.html" "Archives" (sb-blog-fa "archive")
+                    level))
+
+(defun sb-blog-link-rss (level)
+  (sb-blog-rel-link "feed.xml" "RSS" (sb-blog-fa "rss") level))
+
 (defun sb-blog-html-preamble (level)
   (concat "<img id=\"banner\" src=\"" (sb-blog-path-to-root level) "images/banner.jpg\"/>\n"
           "<div class=\"navbar\">\n"
-          (sb-blog-unordered-list `(,(sb-blog-rel-link "index.html"
-                                                       "Home"
-                                                       (sb-blog-fa "home")
-                                                       level)
-                                    ,(sb-blog-rel-link "pages/about.html"
-                                                       "About me"
-                                                       (sb-blog-fa "user")
-                                                       level)
-                                    ,(sb-blog-rel-link "pages/references.html"
-                                                       "References"
-                                                       (sb-blog-fa "book")
-                                                       level)
-                                    ,(sb-blog-rel-link "posts/archives.html"
-                                                       "Archives"
-                                                       (sb-blog-fa "archive")
-                                                       level)
-                                    ,(sb-blog-rel-link "feed.xml"
-                                                       "RSS"
-                                                       (sb-blog-fa "rss")
-                                                       level)))
+          (sb-blog-unordered-list `(,(sb-blog-link-home level)
+                                    ,(sb-blog-link-about level)
+                                    ,(sb-blog-link-references level)
+                                    ,(sb-blog-link-archives level)
+                                    ,(sb-blog-link-rss level)))
           "</div>\n"))
 
 ;; To allow for comments
