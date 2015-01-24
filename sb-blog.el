@@ -21,8 +21,11 @@
 (defun sb-blog-path-to-root (level)
   (apply 'concat "./" (make-list level "../")))
 
-(defun sb-blog-get-level (path)
-  (length (s-split "/" (s-chop-prefix sb-blog-base-directory path))))
+(defun sb-blog-get-level ()
+  (length (s-split "/"
+                   (s-chop-prefix sb-blog-base-directory
+                                  (file-name-directory buffer-file-name))
+                   t)))
 
 ;; Scripts for embedded gadgets
 ;; ============================
