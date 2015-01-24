@@ -125,15 +125,16 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                   (sb-blog-path-to-root level))
           "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
-(defun sb-blog-html-preamble (level)
-  (concat (sb-blog-banner level)
-          "<div class=\"navbar\">\n"
-          (sb-blog-unordered-list `(,(sb-blog-link-home level)
-                                    ,(sb-blog-link-about level)
-                                    ,(sb-blog-link-references level)
-                                    ,(sb-blog-link-archives level)
-                                    ,(sb-blog-link-rss level)))
-          "</div>\n"))
+(defun sb-blog-html-preamble (info)
+  (let ((level (sb-blog-get-level)))
+    (concat (sb-blog-banner level)
+            "<div class=\"navbar\">\n"
+            (sb-blog-unordered-list `(,(sb-blog-link-home level)
+                                      ,(sb-blog-link-about level)
+                                      ,(sb-blog-link-references level)
+                                      ,(sb-blog-link-archives level)
+                                      ,(sb-blog-link-rss level)))
+            "</div>\n")))
 
 ;; To allow for comments
 ;; #+OPTIONS: comments:t
@@ -191,7 +192,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
-         :html-preamble ,(sb-blog-html-preamble 0)
+         :html-preamble sb-blog-html-preamble
          :html-postamble sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
@@ -212,7 +213,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :html-head ,(sb-blog-html-head 1)
          :html-head-include-default-style nil
          :html-head-include-scripts nil
-         :html-preamble ,(sb-blog-html-preamble 1)
+         :html-preamble sb-blog-html-preamble
          :html-postamble sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
@@ -236,7 +237,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :html-head ,(sb-blog-html-head 1)
          :html-head-include-default-style nil
          :html-head-include-scripts nil
-         :html-preamble ,(sb-blog-html-preamble 1)
+         :html-preamble sb-blog-html-preamble
          :html-postamble sb-blog-html-postamble
          :section-numbers nil
          :with-toc nil
