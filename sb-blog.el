@@ -78,27 +78,8 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 (defun sb-blog-link (link title description)
   (format "<a href=\"%s\" title=\"%s\">%s</a>" link title description))
 
-;; Custom backend
-;; ==============
-
-(org-export-define-derived-backend 'sb-blog 'html
-                                   :export-block "SB BLOG"
-                                   :options-alist
-                                   '((:comments-allowed nil "comments" nil)))
-
-(defun sb-blog-publish-to-html (plist filename pub-dir)
-  (org-publish-org-to 'sb-blog filename
-		      (concat "." (or (plist-get plist :html-extension)
-				      org-html-extension "html"))
-		      plist pub-dir))
-
 (defun sb-blog-rel-link (link title description level)
   (sb-blog-link (concat (sb-blog-path-to-root level) link) title description))
-
-(defun sb-blog-html-head (level)
-  (concat (format "<link rel=\"stylesheet\" href=\"%stheme.css\"/>"
-                  (sb-blog-path-to-root level))
-          "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
 (defun sb-blog-link-home (level)
   (sb-blog-rel-link "index.html" "Home" (sb-blog-fa "home") level))
@@ -116,6 +97,26 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
 (defun sb-blog-link-rss (level)
   (sb-blog-rel-link "feed.xml" "RSS" (sb-blog-fa "rss") level))
+
+;; Custom backend
+;; ==============
+
+(org-export-define-derived-backend 'sb-blog 'html
+                                   :export-block "SB BLOG"
+                                   :options-alist
+                                   '((:comments-allowed nil "comments" nil)))
+
+(defun sb-blog-publish-to-html (plist filename pub-dir)
+  (org-publish-org-to 'sb-blog filename
+		      (concat "." (or (plist-get plist :html-extension)
+				      org-html-extension "html"))
+		      plist pub-dir))
+
+
+(defun sb-blog-html-head (level)
+  (concat (format "<link rel=\"stylesheet\" href=\"%stheme.css\"/>"
+                  (sb-blog-path-to-root level))
+          "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
 (defun sb-blog-html-preamble (level)
   (concat "<img id=\"banner\" src=\"" (sb-blog-path-to-root level) "images/banner.jpg\"/>\n"
