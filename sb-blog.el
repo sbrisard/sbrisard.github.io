@@ -81,6 +81,10 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 (defun sb-blog-rel-link (link title description level)
   (sb-blog-link (concat (sb-blog-path-to-root level) link) title description))
 
+(defun sb-blog-banner (level)
+  (format "<img id=\"banner\" src=\"%simages/banner.jpg\"/>\n"
+          (sb-blog-path-to-root level)))
+
 (defun sb-blog-link-home (level)
   (sb-blog-rel-link "index.html" "Home" (sb-blog-fa "home") level))
 
@@ -119,7 +123,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
           "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
 (defun sb-blog-html-preamble (level)
-  (concat "<img id=\"banner\" src=\"" (sb-blog-path-to-root level) "images/banner.jpg\"/>\n"
+  (concat (sb-blog-banner level)
           "<div class=\"navbar\">\n"
           (sb-blog-unordered-list `(,(sb-blog-link-home level)
                                     ,(sb-blog-link-about level)
