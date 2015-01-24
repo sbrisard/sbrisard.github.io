@@ -96,7 +96,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   (sb-blog-link (concat (sb-blog-path-to-root level) link) title description))
 
 (defun sb-blog-html-head (level)
-  (concat (format "<link href=\"%stheme.css\" rel=\"stylesheet\" />"
+  (concat (format "<link rel=\"stylesheet\" href=\"%stheme.css\"/>"
                   (sb-blog-path-to-root level))
           "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
