@@ -1,4 +1,6 @@
 ;; -*- coding: utf-8 -*-
+(require 'dash)
+(require 'f)
 (require 'ox)
 (require 's)
 
@@ -19,13 +21,14 @@
 ;; ==================
 
 (defun sb-blog-path-to-root (level)
-  (apply 'concat "./" (make-list level "../")))
+  (apply 'f-join "." (make-list level "..")))
+
+(defun sb-blog-path-depth (path)
+  (length (-filter (lambda (item) (not (equal item "."))) (f-split path))))
 
 (defun sb-blog-get-level ()
-  (length (s-split "/"
-                   (s-chop-prefix sb-blog-base-directory
-                                  (file-name-directory buffer-file-name))
-                   t)))
+  (sb-blog-path-depth (f-relative (file-name-directory buffer-file-name)
+                                  sb-blog-base-directory)))
 
 ;; Scripts for embedded gadgets
 ;; ============================
@@ -82,11 +85,11 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   (format "<a href=\"%s\" title=\"%s\">%s</a>" link title description))
 
 (defun sb-blog-rel-link (link title description level)
-  (sb-blog-link (concat (sb-blog-path-to-root level) link) title description))
+  (sb-blog-link (f-join (sb-blog-path-to-root level) link) title description))
 
 (defun sb-blog-banner (level)
-  (format "<img id=\"banner\" src=\"%simages/banner.jpg\"/>\n"
-          (sb-blog-path-to-root level)))
+  (format "<img id=\"banner\" src=\"%s\"/>\n"
+          (f-join (sb-blog-path-to-root level) "images" "banner.jpg")))
 
 (defun sb-blog-link-home (level)
   (sb-blog-rel-link "index.html" "Home" (sb-blog-fa "home") level))
@@ -121,8 +124,8 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
 
 (defun sb-blog-html-head (level)
-  (concat (format "<link rel=\"stylesheet\" href=\"%stheme.css\"/>"
-                  (sb-blog-path-to-root level))
+  (concat (format "<link rel=\"stylesheet\" href=\"%s\"/>"
+                  (f-join (sb-blog-path-to-root level) "theme.css"))
           "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
 (defun sb-blog-html-preamble (info)
