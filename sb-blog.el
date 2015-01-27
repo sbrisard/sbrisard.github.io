@@ -160,7 +160,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 (defun sb-blog-html-postamble (info)
   (concat "<p>This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>. Icons come from the <a href=\"http://fontawesome.io/\">Font Awesome</a> icon set.</p>
 "
-          sb-blog-twitter-follow-button-script
+          ;sb-blog-twitter-follow-button-script
           (when (and (plist-get info :comments-allowed)
                      (not (s-ends-with? sb-blog-posts-sitemap-filename
                                         buffer-file-name)))
