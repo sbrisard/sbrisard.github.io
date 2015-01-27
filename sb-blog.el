@@ -108,6 +108,19 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 (defun sb-blog-link-rss (level)
   (sb-blog-rel-link "feed.xml" "RSS" (sb-blog-fa "rss") level))
 
+(defvar sb-blog-link-twitter (sb-blog-link "https://twitter.com/SebBrisard"
+                                           "Twitter"
+                                           (sb-blog-fa "twitter")))
+
+(defvar sb-blog-link-github (sb-blog-link "https://github.com/sbrisard"
+                                          "GitHub"
+                                          (sb-blog-fa "github")))
+
+(defvar sb-blog-link-bitbucket (sb-blog-link "https://bitbucket.org/sbrisard"
+                                             "Bitbucket"
+                                             (sb-blog-fa "bitbucket")))
+
+
 ;; Custom backend
 ;; ==============
 
@@ -136,6 +149,9 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                                       ,(sb-blog-link-about level)
                                       ,(sb-blog-link-references level)
                                       ,(sb-blog-link-archives level)
+                                      ,sb-blog-link-github
+                                      ,sb-blog-link-bitbucket
+                                      ,sb-blog-link-twitter
                                       ,(sb-blog-link-rss level)))
             "</div>\n")))
 
