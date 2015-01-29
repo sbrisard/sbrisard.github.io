@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono|Droid+Serif);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono|Droid+Serif|Ubuntu+Condensed);
 
 @media all {
     html {
@@ -158,26 +158,34 @@
 	overflow: auto;
     }
 
+    .sitename {
+        float: left;
+        font-family: "Ubuntu Condensed";
+        font-size: 14pt;
+        margin: 0;
+        text-shadow: 1px 1px 2px #808080;
+    }
+
     .navbar {
         font-size: 16pt;
-        margin-bottom: 50px;
+        margin-bottom: 75px;
     }
 
     .navbar ul {
+        float: right;
         list-style-type: none;
         margin: 0;
-        padding: 0;
         overflow: hidden;
+        padding: 0;
     }
 
     .navbar li {
         float: left;
-        margin: 0;
+        margin: 0 0 0 16px;
     }
 
     .navbar a {
         display: block;
-        margin-right: 16px;
         text-decoration: none;
     }
 

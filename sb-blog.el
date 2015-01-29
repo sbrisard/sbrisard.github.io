@@ -145,6 +145,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   (let ((level (sb-blog-get-level)))
     (concat (sb-blog-banner level)
             "<div class=\"navbar\">\n"
+            "<span class=\"sitename\"><a href=\"index.html\">Sébastien Brisard's blog</a></span>\n"
             (sb-blog-unordered-list `(,(sb-blog-link-home level)
                                       ,(sb-blog-link-about level)
                                       ,(sb-blog-link-references level)
