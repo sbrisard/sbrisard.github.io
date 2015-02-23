@@ -1,5 +1,6 @@
 #+TITLE: Blog archive
 
+   + [[file:20150223-Orientation_correlations_among_rice_grains-01.org][2015-02-23 -- Orientation correlations among rice grains, part 1: introduction]]
    + [[file:20141219-New_Blog.org][2014-12-19 -- New Blog!]]
    + [[file:20140813-Review_of_Parallel_Programming_with_Python.org][2014-08-13 -- Review of "Parallel Programming with Python"]]
    + [[file:20140306-The_periodic_Green_operator_for_strains.org][2014-03-06 -- The periodic Green operator for strains]]
