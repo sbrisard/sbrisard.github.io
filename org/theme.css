@@ -95,7 +95,13 @@
     }
 
     img {
+        border: none;
         max-width: 100%;
+    }
+
+    img#banner {
+        margin: 0;
+        width: 100%;
     }
 
     .outline-text-2 {
@@ -130,10 +136,6 @@
 	color: black;
 	border: 1px solid #DEDEDE;
 	padding: 0px 0.2em;
-    }
-
-    img {
-	border: none;
     }
 
     .share img {
