@@ -19,9 +19,9 @@ Local orientational order will be illustrated on a "real" packing, and I chose r
 
 Before we proceed, I would like to clarify the notion of local orientational order through images of synthetic packings of 10000 hard (flat) spheroids. The aspect ratio (ratio of polar to equatorial radii) of the (flat) spheroids is 0.125. The images below (click to enlarge) are three realizations of random packing of spheroids, at 40% (left), 50% (middle) and 60% (right) volume fraction. The color of each particle is chosen according to its orientation, so that particles with similar colors have similar orientations.
 
-[[file:images/spheroids_40p100.png][file:images/spheroids_40p100.png]]
-[[file:images/spheroids_50p100.png][file:images/spheroids_50p100.png]]
-[[file:images/spheroids_60p100.png][file:images/spheroids_60p100.png]]
+[[file:20150223-Orientation_correlations_among_rice_grains-01/spheroids_40p100.png][file:20150223-Orientation_correlations_among_rice_grains-01/spheroids_40p100.png]]
+[[file:20150223-Orientation_correlations_among_rice_grains-01/spheroids_50p100.png][file:20150223-Orientation_correlations_among_rice_grains-01/spheroids_50p100.png]]
+[[file:20150223-Orientation_correlations_among_rice_grains-01/spheroids_60p100.png][file:20150223-Orientation_correlations_among_rice_grains-01/spheroids_60p100.png]]
 #+BEGIN_HTML
 <br style="clear:both;" />
 #+END_HTML
