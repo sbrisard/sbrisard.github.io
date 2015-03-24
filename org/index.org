@@ -3,6 +3,8 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:./posts/2015XXXX-Orientation_correlations_among_rice_grains-03.org][2015-MM-DD -- Orientation correlations among rice grains, part 3: binning -- The Pythonic way]]
+
 * [[file:./posts/20150310-Orientation_correlations_among_rice_grains-02.org][2015-03-10 -- Orientation correlations among rice grains, part 2: acquisition of tomography images]]
 
 In the [[file:./posts/20150223-Orientation_correlations_among_rice_grains-01.org][first]] instalment of this series, I briefly introduced orientational order in assemblies of anisotropic particles, and proposed an illustration based on synthetic microstructures. But what I really intend to do in this series is to show how orientational order can be quantified in a "real-life" sample, namely a packing of rice grains. This of course requires a 3D image of the packing. Fortunately, my lab ([[http://navier.enpc.fr/][Laboratoire Navier]]) is the proud host of a [[http://navier.enpc.fr/Microtomographe,297][collaborative microtomography platform]] and my former colleague Nicolas Lenoir --who was in charge of this instrument-- gave me the opportunity to scan my toy sample in december 2013.
