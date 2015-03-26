@@ -51,10 +51,10 @@ We then create the empty, reference array =actual=, which is to receive the binn
 
 #+BEGIN_SRC python
   bin_size = 4
-  shape = tuple(n // bin_size for n in a.shape)
-  expected = np.zeros(shape, dtype=np.float64)
+  binned_shape = tuple(n // bin_size for n in a.shape)
+  expected = np.zeros(binned_shape, dtype=np.float64)
 
-  'Shape of binned array: {}'.format(shape)
+  'Shape of binned array: {}'.format(binned_shape)
 #+END_SRC
 
 #+RESULTS:
@@ -63,24 +63,77 @@ We then create the empty, reference array =actual=, which is to receive the binn
 Finally, we loop over all cells to compute the binned array
 
 #+BEGIN_SRC python
-  for j0 in range(expected.shape[0]):
-      for j2 in range(bin_size):
-          i0 = j0 * bin_size + j2
-          for j1 in range(expected.shape[1]):
-              for j3 in range(bin_size):
-                  i1 = j1 * bin_size + j3
-                  expected[j0, j1] += a[i0, i1]
+  binned1 = np.zeros(binned_shape, dtype=np.float64)
+  for i0 in range(bin_size * binned_shape[0]):
+      j0 = i0 // bin_size
+      for i1 in range(bin_size * binned_shape[1]):
+          j1 = i1 // bin_size
+          binned1[j0, j1] += a[i0, i1]
 
-  expected /= (bin_size * bin_size)
-  expected
+  binned1 /= (bin_size**2)
+  binned1
 #+END_SRC
 
 #+RESULTS:
-: [[ 0.55571299  0.56719206]
-:  [ 0.48390604  0.5127349 ]
-:  [ 0.5167703   0.53772563]]
+: [[ 0.52302399  0.53382782]
+:  [ 0.45544097  0.48257402]
+:  [ 0.48637204  0.50609471]]
 
-That was tedious, wasn't it? Now, for the more elegant stuff.
+This is a bit tedious, isn't it. Besides, it is appallingly slow! In order to introduce a more elegant solution to this problem, we will first present an even slower solution...
+
+* Towards thinking in higher dimensions
+
+Instead of looping over all cells of the original array, we could loop over the cells of the binned array. We then loop over all cells of the original array which contribute to the current cell of the binned array. This is illustrated below
+
+#+BEGIN_SRC python
+  binned2 = np.zeros(binned_shape, dtype=np.float64)
+  for j0 in range(binned_shape[0]):
+      for j2 in range(bin_size):
+          i0 = j0 * bin_size + j2
+          for j1 in range(binned_shape[1]):
+              for j3 in range(bin_size):
+                  i1 = j1 * bin_size + j3
+                  binned2[j0, j1] += a[i0, i1]
+
+  binned2 /= (bin_size * bin_size)
+  binned2
+#+END_SRC
+
+#+RESULTS:
+: [[ 0.52302399  0.53382782]
+:  [ 0.45544097  0.48257402]
+:  [ 0.48637204  0.50609471]]
+
+We can check that both methods lead to the same result
+
+#+BEGIN_SRC python
+  np.linalg.norm(binned2 - binned1)
+#+END_SRC
+
+#+RESULTS:
+: 0.0
+
+OK, that's fine. But we now have /four/ nested loops! This is even worse than the previous version...
+
+However, the above code snippet suggests that we could consider =a= as a four-dimensional array, where all cells are grouped in 4×4 /macro-cells/. This is illustrated below
+
+#+CAPTION: Grouping the cells of the original array in /macro-cells/.
+#+NAME: fig:2
+file:./2015XXXX-Orientation_correlations_among_rice_grains-03/binning.svg
+
+In other words, if we introduced the auxiliary array =a4= defined as follows
+
+#+BEGIN_EXAMPLE
+a4[j0, j1, j2, j3] = a[j0 * bin_size + j2, j1 * bin_size + j3]
+#+END_EXAMPLE
+
+then, the binned array could simply be computed through the following NumPy command
+
+#+BEGIN_EXAMPLE
+binned3 = np.mean(a4, axis=(-1, -2))
+#+END_EXAMPLE
+
+In the next section, we will show that creation of =a4= with NumPy is actually straightforward, and entails no data copy.
 
 * Binning a 2D array: thinking in higher dimensions
 
