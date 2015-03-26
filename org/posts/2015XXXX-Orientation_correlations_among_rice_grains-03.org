@@ -14,33 +14,7 @@ file:./2015XXXX-Orientation_correlations_among_rice_grains-03/original_vs_binned
 
 * Zen of NumPy
 
-You probably have all heard of Tim Peters' /Zen of Python/, which you can display in the Python console through the command =import this=. It is reproduced below, just for fun.
-
-#+BEGIN_VERSE
-The Zen of Python, by Tim Peters
-
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren't special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you're Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it's a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let's do more of those!
-#+END_VERSE
-
-A few years ago, [[https://plus.google.com/111231464998965388525/about][Travis Oliphant]], who is the author of NumPy (but also CEO of [[http://www.continuum.io/][Continuum Analytics]], which provides [[https://store.continuum.io/cshop/anaconda/][Anaconda]]), wrote a post called /[[http://technicaldiscovery.blogspot.fr/2010/11/zen-of-numpy.html][Zen of NumPy]]/, in which he came up with the following points
+You probably have all heard of Tim Peters' /Zen of Python/, which you can display in the Python console through the command =import this=. A few years ago, [[https://plus.google.com/111231464998965388525/about][Travis Oliphant]], who is the author of NumPy (but also CEO of [[http://www.continuum.io/][Continuum Analytics]], which provides [[https://store.continuum.io/cshop/anaconda/][Anaconda]]), wrote a post called /[[http://technicaldiscovery.blogspot.fr/2010/11/zen-of-numpy.html][Zen of NumPy]]/, in which he came up with the following points
 
 #+BEGIN_VERSE
 Strided is better than scattered
