@@ -1,6 +1,6 @@
 #+TITLE: Blog archive
 
-   + [[file:2015XXXX-Orientation_correlations_among_rice_grains-03.org][2015-03-10 -- Orientation correlations among rice grains, part 3: binning -- The Pythonic way]]
+   + [[file:2015XXXX-Orientation_correlations_among_rice_grains-03.org][2015-03-10 -- Orientation correlations among rice grains, part 3: intermezzo -- Binning images]]
    + [[file:20150310-Orientation_correlations_among_rice_grains-02.org][2015-03-10 -- Orientation correlations among rice grains, part 2: acquisition of tomography images]]
    + [[file:20150223-Orientation_correlations_among_rice_grains-01.org][2015-02-23 -- Orientation correlations among rice grains, part 1: introduction]]
    + [[file:20141219-New_Blog.org][2014-12-19 -- New Blog!]]

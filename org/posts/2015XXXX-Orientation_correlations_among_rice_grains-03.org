@@ -1,5 +1,5 @@
 # -*- coding: utf-8; -*-
-#+TITLE: Orientation correlations among rice grains, part 3: binning -- The Pythonic way
+#+TITLE: Orientation correlations among rice grains, part 3: intermezzo -- Binning images
 #+DATE: [2015-03-10 Tue]
 #+PROPERTY: header-args:python :results value verbatim :session :exports both
 
@@ -31,28 +31,20 @@ We will be particularly interested in the last point: "think in higher dimension
 
 * Binning a 2D array: using loops
 
-We eventually want to perform binning on a 3D array (a stack of 2D slices). But, for the sake of illustration, the method will be demonstrated on a 2D array. We must first generate the data
+We eventually want to perform binning on a 3D array (a stack of 2D slices). But, for the sake of illustration, the method will be demonstrated on a 2D array. We must first generate the data.
 
 #+BEGIN_SRC python
   import numpy as np
 
   np.random.seed(20150324)
-  a = np.random.rand(15, 9)
-
-  'Shape of original array: {}'.format(a.shape)
+  a2 = np.random.rand(15, 9)
 #+END_SRC
 
-#+RESULTS:
-: Shape of original array: (15, 9)
-
-Note that the shape of the =a= (the array to be binned) is purposely not a multiple of 4! Also note that, in order to make tests fully reproducible, it is good practice to seed the random generator manually.
-
-We then create the empty, reference array =actual=, which is to receive the binned array (computed through explicit loops)
+Note that the shape of =a2= (the array to be binned) is purposely not a multiple of 4! Also note that, in order to make tests fully reproducible, it is good practice to seed the random generator manually. We then compute the shape of the binned array to be computed.
 
 #+BEGIN_SRC python
   bin_size = 4
-  binned_shape = tuple(n // bin_size for n in a.shape)
-  expected = np.zeros(binned_shape, dtype=np.float64)
+  binned_shape = tuple(n//bin_size for n in a2.shape)
 
   'Shape of binned array: {}'.format(binned_shape)
 #+END_SRC
@@ -60,17 +52,17 @@ We then create the empty, reference array =actual=, which is to receive the binn
 #+RESULTS:
 : Shape of binned array: (3, 2)
 
-Finally, we loop over all cells to compute the binned array
+Finally, we loop over all cells to compute the binned array.
 
 #+BEGIN_SRC python
   binned1 = np.zeros(binned_shape, dtype=np.float64)
-  for i0 in range(bin_size * binned_shape[0]):
-      j0 = i0 // bin_size
-      for i1 in range(bin_size * binned_shape[1]):
-          j1 = i1 // bin_size
-          binned1[j0, j1] += a[i0, i1]
+  for i0 in range(bin_size*binned_shape[0]):
+      j0 = i0//bin_size
+      for i1 in range(bin_size*binned_shape[1]):
+          j1 = i1//bin_size
+          binned1[j0, j1] += a2[i0, i1]
 
-  binned1 /= (bin_size**2)
+  binned1 /= bin_size**2
   binned1
 #+END_SRC
 
@@ -83,19 +75,19 @@ This is a bit tedious, isn't it. Besides, it is appallingly slow! In order to in
 
 * Towards thinking in higher dimensions
 
-Instead of looping over all cells of the original array, we could loop over the cells of the binned array. We then loop over all cells of the original array which contribute to the current cell of the binned array. This is illustrated below
+Instead of looping over all cells of the original array, we could loop over the cells of the binned array. We then loop over all cells of the original array which contribute to the current cell of the binned array.
 
 #+BEGIN_SRC python
   binned2 = np.zeros(binned_shape, dtype=np.float64)
   for j0 in range(binned_shape[0]):
       for j2 in range(bin_size):
-          i0 = j0 * bin_size + j2
+          i0 = bin_size*j0 + j2
           for j1 in range(binned_shape[1]):
               for j3 in range(bin_size):
-                  i1 = j1 * bin_size + j3
-                  binned2[j0, j1] += a[i0, i1]
+                  i1 = bin_size*j1 + j3
+                  binned2[j0, j1] += a2[i0, i1]
 
-  binned2 /= (bin_size * bin_size)
+  binned2 /= bin_size**2
   binned2
 #+END_SRC
 
@@ -113,9 +105,7 @@ We can check that both methods lead to the same result
 #+RESULTS:
 : 0.0
 
-OK, that's fine. But we now have /four/ nested loops! This is even worse than the previous version...
-
-However, the above code snippet suggests that we could consider =a= as a four-dimensional array, where all cells are grouped in 4×4 /macro-cells/. This is illustrated below
+OK, that's fine. But this solution is even worse than the previous one, since we are now left with /four/ nested loops! However, the above code snippet suggests that we could consider =a2= as a four-dimensional array, where all cells are grouped in 4×4 /macro-cells/, as shown in Fig [[fig:2]].
 
 #+CAPTION: Grouping the cells of the original array in /macro-cells/.
 #+NAME: fig:2
@@ -123,8 +113,8 @@ file:./2015XXXX-Orientation_correlations_among_rice_grains-03/binning.svg
 
 In other words, if we introduced the auxiliary array =a4= defined as follows
 
-#+BEGIN_EXAMPLE
-a4[j0, j1, j2, j3] = a[j0 * bin_size + j2, j1 * bin_size + j3]
+#+BEGIN_EXAMPLE -n -r
+  a4[j0, j1, j2, j3] = a2[bin_size*j0 + j2, bin_size*j1 + j3]            (ref:1)
 #+END_EXAMPLE
 
 then, the binned array could simply be computed through the following NumPy command
@@ -135,37 +125,40 @@ binned3 = np.mean(a4, axis=(-1, -2))
 
 In the next section, we will show that creation of =a4= with NumPy is actually straightforward, and entails no data copy.
 
-* Binning a 2D array: thinking in higher dimensions
+* Stride tricks
 
-The present approach works only for strided arrays. =numpy.ndarray.strides= is defined in the [[http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.strides.html][NumPy documentation]] as follows
+The present approach works only for strided arrays. In the above example, the data of array =a2= is actually stored in a 1D array (let's call it =data=), and the [[http://en.wikipedia.org/wiki/Offset_%28computer_science%29][offset]] of element =(i0, i1)= is given by =s0*i0 + s1*i1=, where =(s0, s1)= are the strides (as returned by =a2.strides=) of the n-dimensional array. In other words, we have for all =i0= and =i1=
 
-#+BEGIN_QUOTE
-Tuple of bytes to step in each dimension when traversing an array. The byte offset of element (=i[0], i[1], ..., i[n]=) in an array =a= is:
-#+BEGIN_EXAMPLE
-offset = sum(np.array(i) * a.strides)
+#+BEGIN_EXAMPLE +n -r
+  a2[i0, i1] == data[s0*i0 + s1*i1]                                      (ref:2)
 #+END_EXAMPLE
-#+END_QUOTE
 
-Let's look at the strides of our array =a=
+Now, going back to the construction of the four-dimensional array =a4=. We want to enforce ([[(1)]]); using ([[(2)]]), we find that
 
-#+BEGIN_SRC python
-  a.strides
-#+END_SRC
+#+BEGIN_EXAMPLE
+  a4[j0, j1, j2, j3] = data[s0*(j0*bin_size + j2) + s1*(j1*bin_size + j3)]
+                     = data[s0*j0 + s1*j1 + s0*bin_size*j2 + s1*bin_size*j3]
+#+END_EXAMPLE
 
-#+RESULTS:
-: (72, 8)
+Therefore, =a4= can be built as a strided array, using the /same/ data array as a2, with strides =(s0, s1, s0*bin_size, s1*bin_size)=. The NumPy function =numpy.lib.stride_tricks.as_strided= does just that:
 
-In other words, the offset (in bytes) of element =(i0, i1)= is =s0 * i0 + s1 * i1=, where =(s0, s1)= is =a.strides=.
+#+BEGIN_EXAMPLE
+numpy.lib.stride_tricks.as_strided(x, shape=None, strides=None)
+
+Make an ndarray from the given array with the given shape and strides.
+#+END_EXAMPLE
+
+It should be noted that this function makes no copy of the underlying data, so that it is exactly what we were looking for. We are now in a position to compute the binned array.
 
 #+BEGIN_SRC python
   from numpy.lib.stride_tricks import as_strided
 
-  new_shape = tuple(n // bin_size for n in a.shape) + (bin_size, bin_size)
-  new_strides = tuple(s * bin_size for s in a.strides) + a.strides
-  aa = as_strided(a, shape=new_shape, strides=new_strides)
-  actual = np.mean(aa, axis=(2, 3))
+  new_shape = tuple(n // bin_size for n in a2.shape) + (bin_size, bin_size)
+  new_strides = tuple(s * bin_size for s in a2.strides) + a2.strides
+  a4 = as_strided(a2, shape=new_shape, strides=new_strides)
+  binned3 = np.mean(a4, axis=(2, 3))
 
-  actual
+  binned3
 #+END_SRC
 
 #+RESULTS:
@@ -173,15 +166,26 @@ In other words, the offset (in bytes) of element =(i0, i1)= is =s0 * i0 + s1 * i
 :  [ 0.45544097  0.48257402]
 :  [ 0.48637204  0.50609471]]
 
-
-Let's check that =actual= and =expected= are actually equal
+It can be verified that =binned3= and =binned1= are actually equal
 
 #+BEGIN_SRC python
-  np.sqrt(np.sum((actual - expected)**2))
+  np.linalg.norm(binned3 - binned1)
 #+END_SRC
 
 #+RESULTS:
 : 1.75541673429e-16
+
+Which shows that the above approach is correct. Thinking in higher dimensions allowed us to replace all Python loops with low-level, C loops. This approach is therefore way faster than the previous ones. However, it should be noted that re-striding =a2= leads to a computation of the binned array by means of /four/ (instead of two) nested loops. Given that these loops are implemented in C, the overhead is probably acceptable.
+
+* Putting it all together
+
+The script which allowed the binning of the whole 3D image is presented below. Is is slightly more complex than the previous example, because the 3D image is actually stored as a series of 2D images (in separate files). Image files must therefore be loaded 4 at a time and summed. The resulting 2D array is then binned. Also, the images are converted to 8 bits, and the histogram is adjusted accordingly.
+
+#+INCLUDE: "./2015XXXX-Orientation_correlations_among_rice_grains-03/binning.py" src python
+
+* Conclusion
+
+In this post, we took a slight detour on our way towards segmentation and analysis of our 3D images. Still, I hope you enjoyed this post and found it useful. In the next instalment, we will look at the segmentation of the sample container.
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil
