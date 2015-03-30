@@ -4,6 +4,13 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
+      <title>Orientation correlations among rice grains, part 3: intermezzo – Binning images</title>
+      <link>http://sbrisard.github.io/posts/20150330-Orientation_correlations_among_rice_grains-03.html</link>
+      <guid>posts/20150330-Orientation_correlations_among_rice_grains-03.html</guid>
+      <pubDate>Mon, 30 Mar 2015</pubDate>
+      <description>The full reconstructed image resulting from the tomography experiment described in the second instalment of this series is a 1747×1751×688 stack. The voxel size is about 0.030 mm. This is far too much for the purpose of the present study, since all we are interested in is the determination of the location (coordinates of the centroid) and orientation (principal axes of inertia) of the rice grains. In order to reduce the computation time, the images will first be binned, that is each set of (say) 4×4×4 voxels will be replaced with a unique voxel, with average gray value (see Fig. 1 below for an illustration). 3D binning would usually require 3 uggly nested loops. There is, however, a much more pythonic way. This is the topic of the present post.</description>
+    </item>
+    <item>
       <title>Orientation correlations among rice grains, part 2: acquisition of tomography images</title>
       <link>http://sbrisard.github.io/posts/20150310-Orientation_correlations_among_rice_grains-02.html</link>
       <guid>posts/20150310-Orientation_correlations_among_rice_grains-02.html</guid>

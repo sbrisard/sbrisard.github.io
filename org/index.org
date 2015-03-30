@@ -3,7 +3,9 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
-* [[file:./posts/2015XXXX-Orientation_correlations_among_rice_grains-03.org][2015-MM-DD -- Orientation correlations among rice grains, part 3: binning -- The Pythonic way]]
+* [[file:./posts/20150330-Orientation_correlations_among_rice_grains-03.org][2015-03-30 -- Orientation correlations among rice grains, part 3: intermezzo -- Binning images]]
+
+The full reconstructed image resulting from the tomography experiment described in the [[file:./posts/20150310-Orientation_correlations_among_rice_grains-02.org][second]] instalment of this series is a 1747×1751×688 stack. The voxel size is about 0.030 mm. This is far too much for the purpose of the present study, since all we are interested in is the determination of the location (coordinates of the centroid) and orientation (principal axes of inertia) of the rice grains. In order to reduce the computation time, the images will first be /binned/, that is each set of (say) 4×4×4 voxels will be replaced with a unique voxel, with average gray value. 3D binning would usually require three uggly nested loops. There is, however, a much more pythonic way. This is the topic of the present post.
 
 * [[file:./posts/20150310-Orientation_correlations_among_rice_grains-02.org][2015-03-10 -- Orientation correlations among rice grains, part 2: acquisition of tomography images]]
 

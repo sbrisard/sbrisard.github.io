@@ -16,7 +16,7 @@ file:./20150310-Orientation_correlations_among_rice_grains-02/rice-proj0000-medi
 
 file:./20150310-Orientation_correlations_among_rice_grains-02/rice-orthoslices.png
 
-The reconstruction is highly contrasted, so that simple thresholding should produce a very convincing segmentation. This will be the topic of the next instalment.
+The reconstruction is highly contrasted, so that simple thresholding should produce a very convincing segmentation. This will be the topic of the next instalments. But we first take a break to discuss [[file:./20150330-Orientation_correlations_among_rice_grains-03.org][binning of the images]].
 
 * Acknowledgements
 
