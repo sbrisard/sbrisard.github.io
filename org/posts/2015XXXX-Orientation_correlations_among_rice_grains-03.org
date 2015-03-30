@@ -1,16 +1,14 @@
 # -*- coding: utf-8; -*-
 #+TITLE: Orientation correlations among rice grains, part 3: intermezzo -- Binning images
-#+DATE: [2015-03-10 Tue]
+#+DATE: [2015-03-30 Mon]
 #+PROPERTY: header-args:python :results value verbatim :session :exports both
 
-The full reconstructed image is a 1747×1751×688 stack, and we do not need such fine images to resolve the rice grains. In order to reduce the computation times, the images will first be /binned/, that is each set of --say-- 4×4×4 voxels will be replaced with a unique voxel, with average gray value. This is illustrated below (see Fig. [[fig:1]]).
+The full reconstructed image resulting from the tomography experiment described in the [[file:./20150310-Orientation_correlations_among_rice_grains-02.org][second]] instalment of this series is a 1747×1751×688 stack. The voxel size is about 0.030 mm. This is far too much for the purpose of the present study, since all we are interested in is the determination of the location (coordinates of the centroid) and orientation (principal axes of inertia) of the rice grains. In order to reduce the computation time, the images will first be /binned/, that is each set of --say-- 4×4×4 voxels will be replaced with a unique voxel, with average gray value (see Fig. [[fig:1]] below for an illustration). 3D binning would usually require 3 uggly nested loops. There is, however, a much more pythonic way. This is the topic of the present post.
 
-3D binning would usually require 3 uggly nested loops. There is, however, a much more pythonic way. This is the topic of the present post.
-
-#+CAPTION: The original (left) and binned (right) images. Each pixel in the right image is the average of 4^3@@html:&thinsp;@@=@@html:&thinsp;@@64 voxels. As a result, the binned image is far less noisy than the original one.
+#+CAPTION: The original (left) and binned (right) images. Each pixel in the right image is the average of 4^3@@html:&thinsp;@@=@@html:&thinsp;@@64 voxels. As a result, the binned image is far less noisy than the original one (at the cost of lesser resolution).
 #+NAME: fig:1
 #+ATTR_HTML: :width 90%
-file:./2015XXXX-Orientation_correlations_among_rice_grains-03/original_vs_binned.png
+file:./20150330-Orientation_correlations_among_rice_grains-03/original_vs_binned.png
 
 * Zen of NumPy
 
@@ -109,7 +107,7 @@ OK, that's fine. But this solution is even worse than the previous one, since we
 
 #+CAPTION: Grouping the cells of the original array in /macro-cells/.
 #+NAME: fig:2
-file:./2015XXXX-Orientation_correlations_among_rice_grains-03/binning.svg
+file:./20150330-Orientation_correlations_among_rice_grains-03/binning.svg
 
 In other words, if we introduced the auxiliary array =a4= defined as follows
 
@@ -181,11 +179,11 @@ Which shows that the above approach is correct. Thinking in higher dimensions al
 
 The script which allowed the binning of the whole 3D image is presented below. Is is slightly more complex than the previous example, because the 3D image is actually stored as a series of 2D images (in separate files). Image files must therefore be loaded 4 at a time and summed. The resulting 2D array is then binned. Also, the images are converted to 8 bits, and the histogram is adjusted accordingly.
 
-#+INCLUDE: "./2015XXXX-Orientation_correlations_among_rice_grains-03/binning.py" src python
+#+INCLUDE: "./20150330-Orientation_correlations_among_rice_grains-03/binning.py" src python
 
 * Conclusion
 
-In this post, we took a slight detour on our way towards segmentation and analysis of our 3D images. Still, I hope you enjoyed this post and found it useful. In the next instalment, we will look at the segmentation of the sample container.
+In this post, we took a slight detour on our way towards segmentation and analysis of our 3D images. Still, I hope you enjoyed this post and found it useful. In the next instalment, we will be back on track, as I will discuss the segmentation of the cylindrical sample container.
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil
