@@ -1,0 +1,75 @@
+# -*- coding: utf-8; -*-
+#+TITLE: Orientation correlations among rice grains, part 4: segmentation of the sample container
+#+DATE: [2015-06-01 Mon]
+#+PROPERTY: header-args:python :results value verbatim :session :exports both
+
+In the [[file:./20150330-Orientation_correlations_among_rice_grains-03.org][previous instalment]] of this series, we obtained binned slices of the sample. Fig. [[fig:1]] is a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within these boundaries only.
+
+#+CAPTION: A typical slice of the 3D reconstruction of the sample. The original image has been reduced by 4×4×4 binning; the size of each binned slice is 436×437.
+#+NAME: fig:1
+#+ATTR_HTML: :width 30%
+file:./201506XX-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-099.png
+
+The sample container cylindrical. Since it was nearly vertical during the tomography experiment, its trace is a circular ring on each slice. We are going to use the [[http://en.wikipedia.org/wiki/Circle_Hough_Transform][Circle Hough Transform]] in order to locate the inner and outer circles which define this ring. To do so, we will use [[https://www.python.org/][python]], [[http://www.numpy.org/][numpy]] and [[http://scikit-image.org/docs/dev/api/skimage.html][scikit-image]].
+
+We first import these modules, and load the image
+
+#+BEGIN_SRC python
+  import os.path
+
+  import numpy as np
+
+  from skimage.color import gray2rgb
+  from skimage.draw import circle_perimeter
+  from skimage.feature import canny
+  from skimage.io import imread, imsave
+  from skimage.transform import hough_circle
+  from skimage.util import img_as_ubyte
+
+  root = os.path.join('.',
+                      '201506XX-Orientation_correlations_among_rice_grains-04')
+  name = os.path.join(root, 'rice-bin_4x4x4-099.tif')
+  img = imread(name)
+
+  'Read {}x{} image.'.format(*img.shape)
+#+END_SRC
+
+#+RESULTS:
+: Read 437x436 image.
+
+Then, we locate the edges, by means of a standard [[http://en.wikipedia.org/wiki/Canny_edge_detector][Canny edge detector]] (see also the [[http://scikit-image.org/docs/dev/api/skimage.feature.html#canny][API docs]] of scikit-image).
+
+#+BEGIN_SRC python
+  edges = canny(img, sigma=0.)
+  imsave(os.path.join(root, 'rice-bin_4x4x4-edges-099.png'),
+         img_as_ubyte(edges))
+#+END_SRC
+
+#+RESULTS:
+
+The resulting image is shown in Fig. [[fig:2]]. It should be noted that due to the preliminary binning (which is nothing but a mean filter), the input image exhibits very little noise. Therefore, =sigma=0.0= in the above call to =skimage.feature.canny=.
+
+#+CAPTION: Canny edge detection performed on the initial image shown in Fig. [[fig:1]].
+#+NAME: fig:2
+#+ATTR_HTML: :width 30%
+file:./201506XX-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-edges-099.png
+
+We are now ready to compute the Circle Hough Transform. This transform aims at finding circles within an image. It was proposed by Duda and Hart ([[file:../pages/references.org::#DUDA1971][1971]]) (see also [[http://en.wikipedia.org/wiki/Hough_transform][Wikipedia]]). It should be understood as a histogram in parameter space. More precisely, a point $(x, y)$ belongs to the circle centered at $(c_x, c_y)$ and of radius $r$ if, and only if
+
+\begin{equation*}
+(x-c_x)^2+(y-c_y)^2=r^2.
+\end{equation*}
+
+The circle under consideration is parameterized by $(c_x, c_y, r)$. Conversely, given a point $(x, y)$, the set of circles to which this point belongs is given by the triplet $(c_x, c_y, r)$ such that
+
+\begin{equation*}
+(c_x-x)^2+(c_y-y)^2-r^2=0.
+\end{equation*}
+
+In the parameter space $(c_x, c_y, r)$, the set of circles to which point $(x, y)$ belongs is a /conical surface/. Its apex is $(x, y, 0)$ and its axis is the $(0, 0, 1)$ direction. As we are only interested in real circles, only the $r\geq0$ half-space should be considered.
+
+How is this representation in parameter space to be used?
+
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# End:
