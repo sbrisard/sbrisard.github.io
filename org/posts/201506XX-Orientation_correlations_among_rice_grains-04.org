@@ -7,7 +7,7 @@ In the [[file:./20150330-Orientation_correlations_among_rice_grains-03.org][prev
 
 #+CAPTION: A typical slice of the 3D reconstruction of the sample. The original image has been reduced by 4×4×4 binning; the size of each binned slice is 436×437.
 #+NAME: fig:1
-#+ATTR_HTML: :width 30%
+#+ATTR_HTML: :width 50%
 file:./201506XX-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-099.png
 
 The sample container cylindrical. Since it was nearly vertical during the tomography experiment, its trace is a circular ring on each slice. We are going to use the [[http://en.wikipedia.org/wiki/Circle_Hough_Transform][Circle Hough Transform]] in order to locate the inner and outer circles which define this ring. To do so, we will use [[https://www.python.org/][python]], [[http://www.numpy.org/][numpy]] and [[http://scikit-image.org/docs/dev/api/skimage.html][scikit-image]].
@@ -51,7 +51,7 @@ The resulting image is shown in Fig. [[fig:2]]. It should be noted that due to t
 
 #+CAPTION: Canny edge detection performed on the initial image shown in Fig. [[fig:1]].
 #+NAME: fig:2
-#+ATTR_HTML: :width 30%
+#+ATTR_HTML: :width 50%
 file:./201506XX-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-edges-099.png
 
 We are now ready to compute the Circle Hough Transform. This transform aims at finding circles within an image. It was proposed by Duda and Hart ([[file:../pages/references.org::#DUDA1971][1971]]) (see also [[http://en.wikipedia.org/wiki/Hough_transform][Wikipedia]]). It should be understood as a histogram in parameter space. More precisely, a point $(x, y)$ belongs to the circle centered at $(c_x, c_y)$ and of radius $r$ if, and only if
@@ -66,9 +66,50 @@ The circle under consideration is parameterized by $(c_x, c_y, r)$. Conversely, 
 (c_x-x)^2+(c_y-y)^2-r^2=0.
 \end{equation*}
 
-In the parameter space $(c_x, c_y, r)$, the set of circles to which point $(x, y)$ belongs is a /conical surface/. Its apex is $(x, y, 0)$ and its axis is the $(0, 0, 1)$ direction. As we are only interested in real circles, only the $r\geq0$ half-space should be considered.
+In the parameter space $(c_x, c_y, r)$, the set of circles to which point $(x, y)$ belongs is a /conical surface/. Its apex is $(x, y, 0)$, its axis is the $(0, 0, 1)$ direction and its aperture is 90°. As we are only interested in real circles, only the $r\geq0$ half-space should be considered.
 
-How is this representation in parameter space to be used?
+How is this representation in parameter space to be used? We consider a binary (0/1) image; let $\{(x_i, y_i),i=1,\ldots,N\}$ denote the set of non-null pixels. We define $\mathcal H_i$ as the 3D, binary image of the cone associated in the sphere parameter space with pixel $(x_i, y_i)$. The Hough transform is then the (possibly normalized) sum of all $\mathcal H_i$
+
+\begin{equation*}
+\mathcal H(c_x, c_y, r)=\sum_i\mathcal H_i(c_x, c_y, r).
+\end{equation*}
+
+$\mathcal H$ should really be understood as an histogram. Indeed, a peak in $\mathcal H$ indicates that the cones corresponding to many pixels intersect at the same point in parameter space. In other words, many pixels in the original image belong to the /same/ circle. Finding circles in the original image therefore reduces to finding peaks in its Hough transform. That is what we are going to do presently. We must first compute the Hough transform. In order to reduce the CPU cost, we will only consider these circles whose radius is close to that of the sample container. We saw in [[file:./20150310-Orientation_correlations_among_rice_grains-02.org][part 2]] of this series that the radius of the sample container is 25 mm, while the voxel size is approximately 0.03 mm; after binning, the voxel size is therefore 0.12 mm, and the radius of the sample container is approx. 25 / 0.12 = 208 pix. In the following code, we ask for the circle Hough transform for circles with radii between 190 and 220 pix.
+
+#+BEGIN_SRC python
+  radii = np.arange(190, 220)
+  h = hough_circle(edges, radii)
+  for i, r in enumerate(radii):
+      imsave(os.path.join(root, 'rice-bin_4x4x4-hough-099-{}.tif'.format(r)),
+             h[i, ...])
+#+END_SRC
+
+#+RESULTS:
+
+The above code snippet saves a series of images, which is displayed below (see Fig. [[fig:3]]). The two bright spots indicate the location of the inner and outer boundaries in the parameter space. We use a very simple procedure to locate these two peaks (a more elaborate method is not required as we do not seek sub-pixel accuracy).
+
+The code snippet below finds the two highest values of the Hough transform. The correct peak (inner boundary) corresponds to the /smallest/ radius. Then, the coordinates of the center of the corresponding circle are found (it should be noted that what I call =c_x= and =c_y= really are the row and column of the center).
+
+#+BEGIN_SRC python
+  h_max = np.max(h, axis=(1, 2))
+  k = np.min(np.argsort(h_max)[-2:])
+  r= radii[k]
+  h = h[k, ...]
+  c_x, c_y = np.unravel_index(np.argmax(h), h.shape)
+  c_x, c_y, r
+#+END_SRC
+
+#+RESULTS:
+: (219, 217, 208)
+
+The inner boundary is centered at =(219, 217)=, and its radius is =208= (I did not make the data up!).
+
+#+CAPTION: 3D view of the Hough transform. The two bright spots correspond to the inner and outer boundaries of the sample container.
+#+NAME: fig:3
+#+ATTR_HTML: :width 50%
+file:./201506XX-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-hough-3D_rot-099.gif
+
+are converted into the following film using [[http://imagej.nih.gov/ij/][ImageJ]]
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil
