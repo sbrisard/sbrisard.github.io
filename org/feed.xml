@@ -4,6 +4,13 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
+      <title>Orientation correlations among rice grains, part 4: defining the ROI</title>
+      <link>http://sbrisard.github.io/posts/20150529-Orientation_correlations_among_rice_grains-04.html</link>
+      <guid>posts/20150529-Orientation_correlations_among_rice_grains-04.html</guid>
+      <pubDate>Fri, 29 May 2015</pubDate>
+      <description>In the previous instalment of this series, we obtained binned slices of the sample. Fig. 1 is a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within the Region Of Interest (ROI) thus defined.</description>
+    </item>
+    <item>
       <title>Orientation correlations among rice grains, part 3: intermezzo – Binning images</title>
       <link>http://sbrisard.github.io/posts/20150330-Orientation_correlations_among_rice_grains-03.html</link>
       <guid>posts/20150330-Orientation_correlations_among_rice_grains-03.html</guid>

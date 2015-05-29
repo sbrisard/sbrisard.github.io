@@ -183,7 +183,7 @@ The script which allowed the binning of the whole 3D image is presented below. I
 
 * Conclusion
 
-In this post, we took a slight detour on our way towards segmentation and analysis of our 3D images. Still, I hope you enjoyed this post and found it useful. In the next instalment, we will be back on track, as I will discuss the segmentation of the cylindrical sample container.
+In this post, we took a slight detour on our way towards segmentation and analysis of our 3D images. Still, I hope you enjoyed this post and found it useful. In the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][next instalment]], we will be back on track, as I will discuss the segmentation of the cylindrical sample container.
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil
