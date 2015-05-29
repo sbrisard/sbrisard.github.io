@@ -129,7 +129,7 @@ file:./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-bou
 A closer look (see Fig. [[fig:5]]) shows that we roughly achieved pixel accuracy, which will be sufficient for the analysis to come.
 
 #+CAPTION: Close-up of Fig. [[fig:4]]; pixel accuracy was approximately achieved.
-#+NAME: fig:4
+#+NAME: fig:5
 #+ATTR_HTML: :width 50%
 file:./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-roi_64x64+10+110-boundary-resized-099.png
 
