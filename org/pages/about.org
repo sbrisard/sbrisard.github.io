@@ -27,7 +27,21 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
   - Theory of Plates and Shells
   - Structural analysis (until 2012)
 
+* Supervision of Postdoctoral Fellows
+
+  - Michaël BERTIN (mar. 2015 - mar. 2016) :: /Variance Reduction Techniques for the Homogenization of Random Materials/ (co-supervised with: [[https://www.rocq.inria.fr/matherials/spip.php?rubrique5][C. Lebris]] and [[http://navier.enpc.fr/LEGOLL-Frederic][F. Legoll]]). This work has benefited from a French government grant managed by ANR within the frame of the national program Investments for the Future ANR-11-LABX-022-01.
+  - Linlin WANG (sept. 2013 - aug. 2014) :: ANHYMA project (hydromechanical couplings within the clay matrix of argilites) (co-supervised with: [[http://navier.enpc.fr/~vandamme][M. Vandamme]]). This work was financially supported by Défi NEEDS MiPor.
+  - Fatma ALLOUCHE (jan. 2013 - dec. 2013) :: /Methodologies and tools for the analysis of X-rays and electron tomography images/; Application to nanostructured materials and geomaterials (co-supervised with: [[http://navier.enpc.fr/BORNERT-Michel][M. Bornert]], N. Lenoir, [[http://www.icmpe.cnrs.fr/spip.php?article26][E. Leroy]], [[http://mateis.insa-lyon.fr/florent-dalmas][F. Dalmas]]). This work has benefited from a French government grant managed by ANR within the frame of the national program Investments for the Future ANR-11-LABX-022-01.
+
+* Supervision of PhD Students
+
+  - Vinh-Phuc TRAN (sept. 2013 - ???) :: /Multiscale a priori probabilistic modelling of random heterogeneous materials/ (advisor: [[http://navier.enpc.fr/SAB-Karam][K. Sab]]; co-supervisor: [[http://msme.u-pem.fr/equipe-mecanique/personnel/enseignants-chercheurs/guilleminot-johann/][J. Guilleminot]]).
+  - Mohamed Hassan KHALILI (sept. 2013 - ???) :: /Micromechanics of creep in granular materials/ (advisor: [[http://navier.enpc.fr/ROUX-Jean-Noel][J.-N. Roux]]; co-supervisors [[http://navier.enpc.fr/BORNERT-Michel][M. Bornert]], [[http://navier.enpc.fr/PEREIRA-Jean-Michel][J.-M. Pereira]] and [[http://navier.enpc.fr/~vandamme][M. Vandamme]]).
+  - Yassine EL-ASSAMI (febr. 2012 - may 2015) :: Modelling time-dependent behaviour of concrete with the equivalent inclusion method (advisor: [[http://navier.enpc.fr/DORMIEUX-Luc][L. Dormieux]]).
+
 * Publications
+
+(see also [[https://cv.archives-ouvertes.fr/sbrisard][HAL]], [[http://scholar.google.fr/citations?user=IwlAZnAAAAAJ&hl=en][Google Scholar]], [[http://orcid.org/0000-0002-1976-6263][ORCID]])
 
   - <<#BRIS2014>> [[http://dx.doi.org/10.1016/j.ijsolstr.2013.10.037][Brisard et al (2014)]] :: S. Brisard, L. Dormieux and K. Sab, /A variational form of the equivalent inclusion method for numerical homogenization/, International Journal of Solids and Structures 51(3-4): 716-728, 2014 ([[http://hal-enpc.archives-ouvertes.fr/hal-00922779][author's version]])
   - <<#BRIS2013A>> [[http://dx.doi.org/10.1016/j.jmps.2013.08.009][Brisard et al (2013)]] :: S. Brisard, K. Sab and L. Dormieux, /New boundary conditions for the computation of the apparent stiffness of statistical volume elements/, Journal of the Mechanics and Physics of Solids 61(12): 2638-2658, 2013 ([[http://hal-enpc.archives-ouvertes.fr/hal-00871767][author's version]])
