@@ -1,5 +1,6 @@
 #+TITLE: Blog archive
 
+   + [[file:201506XX-On_thick_shells.org][2015-06-01 -- On thick shells]]
    + [[file:20150529-Orientation_correlations_among_rice_grains-04.org][2015-05-29 -- Orientation correlations among rice grains, part 4: defining the ROI]]
    + [[file:20150330-Orientation_correlations_among_rice_grains-03.org][2015-03-30 -- Orientation correlations among rice grains, part 3: intermezzo -- Binning images]]
    + [[file:20150310-Orientation_correlations_among_rice_grains-02.org][2015-03-10 -- Orientation correlations among rice grains, part 2: acquisition of tomography images]]
