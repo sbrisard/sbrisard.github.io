@@ -15,7 +15,7 @@ R_\text{in}&=R-\frac h2,\\
 R_\text{out}&=R+\frac h2.
 \end{align}
 
-The problem is solved in spherical coordinates. From symmetry considerations (the problem is fully isotropic), the deflection \(w\) (normal displacement of the midsurface) is constant. Similarly, the strain \(\epsilon_{\alpha\beta}\), the change of curvature \(\kappa_{\alpha\beta}\), the membrane force \(N_{\alpha\beta}$\) and the bending moment $M_{\alpha\beta}$ are all diagonal tensors with constant components
+The problem is solved in spherical coordinates. From symmetry considerations (the problem is fully isotropic), the deflection \(w\) (normal displacement of the midsurface) is constant. Similarly, the strain \(\epsilon_{\alpha\beta}\), the change of curvature \(\kappa_{\alpha\beta}\), the membrane force \(N_{\alpha\beta}\) and the bending moment \(M_{\alpha\beta}\) are all diagonal tensors with constant components
 
 \begin{align}
 \label{eq:6}\epsilon_{\theta\theta}&=\epsilon,&\epsilon_{\phi\phi}&=\epsilon,&\epsilon_{\theta\phi}&=0,\\
@@ -90,10 +90,12 @@ N &= \frac{pR}2\left(1-\frac{h^2}{12R^2}\right)+\mathcal O(\frac{h^4}{R^4}),\\
 M &= -\frac{ph^2}{24}\left(1-\frac{h^2}{12R^2}\right)+\mathcal O(\frac{h^6}{R^6}).
 \end{align}
 
-This is the first surprise in this series: the stress couples are /not/ null, and the stress resultants differ slightly from the well-known formula \(N=pR/2\) ([[http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels][Wikipedia]]).
+This is the first surprise in this series: the stress couples are /not/ null, and the stress resultant differ slightly from the well-known formula \(N=pR/2\) ([[http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels][Wikipedia]]).
 
 Nota: the above-mentioned formula \(N=pR/2\) is called "formule des chaudronniers" (formula of boilermakers?) in French, but I could not find any English translation. If you happen to know the name of this formula, please let me know.
 
 * Conclusion
 
-We started with a very simple shell, which we expect to be in a state of membrane equilibrium. However, using Koiter's linear theory of thin shells, we found that the stress couples, though small, are not null! So what's wrong with the above analysis? To dig deeper into this problem, we will use its full 3D solution to compute /exact/ values of the stress resultants and couples... which will lead to other exciting findings!
+We started with a very simple shell, which we expected to be in a state of membrane equilibrium. However, using Koiter's linear theory of thin shells, we found that the stress couples, though small, are not null!
+
+So what's wrong with the above analysis? To dig deeper into this problem, we will use its full 3D solution to compute /exact/ values of the stress resultants and couples... which will lead to other exciting findings!
