@@ -1,7 +1,7 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/mathjax.org"
-#+TITLE: On thick shells
-#+DATE: [2015-06-01 Mon]
+#+TITLE: When a thin shell is not so thin, part\nbsp{}1: Koiter's linear theory
+#+DATE: [2015-06-08 Mon]
 
 In structural analysis, thick beams (resp. plates) usually refer to shear deformability, and the [[http://en.wikipedia.org/wiki/Timoshenko_beam_theory][Timoshenko beam theory]] (resp. [[http://en.wikipedia.org/wiki/Mindlin%E2%80%93Reissner_plate_theory][Mindlin–Reissner plate theory]]). With curved elements however (e.g. curved beams or shells), the situation is more subtle, as thickness corrections may be necessary even in shells /where the shear stress is null at any point/. In this series, this is illustrated with a spherical pressure vessel, for which the stress resultants and couples are studied. "Easy enough", you probably think: \(N=pR/2\), \(M=0\) and that's the end of it ([[http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels][Wikipedia]]). Well, maybe...
 
@@ -86,11 +86,11 @@ and similarly for the stress couples
 Substituting Eqs.\eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} in Eqs. \eqref{eq:4} and \eqref{eq:5} finally leads to the following expansions
 
 \begin{align}
-N &= \frac{pR}2\left(1-\frac{h^2}{12R^2}\right)+\mathcal O(\frac{h^4}{R^4}),\\
-M &= -\frac{ph^2}{24}\left(1-\frac{h^2}{12R^2}\right)+\mathcal O(\frac{h^6}{R^6}).
+N &= \frac{pR}2\left(1-\frac{h^2}{12R^2}\right)+\mathcal O\left(\frac{h^4}{R^4}\right),\\
+M &= -\frac{ph^2}{24}\left(1-\frac{h^2}{12R^2}\right)+\mathcal O\left(\frac{h^6}{R^6}\right).
 \end{align}
 
-This is the first surprise in this series: the stress couples are /not/ null, and the stress resultant differ slightly from the well-known formula \(N=pR/2\) ([[http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels][Wikipedia]]).
+This is the first surprise in this series: the stress couples are /not/ null, and the stress resultant differ slightly from the well-known formula \(N=pR/2\) (see [[http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels][Wikipedia]]).
 
 Nota: the above-mentioned formula \(N=pR/2\) is called "formule des chaudronniers" (formula of boilermakers?) in French, but I could not find any English translation. If you happen to know the name of this formula, please let me know.
 
