@@ -66,7 +66,10 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (setq url (concat "http://sbrisard.github.io/" id ".html"))
     (format sb-blog-disqus-script-format
             id
-            (org-export-data (plist-get info :title) info)
+            (org-export-data
+             (s-replace "'" "\\'"
+                        (org-export-data (plist-get info :title) info))
+             info)
             url)))
 
 ;; Functions for generation of HTML tags
