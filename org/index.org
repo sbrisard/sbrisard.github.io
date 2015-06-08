@@ -3,6 +3,10 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:./posts/20150608-When_a_thin_shell_is_not_so_thin-01.org][2015-06-08 -- When a thin shell is not so thin, part\nbsp{}1: Koiter's linear theory]]
+
+In structural analysis, thick beams (resp. plates) usually refer to shear deformability, and the [[http://en.wikipedia.org/wiki/Timoshenko_beam_theory][Timoshenko beam theory]] (resp. [[http://en.wikipedia.org/wiki/Mindlin%E2%80%93Reissner_plate_theory][Mindlin–Reissner plate theory]]). With curved elements however (e.g. curved beams or shells), the situation is more subtle, as thickness corrections may be necessary even in shells /where the shear stress is null at any point/. In this series, this is illustrated with a spherical pressure vessel, for which the stress resultants and couples are studied. "Easy enough", you probably think: N=pR/2, M=0 and that's the end of it ([[http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels][Wikipedia]]). Well, maybe...
+
 * [[file:./posts/20150529-Orientation_correlations_among_rice_grains-04.org][2015-05-29 -- Orientation correlations among rice grains, part 4: defining the ROI]]
 
 In the [[file:./posts/20150330-Orientation_correlations_among_rice_grains-03.org][previous instalment]] of this series, we obtained binned slices of the sample. Fig. 1 is a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within the Region Of Interest (ROI) thus defined.
