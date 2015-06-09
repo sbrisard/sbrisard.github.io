@@ -1,0 +1,21 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/mathjax.org"
+#+TITLE: When a thin shell is not so thin, part\nbsp{}2: the 3D, exact solution
+#+DATE: [2015-06-10 Wed]
+
+In the [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org][previous instalment]] of this series, we analysed a spherical pressure vessel by means of Koiter's linear theory of thin shells. We found the somewhat unexpected result that the stress couple was not null. Besides, we also found that the stress resultant was slightly different from the well-known value \(N=pR/2\). So what was wrong with the previous analysis? To explore this question, we will make use of the exact solution in 3D elasticity.
+
+* The spherical pressure vessel, exact solution
+
+Finding the stresses and displacements in a pressure vessel is a classical exercise in 3D linear elasticity. In this post, I will spare you the details of the derivation (which can be found in e.g. XXX). Instead, I will come straight to the point, and provide you with the exact expression of the stress tensor
+
+\begin{gather}
+\sigma_{rr}=\\
+\sigma_{\theta\theta}=\sigma_{\phi\phi}=,
+\end{gather}
+
+all other components being null. In the above formulas, \(R_\text{int}\) (resp. \(R_\text{ext}\)) denotes the internal (resp. external) radius of the spherical pressure vessel; \(p_\text{int}\) (resp. \(p_\text{ext}\)) denotes the internal (resp. external) pressure. In the remainder of this post, \(\sigma\) will denote the common value of the in-plane stresses
+
+\begin{equation}
+\sigma=\sigma_{\theta\theta}=\sigma_{\phi\phi}.
+\end{equation}
