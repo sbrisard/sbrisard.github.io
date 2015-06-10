@@ -7,11 +7,11 @@ In the [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org][previous insta
 
 * The spherical pressure vessel, exact solution
 
-Finding the stresses and displacements in a pressure vessel is a classical exercise in 3D linear elasticity. In this post, I will spare you the details of the derivation (which can be found in e.g. XXX). Instead, I will come straight to the point, and provide you with the exact expression of the stress tensor in spherical coordinates (\(r\): distance to the center of the spherical pressure vessel)
+Finding the stresses and displacements in a pressure vessel is a classical exercise in 3D linear elasticity. In this post, I will spare you the details of the derivation (which can be found in e.g. [[file:../pages/references.org::#TIMO1951][Timoshenko and Goodier, 1951]], art. 121). Instead, I will come straight to the point, and provide you with the exact expression of the stress tensor in spherical coordinates (\(r\): distance to the center of the spherical pressure vessel)
 
 \begin{gather}
-\label{eq:1}\sigma_{rr}=A-\frac{2B}{r^3},\\
-\label{eq:2}\sigma_{\theta\theta}=\sigma_{\phi\phi}=A+\frac{B}{r^3},
+\label{eq:1}\sigma_{rr}(r)=A-\frac{2B}{r^3},\\
+\label{eq:2}\sigma_{\theta\theta}(r)=\sigma_{\phi\phi}(r)=A+\frac{B}{r^3},
 \end{gather}
 
 all other components being null. The integration constants \(A\) and \(B\) are defined below
@@ -21,7 +21,13 @@ A&=-\frac{p_\text{ext}R_\text{ext}^3-p_\text{int}R_\text{int}^3}{R_\text{ext}^3-
 B&=-\frac12\frac{\left(p_\text{ext}-p_\text{int}\right)R_\text{int}^3R_\text{ext}^3}{R_\text{ext}^3-R_\text{int}^3},\\
 \end{align}
 
-where \(R_\text{int}\) and \(R_\text{ext}\) denote the internal and external radii of the spherical pressure vessel; \(p_\text{int}\) and \(p_\text{ext}\) denote the internal and external pressures. In the remainder of this post, \(\sigma\) will denote the common value of the in-plane stresses
+where \(R_\text{int}=R-h/2\) and \(R_\text{ext}=R+h/2\) denote the internal and external radii of the spherical pressure vessel (\(R\): radius of midsurface, \(h\): thickness); \(p_\text{int}\) and \(p_\text{ext}\) denote the internal and external pressures. To make a fair comparison between the shell theory and the 3D exact solution, it is customary to share the load equally between the upper and lower faces (see e.g. [[file:../pages/references.org::#REIS1947][Reissner, 1947]]). In other words,
+
+\begin{equation}
+p_\text{int}=-p_\text{ext}=\frac p2.
+\end{equation}
+
+In the remainder of this post, \(\sigma\) will denote the common value of the in-plane stresses
 
 \begin{equation}
 \sigma=\sigma_{\theta\theta}=\sigma_{\phi\phi}.
@@ -30,6 +36,10 @@ where \(R_\text{int}\) and \(R_\text{ext}\) denote the internal and external rad
 From Eq. \eqref{eq:2}, we readily find the following expressions of the stress resultant \(N=N_{\theta\theta}=N_{\phi\phi}\) and stress couple \(M=M_{\theta\theta}=M_{\phi\phi}\)
 
 \begin{align}
-N &= \int_{R_\text{int}}^{R_\text{ext}}\sigma\,\mathrm{d}r,\\
-M &= -\int_{R_\text{int}}^{R_\text{ext}}\left(r-R\right)\sigma\,\mathrm{d}r.
+\label{eq:3}N &= \int_{R_\text{int}}^{R_\text{ext}}\sigma(r)\,\mathrm{d}r=\frac{pR}2\frac{1+\frac{5h^2}{12R^2}}{1+\frac{h^2}{12R^2}}=\frac{pR}2\left(1+\frac{h^2}{3R^2}\right)+\mathcal O\left(\frac{h^4}{R^4}\right),\\
+\label{eq:4}M &= -\int_{R_\text{int}}^{R_\text{ext}}\left(r-R\right)\sigma(r)\,\mathrm{d}r=\frac{ph^2}{24}\frac{1-\frac{h^2}{4R^2}}{1+\frac{h^2}{12R^2}}=\frac{ph^2}{24}\left(1-\frac{h^2}{3R^2}\right)+\mathcal O\left(\frac{h^6}{R^6}\right).
 \end{align}
+
+Comparing with [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org::#Koiter_solution][Koiter's solution]], it is found that the dominant terms of the stress resultant coincide. This is not true of the stress couple, though. Even worse, the signs differ! While in Koiter's solution, the stress couple is negative (as expected), integration of the 3D solution leads to a /positive/ stress couple, which is unphysical. Something nasty is definitely taking place, here!
+
+In the next section, I will show that Eqs. \eqref{eq:3} and \eqref{eq:4} are in fact (poor) approximations of the true expression of the stress resultant and couple.
