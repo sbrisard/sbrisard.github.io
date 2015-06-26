@@ -43,3 +43,25 @@ From Eq. \eqref{eq:2}, we readily find the following expressions of the stress r
 Comparing with [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org::#Koiter_solution][Koiter's solution]], it is found that the dominant terms of the stress resultant coincide. This is not true of the stress couple, though. Even worse, the signs differ! While in Koiter's solution, the stress couple is negative (as expected), integration of the 3D solution leads to a /positive/ stress couple, which is unphysical. Something nasty is definitely taking place, here!
 
 In the next section, I will show that Eqs. \eqref{eq:3} and \eqref{eq:4} are in fact (poor) approximations of the true expression of the stress resultant and couple.
+
+* Defining a sub-system
+
+#+CAPTION: blabla.
+#+NAME: fig:1
+file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig01.svg
+
+#+CAPTION: blabla.
+#+NAME: fig:2
+file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig02.svg
+
+#+CAPTION: blabla.
+#+NAME: fig:3
+file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig03.svg
+
+#+CAPTION: blabla.
+#+NAME: fig:4
+file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig04.svg
+
+#+CAPTION: blabla.
+#+NAME: fig:5
+file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig05.svg
