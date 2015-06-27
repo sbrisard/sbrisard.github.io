@@ -213,8 +213,8 @@ if __name__ == '__main__':
 
     u_fine = np.linspace(*base.u_range, num=20)
     v_fine = np.linspace(*base.v_range, num=20)
-    u_coarse = np.linspace(*base.u_range, num=13)
-    v_coarse = np.linspace(*base.v_range, num=13)
+    u_coarse = np.linspace(*base.u_range, num=9)
+    v_coarse = np.linspace(*base.v_range, num=9)
 
     upper_outer_boundary = boundary(upper, u_fine, v_fine)
     base_outer_boundary = boundary(base, u_fine, v_fine)
