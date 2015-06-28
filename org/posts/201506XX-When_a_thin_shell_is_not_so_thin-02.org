@@ -44,24 +44,27 @@ Comparing with [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org::#Koite
 
 In the next section, I will show that Eqs. \eqref{eq:3} and \eqref{eq:4} are in fact (poor) approximations of the true expression of the stress resultant and couple.
 
-* Defining a sub-system
+* Stress resultants and stress couples: the correct definition
 
-#+CAPTION: blabla.
-#+NAME: fig:1
+Stress resultants and stress couples are defined from the internal resultant forces and moments exerted on subregions of the shell. In this section, I will show how such subsystems are constructed, from a closed path drawn on the midsurface. The story begins with a shell, seen as a continuum.
+
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig01.svg
 
-#+CAPTION: blabla.
-#+NAME: fig:2
+In this section, we will focus on the upper and lower faces of the shell (in green), as well as the base surface (in blue). For homogeneous shells, the base surface usually coincides with the midsurface (in other words, it is equidistant to the upper and lower faces). This is not really required here, as we are only discussing equilibrium issues. The situation would be a bit different if we were to discuss shell constitutive equations, but this would take us too far. So, let us just assume that the base surface /is/ the midsurface.
+
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig02.svg
 
-#+CAPTION: blabla.
-#+NAME: fig:3
+To define a subregion of the shell, we first draw a closed path on the base surface. As the current point moves along this path, the normal to the base surface sweeps a new surface, which will be the /lateral surface/ of the subregion. It should be noted that, by construction, the lateral surface is a ruled surface.
+
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig03.svg
 
-#+CAPTION: blabla.
-#+NAME: fig:4
+The lateral surface intersects the upper and lower faces of the shell...
+
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig04.svg
 
-#+CAPTION: blabla.
-#+NAME: fig:5
+
+... thus defining the upper and lower boundaries of the subregion. That's it! We have defined our subsystem!
+
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig05.svg
+
+Now,
