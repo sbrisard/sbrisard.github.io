@@ -279,6 +279,18 @@ if __name__ == '__main__':
     attrs = [pyx.deco.filled([boundary_color, outer_transparency])]
     c.draw(multiline(*proj(*lower_outer_boundary), closed=True), attrs)
 
+    text_attrs = [pyx.text.halign.boxleft,
+                  pyx.text.valign.middle,
+                  pyx.color.rgb.black,
+                  pyx.color.transparency(0.)]
+    u, v = -0.6, 0.6
+    x, y = proj(*base.point(u, v))
+    c.text(x, y, r'$\Sigma$', text_attrs)
+    x, y = proj(*upper.point(u, v))
+    c.text(x, y, r'$\Sigma^+$', text_attrs)
+    x, y = proj(*lower.point(u, v))
+    c.text(x, y, r'$\Sigma^-$', text_attrs)
+
     c.writeSVGfile('fig02')
 
     # ------------------------------------------------------------------------
