@@ -192,6 +192,14 @@ def id_v(u, v_range):
 
 
 if __name__ == '__main__':
+    # Using package txfonts leads to LaTeX messages that pyx cannot parse.
+    pyx.text.set(pyx.text.LatexRunner,
+                 docopt='12pt',
+                 errordetail=pyx.text.errordetail.full,
+                 texmessages_preamble=[pyx.text.texmessage.ignore],
+                 texmessages_run=[pyx.text.texmessage.ignore])
+    pyx.text.preamble(r'\usepackage{amsmath, txfonts}')
+
     proj = pyx.graph.graphxyz.parallel(45, 30).point
 
     h = 1.5
