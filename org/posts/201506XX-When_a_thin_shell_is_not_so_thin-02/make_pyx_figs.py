@@ -385,6 +385,18 @@ if __name__ == '__main__':
     for i in range(len(t)):
         c.stroke(pyx.path.line(x1[i], y1[i], x2[i], y2[i]), attrs)
 
+    u, v = -0.57, 0.57
+
+    x, y = proj(*upper.point(u, v))
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma^+$', text_attrs)
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+
+    x, y = proj(*lower.point(u, v))
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma^-$', text_attrs)
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+
     c.writeSVGfile('fig04')
 
     # ------------------------------------------------------------------------
