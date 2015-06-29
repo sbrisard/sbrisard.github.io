@@ -287,17 +287,42 @@ if __name__ == '__main__':
     attrs = [pyx.deco.filled([boundary_color, outer_transparency])]
     c.draw(multiline(*proj(*lower_outer_boundary), closed=True), attrs)
 
+    text_scaling = pyx.trafo.scale(1.4)
     text_attrs = [pyx.text.halign.boxleft,
                   pyx.text.valign.middle,
                   pyx.color.rgb.black,
                   pyx.color.transparency(0.)]
-    u, v = -0.6, 0.6
+    attrs = [pyx.deco.barrow([pyx.deco.stroked([pyx.color.rgb.black]),
+                              pyx.deco.filled([pyx.color.rgb.black,
+                                               pyx.color.transparency(0.0)])])]
+    u, v = -0.75, 0.75
+
     x, y = proj(*base.point(u, v))
-    c.text(x, y, r'$\Sigma$', text_attrs)
+    x1, y1, dx1, dy1 = x, y, 0.5, 1.0
+    x2, y2, dx2, dy2 = x+1.5, y, 0, 0
+    c.stroke(pyx.path.curve(x1, y1, x1+dx1, y1+dy1, x2+dx2, y2+dy2, x2, y2),
+             attrs)
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma$', text_attrs)
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x2, y2)])
+
     x, y = proj(*upper.point(u, v))
-    c.text(x, y, r'$\Sigma^+$', text_attrs)
+    x1, y1, dx1, dy1 = x, y, -0.5, 1.0
+    x2, y2, dx2, dy2 = x+1.5, y+2.0, -1, -0.3
+    c.stroke(pyx.path.curve(x1, y1, x1+dx1, y1+dy1, x2+dx2, y2+dy2, x2, y2),
+             attrs)
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma^+$', text_attrs)
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x2, y2)])
+
     x, y = proj(*lower.point(u, v))
-    c.text(x, y, r'$\Sigma^-$', text_attrs)
+    x1, y1, dx1, dy1 = x, y, 0, 0
+    x2, y2, dx2, dy2 = x+1.5, y-1.5, -0.5, -0.5
+    c.stroke(pyx.path.curve(x1, y1, x1+dx1, y1+dy1, x2+dx2, y2+dy2, x2, y2),
+             attrs)
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma^-$', text_attrs)
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x2, y2)])
 
     c.writeSVGfile('fig02')
 
