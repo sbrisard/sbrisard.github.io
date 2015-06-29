@@ -198,7 +198,7 @@ if __name__ == '__main__':
                  errordetail=pyx.text.errordetail.full,
                  texmessages_preamble=[pyx.text.texmessage.ignore],
                  texmessages_run=[pyx.text.texmessage.ignore])
-    pyx.text.preamble(r'\usepackage{amsmath, txfonts}')
+    pyx.text.preamble(r'\usepackage{amsmath, bm, txfonts}')
 
     proj = pyx.graph.graphxyz.parallel(45, 30).point
 
@@ -288,41 +288,25 @@ if __name__ == '__main__':
     c.draw(multiline(*proj(*lower_outer_boundary), closed=True), attrs)
 
     text_scaling = pyx.trafo.scale(1.4)
-    text_attrs = [pyx.text.halign.boxleft,
-                  pyx.text.valign.middle,
-                  pyx.color.rgb.black,
-                  pyx.color.transparency(0.)]
-    attrs = [pyx.deco.barrow([pyx.deco.stroked([pyx.color.rgb.black]),
-                              pyx.deco.filled([pyx.color.rgb.black,
-                                               pyx.color.transparency(0.0)])])]
-    u, v = -0.75, 0.75
+    text_attrs = [pyx.text.halign.boxleft, pyx.text.valign.middle,
+                  pyx.color.rgb.black, pyx.color.transparency(0.)]
+
+    u, v = -0.57, 0.57
 
     x, y = proj(*base.point(u, v))
-    x1, y1, dx1, dy1 = x, y, 0.5, 1.0
-    x2, y2, dx2, dy2 = x+1.5, y, 0, 0
-    c.stroke(pyx.path.curve(x1, y1, x1+dx1, y1+dy1, x2+dx2, y2+dy2, x2, y2),
-             attrs)
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma$', text_attrs)
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x2, y2)])
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
     x, y = proj(*upper.point(u, v))
-    x1, y1, dx1, dy1 = x, y, -0.5, 1.0
-    x2, y2, dx2, dy2 = x+1.5, y+2.0, -1, -0.3
-    c.stroke(pyx.path.curve(x1, y1, x1+dx1, y1+dy1, x2+dx2, y2+dy2, x2, y2),
-             attrs)
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma^+$', text_attrs)
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x2, y2)])
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
     x, y = proj(*lower.point(u, v))
-    x1, y1, dx1, dy1 = x, y, 0, 0
-    x2, y2, dx2, dy2 = x+1.5, y-1.5, -0.5, -0.5
-    c.stroke(pyx.path.curve(x1, y1, x1+dx1, y1+dy1, x2+dx2, y2+dy2, x2, y2),
-             attrs)
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma^-$', text_attrs)
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x2, y2)])
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
     c.writeSVGfile('fig02')
 
@@ -351,6 +335,24 @@ if __name__ == '__main__':
     x2, y2 = proj(*xyz2)
     for i in range(len(t)):
         c.stroke(pyx.path.line(x1[i], y1[i], x2[i], y2[i]), attrs)
+
+    cc = pyx.canvas.canvas()
+    cc.text(0, +0.1, r'$\bm{\mathrm{n}}$', [pyx.text.halign.boxcenter,
+                                            pyx.text.valign.bottom,
+                                            normal_color,
+                                            pyx.color.transparency(0.)])
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x2[-5], y2[-5])])
+
+    x, y = proj(*base.point(-0.57, 0.57))
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma$', text_attrs)
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+
+    x, y = proj(*base.point(*inner_boundary.point(0.25*np.pi)))
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Gamma$', [pyx.text.halign.boxleft, pyx.text.valign.top,
+                                pyx.color.rgb.black, pyx.color.transparency(0.)])
+    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y-0.1)])
 
     c.writeSVGfile('fig03')
 
