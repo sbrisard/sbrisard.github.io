@@ -50,11 +50,11 @@ Stress resultants and stress couples are defined from the internal resultant for
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig01.svg
 
-In this section, we will focus on the upper and lower faces of the shell (in green), as well as the base surface (in blue). For homogeneous shells, the base surface usually coincides with the midsurface (in other words, it is equidistant to the upper and lower faces). This is not really required here, as we are only discussing equilibrium issues. The situation would be a bit different if we were to discuss shell constitutive equations, but this would take us too far. So, let us just assume that the base surface /is/ the midsurface.
+In this section, we will focus on the upper ($\Sigma^+$) and lower faces ($\Sigma^-$) of the shell, as well as the base surface ($\Sigma$). For homogeneous shells, the base surface usually coincides with the midsurface (in other words, it is equidistant to the upper and lower faces). This is not really required here, as we are only discussing equilibrium issues. The situation would be a bit different if we were to discuss shell constitutive equations, but this would take us too far. So, let us just assume that the base surface /is/ the midsurface.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig02.svg
 
-To define a subregion of the shell, we first draw a closed path on the base surface. As the current point moves along this path, the normal to the base surface sweeps a new surface, which will be the /lateral surface/ of the subregion. It should be noted that, by construction, the lateral surface is a ruled surface.
+To define a subregion of the shell, we first draw a closed path $\Gamma$ on the base surface. As the current point moves along this path, the normal to the base surface sweeps a new surface, which will be the /lateral surface/ of the subregion. It should be noted that, by construction, the lateral surface is a ruled surface.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig03.svg
 
