@@ -46,11 +46,11 @@ In the next section, I will show that Eqs. \eqref{eq:3} and \eqref{eq:4} are in 
 
 * Stress resultants and stress couples: the correct definition
 
-Stress resultants and stress couples are defined from the internal resultant forces and moments exerted on subregions of the shell. In this section, I will show how such subsystems are constructed, from a closed path drawn on the midsurface. The story begins with a shell, seen as a continuum.
+Stress resultants and stress couples are defined from the internal resultant forces and moments exerted on subdomains of the shell. In this section, I will show how such subsystems are constructed from a closed path drawn on the midsurface. The story begins with a shell, seen as a continuum.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig01.svg
 
-In this section, we will focus on the upper ($\Sigma^+$) and lower faces ($\Sigma^-$) of the shell, as well as the base surface ($\Sigma$). For homogeneous shells, the base surface usually coincides with the midsurface (in other words, it is equidistant to the upper and lower faces). This is not really required here, as we are only discussing equilibrium issues. The situation would be a bit different if we were to discuss shell constitutive equations, but this would take us too far. So, let us just assume that the base surface /is/ the midsurface.
+We will focus on the upper and lower faces of the shell, $\Sigma^+$ and $\Sigma^-$, as well as the base surface, $\Sigma$. For homogeneous shells, the base surface usually coincides with the midsurface (in other words, it is equidistant to the upper and lower faces). This is not really required here, as we are only discussing equilibrium issues. However, for the sake of simplicity, we will just assume that the base surface /is/ the midsurface.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig02.svg
 
@@ -67,4 +67,22 @@ file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig04.svg
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig05.svg
 
-Now,
+Let us now compute the resultant force $\vec{\mathcal R}$ and moment $\vec{\mathcal M}$ exerted by the remainder of the shell on this subregion. By definition of the Cauchy stress tensor $\tens\sigma$, we have
+
+\begin{align}
+\vec{\mathcal R} &= \int_{\vec x\in\Sigma^\mathrm{lat}}\tens\sigma\cdot\vec\nu\,\mathrm{d}\Sigma_{\vec x}^\mathrm{lat},\\
+\vec{\mathcal M} &= \int_{\vec x\in\Sigma^\mathrm{lat}}\vec x\times\left(\tens\sigma\cdot\vec\nu\right)\mathrm{d}\Sigma_{\vec x}^\mathrm{lat},
+\end{align}
+
+where $\vec x$ denotes the current point on the lateral surface, $\Sigma^\mathrm{lat}$, and $\vec\nu$ is the outer normal to the lateral surface. By definition, the stress resultant $\tens N$ and stress couple $\tens M$ are second order tensors, such that
+
+\begin{align}
+\vec{\mathcal R} &= \int_{\vec x\in\Gamma}\tens N\cdot\vec\nu\,\mathrm{d}s,\\
+\vec{\mathcal M} &= \int_{\vec x\in\Gamma}\vec x\times\left(\tens M\cdot\svec\nu\right)\mathrm{d}s,
+\end{align}
+
+where the integral is now computed on the closed path $\Gamma$ only. This definition will be used in the next section to compute the stress resultant and couple in the spherical pressure vessel.
+
+* Stress resultant and couple in the spherical pressure vessel
+
+Since
