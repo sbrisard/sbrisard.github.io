@@ -72,6 +72,11 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
              info)
             url)))
 
+;; Creative commons license
+;; ------------------------
+(defvar sb-blog-license "<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-nc/4.0/88x31.png\" /></a><br /><span xmlns:dct=\"http://purl.org/dc/terms/\" property=\"dct:title\">Except where otherwise noted, this blog</span> by <a xmlns:cc=\"http://creativecommons.org/ns#\" href=\"http://sbrisard.github.io/\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Sébastien Brisard</a> is licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+")
+
 ;; Functions for generation of HTML tags
 ;; =====================================
 
@@ -162,11 +167,15 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                                       ,(sb-blog-link-rss level)))
             "</div>\n")))
 
+(defvar sb-blog-credits "This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>. Icons come from the <a href=\"http://fontawesome.io/\">Font Awesome</a> icon set.")
+
 ;; To allow for comments
 ;; #+OPTIONS: comments:t
 (defun sb-blog-html-postamble (info)
-  (concat "<p>This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>. Icons come from the <a href=\"http://fontawesome.io/\">Font Awesome</a> icon set.</p>
-"
+  (concat "<p>"
+          sb-blog-license
+          sb-blog-credits
+          "</p>"
           ;sb-blog-twitter-follow-button-script
           (when (and (plist-get info :comments-allowed)
                      (not (s-ends-with? sb-blog-posts-sitemap-filename
