@@ -1,0 +1,6 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/mathjax.org"
+#+TITLE: This blog is now licensed!
+#+DATE: [2015-07-01 Wed]
+
+As indicated at the bottom of each page of this website, this blog is now licensed under a [[http://creativecommons.org/licenses/by-nc/4.0/][Creative Commons Attribution-NonCommercial 4.0 International License]]. This means that you are free to share and/or adapt the contents of this blog, as long as you give appropriate credit to the author. You may not make profit out of this website, though.
