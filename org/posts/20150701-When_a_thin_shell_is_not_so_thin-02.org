@@ -140,3 +140,5 @@ Comparing Eqs. \eqref{eq:18} and \eqref{eq:19} with Eqs. \eqref{eq:7} and \eqref
 In this post, we used the exact stress distribution within the spherical vessel to compute the stress resultant and stress couple. We showed that the thin shell approximation, which amounts to neglecting the jacobian in a surface integral, results in poor estimates in this case. Exact integration delivers much more convincing results. However, we still have not completely solved the problem. Indeed, comparing Eqs. \eqref{eq:18} and \eqref{eq:19} with Eqs. (17) and (18) in the [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org][previous instalment]] of this series, we still observe major differences: the two values of the stress couple have the same sign, but they differ by two orders of magnitude (with respect to the thickness of the shell).
 
 In the next instalment of this series, we will go back to Koiter's shell model and use constitutive equations for /thick shells/ to finally resolve the apparent contradiction.
+
+Figures in this post were generated with the nice [[http://pyx.sourceforge.net/][PyX]] library.
