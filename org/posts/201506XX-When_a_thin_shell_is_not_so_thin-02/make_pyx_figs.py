@@ -401,19 +401,19 @@ if __name__ == '__main__':
     # ------------------------------------------------------------------------
     #                                 Figure 5
     # ------------------------------------------------------------------------
-    c = pyx.canvas.canvas()
+    c5 = pyx.canvas.canvas()
 
     attrs = [pyx.deco.filled([boundary_color, outer_transparency])]
     xyz = np.hstack((lower_outer_boundary, lower_inner_boundary))
-    c.draw(multiline(*proj(*xyz)), attrs)
+    c5.draw(multiline(*proj(*xyz)), attrs)
     attrs = [pyx.deco.filled([boundary_color, outer_transparency])]
     xyz = np.hstack((upper_outer_boundary, upper_inner_boundary))
-    c.draw(multiline(*proj(*xyz)), attrs)
+    c5.draw(multiline(*proj(*xyz)), attrs)
 
     attrs = [pyx.deco.stroked([boundary_color, boundary_thickness]),
              pyx.deco.filled([boundary_color, inner_transparency])]
-    c.draw(multiline(*proj(*upper_inner_boundary)), attrs)
-    c.draw(multiline(*proj(*lower_inner_boundary)), attrs)
+    c5.draw(multiline(*proj(*upper_inner_boundary)), attrs)
+    c5.draw(multiline(*proj(*lower_inner_boundary)), attrs)
 
     attrs = [pyx.deco.stroked([normal_thickness, normal_color])]
     t = np.linspace(*inner_boundary.t_range, num=num_normals, endpoint=False)
@@ -425,21 +425,21 @@ if __name__ == '__main__':
     xyz2 = xyz+0.5*h*n
     x2, y2 = proj(*xyz2)
     for i in range(len(t)):
-        c.stroke(pyx.path.line(x1[i], y1[i], x2[i], y2[i]), attrs)
+        c5.stroke(pyx.path.line(x1[i], y1[i], x2[i], y2[i]), attrs)
 
     u, v = -0.57, 0.57
 
     x, y = proj(*upper.point(u, v))
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma^+$', text_attrs)
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+    c5.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
     x, y = proj(*lower.point(u, v))
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma^-$', text_attrs)
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+    c5.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
-    c.writeSVGfile('fig05')
+    c5.writeSVGfile('fig05')
 
     # ------------------------------------------------------------------------
     #                                 Figure 6
