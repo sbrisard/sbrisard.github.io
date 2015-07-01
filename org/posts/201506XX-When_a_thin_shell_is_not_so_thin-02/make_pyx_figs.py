@@ -248,17 +248,17 @@ if __name__ == '__main__':
     # ------------------------------------------------------------------------
     #                                 Figure 1
     # ------------------------------------------------------------------------
-    c = pyx.canvas.canvas()
+    c1 = pyx.canvas.canvas()
 
     # Outer boundaries
     attrs = [pyx.deco.stroked([boundary_thickness, boundary_color])]
-    c.stroke(multiline(*proj(*upper_outer_boundary)), attrs)
+    c1.stroke(multiline(*proj(*upper_outer_boundary)), attrs)
     curve2 = id_v(base.u_range[1], base.v_range)
     lat2 = lateral_surface(base, curve2, z_range)
-    c.stroke(multiline(*proj(*boundary(lat2, v_fine, z_range))), attrs)
+    c1.stroke(multiline(*proj(*boundary(lat2, v_fine, z_range))), attrs)
     curve3 = id_u(base.v_range[1], base.u_range)
     lat3 = lateral_surface(base, curve3, z_range)
-    c.stroke(multiline(*proj(*boundary(lat3, u_fine, z_range))), attrs)
+    c1.stroke(multiline(*proj(*boundary(lat3, u_fine, z_range))), attrs)
 
     # Iso-lines
     attrs = [isoline_thickness, boundary_color]
@@ -266,19 +266,19 @@ if __name__ == '__main__':
     for u in u_coarse:
         upper.point(u, v_fine, xyz[:, :-1])
         lower.point(u, lower.v_range[1], xyz[:, -1])
-        c.stroke(multiline(*proj(*xyz)), attrs)
+        c1.stroke(multiline(*proj(*xyz)), attrs)
     xyz = np.empty((3, u_fine.shape[0]+1), dtype=np.float64)
     for v in v_coarse:
         upper.point(u_fine, v, xyz[:, 0:-1])
         lower.point(lower.u_range[1], v, xyz[:, -1])
-        c.stroke(multiline(*proj(*xyz)), attrs)
+        c1.stroke(multiline(*proj(*xyz)), attrs)
 
     # Trace of base surface
     attrs = [isoline_thickness, base_color]
-    c.stroke(multiline(*proj(*base.point(*curve2.point(v_fine)))), attrs)
-    c.stroke(multiline(*proj(*base.point(*curve3.point(u_fine)))), attrs)
+    c1.stroke(multiline(*proj(*base.point(*curve2.point(v_fine)))), attrs)
+    c1.stroke(multiline(*proj(*base.point(*curve3.point(u_fine)))), attrs)
 
-    c.writeSVGfile('fig01')
+    c1.writeSVGfile('fig01')
 
     # ------------------------------------------------------------------------
     #                                 Figure 2
