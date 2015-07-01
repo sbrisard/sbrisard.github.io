@@ -46,46 +46,46 @@ In the next section, I will show that Eqs. \eqref{eq:3} and \eqref{eq:4} are in 
 
 * Stress resultants and stress couples: the correct definition
 
-Stress resultants and stress couples are defined from the internal resultant forces and moments exerted on subdomains of the shell. In this section, I will show how such subsystems are constructed from a closed path drawn on the midsurface. The story begins with a shell, seen as a continuum.
+Stress resultants and stress couples are defined from the internal resultant forces and moments exerted on subdomains of the shell. In this section, I will show how such subsystems are constructed from a closed path drawn on the midsurface.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig01.svg
 
-We will focus on the upper and lower faces of the shell, $\Sigma^+$ and $\Sigma^-$, as well as the base surface, $\Sigma$. For homogeneous shells, the base surface usually coincides with the midsurface (in other words, it is equidistant to the upper and lower faces). This is not really required here, as we are only discussing equilibrium issues. However, for the sake of simplicity, we will just assume that the base surface /is/ the midsurface.
+The story begins with a shell, seen as a continuum.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig02.svg
 
-To define a subregion of the shell, we first draw a closed path $\Gamma$ on the base surface, and define a local basis $(\vec\tau,\vec n, \vec\nu)$ attached to this curve: $\vec\tau$ is the unit tangent, $\vec n$ is the unit normal to the base surface, and $\vec\nu=\vec\tau\times\vec n$ is the unit in-plane normal to $\Gamma$.
+We will focus on the upper and lower faces of the shell, $\Sigma^+$ and $\Sigma^-$, as well as the base surface, $\Sigma$. For homogeneous shells, the base surface usually coincides with the midsurface (in other words, it is equidistant to the upper and lower faces). This is not really required here, as we are only discussing equilibrium issues. However, for the sake of simplicity, we will just assume that the base surface /is/ the midsurface.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig03.svg
 
-As the current point moves along this path, the normal to the base surface sweeps a new surface, which will be the /lateral surface/ of the subregion. It should be noted that, by construction, the lateral surface is a ruled surface. The outer normal to this surface is constant, equal to $\vec\nu$ along each of the generating lines.
+To define a subregion of the shell, we first draw a closed path $\Gamma$ on the base surface, and define the local basis $(\boldsymbol\tau, \mathbf n, \boldsymbol\nu)$ attached to this curve: $\boldsymbol\tau$ is the unit tangent, $\mathbf n$ is the unit normal to the base surface, and $\boldsymbol\nu=\boldsymbol\tau\times\mathbf n$ is the unit in-plane normal to $\Gamma$.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig04.svg
 
-The lateral surface intersects the upper and lower faces of the shell...
+As the current point moves along this path, the normal to the base surface sweeps a new surface, which will be the /lateral surface/ of the subregion. It should be noted that, by construction, the lateral surface is a ruled surface. The outer normal to this surface is constant, equal to $\boldsymbol\nu$ along each of the generating lines.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig05.svg
 
-... thus defining the upper and lower boundaries of the subregion. That's it! We have defined our subsystem!
+The lateral surface intersects the upper and lower faces of the shell...
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig06.svg
 
-Let us now compute the resultant force $\vec{\mathcal R}$ and moment $\vec{\mathcal M}$ exerted by the remainder of the shell on this subregion. By definition of the Cauchy stress tensor $\tens\sigma$, we have
+... thus defining the upper and lower boundaries of the subregion. That's it! We have defined our subsystem!
+
+Let us now compute the resultant force $\boldsymbol{\mathcal R}$ and moment $\boldsymbol{\mathcal M}$ exerted by the remainder of the shell on this subregion. By definition of the Cauchy stress tensor $\boldsymbol\sigma$, we have
 
 \begin{align}
-\vec{\mathcal R} &= \int_{\vec x\in\Sigma^\mathrm{lat}}\tens\sigma\cdot\vec\nu\,\mathrm{d}\Sigma_{\vec x}^\mathrm{lat},\\
-\vec{\mathcal M} &= \int_{\vec x\in\Sigma^\mathrm{lat}}\vec x\times\left(\tens\sigma\cdot\vec\nu\right)\mathrm{d}\Sigma_{\vec x}^\mathrm{lat},
+\boldsymbol{\mathcal R} &= \int_{\mathbf x\in\Sigma^\mathrm{lat}}\boldsymbol\sigma\cdot\boldsymbol\nu\,\mathrm{d}\Sigma_{\mathbf x}^\mathrm{lat},\\
+\boldsymbol{\mathcal M} &= \int_{\mathbf x\in\Sigma^\mathrm{lat}}\mathbf{x}\times\left(\boldsymbol\sigma\cdot\boldsymbol\nu\right)\mathrm{d}\Sigma_{\mathbf x}^\mathrm{lat},
 \end{align}
 
-where $\vec x$ denotes the current point on the lateral surface, $\Sigma^\mathrm{lat}$, and $\vec\nu$ is the outer normal to the lateral surface. By definition, the stress resultant $\tens N$ and stress couple $\tens M$ are second order tensors, such that
+where $\mathbf x$ denotes the current point on the lateral surface. By definition, the membrane stress resultant $\mathbf N$ (second order tensor), the shear stress resultant $\mathbf Q$ (vector) and the stress couple $\mathbf M$ (second order tensor) allows the reduction of the above surface integrals to contour integrals
 
 \begin{align}
-\vec{\mathcal R} &= \int_{\vec x\in\Gamma}\tens N\cdot\vec\nu\,\mathrm{d}s,\\
-\vec{\mathcal M} &= \int_{\vec x\in\Gamma}\vec x\times\left(\tens M\cdot\svec\nu\right)\mathrm{d}s,
+\label{eq:11}\boldsymbol{\mathcal R} &= \int_{\mathbf x\in\Gamma}\left[\mathbf N\cdot\boldsymbol\nu+\left(\mathbf Q\cdot\boldsymbol\nu\right)\mathbf n\right]\mathrm{d}s,\\
+\label{eq:12}\boldsymbol{\mathcal M} &= \int_{\mathbf x\in\Gamma}\mathbf x\times\left[\mathbf N\cdot\boldsymbol\nu+\left(\mathbf Q\cdot\boldsymbol\nu\right)\mathbf n\right]\mathrm{d}s-\int_{\mathbf x\in\Gamma}\mathbf n\times\left(\mathbf M\cdot\boldsymbol\nu\right)\mathrm ds.
 \end{align}
 
-where the integral is now computed on the closed path $\Gamma$ only. This definition will be used in the next section to compute the stress resultant and couple in the spherical pressure vessel.
+This definition will be used in the next section to compute the stress resultant and couple in the spherical pressure vessel.
 
 * Stress resultant and couple in the spherical pressure vessel
-
-Since blabla
