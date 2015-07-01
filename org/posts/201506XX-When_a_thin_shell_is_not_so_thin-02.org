@@ -30,19 +30,19 @@ p_\text{int}=-p_\text{ext}=\frac p2.
 In the remainder of this post, \(\sigma\) will denote the common value of the in-plane stresses
 
 \begin{equation}
-\sigma=\sigma_{\theta\theta}=\sigma_{\phi\phi}.
+\label{eq:6}\sigma=\sigma_{\theta\theta}=\sigma_{\phi\phi}.
 \end{equation}
 
 From Eq. \eqref{eq:2}, we readily find the following expressions of the stress resultant \(N=N_{\theta\theta}=N_{\phi\phi}\) and stress couple \(M=M_{\theta\theta}=M_{\phi\phi}\)
 
 \begin{align}
-\label{eq:3}N &= \int_{R_\text{int}}^{R_\text{ext}}\sigma(r)\,\mathrm{d}r=\frac{pR}2\frac{1+\frac{5h^2}{12R^2}}{1+\frac{h^2}{12R^2}}=\frac{pR}2\left(1+\frac{h^2}{3R^2}\right)+\mathcal O\left(\frac{h^4}{R^4}\right),\\
-\label{eq:4}M &= -\int_{R_\text{int}}^{R_\text{ext}}\left(r-R\right)\sigma(r)\,\mathrm{d}r=\frac{ph^2}{24}\frac{1-\frac{h^2}{4R^2}}{1+\frac{h^2}{12R^2}}=\frac{ph^2}{24}\left(1-\frac{h^2}{3R^2}\right)+\mathcal O\left(\frac{h^6}{R^6}\right).
+\label{eq:7}N &= \int_{R_\text{int}}^{R_\text{ext}}\sigma(r)\,\mathrm{d}r=\frac{pR}2\frac{1+\frac{5h^2}{12R^2}}{1+\frac{h^2}{12R^2}}=\frac{pR}2\left(1+\frac{h^2}{3R^2}\right)+\mathcal O\left(\frac{h^4}{R^4}\right),\\
+\label{eq:8}M &= -\int_{R_\text{int}}^{R_\text{ext}}\left(r-R\right)\sigma(r)\,\mathrm{d}r=\frac{ph^2}{24}\frac{1-\frac{h^2}{4R^2}}{1+\frac{h^2}{12R^2}}=\frac{ph^2}{24}\left(1-\frac{h^2}{3R^2}\right)+\mathcal O\left(\frac{h^6}{R^6}\right).
 \end{align}
 
 Comparing with [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org::#Koiter_solution][Koiter's solution]], it is found that the dominant terms of the stress resultant coincide. This is not true of the stress couple, though. Even worse, the signs differ! While in Koiter's solution, the stress couple is negative (as expected), integration of the 3D solution leads to a /positive/ stress couple, which is unphysical. Something nasty is definitely taking place, here!
 
-In the next section, I will show that Eqs. \eqref{eq:3} and \eqref{eq:4} are in fact (poor) approximations of the true expression of the stress resultant and couple.
+In the next section, I will show that Eqs. \eqref{eq:7} and \eqref{eq:8} are in fact (poor) approximations of the true expression of the stress resultant and couple.
 
 * Stress resultants and stress couples: the correct definition
 
@@ -75,11 +75,11 @@ file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig06.svg
 Let us now compute the resultant force $\boldsymbol{\mathcal R}$ and moment $\boldsymbol{\mathcal M}$ exerted by the remainder of the shell on this subregion. By definition of the Cauchy stress tensor $\boldsymbol\sigma$, we have
 
 \begin{align}
-\boldsymbol{\mathcal R} &= \int_{\mathbf x\in\Sigma^\mathrm{lat}}\boldsymbol\sigma\cdot\boldsymbol\nu\,\mathrm{d}\Sigma_{\mathbf x}^\mathrm{lat},\\
-\boldsymbol{\mathcal M} &= \int_{\mathbf x\in\Sigma^\mathrm{lat}}\mathbf{x}\times\left(\boldsymbol\sigma\cdot\boldsymbol\nu\right)\mathrm{d}\Sigma_{\mathbf x}^\mathrm{lat},
+\label{eq:9}\boldsymbol{\mathcal R} &= \int_{\mathbf x\in\Sigma^\mathrm{lat}}\boldsymbol\sigma\cdot\boldsymbol\nu\,\mathrm{d}\Sigma_{\mathbf x}^\mathrm{lat},\\
+\label{eq:10}\boldsymbol{\mathcal M} &= \int_{\mathbf x\in\Sigma^\mathrm{lat}}\mathbf{x}\times\left(\boldsymbol\sigma\cdot\boldsymbol\nu\right)\mathrm{d}\Sigma_{\mathbf x}^\mathrm{lat},
 \end{align}
 
-where $\mathbf x$ denotes the current point on the lateral surface. By definition, the membrane stress resultant $\mathbf N$ (second order tensor), the shear stress resultant $\mathbf Q$ (vector) and the stress couple $\mathbf M$ (second order tensor) allows the reduction of the above surface integrals to contour integrals
+where $\mathbf x$ denotes the current point on the lateral surface. By definition, the membrane stress resultant $\mathbf N$ (second order tensor), the shear stress resultant $\mathbf Q$ (vector) and the stress couple $\mathbf M$ (second order tensor) allow the reduction of the above surface integrals to contour integrals
 
 \begin{align}
 \label{eq:11}\boldsymbol{\mathcal R} &= \int_{\mathbf x\in\Gamma}\left[\mathbf N\cdot\boldsymbol\nu+\left(\mathbf Q\cdot\boldsymbol\nu\right)\mathbf n\right]\mathrm{d}s,\\
@@ -89,3 +89,54 @@ where $\mathbf x$ denotes the current point on the lateral surface. By definitio
 This definition will be used in the next section to compute the stress resultant and couple in the spherical pressure vessel.
 
 * Stress resultant and couple in the spherical pressure vessel
+
+file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig07.svg
+
+In order to compute $N$ and $M$ from the stress distribution in the spherical pressure vessel, we consider a subdomain obtained by taking the equator as closed path $\Gamma$. Then, the lateral surface $\Sigma^\mathrm{lat}$ is an annulus, and the outer normal $\boldsymbol\nu$ is constant, vertical. Points on the lateral surface are specified by their radial distance $r$ and polar angle $\phi$.
+
+We first use Eq. \eqref{eq:9} to compute the resultant internal force $\boldsymbol{\mathcal R}$. The surface element $\mathrm{d}\Sigma^\mathrm{lat}$ reads
+
+\begin{equation}
+\mathrm{d}\Sigma^\mathrm{lat}=r\,\mathrm{d}r\,\mathrm{d}\phi=\frac rR\,\mathrm{d}r\,\mathrm{d}s.
+\end{equation}
+
+where it is observed that $\mathrm{d}s=R\mathrm{d}\phi$ ($s$: arc-length measured on $\Gamma$). Furthermore, from Eq. \eqref{eq:6}, we have $\boldsymbol\sigma\cdot\boldsymbol\nu=\sigma(r)\,\boldsymbol\nu$. Eq. \eqref{eq:9} then reads
+
+\begin{equation}
+\label{eq:14}\boldsymbol{\mathcal R}=\int_\Gamma\left[\int_{R_\mathrm{int}}^{R_\mathrm{ext}}\sigma(r)\,\frac rR\,\mathrm{d}r\right]\boldsymbol\nu\,\mathrm{d}s,
+\end{equation}
+
+where we have used the fact that $\boldsymbol\nu$ is constant along $\Gamma$. Turning now to Eq. \eqref{eq:11}, and recalling that $N_{\theta\theta}=N_{\phi\phi}=N$ and $\mathbf Q=\mathbf 0$, we find
+
+\begin{equation}
+\label{eq:15}\boldsymbol{\mathcal R}=\int_{\Gamma}N\,\boldsymbol\nu\mathrm{d}s.
+\end{equation}
+
+Upon identification of Eqs. \eqref{eq:14} and \eqref{eq:15}, we finally find the following expression of the stress resultant $N$
+
+\begin{equation}
+\label{eq:16}\require{color}N=\int_{R_\mathrm{int}}^{R_\mathrm{ext}}\sigma(r)\,{\color{red}\frac rR}\,\mathrm{d}r,
+\end{equation}
+
+while a similar calculation delivers the stress couple $M$
+
+\begin{equation}
+\label{eq:17}M=\int_{R_\mathrm{int}}^{R_\mathrm{ext}}-\left(r-R\right)\sigma(r)\,{\color{red}\frac rR}\,\mathrm{d}r.
+\end{equation}
+
+Comparing Eqs. \eqref{eq:16} and \eqref{eq:17} with Eqs. \eqref{eq:7} and \eqref{eq:8}, we observe that we forgot the Jacobian $r/R$! For thin shells, we have $r\simeq R$ and this correction is usually neglected.
+
+In the present case, using Eq. \eqref{eq:2}, we find
+
+\begin{align}
+\label{eq:18}N &= \frac{pR}2\left(1+\frac{h^2}{4R^2}\right),\\
+\label{eq:19}M &= -\frac{ph^2}{30}\,\frac{h^2}{R^2}+\mathcal O\left(\frac{h^6}{R^6}\right).
+\end{align}
+
+Comparing Eqs. \eqref{eq:18} and \eqref{eq:19} with Eqs. \eqref{eq:7} and \eqref{eq:8}, we see that the results are dramatically different! Indeed, the stress couple has a different sign, and is two order of magnitude smaller (with respect to the thickness of the shell)! Clearly, the thin shell approximation is questionable in the present case.
+
+* Conclusion
+
+In this post, we used the exact stress distribution within the spherical vessel to compute the stress resultant and stress couple. We showed that the thin shell approximation, which amounts to neglecting the jacobian in a surface integral, results in poor estimates in this case. Exact integration delivers much more convincing results. However, we still have not completely solved the problem. Indeed, comparing Eqs. \eqref{eq:18} and \eqref{eq:19} with Eqs. (17) and (18) in the [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org][previous instalment]] of this series, we still observe major differences: the two values of the stress couple have the same sign, but they differ by two orders of magnitude (with respect to the thickness of the shell).
+
+In the next instalment of this series, we will go back to Koiter's shell model and use constitutive equations for /thick shells/ to finally resolve the apparent contradiction.
