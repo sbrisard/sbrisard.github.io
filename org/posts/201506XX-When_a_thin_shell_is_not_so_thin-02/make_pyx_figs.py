@@ -316,7 +316,7 @@ if __name__ == '__main__':
     c2.writeSVGfile('fig02')
 
     # ------------------------------------------------------------------------
-    #                                 Figure 3
+    #                                 Figures 3 & 4
     # ------------------------------------------------------------------------
     c3 = pyx.canvas.canvas()
     c3a = pyx.canvas.canvas()
@@ -396,7 +396,7 @@ if __name__ == '__main__':
     c3a.insert(cc, [text_scaling, pyx.trafo.translate(x3, y3)])
 
     c3.writeSVGfile('fig03')
-    c3a.writeSVGfile('fig03a')
+    c3a.writeSVGfile('fig04')
 
     # ------------------------------------------------------------------------
     #                                 Figure 5
