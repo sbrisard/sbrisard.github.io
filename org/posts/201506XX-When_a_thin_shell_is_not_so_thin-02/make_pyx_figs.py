@@ -361,7 +361,7 @@ if __name__ == '__main__':
     c3.insert(cc, [text_scaling, pyx.trafo.translate(x, y+.1)])
 
     # Local basis
-    t = 0.8
+    t = 0.4
     uv, uv_prime = inner_boundary.point(t), inner_boundary.tangent(t)
     xyz0, n = base.point(*uv), base.normal(*uv)
     tau = uv_prime[0]*base.tangent_u(*uv)+uv_prime[1]*base.tangent_v(*uv)
@@ -494,6 +494,27 @@ if __name__ == '__main__':
             upper.point(uu, v, xyz[:, :-1])
             lower.point(uu[-1], v, xyz[:, -1])
             c6.stroke(multiline(*proj(*xyz)), attrs)
+
+    # Outer normal
+    t = 0.4
+    uv, uv_prime = inner_boundary.point(t), inner_boundary.tangent(t)
+    xyz0, n = base.point(*uv), base.normal(*uv)
+    xyz4 = xyz0+0.25*h*n
+    tau = uv_prime[0]*base.tangent_u(*uv)+uv_prime[1]*base.tangent_v(*uv)
+    tau /= np.sqrt(np.sum(tau**2, axis=0))
+    nu = wedge(tau, n)
+
+    x4, y4 = proj(*xyz4)
+    x3, y3 = proj(*(xyz4+nu))
+    attrs = [pyx.deco.stroked([normal_thickness, normal_color]),
+             pyx.deco.earrow(arrow_attrs, size=0.25)]
+    c6.stroke(pyx.path.line(x4, y4, x3, y3), attrs)
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\bm{\nu}$', [pyx.text.halign.boxcenter,
+                                  pyx.text.valign.top,
+                                  normal_color,
+                                  pyx.color.transparency(0.)])
+    c6.insert(cc, [text_scaling, pyx.trafo.translate(x3, y3)])
 
     c6.writeSVGfile('fig06')
 
