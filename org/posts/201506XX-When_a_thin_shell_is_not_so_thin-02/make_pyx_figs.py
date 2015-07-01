@@ -3,6 +3,16 @@ import pyx
 
 from scipy.optimize import brentq
 
+def wedge(x, y, out=None):
+    x, y = np.broadcast_arrays(x, y)
+    if out is None:
+        out = np.empty_like(x)
+    out[0] = x[1]*y[2]-x[2]*y[1]
+    out[1] = x[2]*y[0]-x[0]*y[2]
+    out[2] = x[0]*y[1]-x[1]*y[0]
+    return out
+
+
 class Curve:
     def __init__(self, point, t_range, dim=3, eps=1E-8):
         self.point = point
@@ -42,12 +52,7 @@ class Surface:
         return (p2-p1)/self.eps
 
     def normal(self, u, v):
-        t_u = self.tangent_u(u, v)
-        t_v = self.tangent_v(u, v)
-        n = np.empty_like(t_u)
-        n[0] = t_u[1]*t_v[2]-t_u[2]*t_v[1]
-        n[1] = t_u[2]*t_v[0]-t_u[0]*t_v[2]
-        n[2] = t_u[0]*t_v[1]-t_u[1]*t_v[0]
+        n = wedge(self.tangent_u(u, v), self.tangent_v(u, v))
         norm = np.sqrt(np.sum(n**2, axis=0))
         return n/norm[None, ...]
 
@@ -313,17 +318,21 @@ if __name__ == '__main__':
     # ------------------------------------------------------------------------
     #                                 Figure 3
     # ------------------------------------------------------------------------
-    c = pyx.canvas.canvas()
+    c3 = pyx.canvas.canvas()
+    c3a = pyx.canvas.canvas()
 
     attrs = [pyx.deco.filled([base_color, outer_transparency])]
     xyz = np.hstack((base_outer_boundary, base_inner_boundary))
-    c.draw(multiline(*proj(*xyz), closed=True), attrs)
+    c3.draw(multiline(*proj(*xyz), closed=True), attrs)
+    c3a.draw(multiline(*proj(*xyz), closed=True), attrs)
 
     attrs = [pyx.deco.stroked([base_color, boundary_thickness]),
              pyx.deco.filled([base_color, inner_transparency])]
-    c.draw(multiline(*proj(*base_inner_boundary)), attrs)
+    c3.draw(multiline(*proj(*base_inner_boundary)), attrs)
+    c3a.draw(multiline(*proj(*base_inner_boundary)), attrs)
 
-    arrow_attrs = [pyx.deco.filled([normal_color, pyx.color.transparency(0.0)])]
+    arrow_attrs = [pyx.deco.filled([normal_color,
+                                    pyx.color.transparency(0.0)])]
     attrs = [pyx.deco.stroked([normal_thickness, normal_color]),
              pyx.deco.earrow(arrow_attrs, size=0.25)]
     t = np.linspace(*inner_boundary.t_range, num=num_normals, endpoint=False)
@@ -334,27 +343,60 @@ if __name__ == '__main__':
     xyz2 = xyz1+n
     x2, y2 = proj(*xyz2)
     for i in range(len(t)):
-        c.stroke(pyx.path.line(x1[i], y1[i], x2[i], y2[i]), attrs)
-
-    cc = pyx.canvas.canvas()
-    cc.text(0, +0.1, r'$\bm{\mathrm{n}}$', [pyx.text.halign.boxcenter,
-                                            pyx.text.valign.bottom,
-                                            normal_color,
-                                            pyx.color.transparency(0.)])
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x2[-5], y2[-5])])
+        c3.stroke(pyx.path.line(x1[i], y1[i], x2[i], y2[i]), attrs)
 
     x, y = proj(*base.point(-0.57, 0.57))
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma$', text_attrs)
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+    c3.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
-    x, y = proj(*base.point(*inner_boundary.point(0.25*np.pi)))
+    x, y = proj(*base.point(*inner_boundary.point(3.95)))
     cc = pyx.canvas.canvas()
-    cc.text(0, 0, r'$\Gamma$', [pyx.text.halign.boxleft, pyx.text.valign.top,
-                                pyx.color.rgb.black, pyx.color.transparency(0.)])
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y-0.1)])
+    cc.text(0, 0, r'$\Gamma$', [pyx.text.halign.boxleft,
+                                pyx.text.valign.bottom,
+                                pyx.color.rgb.black,
+                                pyx.color.transparency(0.)])
+    c3.insert(cc, [text_scaling, pyx.trafo.translate(x, y+.1)])
+    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x, y+.1)])
 
-    c.writeSVGfile('fig03')
+    # Local basis
+    t = 0.8
+    uv, uv_prime = inner_boundary.point(t), inner_boundary.tangent(t)
+    xyz0, n = base.point(*uv), base.normal(*uv)
+    tau = uv_prime[0]*base.tangent_u(*uv)+uv_prime[1]*base.tangent_v(*uv)
+    tau /= np.sqrt(np.sum(tau**2, axis=0))
+    nu = wedge(tau, n)
+
+    x0, y0 = proj(*xyz0)
+    x1, y1 = proj(*(xyz0+tau))
+    x2, y2 = proj(*(xyz0+n))
+    x3, y3 = proj(*(xyz0+nu))
+    c3a.stroke(pyx.path.line(x0, y0, x1, y1), attrs)
+    c3a.stroke(pyx.path.line(x0, y0, x2, y2), attrs)
+    c3a.stroke(pyx.path.line(x0, y0, x3, y3), attrs)
+
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\bm{\tau}$', [pyx.text.halign.boxleft,
+                                   pyx.text.valign.middle,
+                                   normal_color,
+                                   pyx.color.transparency(0.)])
+    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x1, y1)])
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\bm{\mathrm{n}}$', [pyx.text.halign.boxcenter,
+                                         pyx.text.valign.bottom,
+                                         normal_color,
+                                         pyx.color.transparency(0.)])
+    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x2, y2)])
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\bm{\nu}$', [pyx.text.halign.boxleft,
+                                  pyx.text.valign.top,
+                                  normal_color,
+                                  pyx.color.transparency(0.)])
+    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x3, y3)])
+
+    c3.writeSVGfile('fig03')
+    c3a.writeSVGfile('fig03a')
 
     # ------------------------------------------------------------------------
     #                                 Figure 4
