@@ -541,3 +541,125 @@ if __name__ == '__main__':
     c100.draw(multiline(*proj(*lower_inner_boundary), closed=True), attrs)
 
     #c100.writeSVGfile('fig100')
+
+    # ------------------------------------------------------------------------
+    #                                 Figure 7
+    # ------------------------------------------------------------------------
+    h = 1.0
+    R = 3.0
+    R_int = R-0.5*h
+    R_ext = R+0.5*h
+
+    c7 = pyx.canvas.canvas()
+
+    t = np.linspace(0, 2*np.pi, num=100, endpoint=False)
+
+    attrs = [pyx.deco.stroked([boundary_thickness, boundary_color]),
+             pyx.deco.filled([boundary_color, outer_transparency])]
+
+    phi = -0.25*np.pi
+    theta = np.linspace(-0.5*np.pi, 0.5*np.pi, num=100)
+    x = R_ext*np.sin(theta)*np.cos(phi)
+    y = R_ext*np.sin(theta)*np.sin(phi)
+    z = -R_ext*np.cos(theta)
+    x, y = proj(x, y, z)
+    c7.draw(multiline(x, y, closed=False), attrs)
+
+    t = np.linspace(0.75*np.pi, 1.75*np.pi, num=100)
+    x, y = proj(R_ext*np.cos(t), R_ext*np.sin(t), 0)
+    c7.draw(multiline(x, y), attrs)
+
+    t = np.linspace(0, 2*np.pi, num=100)
+    x, y = proj(R_int*np.cos(t), R_int*np.sin(t), 0)
+    c7.draw(multiline(x, y, closed=True), attrs)
+    x, y = proj(R_ext*np.cos(t), R_ext*np.sin(t), 0)
+    c7.draw(multiline(x, y, closed=True), attrs)
+    x, y = proj(R*np.cos(t), R*np.sin(t), 0)
+    attrs = [pyx.deco.stroked([boundary_thickness, base_color,
+                               pyx.color.transparency(0.)])]
+    c7.draw(multiline(x, y, closed=True), attrs)
+
+    r = 1.5*R
+    t1 = 0.0
+    x1, y1 = proj(r*np.cos(t1), r*np.sin(t1), 0)
+
+    t2 = np.pi/3
+    x2, y2 = proj(r*np.cos(t2), r*np.sin(t2), 0)
+    x3, y3 = proj(R*np.cos(t2), R*np.sin(t2), 0)
+
+    arrow_attrs = [pyx.deco.filled([normal_color,
+                                    pyx.color.transparency(0.0)])]
+    attrs = [pyx.deco.stroked([normal_thickness, normal_color]),
+             pyx.deco.earrow(arrow_attrs, size=0.25)]
+    c7.draw(pyx.path.line(x3, y3, x3, y3+1), attrs)
+
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\boldsymbol\nu$', [pyx.text.halign.boxcenter,
+                                        pyx.text.valign.bottom,
+                                        normal_color,
+                                        pyx.color.transparency(0.)])
+    c7.insert(cc, [text_scaling, pyx.trafo.translate(x3, y3+1)])
+
+    attrs = [pyx.deco.stroked([isoline_thickness,
+                               pyx.color.rgb.black,
+                               pyx.color.transparency(0.)])]
+    c7.draw(pyx.path.line(0, 0, x1, y1), attrs)
+    c7.draw(pyx.path.line(0, 0, x2, y2), attrs)
+
+    text_attrs = [pyx.text.halign.boxcenter, pyx.text.valign.top,
+                  pyx.color.rgb.black, pyx.color.transparency(0.)]
+    arrow_attrs = [pyx.deco.filled([pyx.color.rgb.black,
+                                    pyx.color.transparency(0.0)])]
+    attrs = [pyx.deco.stroked([isoline_thickness, pyx.color.rgb.black]),
+             pyx.deco.earrow(arrow_attrs, size=0.25)]
+    t = np.linspace(t1, t2, num=20)
+    r = 1.4*R
+    c7.draw(multiline(*proj(r*np.cos(t), r*np.sin(t), 0)), attrs)
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\phi$', text_attrs)
+    t = 0.5*(t1+t2)
+    c7.insert(cc, [text_scaling, pyx.trafo.translate(*proj(r*np.cos(t),
+                                                           r*np.sin(t), 0))])
+
+    text_attrs = [pyx.text.halign.boxleft, pyx.text.valign.middle,
+                  pyx.color.rgb.black, pyx.color.transparency(0.)]
+    t = 2*np.pi/3
+    x, y = proj(R_ext*np.cos(t), R_ext*np.sin(t), 0)
+    c7.draw(pyx.path.line(0, 0, x, y), attrs)
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$R_\mathrm{ext}$', text_attrs)
+    c7.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+
+    t = 5*np.pi/6
+    x, y = proj(R_int*np.cos(t), R_int*np.sin(t), 0)
+    c7.draw(pyx.path.line(0, 0, x, y), attrs)
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$R_\mathrm{int}$', text_attrs)
+    c7.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+
+    text_attrs = [pyx.text.halign.boxleft, pyx.text.valign.middle,
+                  pyx.color.rgb.black, pyx.color.transparency(0.)]
+    t = 7*np.pi/6
+    x4, y4 = proj(R*np.cos(t), R*np.sin(t), 0)
+    x1, y1 = x4+1.5, y4+1.2
+    x3, y3 = x4-0.3, y4+1.0
+    x2, y2 = x1, y1
+    c7.draw(pyx.path.curve(x1, y1, x2, y2, x3, y3, x4, y4), attrs)
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Gamma$', text_attrs)
+    c7.insert(cc, [text_scaling, pyx.trafo.translate(x1, y1)])
+
+    text_attrs = [pyx.text.halign.boxright, pyx.text.valign.middle,
+                  pyx.color.rgb.black, pyx.color.transparency(0.)]
+    t = 4*np.pi/3
+    r = R+.25*h
+    x4, y4 = proj(r*np.cos(t), r*np.sin(t), 0)
+    x1, y1 = x4-1., y4+1.5
+    x3, y3 = x4+0.3, y4+1.0
+    x2, y2 = x1, y1
+    c7.draw(pyx.path.curve(x1, y1, x2, y2, x3, y3, x4, y4), attrs)
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma^\mathrm{lat}$', text_attrs)
+    c7.insert(cc, [text_scaling, pyx.trafo.translate(x1, y1)])
+
+    c7.writeSVGfile('fig07')
