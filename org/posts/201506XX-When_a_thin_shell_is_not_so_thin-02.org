@@ -54,18 +54,21 @@ We will focus on the upper and lower faces of the shell, $\Sigma^+$ and $\Sigma^
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig02.svg
 
-To define a subregion of the shell, we first draw a closed path $\Gamma$ on the base surface. As the current point moves along this path, the normal $\vec n$ to the base surface sweeps a new surface, which will be the /lateral surface/ of the subregion. It should be noted that, by construction, the lateral surface is a ruled surface.
+To define a subregion of the shell, we first draw a closed path $\Gamma$ on the base surface, and define a local basis $(\vec\tau,\vec n, \vec\nu)$ attached to this curve: $\vec\tau$ is the unit tangent, $\vec n$ is the unit normal to the base surface, and $\vec\nu=\vec\tau\times\vec n$ is the unit in-plane normal to $\Gamma$.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig03.svg
 
-The lateral surface intersects the upper and lower faces of the shell...
+As the current point moves along this path, the normal to the base surface sweeps a new surface, which will be the /lateral surface/ of the subregion. It should be noted that, by construction, the lateral surface is a ruled surface. The outer normal to this surface is constant, equal to $\vec\nu$ along each of the generating lines.
 
 file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig04.svg
 
+The lateral surface intersects the upper and lower faces of the shell...
+
+file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig05.svg
 
 ... thus defining the upper and lower boundaries of the subregion. That's it! We have defined our subsystem!
 
-file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig05.svg
+file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig06.svg
 
 Let us now compute the resultant force $\vec{\mathcal R}$ and moment $\vec{\mathcal M}$ exerted by the remainder of the shell on this subregion. By definition of the Cauchy stress tensor $\tens\sigma$, we have
 
@@ -85,4 +88,4 @@ where the integral is now computed on the closed path $\Gamma$ only. This defini
 
 * Stress resultant and couple in the spherical pressure vessel
 
-Since
+Since blabla
