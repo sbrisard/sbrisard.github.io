@@ -90,7 +90,7 @@ N &= \frac{pR}2\left(1-\frac{h^2}{12R^2}\right)+\mathcal O\left(\frac{h^4}{R^4}\
 M &= -\frac{ph^2}{24}\left(1-\frac{h^2}{12R^2}\right)+\mathcal O\left(\frac{h^6}{R^6}\right).
 \end{align}
 
-This is the first surprise in this series: the stress couples are /not/ null, and the stress resultant differ slightly from the well-known formula \(N=pR/2\) (see [[http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels][Wikipedia]]).
+This is the first surprise in this series: the stress couple is /not/ null, and the stress resultant differ slightly from the well-known formula \(N=pR/2\) (see [[http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels][Wikipedia]]).
 
 Nota: the above-mentioned formula \(N=pR/2\) is called "formule des chaudronniers" (formula of boilermakers?) in French, but I could not find any English translation. If you happen to know the name of this formula, please let me know.
 
