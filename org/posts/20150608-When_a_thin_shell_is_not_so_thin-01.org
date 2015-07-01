@@ -98,4 +98,4 @@ Nota: the above-mentioned formula \(N=pR/2\) is called "formule des chaudronnier
 
 We started with a very simple shell, which we expected to be in a state of membrane equilibrium. However, using Koiter's linear theory of thin shells, we found that the stress couples, though small, are not null!
 
-So what's wrong with the above analysis? To dig deeper into this problem, we will use its full 3D solution to compute /exact/ values of the stress resultants and couples... which will lead to other exciting findings!
+So what's wrong with the above analysis? To dig deeper into this problem, we will use its full 3D solution to compute /exact/ values of the stress resultants and couples... which will lead to other exciting findings in the [[file:./20150701-When_a_thin_shell_is_not_so_thin-02.org][next instalment]] of this series!

@@ -1,7 +1,7 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: When a thin shell is not so thin, part\nbsp{}2: the 3D, exact solution
-#+DATE: [2015-06-10 Wed]
+#+DATE: [2015-07-01 Wed]
 
 In the [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org][previous instalment]] of this series, we analysed a spherical pressure vessel by means of Koiter's linear theory of thin shells. We found the somewhat unexpected result that the stress couple was not null. Besides, we also found that the stress resultant was slightly different from the well-known value \(N=pR/2\). So what was wrong with the previous analysis? To explore this question, we will make use of the exact solution in 3D elasticity.
 
@@ -48,27 +48,27 @@ In the next section, I will show that Eqs. \eqref{eq:7} and \eqref{eq:8} are in 
 
 Stress resultants and stress couples are defined from the internal resultant forces and moments exerted on subdomains of the shell. In this section, I will show how such subsystems are constructed from a closed path drawn on the midsurface.
 
-file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig01.svg
+file:./20150701-When_a_thin_shell_is_not_so_thin-02/fig01.svg
 
 The story begins with a shell, seen as a continuum.
 
-file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig02.svg
+file:./20150701-When_a_thin_shell_is_not_so_thin-02/fig02.svg
 
 We will focus on the upper and lower faces of the shell, $\Sigma^+$ and $\Sigma^-$, as well as the base surface, $\Sigma$. For homogeneous shells, the base surface usually coincides with the midsurface (in other words, it is equidistant to the upper and lower faces). This is not really required here, as we are only discussing equilibrium issues. However, for the sake of simplicity, we will just assume that the base surface /is/ the midsurface.
 
-file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig03.svg
+file:./20150701-When_a_thin_shell_is_not_so_thin-02/fig03.svg
 
 To define a subregion of the shell, we first draw a closed path $\Gamma$ on the base surface, and define the local basis $(\boldsymbol\tau, \mathbf n, \boldsymbol\nu)$ attached to this curve: $\boldsymbol\tau$ is the unit tangent, $\mathbf n$ is the unit normal to the base surface, and $\boldsymbol\nu=\boldsymbol\tau\times\mathbf n$ is the unit in-plane normal to $\Gamma$.
 
-file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig04.svg
+file:./20150701-When_a_thin_shell_is_not_so_thin-02/fig04.svg
 
 As the current point moves along this path, the normal to the base surface sweeps a new surface, which will be the /lateral surface/ of the subregion. It should be noted that, by construction, the lateral surface is a ruled surface. The outer normal to this surface is constant, equal to $\boldsymbol\nu$ along each of the generating lines.
 
-file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig05.svg
+file:./20150701-When_a_thin_shell_is_not_so_thin-02/fig05.svg
 
 The lateral surface intersects the upper and lower faces of the shell...
 
-file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig06.svg
+file:./20150701-When_a_thin_shell_is_not_so_thin-02/fig06.svg
 
 ... thus defining the upper and lower boundaries of the subregion. That's it! We have defined our subsystem!
 
@@ -90,7 +90,7 @@ This definition will be used in the next section to compute the stress resultant
 
 * Stress resultant and couple in the spherical pressure vessel
 
-file:./201506XX-When_a_thin_shell_is_not_so_thin-02/fig07.svg
+file:./20150701-When_a_thin_shell_is_not_so_thin-02/fig07.svg
 
 In order to compute $N$ and $M$ from the stress distribution in the spherical pressure vessel, we consider a subdomain obtained by taking the equator as closed path $\Gamma$. Then, the lateral surface $\Sigma^\mathrm{lat}$ is an annulus, and the outer normal $\boldsymbol\nu$ is constant, vertical. Points on the lateral surface are specified by their radial distance $r$ and polar angle $\phi$.
 
