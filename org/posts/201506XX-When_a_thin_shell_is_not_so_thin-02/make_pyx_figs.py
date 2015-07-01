@@ -516,6 +516,27 @@ if __name__ == '__main__':
                                   pyx.color.transparency(0.)])
     c6.insert(cc, [text_scaling, pyx.trafo.translate(x3, y3)])
 
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma^+$', [pyx.text.halign.boxcenter,
+                                  pyx.text.valign.bottom,
+                                  pyx.color.rgb.black,
+                                  pyx.color.transparency(0.)])
+    c6.insert(cc, [text_scaling, pyx.trafo.translate(-0.2, 1.8)])
+
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma^-$', [pyx.text.halign.boxcenter,
+                                  pyx.text.valign.bottom,
+                                  pyx.color.rgb.black,
+                                  pyx.color.transparency(0.)])
+    c6.insert(cc, [text_scaling, pyx.trafo.translate(-0.2, -2.2)])
+
+    cc = pyx.canvas.canvas()
+    cc.text(0, 0, r'$\Sigma^\mathrm{lat}$', [pyx.text.halign.boxcenter,
+                                             pyx.text.valign.middle,
+                                             pyx.color.rgb.black,
+                                             pyx.color.transparency(0.)])
+    c6.insert(cc, [text_scaling, pyx.trafo.translate(2.5, 0)])
+
     c6.writeSVGfile('fig06')
 
     # ------------------------------------------------------------------------
