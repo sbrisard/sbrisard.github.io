@@ -519,4 +519,4 @@ if __name__ == '__main__':
     attrs = [pyx.deco.filled([boundary_color, inner_transparency])]
     c100.draw(multiline(*proj(*lower_inner_boundary), closed=True), attrs)
 
-    c100.writeSVGfile('fig100')
+    #c100.writeSVGfile('fig100')
