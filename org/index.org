@@ -3,6 +3,10 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:./posts/20150701-When_a_thin_shell_is_not_so_thin-02.org][2015-07-01 -- When a thin shell is not so thin, part\nbsp{}2: the 3D, exact solution]]
+
+In the [[file:./posts/20150608-When_a_thin_shell_is_not_so_thin-01.org][previous instalment]] of this series, we analysed a spherical pressure vessel by means of Koiter's linear theory of thin shells. We found the somewhat unexpected result that the stress couple was not null. Besides, we also found that the stress resultant was slightly different from the well-known value N=pR/2. So what was wrong with the previous analysis? To explore this question, we will make use of the exact solution in 3D elasticity.
+
 * [[file:./posts/20150701-This_blog_is_now_licensed.org][2015-07-01 -- This blog is now licensed!]]
 
 As indicated at the bottom of each page of this website, this blog is now licensed under a [[http://creativecommons.org/licenses/by-nc/4.0/][Creative Commons Attribution-NonCommercial 4.0 International License]]. This means that you are free to share and/or adapt the contents of this blog, as long as you give appropriate credit to the author. You may not make profit out of this website, though.

@@ -4,6 +4,13 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
+      <title>When a thin shell is not so thin, part 2: the 3D, exact solution</title>
+      <link>http://sbrisard.github.io/posts/20150701-When_a_thin_shell_is_not_so_thin-02.html</link>
+      <guid>posts/20150701-When_a_thin_shell_is_not_so_thin-02.html</guid>
+      <pubDate>Wed, 1 July 2015</pubDate>
+      <description>In the previous instalment of this series, we analysed a spherical pressure vessel by means of Koiter's linear theory of thin shells. We found the somewhat unexpected result that the stress couple was not null. Besides, we also found that the stress resultant was slightly different from the well-known value \(N=pR/2\). So what was wrong with the previous analysis? To explore this question, we will make use of the exact solution in 3D elasticity.</description>
+    </item>
+    <item>
       <title>This blog is now licensed!</title>
       <link>http://sbrisard.github.io/posts/20150701-This_blog_is_now_licensed.html</link>
       <guid>posts/20150701-This_blog_is_now_licensed.html</guid>
