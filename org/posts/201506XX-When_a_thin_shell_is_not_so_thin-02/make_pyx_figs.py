@@ -319,17 +319,17 @@ if __name__ == '__main__':
     #                                 Figures 3 & 4
     # ------------------------------------------------------------------------
     c3 = pyx.canvas.canvas()
-    c3a = pyx.canvas.canvas()
+    c4 = pyx.canvas.canvas()
 
     attrs = [pyx.deco.filled([base_color, outer_transparency])]
     xyz = np.hstack((base_outer_boundary, base_inner_boundary))
     c3.draw(multiline(*proj(*xyz), closed=True), attrs)
-    c3a.draw(multiline(*proj(*xyz), closed=True), attrs)
+    c4.draw(multiline(*proj(*xyz), closed=True), attrs)
 
     attrs = [pyx.deco.stroked([base_color, boundary_thickness]),
              pyx.deco.filled([base_color, inner_transparency])]
     c3.draw(multiline(*proj(*base_inner_boundary)), attrs)
-    c3a.draw(multiline(*proj(*base_inner_boundary)), attrs)
+    c4.draw(multiline(*proj(*base_inner_boundary)), attrs)
 
     arrow_attrs = [pyx.deco.filled([normal_color,
                                     pyx.color.transparency(0.0)])]
@@ -349,7 +349,7 @@ if __name__ == '__main__':
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma$', text_attrs)
     c3.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
-    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+    c4.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
     x, y = proj(*base.point(*inner_boundary.point(3.95)))
     cc = pyx.canvas.canvas()
@@ -358,7 +358,7 @@ if __name__ == '__main__':
                                 pyx.color.rgb.black,
                                 pyx.color.transparency(0.)])
     c3.insert(cc, [text_scaling, pyx.trafo.translate(x, y+.1)])
-    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x, y+.1)])
+    c4.insert(cc, [text_scaling, pyx.trafo.translate(x, y+.1)])
 
     # Local basis
     t = 0.8
@@ -372,31 +372,31 @@ if __name__ == '__main__':
     x1, y1 = proj(*(xyz0+tau))
     x2, y2 = proj(*(xyz0+n))
     x3, y3 = proj(*(xyz0+nu))
-    c3a.stroke(pyx.path.line(x0, y0, x1, y1), attrs)
-    c3a.stroke(pyx.path.line(x0, y0, x2, y2), attrs)
-    c3a.stroke(pyx.path.line(x0, y0, x3, y3), attrs)
+    c4.stroke(pyx.path.line(x0, y0, x1, y1), attrs)
+    c4.stroke(pyx.path.line(x0, y0, x2, y2), attrs)
+    c4.stroke(pyx.path.line(x0, y0, x3, y3), attrs)
 
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\bm{\tau}$', [pyx.text.halign.boxleft,
                                    pyx.text.valign.middle,
                                    normal_color,
                                    pyx.color.transparency(0.)])
-    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x1, y1)])
+    c4.insert(cc, [text_scaling, pyx.trafo.translate(x1, y1)])
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\bm{\mathrm{n}}$', [pyx.text.halign.boxcenter,
                                          pyx.text.valign.bottom,
                                          normal_color,
                                          pyx.color.transparency(0.)])
-    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x2, y2)])
+    c4.insert(cc, [text_scaling, pyx.trafo.translate(x2, y2)])
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\bm{\nu}$', [pyx.text.halign.boxleft,
                                   pyx.text.valign.top,
                                   normal_color,
                                   pyx.color.transparency(0.)])
-    c3a.insert(cc, [text_scaling, pyx.trafo.translate(x3, y3)])
+    c4.insert(cc, [text_scaling, pyx.trafo.translate(x3, y3)])
 
     c3.writeSVGfile('fig03')
-    c3a.writeSVGfile('fig04')
+    c4.writeSVGfile('fig04')
 
     # ------------------------------------------------------------------------
     #                                 Figure 5
