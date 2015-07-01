@@ -445,18 +445,18 @@ if __name__ == '__main__':
     #                                 Figure 6
     # ------------------------------------------------------------------------
 
-    c = pyx.canvas.canvas()
+    c6 = pyx.canvas.canvas()
 
     attrs = [pyx.deco.stroked([boundary_color, boundary_thickness])]
-    c.draw(multiline(*proj(*upper_inner_boundary), closed=True), attrs)
-    c.draw(multiline(*proj(*lower_inner_visible_boundary)), attrs)
+    c6.draw(multiline(*proj(*upper_inner_boundary), closed=True), attrs)
+    c6.draw(multiline(*proj(*lower_inner_visible_boundary)), attrs)
     x_up, y_up = proj(*upper_inner_visible_boundary)
     x_lo, y_lo = proj(*lower_inner_visible_boundary)
-    c.draw(pyx.path.line(x_up[0], y_up[0], x_lo[0], y_lo[0]), attrs)
-    c.draw(pyx.path.line(x_up[-1], y_up[-1], x_lo[-1], y_lo[-1]), attrs)
+    c6.draw(pyx.path.line(x_up[0], y_up[0], x_lo[0], y_lo[0]), attrs)
+    c6.draw(pyx.path.line(x_up[-1], y_up[-1], x_lo[-1], y_lo[-1]), attrs)
 
     attrs = [pyx.deco.stroked([base_color, isoline_thickness])]
-    c.draw(multiline(*proj(*base_inner_visible_boundary)), attrs)
+    c6.draw(multiline(*proj(*base_inner_visible_boundary)), attrs)
 
     t = np.linspace(*inner_boundary.t_range, num=200)
     uv = inner_boundary.point(t)
@@ -479,7 +479,7 @@ if __name__ == '__main__':
             vv = np.linspace(uv[1, 0], uv[1, 1], num=v_fine.shape[0])
             upper.point(u, vv, xyz[:, :-1])
             lower.point(u, vv[-1], xyz[:, -1])
-            c.stroke(multiline(*proj(*xyz)), attrs)
+            c6.stroke(multiline(*proj(*xyz)), attrs)
 
     xyz = np.empty((3, u_fine.shape[0]+1), dtype=np.float64)
     for v in v_coarse:
@@ -493,10 +493,9 @@ if __name__ == '__main__':
             uu = np.linspace(uv[0, 0], uv[0, 1], num=u_fine.shape[0])
             upper.point(uu, v, xyz[:, :-1])
             lower.point(uu[-1], v, xyz[:, -1])
-            c.stroke(multiline(*proj(*xyz)), attrs)
+            c6.stroke(multiline(*proj(*xyz)), attrs)
 
-    c.writeSVGfile('fig06')
-
+    c6.writeSVGfile('fig06')
 
     # ------------------------------------------------------------------------
     #                                 Figure 100
