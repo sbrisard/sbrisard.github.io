@@ -5,7 +5,7 @@
 
 In structural analysis, thick beams (resp. plates) usually refer to shear deformability, and the [[http://en.wikipedia.org/wiki/Timoshenko_beam_theory][Timoshenko beam theory]] (resp. [[http://en.wikipedia.org/wiki/Mindlin%E2%80%93Reissner_plate_theory][Mindlin–Reissner plate theory]]). With curved elements however (e.g. curved beams or shells), the situation is more subtle, as thickness corrections may be necessary even in shells /where the shear stress is null at any point/. In this series, this is illustrated with a spherical pressure vessel, for which the stress resultants and couples are studied. "Easy enough", you probably think: \(N=pR/2\), \(M=0\) and that's the end of it ([[http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels][Wikipedia]]). Well, maybe...
 
-In the first part of this series, Koiter's thin shell theory ([[file:../pages/references.org::#KOIT1970][Koiter, 1970]] is used to analyse the equilibrium of the spherical pressure vessel. In particular, it is shown that the results deviate slightly from what is expected from the membrane theory.
+In the first part of this series, Koiter's thin shell theory ([[file:../pages/references.org::#KOIT1970][Koiter, 1970]]) is used to analyse the equilibrium of the spherical pressure vessel. In particular, it is shown that the results deviate slightly from what is expected from the membrane theory.
 
 * Description of the problem
 
