@@ -1,5 +1,7 @@
 #+TITLE: Blog archive
 
+   + [[file:20150701-When_a_thin_shell_is_not_so_thin-02.org][2015-07-01 -- When a thin shell is not so thin, part\nbsp{}2: the 3D, exact solution]]
+   + [[file:20150701-This_blog_is_now_licensed.org][2015-07-01 -- This blog is now licensed!]]
    + [[file:20150608-When_a_thin_shell_is_not_so_thin-01.org][2015-06-08 -- When a thin shell is not so thin, part\nbsp{}1: Koiter's linear theory]]
    + [[file:20150529-Orientation_correlations_among_rice_grains-04.org][2015-05-29 -- Orientation correlations among rice grains, part 4: defining the ROI]]
    + [[file:20150330-Orientation_correlations_among_rice_grains-03.org][2015-03-30 -- Orientation correlations among rice grains, part 3: intermezzo -- Binning images]]
