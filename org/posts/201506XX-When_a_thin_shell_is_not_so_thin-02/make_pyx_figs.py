@@ -501,23 +501,23 @@ if __name__ == '__main__':
     # ------------------------------------------------------------------------
     #                                 Figure 100
     # ------------------------------------------------------------------------
-    c = pyx.canvas.canvas()
+    c100 = pyx.canvas.canvas()
 
     attrs = [pyx.deco.filled([base_color, outer_transparency])]
     xyz = np.hstack((base_outer_boundary, base_inner_boundary))
-    c.draw(multiline(*proj(*xyz)), attrs)
+    c100.draw(multiline(*proj(*xyz)), attrs)
     attrs = [pyx.deco.filled([boundary_color, outer_transparency])]
     xyz = np.hstack((lower_outer_boundary, lower_inner_boundary))
-    c.draw(multiline(*proj(*xyz)), attrs)
+    c100.draw(multiline(*proj(*xyz)), attrs)
     attrs = [pyx.deco.filled([boundary_color, outer_transparency])]
     xyz = np.hstack((upper_outer_boundary, upper_inner_boundary))
-    c.draw(multiline(*proj(*xyz)), attrs)
+    c100.draw(multiline(*proj(*xyz)), attrs)
 
     attrs = [pyx.deco.filled([base_color, inner_transparency])]
-    c.draw(multiline(*proj(*base_inner_boundary), closed=True), attrs)
+    c100.draw(multiline(*proj(*base_inner_boundary), closed=True), attrs)
     attrs = [pyx.deco.filled([boundary_color, inner_transparency])]
-    c.draw(multiline(*proj(*upper_inner_boundary), closed=True), attrs)
+    c100.draw(multiline(*proj(*upper_inner_boundary), closed=True), attrs)
     attrs = [pyx.deco.filled([boundary_color, inner_transparency])]
-    c.draw(multiline(*proj(*lower_inner_boundary), closed=True), attrs)
+    c100.draw(multiline(*proj(*lower_inner_boundary), closed=True), attrs)
 
-    c.writeSVGfile('fig100')
+    c100.writeSVGfile('fig100')
