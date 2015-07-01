@@ -283,14 +283,14 @@ if __name__ == '__main__':
     # ------------------------------------------------------------------------
     #                                 Figure 2
     # ------------------------------------------------------------------------
-    c = pyx.canvas.canvas()
+    c2 = pyx.canvas.canvas()
 
     attrs = [pyx.deco.filled([base_color, outer_transparency])]
-    c.draw(multiline(*proj(*base_outer_boundary), closed=True), attrs)
+    c2.draw(multiline(*proj(*base_outer_boundary), closed=True), attrs)
     attrs = [pyx.deco.filled([boundary_color, outer_transparency])]
-    c.draw(multiline(*proj(*upper_outer_boundary), closed=True), attrs)
+    c2.draw(multiline(*proj(*upper_outer_boundary), closed=True), attrs)
     attrs = [pyx.deco.filled([boundary_color, outer_transparency])]
-    c.draw(multiline(*proj(*lower_outer_boundary), closed=True), attrs)
+    c2.draw(multiline(*proj(*lower_outer_boundary), closed=True), attrs)
 
     text_scaling = pyx.trafo.scale(1.4)
     text_attrs = [pyx.text.halign.boxleft, pyx.text.valign.middle,
@@ -301,19 +301,19 @@ if __name__ == '__main__':
     x, y = proj(*base.point(u, v))
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma$', text_attrs)
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+    c2.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
     x, y = proj(*upper.point(u, v))
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma^+$', text_attrs)
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+    c2.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
     x, y = proj(*lower.point(u, v))
     cc = pyx.canvas.canvas()
     cc.text(0, 0, r'$\Sigma^-$', text_attrs)
-    c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
+    c2.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
-    c.writeSVGfile('fig02')
+    c2.writeSVGfile('fig02')
 
     # ------------------------------------------------------------------------
     #                                 Figure 3
