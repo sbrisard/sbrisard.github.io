@@ -399,7 +399,7 @@ if __name__ == '__main__':
     c3a.writeSVGfile('fig03a')
 
     # ------------------------------------------------------------------------
-    #                                 Figure 4
+    #                                 Figure 5
     # ------------------------------------------------------------------------
     c = pyx.canvas.canvas()
 
@@ -439,7 +439,7 @@ if __name__ == '__main__':
     cc.text(0, 0, r'$\Sigma^-$', text_attrs)
     c.insert(cc, [text_scaling, pyx.trafo.translate(x, y)])
 
-    c.writeSVGfile('fig04')
+    c.writeSVGfile('fig05')
 
     # ------------------------------------------------------------------------
     #                                 Figure 6
