@@ -3,6 +3,14 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:./posts/20150706-When_a_thin_shell_is_not_so_thin-03.org][2015-07-06 -- When a thin shell is not so thin, part\nbsp{}3: the thick shell solution]]
+
+Finding the stress resultant and stress couple in a spherical pressure vessel seems easy enough. Well, this apparently simple problem allows us to highlight subtle thickness effects within shells. It should be emphasized again that these thickness effects have nothing to do with shear corrections. Indeed, shear stresses are null at any point of the spherical pressure vessel. Rather, the thickness effects we are discussing in this series are due to curvature.
+
+In the [[file:./posts/20150608-When_a_thin_shell_is_not_so_thin-01.org][first instalment]] of this series, I showed that using Koiter's thin shell solution leads to a non-null stress couple, which came as quite a surprise. In the [[file:./posts/20150701-When_a_thin_shell_is_not_so_thin-02.org][second instalment]], I used the exact, 3D solution to derive reference values of the stress couple and stress resultant through integration over the thickness of the shell. In particular, I showed that thickness corrections /had/ to be incorporated.
+
+This still does not settle the matter, since the results obtained within the framework of Koiter's thin shell theory (see [[file:./posts/20150608-When_a_thin_shell_is_not_so_thin-01.org][first instalment]]) are inconsistent with the reference, 3D elasticity values (see [[file:./posts/20150701-When_a_thin_shell_is_not_so_thin-02.org][second instalment]]). To reconcile both approaches (3D elasticity vs. shell theory), we need to use a /thick/ shell theory, as illustrated below.
+
 * [[file:./posts/20150701-When_a_thin_shell_is_not_so_thin-02.org][2015-07-01 -- When a thin shell is not so thin, part\nbsp{}2: the 3D, exact solution]]
 
 In the [[file:./posts/20150608-When_a_thin_shell_is_not_so_thin-01.org][previous instalment]] of this series, we analysed a spherical pressure vessel by means of Koiter's linear theory of thin shells. We found the somewhat unexpected result that the stress couple was not null. Besides, we also found that the stress resultant was slightly different from the well-known value N=pR/2. So what was wrong with the previous analysis? To explore this question, we will make use of the exact solution in 3D elasticity.
