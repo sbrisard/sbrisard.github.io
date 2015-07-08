@@ -12,6 +12,7 @@
   - <<#LEIS1973>> [[http://hdl.handle.net/2060/19730018197][Leissa (1973)]] :: A. W. Leissa, /Vibration of shells/, NASA Technical Report SP-288, 1973
   - <<#MOUL1994>> Moulinec and Suquet (1994) :: H. Moulinec and P. Suquet, /A fast numerical method for computing the linear and nonlinear properties of composites/, Comptes-Rendus de l'Académie des Sciences série II 318: 1417-1423, 1994
   - <<#MOUL1998>>  [[http://dx.doi.org/10.1016/S0045-7825(97)00218-1][Moulinec and Suquet (1998)]] :: H. Moulinec and P. Suquet, /A numerical method for computing the overall response of nonlinear composites with complex microstructure/, Computer Methods in Applied Mechanics and Engineering 157(1-2): 69-94, 1998
+  - <<#MUMF1989>> [[http://dx.doi.org/10.1002/cpa.3160420503][Mumford and Shah (1989)]] :: D. Mumford and J. Shah, /Optimal approximations by piecewise smooth functions and associated variational problems/, Communications on Pure and Applied Mathematics 42(5): 577-685, 1989
   - <<#OTSU1979>> [[http://dx.doi.org/10.1109/TSMC.1979.4310076][Otsu (1979)]] :: N. Otsu, /A Threshold Selection Method from Gray-Level Histograms/, IEEE Transactions on Systems, Man and Cybernetics 9(1): 62-66, 1979
   - <<#REIS1947>> Reissner (1947) :: E. Reissner, /On bending of elastic plates/, Quarterly of Applied Mathematics 5(1): 55-68, 1947
   - <<#TIMO1951>> Timoshenko and Goodier (1951) :: S. Timoshenko and J. N. Goodier, /Theory of Elasticity/, 2nd edition, McGraw-Hill, 1951

@@ -1,0 +1,26 @@
+figure.figsize : 3.3,2.2
+
+axes.linewidth : 1.5
+grid.linewidth : 1.5
+lines.linewidth : 1.0
+xtick.major.width : 1.5
+ytick.major.width : 1.5
+xtick.minor.width : 1.5
+ytick.minor.width : 1.5
+
+xtick.major.size : 5
+ytick.major.size : 5
+xtick.minor.size : 3
+ytick.minor.size : 3
+
+font.size : 12
+legend.fontsize : medium
+xtick.labelsize : small
+ytick.labelsize : small
+
+lines.markeredgewidth : 0
+lines.markersize : 5
+
+grid.linestyle : -
+
+legend.frameon : False
