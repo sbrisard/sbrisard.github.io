@@ -10,6 +10,10 @@ In the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][prev
 #+ATTR_HTML: :width 90%
 file:./20150709-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-initial_vs_thresholded-099.png
 
+#+TOC: headlines 2
+
+* Plotting the image's histogram
+
 Before we dig into Otsu's method, we will first draw the histogram of the original image shown in Fig. [[fig:1]] (left), remembering that the boundary was found in the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][previous instalment]] to be a circle centered at =(219, 217)=, with radius =208=. The following Python code computes and saves the histogram as a SVG file, which is displayed in Fig. [[fig:2]].
 
 #+BEGIN_SRC python :eval no-export :exports code
@@ -193,11 +197,11 @@ We first load all binned slices, and recover the parameters of the circular boun
   name = os.path.join(root, 'bin_4x4x4', 'rice-bin_4x4x4-{0:03d}.tif')
   images = [imread(name.format(i)) for i in range(num_slices)]
 
-  'Loaded {} images'.format(len(images))
+  'Loaded {} images.'.format(len(images))
 #+END_SRC
 
 #+RESULTS:
-: Loaded 172 images
+: Loaded 172 images.
 
 We then concatenate in =pixel_values= the gray levels of all pixels located inside the relevant ROI.
 
@@ -209,21 +213,21 @@ We then concatenate in =pixel_values= the gray levels of all pixels located insi
       pixel_values.append(img[rows, cols].ravel())
 
   pixel_values = np.concatenate(pixel_values)
-  'Concatenated {} pixel values'.format(pixel_values.shape[0])
+  'Concatenated {} pixel values.'.format(pixel_values.shape[0])
 #+END_SRC
 
 #+RESULTS:
-: Concatenated 23342700 pixel values
+: Concatenated 23342700 pixel values.
 
 This concatenated array is then passed to =threshold_otsu= to compute the threshold.
 
 #+BEGIN_SRC python :eval no-export :exports both :session
   threshold = threshold_otsu(pixel_values)
-  'Otsu\'s threshold = {}'.format(threshold)
+  'Otsu\'s threshold = {}.'.format(threshold)
 #+END_SRC
 
 #+RESULTS:
-: Otsu's threshold = 126
+: Otsu's threshold = 126.
 
 Finally, the images are thresholded and saved
 
