@@ -282,7 +282,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         ("sb-blog-attachments"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
-         :base-extension "jpg\\|gif\\|png\\|xml\\|css\\|svg\\|png"
+         :base-extension "jpg\\|gif\\|png\\|xml\\|css\\|svg\\|png\\|py\\|mplstyle\\|tif"
          :recursive t
          :publishing-function org-publish-attachment)
         ("sb-blog"
