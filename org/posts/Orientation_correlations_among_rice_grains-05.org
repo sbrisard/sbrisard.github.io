@@ -13,7 +13,7 @@ file:./201507XX-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-ini
 
 Before we dig into Otsu's method, we will first draw the histogram of the original image shown in Fig. [[fig:1]] (left), remembering that the boundary was found in the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][previous instalment]] to be a circle centered at =(219, 217)=, with radius =208=. The following Python code computes and saves the histogram as a SVG file, which is displayed in Fig. [[fig:2]].
 
-#+BEGIN_SRC python :exports code
+#+BEGIN_SRC python :eval no-export :exports code
   import os.path
 
   import numpy as np
@@ -174,7 +174,7 @@ In the present section, we will first compute the threshold based on the histogr
 
 We first load all binned slices, and recover the parameters of the circular boundaries of each ROI, from the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][previous instalment]].
 
-#+BEGIN_SRC python :output both :session
+#+BEGIN_SRC python :eval no-export :output both :session
   import os.path
 
   import numpy as np
@@ -202,7 +202,7 @@ We first load all binned slices, and recover the parameters of the circular boun
 
 We then concatenate in =pixel_values= the gray levels of all pixels located inside the relevant ROI.
 
-#+BEGIN_SRC python :output both :session
+#+BEGIN_SRC python :eval no-export :output both :session
   pixel_values = []
 
   for img, params in zip(images, circle_params):
@@ -218,7 +218,7 @@ We then concatenate in =pixel_values= the gray levels of all pixels located insi
 
 This concatenated array is then passed to =threshold_otsu= to compute the threshold.
 
-#+BEGIN_SRC python :output both :session
+#+BEGIN_SRC python :eval no-export :output both :session
   threshold = threshold_otsu(pixel_values)
   'Otsu\'s threshold = {}'.format(threshold)
 #+END_SRC
@@ -228,7 +228,7 @@ This concatenated array is then passed to =threshold_otsu= to compute the thresh
 
 Finally, the images are thresholded and saved
 
-#+BEGIN_SRC python :output both :session
+#+BEGIN_SRC python :eval no-export :output both :session
   basename = 'rice-bin_4x4x4-otsu_{0}-{1:03d}.tif'
   names = [os.path.join(root, 'bin_4x4x4-otsu', basename.format(threshold, i))
            for i in range(num_slices)]
