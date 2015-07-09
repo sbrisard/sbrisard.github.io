@@ -1,7 +1,7 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Orientation correlations among rice grains, part 5: thresholding
-#+DATE: [2015-07-08 Wed]
+#+DATE: [2015-07-09 Thu]
 #+PROPERTY: header-args:python :results value verbatim :exports both
 
 In the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][previous instalment]] of this series, we used the circle Hough transform to find the boundary of the sample and define the circular ROI. Within this ROI, we now need to segment the rice grains. In other words, starting from a gray-level image (Fig. [[fig:1]], left), we want to produce a binary image, where all pixels that we believe belong to rice grains are white, and all background pixels are black (Fig. [[fig:1]], right). This is the topic of the present post, where we will use Otsu's automated threshold selection. I will first discuss Otsu's method, and propose what I believe is a new interpretation of this rather old technique. Then, I will apply this method to the 3D image of rice grains, using [[http://scikit-image.org/][scikit-image]].
@@ -9,7 +9,7 @@ In the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][prev
 #+CAPTION: The original (left) and thresholded (right) images.
 #+NAME: fig:1
 #+ATTR_HTML: :width 90%
-file:./201507XX-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-initial_vs_thresholded-099.png
+file:./20150709-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-initial_vs_thresholded-099.png
 
 Before we dig into Otsu's method, we will first draw the histogram of the original image shown in Fig. [[fig:1]] (left), remembering that the boundary was found in the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][previous instalment]] to be a circle centered at =(219, 217)=, with radius =208=. The following Python code computes and saves the histogram as a SVG file, which is displayed in Fig. [[fig:2]].
 
@@ -24,7 +24,7 @@ Before we dig into Otsu's method, we will first draw the histogram of the origin
   from skimage.io import imread
 
   root = os.path.join('.',
-                      '201507XX-Orientation_correlations_among_rice_grains-05')
+                      '20150709-Orientation_correlations_among_rice_grains-05')
 
   img = imread(os.path.join(root, 'rice-bin_4x4x4-099.tif'))
   rows, cols = circle(219, 217, 208)
@@ -49,7 +49,7 @@ Before we dig into Otsu's method, we will first draw the histogram of the origin
 
 #+CAPTION: Histogram of the original image shown in Fig. [[fig:1]] (left).
 #+NAME: fig:2
-file:./201507XX-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-hist-099.svg
+file:./20150709-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-hist-099.svg
 
 It is observed that this histogram is relatively well suited to thresholding. Indeed, it exhibits two peaks which are fairly well-separated, and the pixel counts between these peaks are rather small. However, these pixel counts never go to zero, which means that no matter the threshold, the thresholded image will always be wrong!
 

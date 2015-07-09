@@ -154,7 +154,7 @@ Which shows that there is very little variation of the circle parameters across 
 
 * Closing words
 
-In this post, we saw how to define the (cylindrical) ROI on our stack of images. To do so, we used the Circle Hough Transform to find circular edges in the slices. In the next instalment of this series, I will start discussing segmentation /per se/.
+In this post, we saw how to define the (cylindrical) ROI on our stack of images. To do so, we used the Circle Hough Transform to find circular edges in the slices. In the [[file:./20150709-Orientation_correlations_among_rice_grains-05.org][next]] instalment of this series, I will start discussing segmentation /per se/.
 
 * Side-note: how to produce animated GIFs
 

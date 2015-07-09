@@ -4,6 +4,13 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
+      <title>Orientation correlations among rice grains, part 5: thresholding</title>
+      <link>http://sbrisard.github.io/posts/20150709-Orientation_correlations_among_rice_grains-05.html</link>
+      <guid>posts/20150709-Orientation_correlations_among_rice_grains-05.html</guid>
+      <pubDate>Thu, 9 July 2015</pubDate>
+      <description>In the previous instalment of this series, we used the circle Hough transform to find the boundary of the sample and define the circular ROI. Within this ROI, we now need to segment the rice grains. In other words, starting from a gray-level image (Fig. 1, left), we want to produce a binary image, where all pixels that we believe belong to rice grains are white, and all background pixels are black (Fig. 1, right). This is the topic of the present post, where we will use Otsu's automated threshold selection. I will first discuss Otsu's method, and propose what I believe is a new interpretation of this rather old technique. Then, I will apply this method to the 3D image of rice grains, using scikit-image.</description>
+    </item>
+    <item>
       <title>When a thin shell is not so thin, part 3: the thick shell solution</title>
       <link>http://sbrisard.github.io/posts/20150706-When_a_thin_shell_is_not_so_thin-03.html</link>
       <guid>posts/20150706-When_a_thin_shell_is_not_so_thin-03.html</guid>
@@ -16,7 +23,6 @@
         This still does not settle the matter, since the results obtained within the framework of Koiter's thin shell theory (see first instalment) are inconsistent with the reference, 3D elasticity values (see second instalment). To reconcile both approaches (3D elasticity vs. shell theory), we need to use a thick shell theory, as illustrated below.
       </description>
     </item>
-
     <item>
       <title>When a thin shell is not so thin, part 2: the 3D, exact solution</title>
       <link>http://sbrisard.github.io/posts/20150701-When_a_thin_shell_is_not_so_thin-02.html</link>
