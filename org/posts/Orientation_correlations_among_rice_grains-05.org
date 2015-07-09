@@ -51,7 +51,7 @@ Before we dig into Otsu's method, we will first draw the histogram of the origin
 #+NAME: fig:2
 file:./201507XX-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-hist-099.svg
 
-It is observed that this histogram is relatively well-suited to thresholding. Indeed, it exhibits two peaks which are fairly well-separated, and the pixel counts between these peaks are rather small. However, these pixel counts never go to zero, which means that no matter the threshold, the thresholded image will always be wrong!
+It is observed that this histogram is relatively well suited to thresholding. Indeed, it exhibits two peaks which are fairly well-separated, and the pixel counts between these peaks are rather small. However, these pixel counts never go to zero, which means that no matter the threshold, the thresholded image will always be wrong!
 
 * Otsu's method
 
@@ -79,7 +79,7 @@ At this point, it should be noted that the above choice of distance will result 
 \label{eq:8}f(x) < f(y)\quad & \Rightarrow\quad g(x) \leq g(y).
 \end{align}
 
-The proof of the above assertions can be found in the appendices (see [[proof:1][proof]] of assertion \eqref{eq:2} and [[proof:2][proof]] of assertion \eqref{eq:8}). Assertion \eqref{eq:2} proves that $g(x)$ depends on the gray value of $x$ in image $f$, not on the pixel $x$ itself. Therefore, [[pb:1][Problem 1]] leads to a histogram based segmentation method. Assuming $g_0 < g_1$, we then define $k$ as follows
+The proof of the above assertions can be found in the appendices [see [[proof:1][proof]] of assertion \eqref{eq:2} and [[proof:2][proof]] of assertion \eqref{eq:8}]. Assertion \eqref{eq:2} proves that $g(x)$ depends on the gray value of $x$ in image $f$, not on the pixel $x$ itself. Therefore, [[pb:1][Problem 1]] leads to a histogram based segmentation method. Assuming $g_0 < g_1$, we then define $k$ as follows
 
 \begin{equation}
 \label{eq:15}k=\max\{f(x), x\in E,g(x)=g_0\},
@@ -164,7 +164,7 @@ In the above expression, the sum over all pixels of the image is constant. There
 \label{eq:26}\omega_0\omega_1\left(\mu_0-\mu_1\right)^2.
 \end{equation}
 
-This is exactly how Otsu's threshold is defined! [see [[file:../pages/references.org::#OTSU1979][Otsu, 1979]], Eq. (14)] To sum up, we started with [[pb:1][Problem 1]]: find the best binary approximation of a specified image. We showed that the best binary approximation was to be found amongst the class of thresholded images (see [[pb:2][Problem 2]] and [[pb:3][Problem 3]]). Then, the optimum threshold was found to coincide with Otsu's. In that sense, Otsu's method is equivalent to [[pb:1][Problem 1]].
+This is exactly how Otsu's threshold is defined! [see [[file:../pages/references.org::#OTSU1979][Otsu, 1979]], Eq. (14)] To sum up, we started with [[pb:1][Problem 1]]: find the best binary approximation of a specified image. We showed that the best binary approximation was to be found amongst the class of thresholded images (see Problems [[pb:2][2]] and [[pb:3][3]]). Then, the optimum threshold was found to coincide with Otsu's. In that sense, Otsu's method is equivalent to [[pb:1][Problem 1]].
 
 It is interesting to realize that there is a connection between Otsu's method and the Mumford--Shah functional ([[file:../pages/references.org::#MUMF1989][Mumford and Shah, 1989]]). Indeed, Mumford and Shah also seek the best binary (or more generally, $n$-component) approximation of an image in the $L^2$ sense. However, their cost function also penalizes the total variation as well as the total length of the interfaces. As such, segmentation techniques based on the Mumford--Shah functional are not histogram-based.
 
@@ -247,7 +247,7 @@ Finally, the images are thresholded and saved
 
 ** Proof of assertion \eqref{eq:2} <<proof:1>>
 
-This assertion is proved by contradiction. Let us assume that there exists two pixels $x$ and $y$ ($x\neq y$) with same value in the original image ($f(x)=f(y)$) and different values in the binary approximation ($g(x)\neq g(y)$). We select $g_2\in\{g(x),g(y)\}=\{g_0, g_1\}$ so that
+This assertion is proved by contradiction. Let us assume that there exists two pixels $x$ and $y$ ($x\neq y$) with same value in the original image [$f(x)=f(y)$] and different values in the binary approximation [$g(x)\neq g(y)$]. We select $g_2\in\{g(x),g(y)\}=\{g_0, g_1\}$ so that
 
 \begin{align}
 \notag\left(f(x)-g_2\right)^2&=\left(f(y)-g_2\right)^2\\
