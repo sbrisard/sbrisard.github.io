@@ -242,6 +242,8 @@ Finally, the images are thresholded and saved
 
 #+RESULTS:
 
+The above script produces a series of binary images called =rice-bin_4x4x4-otsu_XXX-YYY.tif=, where =XXX= denotes the threshold, and =YYY= is the slice number. An example of such thresholded image is given in Fig. [[fig:1]] (right).
+
 * Closing words
 
 In this post, we have used Otsu's method to threshold the 3D image of the rice grains. This is only the first step towards segmentation of this image, though, as we would like to label all rice grains. This will be the topic of the next post.
