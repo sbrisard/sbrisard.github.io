@@ -250,7 +250,7 @@ The above script produces a series of binary images called =rice-bin_4x4x4-otsu_
 
 * Closing words
 
-In this post, we have used Otsu's method to threshold the 3D image of the rice grains. This is only the first step towards segmentation of this image, though, as we would like to label all rice grains. This will be the topic of the next post.
+In this post, we have used Otsu's method to threshold the 3D image of the rice grains. This is only the first step towards segmentation of this image, though, as we would like to label all rice grains. This will be the topic of the [[file:./20150930-Orientation_correlations_among_rice_grains-06.org][next post]].
 
 In the present post, I also presented an alternative derivation of Otsu's method. I believe this derivation is original, but I might be wrong. So please, do leave a comment to let me know what you think about this presentation.
 
