@@ -3,6 +3,10 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:posts/20151208-New_paper_published.org][2015-12-08 -- New paper published]]
+
+My student Vinh Phuc Tran has recently had one of his paper published in /Mechanics of Materials/. The paper is called /Stochastic modeling of mesoscopic elasticity random field/.
+
 * [[file:./posts/20150930-Orientation_correlations_among_rice_grains-06.org][2015-09-30 -- Orientation correlations among rice grains, part 6: segmentation]]
 
 In the [[file:./posts/20150709-Orientation_correlations_among_rice_grains-05.org][previous instalment]] of this series, I showed that a convincing binary image could be produced from the gray level 3D reconstruction of the assembly of rice grains, using Otsu's threshold. However, I intend to carry out statistical analyses of the /grains/ themselves in the subsequent instalments. Therefore, instead of a binary image of the rice grains, what is really needed is a /labelled/ image, where all voxels which are thought to belong to the same rice grain are tagged with the same label. This is called /segmentation/, which is the topic of the present post. I will first show that the most basic segmentation technique (namely, detecting connected components in the image) fails in the present case. This calls for a more elaborate strategy, based on the widely popular [[https://en.wikipedia.org/wiki/Watershed_%28image_processing%29][watershed]] method. However, blind application of the standard watershed strategy leads to over-segmentation. This post will therefore close on a problem-dependent strategy better suited to the present case.
