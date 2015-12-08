@@ -56,6 +56,8 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
 
 * Conferences
 
+  - Tran et al. (2015b) :: V.P. Tran, S. Brisard, J. Guilleminot, K. Sab, /Stress-gradient materials: an analytical exploration/, Workshop on Computational Mechanics of Generalized Continua and Applications to Materials with Microstructure , Oct 2015, Catania, Italy ([[https://hal-enpc.archives-ouvertes.fr/hal-01226290][slides]])
+  - Khalili et al. (2015a) ::  M.H. Khalili, J.-N. Roux, J.-M. Pereira, M. Vandamme, S. Brisard, M. Bornert, /Internal states, stress-strain behavior and elasticity in oedometrically compressed model granular materials/, IV International Conference on Particle-based Methods -- Fundamentals and Applications, Sep 2015, Barcelona, Spain ([[https://hal-enpc.archives-ouvertes.fr/hal-01214733][paper]])
   - Brisard and Chamoin (2015) :: S. Brisard, L. Chamoin, /A posteriori error estimators for FFT-based numerical techniques/, MAI workshop and training session: Micromechanics of cementitious materials, Sep 2015, Ecuelles, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01199166][slides]])
   - Brisard (2015a) :: S. Brisard, /Towards improved Hashin–Shtrikman bounds on the effective moduli of random composites/, 22ème Congrès Français de Mécanique, Aug 2015, Lyon, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01187197][paper]], [[https://hal-enpc.archives-ouvertes.fr/hal-01187829][slides]])
   - Tran et al. (2015a) :: V. P. Tran, J. Guilleminot, S. Brisard, K. Sab, /Homogénéisation numérique à l'aide de modèles prior de la raideur mésoscopique : identification et validation/, 22ème Congrès Français de Mécanique, Aug 2015, Lyon, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01194370][paper]])
