@@ -271,7 +271,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :exclude nil
          :recursive t
          :publishing-function sb-blog-publish-to-html
-         :auto-sitemap t
+         :auto-sitemap nil
          :sitemap-filename ,sb-blog-posts-sitemap-filename
          :sitemap-title "Blog archive"
          :sitemap-sort-files anti-chronologically
