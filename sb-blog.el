@@ -165,7 +165,16 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                                       ,sb-blog-link-bitbucket
                                       ,sb-blog-link-twitter
                                       ,(sb-blog-link-rss level)))
-            "</div>\n")))
+            "</div>\n"
+            "<div id=\"titleblock\">\n"
+            "<p class=\"date\">"
+            (org-export-data (org-export-get-date info "%Y-%m-%d") info)
+            "</p>\n"
+            "<h1 class=\"title\">"
+            (org-export-data (plist-get info :title) info)
+            "</h1>\n"
+            "</div>"
+            )))
 
 (defvar sb-blog-credits "This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>. Icons come from the <a href=\"http://fontawesome.io/\">Font Awesome</a> icon set.")
 
