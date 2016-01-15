@@ -149,6 +149,10 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                   (f-join (sb-blog-path-to-root level) "theme.css"))
           "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
+(defun sb-blog-get-date-as-html (info)
+  (let ((date (org-export-get-date info "%Y-%m-%d")))
+    (when date (concat "<p class=\"date\">" (org-export-data date info)  "</p>\n"))))
+
 (defun sb-blog-html-preamble (info)
   (let ((level (sb-blog-get-level)))
     (concat (sb-blog-banner level)
@@ -167,9 +171,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                                       ,(sb-blog-link-rss level)))
             "</div>\n"
             "<div id=\"titleblock\">\n"
-            "<p class=\"date\">"
-            (org-export-data (org-export-get-date info "%Y-%m-%d") info)
-            "</p>\n"
+            (sb-blog-get-date-as-html info)
             "<h1 class=\"title\">"
             (org-export-data (plist-get info :title) info)
             "</h1>\n"
