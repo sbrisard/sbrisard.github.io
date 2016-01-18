@@ -1,7 +1,7 @@
 # -*- coding: utf-8; -*-
 #+TITLE: Orientation correlations among rice grains, part 4: defining the ROI
 #+DATE: [2015-05-29 Fri]
-#+PROPERTY: header-args:python :results value verbatim :session :exports both
+#+PROPERTY: header-args:python :results value verbatim :session :exports both :eval no-export
 
 In the [[file:./20150330-Orientation_correlations_among_rice_grains-03.org][previous instalment]] of this series, we obtained binned slices of the sample. Fig. [[fig:1]] is a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within the Region Of Interest (ROI) thus defined.
 
@@ -166,7 +166,3 @@ The animated GIF in Fig. [[fig:3]] was produced with [[http://imagej.nih.gov/ij/
   4. File → Save As → Gif
 
 To change the frame rate, use Image → Stacks → Tools → Animation Options...
-
-# Local Variables:
-# org-confirm-babel-evaluate: nil
-# End:
