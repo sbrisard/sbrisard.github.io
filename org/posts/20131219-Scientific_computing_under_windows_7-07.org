@@ -81,10 +81,10 @@ Once your are satisfied with all options, click "Generate" to produce the =Makef
 
 In the MSYS console
 
-#+BEGIN_SRC
+#+BEGIN_EXAMPLE
 $ cd /C/src/InsightToolkit-4.4.2/build
 $ mingw32-make
-#+END_SRC
+#+END_EXAMPLE
 
 The first compilation error is the following
 
@@ -185,7 +185,7 @@ with
 
 (four occurences in the same file). The next compilation error is
 
-#+BEGIN_SRC
+#+BEGIN_EXAMPLE
 [  9%] Building C object Modules/ThirdParty/OpenJPEG/src/openjpeg/CMakeFiles/itk
 openjpeg.dir/openjpeg.c.obj
 C:\src\InsightToolkit-4.4.2\src\Modules\ThirdParty\OpenJPEG\src\openjpeg\openjpe
@@ -210,7 +210,7 @@ mingw32-make[1]: *** [Modules/ThirdParty/OpenJPEG/src/openjpeg/CMakeFiles/itkope
 njpeg.dir/all] Error 2
 Makefile:135: recipe for target 'all' failed
 mingw32-make: *** [all] Error 2
-#+END_SRC
+#+END_EXAMPLE
 
 To conform with the definition of =DllMain= found in =C:\MinGW\include\winbase.h=, edit =C:\src\ITK\src\Modules\ThirdParty\OpenJPEG\src\openjpeg\openjpeg.c= and replace line 155
 
