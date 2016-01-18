@@ -4,7 +4,7 @@
 
 As of Python 3, the operator =/= performs a /true/ division (floating-point result). If you are looking for an integer division (quotient of the Euclidean division), you must use =//=. For example
 
-#+BEGIN_SRC python
+#+BEGIN_SRC python :exports code
   >>> 1 / 2
   0.5
   >>> 5 // 2
