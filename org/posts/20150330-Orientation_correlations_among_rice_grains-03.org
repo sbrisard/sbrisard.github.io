@@ -1,7 +1,7 @@
 # -*- coding: utf-8; -*-
 #+TITLE: Orientation correlations among rice grains, part 3: intermezzo -- Binning images
 #+DATE: [2015-03-30 Mon]
-#+PROPERTY: header-args:python :results value verbatim :session :exports both
+#+PROPERTY: header-args:python :results value verbatim :session :exports both :eval never-export
 
 The full reconstructed image resulting from the tomography experiment described in the [[file:./20150310-Orientation_correlations_among_rice_grains-02.org][second]] instalment of this series is a 1747×1751×688 stack. The voxel size is about 0.030 mm. This is far too much for the purpose of the present study, since all we are interested in is the determination of the location (coordinates of the centroid) and orientation (principal axes of inertia) of the rice grains. In order to reduce the computation time, the images will first be /binned/, that is each set of (say) 4×4×4 voxels will be replaced with a unique voxel, with average gray value (see Fig. [[fig:1]] below for an illustration). 3D binning would usually require three uggly nested loops. There is, however, a much more pythonic way. This is the topic of the present post.
 
@@ -31,16 +31,18 @@ We will be particularly interested in the last point: "think in higher dimension
 
 We eventually want to perform binning on a 3D array (a stack of 2D slices). But, for the sake of illustration, the method will be demonstrated on a 2D array. We must first generate the data.
 
-#+BEGIN_SRC python
+#+BEGIN_SRC python :exports code
   import numpy as np
 
   np.random.seed(20150324)
   a2 = np.random.rand(15, 9)
 #+END_SRC
 
+#+RESULTS:
+
 Note that the shape of =a2= (the array to be binned) is purposely not a multiple of 4! Also note that, in order to make tests fully reproducible, it is good practice to seed the random generator manually. We then compute the shape of the binned array to be computed.
 
-#+BEGIN_SRC python
+#+BEGIN_SRC python :exports both
   bin_size = 4
   binned_shape = tuple(n//bin_size for n in a2.shape)
 
@@ -184,7 +186,3 @@ The script which allowed the binning of the whole 3D image is presented below. I
 * Conclusion
 
 In this post, we took a slight detour on our way towards segmentation and analysis of our 3D images. Still, I hope you enjoyed this post and found it useful. In the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][next instalment]], we will be back on track, as I will discuss the segmentation of the cylindrical sample container.
-
-# Local Variables:
-# org-confirm-babel-evaluate: nil
-# End:
