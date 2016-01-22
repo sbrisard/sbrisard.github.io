@@ -92,6 +92,29 @@
     h2 a { color: inherit; font-weight: inherit; }
     h2 a:hover { color: blue; }
 
+    .sb-bib h2 {
+        border-bottom: 0;
+        font-family: serif;
+        font-size: 100%;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+    }
+
+    .sb-bib h3 {
+        border-bottom: 0;
+        font-family: serif;
+        font-size: 100%;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+    }
+
+    .sb-bib p {
+        margin: 0 0 0.5em 2em;
+        padding: 0;
+    }
+
     #postamble {
         border-top: 1px solid #ddd;
         font-size:0.8em;
