@@ -234,7 +234,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :auto-sitemap nil
          :html-doctype "html5"
          :html-container "div"
-         :html-head ,(sb-blog-html-head 0)
+         ;:html-head ,(sb-blog-html-head 0)
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
@@ -256,7 +256,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :sitemap-sort-files chronologically
          :html-doctype "html5"
          :html-container "div"
-         :html-head ,(sb-blog-html-head 1)
+         ;:html-head ,(sb-blog-html-head 1)
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble sb-blog-html-preamble
@@ -280,7 +280,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :sitemap-file-entry-format "%d -- %t"
          :html-doctype "html5"
          :html-container "div"
-         :html-head ,(sb-blog-html-head 1)
+         ;:html-head ,(sb-blog-html-head 1)
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble sb-blog-html-preamble
