@@ -235,7 +235,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
          :base-extension "org"
-         :exclude nil
+         :exclude ".*include.*"
          :recursive t
          :publishing-function sb-blog-publish-to-html
          :auto-sitemap nil
