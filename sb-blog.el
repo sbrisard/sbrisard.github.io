@@ -17,6 +17,24 @@
 (defvar sb-blog-posts-sitemap-filename "archives.org")
 (defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
 
+(defgroup sb-blog nil "Customizations for my blog")
+(defcustom sb-blog-comments t
+  "t if comments are allowed in the page defined by the present buffer.
+
+Can be buffer-local, in which case, it must be specified as follows
+
+#+BIND: sb-blog-comments t
+
+or
+
+#+BIND: sb-blog-comments nil
+"
+  :type 'boolean
+  :group 'sb-blog
+  :tag "Comments allowed")
+
+(setq org-export-allow-bind-keywords t)
+
 ;; Path manipulations
 ;; ==================
 
@@ -180,18 +198,12 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
 (defvar sb-blog-credits "This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>. Icons come from the <a href=\"http://fontawesome.io/\">Font Awesome</a> icon set.")
 
-;; To allow for comments
-;; #+OPTIONS: comments:t
 (defun sb-blog-html-postamble (info)
   (concat "<p>"
           sb-blog-license
           sb-blog-credits
           "</p>"
-          ;sb-blog-twitter-follow-button-script
-          (when (and (plist-get info :comments-allowed)
-                     (not (s-ends-with? sb-blog-posts-sitemap-filename
-                                        buffer-file-name)))
-            (sb-blog-disqus-script info))))
+          (when sb-blog-comments (sb-blog-disqus-script info))))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
