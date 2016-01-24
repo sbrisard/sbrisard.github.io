@@ -11,11 +11,6 @@
 (defvar sb-blog-root (file-name-directory load-file-name))
 (defvar sb-blog-base-directory (concat sb-blog-root "org/"))
 (defvar sb-blog-publishing-directory (concat sb-blog-root "html/"))
-(defvar sb-blog-pages-base-directory (concat sb-blog-root "org/pages"))
-(defvar sb-blog-pages-publishing-directory (concat sb-blog-root "html/pages"))
-(defvar sb-blog-posts-base-directory (concat sb-blog-root "org/posts"))
-(defvar sb-blog-posts-sitemap-filename "archives.org")
-(defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
 
 (defgroup sb-blog nil "Customizations for my blog")
 (defcustom sb-blog-comments t
