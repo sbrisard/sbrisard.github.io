@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+TITLE: New paper published
 #+DATE: [2015-12-08 Tue]
 

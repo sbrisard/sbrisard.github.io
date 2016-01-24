@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+TITLE: Watch it! Integer division in Python 3
 #+DATE: <2013-09-10 Tue>
 

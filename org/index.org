@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "./include/css-0.org
 #+TITLE: Welcome!
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.

@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org
 #+TITLE: References
 
   - <<#BIGO1994>> [[http://www.ing.unitn.it/~bigoni/paper/eigenvalues.pdf][Bigoni and Zaccaria (1994)]] :: D. Bigoni and D. Zaccaria, /On the eigenvalues of the acoustic tensor in elastoplasticity/, European Journal of Mechanics - A/Solids 13(5):621-638, 1994

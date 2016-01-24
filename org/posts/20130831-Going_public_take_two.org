@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+TITLE: Going public (take two)
 #+DATE: <2013-08-31 Sat>
 

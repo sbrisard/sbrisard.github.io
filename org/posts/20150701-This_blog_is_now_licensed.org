@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: This blog is now licensed!
 #+DATE: [2015-07-01 Wed]

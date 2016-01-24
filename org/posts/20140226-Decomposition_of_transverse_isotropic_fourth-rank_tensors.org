@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Decomposition of transverse isotropic, fourth-rank tensors
 #+DATE: <2014-02-26 Wed>

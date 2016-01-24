@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+TITLE: Orientation correlations among rice grains, part 3: intermezzo -- Binning images
 #+DATE: [2015-03-30 Mon]
 #+PROPERTY: header-args:python :results value verbatim :session :exports both :eval never-export
