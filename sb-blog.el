@@ -236,17 +236,16 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 ;; - Carsten
 ;;
 (setq org-publish-project-alist
-      `(("sb-blog-root"
+      `(("sb-blog-org"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
          :base-extension "org"
          :exclude nil
-         :recursive nil
+         :recursive t
          :publishing-function sb-blog-publish-to-html
          :auto-sitemap nil
          :html-doctype "html5"
          :html-container "div"
-         ;:html-head ,(sb-blog-html-head 0)
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
@@ -255,52 +254,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :section-numbers nil
          :with-toc nil
          :language "en"
-         :comments-allowed nil
-         )
-        ("sb-blog-pages"
-         :base-directory ,sb-blog-pages-base-directory
-         :publishing-directory ,sb-blog-pages-publishing-directory
-         :base-extension "org"
-         :exclude nil
-         :recursive t
-         :publishing-function sb-blog-publish-to-html
-         :auto-sitemap nil
-         :sitemap-sort-files chronologically
-         :html-doctype "html5"
-         :html-container "div"
-         ;:html-head ,(sb-blog-html-head 1)
-         :html-head-include-default-style nil
-         :html-head-include-scripts nil
-         :html-preamble sb-blog-html-preamble
-         :html-postamble sb-blog-html-postamble
-         :section-numbers nil
-         :with-toc nil
-         :language "en"
-         :comments-allowed nil
-         )
-        ("sb-blog-posts"
-         :base-directory ,sb-blog-posts-base-directory
-         :publishing-directory ,sb-blog-posts-publishing-directory
-         :base-extension "org"
-         :exclude nil
-         :recursive t
-         :publishing-function sb-blog-publish-to-html
-         :auto-sitemap nil
-         :sitemap-filename ,sb-blog-posts-sitemap-filename
-         :sitemap-title "Blog archive"
-         :sitemap-sort-files anti-chronologically
-         :sitemap-file-entry-format "%d -- %t"
-         :html-doctype "html5"
-         :html-container "div"
-         ;:html-head ,(sb-blog-html-head 1)
-         :html-head-include-default-style nil
-         :html-head-include-scripts nil
-         :html-preamble sb-blog-html-preamble
-         :html-postamble sb-blog-html-postamble
-         :section-numbers nil
-         :with-toc nil
-         :language "en"
-         :comments-allowed t
          )
         ("sb-blog-attachments"
          :base-directory ,sb-blog-base-directory
@@ -309,7 +262,5 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :recursive t
          :publishing-function org-publish-attachment)
         ("sb-blog"
-         :components ("sb-blog-root"
-                      "sb-blog-pages"
-                      "sb-blog-posts"
+         :components ("sb-blog-org"
                       "sb-blog-attachments"))))
