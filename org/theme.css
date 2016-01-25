@@ -92,21 +92,6 @@
     h2 a { color: inherit; font-weight: inherit; }
     h2 a:hover { color: blue; }
 
-    .sb-bibitem h2, h3 {
-        border-bottom: 0;
-        font-family: inherit;
-        font-size: 100%;
-        font-weight: normal;
-        line-height: 18pt;
-        margin: 0;
-        padding: 0;
-    }
-
-    .sb-bibitem p {
-        margin: 0 0 0.5em 2em;
-        padding: 0;
-    }
-
     #postamble {
         border-top: 1px solid #ddd;
         font-size:0.8em;

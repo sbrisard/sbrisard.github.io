@@ -3,162 +3,23 @@
 #+BIND: sb-blog-comments nil
 #+TITLE: References
 
-* [[http://www.ing.unitn.it/~bigoni/paper/eigenvalues.pdf][Bigoni and Zaccaria (1994)]]
-  :PROPERTIES:
-  :CUSTOM_ID: BIGO1994
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-D. Bigoni and D. Zaccaria, /On the eigenvalues of the acoustic tensor in elastoplasticity/, European Journal of Mechanics - A/Solids 13(5):621-638, 1994
-
-* [[http://dx.doi.org//10.1007/BF00041097][Del Piero (1979)]]
-  :PROPERTIES:
-  :CUSTOM_ID: PIER1979
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-P. Del Piero, /Some properties of the set of fourth-order tensors, with application to elasticity/, Journal of Elasticity 9(3):245-261, 1979
-
-* [[http://www.sciencedirect.com/science/article/pii/S0021999104003146][Donev et al. (2005)]]
-  :PROPERTIES:
-  :CUSTOM_ID: DONE2005
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-A. Donev, S. Torquato and F. H. Stillinger, /Neighbor list collision-driven molecular dynamics simulation for nonspherical hard particles. I. Algorithmic details/, Journal of Computational Physics 202(2):737-764, 2005
-
-* [[http://www.sciencedirect.com/science/article/pii/S0021999104003948][Donev et al. (2005a)]]
-  :PROPERTIES:
-  :CUSTOM_ID: DONE2005A
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-A. Donev, S. Torquato and F. H. Stillinger, /Neighbor list collision-driven molecular dynamics simulation for nonspherical hard particles.: II. Applications to ellipses and ellipsoids/, Journal of Computational Physics 202(2):765-793, 2005
-
-* [[http://dx.doi.org/10.1145/361237.361242][Duda and Hart (1971)]]
-  :PROPERTIES:
-  :CUSTOM_ID: DUDA1971
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-R. O. Duda and P. E. Hart, /Use of the Hough Transformation to Detect Lines and Curves in Pictures/, Communications of the ACM 15(1):11-15, 1971
-
-* [[http://dx.doi.org/10.1016/j.ijengsci.2013.07.006][Gentile and Straughan (2013)]]
-  :PROPERTIES:
-  :CUSTOM_ID: GENT2013
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-M. Gentile and B. Straughan, /Acceleration waves in nonlinear double porosity elasticity/, International Journal of Engineering Science 73:10-16, 2013
-
-* [[http://dx.doi.org/10.1016/0022-5096(62)90004-2][Hashin and Shtrikman (1962)]]
-  :PROPERTIES:
-  :CUSTOM_ID: HASH1962
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-Z. Hashin and S. Shtrikman, /On some variational principles in anisotropic and nonhomogeneous elasticity/, Journal of the Mechanics and Physics of Solids 10(4):335-342, 1962
-
-* [[http://www.mathunion.org/ICM/ICM1970.3/Main/icm1970.3.0123.0130.ocr.pdf][Koiter (1970)]]
-  :PROPERTIES:
-  :CUSTOM_ID: KOIT1970
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-W. T. Koiter, /On the mathematical foundation of shell theory/, Actes du Congrès International des Mathématiciens 3:123-130, 1970
-
-* [[http://hdl.handle.net/2060/19730018197][Leissa (1973)]]
-  :PROPERTIES:
-  :CUSTOM_ID: LEIS1973
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-A. W. Leissa, /Vibration of shells/, NASA Technical Report SP-288, 1973
-
-* Moulinec and Suquet (1994)
-  :PROPERTIES:
-  :CUSTOM_ID: MOUL1994
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-H. Moulinec and P. Suquet, /A fast numerical method for computing the linear and nonlinear properties of composites/, Comptes-Rendus de l'Académie des Sciences série II 318: 1417-1423, 1994
-
-* [[http://dx.doi.org/10.1016/S0045-7825(97)00218-1][Moulinec and Suquet (1998)]]
-  :PROPERTIES:
-  :CUSTOM_ID: MOUL1998
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-H. Moulinec and P. Suquet, /A numerical method for computing the overall response of nonlinear composites with complex microstructure/, Computer Methods in Applied Mechanics and Engineering 157(1-2): 69-94, 1998
-
-* [[http://dx.doi.org/10.1002/cpa.3160420503][Mumford and Shah (1989)]]
-  :PROPERTIES:
-  :CUSTOM_ID: MUMF1989
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-D. Mumford and J. Shah, /Optimal approximations by piecewise smooth functions and associated variational problems/, Communications on Pure and Applied Mathematics 42(5): 577-685, 1989
-
-* [[http://dx.doi.org/10.1109/TSMC.1979.4310076][Otsu (1979)]]
-  :PROPERTIES:
-  :CUSTOM_ID: OTSU1979
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-N. Otsu, /A Threshold Selection Method from Gray-Level Histograms/, IEEE Transactions on Systems, Man and Cybernetics 9(1): 62-66, 1979
-
-* Reissner (1947)
-  :PROPERTIES:
-  :CUSTOM_ID: REIS1947
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-E. Reissner, /On bending of elastic plates/, Quarterly of Applied Mathematics 5(1): 55-68, 1947
-
-* [[http://dx.doi.org/10.5566/ias.v27.p23-28][Tariel et al. (2008)]]
-  :PROPERTIES:
-  :CUSTOM_ID: TARI2008
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-V. Tariel, D. Jeulin, A. Fanget and G. Contesse, /3D multi-scale segmentation of granular materials/, Image Analysis & Stereology 27(1): 23-28, 2008
-
-* Timoshenko and Goodier (1951)
-  :PROPERTIES:
-  :CUSTOM_ID: TIMO1951
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-S. Timoshenko and J. N. Goodier, /Theory of Elasticity/, 2nd edition, McGraw-Hill, 1951
-
-* [[http://dx.doi.org/10.1098/rspa.1984.0008][Walpole (1984)]]
-  :PROPERTIES:
-  :CUSTOM_ID: WALP1984
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-L. J. Walpole, /Fourth-Rank Tensors of the Thirty-Two Crystal Classes: Multiplication Tables/, Proceedings of the Royal Society of London. A. Mathematical and Physical Sciences 391(1800): 149-179, 1984
-
-* [[http://dx.doi.org/10.1016/0022-5096(77)90022-9][Willis (1977)]]
-  :PROPERTIES:
-  :CUSTOM_ID: WILL1977
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-J. R. Willis, /Bounds and self-consistent estimates for the overall properties of anisotropic composites/, Journal of the Mechanics and Physics of Solids 25(3):185-202, 1977
-
-* Willis (2001)
-  :PROPERTIES:
-  :CUSTOM_ID: WILL2001
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-J. R. Willis, /Lectures on mechanics of random media/, in D. Jeulin, M. Ostoja-Starzewski (eds) Mechanics of random and multiscale microstructures, CISM courses and lectures 430:221-267, Springer, 2001
-
-* [[http://dx.doi.org/10.1002/pssb.2220550241][Zeller & Dederichs (1973)]]
-  :PROPERTIES:
-  :CUSTOM_ID: ZELL1973
-  :HTML_CONTAINER_CLASS: sb-bibitem
-  :END:
-
-R. Zeller and P. H. Dederichs, /Elastic constants of polycrystals/, Physica Status Solidi (B) 55(2): 831-842, 1973
+  - <<#BIGO1994>> [[http://www.ing.unitn.it/~bigoni/paper/eigenvalues.pdf][Bigoni and Zaccaria (1994)]] :: D. Bigoni and D. Zaccaria, /On the eigenvalues of the acoustic tensor in elastoplasticity/, European Journal of Mechanics - A/Solids 13(5):621-638, 1994
+  - <<#PIER1979>> [[http://dx.doi.org//10.1007/BF00041097][Del Piero (1979)]] :: P. Del Piero, /Some properties of the set of fourth-order tensors, with application to elasticity/, Journal of Elasticity 9(3):245-261, 1979
+  - <<#DONE2005>> [[http://www.sciencedirect.com/science/article/pii/S0021999104003146][Donev et al. (2005)]] :: A. Donev, S. Torquato and F. H. Stillinger, /Neighbor list collision-driven molecular dynamics simulation for nonspherical hard particles. I. Algorithmic details/, Journal of Computational Physics 202(2):737-764, 2005
+  - <<#DONE2005A>> [[http://www.sciencedirect.com/science/article/pii/S0021999104003948][Donev et al. (2005a)]] :: A. Donev, S. Torquato and F. H. Stillinger, /Neighbor list collision-driven molecular dynamics simulation for nonspherical hard particles.: II. Applications to ellipses and ellipsoids/, Journal of Computational Physics 202(2):765-793, 2005
+  - <<DUDA1971>> [[http://dx.doi.org/10.1145/361237.361242][Duda and Hart (1971)]] :: R. O. Duda and P. E. Hart, /Use of the Hough Transformation to Detect Lines and Curves in Pictures/, Communications of the ACM 15(1):11-15, 1971
+  - <<#GENT2013>> [[http://dx.doi.org/10.1016/j.ijengsci.2013.07.006][Gentile and Straughan (2013)]] :: M. Gentile and B. Straughan, /Acceleration waves in nonlinear double porosity elasticity/, International Journal of Engineering Science 73:10-16, 2013
+  - <<#HASH1962>> [[http://dx.doi.org/10.1016/0022-5096(62)90004-2][Hashin and Shtrikman (1962)]] :: Z. Hashin and S. Shtrikman, /On some variational principles in anisotropic and nonhomogeneous elasticity/, Journal of the Mechanics and Physics of Solids 10(4):335-342, 1962
+  - <<#KOIT1970>> [[http://www.mathunion.org/ICM/ICM1970.3/Main/icm1970.3.0123.0130.ocr.pdf][Koiter (1970)]] :: W. T. Koiter, /On the mathematical foundation of shell theory/, Actes du Congrès International des Mathématiciens 3:123-130, 1970
+  - <<#LEIS1973>> [[http://hdl.handle.net/2060/19730018197][Leissa (1973)]] :: A. W. Leissa, /Vibration of shells/, NASA Technical Report SP-288, 1973
+  - <<#MOUL1994>> Moulinec and Suquet (1994) :: H. Moulinec and P. Suquet, /A fast numerical method for computing the linear and nonlinear properties of composites/, Comptes-Rendus de l'Académie des Sciences série II 318: 1417-1423, 1994
+  - <<#MOUL1998>>  [[http://dx.doi.org/10.1016/S0045-7825(97)00218-1][Moulinec and Suquet (1998)]] :: H. Moulinec and P. Suquet, /A numerical method for computing the overall response of nonlinear composites with complex microstructure/, Computer Methods in Applied Mechanics and Engineering 157(1-2): 69-94, 1998
+  - <<#MUMF1989>> [[http://dx.doi.org/10.1002/cpa.3160420503][Mumford and Shah (1989)]] :: D. Mumford and J. Shah, /Optimal approximations by piecewise smooth functions and associated variational problems/, Communications on Pure and Applied Mathematics 42(5): 577-685, 1989
+  - <<#OTSU1979>> [[http://dx.doi.org/10.1109/TSMC.1979.4310076][Otsu (1979)]] :: N. Otsu, /A Threshold Selection Method from Gray-Level Histograms/, IEEE Transactions on Systems, Man and Cybernetics 9(1): 62-66, 1979
+  - <<#REIS1947>> Reissner (1947) :: E. Reissner, /On bending of elastic plates/, Quarterly of Applied Mathematics 5(1): 55-68, 1947
+  - <<#TARI2008>> [[http://dx.doi.org/10.5566/ias.v27.p23-28][Tariel et al. (2008)]] :: V. Tariel, D. Jeulin, A. Fanget and G. Contesse, /3D multi-scale segmentation of granular materials/, Image Analysis & Stereology 27(1): 23-28, 2008
+  - <<#TIMO1951>> Timoshenko and Goodier (1951) :: S. Timoshenko and J. N. Goodier, /Theory of Elasticity/, 2nd edition, McGraw-Hill, 1951
+  - <<#WALP1984>> [[http://dx.doi.org/10.1098/rspa.1984.0008][Walpole (1984)]] :: L. J. Walpole, /Fourth-Rank Tensors of the Thirty-Two Crystal Classes: Multiplication Tables/, Proceedings of the Royal Society of London. A. Mathematical and Physical Sciences 391(1800): 149-179, 1984
+  - <<#WILL1977>> [[http://dx.doi.org/10.1016/0022-5096(77)90022-9][Willis (1977)]] :: J. R. Willis, /Bounds and self-consistent estimates for the overall properties of anisotropic composites/, Journal of the Mechanics and Physics of Solids 25(3):185-202, 1977
+  - <<#WILL2001>> Willis (2001) :: J. R. Willis, /Lectures on mechanics of random media/, in D. Jeulin, M. Ostoja-Starzewski (eds) Mechanics of random and multiscale microstructures, CISM courses and lectures 430:221-267, Springer, 2001
+  - <<#ZELL1973>> [[http://dx.doi.org/10.1002/pssb.2220550241][Zeller & Dederichs (1973)]] :: R. Zeller and P. H. Dederichs, /Elastic constants of polycrystals/, Physica Status Solidi (B) 55(2): 831-842, 1973

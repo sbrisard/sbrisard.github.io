@@ -45,159 +45,27 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
 
 (see also [[https://cv.archives-ouvertes.fr/sbrisard][HAL]], [[http://scholar.google.fr/citations?user=IwlAZnAAAAAJ&hl=en][Google Scholar]], [[http://orcid.org/0000-0002-1976-6263][ORCID]])
 
-** [[http://dx.doi.org/10.1016/j.mechmat.2015.10.007][Tran et al. (2016)]]
-   :PROPERTIES:
-   :CUSTOM_ID: TRAN2016
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-V.P. Tran, J. Guilleminot, S. Brisard and K. Sab, /Stochastic modeling of mesoscopic elasticity random field/, Mechanics of Materials 93: 1-12, 2016 ([[https://hal-enpc.archives-ouvertes.fr/hal-01226337][author's version]])
-
-** [[http://dx.doi.org/10.1016/j.ijsolstr.2013.10.037][Brisard et al (2014)]]
-   :PROPERTIES:
-   :CUSTOM_ID: BRIS2014
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard, L. Dormieux and K. Sab, /A variational form of the equivalent inclusion method for numerical homogenization/, International Journal of Solids and Structures 51(3-4): 716-728, 2014 ([[http://hal-enpc.archives-ouvertes.fr/hal-00922779][author's version]])
-
-** [[http://dx.doi.org/10.1016/j.jmps.2013.08.009][Brisard et al (2013)]]
-   :PROPERTIES:
-   :CUSTOM_ID: BRIS2013A
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard, K. Sab and L. Dormieux, /New boundary conditions for the computation of the apparent stiffness of statistical volume elements/, Journal of the Mechanics and Physics of Solids 61(12): 2638-2658, 2013 ([[http://hal-enpc.archives-ouvertes.fr/hal-00871767][author's version]])
-
-** [[http://link.aps.org/doi/10.1103/PhysRevE.87.013305][Brisard and Levitz (2013)]]
-   :PROPERTIES:
-   :CUSTOM_ID: BRIS2013
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard and P. Levitz, /Small-angle scattering of dense, polydisperse granular porous media: Computation free of size effects/, Physical Review E 87(1): 013305, 2013 ([[http://hal-enpc.archives-ouvertes.fr/hal-00779317][author's version]])
-
-** [[http://dx.doi.org/10.1016/j.cma.2012.01.003][Brisard and Dormieux (2012)]]
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard and L. Dormieux, /Combining Galerkin approximation techniques with the principle of Hashin and Shtrikman to derive a new FFT-based numerical method for the homogenization of composites/, Computer Methods in Applied Mechanics and Engineering 217-220: 197-212, 2012 ([[http://hal-enpc.archives-ouvertes.fr/hal-00722361][author's version]])
-
-** [[http://www.minsocam.org/msa/ammin/TOC/2012/FM12.html][Brisard et al (2012)]]
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard, R. S. Chae, I. Bihannic, L. Michot, P. Guttmann, J. Thieme, G. Schneider, P. J. M. Monteiro and P. Levitz, /Morphological quantification of hierarchical geomaterials by X-ray nano-CT bridges the gap from nano to micro length scales/, American Mineralogist 97(203): 480-483, 2012
-
-** [[http://dx.doi.org/10.1016/j.commatsci.2010.08.032][Brisard et al (2010a)]]
-   :PROPERTIES:
-   :CUSTOM_ID: BRIS2010B
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard, L. Dormieux and D. Kondo, /Hashin-Shtrikman bounds on the shear modulus of a nanocomposite with spherical inclusions and interface effects/, Computational Materials Science 50(2): 403-410, 2010 ([[http://hal.archives-ouvertes.fr/hal-00539812][author's version]])
-
-** [[http://dx.doi.org/10.1016/j.commatsci.2010.06.009][Brisard and Dormieux (2010)]]
-   :PROPERTIES:
-   :CUSTOM_ID: BRIS2010A
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard and L. Dormieux, /FFT-based methods for the mechanics of composites: a general variational framework/, Computational Materials Science 49(3): 663-671, 2010 ([[http://hal-enpc.archives-ouvertes.fr/hal-00722339][author's version]])
-
-** [[http://dx.doi.org/10.1016/j.commatsci.2010.02.027][Brisard et al (2010)]]
-   :PROPERTIES:
-   :CUSTOM_ID: BRIS2010
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard, L. Dormieux and D. Kondo, /Hashin-Shtrikman bounds on the bulk modulus of a nanocomposite with spherical inclusions and interface effects/, Computational Materials Science 48(3): 589-596, 2010 ([[http://hal-enpc.archives-ouvertes.fr/hal-00904517][author's version]])
-
-** [[http://dx.doi.org/10.2140/jomms.2009.4.263][Coussy and Brisard (2009)]]
-   :PROPERTIES:
-   :CUSTOM_ID: COUS2009
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-O. P. Coussy and S. Brisard, /Prediction of drying shrinkage beyond the pore isodeformation assumption/, Journal of Mechanics of Materials and Structures 4(2): 263-279, 2009
+  - <<#TRAN2016>> [[http://dx.doi.org/10.1016/j.mechmat.2015.10.007][Tran et al. (2016)]] :: V.P. Tran, J. Guilleminot, S. Brisard and K. Sab, /Stochastic modeling of mesoscopic elasticity random field/, Mechanics of Materials 93: 1-12, 2016 ([[https://hal-enpc.archives-ouvertes.fr/hal-01226337][author's version]])
+  - <<#BRIS2014>> [[http://dx.doi.org/10.1016/j.ijsolstr.2013.10.037][Brisard et al (2014)]] :: S. Brisard, L. Dormieux and K. Sab, /A variational form of the equivalent inclusion method for numerical homogenization/, International Journal of Solids and Structures 51(3-4): 716-728, 2014 ([[http://hal-enpc.archives-ouvertes.fr/hal-00922779][author's version]])
+  - <<#BRIS2013A>> [[http://dx.doi.org/10.1016/j.jmps.2013.08.009][Brisard et al (2013)]] :: S. Brisard, K. Sab and L. Dormieux, /New boundary conditions for the computation of the apparent stiffness of statistical volume elements/, Journal of the Mechanics and Physics of Solids 61(12): 2638-2658, 2013 ([[http://hal-enpc.archives-ouvertes.fr/hal-00871767][author's version]])
+  - <<#BRIS2013>> [[http://link.aps.org/doi/10.1103/PhysRevE.87.013305][Brisard and Levitz (2013)]] :: S. Brisard and P. Levitz, /Small-angle scattering of dense, polydisperse granular porous media: Computation free of size effects/, Physical Review E 87(1): 013305, 2013 ([[http://hal-enpc.archives-ouvertes.fr/hal-00779317][author's version]])
+  - [[http://dx.doi.org/10.1016/j.cma.2012.01.003][Brisard and Dormieux (2012)]] :: S. Brisard and L. Dormieux, /Combining Galerkin approximation techniques with the principle of Hashin and Shtrikman to derive a new FFT-based numerical method for the homogenization of composites/, Computer Methods in Applied Mechanics and Engineering 217-220: 197-212, 2012 ([[http://hal-enpc.archives-ouvertes.fr/hal-00722361][author's version]])
+  - [[http://www.minsocam.org/msa/ammin/TOC/2012/FM12.html][Brisard et al (2012)]] :: S. Brisard, R. S. Chae, I. Bihannic, L. Michot, P. Guttmann, J. Thieme, G. Schneider, P. J. M. Monteiro and P. Levitz, /Morphological quantification of hierarchical geomaterials by X-ray nano-CT bridges the gap from nano to micro length scales/, American Mineralogist 97(203): 480-483, 2012
+  - <<#BRIS2010B>> [[http://dx.doi.org/10.1016/j.commatsci.2010.08.032][Brisard et al (2010a)]] :: S. Brisard, L. Dormieux and D. Kondo, /Hashin-Shtrikman bounds on the shear modulus of a nanocomposite with spherical inclusions and interface effects/, Computational Materials Science 50(2): 403-410, 2010 ([[http://hal.archives-ouvertes.fr/hal-00539812][author's version]])
+  - <<#BRIS2010A>> [[http://dx.doi.org/10.1016/j.commatsci.2010.06.009][Brisard and Dormieux (2010)]] :: S. Brisard and L. Dormieux, /FFT-based methods for the mechanics of composites: a general variational framework/, Computational Materials Science 49(3): 663-671, 2010 ([[http://hal-enpc.archives-ouvertes.fr/hal-00722339][author's version]])
+  - <<#BRIS2010>> [[http://dx.doi.org/10.1016/j.commatsci.2010.02.027][Brisard et al (2010)]] :: S. Brisard, L. Dormieux and D. Kondo, /Hashin-Shtrikman bounds on the bulk modulus of a nanocomposite with spherical inclusions and interface effects/, Computational Materials Science 48(3): 589-596, 2010 ([[http://hal-enpc.archives-ouvertes.fr/hal-00904517][author's version]])
+  - <<#COUS2009>> [[http://dx.doi.org/10.2140/jomms.2009.4.263][Coussy and Brisard (2009)]] :: O. P. Coussy and S. Brisard, /Prediction of drying shrinkage beyond the pore isodeformation assumption/, Journal of Mechanics of Materials and Structures 4(2): 263-279, 2009
 
 * Conferences
 
-** Tran et al. (2015b)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-V.P. Tran, S. Brisard, J. Guilleminot, K. Sab, /Stress-gradient materials: an analytical exploration/, Workshop on Computational Mechanics of Generalized Continua and Applications to Materials with Microstructure , Oct 2015, Catania, Italy ([[https://hal-enpc.archives-ouvertes.fr/hal-01226290][slides]])
-
-** Khalili et al. (2015a)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
- M.H. Khalili, J.-N. Roux, J.-M. Pereira, M. Vandamme, S. Brisard, M. Bornert, /Internal states, stress-strain behavior and elasticity in oedometrically compressed model granular materials/, IV International Conference on Particle-based Methods -- Fundamentals and Applications, Sep 2015, Barcelona, Spain ([[https://hal-enpc.archives-ouvertes.fr/hal-01214733][paper]])
-
-** Brisard and Chamoin (2015)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard, L. Chamoin, /A posteriori error estimators for FFT-based numerical techniques/, MAI workshop and training session: Micromechanics of cementitious materials, Sep 2015, Ecuelles, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01199166][slides]])
-
-** Brisard (2015a)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard, /Towards improved Hashin–Shtrikman bounds on the effective moduli of random composites/, 22ème Congrès Français de Mécanique, Aug 2015, Lyon, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01187197][paper]], [[https://hal-enpc.archives-ouvertes.fr/hal-01187829][slides]])
-
-** Tran et al. (2015a)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-V. P. Tran, J. Guilleminot, S. Brisard, K. Sab, /Homogénéisation numérique à l'aide de modèles prior de la raideur mésoscopique : identification et validation/, 22ème Congrès Français de Mécanique, Aug 2015, Lyon, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01194370][paper]])
-
-** Tran et al. (2015)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-V. P. Tran, J. Guilleminot, S. Brisard, K. Sab, /Stochastic Analysis of Mesoscopic Elasticity Random Rields obtained by Filtering Framework/, 13th US National Congress on Computational Mechanics (USNCCM13), Jul 2015, San Diego, United States ([[https://hal-enpc.archives-ouvertes.fr/hal-01194367][abstract]])
-
-** Khalili et al. (2015)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-M.H. Khalili, S. Brisard, M. Bornert, J.-M. Pereira, M. Vandamme, J.-N. Roux, /A new method for measuring grain displacements in granular materials by X-ray computed tomography/, 2nd International Conference on Tomography of Materials and Structures (ICTMS 2015), Jun 2015, Quebec city, Canada ([[https://hal-enpc.archives-ouvertes.fr/hal-01194699][paper]])
-
-** Brisard (2015)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard, /Overview of FFT-based homogenization techniques from the Galerkin point of view/, Conférence Internationale de Géotechnique, des Ouvrages et Structures (CIGOS 2015), May 2015, Cachan, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01194693][paper]], [[https://hal-enpc.archives-ouvertes.fr/hal-01194695][slides]])
-
-** Brisard et al. (2015)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard, M. Vandamme, B. Carrier, L. Wang, /Hydromechanical couplings in the clay matrix of argilite: some methodological aspects of the atomistic-to-continuum upscaling/, Multi-scale computational methods for bridging scales in materials and structures (EuroMech Colloquium 559), Feb 2015, Eindhoven, Netherlands ([[https://hal-enpc.archives-ouvertes.fr/hal-01194708][abstract]], [[https://hal-enpc.archives-ouvertes.fr/hal-01194710][poster]])
-
-** Khalili et al. (2014)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-M.H. Khalili, S. Brisard, M. Bornert, J.-M. Pereira, M. Vandamme, J.-N. Roux, /New method for measuring grains displacement in granular materials by X-ray computed tomography/, Modeling Granular Media Across Scales, Jul 2014, Montpellier, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01137696][abstract]])
-
-** Brisard (2012)
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
-
-S. Brisard and L. Dormieux, /A Galerkin approach to FFT-based homogenization methods/, ECCOMAS 2012, Sep 2012, Vienna, Austria ([[https://hal-enpc.archives-ouvertes.fr/hal-00738040][paper]])
+  - Tran et al. (2015b) :: V.P. Tran, S. Brisard, J. Guilleminot, K. Sab, /Stress-gradient materials: an analytical exploration/, Workshop on Computational Mechanics of Generalized Continua and Applications to Materials with Microstructure , Oct 2015, Catania, Italy ([[https://hal-enpc.archives-ouvertes.fr/hal-01226290][slides]])
+  - Khalili et al. (2015a) ::  M.H. Khalili, J.-N. Roux, J.-M. Pereira, M. Vandamme, S. Brisard, M. Bornert, /Internal states, stress-strain behavior and elasticity in oedometrically compressed model granular materials/, IV International Conference on Particle-based Methods -- Fundamentals and Applications, Sep 2015, Barcelona, Spain ([[https://hal-enpc.archives-ouvertes.fr/hal-01214733][paper]])
+  - Brisard and Chamoin (2015) :: S. Brisard, L. Chamoin, /A posteriori error estimators for FFT-based numerical techniques/, MAI workshop and training session: Micromechanics of cementitious materials, Sep 2015, Ecuelles, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01199166][slides]])
+  - Brisard (2015a) :: S. Brisard, /Towards improved Hashin–Shtrikman bounds on the effective moduli of random composites/, 22ème Congrès Français de Mécanique, Aug 2015, Lyon, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01187197][paper]], [[https://hal-enpc.archives-ouvertes.fr/hal-01187829][slides]])
+  - Tran et al. (2015a) :: V. P. Tran, J. Guilleminot, S. Brisard, K. Sab, /Homogénéisation numérique à l'aide de modèles prior de la raideur mésoscopique : identification et validation/, 22ème Congrès Français de Mécanique, Aug 2015, Lyon, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01194370][paper]])
+  - Tran et al. (2015) :: V. P. Tran, J. Guilleminot, S. Brisard, K. Sab, /Stochastic Analysis of Mesoscopic Elasticity Random Rields obtained by Filtering Framework/, 13th US National Congress on Computational Mechanics (USNCCM13), Jul 2015, San Diego, United States ([[https://hal-enpc.archives-ouvertes.fr/hal-01194367][abstract]])
+  - Khalili et al. (2015) :: M.H. Khalili, S. Brisard, M. Bornert, J.-M. Pereira, M. Vandamme, J.-N. Roux, /A new method for measuring grain displacements in granular materials by X-ray computed tomography/, 2nd International Conference on Tomography of Materials and Structures (ICTMS 2015), Jun 2015, Quebec city, Canada ([[https://hal-enpc.archives-ouvertes.fr/hal-01194699][paper]])
+  - Brisard (2015) :: S. Brisard, /Overview of FFT-based homogenization techniques from the Galerkin point of view/, Conférence Internationale de Géotechnique, des Ouvrages et Structures (CIGOS 2015), May 2015, Cachan, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01194693][paper]], [[https://hal-enpc.archives-ouvertes.fr/hal-01194695][slides]])
+  - Brisard et al. (2015) :: S. Brisard, M. Vandamme, B. Carrier, L. Wang, /Hydromechanical couplings in the clay matrix of argilite: some methodological aspects of the atomistic-to-continuum upscaling/, Multi-scale computational methods for bridging scales in materials and structures (EuroMech Colloquium 559), Feb 2015, Eindhoven, Netherlands ([[https://hal-enpc.archives-ouvertes.fr/hal-01194708][abstract]], [[https://hal-enpc.archives-ouvertes.fr/hal-01194710][poster]])
+  - Khalili et al. (2014) :: M.H. Khalili, S. Brisard, M. Bornert, J.-M. Pereira, M. Vandamme, J.-N. Roux, /New method for measuring grains displacement in granular materials by X-ray computed tomography/, Modeling Granular Media Across Scales, Jul 2014, Montpellier, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01137696][abstract]])
+  - Brisard (2012) :: S. Brisard and L. Dormieux, /A Galerkin approach to FFT-based homogenization methods/, ECCOMAS 2012, Sep 2012, Vienna, Austria ([[https://hal-enpc.archives-ouvertes.fr/hal-00738040][paper]])
