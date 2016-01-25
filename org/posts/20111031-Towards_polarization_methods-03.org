@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Towards polarization methods, part 3: the energy principle of Hashin and Shtrikman
 #+DATE: <2011-10-31 Mon>

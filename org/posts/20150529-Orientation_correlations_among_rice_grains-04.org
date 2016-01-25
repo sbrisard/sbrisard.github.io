@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+TITLE: Orientation correlations among rice grains, part 4: defining the ROI
 #+DATE: [2015-05-29 Fri]
 #+PROPERTY: header-args:python :results value verbatim :session :exports both :eval no-export

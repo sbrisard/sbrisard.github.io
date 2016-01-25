@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Towards polarization methods, part 1: the Lippmann--Schwinger equation
 #+DATE: <2011-10-04 Tue>

@@ -1,5 +1,6 @@
 # -*- coding: utf-8; -*-
-#+sETUPFILE: "../include/mathjax.org"
+#+SETUPFILE: "../include/css-1.org"
+#+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Towards polarization methods, part 2: the variational principle of Hashin and Shtrikman
 #+DATE: <2011-10-19 Wed>
 

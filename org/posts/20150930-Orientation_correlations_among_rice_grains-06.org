@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Orientation correlations among rice grains, part 6: segmentation
 #+DATE: [2015-09-30 Wed]

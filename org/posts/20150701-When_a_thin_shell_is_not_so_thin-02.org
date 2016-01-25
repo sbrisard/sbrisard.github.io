@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: When a thin shell is not so thin, part\nbsp{}2: the 3D, exact solution
 #+DATE: [2015-07-01 Wed]

@@ -11,11 +11,24 @@
 (defvar sb-blog-root (file-name-directory load-file-name))
 (defvar sb-blog-base-directory (concat sb-blog-root "org/"))
 (defvar sb-blog-publishing-directory (concat sb-blog-root "html/"))
-(defvar sb-blog-pages-base-directory (concat sb-blog-root "org/pages"))
-(defvar sb-blog-pages-publishing-directory (concat sb-blog-root "html/pages"))
-(defvar sb-blog-posts-base-directory (concat sb-blog-root "org/posts"))
-(defvar sb-blog-posts-sitemap-filename "archives.org")
-(defvar sb-blog-posts-publishing-directory (concat sb-blog-root "html/posts"))
+
+(defgroup sb-blog nil "Customizations for my blog")
+(defcustom sb-blog-comments t
+  "t if comments are allowed in the page defined by the present buffer.
+
+Can be buffer-local, in which case, it must be specified as follows
+
+#+BIND: sb-blog-comments t
+
+or
+
+#+BIND: sb-blog-comments nil
+"
+  :type 'boolean
+  :group 'sb-blog
+  :tag "Comments allowed")
+
+(setq org-export-allow-bind-keywords t)
 
 ;; Path manipulations
 ;; ==================
@@ -180,18 +193,12 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
 (defvar sb-blog-credits "This blog was generated with <a href=\"http://www.gnu.org/software/emacs/\">Emacs</a> and <a href=\"http://orgmode.org/\">Org mode</a>. The theme is inspired from <a href=\"http://orgmode.org/worg/\">Worg</a>. Icons come from the <a href=\"http://fontawesome.io/\">Font Awesome</a> icon set.")
 
-;; To allow for comments
-;; #+OPTIONS: comments:t
 (defun sb-blog-html-postamble (info)
   (concat "<p>"
           sb-blog-license
           sb-blog-credits
           "</p>"
-          ;sb-blog-twitter-follow-button-script
-          (when (and (plist-get info :comments-allowed)
-                     (not (s-ends-with? sb-blog-posts-sitemap-filename
-                                        buffer-file-name)))
-            (sb-blog-disqus-script info))))
+          (when sb-blog-comments (sb-blog-disqus-script info))))
 
 ;; From http://lists.gnu.org/archive/html/emacs-orgmode/2008-11/msg00571.html
 ;;
@@ -224,17 +231,16 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 ;; - Carsten
 ;;
 (setq org-publish-project-alist
-      `(("sb-blog-root"
+      `(("sb-blog-org"
          :base-directory ,sb-blog-base-directory
          :publishing-directory ,sb-blog-publishing-directory
          :base-extension "org"
-         :exclude nil
-         :recursive nil
+         :exclude ".*include.*"
+         :recursive t
          :publishing-function sb-blog-publish-to-html
          :auto-sitemap nil
          :html-doctype "html5"
          :html-container "div"
-         :html-head ,(sb-blog-html-head 0)
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-preamble nil
@@ -243,52 +249,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :section-numbers nil
          :with-toc nil
          :language "en"
-         :comments-allowed nil
-         )
-        ("sb-blog-pages"
-         :base-directory ,sb-blog-pages-base-directory
-         :publishing-directory ,sb-blog-pages-publishing-directory
-         :base-extension "org"
-         :exclude nil
-         :recursive t
-         :publishing-function sb-blog-publish-to-html
-         :auto-sitemap nil
-         :sitemap-sort-files chronologically
-         :html-doctype "html5"
-         :html-container "div"
-         :html-head ,(sb-blog-html-head 1)
-         :html-head-include-default-style nil
-         :html-head-include-scripts nil
-         :html-preamble sb-blog-html-preamble
-         :html-postamble sb-blog-html-postamble
-         :section-numbers nil
-         :with-toc nil
-         :language "en"
-         :comments-allowed nil
-         )
-        ("sb-blog-posts"
-         :base-directory ,sb-blog-posts-base-directory
-         :publishing-directory ,sb-blog-posts-publishing-directory
-         :base-extension "org"
-         :exclude nil
-         :recursive t
-         :publishing-function sb-blog-publish-to-html
-         :auto-sitemap nil
-         :sitemap-filename ,sb-blog-posts-sitemap-filename
-         :sitemap-title "Blog archive"
-         :sitemap-sort-files anti-chronologically
-         :sitemap-file-entry-format "%d -- %t"
-         :html-doctype "html5"
-         :html-container "div"
-         :html-head ,(sb-blog-html-head 1)
-         :html-head-include-default-style nil
-         :html-head-include-scripts nil
-         :html-preamble sb-blog-html-preamble
-         :html-postamble sb-blog-html-postamble
-         :section-numbers nil
-         :with-toc nil
-         :language "en"
-         :comments-allowed t
          )
         ("sb-blog-attachments"
          :base-directory ,sb-blog-base-directory
@@ -297,7 +257,5 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
          :recursive t
          :publishing-function org-publish-attachment)
         ("sb-blog"
-         :components ("sb-blog-root"
-                      "sb-blog-pages"
-                      "sb-blog-posts"
+         :components ("sb-blog-org"
                       "sb-blog-attachments"))))

@@ -1,4 +1,6 @@
 # -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org
+#+BIND: sb-blog-comments nil
 #+TITLE: References
 
 * [[http://www.ing.unitn.it/~bigoni/paper/eigenvalues.pdf][Bigoni and Zaccaria (1994)]]

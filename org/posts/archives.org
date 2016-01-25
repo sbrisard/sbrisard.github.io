@@ -1,4 +1,6 @@
 #+TITLE: Blog archive
+#+SETUPFILE: "../include/css-1.org"
+#+BIND: sb-blog-comments nil
 
    + [[file:20151208-New_paper_published.org][2015-12-08 -- New paper published]]
    + [[file:20150930-Orientation_correlations_among_rice_grains-06.org][2015-09-30 -- Orientation correlations among rice grains, part 6: segmentation]]
