@@ -79,13 +79,13 @@ where the Green operator for strains $\greeniv_0$ associated with $\stiffness_0$
 \strain(\vec x)+\left\{\greeniv_0\circledast\left[\left(\stiffness-\stiffness_0\right):\strain\right]\right\}(\vec x)=\Strain.
 \end{equation}
 
-This equation was first introduced by [[file:../pages/references.org::#ZELL1973][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\polarization$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
+This equation was first introduced by [[file:../pages/references.org::ZELL1973][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\polarization$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
 
 \begin{equation}
 \label{eq:10}
 \left[\stiffness(\vec x)-\stiffness_0\right]^{-1}:\polarization(\vec x)+\left(\greeniv_0\circledast\polarization\right)(\vec x)=\Strain.
 \end{equation}
 
-To sum up, we started with the set of partial differential equations \eqref{eq:1} -- \eqref{eq:4}, and ended up with one /single/, /equivalent/, integral equation. Discretization of the Lippmann-Schwinger equation \eqref{eq:9} has already been considered in the past. This leads to some well-known numerical schemes (Moulinec & Suquet, [[file:../pages/references.org::#MOUL1994][1994]], [[file:../pages/references.org::#MOUL1998][1998]]).
+To sum up, we started with the set of partial differential equations \eqref{eq:1} -- \eqref{eq:4}, and ended up with one /single/, /equivalent/, integral equation. Discretization of the Lippmann-Schwinger equation \eqref{eq:9} has already been considered in the past. This leads to some well-known numerical schemes (Moulinec & Suquet, [[file:../pages/references.org::MOUL1994][1994]], [[file:../pages/references.org::MOUL1998][1998]]).
 
 However, I do think it is not the best way to proceed. A much more fruitful approach is to consider the variational form of Eq. \eqref{eq:10}. This will be done in the [[file:./20111019-Towards_polarization_methods-02.org][next instalment]] of this series.

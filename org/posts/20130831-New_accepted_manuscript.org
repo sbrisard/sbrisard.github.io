@@ -5,4 +5,4 @@
 
 It is my pleasure to announce that one of my papers has recently been accepted for publication in the Journal of the Mechanics and Physics of Solids. It's called /New boundary conditions for the computation of the apparent stiffness of statistical volume elements/.
 
-It introduces a new set of boundary conditions to be applied to a /finite-size/ Statistical Volume Element. The resulting problem can be solved in a natural way with the help of the Green operator for strains of the whole space. Also, a mathematical framework is proposed for the analysis of linear elasticity problems in the whole (unbounded space). The preprint will be made available soon (see [[../pages/about.org::#BRIS2013A][Brisard et al, 2013]]).
+It introduces a new set of boundary conditions to be applied to a /finite-size/ Statistical Volume Element. The resulting problem can be solved in a natural way with the help of the Green operator for strains of the whole space. Also, a mathematical framework is proposed for the analysis of linear elasticity problems in the whole (unbounded space). The preprint will be made available soon (see [[../pages/about.org::BRIS2013A][Brisard et al, 2013]]).

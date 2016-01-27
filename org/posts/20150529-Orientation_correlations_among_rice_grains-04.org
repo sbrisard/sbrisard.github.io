@@ -55,7 +55,7 @@ The resulting image is shown in Fig. [[fig:2]]. It should be noted that due to t
 #+ATTR_HTML: :width 50%
 file:./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-edges-099.png
 
-We are now ready to compute the Circle Hough Transform. This transform aims at finding circles within an image. It was proposed by Duda and Hart ([[file:../pages/references.org::#DUDA1971][1971]]) (see also [[http://en.wikipedia.org/wiki/Hough_transform][Wikipedia]]). It should be understood as a histogram in parameter space. More precisely, a point $(x, y)$ belongs to the circle centered at $(c_x, c_y)$ and of radius $r$ if, and only if
+We are now ready to compute the Circle Hough Transform. This transform aims at finding circles within an image. It was proposed by Duda and Hart ([[file:../pages/references.org::DUDA1971][1971]]) (see also [[http://en.wikipedia.org/wiki/Hough_transform][Wikipedia]]). It should be understood as a histogram in parameter space. More precisely, a point $(x, y)$ belongs to the circle centered at $(c_x, c_y)$ and of radius $r$ if, and only if
 
 \begin{equation*}
 (x-c_x)^2+(y-c_y)^2=r^2.

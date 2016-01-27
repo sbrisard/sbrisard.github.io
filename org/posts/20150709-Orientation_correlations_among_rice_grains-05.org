@@ -59,7 +59,7 @@ It is observed that this histogram is relatively well suited to thresholding. In
 
 * Otsu's method
 
-Otsu's method ([[file:../pages/references.org::#OTSU1979][Otsu, 1979]]) is a popular thresholding technique. It is quite effective on simple images, when the histogram has two well separated peaks. Otsu's optimum threshold is often presented as (quoted from [[https://en.wikipedia.org/wiki/Otsu%27s_method][Wikipedia]])
+Otsu's method ([[file:../pages/references.org::OTSU1979][Otsu, 1979]]) is a popular thresholding technique. It is quite effective on simple images, when the histogram has two well separated peaks. Otsu's optimum threshold is often presented as (quoted from [[https://en.wikipedia.org/wiki/Otsu%27s_method][Wikipedia]])
 
 #+BEGIN_QUOTE
 separating the two classes so that their combined spread (intra-class variance) is minimal, or equivalently (because the sum of pairwise squared distances is constant), so that their inter-class variance is maximal.
@@ -67,7 +67,7 @@ separating the two classes so that their combined spread (intra-class variance) 
 
 I have always found this definition non-intuitive. Why should maximizing the intra-class variance return a satisfactorily thresholded image? Well, I came to develop my own understanding of Otsu's method.
 
-We start with the original (noisy) image, which will be considered as a map $f\colon E\to\{0,\ldots,L-1\}$ from the set $E$ of pixels to the set $\{0,\ldots,L-1\}$ of gray levels ($L$ denotes the total number of gray levels). It should be noted that in Otsu's original paper ([[file:../pages/references.org::#OTSU1979][1979]]), the gray levels span $\{1,\ldots,L\}$ rather than $\{0,\ldots,L-1\}$: the convention adopted here is more in line with standard images.
+We start with the original (noisy) image, which will be considered as a map $f\colon E\to\{0,\ldots,L-1\}$ from the set $E$ of pixels to the set $\{0,\ldots,L-1\}$ of gray levels ($L$ denotes the total number of gray levels). It should be noted that in Otsu's original paper ([[file:../pages/references.org::OTSU1979][1979]]), the gray levels span $\{1,\ldots,L\}$ rather than $\{0,\ldots,L-1\}$: the convention adopted here is more in line with standard images.
 
 We want to find the "best" binary approximation of $f$, in the sense of Problem 1 defined below.
 
@@ -168,9 +168,9 @@ In the above expression, the sum over all pixels of the image is constant. There
 \label{eq:26}\omega_0\omega_1\left(\mu_0-\mu_1\right)^2.
 \end{equation}
 
-This is exactly how Otsu's threshold is defined! [see [[file:../pages/references.org::#OTSU1979][Otsu, 1979]], Eq. (14)] To sum up, we started with [[pb:1][Problem 1]]: find the best binary approximation of a specified image. We showed that the best binary approximation was to be found amongst the class of thresholded images (see Problems [[pb:2][2]] and [[pb:3][3]]). Then, the optimum threshold was found to coincide with Otsu's. In that sense, Otsu's method is equivalent to [[pb:1][Problem 1]].
+This is exactly how Otsu's threshold is defined! [see [[file:../pages/references.org::OTSU1979][Otsu, 1979]], Eq. (14)] To sum up, we started with [[pb:1][Problem 1]]: find the best binary approximation of a specified image. We showed that the best binary approximation was to be found amongst the class of thresholded images (see Problems [[pb:2][2]] and [[pb:3][3]]). Then, the optimum threshold was found to coincide with Otsu's. In that sense, Otsu's method is equivalent to [[pb:1][Problem 1]].
 
-It is interesting to realize that there is a connection between Otsu's method and the Mumford--Shah functional ([[file:../pages/references.org::#MUMF1989][Mumford and Shah, 1989]]). Indeed, Mumford and Shah also seek the best binary (or more generally, $n$-component) approximation of an image in the $L^2$ sense. However, their cost function also penalizes the total variation as well as the total length of the interfaces. As such, segmentation techniques based on the Mumford--Shah functional are not histogram-based.
+It is interesting to realize that there is a connection between Otsu's method and the Mumford--Shah functional ([[file:../pages/references.org::MUMF1989][Mumford and Shah, 1989]]). Indeed, Mumford and Shah also seek the best binary (or more generally, $n$-component) approximation of an image in the $L^2$ sense. However, their cost function also penalizes the total variation as well as the total length of the interfaces. As such, segmentation techniques based on the Mumford--Shah functional are not histogram-based.
 
 * Thresholding the whole stack of images
 

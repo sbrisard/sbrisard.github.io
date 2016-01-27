@@ -79,7 +79,7 @@ In the 3D approach, the true stress resultant differs from $N=pR/2$ by second or
 
 What should we deduce from this study? Obviously, beware thin shell theories! Fortunately, I believe that most FE codes implement the thick shell theory. More fundamentally, I am still trying to understand what these results really imply. Does that mean that the asymptotic convergence (as the thickness tends to zero) of thick shell models is faster than that of thin shell models? That is something I am going to investigate.
 
-This closes our series on thick shells. I hope you enjoyed reading it... and maybe learned something! Should you want to dig deeper into various thick shell theories, do start with Leissa ([[file:../pages/references.org::#LEIS1973][1973]]), who gives a good overview.
+This closes our series on thick shells. I hope you enjoyed reading it... and maybe learned something! Should you want to dig deeper into various thick shell theories, do start with Leissa ([[file:../pages/references.org::LEIS1973][1973]]), who gives a good overview.
 
 #+CAPTION: Comparison of three different approaches for the analysis of the spherical pressure vessel
 #+NAME: tab:1

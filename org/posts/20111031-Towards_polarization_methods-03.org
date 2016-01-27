@@ -4,7 +4,7 @@
 #+TITLE: Towards polarization methods, part 3: the energy principle of Hashin and Shtrikman
 #+DATE: <2011-10-31 Mon>
 
-In the [[file:./20111019-Towards_polarization_methods-02.org][second part]] of this series, I introduced the /variational/ principle of [[file:../pages/references.org::#HASH1962][Hashin and Shtrikman (1962)]]. It should be noted that this principle is valid, regardless of the reference material $\stiffness_0$ (no restriction apply to the elastic moduli of the reference material). In the present instalment, we will see under which circumstances this principle is in fact an /energy/ principle.@@html:<!-- more -->@@ By energy principle, I mean that the functional of Hashin and Shtrikman $\mathcal H$ (see [[file:./20111019-Towards_polarization_methods-02.org][part 2]])
+In the [[file:./20111019-Towards_polarization_methods-02.org][second part]] of this series, I introduced the /variational/ principle of [[file:../pages/references.org::HASH1962][Hashin and Shtrikman (1962)]]. It should be noted that this principle is valid, regardless of the reference material $\stiffness_0$ (no restriction apply to the elastic moduli of the reference material). In the present instalment, we will see under which circumstances this principle is in fact an /energy/ principle.@@html:<!-- more -->@@ By energy principle, I mean that the functional of Hashin and Shtrikman $\mathcal H$ (see [[file:./20111019-Towards_polarization_methods-02.org][part 2]])
 
 \begin{equation*}
 \mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)},
@@ -12,7 +12,7 @@ In the [[file:./20111019-Towards_polarization_methods-02.org][second part]] of t
 
 is /extremum/ at the solution of the Lippmann-Schwinger equation (we already know that it is /stationary/).
 
-This instalment will in fact be very short, as you will be spared the proof of the main result. As in [[file:./20111019-Towards_polarization_methods-02.org][part 2]], all details can be found in [[file:../pages/references.org::#HASH1962][Hashin and Shtrikman (1962)]] [see also [[file:../pages/references.org::#WILL1977][Willis (1977)]] for a slightly more modern proof]. So, here goes.
+This instalment will in fact be very short, as you will be spared the proof of the main result. As in [[file:./20111019-Towards_polarization_methods-02.org][part 2]], all details can be found in [[file:../pages/references.org::HASH1962][Hashin and Shtrikman (1962)]] [see also [[file:../pages/references.org::WILL1977][Willis (1977)]] for a slightly more modern proof]. So, here goes.
 
 #+BEGIN_THEOREM
 Let $\polarization$ be the unique solution of the Lippmann-Schwinger equation (see [[file:./20111004-Towards_polarization_methods-01.org][part 1]])
