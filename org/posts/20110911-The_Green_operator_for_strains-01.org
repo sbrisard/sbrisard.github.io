@@ -77,4 +77,4 @@ Formula \eqref{eq:8} will be extensively used in subsequent posts, since it lead
 
 In this instalment, I considered the problem of elastic equilibrium of a homogeneous, prestressed material. The solution to this problem is cast in the form of the "convolution product" of the so-called Green operator for strains, and the imposed local prestress. In the next instalments of this series, I will discuss some properties of the thus-defined Green operator.
 
-Follow [[file:./20110911-The_Green_operator_for_strains-02.org][this link]] to go to part 2 of this series.
+Follow [[file:./20110918-The_Green_operator_for_strains-02.org][this link]] to go to part 2 of this series.
