@@ -101,7 +101,7 @@ Besides, the following multiplication table results from Eq. \eqref{eq:6} $\newc
 
 #+CAPTION: Multiplication table for the tensors $\p\x\p$, $\p\x\q$, $\q\x\p$ and $\q\x\q$.
 #+NAME: tab:1
-#+ATTR_HTML: :class center
+#+ATTR_HTML: :class center :width 80%
 | /        | <           |             |             | >           |
 | <c>      | <c>         | <c>         | <c>         | <c>         |
 | $:$      | $\p\x\p$    | $\p\x\q$    | $\q\x\p$    | $\q\x\q$    |
@@ -127,7 +127,7 @@ Multiplication (in the sense of the double product) of these tensors is fairly e
 
 #+CAPTION: Multiplication table for the tensors $\tensiv E_i$, $\tensiv F$ and $\tensiv G$ ($i=1,\ldots,4$).$\newcommand{\t}{\tensiv}$
 #+NAME: tab:2
-#+ATTR_HTML: :class center
+#+ATTR_HTML: :class center :width 50%
 | /        | <        |          |          |          |        | >      |
 | <c>      | <c>      | <c>      | <c>      | <c>      | <c>    | <c>    |
 | $:$      | $\t E_1$ | $\t E_2$ | $\t E_3$ | $\t E_4$ | $\t F$ | $\t G$ |
