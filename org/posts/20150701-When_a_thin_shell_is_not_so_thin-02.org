@@ -41,7 +41,7 @@ From Eq. \eqref{eq:2}, we readily find the following expressions of the stress r
 \label{eq:8}M &= -\int_{R_\text{int}}^{R_\text{ext}}\left(r-R\right)\sigma(r)\,\mathrm{d}r=\frac{ph^2}{24}\frac{1-\frac{h^2}{4R^2}}{1+\frac{h^2}{12R^2}}=\frac{ph^2}{24}\left(1-\frac{h^2}{3R^2}\right)+\mathcal O\left(\frac{h^6}{R^6}\right).
 \end{align}
 
-Comparing with [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org::#Koiter_solution][Koiter's solution]], it is found that the dominant terms of the stress resultant coincide. This is not true of the stress couple, though. Even worse, the signs differ! While in Koiter's solution, the stress couple is negative (as expected), integration of the 3D solution leads to a /positive/ stress couple, which is unphysical. Something nasty is definitely taking place, here!
+Comparing with [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org::Koiter_solution][Koiter's solution]], it is found that the dominant terms of the stress resultant coincide. This is not true of the stress couple, though. Even worse, the signs differ! While in Koiter's solution, the stress couple is negative (as expected), integration of the 3D solution leads to a /positive/ stress couple, which is unphysical. Something nasty is definitely taking place, here!
 
 In the next section, I will show that Eqs. \eqref{eq:7} and \eqref{eq:8} are in fact (poor) approximations of the true expression of the stress resultant and couple.
 

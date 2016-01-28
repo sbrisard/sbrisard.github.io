@@ -84,7 +84,7 @@ and similarly for the stress couples
 \label{eq:5}M=\frac{Eh^3}{12\left(1-\nu\right)}\kappa.
 \end{equation}
 
-<<#Koiter_solution>>Substituting Eqs.\eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} in Eqs. \eqref{eq:4} and \eqref{eq:5} finally leads to the following expansions
+<<Koiter_solution>>Substituting Eqs.\eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} in Eqs. \eqref{eq:4} and \eqref{eq:5} finally leads to the following expansions
 
 \begin{align}
 N &= \frac{pR}2\left(1-\frac{h^2}{12R^2}\right)+\mathcal O\left(\frac{h^4}{R^4}\right),\\
