@@ -5,7 +5,7 @@
 #+DATE: <2014-02-26 Wed>
 
 #+BEGIN_ABSTRACT
-In [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][a previous post]], I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown ([[file:../pages/references.org::WALP1984][Walpole, 1984]]) that the space of three-dimensional, /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole ([[file:../pages/references.org::WALP1984][1984]]).
+In [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][a previous post]], I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown ([[file:../pages/references.org::#WALP1984][Walpole, 1984]]) that the space of three-dimensional, /transverse isotropic/ fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole ([[file:../pages/references.org::#WALP1984][1984]]).
 #+END_ABSTRACT
 
 $\newcommand{\kronecker}{\circledast}$
@@ -30,7 +30,7 @@ $\p$ is the projector onto the direction of anisotropy $\vec n$, while $\q$ is t
 
 * Tensor product of linear transformations
 
-It will be convenient to introduce a new, Kronecker-like product of two second-rank tensors, which Del Piero ([[file:../pages/references.org::PIER1979][1979]]) named /tensor product of linear transformations/, and which will be denoted $\boxtimes{}$.
+It will be convenient to introduce a new, Kronecker-like product of two second-rank tensors, which Del Piero ([[file:../pages/references.org::#PIER1979][1979]]) named /tensor product of linear transformations/, and which will be denoted $\boxtimes{}$.
 
 As a preliminary note, it should be observed that any fourth-rank tensor $\tensiv A$ can be viewed as a endomorphism over the space of second-rank tensors, since $\tensii x\mapsto\tensiv A:\tensii x$ is a linear mapping (the convention adopted in this blog for the double dot product has been specified in a [[file:./20140219-On_the_double_dot_product.org][previous post]]). Therefore, the fourth-rank tensor $\tensii a\boxtimes\tensii b$ ($\tensii a, \tensii b$: second-rank tensors) can be defined by how it operates on second-rank tensors $\tensii x$
 
@@ -116,7 +116,7 @@ To conclude, it is observed that the fourth-rank tensor $\identiv=\identii\boxti
 
 * Walpole's basis for transverse isotropic tensors
 
-Walpole ([[file:../pages/references.org::WALP1984][1984]]) shows that any transverse isotropic tensor is a linear combination of the six fourth-rank tensors $\tensiv E_1,\tensiv E_2,\tensiv E_3,\tensiv E_4,\tensiv F,\tensiv G$ defined as follows
+Walpole ([[file:../pages/references.org::#WALP1984][1984]]) shows that any transverse isotropic tensor is a linear combination of the six fourth-rank tensors $\tensiv E_1,\tensiv E_2,\tensiv E_3,\tensiv E_4,\tensiv F,\tensiv G$ defined as follows
 
 \begin{gather*}
 \tensiv E_1=\p\otimes\p,\quad\tensiv E_2=\frac12\q\otimes\q,\quad\tensiv E_3=\frac1{\sqrt2}\p\otimes\q,\quad\tensiv E_4=\frac1{\sqrt2}\q\otimes\p\\
@@ -143,7 +143,7 @@ Multiplication (in the sense of the double product) of these tensors is fairly e
 
 * A convenient representation of transverse isotropic, fourth-rank tensors
 
-Walpole ([[file:../pages/references.org::WALP1984][1984]]) proposes a convenient representation of any transverse isotropic tensor $\tensiv T$, as the triplet $(A, f, g)$ where $A$ is a 2 × 2 matrix and $f$ and $g$ are two scalars. This representation should be understood as
+Walpole ([[file:../pages/references.org::#WALP1984][1984]]) proposes a convenient representation of any transverse isotropic tensor $\tensiv T$, as the triplet $(A, f, g)$ where $A$ is a 2 × 2 matrix and $f$ and $g$ are two scalars. This representation should be understood as
 
 \begin{equation*}
 \tensiv T=a_{11}\tensiv E_1+a_{22}\tensiv E_2+a_{12}\tensiv E_3+a_{21}\tensiv E_4+f\tensiv F+g\tensiv G,

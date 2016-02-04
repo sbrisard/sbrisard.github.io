@@ -71,7 +71,7 @@ file:./20150930-Orientation_correlations_among_rice_grains-06/watershed-distance
 #+ATTR_HTML: :width 50%
 file:./20150930-Orientation_correlations_among_rice_grains-06/distance.png
 
-One possible response would be to use so-called /vertical filters/ ([[file:../pages/references.org::TARI2008][Tariel et al., 2008]]). I used here a more intuitive approach by providing a =min_distance= parameter to the [[http://scikit-image.org/][scikit-image]] =peak_local_max= ([[http://scikit-image.org/docs/stable/api/skimage.feature.html#peak-local-max][documentation]]) function. The selected value (namely, 10 px) corresponds to the typical equatorial radius of the rice grains (as manually measured on the binary images). This indeed reduces over-segmentation, but does not solve the problem completely.
+One possible response would be to use so-called /vertical filters/ ([[file:../pages/references.org::#TARI2008][Tariel et al., 2008]]). I used here a more intuitive approach by providing a =min_distance= parameter to the [[http://scikit-image.org/][scikit-image]] =peak_local_max= ([[http://scikit-image.org/docs/stable/api/skimage.feature.html#peak-local-max][documentation]]) function. The selected value (namely, 10 px) corresponds to the typical equatorial radius of the rice grains (as manually measured on the binary images). This indeed reduces over-segmentation, but does not solve the problem completely.
 
 In the next section, we will see how a problem dependent solution can be proposed.
 

@@ -8,7 +8,7 @@ In the [[file:./20150608-When_a_thin_shell_is_not_so_thin-01.org][previous insta
 
 * The spherical pressure vessel, exact solution
 
-Finding the stresses and displacements in a pressure vessel is a classical exercise in 3D linear elasticity. In this post, I will spare you the details of the derivation (which can be found in e.g. [[file:../pages/references.org::TIMO1951][Timoshenko and Goodier, 1951]], art. 121). Instead, I will come straight to the point, and provide you with the exact expression of the stress tensor in spherical coordinates (\(r\): distance to the center of the spherical pressure vessel)
+Finding the stresses and displacements in a pressure vessel is a classical exercise in 3D linear elasticity. In this post, I will spare you the details of the derivation (which can be found in e.g. [[file:../pages/references.org::#TIMO1951][Timoshenko and Goodier, 1951]], art. 121). Instead, I will come straight to the point, and provide you with the exact expression of the stress tensor in spherical coordinates (\(r\): distance to the center of the spherical pressure vessel)
 
 \begin{gather}
 \label{eq:1}\sigma_{rr}(r)=A-\frac{2B}{r^3},\\
@@ -22,7 +22,7 @@ A&=-\frac{p_\text{ext}R_\text{ext}^3-p_\text{int}R_\text{int}^3}{R_\text{ext}^3-
 B&=-\frac12\frac{\left(p_\text{ext}-p_\text{int}\right)R_\text{int}^3R_\text{ext}^3}{R_\text{ext}^3-R_\text{int}^3},\\
 \end{align}
 
-where \(R_\text{int}=R-h/2\) and \(R_\text{ext}=R+h/2\) denote the internal and external radii of the spherical pressure vessel (\(R\): radius of midsurface, \(h\): thickness); \(p_\text{int}\) and \(p_\text{ext}\) denote the internal and external pressures. To make a fair comparison between the shell theory and the 3D exact solution, it is customary to share the load equally between the upper and lower faces (see e.g. [[file:../pages/references.org::REIS1947][Reissner, 1947]]). In other words,
+where \(R_\text{int}=R-h/2\) and \(R_\text{ext}=R+h/2\) denote the internal and external radii of the spherical pressure vessel (\(R\): radius of midsurface, \(h\): thickness); \(p_\text{int}\) and \(p_\text{ext}\) denote the internal and external pressures. To make a fair comparison between the shell theory and the 3D exact solution, it is customary to share the load equally between the upper and lower faces (see e.g. [[file:../pages/references.org::#REIS1947][Reissner, 1947]]). In other words,
 
 \begin{equation}
 p_\text{int}=-p_\text{ext}=\frac p2.
