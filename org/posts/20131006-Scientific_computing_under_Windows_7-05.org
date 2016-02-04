@@ -21,7 +21,7 @@ with
   EXE =       $(ROOT)_$@.exe
 #+END_EXAMPLE
 
-Then create an appropriate =Makefile.mingw32=, starting from =Makefile.serial=. In the MSYS console::
+Then create an appropriate =Makefile.mingw32=, starting from =Makefile.serial=. In the MSYS console
 
 #+BEGIN_EXAMPLE
   $ cd /C/src/lammps-30Sep13/src/MAKE
@@ -43,27 +43,27 @@ If you want to link LAMMPS against FFTW (which you must first install, see a pre
   make: `stubs' is up to date.
 #+END_EXAMPLE
 
-The solution is to force compilation of the stubs::
+The solution is to force compilation of the stubs
 
 #+BEGIN_EXAMPLE
   $ cd /C/src/lammps-30Sep13/src/STUBS
   $ make
 #+END_EXAMPLE
 
-which produces a file =libmpi_stubs.a=. You are now ready to compile::
+which produces a file =libmpi_stubs.a=. You are now ready to compile
 
 #+BEGIN_EXAMPLE
   $ cd /C/src/lammps-30Sep13/src
   $ make mingw32
 #+END_EXAMPLE
 
-which produces an executable =src/lmp_mingw32.exe=. To test this executable, go to the =examples= directory::
+which produces an executable =src/lmp_mingw32.exe=. To test this executable, go to the =examples= directory
 
 #+BEGIN_EXAMPLE
   $ cd /C/src/lammps-30Sep13/examples
 #+END_EXAMPLE
 
-and run one of the applications, for example::
+and run one of the applications, for example
 
 #+BEGIN_EXAMPLE
   $ cd micelle

@@ -49,7 +49,7 @@ This pack does not ship with a version of =mpicc=. Therefore, to compile, you ne
   $ mingw32-gcc -o hello.exe hello.c -I/C/opt/Microsoft_HPC_Pack_2012/Inc -L/C/opt/Microsoft_HPC_Pack_2012/Lib/i386 -lmsmpi
 #+END_EXAMPLE
 
-Note that the program is linked against the 32 bit library, as the standard MinGW is a 32 bit system. Then run the example::
+Note that the program is linked against the 32 bit library, as the standard MinGW is a 32 bit system. Then run the example
 
 #+BEGIN_EXAMPLE
   $ /C/opt/Microsoft_HPC_Pack_2012/Bin/mpiexec.exe -np 4 hello.exe
