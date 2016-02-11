@@ -27,40 +27,175 @@
 #+RESULTS:
 : (172, 437, 436)
 
+* The direct approach
+
+The direct (naive) approach will serve as a reference for a better approach. It will be illustrated on one grain only, which we first locate. The remainder of the analysis is then restricted to a ROI.
+
+#+BEGIN_SRC ipython :results output
+  index = 42
+  slices = scipy.ndimage.find_objects(labels)[index-1]
+  roi = labels[slices]
+  print(slices)
+#+END_SRC
+
+#+RESULTS:
+: (slice(0, 14, None), slice(173, 209, None), slice(83, 132, None))
+
+The grain shape is then defined by =mask=, an array of booleans, where all voxels of the ROI that belong to the grain are set to =True=.
+
+#+BEGIN_SRC ipython :results none
+  mask = roi == index
+#+END_SRC
+
+The volume (in voxels) of the grain is then the sum of the above array
+
+#+BEGIN_SRC ipython :results output
+  vol_ref = mask.sum()
+  print('Volume of grain {} = {} vox^3.'.format(index, vol_ref))
+#+END_SRC
+
+#+RESULTS:
+: Volume of grain 42 = 7186 vox^3.
+
+To compute the center of mass and inertia of the grain, we must define the coordinates of each voxel of the grain. To do so, we use the [[http://docs.scipy.org/doc/numpy/reference/generated/numpy.mgrid.html][mgrid]] function
+
+#+BEGIN_SRC ipython :results none
+  coords = np.mgrid[slices].astype(np.float64)
+#+END_SRC
+
+The center of mass of the grain is then the sum of these coordinates divided by the total volume
+
+#+BEGIN_SRC ipython :results output
+  com_ref = np.sum(coords*mask, axis=(-1, -2, -3))/vol_ref
+  print('Center of mass of grain {} = {} vox'.format(index, com_ref))
+#+END_SRC
+
+#+RESULTS:
+: Center of mass of grain 42 = [   4.96688004  191.40801559  103.66824381] vox
+
+Note that we multiplied by mask in order to keep only those voxels that belong to the grain. To compute the inertia of the grain, we first center the voxel coordinates with respect to the center of mass.
+
+#+BEGIN_SRC ipython :results none
+  coords -= com_ref[:, None, None, None]
+#+END_SRC
+
+We then compute the array coordinates cross-products =coords_xprod= defined as follows
+
+#+BEGIN_EXAMPLE
+coords_xprod[m, n, i, j, k] = coords[m, i, j, k]*coords[n, i, j, k]
+#+END_EXAMPLE
+
+(=i, j, k=: voxel indices; =m, n=: coordinates indices). The =coords_xprod= array is produced by the following line of code
+
+#+BEGIN_SRC ipython :results none
+  coords_xprod = coords[None, ...]*coords[:, None, ...]
+#+END_SRC
+
+#+BEGIN_SRC ipython :results output
+  inertia_ref = np.sum(mask*coords_xprod, axis=(-1, -2,-3))
+  print('Moments of inertia of grain {} (vox^5)'.format(index))
+  print(inertia_ref)
+#+END_SRC
+
+#+RESULTS:
+: Moments of inertia of grain 42 (vox^5)
+: [[  73912.1174506   -47088.89229056  -71887.95797384]
+:  [ -47088.89229056  434923.69830225  180875.70915669]
+:  [ -71887.95797384  180875.70915669  893659.09323685]]
+
+This is a bit tedious, isn't it? Besides, we should normally loop over the grains in order to carry out the analysis for all grains. Fortunately, =scipy.ndimage= defines the wonderful [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html][sum]] function!
+
+* Using the =scipy.ndimage.sum= function
+
+This function will allow us to carry out the analysis over all grains simultaneously. We start with the volume, which is seen as
+
+\begin{equation*}
+\sum 1
+\end{equation*}
+
+where the sum is carried over all voxels of each grain.
+
 #+BEGIN_SRC ipython :file ./tmp/volume_histogram.png
   ones = np.ones_like(labels, dtype=np.float64)
-  volume = scipy.ndimage.sum(ones, labels, indices)
-  plt.hist(volume, bins=30)
+  vol = scipy.ndimage.sum(ones, labels, indices)
+  plt.hist(vol, bins=30)
 #+END_SRC
 
 #+RESULTS:
 [[file:./tmp/volume_histogram.png]]
 
-#+BEGIN_SRC ipython :file ./tmp/scatter.png
-  center_of_mass = np.asarray(scipy.ndimage.center_of_mass(ones, labels, indices))
-  plt.scatter(center_of_mass[...,1], center_of_mass[..., 2])
+And we can check that the value we found for grain 42 is correct
+
+#+BEGIN_SRC ipython :results output
+  print('Volume of grain {}'.format(index))
+  print('    expected   = {}'.format(vol_ref))
+  print('    actual     = {}'.format(vol[index-1]))
 #+END_SRC
 
 #+RESULTS:
-[[file:./tmp/scatter.png]]
+: Volume of grain 42
+:     expected   = 7186
+:     actual     = 7186.0
 
-* Calcul de l'inertie n°1
+For the center of mass, we can use the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.center_of_mass.html][center_of_mass]] function
 
-#+BEGIN_SRC ipython
-  slices = [slice(n) for n in labels.shape]
-  coordinates = np.mgrid[slices]
+#+BEGIN_SRC ipython :results output
+  com = np.asarray(scipy.ndimage.center_of_mass(ones, labels, indices))
+  print('Center of mass of grain {}'.format(index))
+  print('    expected   = {}'.format(com_ref))
+  print('    actual     = {}'.format(com[index-1]))
+#+END_SRC
+
+#+RESULTS:
+: Center of mass of grain 42
+:     expected   = [   4.96688004  191.40801559  103.66824381]
+:     actual     = [   4.96688004  191.40801559  103.66824381]
+
+Finally, the moments of inertia are seen as the sum of $x_ix_j$ carried over all voxels of the grain ($x_i$ is the $i$-th coordinate of the voxel). Therefore, we first build the array =coords= of voxel coordinates.
+
+#+BEGIN_SRC ipython :results none
+  coords = np.mgrid[[slice(n) for n in labels.shape]]
+#+END_SRC
+
+We should normally measure the coordinates with respect to the center of mass of each grain. This would require to subtract to =coords= a value which depend on the grain. Rather, we use the following identity
+
+\begin{equation*}
+I_{ij}=\sum\left(x_i-\overline x_j\right)\left(x_j-\overline x_j)=\sum x_ix_j+v\overline x_i\overline x_j,
+\end{equation*}
+
+where $v$ denotes the volume of the grain, $\overline x_i$ the coordinates of its center of mass, and $x_i$ the coordinates of a voxel of the grain. Using the =scipy.ndimage.sum= function, the code reads
+
+#+BEGIN_SRC ipython :results none
   inertia = np.empty((indices.size, 3, 3), dtype=np.float64)
 
   for i in range(3):
       for j in range(3):
-          print('Computing I_{}{}'.format(i+1, j+1))
-          xi = coordinates[i, :]
-          xj = coordinates[j, :]
+          xi = coords[i, :]
+          xj = coords[j, :]
           inertia[:, i, j] = (scipy.ndimage.sum(xi*xj, labels, indices) -
-                              volume*center_of_mass[:, i]*center_of_mass[:, j])
+                              vol*com[:, i]*com[:, j])
+#+END_SRC
+
+And we can again check that the result is correct for grain #42.
+
+#+BEGIN_SRC ipython :results output
+  print('Moments of inertia of grain {}'.format(index))
+  print('    expected =')
+  print(inertia_ref)
+  print('    actual =')
+  print(inertia[index-1])
 #+END_SRC
 
 #+RESULTS:
+: Moments of inertia of grain 42
+:     expected =
+: [[  73912.1174506   -47088.89229056  -71887.95797384]
+:  [ -47088.89229056  434923.69830225  180875.70915669]
+:  [ -71887.95797384  180875.70915669  893659.09323685]]
+:     actual =
+: [[  73912.1174506   -47088.89229057  -71887.95797384]
+:  [ -47088.89229057  434923.69830227  180875.70915669]
+:  [ -71887.95797384  180875.70915669  893659.09323685]]
 
 #+BEGIN_SRC ipython
   val, vec = np.linalg.eig(inertia)
@@ -89,7 +224,7 @@
 [[file:./tmp/radius2_histogram.png]]
 
 #+BEGIN_SRC ipython :file ./tmp/radius3_histogram.png
-  plt.hist(radius[:, 2], bins=30)
+  plt.hist(radius[:, 2])
 #+END_SRC
 
 #+BEGIN_SRC ipython
