@@ -1,0 +1,102 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
+#+SETUPFILE: "../include/mathjax.org"
+#+TITLE: Orientation correlations among rice grains, part 7: analysis of the shape of the grains
+#+DATE: [2015-12-01 Tue]
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
+
+#+BEGIN_SRC ipython :results output
+  import os.path
+
+  import h5py
+  import scipy.ndimage
+
+  filename = os.path.join('G:', 'sebastien', 'experimental_data',
+                          'navier', 'riz', 'rice-bin_4x4x4.hdf5')
+
+  with h5py.File(filename, 'r') as f:
+      labels = np.asarray(f['labels'])
+
+  print(labels.shape)
+
+  indices = np.unique(labels)
+  # Discard index 0, which is the background
+  indices = indices[1:]
+#+END_SRC
+
+#+RESULTS:
+: (172, 437, 436)
+
+#+BEGIN_SRC ipython :file ./tmp/volume_histogram.png
+  ones = np.ones_like(labels, dtype=np.float64)
+  volume = scipy.ndimage.sum(ones, labels, indices)
+  plt.hist(volume, bins=30)
+#+END_SRC
+
+#+RESULTS:
+[[file:./tmp/volume_histogram.png]]
+
+#+BEGIN_SRC ipython :file ./tmp/scatter.png
+  center_of_mass = np.asarray(scipy.ndimage.center_of_mass(ones, labels, indices))
+  plt.scatter(center_of_mass[...,1], center_of_mass[..., 2])
+#+END_SRC
+
+#+RESULTS:
+[[file:./tmp/scatter.png]]
+
+* Calcul de l'inertie n°1
+
+#+BEGIN_SRC ipython
+  slices = [slice(n) for n in labels.shape]
+  coordinates = np.mgrid[slices]
+  inertia = np.empty((indices.size, 3, 3), dtype=np.float64)
+
+  for i in range(3):
+      for j in range(3):
+          print('Computing I_{}{}'.format(i+1, j+1))
+          xi = coordinates[i, :]
+          xj = coordinates[j, :]
+          inertia[:, i, j] = (scipy.ndimage.sum(xi*xj, labels, indices) -
+                              volume*center_of_mass[:, i]*center_of_mass[:, j])
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC ipython
+  val, vec = np.linalg.eig(inertia)
+  i = np.argmax(val, axis=1)
+  director = vec[i]
+  radius = np.sort(np.sqrt(5*val/volume[:, None]))
+
+  radius.shape
+#+END_SRC
+
+#+RESULTS:
+: (2362, 3)
+
+#+BEGIN_SRC ipython :file ./tmp/radius1_histogram.png
+  plt.hist(radius[:, 0], bins=30)
+#+END_SRC
+
+#+RESULTS:
+[[file:./tmp/radius1_histogram.png]]
+
+#+BEGIN_SRC ipython :file ./tmp/radius2_histogram.png
+  plt.hist(radius[:, 1], bins=30)
+#+END_SRC
+
+#+RESULTS:
+[[file:./tmp/radius2_histogram.png]]
+
+#+BEGIN_SRC ipython :file ./tmp/radius3_histogram.png
+  plt.hist(radius[:, 2], bins=30)
+#+END_SRC
+
+#+BEGIN_SRC ipython
+  radius[:, 2]
+  np.min(radius[:, 2])
+  volume == 0
+#+END_SRC
+
+#+RESULTS:
+: array([False, False, False, ..., False, False, False], dtype=bool)
