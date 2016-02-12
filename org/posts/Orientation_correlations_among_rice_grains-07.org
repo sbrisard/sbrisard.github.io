@@ -27,7 +27,9 @@
 #+RESULTS:
 : (172, 437, 436)
 
-* The direct approach
+* Morphological description of the grains
+
+** The direct approach
 
 The direct (naive) approach will serve as a reference for a better approach. It will be illustrated on one grain only, which we first locate. The remainder of the analysis is then restricted to a ROI.
 
@@ -105,7 +107,7 @@ coords_xprod[m, n, i, j, k] = coords[m, i, j, k]*coords[n, i, j, k]
 
 This is a bit tedious, isn't it? Besides, we should normally loop over the grains in order to carry out the analysis for all grains. Fortunately, =scipy.ndimage= defines the wonderful [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html][sum]] function!
 
-* Using the =scipy.ndimage.sum= function
+** Using the =scipy.ndimage.sum= function
 
 This function will allow us to carry out the analysis over all grains simultaneously. We start with the volume, which is seen as
 
@@ -197,17 +199,47 @@ And we can again check that the result is correct for grain #42.
 :  [ -47088.89229057  434923.69830227  180875.70915669]
 :  [ -71887.95797384  180875.70915669  893659.09323685]]
 
-#+BEGIN_SRC ipython
-  val, vec = np.linalg.eig(inertia)
-  i = np.argmax(val, axis=1)
-  director = vec[i]
-  radius = np.sort(np.sqrt(5*val/volume[:, None]))
+* Orientation of the grains
 
-  radius.shape
+#+BEGIN_SRC ipython :results none
+  val, vec = np.linalg.eig(inertia)
+#+END_SRC
+
+It turns out that some of the eigenvalues that are found are negative
+
+#+BEGIN_SRC ipython :results output
+  i = np.nonzero(val <0)
+  print(i)
 #+END_SRC
 
 #+RESULTS:
-: (2362, 3)
+: (array([  13, 1959], dtype=int64), array([2, 2], dtype=int64))
+
+However, these eigenvalues are very small
+
+#+BEGIN_SRC ipython :results output
+  print(val[i])
+#+END_SRC
+
+#+RESULTS:
+: [ -4.88083585e-22  -1.02671800e-22]
+
+and we set them to zero
+
+#+BEGIN_SRC ipython :results none
+  val[i] = 0
+#+END_SRC
+
+The /orientation/ $\vec n$ of the grain is defined as the eigenvector associated with the largest principal moment of inertia.
+
+#+BEGIN_SRC ipython :results none
+  i = np.argmax(val, axis=1)
+  n = vec[i]
+#+END_SRC
+
+#+BEGIN_SRC ipython :results none
+  radius = np.sort(np.sqrt(5*val/vol[:, None]))
+#+END_SRC
 
 #+BEGIN_SRC ipython :file ./tmp/radius1_histogram.png
   plt.hist(radius[:, 0], bins=30)
@@ -224,14 +256,8 @@ And we can again check that the result is correct for grain #42.
 [[file:./tmp/radius2_histogram.png]]
 
 #+BEGIN_SRC ipython :file ./tmp/radius3_histogram.png
-  plt.hist(radius[:, 2])
-#+END_SRC
-
-#+BEGIN_SRC ipython
-  radius[:, 2]
-  np.min(radius[:, 2])
-  volume == 0
+  plt.hist(radius[:, 2], bins=40)
 #+END_SRC
 
 #+RESULTS:
-: array([False, False, False, ..., False, False, False], dtype=bool)
+[[file:./tmp/radius3_histogram.png]]
