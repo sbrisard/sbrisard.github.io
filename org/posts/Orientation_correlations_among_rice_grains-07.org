@@ -120,7 +120,7 @@ where the sum is carried over all voxels of each grain.
 #+BEGIN_SRC ipython :file ./tmp/volume_histogram.png
   ones = np.ones_like(labels, dtype=np.float64)
   vol = scipy.ndimage.sum(ones, labels, indices)
-  plt.hist(vol, bins=30)
+  plt.hist(vol, range=(0, 12000), bins=30)
 #+END_SRC
 
 #+RESULTS:
@@ -162,10 +162,10 @@ Finally, the moments of inertia are seen as the sum of $x_ix_j$ carried over all
 We should normally measure the coordinates with respect to the center of mass of each grain. This would require to subtract to =coords= a value which depend on the grain. Rather, we use the following identity
 
 \begin{equation*}
-I_{ij}=\sum\left(x_i-\overline x_j\right)\left(x_j-\overline x_j)=\sum x_ix_j+v\overline x_i\overline x_j,
+I_{ij}=\sum\left(x_i-\overline x_j\right)\left(x_j-\overline x_j\right)=\sum x_ix_j+V\overline x_i\overline x_j,
 \end{equation*}
 
-where $v$ denotes the volume of the grain, $\overline x_i$ the coordinates of its center of mass, and $x_i$ the coordinates of a voxel of the grain. Using the =scipy.ndimage.sum= function, the code reads
+where $V$ denotes the volume of the grain, $\overline x_i$ the coordinates of its center of mass, and $x_i$ the coordinates of a voxel of the grain. Using the =scipy.ndimage.sum= function, the code reads
 
 #+BEGIN_SRC ipython :results none
   inertia = np.empty((indices.size, 3, 3), dtype=np.float64)
