@@ -202,13 +202,13 @@ And we can again check that the result is correct for grain #42.
 * Orientation of the grains
 
 #+BEGIN_SRC ipython :results none
-  val, vec = np.linalg.eig(inertia)
+  inertia_principal, inertia_direction = np.linalg.eig(inertia)
 #+END_SRC
 
 It turns out that some of the eigenvalues that are found are negative
 
 #+BEGIN_SRC ipython :results output
-  i = np.nonzero(val <0)
+  i = np.nonzero(inertia_principal < 0)
   print(i)
 #+END_SRC
 
@@ -218,7 +218,7 @@ It turns out that some of the eigenvalues that are found are negative
 However, these eigenvalues are very small
 
 #+BEGIN_SRC ipython :results output
-  print(val[i])
+  print(inertia_principal[i])
 #+END_SRC
 
 #+RESULTS:
@@ -227,37 +227,64 @@ However, these eigenvalues are very small
 and we set them to zero
 
 #+BEGIN_SRC ipython :results none
-  val[i] = 0
+  inertia_principal[i] = 0
 #+END_SRC
 
 The /orientation/ $\vec n$ of the grain is defined as the eigenvector associated with the largest principal moment of inertia.
 
 #+BEGIN_SRC ipython :results none
-  i = np.argmax(val, axis=1)
-  n = vec[i]
+  i = np.argmax(inertia_principal, axis=1)
+  n = inertia_direction[i]
 #+END_SRC
+
+To compute the radii $a>b>c$ of the equivalent ellipsoid, we recall that its volume and principal inertia are
+
+\begin{align*}
+  V &= \frac{4\pi}3 abc,\\
+  I_a &= \frac{4\pi}{15}a^3bc=\frac{Va^2}5,\\
+  I_b &= \frac{4\pi}{15}ab^3c=\frac{Vb^2}5,\\
+  I_c &= \frac{4\pi}{15}abc^3=\frac{Vc^2}5.
+\end{align*}
+
+The above expressions can be retrieved from [[https://en.wikipedia.org/wiki/Ellipsoid#Dynamical_properties][Wikipedia]]. For example
+
+\begin{align*}
+I_a &= \int x^2\,\diff x\,\diff y\,\diff z\\
+    &= \frac12\int\left[\left(x^2+y^2\right)+\left(x^2+z^2\right)-\left(y^2+z^2\right)\right]\\
+    &= \frac12\left(I_{zz}+I_{yy}-I_{xx}\right).
+\end{align*}
+
+Then, from the volume $V$ and the principal inertia $I_a$, $I_b$ and $I_c$ of each grain, the radii are retrieved as follows
+
+\begin{align*}
+a &= \sqrt{\frac{5I_a}V}, & b &= \sqrt{\frac{5I_b}V}, & c &= \sqrt{\frac{5I_c}V}.
+\end{align*}
+
+The following code snippet computes the radii of each grain, and sorts them in ascending order.
 
 #+BEGIN_SRC ipython :results none
-  radius = np.sort(np.sqrt(5*val/vol[:, None]))
+  radius = np.sort(np.sqrt(5*inertia_principal/vol[:, None]))
 #+END_SRC
 
-#+BEGIN_SRC ipython :file ./tmp/radius1_histogram.png
-  plt.hist(radius[:, 0], bins=30)
-#+END_SRC
+It is now possible to visualize these radii as histograms
 
-#+RESULTS:
-[[file:./tmp/radius1_histogram.png]]
-
-#+BEGIN_SRC ipython :file ./tmp/radius2_histogram.png
-  plt.hist(radius[:, 1], bins=30)
-#+END_SRC
-
-#+RESULTS:
-[[file:./tmp/radius2_histogram.png]]
-
-#+BEGIN_SRC ipython :file ./tmp/radius3_histogram.png
-  plt.hist(radius[:, 2], bins=40)
+#+BEGIN_SRC ipython :file ./tmp/radii_histogram.png
+  width, height = plt.rcParams['figure.figsize']
+  fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(2*width, height))
+  ax1.hist(radius[:, -1], range=(0, 40), bins=40)
+  ax1.set_xlabel('a')
+  ax1.set_ylabel('Number')
+  ax2.hist((radius[:, -2], radius[:-1]), range=(0, 20), bins=20)
+  ax2.set_xlabel('b, c')
+  ax2.set_ylabel('Number')
 #+END_SRC
 
 #+RESULTS:
-[[file:./tmp/radius3_histogram.png]]
+[[file:./tmp/radii_histogram.png]]
+
+It is observed that, while the length of most grains is about 2×27=54 pixels (about 6.5 mm), a significant number of grains are very small. There are two possible explanations for this
+
+  1. some grains where broken in smaller pieces,
+  2. our [[file:20150930-Orientation_correlations_among_rice_grains-06.org][segmentation]] was not perfect (over-segmentation might have occured).
+
+My guess is that it is in fact a little bit of both. One possible remedy would be to filter out those grains that are too small in the subsequent analysis. We will not go into such degree of refinment.
