@@ -5,6 +5,44 @@
 #+DATE: [2015-12-01 Tue]
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
+In the [[file:20150930-Orientation_correlations_among_rice_grains-06.org][previous instalment]] of this series, we have segmented the 3D image of the assembly of rice grains. In other words, each voxel of the image is attributed the label of the grain to which it belongs. Remember the [[file:20150223-Orientation_correlations_among_rice_grains-01.org][initial goal]] of this series: we want to quantify orientation /correlations/ between grains. To do so, we must analyse the orientation of each individual grain. This is the topic of the present post.
+
+It is customary to define the orientation of an elongated object by means of the eigenvectors of the tensor of second moments, defined as follows
+
+\begin{equation}
+\label{eq:1}J_{ij} = \int_\text{Grain}\left(x_i-X_i\right)\left(x_j-X_j\right)\diff x_1\,\diff x_2\,\diff x_3,
+\end{equation}
+where the integral is carried out over the grain, and $X_i$ denotes the $i$-th coordinate of the grain's center of gravity
+
+\begin{equation}
+\label{eq:2}X_i = \frac1V\int_\text{Grain}x_i\,\diff x_1\,\diff x_2\,\diff x_3
+\end{equation}
+
+($V$: volume of the grain). In intrinsic form, Eq. \eqref{eq:1} reads
+
+\begin{equation}
+\label{eq:3}\tensii J=\int_\text{Grain}\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\diff x_1\,\diff x_2\,\diff x_3.
+\end{equation}
+
+The above defined tensor of second moments is related to the [[https://en.wikipedia.org/wiki/Moment_of_inertia#The_inertia_tensor][inertia tensor]] $\tensii I$
+\begin{equation}
+\label{eq:4}\tensii I=\tr\tensii J\,\tensii\delta-\tensii J,
+\end{equation}
+where $\tensii I$ is defined as follows
+\begin{equation}
+\label{eq:5}\tensii I=\int_\text{Grain}\left[\left(\vec x-\vec X\right)\cdot\left(\vec x-\vec X\right)\tensii\delta-\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\right]\diff x_1\,\diff x_2\,\diff x_3.
+\end{equation}
+
+Being symmetric, the tensor $\tensii J$ of second moments is diagonalizable, and we compute its eigenvalues $J_\mathrm{I}\geq J_\mathrm{II}\geq J_\mathrm{III}$, and the associated eigenvectors $\vec v_\mathrm{I}$, $\vec v_\mathrm{II}$ and $\vec v_\mathrm{III}$:
+
+\begin{equation}
+\tensii J\cdot\vec v_\alpha=J_\alpha\vec v_\alpha,
+\end{equation}
+
+where $\alpha=\mathrm{I}, \mathrm{II}, \mathrm{III}$. In the present post, we define the orientation of the grain as the eigenvector $\vec v_\mathrm{I}$ associated to the /largest/ eigenvalue $J_\mathrm{I}$.
+
+equivalent ellipsoid, with same volume and inertia. More precisely,
+
 #+BEGIN_SRC ipython :results output
   import os.path
 
