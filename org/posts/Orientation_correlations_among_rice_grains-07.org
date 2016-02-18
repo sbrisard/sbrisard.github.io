@@ -12,7 +12,7 @@ It is customary to define the orientation of an elongated object by means of the
 \begin{equation}
 \label{eq:1}J_{ij} = \int_\text{Grain}\left(x_i-X_i\right)\left(x_j-X_j\right)\diff x_1\,\diff x_2\,\diff x_3,
 \end{equation}
-where the integral is carried out over the grain, and $X_i$ denotes the $i$-th coordinate of the grain's center of gravity
+where the integral is carried out over the grain, and $X_i$ denotes the $i$-th coordinate of the grain's center of mass
 
 \begin{equation}
 \label{eq:2}X_i = \frac1V\int_\text{Grain}x_i\,\diff x_1\,\diff x_2\,\diff x_3
@@ -33,17 +33,35 @@ where $\tensii I$ is defined as follows
 \label{eq:5}\tensii I=\int_\text{Grain}\left[\left(\vec x-\vec X\right)\cdot\left(\vec x-\vec X\right)\tensii\delta-\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\right]\diff x_1\,\diff x_2\,\diff x_3.
 \end{equation}
 
-Being symmetric, the tensor $\tensii J$ of second moments is diagonalizable, and we compute its eigenvalues $J_\mathrm{I}\geq J_\mathrm{II}\geq J_\mathrm{III}$, and the associated eigenvectors $\vec v_\mathrm{I}$, $\vec v_\mathrm{II}$ and $\vec v_\mathrm{III}$:
+Being symmetric, the tensor $\tensii J$ of second moments is diagonalizable, and we compute its eigenvalues $J_a$, $J_b$ and $J_c$, and the associated eigenvectors $\vec v_a$, $\vec v_b$ and $\vec v_c$
 
 \begin{equation}
 \tensii J\cdot\vec v_\alpha=J_\alpha\vec v_\alpha,
 \end{equation}
 
-where $\alpha=\mathrm{I}, \mathrm{II}, \mathrm{III}$. In the present post, we define the orientation of the grain as the eigenvector $\vec v_\mathrm{I}$ associated to the /largest/ eigenvalue $J_\mathrm{I}$.
+where $\alpha=a, b, c$. In the present post, we define the orientation of the grain as the eigenvector associated to the /largest/ eigenvalue. We can further define the equivalent ellipsoid as the ellipsoid with same volume and principal second moments. It can readily be verified that the volume and principal second moments of an ellipsoid are
 
-equivalent ellipsoid, with same volume and inertia. More precisely,
+\begin{equation}
+  V=\frac{4\pi}3 abc,\quad J_a=\frac{Va^2}5,\quad J_b=\frac{Vb^2}5,\quad J_c=\frac{Vc^2}5,
+\end{equation}
 
-#+BEGIN_SRC ipython :results output
+where $a$, $b$ and $c$ are the radii of the ellipsoid. The above expressions can be retrieved from [[https://en.wikipedia.org/wiki/Ellipsoid#Dynamical_properties][Wikipedia]] and Eq. \eqref{eq:4}. For example
+
+\begin{equation}
+J_a = \frac12\left(I_b+I_c-I_a\right).
+\end{equation}
+
+Then, the radii of the equivalent ellipsoid are retrieved as follows from the volume $V$ and the principal second moments $J_a$, $J_b$ and $J_c$ of the grain
+
+\begin{equation}
+a=\sqrt{\frac{5I_a}V},\quad b=\sqrt{\frac{5I_b}V},\quad c=\sqrt{\frac{5I_c}V}.
+\end{equation}
+
+The radii of the equivalent ellipsoid can be used to characterize the size of the grains. In the present post, we [[#morphological_description][compute for each grain]]: the volume, the center of mass, the tensor of second moments, the orientation and the radii of the equivalent ellipsoid. We will then perform rudimentary analysis of these morphological parameters.
+
+As usual, we will use Python to carry out the dirty work. We will start with a [[#direct_computation][very naive approach]] and present a nearly [[#using_sum][loop-free approach]] using the clever =scipy.ndimage.sum= function. We start with loading the segmented images.
+
+#+BEGIN_SRC ipython :results none
   import os.path
 
   import h5py
@@ -55,31 +73,28 @@ equivalent ellipsoid, with same volume and inertia. More precisely,
   with h5py.File(filename, 'r') as f:
       labels = np.asarray(f['labels'])
 
-  print(labels.shape)
-
   indices = np.unique(labels)
   # Discard index 0, which is the background
   indices = indices[1:]
 #+END_SRC
 
-#+RESULTS:
-: (172, 437, 436)
-
 * Morphological description of the grains
+  :PROPERTIES:
+  :CUSTOM_ID: morphological_description
+  :END:
 
-** The direct approach
+** Direct computation of the morphological parameters of grain 42
+   :PROPERTIES:
+   :CUSTOM_ID: direct_computation
+   :END:
 
-The direct (naive) approach will serve as a reference for a better approach. It will be illustrated on one grain only, which we first locate. The remainder of the analysis is then restricted to a ROI.
+The direct (naive) approach presented in this section will serve as a reference for a [[#using_sum][better approach]] presented in the next section. It will be illustrated on one grain only (namely grain [[https://en.wikipedia.org/wiki/42_%2528number%2529#The_Hitchhiker.27s_Guide_to_the_Galaxy][42]]), which we first locate. The remainder of the analysis is then restricted to a ROI surrounding the selected grain.
 
-#+BEGIN_SRC ipython :results output
+#+BEGIN_SRC ipython :results none
   index = 42
   slices = scipy.ndimage.find_objects(labels)[index-1]
   roi = labels[slices]
-  print(slices)
 #+END_SRC
-
-#+RESULTS:
-: (slice(0, 14, None), slice(173, 209, None), slice(83, 132, None))
 
 The grain shape is then defined by =mask=, an array of booleans, where all voxels of the ROI that belong to the grain are set to =True=.
 
@@ -132,9 +147,9 @@ coords_xprod[m, n, i, j, k] = coords[m, i, j, k]*coords[n, i, j, k]
 #+END_SRC
 
 #+BEGIN_SRC ipython :results output
-  inertia_ref = np.sum(mask*coords_xprod, axis=(-1, -2,-3))
+  moments2_ref = np.sum(mask*coords_xprod, axis=(-1, -2,-3))
   print('Moments of inertia of grain {} (vox^5)'.format(index))
-  print(inertia_ref)
+  print(moments2_ref)
 #+END_SRC
 
 #+RESULTS:
@@ -146,6 +161,9 @@ coords_xprod[m, n, i, j, k] = coords[m, i, j, k]*coords[n, i, j, k]
 This is a bit tedious, isn't it? Besides, we should normally loop over the grains in order to carry out the analysis for all grains. Fortunately, =scipy.ndimage= defines the wonderful [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html][sum]] function!
 
 ** Using the =scipy.ndimage.sum= function
+   :PROPERTIES:
+   :CUSTOM_ID: using_sum
+   :END:
 
 This function will allow us to carry out the analysis over all grains simultaneously. We start with the volume, which is seen as
 
@@ -275,28 +293,6 @@ The /orientation/ $\vec n$ of the grain is defined as the eigenvector associated
   n = inertia_direction[i]
 #+END_SRC
 
-To compute the radii $a>b>c$ of the equivalent ellipsoid, we recall that its volume and principal inertia are
-
-\begin{align*}
-  V &= \frac{4\pi}3 abc,\\
-  I_a &= \frac{4\pi}{15}a^3bc=\frac{Va^2}5,\\
-  I_b &= \frac{4\pi}{15}ab^3c=\frac{Vb^2}5,\\
-  I_c &= \frac{4\pi}{15}abc^3=\frac{Vc^2}5.
-\end{align*}
-
-The above expressions can be retrieved from [[https://en.wikipedia.org/wiki/Ellipsoid#Dynamical_properties][Wikipedia]]. For example
-
-\begin{align*}
-I_a &= \int x^2\,\diff x\,\diff y\,\diff z\\
-    &= \frac12\int\left[\left(x^2+y^2\right)+\left(x^2+z^2\right)-\left(y^2+z^2\right)\right]\\
-    &= \frac12\left(I_{zz}+I_{yy}-I_{xx}\right).
-\end{align*}
-
-Then, from the volume $V$ and the principal inertia $I_a$, $I_b$ and $I_c$ of each grain, the radii are retrieved as follows
-
-\begin{align*}
-a &= \sqrt{\frac{5I_a}V}, & b &= \sqrt{\frac{5I_b}V}, & c &= \sqrt{\frac{5I_c}V}.
-\end{align*}
 
 The following code snippet computes the radii of each grain, and sorts them in ascending order.
 
