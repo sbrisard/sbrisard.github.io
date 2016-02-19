@@ -4,6 +4,13 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
+      <title>Orientation correlations among rice grains, part 7: analysis of the shape of the grains]]</title>
+      <link>http://sbrisard.github.io/posts/20160219-Orientation_correlations_among_rice_grains-07.html</link>
+      <guid>posts/20160219-Orientation_correlations_among_rice_grains-07.html</guid>
+      <pubDate>Fri, 19 Febr 2016</pubDate>
+      <description>In the previous instalment of this series, we have segmented the 3D image of the assembly of rice grains. In other words, each voxel of the image is attributed the label of the grain to which it belongs. Remember the initial goal of this series: we want to quantify orientation correlations between grains. To do so, we must analyse the orientation of each individual grain. This is the topic of the present post.</description>
+    </item>
+    <item>
       <title>New paper published</title>
       <link>http://sbrisard.github.io/posts/20151208-New_paper_published.html</link>
       <guid>posts/20151208-New_paper_published.html</guid>

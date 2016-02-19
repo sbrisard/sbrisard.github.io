@@ -5,6 +5,10 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:./posts/20160219-Orientation_correlations_among_rice_grains-07.org][2016-02-19 -- Orientation correlations among rice grains, part 7: analysis of the shape of the grains]]
+
+In the [[file:./posts/20150930-Orientation_correlations_among_rice_grains-06.org][previous instalment]] of this series, we have segmented the 3D image of the assembly of rice grains. In other words, each voxel of the image is attributed the label of the grain to which it belongs. Remember the [[file:./posts/20150223-Orientation_correlations_among_rice_grains-01.org][initial goal]] of this series: we want to quantify orientation /correlations/ between grains. To do so, we must analyse the orientation of each individual grain. This is the topic of the present post.
+
 * [[file:posts/20151208-New_paper_published.org][2015-12-08 -- New paper published]]
 
 My student Vinh Phuc Tran has recently had one of his paper published in /Mechanics of Materials/. The paper is called /Stochastic modeling of mesoscopic elasticity random field/.
