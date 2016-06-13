@@ -2,6 +2,7 @@
 #+SETUPFILE: "../include/css-1.org"
 #+BIND: sb-blog-comments nil
 
+   + [[file:../posts/20160613-New_paper.org][2016-06-13 -- New paper]]
    + [[file:20160219-Orientation_correlations_among_rice_grains-07.org][2016-02-19 -- Orientation correlations among rice grains, part 7: analysis of the shape of the grains]]
    + [[file:20151208-New_paper_published.org][2015-12-08 -- New paper published]]
    + [[file:20150930-Orientation_correlations_among_rice_grains-06.org][2015-09-30 -- Orientation correlations among rice grains, part 6: segmentation]]

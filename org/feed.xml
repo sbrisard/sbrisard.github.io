@@ -4,7 +4,14 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
-      <title>Orientation correlations among rice grains, part 7: analysis of the shape of the grains]]</title>
+      <title>New paper</title>
+      <link>http://sbrisard.github.io/posts/20160613-New_paper.html</link>
+      <guid>posts/20160613-New_paper.html</guid>
+      <pubDate>Mon, 13 June 2016</pubDate>
+      <description>My paper “Reconstructing displacements from the solution to the periodic Lippmann–Schwinger equation discretized on a uniform grid” has recently been published in International Journal of Numerical Methods in Engineering.</description>
+    </item>
+    <item>
+      <title>Orientation correlations among rice grains, part 7: analysis of the shape of the grains</title>
       <link>http://sbrisard.github.io/posts/20160219-Orientation_correlations_among_rice_grains-07.html</link>
       <guid>posts/20160219-Orientation_correlations_among_rice_grains-07.html</guid>
       <pubDate>Fri, 19 Febr 2016</pubDate>
