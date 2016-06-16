@@ -45,6 +45,14 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
 
 (see also [[https://cv.archives-ouvertes.fr/sbrisard][HAL]], [[http://scholar.google.fr/citations?user=IwlAZnAAAAAJ&hl=en][Google Scholar]], [[http://orcid.org/0000-0002-1976-6263][ORCID]])
 
+** [[http://dx.doi.org/10.1002/nme.5263][Brisard (2016)]]
+   :PROPERTIES:
+   :CUSTOM_ID: BRIS2016
+   :HTML_CONTAINER_CLASS: sb-bibitem
+   :END:
+
+S. Brisard, /Reconstructing displacements from the solution to the periodic Lippmann–Schwinger equation discretized on a uniform grid/, International Journal for Numerical Methods in Engineering, 2016 ([[https://hal-enpc.archives-ouvertes.fr/hal-01304603][author's version]])
+
 ** [[http://dx.doi.org/10.1016/j.mechmat.2015.10.007][Tran et al. (2016)]]
    :PROPERTIES:
    :CUSTOM_ID: TRAN2016
@@ -124,6 +132,13 @@ S. Brisard, L. Dormieux and D. Kondo, /Hashin-Shtrikman bounds on the bulk modul
 O. P. Coussy and S. Brisard, /Prediction of drying shrinkage beyond the pore isodeformation assumption/, Journal of Mechanics of Materials and Structures 4(2): 263-279, 2009
 
 * Conferences
+
+** Brisard and Chamoin (2016)
+   :PROPERTIES:
+   :HTML_CONTAINER_CLASS: sb-bibitem
+   :END:
+
+S. Brisard, L. Chamoin, /Constitutive relation error for FFT-based methods/, VII European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS Congress 2016), June 2016, Crete Island, Greece
 
 ** Tran et al. (2015b)
    :PROPERTIES:
