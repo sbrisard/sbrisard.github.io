@@ -43,6 +43,22 @@ A. Donev, S. Torquato and F. H. Stillinger, /Neighbor list collision-driven mole
 
 R. O. Duda and P. E. Hart, /Use of the Hough Transformation to Detect Lines and Curves in Pictures/, Communications of the ACM 15(1):11-15, 1971
 
+* [[http://dx.doi.org/10.1080/00268978400101951][Eppenga and Frenkel (1984)]]
+  :PROPERTIES:
+  :CUSTOM_ID: EPPE1984
+  :HTML_CONTAINER_CLASS: sb-bibitem
+  :END:
+
+R. Eppeng and D. Frenkel, /Monte Carlo study of the isotropic and nematic phases of infinitely thin hard platelets/, Molecular Physics 52(6):1303-1334, 1984
+
+* [[http://dx.doi.org/10.1080/00268970110088992][Frenkel and Mulder (2002)]]
+  :PROPERTIES:
+  :CUSTOM_ID: FREN2002
+  :HTML_CONTAINER_CLASS: sb-bibitem
+  :END:
+
+D. Frenkel and B.M. Mulder, /The hard ellipsoid-of-revolution fluid I. Monte Carlo simulations/, Molecular Physics 100(1):201-217, 2002
+
 * [[http://dx.doi.org/10.1016/j.ijengsci.2013.07.006][Gentile and Straughan (2013)]]
   :PROPERTIES:
   :CUSTOM_ID: GENT2013
