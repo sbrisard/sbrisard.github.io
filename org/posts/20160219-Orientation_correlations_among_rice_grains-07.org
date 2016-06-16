@@ -303,7 +303,10 @@ We can now proceed with the analysis of the results. This will be done more thor
 
 #+BEGIN_SRC ipython :results none
   with h5py.File(filename, 'r+') as f:
-      f['orientation'] = n
+      f['volume'] = vol
+      f['center_of_mass'] = com
+      f['radii'] = radius
+      #f['orientation'] = n
 #+END_SRC
 
 * Analysis of the results
