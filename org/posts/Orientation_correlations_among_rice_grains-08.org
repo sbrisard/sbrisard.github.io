@@ -1,0 +1,185 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
+#+SETUPFILE: "../include/mathjax.org"
+#+TITLE: Orientation correlations among rice grains, part 8: XXX
+#+DATE: [2016-03-11 Fri]
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
+
+* One-point order parameter
+  :PROPERTIES:
+  :CUSTOM_ID: S1
+  :END:
+
+Various order parameters have been introduced in order to identify preferred orientations in assemblies of anisotropic particles. In the present post, we will use the so-called nematic order parameter, which is used to monitor isotropic-nematic phase transitions ([[file:../pages/references.org::#EPPE1984][Eppenga and Frenkel, 1984]])
+
+\begin{equation}
+\label{eq:1}
+S_1=\mathbb E\left(\frac{3\cos^2\theta-1}2\right)=\frac1N\sum_{i=1}^N\frac{3\cos^2\theta_i-1}2,
+\end{equation}
+
+where $\mathbb E$ denotes the ensemble average, and $\theta$ is the angle of the current particle with respect to a fixed direction. In the last equality, the ensemble average was replaced with an empirical average over all particles in the system.
+
+If the distribution of particles is isotropic, then the pdf of the orientations reads (in spherical coordinates)
+
+$$p(\theta, \varphi)=\frac1{4\pi}\sin\theta\,{\mathrm d}\theta\,{\mathrm d}\varphi,$$
+
+and we find
+
+$$S_1=\frac1{4\pi}\int_{0\leq\theta\leq\pi}\int_{0\leq\varphi\leq2\pi}\frac{3\cos^2\theta-1}2\sin\theta\,{\mathrm d}\theta\,{\mathrm d}\varphi=0.$$
+
+Conversely, for particles with fixed orientation, $\theta=0$ for all particles and $S_1=1$.
+
+Let's compute $S_1$ for the assembly of rice grains. In the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][last instalment]] of this series, we have computed the orientation (unit vector) of each grain. We will first retrieve this data.
+
+#+BEGIN_SRC ipython :results none
+  import os.path
+
+  import h5py
+  import matplotlib.pyplot as plt
+  import numpy as np
+  import scipy.ndimage
+  import scipy.spatial
+
+  #plt.style.use('../include/zenburn-light.mplstyle')
+
+  filename = os.path.join('Z:', 'sebastien', 'experimental_data',
+                          'navier', 'riz', 'rice-bin_4x4x4.hdf5')
+
+  with h5py.File(filename, 'r') as f:
+      center = np.asarray(f['center_of_mass'])
+      orientation = np.asarray(f['orientation'])
+#+END_SRC
+
+Now, =center[i, :]= denotes the coordinates of the center of grain =i=, while =orientation[i, :]= denotes the orientation of grain =i=. In what follows, we will compute $S_1$, taking the vertical as reference direction. At this point, we should remember that the z coordinate (along the vertical) is the first index in the 3D image (slice number). Therefore, $\cos\theta_i$ is given by =orientation[i, 0]= in this context.
+
+#+BEGIN_SRC ipython :results output
+  cos_theta = orientation[:, 0]
+  p2_cos_theta = (3*cos_theta**2-1)/2
+  print('S1 = {}'.format(p2_cos_theta.mean()))
+#+END_SRC
+
+#+RESULTS:
+: S1 = -0.09220327774809803
+
+It is observed that S_1 is non-zero, which indicates a slight anisotropy. S_1 is a one-point descriptor of the microsctructure. In other words, only one particle is considered at a time (orientational correlations are not accounted for). In the next section, we will show how such correlations can be quantified.
+
+* Two-point order parameter
+  :PROPERTIES:
+  :CUSTOM_ID: S2
+  :END:
+
+The initial motivation of this series was the quantification of orientation correlation between anisotropic particles. The basic idea is this: anisotropic, hard particles tend to be locally well ordered (orientationnally). In other words, the closer the particles, the higher the probability that they are (nearly) parallel. This is definitely true of flat particles (platelets), but it is less obvious for elongated particles.
+
+To measure orientation correlations between particles, Frenkel and Mulder ([[file:../pages/references.org::#FREN2002][2002]]) introduce $S_2(r)$, which is defined from the above order parameter as follows. A “central particle”, $i$, is first selected. The reference direction is the orientation $\vec n_i$ of this central particle. Then, $S_2(r)$ is computed from Eq. \eqref{eq:1}, for all particles $j$ located at a distance $r$ from the central particle i. In this context, we therefore have $\cos\theta_j=\vec n_i\cdot\vec n_j$. The empirical estimation of this two-point order parameter therefore reads
+
+\begin{equation}
+\label{eq:2}
+S_2(r)=\frac1N\sum_{i=1}^N\frac1{\operatorname{\#}\mathcal C_i(r, r+\Delta r)}\sum_{j\in\mathcal C_i(r, r+\Delta r)}\frac{3\left(\vec n_i\cdot\vec n_j\right)^2-1}2,
+\end{equation}
+
+where $\vec n_j$ denotes the orientation of particle $j$. $\mathcal C_i(r_1, r_2)$ is the set of particles centered at a distance $r$ from particle $i$, with $r_1\leq r\leq r_2$
+
+\begin{equation}
+\mathcal C_i(r_1, r_2)=\left\{j, 1\leq j\leq N, r_1\leq\lVert\vec x_j-\vec x_i\rVert\leq r_2\right\}
+\end{equation}
+
+($\vec x_i$: center of particle $i$). Eq. \eqref{eq:2} is readily implemented in Python (using =numpy= and =scipy=). We first compute the distance matrix, and round it to the nearest integer, which then defines =labels[i, j]= (to be used in =scipy.ndimage.sum=).
+
+#+BEGIN_SRC ipython :results none
+  distance = scipy.spatial.distance_matrix(center, center)
+  labels = np.round(distance)
+#+END_SRC
+
+We then compute, for each pair =(i, j)=, the cosine =cos_theta[i, j]= of the angle between particles =i= and =j=. We also evaluate the second Legendre polynomial $P_2$ for each value of $\cos\theta$
+
+\begin{equation}
+P_2(x)=(3x^2-1)/2.
+\end{equation}
+
+#+BEGIN_SRC ipython :results none
+  cos_theta = np.sum(orientation[:, None, :]*orientation[None, :, :], axis=-1)
+  p2_cos_theta = (3*cos_theta**2-1)/2
+#+END_SRC
+
+Now comes the tricky part: the double sum over /all/ grains $i$, and only grains $j$ belonging to $\mathcal C_i(r, r+\Delta r)$ (where $\Delta r=1\,\text{pix}$). For $i$ fixed, the inner sum
+
+\begin{equation}
+\frac1{\operatorname{\#}\mathcal C_i(r, r+1)}\sum_{j\in\mathcal C_i(r, r+1)}\frac{3\left(\vec n_i\cdot\vec n_j\right)^2-1}2,
+\end{equation}
+
+can be seen as the mean of all cells =p2_cos_theta[i, j]= for which ~labels[i, j]==r~. As such, it can be computed with the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.mean.html#scipy-ndimage-mean][scipy.ndimage.mean]] function (similar in spirit to the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html#scipy.ndimage.sum][scipy.ndimage.sum]] function).
+
+#+BEGIN_SRC ipython :results none
+  num_grains = center.shape[0]
+  r = np.unique(labels)
+  inner_sum = np.empty((num_grains, len(r)),
+                       dtype=np.float64)
+  for i in range(num_grains):
+      inner_sum[i] = scipy.ndimage.mean(p2_cos_theta[i], labels[i], r)
+#+END_SRC
+
+I didn't find how to get rid of this loop! Then, the outer sum is a simple mean (ignoring NaNs). The resulting correlation function is represented on Fig. XXX
+
+#+BEGIN_SRC ipython :file ./tmp/S2.png
+  S2 = np.nanmean(inner_sum, axis=0)
+  fig, ax = plt.subplots()
+  ax.set_xlabel('$r$')
+  ax.set_ylabel('$S_2(r)$')
+  ax.set_ylim(-0.1, 0.5)
+  ax.plot(r, S2)
+  fig.tight_layout()
+#+END_SRC
+
+#+RESULTS:
+[[file:./tmp/S2.png]]
+For small values of $r$, the curve is not relevant, since very little grains are close enough (non-overlapping particles). Similarly, the increase at large values of the center-to-center distance $r$ should be considered with caution. Indeed, due to the limited size of the specimen, sampling is insufficient at high $r$. For intermediate values of $r$, the curve is interesting. It shows a rather good correlation at small distances, but this correlation decreases rapidly. For large values of $r$, we do not observe $S_2(r)\to0$, which might reflect the fact that the specimen is not isotropic (as shown in the [[#S1][previous section]]).
+
+* Boundary effects
+
+#+BEGIN_SRC ipython :results none
+  x0 = 219 # x-coordinate of the center of the sample container
+  y0 = 217 # y-coordinate of the center of the sample container
+  r0 = 208 # radius of the sample container
+
+  shifted_center = center-[0, x0, y0]
+  r = np.sqrt(np.sum(shifted_center[:, 1:]**2, axis=-1))
+  distance_to_boundary = r0-r
+  preferred_direction = shifted_center/r[:, None]
+  preferred_direction[:, 0] = 0
+#+END_SRC
+
+#+BEGIN_SRC ipython :file ./tmp/vertical_correlation.png
+  cos_theta = orientation[:, 0]
+  p2_cos_theta = (3*cos_theta**2-1)/2
+  bin_width = 15
+  labels = np.round(distance_to_boundary/bin_width)*bin_width
+  ones = np.ones_like(labels)
+  indices = np.unique(labels)
+  order_parameter = (scipy.ndimage.sum(p2_cos_theta, labels, indices) /
+                     scipy.ndimage.sum(ones, labels, indices))
+  plt.plot(indices, order_parameter, '+-')
+#+END_SRC
+
+#+RESULTS:
+[[file:./tmp/vertical_correlation.png]]
+
+
+#+BEGIN_SRC ipython :results output
+  cos_theta = np.sum(orientation*preferred_direction, axis=-1)
+  p2_cos_theta = (3*cos_theta**2-1)/2
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC ipython :file ./tmp/order_parameter.png
+  bin_width = 15
+  labels = np.round(distance_to_boundary/bin_width)*bin_width
+  ones = np.ones_like(labels)
+  indices = np.unique(labels)
+  order_parameter = (scipy.ndimage.sum(p2_cos_theta, labels, indices) /
+                     scipy.ndimage.sum(ones, labels, indices))
+  plt.plot(indices, order_parameter, '+-')
+#+END_SRC
+
+#+RESULTS:
+[[file:./tmp/order_parameter.png]]
