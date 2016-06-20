@@ -40,7 +40,7 @@ Let's compute $S_1$ for the assembly of rice grains. In the [[file:./20160219-Or
   import scipy.ndimage
   import scipy.spatial
 
-  #plt.style.use('../include/zenburn-light.mplstyle')
+  plt.style.use('../include/zenburn-light.mplstyle')
 
   filename = os.path.join('Z:', 'sebastien', 'experimental_data',
                           'navier', 'riz', 'rice-bin_4x4x4.hdf5')
@@ -83,7 +83,7 @@ where $\vec n_j$ denotes the orientation of particle $j$. $\mathcal C_i(r_1, r_2
 \mathcal C_i(r_1, r_2)=\left\{j, 1\leq j\leq N, r_1\leq\lVert\vec x_j-\vec x_i\rVert\leq r_2\right\}
 \end{equation}
 
-($\vec x_i$: center of particle $i$). Eq. \eqref{eq:2} is readily implemented in Python (using =numpy= and =scipy=). We first compute the distance matrix, and round it to the nearest integer, which then defines =labels[i, j]= (to be used in =scipy.ndimage.sum=).
+($\vec x_i$: center of particle $i$). Eq. \eqref{eq:2} is readily implemented in Python (using =numpy= and =scipy=). We first compute the distance matrix, and round it to the nearest integer, which then defines =labels[i, j]= (to be passed to =scipy.ndimage.mean=).
 
 #+BEGIN_SRC ipython :results none
   distance = scipy.spatial.distance_matrix(center, center)
@@ -107,7 +107,7 @@ Now comes the tricky part: the double sum over /all/ grains $i$, and only grains
 \frac1{\operatorname{\#}\mathcal C_i(r, r+1)}\sum_{j\in\mathcal C_i(r, r+1)}\frac{3\left(\vec n_i\cdot\vec n_j\right)^2-1}2,
 \end{equation}
 
-can be seen as the mean of all cells =p2_cos_theta[i, j]= for which ~labels[i, j]==r~. As such, it can be computed with the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.mean.html#scipy-ndimage-mean][scipy.ndimage.mean]] function (similar in spirit to the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html#scipy.ndimage.sum][scipy.ndimage.sum]] function).
+can be seen as the mean of all cells =p2_cos_theta[i, j]= for which ~labels[i, j]==r~. As such, it can be computed with the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.mean.html#scipy-ndimage-mean][scipy.ndimage.mean]] function (similar in spirit to the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html#scipy.ndimage.sum][scipy.ndimage.sum]] function). In the following snippet, we apply this function to each row of =p2_cos_theta= in turn (I could not find a way to get rid of this loop!).
 
 #+BEGIN_SRC ipython :results none
   num_grains = center.shape[0]
@@ -118,35 +118,88 @@ can be seen as the mean of all cells =p2_cos_theta[i, j]= for which ~labels[i, j
       inner_sum[i] = scipy.ndimage.mean(p2_cos_theta[i], labels[i], r)
 #+END_SRC
 
-I didn't find how to get rid of this loop! Then, the outer sum is a simple mean (ignoring NaNs). The resulting correlation function is represented on Fig. XXX
+Then, the outer sum in Eq. \eqref{eq:2} is a simple mean (ignoring NaNs).
 
-#+BEGIN_SRC ipython :file ./tmp/S2.png
+#+BEGIN_SRC ipython :results none
   S2 = np.nanmean(inner_sum, axis=0)
+#+END_SRC
+
+The resulting correlation function is plotted on Fig. [[fig:1]].
+
+#+BEGIN_SRC ipython :results none
   fig, ax = plt.subplots()
   ax.set_xlabel('$r$')
   ax.set_ylabel('$S_2(r)$')
   ax.set_ylim(-0.1, 0.5)
   ax.plot(r, S2)
   fig.tight_layout()
+  fig.savefig('./Orientation_correlations_among_rice_grains-08/S2.png',
+              transparent=True)
 #+END_SRC
 
-#+RESULTS:
-[[file:./tmp/S2.png]]
-For small values of $r$, the curve is not relevant, since very little grains are close enough (non-overlapping particles). Similarly, the increase at large values of the center-to-center distance $r$ should be considered with caution. Indeed, due to the limited size of the specimen, sampling is insufficient at high $r$. For intermediate values of $r$, the curve is interesting. It shows a rather good correlation at small distances, but this correlation decreases rapidly. For large values of $r$, we do not observe $S_2(r)\to0$, which might reflect the fact that the specimen is not isotropic (as shown in the [[#S1][previous section]]).
+#+CAPTION: The orientational correlation function $S_2(r)$.
+#+NAME: fig:1
+[[./Orientation_correlations_among_rice_grains-08/S2.png]]
+
+For small values of $r$, the curve is not relevant, since very little grains are close enough (remember that rice grains are non-overlapping particles!). Similarly, the increase at large values of the center-to-center distance $r$ should be considered with caution. Indeed, due to the limited size of the specimen, sampling is insufficient at high $r$. For intermediate values of $r$, the curve is interesting. It shows a rather good correlation at small distances, but this correlation decreases rapidly. For larger values of $r$, we do not observe $S_2(r)\to0$, which might reflect the fact that the specimen is not isotropic (as shown in the [[#S1][previous section]]); this should be investigated further.
 
 * Boundary effects
 
-#+BEGIN_SRC ipython :results none
-  x0 = 219 # x-coordinate of the center of the sample container
-  y0 = 217 # y-coordinate of the center of the sample container
-  r0 = 208 # radius of the sample container
+To close this post on orientation correlations, we investigate boundary effects in the specimen. The wall of the cylindrical sample container is impenetrable. Therefore, the particles closest to the wall are tangent this wall. We want to quantify the distance over which the grains keep the memory of this preferred orientation.
 
-  shifted_center = center-[0, x0, y0]
-  r = np.sqrt(np.sum(shifted_center[:, 1:]**2, axis=-1))
-  distance_to_boundary = r0-r
-  preferred_direction = shifted_center/r[:, None]
-  preferred_direction[:, 0] = 0
+To do so, for each grain, we locate the closest point on the wall, and the corresponding normal vector. We first recall the location of the axis of the container, and its radius (see [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][this post]])
+
+#+BEGIN_SRC ipython :results none
+  x_center = 219
+  y_center = 217
+  radius = 208
 #+END_SRC
+
+We then compute the radius-vector (we discard the $z$-coordinate, which is the first index), from which we deduce the normal to the boundary, $\vec e_r$.
+
+#+BEGIN_SRC ipython :results none
+  radius_vector = center-[0, x0, y0]
+  # Discard first (z) coordinate!
+  distance_to_axis = np.sqrt(np.sum(shifted_center[:, 1:]**2, axis=-1))
+  distance_to_boundary = radius-distance_to_axis
+  e_r = radius_vector/distance_to_axis[:, None]
+  e_r[:, 0] = 0
+#+END_SRC
+
+We now compute the orthoradial vector $\vec e_\theta$,
+
+#+BEGIN_SRC ipython :results none
+  e_theta = np.zeros_like(e_r)
+  e_theta[:, 1] = -e_r[:, 2]
+  e_theta[:, 2] = e_r[:, 1]
+#+END_SRC
+
+For each grain, the direction is decomposed in the local basis $(\vec e_r, \vec e_z\times\vec e_r, \vec e_z)$.
+
+#+BEGIN_SRC ipython :results none
+  orientation_local = np.zeros_like(orientation)
+  orientation_local[:, 0] = np.sum(e_r*orientation, axis=-1)
+  orientation_local[:, 1] = np.sum(e_theta*orientation, axis=-1)
+  orientation_local[:, 2] = orientation[:, 0]
+#+END_SRC
+
+#+BEGIN_SRC ipython :file ./tmp/bla.png
+  fabric = orientation_local[:, :, None]*orientation_local[:, None, :]
+  x11 = fabric[:, 0, 0]
+  x22 = fabric[:, 1, 1]
+  x33 = fabric[:, 2, 2]
+  labels = np.round(distance_to_boundary/4)*4
+  indices = np.unique(labels)
+  y11 = scipy.ndimage.mean(x11, labels, indices)
+  y22 = scipy.ndimage.mean(x22, labels, indices)
+  y33 = scipy.ndimage.mean(x33, labels, indices)
+  plt.plot(indices, y11, '-')
+  plt.plot(indices, y22, '-')
+  plt.plot(indices, y33, '-')
+#+END_SRC
+
+#+RESULTS:
+[[file:./tmp/bla.png]]
 
 #+BEGIN_SRC ipython :file ./tmp/vertical_correlation.png
   cos_theta = orientation[:, 0]
