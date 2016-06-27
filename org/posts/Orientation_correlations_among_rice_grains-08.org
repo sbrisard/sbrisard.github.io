@@ -1,8 +1,8 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
-#+TITLE: Orientation correlations among rice grains, part 8: XXX
-#+DATE: [2016-03-11 Fri]
+#+TITLE: Orientation correlations among rice grains, part 8: estimating the correlations
+#+DATE: [2016-06-27 Mon]
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
 In the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][previous instalment]] of this series, we have analyzed the morphology of the rice grains. In particular, we have defined their /orientation/ as that of the major axis of inertia. We are now in a position to quantify the statistics of the orientations. We will first discuss [[#S1][one-point statistics]] (each grain is considered individually), then [[#S2][two-point statistics]] (mutual orientations of pairs of grains are considered). Finally, we will try to quantify how [[#Boundary_effects][the wall of the sample container]] influences the orientation of the rice grains.
@@ -35,7 +35,7 @@ S_1=\frac1{4\pi}\int_{0\leq\theta\leq\pi}\int_{0\leq\varphi\leq2\pi}\frac{3\cos^
 
 Conversely, for particles with fixed orientation, $\theta=0$ for all particles and $S_1=1$.
 
-Let us compute $S_1$ for the assembly of rice grains. In the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][last instalment]] of this series, we have computed the orientation (unit vector) of each grain. We first retrieve this data.
+Let us compute $S_1$ for the assembly of rice grains. In the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][previous instalment]] of this series, we have computed the orientation (unit vector) of each grain. We first retrieve this data.
 
 #+BEGIN_SRC ipython :results none
   import os.path
@@ -113,7 +113,7 @@ Now comes the tricky part: the double sum over /all/ grains $i$, and only grains
 \frac1{\operatorname{\#}\mathcal C_i(r, r+1)}\sum_{j\in\mathcal C_i(r, r+1)}\frac{3\left(\vec n_i\cdot\vec n_j\right)^2-1}2,
 \end{equation}
 
-can be seen as the mean of all cells =p2_cos_theta[i, j]= for which ~labels[i, j]==r~. As such, it can be computed with the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.mean.html#scipy-ndimage-mean][scipy.ndimage.mean]] function (similar in spirit to the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html#scipy.ndimage.sum][scipy.ndimage.sum]] function that was used in the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][last instalment]] of this series). In the following snippet, we apply this function to each row of =p2_cos_theta= in turn (I could not find a way to get rid of this loop!).
+can be seen as the mean of all cells =p2_cos_theta[i, j]= for which ~labels[i, j]==r~. As such, it can be computed with the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.mean.html#scipy-ndimage-mean][scipy.ndimage.mean]] function (similar in spirit to the [[http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html#scipy.ndimage.sum][scipy.ndimage.sum]] function that was used in the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][previous instalment]] of this series). In the following snippet, we apply this function to each row of =p2_cos_theta= in turn (I could not find a way to get rid of this loop!).
 
 #+BEGIN_SRC ipython :results none
   num_grains = center.shape[0]
@@ -233,4 +233,4 @@ This was the last post of this series on /Orientation correlations among rice gr
 
 The resulting values indeed indicate the existence of orientation correlations. However, further investigations should be carried out in order to draw reliable conclusions. In particular, the descriptors plotted in Figs. [[fig:1]] and [[fig:2]] are histograms, and filtering of some sort should be used to smooth the curves. Besides, the analysis of [[#S1][the first section]] shows that the sample is globally anisotropic. This global anisotropy should be accounted for (“subtracted”) while analyzing local anisotropy. In short, the present post should be considered as a mere introduction to the matter and the relevant tools.
 
-Well, I hope you enjoyed this series! We initially set out to quantify orientation correlations in an assembly of rice grains. To do so, a fair amount of image analysis was required. We introduced [[file:./20150330-Orientation_correlations_among_rice_grains-03.org][binning]], the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][Hough transform]], [[file:./20150709-Orientation_correlations_among_rice_grains-05.org][Otsu's method]], a dedicated seeding technique for the [[file:./20150930-Orientation_correlations_among_rice_grains-06.org][watershed transform]] and the quantification of the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][morphology]] of the grains.
+Well, I hope you enjoyed this series! We initially set out to quantify orientation correlations in an assembly of rice grains. To do so, a fair amount of image analysis was required. We introduced [[file:./20150330-Orientation_correlations_among_rice_grains-03.org][binning]], the [[file:./20150529-Orientation_correlations_among_rice_grains-04.org][Hough transform]], [[file:./20150709-Orientation_correlations_among_rice_grains-05.org][Otsu's method]], a dedicated seeding technique for the [[file:./20150930-Orientation_correlations_among_rice_grains-06.org][watershed transform]] and the quantification of the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][morphology]] of the grains. All these techniques have a wide range of applications, which goes far beyond the analysis of rice grains!
