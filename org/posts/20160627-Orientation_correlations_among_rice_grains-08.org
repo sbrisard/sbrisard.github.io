@@ -139,13 +139,13 @@ The resulting correlation function is plotted on Fig. [[fig:1]].
   ax.set_ylim(-0.1, 0.5)
   ax.plot(r, S2)
   fig.tight_layout()
-  fig.savefig('./Orientation_correlations_among_rice_grains-08/S2.png',
+  fig.savefig('./20160627-Orientation_correlations_among_rice_grains-08/S2.png',
               transparent=True)
 #+END_SRC
 
 #+CAPTION: The orientational correlation function $S_2(r)$.
 #+NAME: fig:1
-[[./Orientation_correlations_among_rice_grains-08/S2.png]]
+[[file:./20160627-Orientation_correlations_among_rice_grains-08/S2.png]]
 
 For small values of $r$, the curve is not relevant, since very little grains are close enough (remember that rice grains are non-overlapping particles!). Similarly, the increase at large values of the center-to-center distance $r$ should be considered with caution. Indeed, due to the limited size of the specimen, sampling is insufficient at high $r$. For intermediate values of $r$, the curve is interesting. It shows a rather good correlation at small distances, but this correlation decreases rapidly. For larger values of $r$, we do not observe $S_2(r)\to0$, which might reflect the fact that the specimen is not isotropic (as shown in the [[#S1][previous section]]); this should be investigated further.
 
@@ -219,13 +219,13 @@ The resulting statistical descriptors are plotted in Fig. [[fig:2]]. Honestly, t
   ax.legend(loc='upper left')
 
   fig.tight_layout()
-  fig.savefig('./Orientation_correlations_among_rice_grains-08/boundary_effects.png',
+  fig.savefig('./20160627-Orientation_correlations_among_rice_grains-08/boundary_effects.png',
               transparent=True)
 #+END_SRC
 
 #+CAPTION: Angular correlations with the orientation of the wall.
 #+NAME: fig:2
-[[file:./Orientation_correlations_among_rice_grains-08/boundary_effects.png]]
+[[file:./20160627-Orientation_correlations_among_rice_grains-08/boundary_effects.png]]
 
 * Conclusion
 
