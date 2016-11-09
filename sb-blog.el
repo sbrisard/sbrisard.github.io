@@ -146,7 +146,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 ;; ==============
 
 (org-export-define-derived-backend 'sb-blog 'html
-                                   :export-block "SB BLOG"
                                    :options-alist
                                    '((:comments-allowed nil "comments" nil)))
 
