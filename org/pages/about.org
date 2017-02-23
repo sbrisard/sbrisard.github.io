@@ -46,13 +46,13 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
 
 (see also [[https://cv.archives-ouvertes.fr/sbrisard][HAL]], [[http://scholar.google.fr/citations?user=IwlAZnAAAAAJ&hl=en][Google Scholar]], [[http://orcid.org/0000-0002-1976-6263][ORCID]])
 
-** [[http://dx.doi.org/10.1002/nme.5263][Brisard (2016)]]
-   :PROPERTIES:
-   :CUSTOM_ID: BRIS2016
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
+** [[http://dx.doi.org/10.1002/nme.5263][Brisard (2017)]]
+:PROPERTIES:
+:CUSTOM_ID: BRIS2017
+:HTML_CONTAINER_CLASS: sb-bibitem
+:END:
 
-S. Brisard, /Reconstructing displacements from the solution to the periodic Lippmann–Schwinger equation discretized on a uniform grid/, International Journal for Numerical Methods in Engineering, 2016 ([[https://hal-enpc.archives-ouvertes.fr/hal-01304603][author's version]])
+S. Brisard, /Reconstructing displacements from the solution to the periodic Lippmann–Schwinger equation discretized on a uniform grid/, International Journal for Numerical Methods in Engineering 109(4): 459-486, 2017 ([[https://hal-enpc.archives-ouvertes.fr/hal-01304603][author's version]])
 
 ** [[https://doi.org/10.1520/ACEM20150030][Mayercsik et al. (2016)]]
 :PROPERTIES:
