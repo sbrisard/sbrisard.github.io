@@ -37,8 +37,9 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
 
 * Supervision of PhD Students
 
-  - Vinh-Phuc TRAN (sept. 2013 - ???) :: /Multiscale a priori probabilistic modelling of random heterogeneous materials/ (advisor: [[http://navier.enpc.fr/SAB-Karam][K. Sab]]; co-supervisor: [[http://msme.u-pem.fr/equipe-mecanique/personnel/enseignants-chercheurs/guilleminot-johann/][J. Guilleminot]]).
-  - Mohamed Hassan KHALILI (sept. 2013 - ???) :: /Micromechanics of creep in granular materials/ (advisor: [[http://navier.enpc.fr/ROUX-Jean-Noel][J.-N. Roux]]; co-supervisors [[http://navier.enpc.fr/BORNERT-Michel][M. Bornert]], [[http://navier.enpc.fr/PEREIRA-Jean-Michel][J.-M. Pereira]] and [[http://navier.enpc.fr/~vandamme][M. Vandamme]]).
+  - Vinh Hoang Tan LE (oct. 2016 - ???) :: /Micromechanical modeling of cracking induced by hydromechanical stresses in heterogeneous porous materials by means of joint finite elements and inhomogeneity models with partial bonding of the interface/ (advisor: [[http://navier.enpc.fr/POUYA-Ahmad][A. Pouya]]).
+  - Mohamed Hassan KHALILI (sept. 2013 - nov. 2016) :: /Micromechanics of creep in granular materials/ (advisor: [[http://navier.enpc.fr/ROUX-Jean-Noel][J.-N. Roux]]; co-supervisors [[http://navier.enpc.fr/BORNERT-Michel][M. Bornert]], [[http://navier.enpc.fr/PEREIRA-Jean-Michel][J.-M. Pereira]] and [[http://navier.enpc.fr/~vandamme][M. Vandamme]]).
+  - Vinh-Phuc TRAN (sept. 2013 - oct. 2016) :: /Multiscale a priori probabilistic modelling of random heterogeneous materials/ (advisor: [[http://navier.enpc.fr/SAB-Karam][K. Sab]]; co-supervisor: [[http://msme.u-pem.fr/equipe-mecanique/personnel/enseignants-chercheurs/guilleminot-johann/][J. Guilleminot]]).
   - Yassine EL-ASSAMI (febr. 2012 - may 2015) :: Modelling time-dependent behaviour of concrete with the equivalent inclusion method (advisor: [[http://navier.enpc.fr/DORMIEUX-Luc][L. Dormieux]]).
 
 * Publications in peer-reviewed journals
