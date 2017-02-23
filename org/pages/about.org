@@ -54,6 +54,14 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
 
 S. Brisard, /Reconstructing displacements from the solution to the periodic Lippmann–Schwinger equation discretized on a uniform grid/, International Journal for Numerical Methods in Engineering, 2016 ([[https://hal-enpc.archives-ouvertes.fr/hal-01304603][author's version]])
 
+** [[https://doi.org/10.1520/ACEM20150030][Mayercsik et al. (2016)]]
+:PROPERTIES:
+:CUSTOM_ID: MAYE2016
+:HTML_CONTAINER_CLASS: sb-bibitem
+:END:
+
+N. P. Mayercsik, S. Brisard, M. Vandamme and K. E. Kurtis, /Using Fractal Geometry to Recover the 3D Air Void, Scale-Independent, Microstructure Information From 2D Sections of Mortars/, Advances in Civil Engineering Materials 5(2): 1-21, 2016.
+
 ** [[http://dx.doi.org/10.1016/j.mechmat.2015.10.007][Tran et al. (2016)]]
    :PROPERTIES:
    :CUSTOM_ID: TRAN2016
