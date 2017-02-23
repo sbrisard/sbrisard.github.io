@@ -52,7 +52,7 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
 :HTML_CONTAINER_CLASS: sb-bibitem
 :END:
 
-S. Brisard, /Towards improved Hashin--Shtrikman bounds on the effective moduli of random composites/, Mechanics & Industry 18(2): 214, 2017
+S. Brisard, /Towards improved Hashin--Shtrikman bounds on the effective moduli of random composites/, Mechanics & Industry 18(2): 214, 2017 ([[https://hal-enpc.archives-ouvertes.fr/hal-01474668][post-print]])
 
 ** [[http://dx.doi.org/10.1002/nme.5263][Brisard (2017)]]
 :PROPERTIES:

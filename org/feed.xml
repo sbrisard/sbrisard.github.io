@@ -3,6 +3,14 @@
   <channel>
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
+
+    <item>
+      <title>New paper out!</title>
+      <link>http://sbrisard.github.io/posts/20170223-New_paper_out.html</link>
+      <guid>posts/20170223-New_paper_out.html</guid>
+      <pubDate>Thu, 23 Febr 2017</pubDate>
+      <description>My paper “Towards improved Hashin--Shtrikman bounds on the effective moduli of random composites” has recently been published in Mechanics & Industry.</description>
+    </item>
     <item>
       <title>Orientation correlations among rice grains, part 8: estimating the correlations</title>
       <link>http://sbrisard.github.io/posts/20160627-Orientation_correlations_among_rice_grains-08.html</link>
