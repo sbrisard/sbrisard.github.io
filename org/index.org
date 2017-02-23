@@ -1,5 +1,5 @@
 # -*- coding: utf-8; -*-
-#+SETUPFILE: "./include/css-0.org
+#+SETUPFILE: ./include/css-0.org
 #+BIND: sb-blog-comments nil
 #+TITLE: Welcome!
 
