@@ -87,12 +87,26 @@ N. P. Mayercsik, S. Brisard, M. Vandamme and K. E. Kurtis, /Using Fractal Geomet
 V.P. Tran, J. Guilleminot, S. Brisard and K. Sab, /Stochastic modeling of mesoscopic elasticity random field/, Mechanics of Materials 93: 1-12, 2016 ([[https://hal-enpc.archives-ouvertes.fr/hal-01226337][author's version]])
 
 ** [[http://dx.doi.org/10.1016/j.ijsolstr.2013.10.037][Brisard et al (2014)]]
-   :PROPERTIES:
-   :CUSTOM_ID: BRIS2014
-   :HTML_CONTAINER_CLASS: sb-bibitem
-   :END:
+:PROPERTIES:
+:CUSTOM_ID: BRIS2014
+:HTML_CONTAINER_CLASS: sb-bibitem
+:END:
 
-S. Brisard, L. Dormieux and K. Sab, /A variational form of the equivalent inclusion method for numerical homogenization/, International Journal of Solids and Structures 51(3-4): 716-728, 2014 ([[http://hal-enpc.archives-ouvertes.fr/hal-00922779][author's version]])
+S. Brisard, L. Dormieux and K. Sab, /A variational form of the
+equivalent inclusion method for numerical homogenization/,
+International Journal of Solids and Structures 51(3-4): 716-728, 2014
+([[http://hal-enpc.archives-ouvertes.fr/hal-00922779][author's version]])
+
+** [[https://doi.org/10.1016/j.cma.2014.05.014][Bignonnet et al. (2014)]]
+:PROPERTIES:
+:CUSTOM_ID: BIGN2014
+:HTML_CONTAINER_CLASS: sb-bibitem
+:END:
+
+F. Bignonnet, K. Sab, L. Dormieux, S. Brisard and A. Bisson,
+/Macroscopically consistent non-local modeling of heterogeneous
+media/, Computer Methods in Applied Mechanics and Engineering 278(15):
+218-238, 2014 ([[https://hal-enpc.archives-ouvertes.fr/hal-01076820][preprint]])
 
 ** [[http://dx.doi.org/10.1016/j.jmps.2013.08.009][Brisard et al (2013)]]
    :PROPERTIES:
