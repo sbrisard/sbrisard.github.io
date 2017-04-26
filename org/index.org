@@ -12,11 +12,11 @@ reconstruction-free method to quantify local kinematics in granular
 media by X-ray tomography” has recently been published in
 /Experimental Mechanics/.
 
-* [[file:./posts/20170223-New_paper_out.org][2017-02-23 New paper out!]]
+* [[file:./posts/20170223-New_paper_out.org][2017-02-23 -- New paper out!]]
 
 My paper “Towards improved Hashin--Shtrikman bounds on the effective moduli of random composites” has recently been published in /Mechanics & Industry/.
 
-* [[file:./posts/20160627-Orientation_correlations_among_rice_grains-08.org][2016-06-23 Orientation correlations among rice grains, part 8: estimating the correlations]]
+* [[file:./posts/20160627-Orientation_correlations_among_rice_grains-08.org][2016-06-23 -- Orientation correlations among rice grains, part 8: estimating the correlations]]
 
 In the [[file:./posts/20160219-Orientation_correlations_among_rice_grains-07.org][previous instalment]] of this series, we have analyzed the morphology of the rice grains. In particular, we have defined their /orientation/ as that of the major axis of inertia. We are now in a position to quantify the statistics of the orientations. We will first discuss [[file:./posts/20160627-Orientation_correlations_among_rice_grains-08.org::#S1][one-point statistics]] (each grain is considered individually), then [[file:./posts/20160627-Orientation_correlations_among_rice_grains-08.org::#S2][two-point statistics]] (mutual orientations of pairs of grains are considered). Finally, we will try to quantify how [[file:./posts/20160627-Orientation_correlations_among_rice_grains-08.org::#Boundary_effects][the wall of the sample container]] influences the orientation of the rice grains.
 
