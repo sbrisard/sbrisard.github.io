@@ -46,6 +46,14 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
 
 (see also [[https://cv.archives-ouvertes.fr/sbrisard][HAL]], [[http://scholar.google.fr/citations?user=IwlAZnAAAAAJ&hl=en][Google Scholar]], [[http://orcid.org/0000-0002-1976-6263][ORCID]])
 
+** [[http://dx.doi.org/10.1007/s11340-017-0263-5][Khalili et al. (2017)]]
+:PROPERTIES:
+:CUSTOM_ID: KHAL2017
+:HTML_CONTAINER_CLASS: sb-bibitem
+:END:
+
+M.H. Khalili, S. Brisard, M. Bornert, P. Aimedieu, J.-M. Pereira and J.-N. Roux, /Discrete Digital Projections Correlation: a reconstruction-free method to quantify local kinematics in granular media by X-ray tomography/, Experimental Mechanics, 2017 ([[https://hal-enpc.archives-ouvertes.fr/hal-01474701][preprint]])
+
 ** [[http://doi.org/10.1051/meca/2016037][Brisard (2017a)]]
 :PROPERTIES:
 :CUSTOM_ID: BRIS2017A

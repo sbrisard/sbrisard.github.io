@@ -3,7 +3,18 @@
   <channel>
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
-
+    <item>
+      <title>New paper on Discrete Digital Projections Correlation</title>
+      <link>http://sbrisard.github.io/posts/20170426-New_paper_on_Discrete_Digital_Projections_Correlation.html</link>
+      <guid>posts/20170426-New_paper_on_Discrete_Digital_Projections_Correlation.html</guid>
+      <pubDate>Wed, 26 Apr 2017</pubDate>
+      <description>
+        Our paper “Discrete Digital Projections Correlation: a
+        reconstruction-free method to quantify local kinematics in
+        granular media by X-ray tomography” has recently been
+        published in Experimental Mechanics.
+      </description>
+    </item>
     <item>
       <title>New paper out!</title>
       <link>http://sbrisard.github.io/posts/20170223-New_paper_out.html</link>
