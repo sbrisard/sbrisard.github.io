@@ -2,6 +2,7 @@
 #+SETUPFILE: "../include/css-1.org"
 #+BIND: sb-blog-comments nil
 
+   + [[file:./20170428-New_paper_on_one-dimensional_compression_of_granular_materials.org][2017-04-28 -- New paper on one-dimensional compression of granular materials]]
    + [[file:./20170426-New_paper_on_Discrete_Digital_Projections_Correlation.org][2017-04-26 -- New paper on Discrete Digital Projections Correlation]]
    + [[./20170223-New_paper_out.org][2017-02-23 -- New paper out!]]
    + [[./20160627-Orientation_correlations_among_rice_grains-08.org][2016-06-27 -- Orientation correlations among rice grains, part 8: estimating the correlations]]

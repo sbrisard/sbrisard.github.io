@@ -47,6 +47,22 @@ Teaching assistant (since 2003), then Assistant Professor (since 2008) at Ecole 
 
 (see also [[https://cv.archives-ouvertes.fr/sbrisard][HAL]], [[http://scholar.google.fr/citations?user=IwlAZnAAAAAJ&hl=en][Google Scholar]], [[http://orcid.org/0000-0002-1976-6263][ORCID]])
 
+** [[https://doi.org/10.1103/PhysRevE.95.032908][Khalili et al. (2017b)]]
+:PROPERTIES:
+:CUSTOM_ID: KHAL2017B
+:HTML_CONTAINER_CLASS: sb-bibitem
+:END:
+
+M. H. Khalili, J.-N. Roux, J.-M. Pereira, S. Brisard and M. Bornert, /A numerical study of one-dimensional compression of granular materials: II. Elastic moduli, stresses, and microstructure/, Physical Review E 95(3): 032908, 2017 ([[https://hal-enpc.archives-ouvertes.fr/hal-01497638][preprint]])
+
+** [[http://dx.doi.org/10.1103/PhysRevE.95.032907][Khalili et al. (2017a)]]
+:PROPERTIES:
+:CUSTOM_ID: KHAL2017A
+:HTML_CONTAINER_CLASS: sb-bibitem
+:END:
+
+M. H. Khalili, J.-N. Roux, J.-M. Pereira, S. Brisard and M. Bornert, /A numerical study of one-dimensional compression of granular materials: I. Stress-strain behavior, microstructure and irreversibility/, Physical Review E 95(3): 032907, 2017 ([[https://hal-enpc.archives-ouvertes.fr/hal-01497636][preprint]])
+
 ** [[http://dx.doi.org/10.1007/s11340-017-0263-5][Khalili et al. (2017)]]
 :PROPERTIES:
 :CUSTOM_ID: KHAL2017

@@ -3,6 +3,20 @@
   <channel>
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
+
+    <item>
+      <title>New paper on one-dimensional compression of granular materials</title>
+      <link>http://sbrisard.github.io/posts/20170428-New_paper_on_one-dimensional_compression_of_granular_materials.html</link>
+      <guid>posts/20170428-New_paper_on_one-dimensional_compression_of_granular_materials.html</guid>
+      <pubDate>Fri, 28 Apr 2017</pubDate>
+      <description>
+        My student Mohamed Hassan Khalili has recently had one of his
+        papers published in /Physical Review E/. The paper is called
+        “A numerical study of one-dimensional compression of granular
+        materials”. I have only been very marginally involved in this
+        DEM study, which is divided in two parts.
+      </description>
+    </item>
     <item>
       <title>New paper on Discrete Digital Projections Correlation</title>
       <link>http://sbrisard.github.io/posts/20170426-New_paper_on_Discrete_Digital_Projections_Correlation.html</link>

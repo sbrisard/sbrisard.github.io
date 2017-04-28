@@ -48,9 +48,9 @@ compared to our model systems, should signal contact plasticity or
 damage.
 #+END_QUOTE
 
-The exact references to this paper can be found in my [[file:../pages/about.org::#KHAL2017][list of
-publications]]. The preprint is available on [[https://hal-enpc.archives-ouvertes.fr/hal-01497636][HAL]] and the published
-version is available [[https://doi.org/10.1103/PhysRevE.95.032907][here]].
+The exact references to this paper can be found in my
+[[file:../pages/about.org::#KHAL2017A][list of publications]] The preprint is available on [[https://hal-enpc.archives-ouvertes.fr/hal-01497636][HAL]] and the
+published version is available [[https://doi.org/10.1103/PhysRevE.95.032907][here]].
 
 Part II is entitled “Elastic moduli, stresses and microstructure”. The
 abstract is reproduced below
@@ -91,5 +91,5 @@ are directly assembled in anisotropic configurations and keep a
 roughly constant lateral to axial stress ratio under compression.
 #+END_QUOTE
 
-See my [[file:../pages/about.org::#KHAL2017][list of publications]], the preprint on [[https://hal-enpc.archives-ouvertes.fr/hal-01497638][HAL]] and the [[https://doi.org/10.1103/PhysRevE.95.032908][published
- version]].
+See my [[file:../pages/about.org::#KHAL2017B][list of publications]], the preprint on [[https://hal-enpc.archives-ouvertes.fr/hal-01497638][HAL]] and the
+[[https://doi.org/10.1103/PhysRevE.95.032908][published version]].

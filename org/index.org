@@ -5,6 +5,14 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:./posts/20170428-New_paper_on_one-dimensional_compression_of_granular_materials.org][2017-04-28 -- New paper on one-dimensional compression of granular materials]]
+
+My student Mohamed Hassan Khalili has recently had one of his papers
+published in /Physical Review E/. The paper is called “A numerical
+study of one-dimensional compression of granular materials”. I have
+only been very marginally involved in this DEM study, which is divided
+in two parts.
+
 * [[file:./posts/20170426-New_paper_on_Discrete_Digital_Projections_Correlation.org][2017-04-26 -- New paper on Discrete Digital Projections Correlation]]
 
 Our paper “Discrete Digital Projections Correlation: a
