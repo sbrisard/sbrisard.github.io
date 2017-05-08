@@ -1,6 +1,5 @@
 #+HTML_HEAD_EXTRA: <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
-#+HTML_MATHJAX: path:"http://cdn.mathjax.org/mathjax/latest/MathJax.js"
-#+HTML_HEAD_EXTRA: <script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' type='text/javascript'>
+#+HTML_HEAD_EXTRA:<script type="text/x-mathjax-config">
 #+HTML_HEAD_EXTRA:   MathJax.Hub.Config({
 #+HTML_HEAD_EXTRA:       extensions: ['tex2jax.js', 'TeX/AMSmath.js',
 #+HTML_HEAD_EXTRA:                    'TeX/AMSsymbols.js'],
