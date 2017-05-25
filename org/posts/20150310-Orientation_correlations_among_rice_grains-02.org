@@ -24,3 +24,7 @@ The reconstruction is highly contrasted, so that simple thresholding should prod
 The present series would not exist without the help of my former colleague Nicolas Lenoir, now research engineer at [[http://www.placamat.cnrs.fr/][PLACAMAT]]. His dedication and excellent temper made 3D imaging at Laboratoire Navier a real delight. He also kindly agreed to review this post, which I am grateful for, since he spotted some rather crude mistakes!
 
 [[http://www.paraview.org/][Paraview]] was used to produce the last image of this post.
+
+* Update (2017-05-25)
+
+The 3D reconstruction is now available from the [[https://zenodo.org/][Zenodo]] platform as a set of 689 TIFF images, 1747×1751 pixels, under a [[https://creativecommons.org/licenses/by/4.0/][CC BY 4.0]] license ([[https://doi.org/10.5281/zenodo.582636][10.5281/zenodo.582636]]).
