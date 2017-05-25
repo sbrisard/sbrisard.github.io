@@ -5,7 +5,7 @@
 
 In the [[file:./20150223-Orientation_correlations_among_rice_grains-01.org][first]] instalment of this series, I briefly introduced orientational order in assemblies of anisotropic particles, and proposed an illustration based on synthetic microstructures. But what I really intend to do in this series is to show how orientational order can be quantified in a "real-life" sample, namely a packing of rice grains. This of course requires a 3D image of the packing. Fortunately, my lab ([[http://navier.enpc.fr/][Laboratoire Navier]]) is the proud host of a [[http://navier.enpc.fr/Microtomographe,297][collaborative microtomography platform]] and my former colleague Nicolas Lenoir --who was in charge of this instrument-- gave me the opportunity to scan my toy sample in december 2013.
 
-The sample preparation is rather crude. Ordinary, long-grain rice is poured in a plastic container (see picture below), 50mm in diameter. The average length of the grains is about ....... as the image analysis to come will show. Therefore, strong boundary effects are to be expected. This is no big issue for the present study, which is carried out for illustrative purposes only.
+The sample preparation is rather crude. Ordinary, long-grain rice is poured in a plastic container (see picture below), 50mm in diameter. The average length of the grains is about 6.5mm as the image analysis to come will show. Therefore, strong boundary effects are to be expected. This is no big issue for the present study, which is carried out for illustrative purposes only.
 
 file:./20150310-Orientation_correlations_among_rice_grains-02/rice-sample-medium.png
 
