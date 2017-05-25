@@ -385,4 +385,4 @@ Which shows that the distribution of grains is /not/ isotropic. Analysis of the 
 
 * Conclusion
 
-In this post, we have analysed the orientation of each grain. The orientation was defined as the orientation of the major axis of the equivalent ellipsoid. We are now ready to analyse orientation correlations among rice grains, which will be the topic of the next instalment.
+In this post, we have analysed the orientation of each grain. The orientation was defined as the orientation of the major axis of the equivalent ellipsoid. We are now ready to analyse orientation correlations among rice grains, which will be the topic of the [[file:./20160627-Orientation_correlations_among_rice_grains-08.org][next instalment]].

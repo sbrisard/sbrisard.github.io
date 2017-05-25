@@ -105,4 +105,4 @@ file:./20150930-Orientation_correlations_among_rice_grains-06/watershed-directio
 
 In an image analysis pipeline, segmentation is notoriously the critical step of the process. [[https://en.wikipedia.org/wiki/Watershed_%28image_processing%29][Watershed]] is a very efficient technique, which requires careful seeding. For anisotropic object, ad-hoc techniques have to be adopted. In the present blog, I showed how some simple [[https://en.wikipedia.org/wiki/Mathematical_morphology][mathematical morphology]] operations could be used to produce a satisfactory set of seeds. It should be noted however that the reason why the proposed approach works so well is that rice grains are nearly spheroidal. In other words, correctly seeding the watershed process is highly problem dependent!
 
-In the next instalment of this series, I will show how to analyse the shape and orientation of each individual grain.
+In the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][next instalment]] of this series, I will show how to analyse the shape and orientation of each individual grain.
