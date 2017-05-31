@@ -46,8 +46,8 @@ format is located within a =pre= tag. This suggests the following CSS
 selector
 
 #+BEGIN_SRC python
-out = response.css('pre').extract_first()
-print(out)
+  out = response.css('pre').extract_first()
+  print(out)
 #+END_SRC
 
 which produces the following abbreviated output
@@ -75,7 +75,7 @@ convert each row to floats.
   lines = out.splitlines()
   table = [[np.float64(x) for x in line.split()] for line in lines[6:-1]]
   table = np.asarray(table)
-  print(table[:5])
+  print(table)
 #+END_SRC
 
 #+BEGIN_EXAMPLE
@@ -86,4 +86,55 @@ convert each row to floats.
  [  2.00000000e+01   2.15300000e-02   1.60600000e-02]]
 #+END_EXAMPLE
 
-… and we're done! Or?!?
+… and we're done! Or?!? Let's what happens with [[http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z13.html][Aluminum]].
+
+#+BEGIN_EXAMPLE
+activate scrapy
+scrapy shell "http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z13.html"
+#+END_EXAMPLE
+
+#+BEGIN_SRC python
+  out = response.css('pre').extract_first()
+  lines = out.splitlines()
+  table = [[np.float64(x) for x in line.split()] for line in lines[6:-1]]
+#+END_SRC
+
+This produces the following error
+
+#+BEGIN_EXAMPLE
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "<console>", line 1, in <listcomp>
+  File "<console>", line 1, in <listcomp>
+ValueError: could not convert string to float: 'K'
+#+END_EXAMPLE
+
+This has to do with the [[https://en.wikipedia.org/wiki/Absorption_edge][absorption edge]] of the element, which is marked by a letter in the first column of the table, as shown below.
+
+#+BEGIN_SRC python
+  lines[9]
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+'K  1.55960E-03  3.957E+03  3.829E+03 '
+#+END_EXAMPLE
+
+So we need to skip the first character in each row. In fact, we can safely skip the first three characters.
+
+#+BEGIN_SRC python
+  out = response.css('pre').extract_first()
+  lines = out.splitlines()
+  table = [[np.float64(x) for x in line.split()] for line in lines[6:-1]]
+  table = np.asarray(table)
+  print(table[:5])
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+[[  1.00000000e-03   1.18500000e+03   1.18300000e+03]
+ [  1.50000000e-03   4.02200000e+02   4.00100000e+02]
+......................................................
+ [  1.50000000e+01   2.19500000e-02   1.63100000e-02]
+ [  2.00000000e+01   2.16800000e-02   1.63300000e-02]]
+#+END_EXAMPLE
+
+… and the problem is solved!
