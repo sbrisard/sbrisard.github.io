@@ -162,14 +162,18 @@ We then edit the =scrapymu/scrapymu/spiders/tables.py= file
       start_urls = [TABLE3_URL.format(z) for z in range(1, 93)]
 
       def parse(self, response):
+          # Retrieving the atomic number from the URL
+          z = int(response.url[-7:-5])
+
           pre = response.css('pre').extract_first()
           lines = pre.splitlines()
-          value = [[x for x in line[3:].split()] for line in lines[6:-1]]
-          key = response.url.split('/')[-1].split('.')[0]
-          yield {key: value}
+          table = [[x for x in line[3:].split()] for line in lines[6:-1]]
+          yield {z: table}
 #+END_SRC
 
-This spider can be run as follows
+It returns a =dict= which maps the element's atomic number Z to the
+corresponding table (as a list of rows, each row being itself a
+list). It can be run as follows
 
 #+BEGIN_EXAMPLE
 scrapy crawl table3 -o table3.json
