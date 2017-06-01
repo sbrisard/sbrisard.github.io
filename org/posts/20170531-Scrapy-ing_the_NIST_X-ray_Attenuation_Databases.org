@@ -30,11 +30,10 @@ which installs Scrapy in a new environment (called =scrapy).
 
 * Downloading the table for one single element
 
-** The easy case: hydrogen
-
 In this section, we retrieve the data for the mass attenuation
-coefficient of hydrogen, which can be found [[http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html][here]]. Following the [[https://docs.scrapy.org/en/latest/intro/tutorial.html#extracting-data][Scrapy
-tutorial]], we first use the Scrapy shell.
+coefficient of one single element. We start with the data for
+hydrogen, which can be found [[http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html][here]]. Following the [[https://docs.scrapy.org/en/latest/intro/tutorial.html#extracting-data][Scrapy tutorial]], we
+first use the Scrapy shell.
 
 #+BEGIN_EXAMPLE
 activate scrapy
@@ -73,17 +72,14 @@ convert each row to floats.
 
 #+BEGIN_SRC python
   lines = out.splitlines()
-  table = [[np.float64(x) for x in line.split()] for line in lines[6:-1]]
-  table = np.asarray(table)
+  table = [[float(x) for x in line.split()] for line in lines[6:-1]]
   print(table)
 #+END_SRC
 
 #+BEGIN_EXAMPLE
-[[  1.00000000e-03   7.21700000e+00   6.82000000e+00]
- [  1.50000000e-03   2.14800000e+00   1.75200000e+00]
-......................................................
- [  1.50000000e+01   2.53900000e-02   1.83700000e-02]
- [  2.00000000e+01   2.15300000e-02   1.60600000e-02]]
+[[0.001, 7.217, 6.82], [0.0015, 2.148, 1.752],
+..................................................,
+[15.0, 0.02539, 0.01837], [20.0, 0.02153, 0.01606]]
 #+END_EXAMPLE
 
 … and we're done! Or?!? Let's what happens with [[http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z13.html][Aluminum]].
@@ -96,7 +92,7 @@ scrapy shell "http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z13.html"
 #+BEGIN_SRC python
   out = response.css('pre').extract_first()
   lines = out.splitlines()
-  table = [[np.float64(x) for x in line.split()] for line in lines[6:-1]]
+  table = [[float(x) for x in line.split()] for line in lines[6:-1]]
 #+END_SRC
 
 This produces the following error
@@ -109,7 +105,8 @@ Traceback (most recent call last):
 ValueError: could not convert string to float: 'K'
 #+END_EXAMPLE
 
-This has to do with the [[https://en.wikipedia.org/wiki/Absorption_edge][absorption edge]] of the element, which is marked by a letter in the first column of the table, as shown below.
+This has to do with the [[https://en.wikipedia.org/wiki/Absorption_edge][absorption edge]] of the element, which is
+marked by a letter in the first column of the table, as shown below.
 
 #+BEGIN_SRC python
   lines[9]
@@ -119,22 +116,56 @@ This has to do with the [[https://en.wikipedia.org/wiki/Absorption_edge][absorpt
 'K  1.55960E-03  3.957E+03  3.829E+03 '
 #+END_EXAMPLE
 
-So we need to skip the first character in each row. In fact, we can safely skip the first three characters.
+So we need to skip the first character in each row. In fact, we can
+safely skip the first three characters.
 
 #+BEGIN_SRC python
   out = response.css('pre').extract_first()
   lines = out.splitlines()
-  table = [[np.float64(x) for x in line.split()] for line in lines[6:-1]]
-  table = np.asarray(table)
-  print(table[:5])
+  table = [[float(x) for x in line[3:].split()] for line in lines[6:-1]]
+  print(table)
 #+END_SRC
 
 #+BEGIN_EXAMPLE
-[[  1.00000000e-03   1.18500000e+03   1.18300000e+03]
- [  1.50000000e-03   4.02200000e+02   4.00100000e+02]
-......................................................
- [  1.50000000e+01   2.19500000e-02   1.63100000e-02]
- [  2.00000000e+01   2.16800000e-02   1.63300000e-02]]
+[[0.001, 1185.0, 1183.0], [0.0015, 402.2, 400.1],
+..................................................,
+[15.0, 0.02195, 0.01631], [20.0, 0.02168, 0.01633]]
 #+END_EXAMPLE
 
 … and the problem is solved!
+
+* Downloading tables for all elements
+
+All links follow the same pattern
+=http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/zZZ.html=,
+where ZZ is the [[https://en.wikipedia.org/wiki/Atomic_number][atomic number]]. So we only need to generate a list of
+links in the =Spider=.
+
+We start by creating a Scrapy project.
+
+#+BEGIN_EXAMPLE
+activate scrapy
+scrapy startproject scrapymu
+#+END_EXAMPLE
+
+We then edit the =scrapymu/scrapymu/spiders/tables.py= file
+
+#+BEGIN_SRC python
+  import scrapy
+
+  BASE_URL = 'http://physics.nist.gov/PhysRefData/XrayMassCoef'
+  TABLE3_URL = '/'.join([BASE_URL, 'ElemTab/z{:02d}.html'])
+
+
+  class Table3Spider(scrapy.Spider):
+      name = 'table3'
+
+      start_urls = [TABLE3_URL.format(z) for z in range(1, 93)]
+
+      def parse(self, response):
+          pre = response.css('pre').extract_first()
+          lines = pre.splitlines()
+          value = [[x for x in line[3:].split()] for line in lines[6:-1]]
+          key = response.url.split('/')[-1].split('.')[0]
+          yield {key: value}
+#+END_SRC
