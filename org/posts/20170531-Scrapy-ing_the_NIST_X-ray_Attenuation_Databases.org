@@ -24,9 +24,10 @@ installation of Scrapy is a very smooth procedure
 
 #+BEGIN_EXAMPLE
 conda create --name scrapy python=3 scrapy
+activate scrapy
 #+END_EXAMPLE
 
-which installs Scrapy in a new environment (called =scrapy).
+which installs Scrapy in a new environment (called =scrapy=).
 
 * Downloading the table for one single element
 
@@ -36,7 +37,6 @@ hydrogen, which can be found [[http://physics.nist.gov/PhysRefData/XrayMassCoef/
 first use the Scrapy shell.
 
 #+BEGIN_EXAMPLE
-activate scrapy
 scrapy shell "http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html"
 #+END_EXAMPLE
 
@@ -82,7 +82,7 @@ convert each row to floats.
 [15.0, 0.02539, 0.01837], [20.0, 0.02153, 0.01606]]
 #+END_EXAMPLE
 
-… and we're done! Or?!? Let's what happens with [[http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z13.html][Aluminum]].
+… and we're done! Or?!? Let's see what happens with [[http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z13.html][aluminum]].
 
 #+BEGIN_EXAMPLE
 activate scrapy
@@ -105,8 +105,8 @@ Traceback (most recent call last):
 ValueError: could not convert string to float: 'K'
 #+END_EXAMPLE
 
-This has to do with the [[https://en.wikipedia.org/wiki/Absorption_edge][absorption edge]] of the element, which is
-marked by a letter in the first column of the table, as shown below.
+which has to do with the [[https://en.wikipedia.org/wiki/Absorption_edge][absorption edge]] of the element. It is marked
+by a letter in the first column of the table
 
 #+BEGIN_SRC python
   lines[9]
@@ -116,8 +116,8 @@ marked by a letter in the first column of the table, as shown below.
 'K  1.55960E-03  3.957E+03  3.829E+03 '
 #+END_EXAMPLE
 
-So we need to skip the first character in each row. In fact, we can
-safely skip the first three characters.
+so we need to skip the first character in each row. In fact, we can
+safely skip the first three characters
 
 #+BEGIN_SRC python
   out = response.css('pre').extract_first()
@@ -144,7 +144,6 @@ links in the =Spider=.
 We start by creating a Scrapy project.
 
 #+BEGIN_EXAMPLE
-activate scrapy
 scrapy startproject scrapymu
 #+END_EXAMPLE
 
