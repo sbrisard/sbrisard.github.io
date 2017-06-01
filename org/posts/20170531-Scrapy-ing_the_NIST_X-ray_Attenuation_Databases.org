@@ -169,3 +169,10 @@ We then edit the =scrapymu/scrapymu/spiders/tables.py= file
           key = response.url.split('/')[-1].split('.')[0]
           yield {key: value}
 #+END_SRC
+
+This spider can be run as follows
+
+#+BEGIN_EXAMPLE
+scrapy crawl table3 -o table3.json
+#+END_EXAMPLE
+
