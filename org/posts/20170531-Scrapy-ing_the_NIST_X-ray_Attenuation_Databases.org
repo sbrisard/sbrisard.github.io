@@ -176,3 +176,10 @@ This spider can be run as follows
 scrapy crawl table3 -o table3.json
 #+END_EXAMPLE
 
+* Retrieving the material constants of all elements
+
+We will also need the data from [[http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html][table 1]].
+
+#+BEGIN_EXAMPLE
+scrapy shell "http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html"
+#+END_EXAMPLE
