@@ -150,7 +150,7 @@ scrapy startproject scrapymu
 
 We then edit the =scrapymu/scrapymu/spiders/table3.py= file
 
-#+BEGIN_SRC emacs-lisp :exports none :results none
+#+BEGIN_SRC emacs-lisp :exports none :results silent
   (url-copy-file "https://raw.githubusercontent.com/sbrisard/scrapymu/master/scrapymu/spiders/table3.py"
                  (concat (file-name-sans-extension buffer-file-name)
                          "/table3.py") t)
@@ -170,7 +170,7 @@ scrapy crawl table3 -o table3.json
 
 We will also need the data from [[http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html][Table 1]]. The spider is quite simple.
 
-#+BEGIN_SRC emacs-lisp :exports none :results none
+#+BEGIN_SRC emacs-lisp :exports none :results silent
   (url-copy-file "https://raw.githubusercontent.com/sbrisard/scrapymu/master/scrapymu/spiders/table1.py"
                  (concat (file-name-sans-extension buffer-file-name)
                          "/table1.py") t)
