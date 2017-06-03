@@ -150,29 +150,15 @@ scrapy startproject scrapymu
 
 We then edit the =scrapymu/scrapymu/spiders/table3.py= file
 
-#+BEGIN_SRC python
-  import scrapy
-
-  BASE_URL = 'http://physics.nist.gov/PhysRefData/XrayMassCoef'
-  TABLE3_URL = '/'.join([BASE_URL, 'ElemTab/z{:02d}.html'])
-
-
-  class Table3Spider(scrapy.Spider):
-      name = 'table3'
-
-      start_urls = [TABLE3_URL.format(z) for z in range(1, 93)]
-
-      def parse(self, response):
-          # Retrieving the atomic number from the URL
-          z = int(response.url[-7:-5])
-
-          pre = response.css('pre').extract_first()
-          lines = pre.splitlines()
-          table = [[x for x in line[3:].split()] for line in lines[6:-1]]
-          yield {z: table}
+#+BEGIN_SRC emacs-lisp :exports none :results none
+  (url-copy-file "https://raw.githubusercontent.com/sbrisard/scrapymu/master/scrapymu/spiders/table3.py"
+                 (concat (file-name-sans-extension buffer-file-name)
+                         "/table3.py") t)
 #+END_SRC
 
-It returns a =dict= of =dict=s, each of which maps the element's
+#+INCLUDE: "20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases/table3.py" src python
+
+It returns a =dict= of =dict=, each of which maps the element's
 atomic number Z to the corresponding table (as a list of rows, each
 row being itself a list). It can be run as follows
 
@@ -184,38 +170,13 @@ scrapy crawl table3 -o table3.json
 
 We will also need the data from [[http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html][Table 1]]. The spider is quite simple.
 
-#+BEGIN_SRC python
-  import scrapy
-
-  BASE_URL = 'http://physics.nist.gov/PhysRefData/XrayMassCoef'
-  TABLE1_URL = '/'.join([BASE_URL, 'tab1.html'])
-
-
-  def parse_table1_row(row):
-      all_cols = (c.strip() for c in row.css('td::text').extract())
-      cols = [c for c in all_cols if c != '']
-      if cols != []:
-          try:
-              z = int(cols[0])
-              data = {'symbol': cols[1],
-                      'name': cols[2],
-                      'Z/A': cols[3],
-                      'density [g/cm^3]': cols[5]}
-              return z, data
-          except ValueError:
-              return None
-
-
-  class Table1Spider(scrapy.Spider):
-      name = 'table1'
-
-      start_urls = [TABLE1_URL]
-
-      def parse(self, response):
-          all_rows = (parse_table1_row(r) for r in response.css('tr'))
-          rows = (r for r in all_rows if r is not None)
-          yield {k: v for k, v in rows}
+#+BEGIN_SRC emacs-lisp :exports none :results none
+  (url-copy-file "https://raw.githubusercontent.com/sbrisard/scrapymu/master/scrapymu/spiders/table1.py"
+                 (concat (file-name-sans-extension buffer-file-name)
+                         "/table1.py") t)
 #+END_SRC
+
+#+INCLUDE: "20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases/table1.py" src python
 
 It returns a =dict= which maps the element's atomic number Z to a
 =dict= containing the element's =symbol=, =name=, =Z/A= ratio and
