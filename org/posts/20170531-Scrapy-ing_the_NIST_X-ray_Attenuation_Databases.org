@@ -196,11 +196,9 @@ You can download the json files here: [[file:./20170531-Scrapy-ing_the_NIST_X-ra
 the =dict= of =dicts= that corresponds to Table 3 into one single
 =dict=.
 
-#+BEGIN_SRC ipython :results output
+#+BEGIN_SRC ipython :results output :var ROOT=(file-name-sans-extension buffer-file-name)
   import json
   import os.path
-
-  ROOT = '20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases'
 
   with open(os.path.join('.', ROOT, 'table1.json'), 'r') as f:
       table1 = json.load(f)[0]
