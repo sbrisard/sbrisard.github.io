@@ -148,7 +148,7 @@ We start by creating a Scrapy project.
 scrapy startproject scrapymu
 #+END_EXAMPLE
 
-We then edit the =scrapymu/scrapymu/spiders/tables.py= file
+We then edit the =scrapymu/scrapymu/spiders/table3.py= file
 
 #+BEGIN_SRC python
   import scrapy
