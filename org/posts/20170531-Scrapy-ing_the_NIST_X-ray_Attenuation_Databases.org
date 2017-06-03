@@ -172,9 +172,9 @@ We then edit the =scrapymu/scrapymu/spiders/table3.py= file
           yield {z: table}
 #+END_SRC
 
-It returns a =dict= which maps the element's atomic number Z to the
-corresponding table (as a list of rows, each row being itself a
-list). It can be run as follows
+It returns a =dict= of =dict=s, each of which maps the element's
+atomic number Z to the corresponding table (as a list of rows, each
+row being itself a list). It can be run as follows
 
 #+BEGIN_EXAMPLE
 scrapy crawl table3 -o table3.json
@@ -182,7 +182,7 @@ scrapy crawl table3 -o table3.json
 
 * Retrieving the material constants of all elements
 
-We will also need the data from [[http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html][table 1]]. The spider is quite simple.
+We will also need the data from [[http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html][Table 1]]. The spider is quite simple.
 
 #+BEGIN_SRC python
   import scrapy
@@ -230,14 +230,14 @@ scrapy crawl table1 -o table1.json
 scrapy crawl table3 -o table3.json
 #+END_EXAMPLE
 
-You can download the json files here: [[file:./20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases/table1.json][Table 1]] and [[file:./20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases/table3.json][Table 3]].
+You can download the json files here: [[file:./20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases/table1.json][Table 1]] and [[file:./20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases/table3.json][Table 3]]. We use the
+=json= module in the standard library to read this files, and merge
+the =dict= of =dicts= that corresponds to Table 3 into one single
+=dict=.
 
 #+BEGIN_SRC ipython :results output
   import json
   import os.path
-
-  import h5py
-  import numpy as np
 
   ROOT = '20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases'
 
@@ -247,14 +247,27 @@ You can download the json files here: [[file:./20170531-Scrapy-ing_the_NIST_X-ra
       table3 = dict(next(iter(i.items())) for i in json.load(f))
 
   print(table1['1'])
-  print(table3['14'][0:5])
+  print(table3['1'][0:5])
 #+END_SRC
 
 #+RESULTS:
 : {'symbol': 'H', 'name': 'Hydrogen', 'Z/A': '0.99212', 'density [g/cm^3]': '8.375E-05'}
-: [['1.00000E-03', '1.570E+03', '1.567E+03'], ['1.50000E-03', '5.355E+02', '5.331E+02'], ['1.83890E-03', '3.092E+02', '3.070E+02'], ['1.83890E-03', '3.192E+03', '3.059E+03'], ['2.00000E-03', '2.777E+03', '2.669E+03']]
+: [['00000E-03', '7.217E+00', '6.820E+00'], ['50000E-03', '2.148E+00', '1.752E+00'], ['00000E-03', '1.059E+00', '6.643E-01'], ['00000E-03', '5.612E-01', '1.693E-01'], ['00000E-03', '4.546E-01', '6.549E-02']]
+
+We are now ready to create our HDF5 file. Its structure is very
+simple: we create one dataset per element. The dataset's label is the
+element's symbol. The table attached to the dataset is the linear
+absorption coefficient. A few attributes are further attached to the
+dataset
+
+  - =name=: the element's name,
+  - =Z=: the element's atomic number (byte),
+  - =Z/A=, =density [g/cm^3]=: double precision floats.
 
 #+BEGIN_SRC ipython :results silent
+  import h5py
+  import numpy as np
+
   with h5py.File(os.path.join('.', ROOT, 'tables.hdf5'), 'w') as f:
       for z, attrs in table1.items():
           mu = [[np.float64(x) for x in row] for row in table3[z]]
