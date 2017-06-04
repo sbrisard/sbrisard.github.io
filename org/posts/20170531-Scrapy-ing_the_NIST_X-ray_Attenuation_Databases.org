@@ -117,23 +117,8 @@ by a letter in the first column of the table
 'K  1.55960E-03  3.957E+03  3.829E+03 '
 #+END_EXAMPLE
 
-so we need to skip the first character in each row. In fact, we can
-safely skip the first three characters
-
-#+BEGIN_SRC python
-  out = response.css('pre').extract_first()
-  lines = out.splitlines()
-  table = [[float(x) for x in line[3:].split()] for line in lines[6:-1]]
-  print(table)
-#+END_SRC
-
-#+BEGIN_EXAMPLE
-[[0.001, 1185.0, 1183.0], [0.0015, 402.2, 400.1],
-..................................................,
-[15.0, 0.02195, 0.01631], [20.0, 0.02168, 0.01633]]
-#+END_EXAMPLE
-
-… and the problem is solved!
+So, we need to check wether each element of the current row is indeed
+a float.
 
 * Downloading tables for all elements
 
@@ -211,7 +196,7 @@ the =dict= of =dicts= that corresponds to Table 3 into one single
 
 #+RESULTS:
 : {'symbol': 'H', 'name': 'Hydrogen', 'Z/A': '0.99212', 'density [g/cm^3]': '8.375E-05'}
-: [['00000E-03', '7.217E+00', '6.820E+00'], ['50000E-03', '2.148E+00', '1.752E+00'], ['00000E-03', '1.059E+00', '6.643E-01'], ['00000E-03', '5.612E-01', '1.693E-01'], ['00000E-03', '4.546E-01', '6.549E-02']]
+: [['1.00000E-03', '7.217E+00', '6.820E+00'], ['1.50000E-03', '2.148E+00', '1.752E+00'], ['2.00000E-03', '1.059E+00', '6.643E-01'], ['3.00000E-03', '5.612E-01', '1.693E-01'], ['4.00000E-03', '4.546E-01', '6.549E-02']]
 
 We are now ready to create our HDF5 file. Its structure is very
 simple: we create one dataset per element. The dataset's label is the
