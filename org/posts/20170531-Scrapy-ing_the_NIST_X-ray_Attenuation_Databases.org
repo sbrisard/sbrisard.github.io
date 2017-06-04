@@ -212,7 +212,9 @@ dataset
   import h5py
   import numpy as np
 
-  with h5py.File(os.path.join('.', ROOT, 'tables.hdf5'), 'w') as f:
+  name = 'X-ray_mass_absorption_coefficients.hdf5'
+
+  with h5py.File(os.path.join('.', ROOT, name), 'w') as f:
       for z, attrs in table1.items():
           mu = [[np.float64(x) for x in row] for row in table3[z]]
           dset = f.create_dataset(attrs['symbol'],
