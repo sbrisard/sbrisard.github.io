@@ -250,6 +250,9 @@ all these elements. We first start a new python session, define the
 chemical composition and import the table. Then, we interpolate
 linearly (in log-space) the tables and compute the linear combination.
 
+Note that I shifted the sampling points slightly to the left and right
+of each absorption edges in order to facilitate interpolation.
+
 #+BEGIN_SRC ipython :session mpl :var root=(file-name-sans-extension buffer-file-name) :var input_name="X-ray_mass_absorption_coefficients.hdf5" :var output_name="cement.png" :output silent
   import os.path
 
