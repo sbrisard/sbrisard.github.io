@@ -5,6 +5,20 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:./posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases.org][2017-05-31 -- Scrapy-ing the NIST X-ray Attenuation Databases]]
+
+I am currently preparing with two other colleagues a review paper on
+X-ray tomography of cementitious materials, for which I need to
+retrieve tabulated values of the [[https://en.wikipedia.org/wiki/Mass_attenuation_coefficient#Mass_attenuation_coefficients_for_X-rays][X-ray mass attenuation coefficients]]
+of all elements. NIST provides such data (see [[https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients][X-Ray Mass Attenuation
+Coefficients]] by J. H. Hubbell and S. M. Seltzer). However, it does not
+come in the form of simple files that can be downloaded. Rather, the
+values are presented in nicely formatted HTML tables (see [[http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html][here]] for an
+example).
+
+In this post, I set out to extract this data as a HDF5 table. Of
+course, this looks like a job for [[https://scrapy.org/][Scrapy]]!
+
 * [[file:./posts/20170428-New_paper_on_one-dimensional_compression_of_granular_materials.org][2017-04-28 -- New paper on one-dimensional compression of granular materials]]
 
 My student Mohamed Hassan Khalili has recently had one of his papers
