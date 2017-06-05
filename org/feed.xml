@@ -9,7 +9,16 @@
       <guid>posts/sbrisard.github.io/posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases.html</guid>
       <pubDate>Wed, 31 May 2017</pubDate>
       <description>
-        I am currently preparing with two other colleagues a review paper on X-ray tomography of cementitious materials, for which I need to retrieve tabulated values of the <a href="https://en.wikipedia.org/wiki/Mass_attenuation_coefficient#Mass_attenuation_coefficients_for_X-rays">X-ray mass attenuation coefficients</a> of all elements. NIST provides such data (see <a href="https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients"> X-Ray Mass Attenuation Coefficients</a> by J. H. Hubbell and S. M. Seltzer). However, it does not come in the form of simple files that can be downloaded. Rather, the values are presented in nicely formatted HTML tables (see <a href="http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html">here</a> for an example). In this post, I set out to extract this data as a HDF5 table. Of course, this looks like a job for <a href="https://scrapy.org/">Scrapy</a>!
+        I am currently preparing with two other colleagues a review
+        paper on X-ray tomography of cementitious materials, for which
+        I need to retrieve tabulated values of the X-ray mass
+        attenuation coefficients of all elements. NIST provides such
+        data (see “X-Ray Mass Attenuation Coefficients” by
+        J. H. Hubbell and S. M. Seltzer). However, it does not come in
+        the form of simple files that can be downloaded. Rather, the
+        values are presented in nicely formatted HTML tables. In this
+        post, I set out to extract this data as a HDF5 table. Of
+        course, this looks like a job for Scrapy!
       </description>
     </item>
     <item>
