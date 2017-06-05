@@ -7,12 +7,11 @@
 I am currently preparing with two other colleagues a review paper on
 X-ray tomography of cementitious materials, for which I need to
 retrieve tabulated values of the [[https://en.wikipedia.org/wiki/Mass_attenuation_coefficient#Mass_attenuation_coefficients_for_X-rays][X-ray mass attenuation coefficients]]
-of all elements.
-
-NIST provides such data (see [[https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients][X-Ray Mass Attenuation Coefficients]] by
-J. H. Hubbell and S. M. Seltzer). However, it does not come in the
-form of simple files that can be downloaded. Rather, the values are
-presented in nicely formatted HTML tables (see [[http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html][here]] for an example).
+of all elements. NIST provides such data (see [[https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients][X-Ray Mass Attenuation
+Coefficients]] by J. H. Hubbell and S. M. Seltzer). However, it does not
+come in the form of simple files that can be downloaded. Rather, the
+values are presented in nicely formatted HTML tables (see [[http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html][here]] for an
+example).
 
 In this post, I set out to extract this data as a HDF5 table. Of
 course, this looks like a job for [[https://scrapy.org/][Scrapy]]!
@@ -118,7 +117,7 @@ by a letter in the first column of the table
 #+END_EXAMPLE
 
 So, we need to check wether each element of the current row is indeed
-a float.
+a float (see function =is_float= below).
 
 * Downloading tables for all elements
 
@@ -135,7 +134,7 @@ scrapy startproject scrapymu
 
 We then edit the =scrapymu/scrapymu/spiders/table3.py= file
 
-#+BEGIN_SRC emacs-lisp :exports none :results silent
+#+BEGIN_SRC emacs-lisp :eval never-export :exports none :results silent
   (url-copy-file "https://raw.githubusercontent.com/sbrisard/scrapymu/master/scrapymu/spiders/table3.py"
                  (concat (file-name-sans-extension buffer-file-name)
                          "/table3.py") t)
@@ -155,7 +154,7 @@ scrapy crawl table3 -o table3.json
 
 We will also need the data from [[http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html][Table 1]]. The spider is quite simple.
 
-#+BEGIN_SRC emacs-lisp :exports none :results silent
+#+BEGIN_SRC emacs-lisp :eval never-export :exports none :results silent
   (url-copy-file "https://raw.githubusercontent.com/sbrisard/scrapymu/master/scrapymu/spiders/table1.py"
                  (concat (file-name-sans-extension buffer-file-name)
                          "/table1.py") t)
@@ -365,3 +364,5 @@ cleverly). This validates our Scrapy procedure!
 In this blog, we learned how to use [[https://scrapy.org/][Scrapy]] to retrieve some tabulated
 data that is not available as downloaded files. This is probably the
 most basic use of this tool, which is very simple, and a joy to use!
+
+The whole =scrapymy= project is available on [[https://github.com/sbrisard/scrapymu.git][GitHub]].
