@@ -69,7 +69,7 @@ M. H. Khalili, J.-N. Roux, J.-M. Pereira, S. Brisard and M. Bornert, /A numerica
 :HTML_CONTAINER_CLASS: sb-bibitem
 :END:
 
-M.H. Khalili, S. Brisard, M. Bornert, P. Aimedieu, J.-M. Pereira and J.-N. Roux, /Discrete Digital Projections Correlation: a reconstruction-free method to quantify local kinematics in granular media by X-ray tomography/, Experimental Mechanics, 2017 ([[https://hal-enpc.archives-ouvertes.fr/hal-01474701][preprint]])
+M.H. Khalili, S. Brisard, M. Bornert, P. Aimedieu, J.-M. Pereira and J.-N. Roux, /Discrete Digital Projections Correlation: a reconstruction-free method to quantify local kinematics in granular media by X-ray tomography/, Experimental Mechanics 57(6): 819–830, 2017 ([[https://hal-enpc.archives-ouvertes.fr/hal-01474701][preprint]])
 
 ** [[http://doi.org/10.1051/meca/2016037][Brisard (2017a)]]
 :PROPERTIES:
