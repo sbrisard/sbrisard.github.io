@@ -189,6 +189,25 @@ O. P. Coussy and S. Brisard, /Prediction of drying shrinkage beyond the pore iso
 
 * Conferences
 
+** Brisard (2017a)
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: sb-bibitem
+:END:
+
+S. Brisard, /Beyond the classical Hashin–Shtrikman bounds: the
+Hashin–Shtrikman principle revisited/, Seminar of the
+[[https://portail.polytechnique.edu/lms/en][Laboratory of Solid Mechanics]] (LMS) at École Polytechnique,
+Palaiseau, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01513354][slides]])
+
+** Brisard (2017)
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: sb-bibitem
+:END:
+
+S. Brisard, /Microstructure and mechanical properties: polarization
+techniques to the rescue/, Multi-scale Materials Under the Nanoscope
+2016 (M2UN 2016), Dec 2016, Paris, France ([[https://hal-enpc.archives-ouvertes.fr/hal-01414044][slides]]) – *invited talk*
+
 ** Brisard and Chamoin (2016)
    :PROPERTIES:
    :HTML_CONTAINER_CLASS: sb-bibitem
