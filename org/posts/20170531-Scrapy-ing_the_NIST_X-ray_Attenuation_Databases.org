@@ -368,4 +368,4 @@ In this blog, we learned how to use [[https://scrapy.org/][Scrapy]] to retrieve 
 data that is not available as downloaded files. This is probably the
 most basic use of this tool, which is very simple, and a joy to use!
 
-The whole =scrapymy= project is available on [[https://github.com/sbrisard/scrapymu.git][GitHub]].
+The whole =scrapymu= project is available on [[https://github.com/sbrisard/scrapymu.git][GitHub]].
