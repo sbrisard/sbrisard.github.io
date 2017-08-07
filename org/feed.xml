@@ -4,9 +4,26 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
+      <title>New conference paper on variational estimates of
+      poroelastic coefficients</title>
+      <link>http://sbrisard.github.io/posts/20170807-New_conference_paper_on_variational_estimates_of_poroelastic_coefficients.html</link>
+      <guid>posts/20170807-New_conference_paper_on_variational_estimates_of_poroelastic_coefficients.html</guid>
+      <pubDate>Mon, 7 Aug 2017</pubDate>
+      <description>
+        I recently had the pleasure to give a talk on “Variational
+        estimates of the poroelastic coefficients” at the 6th Biot
+        Conference on Poromechanics that took place at École des Ponts
+        ParisTech on July 9-13, 2017. This is joint work with my
+        colleague Siavash GHABEZLOO. It has been ongoing for years now,
+        but for lack of time, the full paper is still not out! (To tell
+        the truth, I need to find and correct a mistake in the
+        illustrative application…).
+      </description>
+    </item>
+    <item>
       <title>Scrapy-ing the NIST X-ray Attenuation Databases</title>
       <link>http://sbrisard.github.io/posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases.html</link>
-      <guid>posts/sbrisard.github.io/posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases.html</guid>
+      <guid>posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases.html</guid>
       <pubDate>Wed, 31 May 2017</pubDate>
       <description>
         I am currently preparing with two other colleagues a review
