@@ -1,0 +1,5 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
+#+TITLE: Periodic-plus-smooth decomposition of an image
+#+DATE: [2017-09-22 Fri]
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
