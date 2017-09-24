@@ -74,7 +74,7 @@ swap the quadrants. This is readily done in Python:
 
 Which produces the following image
 
-[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-shifted.png]]
+[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-fftshift.png]]
 
 … where the four corners certainly do /not/ join seamlessly at the
 center! Why would this be a problem?
