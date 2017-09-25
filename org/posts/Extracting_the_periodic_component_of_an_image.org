@@ -1,0 +1,80 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
+#+TITLE: Extracting the periodic component of an image
+#+DATE: [2017-09-23 Sat]
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
+
+In this new series, we will explore the so-called
+/periodic-plus-smooth/ decomposition of an image, introduced by Moisan
+in 2011. This series is largely based on Moisan's paper, called
+[[https://doi.org/10.1007/s10851-010-0227-1][Periodic plus Smooth Image Decomposition]] (the author's version can be
+found on [[https://hal.archives-ouvertes.fr/hal-00388020][HAL]]). Besides introducing a quite smart technique (that I do
+use for real materials science applications), this series will be an
+opportunity to discuss an important topic: how to test the
+implementation of an algorithm, and be confident that the test
+actually validates the implementation.
+
+To do so, I will first define the periodic-plus-smooth decomposition
+as a minimiazation problem. This will lead to a first implementation
+of this decomposition: the objective function is quadratic, and the
+minimization problem therefore merely reduces to a linear
+system. However, this system is large (the number of unknowns is the
+number of pixels!). We will therefore use matrix-free techniques.
+
+This first –quite inefficient– implementation will then serve as a
+reference implementation of the decomposition, for testing
+purposes. Indeed, Moisan showed that the minimization problem he
+introduced could in fact be explicitely solved in Fourier space. He
+proposed two efficient algorithms to compute the decomposition. Both
+rely, of course, on the FFT. We will implement both, test them against
+the reference implementation, and compare their merits.
+
+That's a lot of work! So, without further ado, let's start introducing
+this decomposition!
+
+#+NAME: sb-data-dir
+#+BEGIN_SRC emacs-lisp :exports none
+  (subst-char-in-string ?/ ?\\ (file-name-sans-extension buffer-file-name))
+#+END_SRC
+
+#+RESULTS: sb-data-dir
+: c:\Users\sbrisard\Documents\blog\org\posts\Extracting_the_periodic_component_of_an_image
+
+* The need for periodic images
+
+Let us start by briefly discussing what /is/ a periodic image, and why
+we would ever need one. Loosely speaking, an image is periodic if
+placing copies of the same image on a 2×2 grid can be done (almost)
+seamlessly. Remember that an image is defined for a /discrete/ set of
+pixels, and that the pixel values themselves are also
+/discrete/. Therefore, it is not possible to refer to the [[https://en.wikipedia.org/wiki/Continuous_function][“continuity”]]
+of an image, which explains why it is difficult to define periodic
+images more precisely.
+
+It is actually easier to verify that an image is /not/ periodic. Let
+us consider the following image as an example.
+
+[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364.png]]
+
+Instead of putting aside 4 copies of the same image, we can simply
+swap the quadrants. This is readily done in Python:
+
+#+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
+  import os.path
+
+  import numpy as np
+  import scipy.misc
+
+  iname = os.path.join(DATA_DIR, 'hut-648x364.png')
+  oname = os.path.join(DATA_DIR, 'hut-648x364-fftshift.png')
+
+  scipy.misc.imsave(oname,
+                    np.fft.fftshift(scipy.misc.imread(iname)))
+#+END_SRC
+
+Which produces the following image
+
+[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-fftshift.png]]
+
+… where the four corners certainly do /not/ join seamlessly at the
+center! Why would this be a problem?
