@@ -38,7 +38,7 @@ this decomposition!
 #+END_SRC
 
 #+RESULTS: sb-data-dir
-: c:\Users\sbrisard\Documents\blog\org\posts\Extracting_the_periodic_component_of_an_image
+: c:\Users\brisard\Documents\blog\org\posts\Extracting_the_periodic_component_of_an_image
 
 * The need for periodic images
 
@@ -68,8 +68,8 @@ swap the quadrants. This is readily done in Python:
   iname = os.path.join(DATA_DIR, 'hut-648x364.png')
   oname = os.path.join(DATA_DIR, 'hut-648x364-fftshift.png')
 
-  scipy.misc.imsave(oname,
-                    np.fft.fftshift(scipy.misc.imread(iname)))
+  u = scipy.misc.imread(iname)
+  scipy.misc.imsave(oname, np.fft.fftshift(u))
 #+END_SRC
 
 Which produces the following image
@@ -77,4 +77,27 @@ Which produces the following image
 [[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-fftshift.png]]
 
 … where the four corners certainly do /not/ join seamlessly at the
-center! Why would this be a problem?
+center! Why would this be a problem? Well, many image analysis
+techniques rely on the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Fourier transform]] (FFT) for efficiency. In
+turn the discrete Fourier transform implicitely assumes that the data
+is periodic; otherwise, artifacts can result. An archetypal example is
+the power spectrum of an image (we shall come back to this specific
+issue in a dedicated series). This power spectrum is displayed below;
+the bright cross at the center is the signature of the jumps across
+the boundaries of the image. Indeed, remember that discontinuities at
+large correlation lengths translate to oscillations at low frequencies
+(the center of the power spectrum image).
+
+#+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
+  u_dft = np.fft.fft2(u)
+  u_ps = np.abs(np.fft.fftshift(u_dft))**2
+  a = np.log10(u_ps)
+  a_min, a_max = np.min(a), np.max(a)
+  a = 255*(a-a_min)/(a_max-a_min)
+  img = a.astype(np.uint8)
+
+  oname = os.path.join(DATA_DIR, 'hut-648x364-power_spectrum.png')
+  scipy.misc.imsave(oname, img)
+#+END_SRC
+
+[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-power_spectrum.png]]
