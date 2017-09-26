@@ -52,12 +52,24 @@ of an image, which explains why it is difficult to define periodic
 images more precisely.
 
 It is actually easier to verify that an image is /not/ periodic. Let
-us consider the following image as an example.
+us consider the following image as an example (see Figure [[fig:1]]).
 
+#+CAPTION: The original image.
+#+NAME: fig:1
 [[file:./Extracting_the_periodic_component_of_an_image/hut-648x364.png]]
 
 Instead of putting aside 4 copies of the same image, we can simply
-swap the quadrants. This is readily done in Python:
+swap the quadrants, as shown in Figure [[fig:2]], where the four corners
+certainly do /not/ join seamlessly at the center!
+
+#+CAPTION: The original image shown in Figure [[fig:1]], with
+#+CAPTION: swapped quadrants.
+#+NAME: fig:2
+[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-fftshift.png]]
+
+
+It should be noted that the image shown in Figure [[fig:2]] is readily
+produced with the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift][numpy.fft.fftshift]] function:
 
 #+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
   import os.path
@@ -72,21 +84,16 @@ swap the quadrants. This is readily done in Python:
   scipy.misc.imsave(oname, np.fft.fftshift(u))
 #+END_SRC
 
-Which produces the following image
+In the above code snippet, you should not pay attention to the fact
+that =DATA_DIR= has not been defined. I actually used some [[http://orgmode.org/worg/org-contrib/babel/][Org-babel]]
+tricks to define this variable programatically.
 
-[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-fftshift.png]]
-
-… where the four corners certainly do /not/ join seamlessly at the
-center! Why would this be a problem? Well, many image analysis
+Why would this lack of periodicity be a problem? Well, many image analysis
 techniques rely on the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Fourier transform]] (FFT) for efficiency. In
-turn the discrete Fourier transform implicitely assumes that the data
+turn, the discrete Fourier transform implicitely assumes that the data
 is periodic; otherwise, artifacts can result. An archetypal example is
 the power spectrum of an image (we shall come back to this specific
-issue in a dedicated series). This power spectrum is displayed below;
-the bright cross at the center is the signature of the jumps across
-the boundaries of the image. Indeed, remember that discontinuities at
-large correlation lengths translate to oscillations at low frequencies
-(the center of the power spectrum image).
+issue in a dedicated series). The power spectrum of Figure [[fig:1]] is displayed in Figure [[fig:3]] below; the following code snippet was executed to produce this image.
 
 #+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
   u_dft = np.fft.fft2(u)
@@ -100,4 +107,11 @@ large correlation lengths translate to oscillations at low frequencies
   scipy.misc.imsave(oname, img)
 #+END_SRC
 
+#+CAPTION: The power spectrum of the image shown in Figure [[fig:1]].
+#+NAME: fig:3
 [[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-power_spectrum.png]]
+
+In Figure [[fig:3]], the bright cross at the center is the signature of the jumps across
+the boundaries of the image. Indeed, remember that discontinuities at
+large correlation lengths translate to oscillations at low frequencies
+(the center of the power spectrum image).
