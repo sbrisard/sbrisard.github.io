@@ -34,11 +34,11 @@ this decomposition!
 
 #+NAME: sb-data-dir
 #+BEGIN_SRC emacs-lisp :exports none
-  (subst-char-in-string ?/ ?\\ (file-name-sans-extension buffer-file-name))
+  (file-name-sans-extension buffer-file-name)
 #+END_SRC
 
 #+RESULTS: sb-data-dir
-: c:\Users\brisard\Documents\blog\org\posts\Extracting_the_periodic_component_of_an_image
+: c:/Users/brisard/Documents/blog/org/posts/Extracting_the_periodic_component_of_an_image
 
 * The need for periodic images
 
@@ -72,13 +72,11 @@ It should be noted that the image shown in Figure [[fig:2]] is readily
 produced with the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift][numpy.fft.fftshift]] function:
 
 #+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
-  import os.path
-
   import numpy as np
   import scipy.misc
 
-  iname = os.path.join(DATA_DIR, 'hut-648x364.png')
-  oname = os.path.join(DATA_DIR, 'hut-648x364-fftshift.png')
+  iname = '/'.join([DATA_DIR, 'hut-648x364.png'])
+  oname = '/'.join([DATA_DIR, 'hut-648x364-fftshift.png'])
 
   u = scipy.misc.imread(iname)
   scipy.misc.imsave(oname, np.fft.fftshift(u))
@@ -103,7 +101,7 @@ issue in a dedicated series). The power spectrum of Figure [[fig:1]] is displaye
   a = 255*(a-a_min)/(a_max-a_min)
   img = a.astype(np.uint8)
 
-  oname = os.path.join(DATA_DIR, 'hut-648x364-power_spectrum.png')
+  oname = '/'.join([DATA_DIR, 'hut-648x364-power_spectrum.png'])
   scipy.misc.imsave(oname, img)
 #+END_SRC
 
