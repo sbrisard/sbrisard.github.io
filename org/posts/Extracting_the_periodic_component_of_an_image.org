@@ -56,7 +56,7 @@ us consider the following image as an example (see Figure [[fig:1]]).
 
 #+CAPTION: The original image.
 #+NAME: fig:1
-[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364.png]]
+[[sb-data-dir:hut-648x364.png]]
 
 Instead of putting aside 4 copies of the same image, we can simply
 swap the quadrants, as shown in Figure [[fig:2]], where the four corners
@@ -65,8 +65,7 @@ certainly do /not/ join seamlessly at the center!
 #+CAPTION: The original image shown in Figure [[fig:1]], with
 #+CAPTION: swapped quadrants.
 #+NAME: fig:2
-[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-fftshift.png]]
-
+[[sb-data-dir:hut-648x364-fftshift.png]]
 
 It should be noted that the image shown in Figure [[fig:2]] is readily
 produced with the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift][numpy.fft.fftshift]] function:
@@ -107,9 +106,13 @@ issue in a dedicated series). The power spectrum of Figure [[fig:1]] is displaye
 
 #+CAPTION: The power spectrum of the image shown in Figure [[fig:1]].
 #+NAME: fig:3
-[[file:./Extracting_the_periodic_component_of_an_image/hut-648x364-power_spectrum.png]]
+[[sb-data-dir:hut-648x364-power_spectrum.png]]
 
 In Figure [[fig:3]], the bright cross at the center is the signature of the jumps across
 the boundaries of the image. Indeed, remember that discontinuities at
 large correlation lengths translate to oscillations at low frequencies
 (the center of the power spectrum image).
+
+# Local Variables:
+# eval: (setq org-link-abbrev-alist-local `(("sb-data-dir" . ,(concat (file-name-sans-extension buffer-file-name) "/"))))
+# End:
