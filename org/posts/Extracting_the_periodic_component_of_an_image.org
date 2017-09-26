@@ -85,12 +85,14 @@ In the above code snippet, you should not pay attention to the fact
 that =DATA_DIR= has not been defined. I actually used some [[http://orgmode.org/worg/org-contrib/babel/][Org-babel]]
 tricks to define this variable programatically.
 
-Why would this lack of periodicity be a problem? Well, many image analysis
-techniques rely on the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Fourier transform]] (FFT) for efficiency. In
-turn, the discrete Fourier transform implicitely assumes that the data
-is periodic; otherwise, artifacts can result. An archetypal example is
-the power spectrum of an image (we shall come back to this specific
-issue in a dedicated series). The power spectrum of Figure [[fig:1]] is displayed in Figure [[fig:3]] below; the following code snippet was executed to produce this image.
+Why would this lack of periodicity be a problem? Well, many image
+analysis techniques rely on the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Fourier transform]] (FFT) for
+efficiency. In turn, the discrete Fourier transform implicitely
+assumes that the data is periodic; otherwise, artifacts can result. An
+archetypal example is the power spectrum of an image (we shall come
+back to this specific issue in a dedicated series). The power spectrum
+of Figure [[fig:1]] is displayed in Figure [[fig:3]] below; the following code
+snippet was executed to produce this image.
 
 #+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
   u_dft = np.fft.fft2(u)
@@ -108,10 +110,10 @@ issue in a dedicated series). The power spectrum of Figure [[fig:1]] is displaye
 #+NAME: fig:3
 [[sb-data-dir:hut-648x364-power_spectrum.png]]
 
-In Figure [[fig:3]], the bright cross at the center is the signature of the jumps across
-the boundaries of the image. Indeed, remember that discontinuities at
-large correlation lengths translate to oscillations at low frequencies
-(the center of the power spectrum image).
+In Figure [[fig:3]], the bright cross at the center is the signature of
+the jumps across the boundaries of the image. Indeed, remember that
+discontinuities at large correlation lengths translate to oscillations
+at low frequencies (the center of the power spectrum image).
 
 # Local Variables:
 # eval: (setq org-link-abbrev-alist-local `(("sb-data-dir" . ,(concat (file-name-sans-extension buffer-file-name) "/"))))
