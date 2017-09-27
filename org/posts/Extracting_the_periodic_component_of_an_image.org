@@ -47,7 +47,7 @@ we would ever need one. Loosely speaking, an image is periodic if
 placing copies of the same image on a 2×2 grid can be done (almost)
 seamlessly. Remember that an image is defined for a /discrete/ set of
 pixels, and that the pixel values themselves are also
-/discrete/. Therefore, it is not possible to refer to the [[https://en.wikipedia.org/wiki/Continuous_function][“continuity”]]
+/discrete/. Therefore, it is not possible to refer to the [[https://en.wikipedia.org/wiki/Continuous_function][continuity]]
 of an image, which explains why it is difficult to define periodic
 images more precisely.
 
@@ -59,8 +59,8 @@ us consider the following image as an example (see Figure [[fig:1]]).
 [[sb-data-dir:hut-648x364.png]]
 
 Instead of putting aside 4 copies of the same image, we can simply
-swap the quadrants, as shown in Figure [[fig:2]], where the four corners
-certainly do /not/ join seamlessly at the center!
+swap the quadrants, as shown in Figure [[fig:2]]. Alternatively, you could also ask my three-year old daughter if her hut is periodic ;-). In Figure [[fig:2]], the four corners
+certainly do /not/ join seamlessly at the center, which is a sure indication that the image is not periodic.
 
 #+CAPTION: The original image shown in Figure [[fig:1]], with
 #+CAPTION: swapped quadrants.
@@ -68,7 +68,7 @@ certainly do /not/ join seamlessly at the center!
 [[sb-data-dir:hut-648x364-fftshift.png]]
 
 It should be noted that the image shown in Figure [[fig:2]] is readily
-produced with the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift][numpy.fft.fftshift]] function:
+produced with the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift][numpy.fft.fftshift]] function, as illustrated by the following code snippet[fn:1]
 
 #+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
   import numpy as np
@@ -80,10 +80,6 @@ produced with the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/
   u = scipy.misc.imread(iname)
   scipy.misc.imsave(oname, np.fft.fftshift(u))
 #+END_SRC
-
-In the above code snippet, you should not pay attention to the fact
-that =DATA_DIR= has not been defined. I actually used some [[http://orgmode.org/worg/org-contrib/babel/][Org-babel]]
-tricks to define this variable programatically.
 
 Why would this lack of periodicity be a problem? Well, many image
 analysis techniques rely on the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Fourier transform]] (FFT) for
@@ -114,6 +110,11 @@ In Figure [[fig:3]], the bright cross at the center is the signature of
 the jumps across the boundaries of the image. Indeed, remember that
 discontinuities at large correlation lengths translate to oscillations
 at low frequencies (the center of the power spectrum image).
+
+
+[fn:1] In this code snippet, you should not pay attention to the fact
+that =DATA_DIR= has not been defined. I actually used some [[http://orgmode.org/worg/org-contrib/babel/][Org-babel]]
+tricks to define this variable programatically from =emacs-lisp=.
 
 # Local Variables:
 # eval: (setq org-link-abbrev-alist-local `(("sb-data-dir" . ,(concat (file-name-sans-extension buffer-file-name) "/"))))
