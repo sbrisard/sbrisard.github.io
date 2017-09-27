@@ -4,33 +4,31 @@
 #+DATE: [2017-09-23 Sat]
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
-In this new series, we will explore the so-called
-/periodic-plus-smooth/ decomposition of an image, introduced by Moisan
-in 2011. This series is largely based on Moisan's paper, called
-[[https://doi.org/10.1007/s10851-010-0227-1][Periodic plus Smooth Image Decomposition]] (the author's version can be
-found on [[https://hal.archives-ouvertes.fr/hal-00388020][HAL]]). Besides introducing a quite smart technique (that I do
-use for real materials science applications), this series will be an
-opportunity to discuss an important topic: how to test the
-implementation of an algorithm, and be confident that the test
-actually validates the implementation.
+In this new series, we will explore the so-called /periodic-plus-smooth/
+decomposition of an image, introduced by Moisan in 2011. This series is largely
+based on Moisan's paper, called [[https://doi.org/10.1007/s10851-010-0227-1][Periodic plus Smooth Image Decomposition]] (the
+author's version can be found on [[https://hal.archives-ouvertes.fr/hal-00388020][HAL]]). Besides introducing a quite smart
+technique (that I do use for real materials science applications), this series
+will be an opportunity to discuss an important topic: how to test the
+implementation of an algorithm, and be confident that the test actually
+validates the implementation.
 
-To do so, I will first define the periodic-plus-smooth decomposition
-as a minimiazation problem. This will lead to a first implementation
-of this decomposition: the objective function is quadratic, and the
-minimization problem therefore merely reduces to a linear
-system. However, this system is large (the number of unknowns is the
-number of pixels!). We will therefore use matrix-free techniques.
+To do so, I will first define the periodic-plus-smooth decomposition as a
+minimiazation problem. This will lead to a first implementation of this
+decomposition: the objective function is quadratic, and the minimization problem
+therefore merely reduces to a linear system. However, this system is large (the
+number of unknowns is the number of pixels!). We will therefore use matrix-free
+techniques.
 
-This first –quite inefficient– implementation will then serve as a
-reference implementation of the decomposition, for testing
-purposes. Indeed, Moisan showed that the minimization problem he
-introduced could in fact be explicitely solved in Fourier space. He
-proposed two efficient algorithms to compute the decomposition. Both
-rely, of course, on the FFT. We will implement both, test them against
-the reference implementation, and compare their merits.
+This first –quite inefficient– implementation will then serve as a reference
+implementation of the decomposition, for testing purposes. Indeed, Moisan showed
+that the minimization problem he introduced could in fact be explicitely solved
+in Fourier space. He proposed two efficient algorithms to compute the
+decomposition. Both rely, of course, on the FFT. We will implement both, test
+them against the reference implementation, and compare their merits.
 
-That's a lot of work! So, without further ado, let's start introducing
-this decomposition!
+That's a lot of work! So, without further ado, let's start introducing this
+decomposition!
 
 #+NAME: sb-data-dir
 #+BEGIN_SRC emacs-lisp :exports none
@@ -38,37 +36,39 @@ this decomposition!
 #+END_SRC
 
 #+RESULTS: sb-data-dir
-: c:/Users/brisard/Documents/blog/org/posts/Extracting_the_periodic_component_of_an_image
+: c:/Users/sbrisard/Documents/blog/org/posts/Extracting_the_periodic_component_of_an_image
 
 * The need for periodic images
 
-Let us start by briefly discussing what /is/ a periodic image, and why
-we would ever need one. Loosely speaking, an image is periodic if
-placing copies of the same image on a 2×2 grid can be done (almost)
-seamlessly. Remember that an image is defined for a /discrete/ set of
-pixels, and that the pixel values themselves are also
-/discrete/. Therefore, it is not possible to refer to the [[https://en.wikipedia.org/wiki/Continuous_function][continuity]]
-of an image, which explains why it is difficult to define periodic
-images more precisely.
+Let us start by briefly discussing what /is/ a periodic image, and why we would
+ever need one. Loosely speaking, an image is periodic if placing copies of the
+same image on a 2×2 grid can be done (almost) seamlessly. Remember that an image
+is defined for a /discrete/ set of pixels, and that the pixel values themselves
+are also /discrete/. Therefore, it is not possible to refer to the [[https://en.wikipedia.org/wiki/Continuous_function][continuity]] of
+an image, which explains why it is difficult to define periodic images more
+precisely.
 
-It is actually easier to verify that an image is /not/ periodic. Let
-us consider the following image as an example (see Figure [[fig:1]]).
+It is actually easier to verify that an image is /not/ periodic. Let us consider
+the following image as an example (see Figure [[fig:1]]).
 
 #+CAPTION: The original image.
 #+NAME: fig:1
 [[sb-data-dir:hut-648x364.png]]
 
-Instead of putting aside 4 copies of the same image, we can simply
-swap the quadrants, as shown in Figure [[fig:2]]. Alternatively, you could also ask my three-year old daughter if her hut is periodic ;-). In Figure [[fig:2]], the four corners
-certainly do /not/ join seamlessly at the center, which is a sure indication that the image is not periodic.
+Instead of putting aside 4 copies of the same image, we can simply swap the
+quadrants, as shown in Figure [[fig:2]]. Alternatively, you could also ask my
+three-year old daughter if her hut is periodic ;-). In Figure [[fig:2]], the four
+corners certainly do /not/ join seamlessly at the center, which is a sure
+indication that the image is not periodic.
 
 #+CAPTION: The original image shown in Figure [[fig:1]], with
 #+CAPTION: swapped quadrants.
 #+NAME: fig:2
 [[sb-data-dir:hut-648x364-fftshift.png]]
 
-It should be noted that the image shown in Figure [[fig:2]] is readily
-produced with the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift][numpy.fft.fftshift]] function, as illustrated by the following code snippet[fn:1]
+It should be noted that the image shown in Figure [[fig:2]] is readily produced with
+the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift][numpy.fft.fftshift]] function, as illustrated by the following code
+snippet[fn:1]
 
 #+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
   import numpy as np
@@ -81,14 +81,13 @@ produced with the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/
   scipy.misc.imsave(oname, np.fft.fftshift(u))
 #+END_SRC
 
-Why would this lack of periodicity be a problem? Well, many image
-analysis techniques rely on the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Fourier transform]] (FFT) for
-efficiency. In turn, the discrete Fourier transform implicitely
-assumes that the data is periodic; otherwise, artifacts can result. An
-archetypal example is the power spectrum of an image (we shall come
-back to this specific issue in a dedicated series). The power spectrum
-of Figure [[fig:1]] is displayed in Figure [[fig:3]] below; the following code
-snippet was executed to produce this image.
+Why would this lack of periodicity be a problem? Well, many image analysis
+techniques rely on the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Fourier transform]] (FFT) for efficiency. In turn, the
+discrete Fourier transform implicitely assumes that the data is periodic;
+otherwise, artifacts can result. An archetypal example is the power spectrum of
+an image (we shall come back to this specific issue in a dedicated series). The
+power spectrum of Figure [[fig:1]] is displayed in Figure [[fig:3]] below; the following
+code snippet was executed to produce this image.
 
 #+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
   u_dft = np.fft.fft2(u)
@@ -106,23 +105,24 @@ snippet was executed to produce this image.
 #+NAME: fig:3
 [[sb-data-dir:hut-648x364-power_spectrum.png]]
 
-In Figure [[fig:3]], the bright cross at the center is the signature of
-the jumps across the boundaries of the image. Indeed, remember that
-discontinuities at large correlation lengths translate to oscillations
-at low frequencies (the center of the power spectrum image).
+In Figure [[fig:3]], the bright cross at the center is the signature of the jumps
+across the boundaries of the image. Indeed, remember that discontinuities at
+large correlation lengths translate to oscillations at low frequencies (the
+center of the power spectrum image).
 
 * Conclusion
 
-In this post, we set the stage for the subsequent instalments of this
-series, arguing that it is sometimes desirable that an image should be
-periodic. In the next instalment of this series, we will define the
-periodic-plus-smooth decomposition of Moisan ([[https://doi.org/10.1007/s10851-010-0227-1][2011]]). We will then turn
-to the implementation of this decomposition.
+In this post, we set the stage for the subsequent instalments of this series,
+arguing that it is sometimes desirable that an image should be periodic. In the
+next instalment of this series, we will define the periodic-plus-smooth
+decomposition of Moisan ([[https://doi.org/10.1007/s10851-010-0227-1][2011]]). We will then turn to the implementation of this
+decomposition.
 
-[fn:1] In this code snippet, you should not pay attention to the fact
-that =DATA_DIR= has not been defined. I actually used some [[http://orgmode.org/worg/org-contrib/babel/][Org-babel]]
-tricks to define this variable programatically from =emacs-lisp=.
+[fn:1] In this code snippet, you should not pay attention to the fact that
+=DATA_DIR= has not been defined. I actually used some [[http://orgmode.org/worg/org-contrib/babel/][Org-babel]] tricks to define
+this variable programatically from =emacs-lisp=.
 
 # Local Variables:
 # eval: (setq org-link-abbrev-alist-local `(("sb-data-dir" . ,(concat (file-name-sans-extension buffer-file-name) "/"))))
+# fill-column: 80
 # End:
