@@ -111,6 +111,13 @@ the jumps across the boundaries of the image. Indeed, remember that
 discontinuities at large correlation lengths translate to oscillations
 at low frequencies (the center of the power spectrum image).
 
+* Conclusion
+
+In this post, we set the stage for the subsequent instalments of this
+series, arguing that it is sometimes desirable that an image should be
+periodic. In the next instalment of this series, we will define the
+periodic-plus-smooth decomposition of Moisan ([[https://doi.org/10.1007/s10851-010-0227-1][2011]]). We will then turn
+to the implementation of this decomposition.
 
 [fn:1] In this code snippet, you should not pay attention to the fact
 that =DATA_DIR= has not been defined. I actually used some [[http://orgmode.org/worg/org-contrib/babel/][Org-babel]]
