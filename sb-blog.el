@@ -258,3 +258,46 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         ("sb-blog"
          :components ("sb-blog-org"
                       "sb-blog-attachments"))))
+
+(defun sb-blog-data-dir (filename)
+  "Return the relative path to the data directory of the blog post.
+
+FILENAME is the full path to the blog post. Blog posts are named
+according to the convention
+
+    /path/to/post/YYYYMMDD-post_title.org
+
+or (for series of posts)
+
+    /path/to/post/YYYYMMDD-post_title-NN.org
+
+In both cases, data associated with this post are to be stored in
+a directory called
+
+    /path/to/post/post_title/
+
+and this function returns
+
+    ./post_title/"
+  (let ((basename (file-name-nondirectory filename)))
+    (string-match "^\\([0-9]\\{8\\}-\\)?\\(.*?\\)\\(-[0-9]\\{2\\}\\)?.org$"
+                  basename)
+    (concat "./" (match-string 2 basename) "/")))
+
+
+(defun sb-blog-init-data-dir ()
+  "Append relative path to the data directory to `org-link-abbrev-alist-local`.
+
+The path is associated to the key \"sb-blog-data-dir\", so that
+links to data file can be abbreviated as follows
+
+    sb-data-dir:filename
+
+This function can be invoked automatically through the following
+lines (which must be placed at the bottom of the file)
+
+    # Local Variables:
+    # eval: (sb-blog-init-data-dir)
+    # End:"
+  (add-to-list 'org-link-abbrev-alist-local
+               `("sb-blog-data-dir" . ,(sb-blog-data-dir buffer-file-name))))
