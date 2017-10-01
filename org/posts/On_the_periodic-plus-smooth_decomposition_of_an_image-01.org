@@ -69,11 +69,8 @@ snippet[fn:1]
   import numpy as np
   import scipy.misc
 
-  iname = DATA_DIR+'hut-648x364.png'
-  oname = DATA_DIR+'hut-648x364-fftshift.png'
-
-  u = scipy.misc.imread(iname)
-  scipy.misc.imsave(oname, np.fft.fftshift(u))
+  u = scipy.misc.imread(DATA_DIR+'hut-648x364.png')
+  scipy.misc.imsave(DATA_DIR+'hut-648x364-fftshift.png', np.fft.fftshift(u))
 #+END_SRC
 
 Why would this lack of periodicity be a problem? Well, many image analysis
@@ -90,10 +87,9 @@ code snippet was executed to produce this image.
   a = np.log10(u_ps)
   a_min, a_max = np.min(a), np.max(a)
   a = 255*(a-a_min)/(a_max-a_min)
-  img = a.astype(np.uint8)
 
-  oname = DATA_DIR+'hut-648x364-power_spectrum.png'
-  scipy.misc.imsave(oname, img)
+  scipy.misc.imsave(DATA_DIR+'hut-648x364-power_spectrum.png',
+                    a.astype(np.uint8))
 #+END_SRC
 
 #+CAPTION: The power spectrum of the image shown in Figure [[fig:1]].
