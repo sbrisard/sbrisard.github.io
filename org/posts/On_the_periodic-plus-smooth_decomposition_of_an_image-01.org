@@ -45,6 +45,7 @@ the following image as an example (see Figure [[fig:1]]).
 
 #+CAPTION: The original image.
 #+NAME: fig:1
+#+ATTR_HTML: :width 80%
 [[sb-blog-data-dir:hut-648x364.png]]
 
 Instead of putting aside 4 copies of the same image, we can simply swap the
@@ -56,6 +57,7 @@ indication that the image is not periodic.
 #+CAPTION: The original image shown in Figure [[fig:1]], with
 #+CAPTION: swapped quadrants.
 #+NAME: fig:2
+#+ATTR_HTML: :width 80%
 [[sb-blog-data-dir:hut-648x364-fftshift.png]]
 
 It should be noted that the image shown in Figure [[fig:2]] is readily produced with
@@ -96,6 +98,7 @@ code snippet was executed to produce this image.
 
 #+CAPTION: The power spectrum of the image shown in Figure [[fig:1]].
 #+NAME: fig:3
+#+ATTR_HTML: :width 80%
 [[sb-blog-data-dir:hut-648x364-power_spectrum.png]]
 
 In Figure [[fig:3]], the bright cross at the center is the signature of the jumps
@@ -103,11 +106,58 @@ across the boundaries of the image. Indeed, remember that discontinuities at
 large correlation lengths translate to oscillations at low frequencies (the
 center of the power spectrum image).
 
+* Periodization by symmetrization
+
+Of course, it is possible to enforce periodicity by tiling together 4 mirror
+images of the same initial image as follows (see figure [[fig:4]])
+
+#+BEGIN_SRC ipython :results silent
+  m, n = u.shape
+  left, right = slice(0, m), slice(2*m-1, m-1, -1)
+  top, bottom = slice(0, n), slice(2*n-1, n-1, -1)
+  u_mirrored = np.zeros((2*m, 2*n), dtype=u.dtype)
+  u_mirrored[left, bottom] = u
+  u_mirrored[right, bottom] = u
+  u_mirrored[left, top] = u
+  u_mirrored[right, top] = u
+  scipy.misc.imsave(DATA_DIR+'hut-648x364-mirrored.png', u_mirrored)
+#+END_SRC
+
+#+CAPTION: Periodization by symmetrization of the image shown in
+#+CAPTION: Figure [[fig:1]].
+#+NAME: fig:4
+#+ATTR_HTML: :width 80%
+[[sb-blog-data-dir:hut-648x364-mirrored.png]]
+
+This indeed makes the power spectrum
+
+#+BEGIN_SRC ipython :results silent
+  a = np.abs(np.fft.fftshift(np.fft.fft2(u_mirrored)))**2
+  a[a==0.0]=1.0
+  a = np.log10(a)
+  a_min, a_max = np.min(a), np.max(a)
+  a = 255*(a-a_min)/(a_max-a_min)
+
+  scipy.misc.imsave(DATA_DIR+'hut-648x364-mirrored-power_spectrum.png',
+                    a.astype(np.uint8))
+#+END_SRC
+
+This does not remove entirely the cross at the center of the power
+spectrum. Worse, "it makes the DFT symmetric and real-valued, which can be
+dramatic if the phase component of the Fourier transform has to be analyzed, or
+if orientation issues are concerned" ([[https://doi.org/10.1007/s10851-010-0227-1][Moisan, 2011]]). This led Moisan to
+introduce the /periodic-plus-smooth/ decomposition.
+
+#+CAPTION: The power spectrum of the image shown in Figure [[fig:4]].
+#+NAME: fig:5
+#+ATTR_HTML: :width 80%
+[[sb-blog-data-dir:hut-648x364-mirrored-power_spectrum.png]]
+
 * Conclusion
 
 In this post, we set the stage for the subsequent instalments of this series,
 arguing that it is sometimes desirable that an image should be periodic. In the
-next instalment of this series, we will define the periodic-plus-smooth
+next instalment of this series, we will define the /periodic-plus-smooth/
 decomposition of Moisan ([[https://doi.org/10.1007/s10851-010-0227-1][2011]]). We will then turn to the implementation of this
 decomposition.
 
