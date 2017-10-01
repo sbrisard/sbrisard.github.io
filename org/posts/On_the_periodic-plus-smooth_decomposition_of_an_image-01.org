@@ -30,14 +30,6 @@ them against the reference implementation, and compare their merits.
 That's a lot of work! So, without further ado, let's start introducing this
 decomposition!
 
-#+NAME: sb-data-dir
-#+BEGIN_SRC emacs-lisp :exports none
-  (file-name-sans-extension buffer-file-name)
-#+END_SRC
-
-#+RESULTS: sb-data-dir
-: c:/Users/sbrisard/Documents/blog/org/posts/Extracting_the_periodic_component_of_an_image
-
 * The need for periodic images
 
 Let us start by briefly discussing what /is/ a periodic image, and why we would
@@ -53,7 +45,7 @@ the following image as an example (see Figure [[fig:1]]).
 
 #+CAPTION: The original image.
 #+NAME: fig:1
-[[sb-data-dir:hut-648x364.png]]
+[[sb-blog-data-dir:hut-648x364.png]]
 
 Instead of putting aside 4 copies of the same image, we can simply swap the
 quadrants, as shown in Figure [[fig:2]]. Alternatively, you could also ask my
@@ -64,18 +56,19 @@ indication that the image is not periodic.
 #+CAPTION: The original image shown in Figure [[fig:1]], with
 #+CAPTION: swapped quadrants.
 #+NAME: fig:2
-[[sb-data-dir:hut-648x364-fftshift.png]]
+[[sb-blog-data-dir:hut-648x364-fftshift.png]]
 
 It should be noted that the image shown in Figure [[fig:2]] is readily produced with
 the [[https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift][numpy.fft.fftshift]] function, as illustrated by the following code
 snippet[fn:1]
 
-#+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
+#+HEADER: :var DATA_DIR=(cdr (assoc "sb-blog-data-dir" org-link-abbrev-alist-local))
+#+BEGIN_SRC ipython :results silent
   import numpy as np
   import scipy.misc
 
-  iname = '/'.join([DATA_DIR, 'hut-648x364.png'])
-  oname = '/'.join([DATA_DIR, 'hut-648x364-fftshift.png'])
+  iname = DATA_DIR+'hut-648x364.png'
+  oname = DATA_DIR+'hut-648x364-fftshift.png'
 
   u = scipy.misc.imread(iname)
   scipy.misc.imsave(oname, np.fft.fftshift(u))
@@ -89,7 +82,7 @@ an image (we shall come back to this specific issue in a dedicated series). The
 power spectrum of Figure [[fig:1]] is displayed in Figure [[fig:3]] below; the following
 code snippet was executed to produce this image.
 
-#+BEGIN_SRC ipython :results silent :var DATA_DIR=sb-data-dir
+#+BEGIN_SRC ipython :results silent
   u_dft = np.fft.fft2(u)
   u_ps = np.abs(np.fft.fftshift(u_dft))**2
   a = np.log10(u_ps)
@@ -97,13 +90,13 @@ code snippet was executed to produce this image.
   a = 255*(a-a_min)/(a_max-a_min)
   img = a.astype(np.uint8)
 
-  oname = '/'.join([DATA_DIR, 'hut-648x364-power_spectrum.png'])
+  oname = DATA_DIR+'hut-648x364-power_spectrum.png'
   scipy.misc.imsave(oname, img)
 #+END_SRC
 
 #+CAPTION: The power spectrum of the image shown in Figure [[fig:1]].
 #+NAME: fig:3
-[[sb-data-dir:hut-648x364-power_spectrum.png]]
+[[sb-blog-data-dir:hut-648x364-power_spectrum.png]]
 
 In Figure [[fig:3]], the bright cross at the center is the signature of the jumps
 across the boundaries of the image. Indeed, remember that discontinuities at
@@ -123,6 +116,6 @@ decomposition.
 this variable programatically from =emacs-lisp=.
 
 # Local Variables:
-# eval: (setq org-link-abbrev-alist-local `(("sb-data-dir" . ,(concat (file-name-sans-extension buffer-file-name) "/"))))
+# eval: (sb-blog-init-data-dir)
 # fill-column: 80
 # End:
