@@ -2,10 +2,31 @@
 #+SETUPFILE: "../include/css-1.org"
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition
 #+DATE: [2017-10-02 Mon]
+#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
+#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-01.org
+#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
+#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
+In the [[sb-blog-prev:][previous instalment]] of this series, I discussed the need for periodic
+images. Although not all images are periodic, some image analysis techniques are
+best performed in Fourier space (using the fast Fourier transform). Applying
+Fourier-based techniques to images that are /not/ periodic (as is often the
+case) generates artifacts. In order to reduce these artifacts, Moisan ([[moisan2011:][2011]])
+proposed to construct a periodic image that is as close as possible to the
+original image. For reasons that will become clearer in the remainder of this
+post, he called the resulting construction the “periodic-plus-smooth
+decomposition”. In this post, I will define this decomposition, a first
+implementation of which will be proposed in the [[sb-blog-next:][next instalment]].
+
+As an appetizer, Figure [[fig:1]] shows the original image (left) and its periodic
+(middle) and smooth components (right). Gray levels of the smooth component have
+been rescaled so as to fit between 0 and 255. Most of this image is grayish,
+meaning it is zero almost everywhere, except at the boundaries, where it
+corrects the jumps induced by the lack of periodicity of the initial image.
+
 #+HEADER: :var DATA_DIR=(cdr (assoc "sb-blog-data-dir" org-link-abbrev-alist-local))
-#+BEGIN_SRC ipython :results output
+#+BEGIN_SRC ipython :results none :exports none
   import numpy as np
   import scipy.misc
 
@@ -24,9 +45,58 @@
   scipy.misc.imsave(DATA_DIR+'hut-648x364-smooth.png', s)
   scipy.misc.imsave(DATA_DIR+'hut-648x364-periodic-fftshift.png',
                     np.fft.fftshift(p))
+
+  margin = 20
+  m, n = u.shape
+  img = np.empty((m, 3*n+2*margin), dtype=np.uint8)
+  img[:, :] = 255
+  img[:, :n] = u
+  img[:, n+margin:2*n+margin] = p
+  img[:, 2*n+2*margin:3*n+2*margin] = s
+  scipy.misc.imsave(DATA_DIR+'hut-648x364-periodic-plus-smooth.png', img)
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Illustration of the periodic-plus-smooth decomposition of an image.
+#+CAPTION: The original image (left), its periodic component (middle) and its
+#+CAPTION: smooth (rescaled) component (right).
+#+NAME: fig:1
+#+ATTR_HTML: :width 100%
+[[sb-blog-data-dir:hut-648x364-periodic-plus-smooth.png]]
+
+Now, let us define this decomposition. The intuitive idea is the following: let
+$u$ be a $m\times n$ image. The problem is to find two images $p$ (“periodic”
+component) and $s$ (“smooth” component), such that $u=p+s$, and
+
+  1. $p$ minimizes jumps across boundaries (periodicity),
+  2. $s$ minimizes jumps between neighbor pixels (smoothness),
+  3. $p$ and $u$ have same mean value (conservation of brigthness).
+
+In the present post, neighbor pixels refer to the [[https://en.wikipedia.org/wiki/Pixel_connectivity#4-connected][4-connectivity]]. Now, we to
+introduce measures of periodicity and smoothness. Regarding periodicity,
+first. For each pixel located at the boundary of an image, we look at its
+periodic neighbors and compute the difference in gray value. The measure of
+periodicity is defined as the sum of squares of these differences. Note that
+“periodic neighbors” that are adjacent to the pixel under consideration are
+excluded from this sum, as we focus here on the jumps accross image boundaries
+(see Figure [[fig:2]]).
+
+#+CAPTION: Periodic images (blue) of a specific pixel (orange) to be considered
+#+CAPTION: for the evaluation of the measure of periodicity, for corner pixels
+#+CAPTION: (top row), and off-corner pixels (bottom row).
+#+NAME: fig:2
+#+ATTR_HTML: :width 90%
+[[sb-blog-data-dir:periodic_neighbors.svg]]
+
+\begin{equation}
+E_\mathrm{per}(p)
+=\sum_{j=0}^{n-1}\bigl(p[m-1, j]-p[0, j]\bigr)^2
++\sum_{j=0}^{n-1}\bigl(p[0, j]-p[m-1, j]\bigr)^2
++\sum_{i=0}^{m-1}\bigl(p[i, n-1]-p[i, 0]\bigr)^2
++\sum_{i=0}^{m-1}\bigl(p[i, 0]-p[i, n-1]\bigr)^2
+\end{equation}
+
+The four terms corresponding, respectively, to the contribution of the west,
+east, north and south borders.
 
 # Local Variables:
 # eval: (sb-blog-init-data-dir)
