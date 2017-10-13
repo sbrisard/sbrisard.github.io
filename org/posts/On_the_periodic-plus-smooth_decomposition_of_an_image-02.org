@@ -79,11 +79,14 @@ find two images {{{inline_mathml(<mi>p</mi>)}}} (“periodic” component) and
      same mean value (conservation of brigthness).
 
 In the present post, neighbor pixels refer to the [[https://en.wikipedia.org/wiki/Pixel_connectivity#4-connected][4-connectivity]]. Furthermore,
-we will define /direct/ and /indirect/ neighbors. By definition, direct
-neighbors are adjacent to the pixel under consideration. Conversely, indirect
-neighbors are periodic images of these pixels that fall outside the
-image. Figure [[fig:direct_and_indirect_neighbors]] illustrates directe and indirect
-neighbors. It results from these definitions that
+we define
+
+  - /direct/ neighbors, that are adjacent to the pixel under consideration
+  - /indirect/ neighbors, that are periodic images of these neigbors that would
+    normally fall outside the image.
+
+Figure [[fig:direct_and_indirect_neighbors]] illustrates direct and indirect
+neighbors. It shows that
 
   - corner pixels have 2 direct neighbors and 2 indirect neighbors,
   - off-corner, boundary pixels have 3 direct neighbors and 1 indirect neighbor,
@@ -96,17 +99,18 @@ neighbors. It results from these definitions that
 #+ATTR_HTML: :width 90%
 [[sb-blog-data-dir:direct_and_indirect_neighbors.svg]]
 
-Now, we need to quantify how periodic is the periodic component $p$, and how
-smooth is the smooth component $s$. More precisely, we will define to energy
-functions: $E_\mathrm{p}$ and $E_\mathrm{s}$ that penalize lack of periodicity
-and smoothness, respectively. More precisely, $E_\mathrm{p}$
+Now, we need to quantify how periodic is the periodic component
+{{{inline_mathml(<mi>p</mi>)}}}, and how smooth is the smooth component
+{{{inline_mathml(<mi>s</mi>)}}}. To do so, we will define two energy functions:
+{{{inline_mathml(<mi>E</mi><msub><mtext>p</mtext></msub>)}}} and
+{{{inline_mathml(<mi>E</mi><msub><mtext>s</mtext></msub>)}}} that penalize lack
+of periodicity and smoothness, respectively. More precisely, $E_\mathrm{p}$
 (resp. $E_\mathrm{s}$) is greater for less periodic (resp. less smooth) $p$
 (resp. $s$). The periodic-plus-smooth decomposition of an image $u$ is then
 defined as the pair of images $(p,s)$ that minimize the total energy $E(p,
 s)=E_\mathrm{p}(p)+E_\mathrm{s}(s)$ under the constraints $u=p+s$ and
 $\operatorname{mean}(s)=0$. The remainder of this post is dedicated to defining
 the energies $E_\mathrm{p}$ and $E_\mathrm{s}$.
-
 
 Regarding periodicity, first. For each pixel located at the boundary of an
 image, we look at its periodic neighbors and compute the difference in gray
