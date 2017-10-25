@@ -129,96 +129,95 @@ expression
 
 #+BEGIN_EXPORT html
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mtable>
+  <mtable columnspacing="0em" columnalign="right left" displaystyle="true">
     <mtr>
       <mtd>
         <mrow>
-          <mrow>
-            <msub>
-              <mi>E</mi>
-              <mtext>p</mtext>
-            </msub>
-            <mo>&ApplyFunction;</mo>
-            <mfenced>
-              <mi>p</mi>
-            </mfenced>
-          </mrow>
-          <mo>=</mo>
-          <malignmark/>
-          <munder accentunder="true">
-            <!-- top-left corner -->
-            <mrow>
-              <!-- (p[m-1, 0]-p[0, 0])^2 -->
-              <msup>
-                <mfenced>
-                  <mrow>
-                    <msub>
-                      <mi>p</mi>
-                      <mrow>
-                        <mrow>
-                          <mi>m</mi>
-                          <mo>-</mo>
-                          <mn>1</mn>
-                        </mrow>
-                        <mo>,</mo>
-                        <mn>0</mn>
-                      </mrow>
-                    </msub>
-                    <mo>-</mo>
-                    <msub>
-                      <mi>p</mi>
-                      <mrow>
-                        <mn>0</mn>
-                        <mo>,</mo>
-                        <mn>0</mn>
-                      </mrow>
-                    </msub>
-                  </mrow>
-                </mfenced>
-                <mn>2</mn>
-              </msup>
-              <mo>+</mo>
-              <!-- (p[0, n-1]-p[0, 0])^2 -->
-              <msup>
-                <mfenced>
-                  <mrow>
-                    <msub>
-                      <mi>p</mi>
-                      <mrow>
-                        <mn>0</mn>
-                        <mo>,</mo>
-                        <mrow>
-                          <mi>n</mi>
-                          <mo>-</mo>
-                          <mn>1</mn>
-                        </mrow>
-                      </mrow>
-                    </msub>
-                    <mo>-</mo>
-                    <msub>
-                      <mi>p</mi>
-                      <mrow>
-                        <mn>0</mn>
-                        <mo>,</mo>
-                        <mn>0</mn>
-                      </mrow>
-                    </msub>
-                  </mrow>
-                </mfenced>
-                <mn>2</mn>
-              </msup>
-            </mrow>
-            <munder accentunder="true">
-              <mo>&UnderBrace;</mo>
-              <mtext>top-left corner</mtext>
-            </munder>
-          </munder>
+          <msub>
+            <mi>E</mi>
+            <mtext>p</mtext>
+          </msub>
+          <mo>&ApplyFunction;</mo>
+          <mfenced>
+            <mi>p</mi>
+          </mfenced>
         </mrow>
+        <mo>=</mo>
+      </mtd>
+      <mtd>
+        <munder accentunder="true">
+          <!-- top-left corner -->
+          <mrow>
+            <!-- (p[m-1, 0]-p[0, 0])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <!-- (p[0, n-1]-p[0, 0])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <munder accentunder="true">
+            <mo>&UnderBrace;</mo>
+            <mtext>top-left corner</mtext>
+          </munder>
+        </munder>
       </mtd>
     </mtr>
     <mtr>
+      <mtd/>
       <mtd>
-        <malignmark/>
         <mo>+</mo>
         <munder accentunder="true">
           <!-- top-right corner -->
@@ -299,8 +298,8 @@ expression
       </mtd>
     </mtr>
     <mtr>
+      <mtd/>
       <mtd>
-        <malignmark/>
         <mo>+</mo>
         <munder accentunder="true">
           <!-- bottom-left corner -->
@@ -381,8 +380,8 @@ expression
       </mtd>
     </mtr>
     <mtr>
+      <mtd/>
       <mtd>
-        <malignmark/>
         <mo>+</mo>
         <munder accentunder="true">
           <!-- bottom-right corner -->
@@ -471,8 +470,8 @@ expression
       </mtd>
     </mtr>
     <mtr>
+      <mtd/>
       <mtd>
-        <malignmark/>
         <mo>+</mo>
         <munder accentunder="true">
           <!-- sum((p[i, n-1]-p[i, 0])**2, i, 1, m-2) -->
@@ -578,8 +577,8 @@ expression
       </mtd>
     </mtr>
     <mtr>
+      <mtd/>
       <mtd>
-        <malignmark/>
         <mo>+</mo>
         <munder accentunder="true">
           <!-- sum((p[m-1, j]-p[0, j])**2, j, 1, n-2) -->
@@ -682,6 +681,7 @@ expression
             <mtext>bottom row</mtext>
           </munder>
         </munder>
+        <mtext>,</mtext>
       </mtd>
     </mtr>
   </mtable>
@@ -689,20 +689,684 @@ expression
 </math>
 #+END_EXPORT
 
-where the four first lines are the contributions of: the top-left, top right,
-bottom left and bottom right corners, respectively. The fifth line is the
-contribution of the left and right columns, and the sixth line is the
-contribution of the top and bottom rows respectively. The above expression
-reduces as follows
+which reduces to
 
-\begin{equation}
-E_\mathrm{p}(p)
-=2\sum_{j=0}^{n-1}\bigl(p_{m-1, j}-p_{0, j}\bigr)^2
-+2\sum_{j=0}^{n-1}\bigl(p_{0, j}-p_{m-1, j}\bigr)^2.
-\end{equation}
+#+BEGIN_EXPORT html
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mrow>
+    <msub>
+      <mi>E</mi>
+      <mtext>p</mtext>
+    </msub>
+    <mo>&ApplyFunction;</mo>
+    <mfenced>
+      <mi>p</mi>
+    </mfenced>
+  </mrow>
+  <mo>=</mo>
+  <!-- sum((p[i, n-1]-p[i, 0])**2, i, 1, m-2) -->
+  <mrow>
+    <mn>2</mn>
+    <mo>&InvisibleTimes;</mo>
+    <munderover>
+      <mo>&sum;</mo>
+      <mrow>
+        <mi>i</mi>
+        <mo>=</mo>
+        <mn>0</mn>
+      </mrow>
+      <mrow>
+        <mi>m</mi>
+        <mo>-</mo>
+        <mn>1</mn>
+      </mrow>
+    </munderover>
+    <msup>
+      <mfenced>
+        <mrow>
+          <msub>
+            <mi>p</mi>
+            <mrow>
+              <mi>i</mi>
+              <mo>,</mo>
+              <mrow>
+                <mi>n</mi>
+                <mo>-</mo>
+                <mn>1</mn>
+              </mrow>
+            </mrow>
+          </msub>
+          <mo>-</mo>
+          <msub>
+            <mi>p</mi>
+            <mrow>
+              <mi>i</mi>
+              <mo>,</mo>
+              <mn>0</mn>
+            </mrow>
+          </msub>
+        </mrow>
+      </mfenced>
+      <mn>2</mn>
+    </msup>
+  </mrow>
+  <mo>+</mo>
+  <!-- sum((p[m-1, j]-p[0, j])**2, j, 1, n-2) -->
+  <mrow>
+    <mn>2</mn>
+    <mo>&InvisibleTimes;</mo>
+    <munderover>
+      <mo>&sum;</mo>
+      <mrow>
+        <mi>j</mi>
+        <mo>=</mo>
+        <mn>0</mn>
+      </mrow>
+      <mrow>
+        <mi>n</mi>
+        <mo>-</mo>
+        <mn>1</mn>
+      </mrow>
+    </munderover>
+    <msup>
+      <mfenced>
+        <mrow>
+          <msub>
+            <mi>p</mi>
+            <mrow>
+              <mrow>
+                <mi>m</mi>
+                <mo>-</mo>
+                <mn>1</mn>
+              </mrow>
+              <mo>,</mo>
+              <mi>j</mi>
+            </mrow>
+          </msub>
+          <mo>-</mo>
+          <msub>
+            <mi>p</mi>
+            <mrow>
+              <mn>0</mn>
+              <mo>,</mo>
+              <mi>j</mi>
+            </mrow>
+          </msub>
+        </mrow>
+      </mfenced>
+      <mn>2</mn>
+    </msup>
+  </mrow>
+  <mtext>.</mtext>
+</mrow>
+</math>
+#+END_EXPORT
 
-Now, smoothness is evaluated by computing the sum of squares of all jumps
-between “true” (adjacent) neighbors: periodic images are excluded. This leads to the following expression
+Now, smoothness is measured through the sum of squares of all jumps between
+direct neighbors (indirect neighbors are excluded)
+
+#+BEGIN_EXPORT html
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mtable columnspacing="0em" columnalign="right left" displaystyle="true">
+    <mtr>
+      <mtd>
+        <mrow>
+          <msub>
+            <mi>E</mi>
+            <mtext>s</mtext>
+          </msub>
+          <mo>&ApplyFunction;</mo>
+          <mfenced>
+            <mi>s</mi>
+          </mfenced>
+        </mrow>
+        <mo>=</mo>
+      </mtd>
+      <mtd>
+        <munder accentunder="true">
+          <!-- top-left corner -->
+          <mrow>
+            <!-- (s[1, 0]-s[0, 0])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mn>1</mn>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <!-- (s[0, 1]-s[0, 0])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mn>1</mn>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <munder accentunder="true">
+            <mo>&UnderBrace;</mo>
+            <mtext>top-left corner</mtext>
+          </munder>
+        </munder>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd/>
+      <mtd>
+        <mo>+</mo>
+        <munder accentunder="true">
+          <!-- top-right corner -->
+          <mrow>
+            <!-- (s[1, n-1]-s[0, n-1])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mn>1</mn>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <!-- (s[0, n-2]-p[0, n-1])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>2</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <munder accentunder="true">
+            <mo>&UnderBrace;</mo>
+            <mtext>top-right corner</mtext>
+          </munder>
+        </munder>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd/>
+      <mtd>
+        <mo>+</mo>
+        <munder accentunder="true">
+          <!-- bottom-left corner -->
+          <mrow>
+            <!-- (s[m-2, 0]-s[m-1, 0])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>2</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <!-- (s[m-1, 1]-s[m-1, 0])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mn>1</mn>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <munder accentunder="true">
+            <mo>&UnderBrace;</mo>
+            <mtext>bottom-left corner</mtext>
+          </munder>
+        </munder>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd/>
+      <mtd>
+        <mo>+</mo>
+        <munder accentunder="true">
+          <!-- bottom-right corner -->
+          <mrow>
+            <!-- (s[m-2, n-1]-s[m-1, n-1])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>2</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <!-- (s[m-1, n-2]-s[m-1, n-1])^2 -->
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>2</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>s</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <munder accentunder="true">
+            <mo>&UnderBrace;</mo>
+            <mtext>bottom-right corner</mtext>
+          </munder>
+        </munder>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd/>
+      <mtd>
+        <mo>+</mo>
+        <munder accentunder="true">
+          <!-- sum((p[i, n-1]-p[i, 0])**2, i, 1, m-2) -->
+          <mrow>
+            <munderover>
+              <mo>&sum;</mo>
+              <mrow>
+                <mi>i</mi>
+                <mo>=</mo>
+                <mn>1</mn>
+              </mrow>
+              <mrow>
+                <mi>m</mi>
+                <mo>-</mo>
+                <mn>2</mn>
+              </mrow>
+            </munderover>
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mi>i</mi>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mi>i</mi>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <munder accentunder="true">
+            <mo>&UnderBrace;</mo>
+            <mtext>left column</mtext>
+          </munder>
+        </munder>
+        <mo>+</mo>
+        <munder accentunder="true">
+          <!-- sum((p[i, 0]-p[i, n-1])**2, i, 1, m-2) -->
+          <mrow>
+            <munderover>
+              <mo>&sum;</mo>
+              <mrow>
+                <mi>i</mi>
+                <mo>=</mo>
+                <mn>1</mn>
+              </mrow>
+              <mrow>
+                <mi>m</mi>
+                <mo>-</mo>
+                <mn>2</mn>
+              </mrow>
+            </munderover>
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mi>i</mi>
+                      <mo>,</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mi>i</mi>
+                      <mo>,</mo>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <munder accentunder="true">
+            <mo>&UnderBrace;</mo>
+            <mtext>right column</mtext>
+          </munder>
+        </munder>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd/>
+      <mtd>
+        <mo>+</mo>
+        <munder accentunder="true">
+          <!-- sum((p[m-1, j]-p[0, j])**2, j, 1, n-2) -->
+          <mrow>
+            <munderover>
+              <mo>&sum;</mo>
+              <mrow>
+                <mi>j</mi>
+                <mo>=</mo>
+                <mn>1</mn>
+              </mrow>
+              <mrow>
+                <mi>n</mi>
+                <mo>-</mo>
+                <mn>2</mn>
+              </mrow>
+            </munderover>
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mi>j</mi>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mi>j</mi>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <munder accentunder="true">
+            <mo>&UnderBrace;</mo>
+            <mtext>top row</mtext>
+          </munder>
+        </munder>
+        <mo>+</mo>
+        <munder accentunder="true">
+          <!-- sum((p[0, j]-p[m-1, j])**2, j, 1, n-2) -->
+          <mrow>
+            <munderover>
+              <mo>&sum;</mo>
+              <mrow>
+                <mi>j</mi>
+                <mo>=</mo>
+                <mn>1</mn>
+              </mrow>
+              <mrow>
+                <mi>n</mi>
+                <mo>-</mo>
+                <mn>2</mn>
+              </mrow>
+            </munderover>
+            <msup>
+              <mfenced>
+                <mrow>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mn>0</mn>
+                      <mo>,</mo>
+                      <mi>j</mi>
+                    </mrow>
+                  </msub>
+                  <mo>-</mo>
+                  <msub>
+                    <mi>p</mi>
+                    <mrow>
+                      <mrow>
+                        <mi>m</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mo>,</mo>
+                      <mi>j</mi>
+                    </mrow>
+                  </msub>
+                </mrow>
+              </mfenced>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <munder accentunder="true">
+            <mo>&UnderBrace;</mo>
+            <mtext>bottom row</mtext>
+          </munder>
+        </munder>
+        <mtext>,</mtext>
+      </mtd>
+    </mtr>
+  </mtable>
+</mrow>
+</math>
+
+#+END_EXPORT
 
 \begin{equation}
 E_\mathrm{s}(s)=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}\Bigl[
