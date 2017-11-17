@@ -5,6 +5,11 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:./posts/20171117-Announcing_the_defense_of_my_habilitation.org][2017-11-17 – Announcing the defense of my “Habilitation à Diriger des Recherches”]]
+
+On monday 20^th, november 2017 (at 13:30), I will be defending my
+[[https://en.wikipedia.org/wiki/Habilitation#France][“Habilitation à Diriger des Recherches”]] at [[http://www.enpc.fr/][École des Ponts ParisTech]].
+
 * [[file:./posts/20170807-New_conference_paper_on_variational_estimates_of_poroelastic_coefficients.org][2017-08-07 – New conference paper on variational estimates of poroelastic coefficients]]
 
 I recently had the pleasure to give a talk on “Variational estimates
