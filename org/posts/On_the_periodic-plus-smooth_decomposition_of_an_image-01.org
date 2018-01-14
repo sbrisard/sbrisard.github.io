@@ -125,7 +125,13 @@ images of the same initial image as follows (see figure [[fig:4]])
 #+ATTR_HTML: :width 80%
 [[sb-blog-data-dir:hut-648x364-mirrored.png]]
 
-This indeed makes the power spectrum
+The resulting power spectrum (computed with the code snippet below) is shown in
+figure [[fig:5]]. It is observed that symmetrization does not remove entirely the
+cross at the center of the power spectrum. Worse, “it makes the DFT symmetric
+and real-valued, which can be dramatic if the phase component of the Fourier
+transform has to be analyzed, or if orientation issues are concerned”
+([[https://doi.org/10.1007/s10851-010-0227-1][Moisan, 2011]]). This led Moisan to introduce the /periodic-plus-smooth/
+decomposition.
 
 #+BEGIN_SRC ipython :results silent
   a = np.abs(np.fft.fftshift(np.fft.fft2(u_mirrored)))**2
@@ -137,12 +143,6 @@ This indeed makes the power spectrum
   scipy.misc.imsave(DATA_DIR+'hut-648x364-mirrored-power_spectrum.png',
                     a.astype(np.uint8))
 #+END_SRC
-
-This does not remove entirely the cross at the center of the power
-spectrum. Worse, "it makes the DFT symmetric and real-valued, which can be
-dramatic if the phase component of the Fourier transform has to be analyzed, or
-if orientation issues are concerned" ([[https://doi.org/10.1007/s10851-010-0227-1][Moisan, 2011]]). This led Moisan to
-introduce the /periodic-plus-smooth/ decomposition.
 
 #+CAPTION: The power spectrum of the image shown in Figure [[fig:4]].
 #+NAME: fig:5
