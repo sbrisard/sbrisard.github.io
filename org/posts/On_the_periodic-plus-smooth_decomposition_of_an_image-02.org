@@ -1,5 +1,6 @@
 # -*- coding: utf-8; -*-
 #+SETUPFILE: "../include/css-1.org"
+#+SETUPFILE: "../include/mathjax.org"
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition
 #+DATE: [2017-10-02 Mon]
 #+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
@@ -66,18 +67,12 @@ corrects the jumps induced by the lack of periodicity of the initial image.
 
 * The decomposition as a minimization problem
 
-Let {{{inline_mathml(<mi>u</mi>)}}} be a
-{{{inline_mathml(<mi>m</mi><mo>×</mo><mi>n</mi>)}}} image. We want to find two
-images {{{inline_mathml(<mi>p</mi>)}}} (“periodic” component) and
-{{{inline_mathml(<mi>s</mi>)}}} (“smooth” component), such that
-{{{inline_mathml(<mi>u</mi><mo>=</mo><mi>p</mi><mo>+</mo><mi>s</mi>)}}}, and
+Let $u$ be a $m\times n$ image. We want to find two images $p$ (“periodic”
+component) and $s$ (“smooth” component), such that $u=p+s$ and
 
-  1. {{{inline_mathml(<mi>p</mi>)}}} minimizes jumps across boundaries
-     (periodicity),
-  2. {{{inline_mathml(<mi>s</mi>)}}} minimizes jumps between neighbor pixels
-     (smoothness),
-  3. {{{inline_mathml(<mi>p</mi>)}}} and {{{inline_mathml(<mi>u</mi>)}}} have
-     same mean value (conservation of brigthness).
+  1. $p$ minimizes jumps across boundaries (periodicity),
+  2. $s$ minimizes jumps between neighbor pixels (smoothness),
+  3. $p$ and $u$ have same mean value (conservation of brigthness).
 
 In Moisan's work, neighbor pixels refer to the [[https://en.wikipedia.org/wiki/Pixel_connectivity#4-connected][4-connectivity]]. Furthermore, we
 define
@@ -100,26 +95,24 @@ neighbors. It shows that
 #+ATTR_HTML: :width 90%
 [[sb-blog-data-dir:direct_and_indirect_neighbors.svg]]
 
-Now, we need to quantify how periodic is {{{inline_mathml(<mi>p</mi>)}}}, and
-how smooth is {{{inline_mathml(<mi>s</mi>)}}}. To do so, we will define two
-energy functions: {{{inline_mathml(<msub><mi>E</mi><mtext>p</mtext></msub>)}}}
-and {{{inline_mathml(<msub><mi>E</mi><mtext>s</mtext></msub>)}}} that penalize
+Now, we need to quantify how periodic is $p$, and
+how smooth is $s$. To do so, we will define two
+energy functions: $E_\mathrm p$
+and $E_\mathrm s$ that penalize
 lack of periodicity and smoothness, respectively. More precisely,
-{{{inline_mathml(<msub><mi>E</mi><mtext>p</mtext></msub>)}}}
-(resp. {{{inline_mathml(<msub><mi>E</mi><mtext>s</mtext></msub>)}}}) is greater
-for less periodic (resp. less smooth) {{{inline_mathml(<mi>p</mi>)}}}
-(resp. {{{inline_mathml(<mi>s</mi>)}}}). The periodic-plus-smooth decomposition
-of an image {{{inline_mathml(<mi>u</mi>)}}} is then defined as the pair of
-images {{{inline_mathml(<mfenced><mi>p</mi><mi>s</mi></mfenced>)}}} that
+$E_\mathrm p$
+(resp. $E_\mathrm s$) is greater
+for less periodic (resp. less smooth) $p$
+(resp. $s$). The periodic-plus-smooth decomposition
+of an image $u$ is then defined as the pair of
+images $(p, s)$ that
 minimize the total energy
-{{{inline_mathml(<mrow><mrow><mi>E</mi><mo>&af;</mo><mrow><mo>(</mo><mrow><mi>p</mi><mo>\,</mo><mi>s</mi></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>E</mi><mtext>p</mtext></msub><mo>&af;</mo><mrow><mo>(</mo><mi>p</mi><mo>)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>E</mi><mtext>s</mtext></msub><mo>&af;</mo><mrow><mo>(</mo><mi>s</mi><mo>)</mo></mrow></mrow></mrow>)}}}
-under the constraints
-{{{inline_mathml(<mrow><mi>u</mi><mo>=</mo><mi>p</mi><mo>+</mo><mi>s</mi></mrow>)}}}
-and
-{{{inline_mathml(<mrow><mrow><mi>mean</mi><mo>&af;</mo><mfenced><mi>s</mi></mfenced></mrow><mo>=</mo><mn>0</mn></mrow>)}}}. The
+$E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$
+under the constraints $u=p+s$
+and $\operatorname{mean}(s)=0$. The
 remainder of this post is dedicated to defining the energies
-{{{inline_mathml(<msub><mi>E</mi><mtext>p</mtext></msub>)}}} and
-{{{inline_mathml(<msub><mi>E</mi><mtext>s</mtext></msub>)}}}
+$E_\mathrm p$ and
+$E_\mathrm s$.
 
 * How to penalize lack of periodicity?
 
