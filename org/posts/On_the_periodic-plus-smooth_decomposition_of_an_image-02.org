@@ -8,7 +8,6 @@
 #+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
 #+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
-#+MACRO: inline_mathml @@html: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">$1</math>@@
 
 In the [[sb-blog-prev:][previous instalment]] of this series, I discussed the need for periodic
 images. Although not all images are periodic, some image analysis techniques are
@@ -1201,7 +1200,8 @@ twice. In other words,
 
 * Python implementation
 
-Implementation of the total energy {{{inline_mathml(<mrow><mrow><mi>E</mi><mo>&af;</mo><mrow><mo>(</mo><mrow><mi>p</mi><mo>\,</mo><mi>s</mi></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>E</mi><mtext>p</mtext></msub><mo>&af;</mo><mrow><mo>(</mo><mi>p</mi><mo>)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>E</mi><mtext>s</mtext></msub><mo>&af;</mo><mrow><mo>(</mo><mi>s</mi><mo>)</mo></mrow></mrow></mrow>)}}} is fairly trivial.
+Implementation of the total energy $E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ is
+fairly trivial.
 
 #+BEGIN_SRC python :results output code :exports results
   import inspect
