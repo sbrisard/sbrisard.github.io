@@ -1,0 +1,33 @@
+# -*- coding: utf-8; -*-
+#+SETUPFILE: "../include/css-1.org"
+#+SETUPFILE: "../include/mathjax.org"
+#+TITLE: On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form
+#+DATE: [2018-01-15 Mon]
+#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
+#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org
+#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-04.org
+#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
+
+In the [[sb-blog-prev:][previous instalment]] of this series, we introduced the
+periodic-plus-smooth decomposition of an image as a pair of images which
+minimizes an energy functional. The purpose of this post is to show that this
+energy is in fact a quadratic functional, the minimization of which therefore
+amounts to solving a linear problem.
+
+According to Moisan ([[moisan2011:][2011]]), the total energy $E(p, s)$ of the
+periodic-plus-smooth decomposition of an image $u=p+s$ ($p$: periodic component,
+$s$: smooth component) is defined as the sum $E(p, s)=E_\mathrm p(p)+E_\mathrm
+s(s)$, with
+
+\begin{align*}
+E_\mathrm p(p)&=2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
++2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2,\\
+E_\mathrm s(s)&=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
++2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
+\end{align*}
+
+The contribution $E_\mathrm p$ (resp. $E_\mathrm s$) of the periodic
+(resp. smooth) component to the total energy are analyzed separately below.
+
+* Contribution of the periodic component
