@@ -60,3 +60,16 @@ h_{ij}=\begin{cases}
 0                      & \text{otherwise}.
 \end{cases}
 \end{equation*}
+
+The mapping $p\mapsto h$ is obviously linear, and we shall introduce the linear
+operator $A_\mathrm h$ that maps $p$ onto $h$. This operator is obviously
+symmetric. Indeed, $p$ and $q$ being two $m\times n$ images,
+\begin{equation*}
+\begin{aligned}
+(A\cdot p)\cdot q&=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}(A\cdot p)_{ij}q_{ij}
+=2\sum_{i=0}^{m-1}(p_{i, 0}-p_{i, n-1})q_{i, 0}
++2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})q_{i, n-1}\\
+&=2\sum_{i=0}^{m-1}(p_{i, 0}-p_{i, n-1})(q_{i, 0}-q_{i, n-1}
+=\cdots=p\cdot(A\cdot q).
+\end{aligned}
+\end{equation*}
