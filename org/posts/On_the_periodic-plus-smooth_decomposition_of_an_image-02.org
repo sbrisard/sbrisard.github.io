@@ -1,4 +1,4 @@
-# -*- coding: utf-8; -*-
+# -*- coding: utf-8; fill-column: 80 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition
@@ -257,8 +257,3 @@ implementation of Moisan's method.
         sympy.printing.mathml(output)+
         '</math>')
 #+END_SRC
-
-# Local Variables:
-# eval: (sb-blog-init-data-dir)
-# fill-column: 80
-# End:
