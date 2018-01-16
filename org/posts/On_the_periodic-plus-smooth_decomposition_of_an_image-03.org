@@ -19,7 +19,7 @@ In this post, it will be convenient to regard images as vectors. Given two
 $m\times n$ images $u$ and $v$, the scalar product $u\cdot v$ is then defined
 as
 \begin{equation*}
-u\cdot v=\sum_{i=0}^{m-1}\sum_{j=0}^{m-1}u_{ij}v_{ij}.
+u\cdot v=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{ij}v_{ij}.
 \end{equation*}
 
 Likewise, a linear operator $A$ over the space of $m\times n$ images is defined
