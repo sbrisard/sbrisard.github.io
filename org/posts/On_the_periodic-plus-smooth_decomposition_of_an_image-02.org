@@ -164,7 +164,7 @@ E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 Implementation of the total energy $E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ is
 fairly trivial.
 
-#+BEGIN_SRC python :results output code :exports results
+#+BEGIN_SRC python :eval no-export :exports results :results output code
   import inspect
 
   import moisan2011
