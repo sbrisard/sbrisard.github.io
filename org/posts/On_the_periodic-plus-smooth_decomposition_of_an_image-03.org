@@ -15,6 +15,20 @@ minimizes an energy functional. The purpose of this post is to show that this
 energy is in fact a quadratic functional, the minimization of which therefore
 amounts to solving a linear problem.
 
+In this post, it will be convenient to regard images as vectors. Given two
+$m\times n$ images $u$ and $v$, the scalar product $u\cdot v$ is then defined
+as
+\begin{equation*}
+u\cdot v=\sum_{i=0}^{m-1}\sum_{j=0}^{m-1}u_{ij}v_{ij}.
+\end{equation*}
+
+Likewise, a linear operator $A$ over the space of $m\times n$ images is defined
+as follows
+\begin{equation*}
+v=A\cdot u,\quad\text{with}\quad v_{ij}
+=\sum_{k=0}^{m-1}\sum_{l=0}^{n-1}A_{ij,kl}u_{kl}.
+\end{equation*}
+
 According to Moisan ([[moisan2011:][2011]]), the total energy $E(p, s)$ of the
 periodic-plus-smooth decomposition of an image $u=p+s$ ($p$: periodic component,
 $s$: smooth component) is defined as the sum $E(p, s)=E_\mathrm p(p)+E_\mathrm
@@ -31,3 +45,18 @@ The contribution $E_\mathrm p$ (resp. $E_\mathrm s$) of the periodic
 (resp. smooth) component to the total energy are analyzed separately below.
 
 * Contribution of the periodic component
+
+We have
+\begin{equation*}
+2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
+=2\sum_{i=0}^{m-1}p_{i, 0}(p_{i, 0}-p_{i, n-1})
++2\sum_{i=0}^{m-1}p_{i, n-1}(p_{i, n-1}-p_{i, 0})=p\cdot h,
+\end{equation*}
+where we have introduced the new image $h$, defined as follows
+\begin{equation*}
+h_{ij}=\begin{cases}
+2(p_{i, 0}-p_{i, n-1}) & \text{if }j=0,\\
+2(p_{i, n-1}-p_{i, 0}) & \text{if }j=n-1,\\
+0                      & \text{otherwise}.
+\end{cases}
+\end{equation*}
