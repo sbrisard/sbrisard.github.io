@@ -82,3 +82,25 @@ two $m\times n$ images,
 =\cdots=p\cdot(A_\mathrm h\cdot q).
 \end{aligned}
 \end{equation*}
+
+Turning now to the second term in Eq. \eqref{eq:1}, we introduce the symmetric
+linear operator $A_\mathrm v$ defined by
+\begin{equation*}
+(A_\mathrm v\cdot p)_{ij}=\begin{cases}
+2(p_{0, j}-p_{m-1, j}) & \text{if }i=0,\\
+2(p_{m-1, j}-p_{0, j}) & \text{if }i=m-1,\\
+0                      & \text{otherwise},
+\end{cases}
+\end{equation*}
+so that
+\begin{equation*}
+2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=p\cdot(A_\mathrm v)\cdot p.
+\end{equation*}
+
+Gathering the above results and introducing the symmetric operator
+$A=A_\mathrm h+A_\mathrm v$, we finally find
+\begin{equation}
+E_\mathrm p(p)=p\cdot A\cdot p.
+\end{equation}
+
+* Contribution of the smooth component
