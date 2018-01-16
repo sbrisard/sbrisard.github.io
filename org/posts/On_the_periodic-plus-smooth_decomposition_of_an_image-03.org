@@ -34,12 +34,14 @@ periodic-plus-smooth decomposition of an image $u=p+s$ ($p$: periodic component,
 $s$: smooth component) is defined as the sum $E(p, s)=E_\mathrm p(p)+E_\mathrm
 s(s)$, with
 
-\begin{align*}
+\begin{align}
+\label{eq:1}
 E_\mathrm p(p)&=2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
 +2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2,\\
+\label{eq:2}
 E_\mathrm s(s)&=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 +2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
-\end{align*}
+\end{align}
 
 The contribution $E_\mathrm p$ (resp. $E_\mathrm s$) of the periodic
 (resp. smooth) component to the total energy are analyzed separately below.
@@ -62,14 +64,21 @@ h_{ij}=\begin{cases}
 \end{equation*}
 
 The mapping $p\mapsto h$ is obviously linear, and we shall introduce the linear
-operator $A_\mathrm h$ that maps $p$ onto $h$. This operator is obviously
-symmetric. Indeed, $p$ and $q$ being two $m\times n$ images,
+operator $A_\mathrm h$ that maps $p$ onto $h$. Then, the first term in Eq.
+\eqref{eq:1} reads
+\begin{equation*}
+2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2=p\cdot(A_\mathrm h\cdot p).
+\end{equation*}
+
+The operator $A_\mathrm h$ is obviously symmetric. Indeed, $p$ and $q$ being
+two $m\times n$ images,
 \begin{equation*}
 \begin{aligned}
-(A\cdot p)\cdot q&=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}(A\cdot p)_{ij}q_{ij}
+(A_\mathrm h\cdot p)\cdot q
+&=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}(A_\mathrm h\cdot p)_{ij}q_{ij}
 =2\sum_{i=0}^{m-1}(p_{i, 0}-p_{i, n-1})q_{i, 0}
 +2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})q_{i, n-1}\\
-&=2\sum_{i=0}^{m-1}(p_{i, 0}-p_{i, n-1})(q_{i, 0}-q_{i, n-1}
-=\cdots=p\cdot(A\cdot q).
+&=2\sum_{i=0}^{m-1}(p_{i, 0}-p_{i, n-1})(q_{i, 0}-q_{i, n-1})
+=\cdots=p\cdot(A_\mathrm h\cdot q).
 \end{aligned}
 \end{equation*}
