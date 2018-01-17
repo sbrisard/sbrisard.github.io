@@ -110,26 +110,34 @@ E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 +2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
 \end{equation}
 
-The first term reads
-\begin{equation*}
+In order to transform the first term, we observe that, $u$ and $v$ being two
+$m\times n$ images
+\begin{equation}
+\label{eq:4}
 \begin{aligned}[b]
-\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
-={}&\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}s_{i+1, j}(s_{i+1, j}-s_{i, j})
--\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}s_{i, j}(s_{i+1, j}-s_{i, j})\\
-={}&\sum_{i=1}^{m-1}\sum_{j=0}^{n-1}s_{i, j}(s_{i, j}-s_{i-1, j})
--\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}s_{i, j}(s_{i+1, j}-s_{i, j})\\
-={}&\sum_{i=1}^{m-2}\sum_{j=0}^{n-1}s_{i, j}(2s_{i, j}-s_{i-1, j}-s_{i+1,j})\\
-&+\sum_{j=0}^{n-1}s_{m-1, j}(s_{m-1, j}-s_{m-2, j})
-+\sum_{j=0}^{n-1}s_{0, j}(s_{0, j}-s_{1, j})\\
-={}&\tfrac12 s\cdot(B_\mathrm h\cdot s),
+&\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(u_{i+1, j}-u_{i, j})(v_{i+1, j}-v_{i, j})\\
+={}&\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}u_{i+1, j}(v_{i+1, j}-v_{i, j})
+-\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}u_{i, j}(v_{i+1, j}-v_{i, j})\\
+={}&\sum_{i=1}^{m-1}\sum_{j=0}^{n-1}u_{i, j}(v_{i, j}-v_{i-1, j})
+-\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}u_{i, j}(v_{i+1, j}-v_{i, j})\\
+={}&\sum_{i=1}^{m-2}\sum_{j=0}^{n-1}u_{i, j}(2v_{i, j}-v_{i-1, j}-v_{i+1,j})\\
+&+\sum_{j=0}^{n-1}u_{m-1, j}(v_{m-1, j}-v_{m-2, j})
++\sum_{j=0}^{n-1}u_{0, j}(v_{0, j}-v_{1, j})\\
+={}&\tfrac12 u\cdot(B_\mathrm h\cdot v),
 \end{aligned}
-\end{equation*}
+\end{equation}
 where we have introduced the linear operator $B_\mathrm h$ defined as follows
 \begin{equation*}
-(B_\mathrm h\cdot s)_{i,j}=
+(B_\mathrm h\cdot v)_{i,j}=
 \begin{cases}
-2(s_{0, j}-s_{1, j})              & \text{if }i=0,\\
-2(s_{m-1, j}-s_{m-2, j})          & \text{if }i=m-1,\\
-2(2s_{i, j}-s_{i-1, j}-s_{i+1,j}) & \text{otherwise},
+2(v_{0, j}-v_{1, j})              & \text{if }i=0,\\
+2(v_{m-1, j}-v_{m-2, j})          & \text{if }i=m-1,\\
+2(2v_{i, j}-v_{i-1, j}-v_{i+1,j}) & \text{otherwise}.
 \end{cases}
+\end{equation*}
+
+From the left-hand side of Eq. \eqref{eq:4}, it is readily found that
+$B_\mathrm h$ is a symmetric, positive operator. Furthermore, the first term of Eq. ????? reads
+\begin{equation*}
+2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2=s\cdot B_\mathrm h\cdot s.
 \end{equation*}
