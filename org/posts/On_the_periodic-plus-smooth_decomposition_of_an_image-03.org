@@ -103,8 +103,9 @@ h+A_\mathrm v$, we finally find that $E_\mathrm p(p)=p\cdot A\cdot p$.
 
 The contribution to the total energy of the smooth component $s$ is defined by
 Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous post]])
+
 \begin{equation}
-\label{eq:2}
+\label{eq:5}
 E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 +2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
 \end{equation}
@@ -123,21 +124,49 @@ $m\times n$ images
 +\sum_{j=0}^{n-1}u_{0, j}(v_{0, j}-v_{1, j})\\
 ={}&\tfrac12 u\cdot(B_\mathrm h\cdot v),
 \end{aligned}
-\label{eq:3}
+\label{eq:6}
 \end{equation}
+
 where we have introduced the linear operator $B_\mathrm h$ defined as follows
-\begin{equation*}
-(B_\mathrm h\cdot v)_{i,j}=
+
+\begin{equation}
+\tfrac12(B_\mathrm h\cdot u)_{i,j}=
 \begin{cases}
-2(v_{0, j}-v_{1, j})              & \text{if }i=0,\\
-2(v_{m-1, j}-v_{m-2, j})          & \text{if }i=m-1,\\
-2(2v_{i, j}-v_{i-1, j}-v_{i+1,j}) & \text{otherwise}.
+u_{0, j}-u_{1, j}              & \text{if }i=0,\\
+u_{m-1, j}-u_{m-2, j}          & \text{if }i=m-1,\\
+2u_{i, j}-u_{i-1, j}-u_{i+1,j} & \text{otherwise}.
 \end{cases}
+\label{eq:7}
+\end{equation}
+
+From the left-hand side of Eq. \eqref{eq:6}, the linear operator $B_\mathrm h$
+thus defined is obviously symmetric and positive. Besides, the first term in Eq.
+\eqref{eq:5} reads
+
+\begin{equation*}
+2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
+=s\cdot B_\mathrm h\cdot s.
 \end{equation*}
 
-From the left-hand side of Eq. \eqref{eq:3}, it is readily found that
-$B_\mathrm h$ is a symmetric, positive operator. Furthermore, the first term of
-Eq. \eqref{eq:2} reads
+Turning now to the second term in Eq. \eqref{eq:5}, we introduce the symmetric,
+positive linear operator $B_\mathrm v$ defined by
+
+\begin{equation}
+\tfrac12(B_\mathrm v\cdot u)_{i,j}=
+\begin{cases}
+u_{i, 0}-u_{i, 1}              & \text{if }j=0,\\
+u_{i, n-1}-u_{i, n-2}          & \text{if }j=n-1,\\
+2u_{i, j}-u_{i, j-1}-u_{i,j+1} & \text{otherwise}.
+\end{cases}
+\label{eq:8}
+\end{equation}
+
+so that
+
 \begin{equation*}
-2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2=s\cdot B_\mathrm h\cdot s.
+2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2
+=s\cdot B_\mathrm v\cdot s.
 \end{equation*}
+
+Gathering the above results and introducing the symmetric, positive operator $B=B_\mathrm
+h+B_\mathrm v$, we finally find that $E_\mathrm s(s)=s\cdot B\cdot s$.
