@@ -109,3 +109,27 @@ Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous po
 E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 +2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
 \end{equation}
+
+The first term reads
+\begin{equation*}
+\begin{aligned}[b]
+\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
+={}&\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}s_{i+1, j}(s_{i+1, j}-s_{i, j})
+-\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}s_{i, j}(s_{i+1, j}-s_{i, j})\\
+={}&\sum_{i=1}^{m-1}\sum_{j=0}^{n-1}s_{i, j}(s_{i, j}-s_{i-1, j})
+-\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}s_{i, j}(s_{i+1, j}-s_{i, j})\\
+={}&\sum_{i=1}^{m-2}\sum_{j=0}^{n-1}s_{i, j}(2s_{i, j}-s_{i-1, j}-s_{i+1,j})\\
+&+\sum_{j=0}^{n-1}s_{m-1, j}(s_{m-1, j}-s_{m-2, j})
++\sum_{j=0}^{n-1}s_{0, j}(s_{0, j}-s_{1, j})\\
+={}&\tfrac12 s\cdot(B_\mathrm h\cdot s),
+\end{aligned}
+\end{equation*}
+where we have introduced the linear operator $B_\mathrm h$ defined as follows
+\begin{equation*}
+(B_\mathrm h\cdot s)_{i,j}=
+\begin{cases}
+2(s_{0, j}-s_{1, j})              & \text{if }i=0,\\
+2(s_{m-1, j}-s_{m-2, j})          & \text{if }i=m-1,\\
+2(2s_{i, j}-s_{i-1, j}-s_{i+1,j}) & \text{otherwise},
+\end{cases}
+\end{equation*}
