@@ -1,4 +1,4 @@
-# -*- coding: utf-8; -*-
+# -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form
@@ -30,25 +30,22 @@ v=A\cdot u,\quad\text{with}\quad v_{ij}
 \end{equation*}
 
 According to Moisan ([[moisan2011:][2011]]), the total energy $E(p, s)$ of the
-periodic-plus-smooth decomposition of an image $u=p+s$ ($p$: periodic component,
-$s$: smooth component) is defined as the sum $E(p, s)=E_\mathrm p(p)+E_\mathrm
-s(s)$, with
+periodic-plus-smooth decomposition of an image $u=p+s$ is defined as the sum
+$E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$. The contributions $E_\mathrm p(p)$ of
+the [[periodic-contrib][periodic component]] and $E_\mathrm s(s)$] of the [[smooth-contrib][smooth component]] $s$ to the
+total energy $E$ are analyzed separately below.
 
-\begin{align}
+* Contribution of the periodic component <<periodic-contrib>>
+
+The contribution to the total energy of the periodic component $p$ is defined
+by Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous post]])
+\begin{equation}
 \label{eq:1}
-E_\mathrm p(p)&=2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
-+2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2,\\
-\label{eq:2}
-E_\mathrm s(s)&=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
-+2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
-\end{align}
+E_\mathrm p(p)=2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
++2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2.\\
+\end{equation}
 
-The contribution $E_\mathrm p$ (resp. $E_\mathrm s$) of the periodic
-(resp. smooth) component to the total energy are analyzed separately below.
-
-* Contribution of the periodic component
-
-We have
+The first term reads
 \begin{equation*}
 2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
 =2\sum_{i=0}^{m-1}p_{i, 0}(p_{i, 0}-p_{i, n-1})
@@ -94,7 +91,7 @@ linear operator $A_\mathrm v$ defined by
 \end{equation*}
 so that
 \begin{equation*}
-2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=p\cdot(A_\mathrm v)\cdot p.
+2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=p\cdot(A_\mathrm v\cdot p).
 \end{equation*}
 
 Gathering the above results and introducing the symmetric operator
@@ -103,4 +100,12 @@ $A=A_\mathrm h+A_\mathrm v$, we finally find
 E_\mathrm p(p)=p\cdot A\cdot p.
 \end{equation}
 
-* Contribution of the smooth component
+* Contribution of the smooth component <<smooth-contrib>>
+
+The contribution to the total energy of the smooth component $s$ is defined by
+Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous post]])
+\begin{equation}
+\label{eq:2}
+E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
++2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
+\end{equation}
