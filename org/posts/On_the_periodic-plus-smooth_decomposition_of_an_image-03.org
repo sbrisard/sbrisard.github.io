@@ -45,60 +45,59 @@ E_\mathrm p(p)=2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
 +2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2.\\
 \end{equation}
 
-The first term reads
-\begin{equation*}
-2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
-=2\sum_{i=0}^{m-1}p_{i, 0}(p_{i, 0}-p_{i, n-1})
-+2\sum_{i=0}^{m-1}p_{i, n-1}(p_{i, n-1}-p_{i, 0})=p\cdot h,
-\end{equation*}
-where we have introduced the new image $h$, defined as follows
-\begin{equation*}
-h_{ij}=\begin{cases}
-2(p_{i, 0}-p_{i, n-1}) & \text{if }j=0,\\
-2(p_{i, n-1}-p_{i, 0}) & \text{if }j=n-1,\\
-0                      & \text{otherwise}.
-\end{cases}
-\end{equation*}
+In order to transform the first term, we observe that, $u$ and $v$ being two
+$m\times n$ images
 
-The mapping $p\mapsto h$ is obviously linear, and we shall introduce the linear
-operator $A_\mathrm h$ that maps $p$ onto $h$. Then, the first term in Eq.
-\eqref{eq:1} reads
-\begin{equation*}
-2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2=p\cdot(A_\mathrm h\cdot p).
-\end{equation*}
-
-The operator $A_\mathrm h$ is obviously symmetric. Indeed, $p$ and $q$ being
-two $m\times n$ images,
-\begin{equation*}
-\begin{aligned}
-(A_\mathrm h\cdot p)\cdot q
-&=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}(A_\mathrm h\cdot p)_{ij}q_{ij}
-=2\sum_{i=0}^{m-1}(p_{i, 0}-p_{i, n-1})q_{i, 0}
-+2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})q_{i, n-1}\\
-&=2\sum_{i=0}^{m-1}(p_{i, 0}-p_{i, n-1})(q_{i, 0}-q_{i, n-1})
-=\cdots=p\cdot(A_\mathrm h\cdot q).
-\end{aligned}
-\end{equation*}
-
-Turning now to the second term in Eq. \eqref{eq:1}, we introduce the symmetric
-linear operator $A_\mathrm v$ defined by
-\begin{equation*}
-(A_\mathrm v\cdot p)_{ij}=\begin{cases}
-2(p_{0, j}-p_{m-1, j}) & \text{if }i=0,\\
-2(p_{m-1, j}-p_{0, j}) & \text{if }i=m-1,\\
-0                      & \text{otherwise},
-\end{cases}
-\end{equation*}
-so that
-\begin{equation*}
-2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=p\cdot(A_\mathrm v\cdot p).
-\end{equation*}
-
-Gathering the above results and introducing the symmetric operator
-$A=A_\mathrm h+A_\mathrm v$, we finally find
 \begin{equation}
-E_\mathrm p(p)=p\cdot A\cdot p.
+\begin{aligned}
+\sum_{i=0}^{m-1}(u_{i, n-1}-u_{i, 0})(v_{i, n-1}-v_{i, 0})
+&=\sum_{i=0}^{m-1}u_{i, 0}(v_{i, 0}-v_{i, n-1})
++\sum_{i=0}^{m-1}u_{i, n-1}(v_{i, n-1}-v_{i, 0})\\
+&=\tfrac12 u\cdot(A_\mathrm h\cdot v),
+\end{aligned}
+\label{eq:2}
 \end{equation}
+
+where we have introduced the linear operator $A_\mathrm h$ defined as follows
+
+\begin{equation}
+\tfrac12(A_\mathrm h\cdot u)_{ij}=
+\begin{cases}
+u_{i, 0}-u_{i, n-1} & \text{if }j=0,\\
+u_{i, n-1}-u_{i, 0} & \text{if }j=n-1,\\
+0                   & \text{otherwise}.
+\end{cases}
+\label{eq:3}
+\end{equation}
+
+From the left-hand side of Eq. \eqref{eq:2}, the linear operator $A_\mathrm h$
+thus defined is obviously symmetric and positive. Besides, the first term in Eq.
+\eqref{eq:1} reads
+
+\begin{equation*}
+2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2=p\cdot A_\mathrm h\cdot p.
+\end{equation*}
+
+Turning now to the second term in Eq. \eqref{eq:1}, we introduce the symmetric,
+positive linear operator $A_\mathrm v$ defined by
+
+\begin{equation}
+\tfrac12(A_\mathrm v\cdot u)_{ij}=\begin{cases}
+u_{0, j}-u_{m-1, j} & \text{if }i=0,\\
+u_{m-1, j}-u_{0, j} & \text{if }i=m-1,\\
+0                   & \text{otherwise},
+\end{cases}
+\label{eq:4}
+\end{equation}
+
+so that
+
+\begin{equation*}
+2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=p\cdot A_\mathrm v\cdot p.
+\end{equation*}
+
+Gathering the above results and introducing the symmetric operator $A=A_\mathrm
+h+A_\mathrm v$, we finally find that $E_\mathrm p(p)=p\cdot A\cdot p$.
 
 * Contribution of the smooth component <<smooth-contrib>>
 
@@ -113,7 +112,6 @@ E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 In order to transform the first term, we observe that, $u$ and $v$ being two
 $m\times n$ images
 \begin{equation}
-\label{eq:4}
 \begin{aligned}[b]
 &\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(u_{i+1, j}-u_{i, j})(v_{i+1, j}-v_{i, j})\\
 ={}&\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}u_{i+1, j}(v_{i+1, j}-v_{i, j})
@@ -125,6 +123,7 @@ $m\times n$ images
 +\sum_{j=0}^{n-1}u_{0, j}(v_{0, j}-v_{1, j})\\
 ={}&\tfrac12 u\cdot(B_\mathrm h\cdot v),
 \end{aligned}
+\label{eq:3}
 \end{equation}
 where we have introduced the linear operator $B_\mathrm h$ defined as follows
 \begin{equation*}
@@ -136,8 +135,9 @@ where we have introduced the linear operator $B_\mathrm h$ defined as follows
 \end{cases}
 \end{equation*}
 
-From the left-hand side of Eq. \eqref{eq:4}, it is readily found that
-$B_\mathrm h$ is a symmetric, positive operator. Furthermore, the first term of Eq. ????? reads
+From the left-hand side of Eq. \eqref{eq:3}, it is readily found that
+$B_\mathrm h$ is a symmetric, positive operator. Furthermore, the first term of
+Eq. \eqref{eq:2} reads
 \begin{equation*}
 2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2=s\cdot B_\mathrm h\cdot s.
 \end{equation*}
