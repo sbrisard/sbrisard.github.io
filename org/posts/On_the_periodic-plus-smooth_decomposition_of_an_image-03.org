@@ -168,5 +168,6 @@ so that
 =s\cdot B_\mathrm v\cdot s.
 \end{equation*}
 
-Gathering the above results and introducing the symmetric, positive operator $B=B_\mathrm
-h+B_\mathrm v$, we finally find that $E_\mathrm s(s)=s\cdot B\cdot s$.
+Gathering the above results and introducing the symmetric, positive operator
+$B=B_\mathrm h+B_\mathrm v$, we finally find that $E_\mathrm s(s)=s\cdot B\cdot
+s$.
