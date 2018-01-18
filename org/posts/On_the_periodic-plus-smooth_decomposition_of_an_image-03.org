@@ -171,3 +171,74 @@ so that
 Gathering the above results and introducing the symmetric, positive operator
 $B=B_\mathrm h+B_\mathrm v$, we finally find that $E_\mathrm s(s)=s\cdot B\cdot
 s$.
+
+* Implementation of the operators /A/ and /B/
+
+The operators $A$ and $B$ defined above are linear operators. They may in
+principle be implemented as matrices. However, doing so would be a terrible
+idea. First, because the matrix would be huge ($mn\times mn$ coefficients for a
+$m\times n$ image), and second, because a new matrix would need to be created
+each time we work with a different image.
+
+Instead, we will adopt here a /matrix-free/ approach, where $A$ and $B$ are
+implemented as =LinearOperator= from the =scipy.sparse.linalg= module (see
+[[https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.sparse.linalg.LinearOperator.html#scipy.sparse.linalg.LinearOperator][documentation]]). Essentially, what this means is that $A$ and $B$ are
+/functions/ that perform the matrix-vector product. Often times, this is enough
+to perform fairly complex linear algebra operations. In particular, solving
+linear systems that involve $A$ and $B$ can then be done by means of
+[[https://en.wikipedia.org/wiki/Iterative_method#Linear_systems][iterative linear solvers]], such as the [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]]. Interesting references on this topic are the book by Y. Saad:
+[[https://doi.org/10.1137/1.9780898718003][Iterative Methods for Sparse Linear Systems]] and the book by Barrett /et al./:
+[[http://epubs.siam.org/doi/book/10.1137/1.9781611971538][Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods]] (also freely available [[http://www.netlib.org/templates/][here]]).
+
+It should be noted that instances of =LinearOperator= (in the Scipy sense)
+operate on 1D-vectors. Therefore, 2D images must be converted to 1D vectors
+each time linear operators are to ben invoked. We will assume C-ordering in the
+implementation below.
+
+We first create the base class =ImageLinearOperator=, that defines linear
+operators that operate on images. These operators store the shape of the image.
+
+#+BEGIN_SRC python :eval no-export :exports results :results output code
+  import inspect
+
+  import moisan2011
+
+  print(inspect.getsource(moisan2011.ImageLinearOperator))
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC python
+class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
+    """Linear operator that operate on images.
+
+    This class defines a linear operator (in the SciPy sense) that
+    operates on two-dimensional images, the shape of which is passed to
+    the initializer
+
+    >>> a = ImageLinearOperator((10, 5))
+    >>> a.img_shape
+    (10, 5)
+
+    ,**Note:** the above code does not actually work, since neither
+    ``_matvec``, nor ``_matmat`` are implemented.
+
+    SciPy linear operators operate on one-dimensional vectors: the
+    methods ``_matvec`` and ``_adjoint`` implemented by each subclass
+    must therefore first reshape the input array to a two-dimensional
+    image, the shape of which was passed to the initializer of this
+    class
+
+    >>> x2 = x.reshape(self.img_shape)
+
+    Subclasses of the present class must specifiy whether this reshape
+    assumes C- or Fortran-ordering.
+    """
+    def __init__(self, img_shape):
+        m, n = self.img_shape = img_shape
+        mn = m*n
+        shape = (mn, mn)
+        dtype = np.dtype(np.float64)
+
+        super(ImageLinearOperator, self).__init__(dtype, shape)
+
+#+END_SRC
