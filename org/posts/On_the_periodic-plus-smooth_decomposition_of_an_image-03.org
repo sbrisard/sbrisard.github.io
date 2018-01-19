@@ -53,15 +53,15 @@ $m\times n$ images
 \sum_{i=0}^{m-1}(u_{i, n-1}-u_{i, 0})(v_{i, n-1}-v_{i, 0})
 &=\sum_{i=0}^{m-1}u_{i, 0}(v_{i, 0}-v_{i, n-1})
 +\sum_{i=0}^{m-1}u_{i, n-1}(v_{i, n-1}-v_{i, 0})\\
-&=\tfrac12 u\cdot(A_\mathrm h\cdot v),
+&=\tfrac12 u\cdot(Q_1^\mathrm h\cdot v),
 \end{aligned}
 \label{eq:2}
 \end{equation}
 
-where we have introduced the linear operator $A_\mathrm h$ defined as follows
+where we have introduced the linear operator $Q_1^\mathrm h$ defined as follows
 
 \begin{equation}
-\tfrac12(A_\mathrm h\cdot u)_{ij}=
+\tfrac12(Q_1^\mathrm h\cdot u)_{ij}=
 \begin{cases}
 u_{i, 0}-u_{i, n-1} & \text{if }j=0,\\
 u_{i, n-1}-u_{i, 0} & \text{if }j=n-1,\\
@@ -70,19 +70,19 @@ u_{i, n-1}-u_{i, 0} & \text{if }j=n-1,\\
 \label{eq:3}
 \end{equation}
 
-From the left-hand side of Eq. \eqref{eq:2}, the linear operator $A_\mathrm h$
-thus defined is obviously symmetric and positive. Besides, the first term in Eq.
-\eqref{eq:1} reads
+From the left-hand side of Eq. \eqref{eq:2}, the linear operator $Q_1^\mathrm
+h$ thus defined is obviously symmetric and positive. Besides, the first term in
+Eq.  \eqref{eq:1} reads
 
 \begin{equation*}
-2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2=p\cdot A_\mathrm h\cdot p.
+2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2=p\cdot Q_1^\mathrm h\cdot p.
 \end{equation*}
 
 Turning now to the second term in Eq. \eqref{eq:1}, we introduce the symmetric,
-positive linear operator $A_\mathrm v$ defined by
+positive linear operator $Q_1^\mathrm v$ defined by
 
 \begin{equation}
-\tfrac12(A_\mathrm v\cdot u)_{ij}=\begin{cases}
+\tfrac12(Q_1^\mathrm v\cdot u)_{ij}=\begin{cases}
 u_{0, j}-u_{m-1, j} & \text{if }i=0,\\
 u_{m-1, j}-u_{0, j} & \text{if }i=m-1,\\
 0                   & \text{otherwise},
@@ -93,11 +93,12 @@ u_{m-1, j}-u_{0, j} & \text{if }i=m-1,\\
 so that
 
 \begin{equation*}
-2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=p\cdot A_\mathrm v\cdot p.
+2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=p\cdot Q_1^\mathrm v\cdot p.
 \end{equation*}
 
-Gathering the above results and introducing the symmetric operator $A=A_\mathrm
-h+A_\mathrm v$, we finally find that $E_\mathrm p(p)=p\cdot A\cdot p$.
+Gathering the above results and introducing the symmetric operator
+$Q_1=Q_1^\mathrm h+Q_1^\mathrm v$, we finally find that
+$E_\mathrm p(p)=p\cdot Q_1\cdot p$.
 
 * Contribution of the smooth component <<smooth-contrib>>
 
