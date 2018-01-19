@@ -198,7 +198,7 @@ implementation below.
 We first create the base class =ImageLinearOperator=, that defines linear
 operators that operate on images. These operators store the shape of the image.
 
-#+BEGIN_SRC python :eval no-export :exports results :results output code
+#+BEGIN_SRC ipython :exports results :results output code
   import inspect
 
   import moisan2011
@@ -207,38 +207,113 @@ operators that operate on images. These operators store the shape of the image.
 #+END_SRC
 
 #+RESULTS:
-#+BEGIN_SRC python
+#+BEGIN_SRC ipython
 class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
     """Linear operator that operate on images.
 
     This class defines a linear operator (in the SciPy sense) that
-    operates on two-dimensional images, the shape of which is passed to
+    operates on n-dimensional images, the shape of which is passed to
     the initializer
 
-    >>> a = ImageLinearOperator((10, 5))
+    >>> a = ImageLinearOperator(10, 5)
     >>> a.img_shape
     (10, 5)
-
-    ,**Note:** the above code does not actually work, since neither
-    ``_matvec``, nor ``_matmat`` are implemented.
+    >>> a.shape
+    (50, 50)
 
     SciPy linear operators operate on one-dimensional vectors: the
-    methods ``_matvec`` and ``_adjoint`` implemented by each subclass
-    must therefore first reshape the input array to a two-dimensional
-    image, the shape of which was passed to the initializer of this
-    class
+    methods _matvec and _adjoint implemented by each subclass must
+    therefore first reshape the input array to a n-dimensional
+    image. By convention, C-ordering will always be assumed.
 
-    >>> x2 = x.reshape(self.img_shape)
+        y = numpy.zeros_like(x)
+        x2 = x.reshape(self.img_shape)
+        y2 = y.reshape(self.img_shape)
+        ......................
+        # Operate on x2 and y2
+        ......................
+        return y
 
-    Subclasses of the present class must specifiy whether this reshape
-    assumes C- or Fortran-ordering.
+    Alternatively, developers may implement the method _apply that
+    operates on n-dimensional images: the default implementation of
+    _matvec calls this method on the input vector, suitably reshaped to
+    a n-dimensional image.
     """
-    def __init__(self, img_shape):
-        m, n = self.img_shape = img_shape
-        mn = m*n
-        shape = (mn, mn)
+    def __init__(self, *args):
+        self.img_shape = tuple(int(n) for n in args)
+        n = np.product(self.img_shape)
+        shape = (n, n)
         dtype = np.dtype(np.float64)
+        super().__init__(dtype, shape)
 
-        super(ImageLinearOperator, self).__init__(dtype, shape)
+    def _matvec(self, x):
+        y = np.zeros_like(x)
+        x2 = x.reshape(self.img_shape)
+        y2 = y.reshape(self.img_shape)
+        self.ddot(x2, y2)
+        return y
+
+    def _apply(x, y=None):
+        """Apply this operator on the input image x.
+
+        The shape of x must be self.img_shape. The returned array has
+        same shape as x.
+
+        If specified, the optional argument y must be an array of same
+        shape as x. It is modified in-place, and a reference to y is
+        returned.
+        """
+        raise NotImplementedError()
 
 #+END_SRC
+
+Then, implementation of the $Q_1$ operator is fairly simple.
+
+#+BEGIN_SRC ipython :exports results :results output code
+  import inspect
+
+  import moisan2011
+
+  print(inspect.getsource(moisan2011.OperatorQ1))
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC ipython
+class OperatorQ1(ImageLinearOperator):
+    u"""Implementation of Q₁ as a ``ImageLinearOperator``.
+
+    Q₁ is defined by Eq. (9) of Moisan (2011)
+
+        F(s) = (u-s)ᵀ·Q₁·(u-s)+sᵀ·Q₂·s,
+
+    where F(s) is the function to be minimized, defined by Eq. (8)
+
+        F(s) = E(u-s, s) + mean(s)².
+
+    Image p = u-s must be passed as a 1-dimensional vector. Internally,
+    it is reshaped to a two-dimensional image (the shape of which is
+    passed to the initializer), **assuming C-ordering**.
+    """
+    def __init__(self, *args):
+        super().__init__(*args)
+
+    def _apply(self, x, y=None):
+        if y is None:
+            y = np.zeros_like(x)
+
+        dx = 2.0*(x[:, 0]-x[:, -1])
+        y[:, 0] = dx
+        y[:, -1] = -dx
+
+        dx = 2.0*(x[0, :]-x[-1, :])
+        y[0, :] += dx
+        y[-1, :] -= dx
+
+        return y
+
+    def _adjoint(self):
+        return self
+
+#+END_SRC
+
+Note that $Q_1$ is symmetric: the =_adjoint= method simply returns =self=.
