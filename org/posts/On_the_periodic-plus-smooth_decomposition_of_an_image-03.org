@@ -106,10 +106,18 @@ The contribution to the total energy of the smooth component $s$ is defined by
 Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous post]])
 
 \begin{equation}
-\label{eq:5}
-E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
+E_\mathrm s'(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 +2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
 \end{equation}
+
+The total energy is to be minimized over the space of zero-mean images $s$. It
+will therefore be convenient to introduce the following modified energy
+\begin{equation}
+\label{eq:5}
+E_\mathrm s(s)=E_\mathrm s'(s)+(\operatorname{mean}s)^2,
+\end{equation}
+and it is observed that $E_\mathrm s(s)=E_\mathrm s'(s)$ at the solution of the
+minimization problem.
 
 In order to transform the first term, we observe that, $u$ and $v$ being two
 $m\times n$ images
