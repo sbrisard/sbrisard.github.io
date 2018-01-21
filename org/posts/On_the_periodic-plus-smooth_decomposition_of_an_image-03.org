@@ -31,8 +31,8 @@ v=A\cdot u,\quad\text{with}\quad v_{ij}
 
 According to Moisan ([[moisan2011:][2011]]), the total energy $E(p, s)$ of the
 periodic-plus-smooth decomposition of an image $u=p+s$ is defined as the sum
-$E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$. The contributions $E_\mathrm p(p)$ of
-the [[periodic-contrib][periodic component]] and $E_\mathrm s(s)$] of the [[smooth-contrib][smooth component]] $s$ to the
+$E(p, s)=E_\mathrm p'(p)+E_\mathrm s(s)$. The contributions $E_\mathrm p(p)$ of
+the [[periodic-contrib][periodic component]] and $E_\mathrm s'(s)$ of the [[smooth-contrib][smooth component]] $s$ to the
 total energy $E$ are analyzed separately below.
 
 * Contribution of the periodic component <<periodic-contrib>>
@@ -106,21 +106,23 @@ The contribution to the total energy of the smooth component $s$ is defined by
 Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous post]])
 
 \begin{equation}
+\label{eq:5}
 E_\mathrm s'(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 +2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
 \end{equation}
 
 The total energy is to be minimized over the space of zero-mean images $s$. It
 will therefore be convenient to introduce the following modified energy
+
 \begin{equation}
-\label{eq:5}
+\label{eq:6}
 E_\mathrm s(s)=E_\mathrm s'(s)+(\operatorname{mean}s)^2,
 \end{equation}
-and it is observed that $E_\mathrm s(s)=E_\mathrm s'(s)$ at the solution of the
-minimization problem.
 
-In order to transform the first term, we observe that, $u$ and $v$ being two
-$m\times n$ images
+so that $E_\mathrm s(s)=E_\mathrm s'(s)$ at the solution of the minimization
+problem. In order to transform the first term in Eq. \eqref{eq:5}, we observe
+that, $u$ and $v$ being two $m\times n$ images
+
 \begin{equation}
 \begin{aligned}[b]
 &\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(u_{i+1, j}-u_{i, j})(v_{i+1, j}-v_{i, j})\\
@@ -133,7 +135,7 @@ $m\times n$ images
 +\sum_{j=0}^{n-1}u_{0, j}(v_{0, j}-v_{1, j})\\
 ={}&\tfrac12 u\cdot(Q_2^\mathrm h\cdot v),
 \end{aligned}
-\label{eq:6}
+\label{eq:7}
 \end{equation}
 
 where we have introduced the linear operator $Q_2^\mathrm h$ defined as follows
@@ -145,10 +147,10 @@ u_{0, j}-u_{1, j}              & \text{if }i=0,\\
 u_{m-1, j}-u_{m-2, j}          & \text{if }i=m-1,\\
 2u_{i, j}-u_{i-1, j}-u_{i+1,j} & \text{otherwise}.
 \end{cases}
-\label{eq:7}
+\label{eq:8}
 \end{equation}
 
-From the left-hand side of Eq. \eqref{eq:6}, the linear operator
+From the left-hand side of Eq. \eqref{eq:7}, the linear operator
 $Q_2^\mathrm h$ thus defined is obviously symmetric and positive. Besides, the
 first term in Eq. \eqref{eq:5} reads
 
@@ -167,7 +169,7 @@ u_{i, 0}-u_{i, 1}              & \text{if }j=0,\\
 u_{i, n-1}-u_{i, n-2}          & \text{if }j=n-1,\\
 2u_{i, j}-u_{i, j-1}-u_{i,j+1} & \text{otherwise}.
 \end{cases}
-\label{eq:8}
+\label{eq:9}
 \end{equation}
 
 so that
@@ -177,8 +179,29 @@ so that
 =s\cdot Q_2^\mathrm v\cdot s.
 \end{equation*}
 
+Finally
+
+\begin{equation}
+\begin{aligned}[b]
+(\operatorname{mean}u)(\operatorname{mean}v)
+&=\frac{\operatorname{mean}v}{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i,j}
+=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i,j}\times\frac{\operatorname{mean}v}{mn}
+=\vec u\cdot(Q_2^\mathrm m\cdot v),
+\end{aligned}
+\label{eq:10}
+\end{equation}
+
+where we have introduced the symmetric, positive operator $Q_2^\mathrm m$
+defined as follows
+
+\begin{equation}
+(Q_2^\mathrm m\cdot u)_{i,j}=\frac{\operatorname{mean} u}{mn}
+=\frac1{m^2n^2}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i,j}.
+\label{eq:11}
+\end{equation}
+
 Gathering the above results and introducing the symmetric, positive operator
-$Q_2=Q_2^\mathrm h+Q_2^\mathrm v$, we finally find that
+$Q_2=Q_2^\mathrm h+Q_2^\mathrm v+Q_2^\mathrm m$, we finally find that
 $E_\mathrm s(s)=s\cdot Q_2\cdot s$.
 
 * Implementation of the operators /Q₁/ and /Q₂/
