@@ -11,15 +11,17 @@
 
 In the [[sb-blog-prev:][previous instalment]] of this series, we introduced the
 periodic-plus-smooth decomposition of an image as a pair of images which
-minimizes an energy functional. The purpose of this post is to show that this
-energy is in fact a quadratic functional, the minimization of which therefore
-amounts to solving a linear problem.
+minimizes an energy functional. Observing that this energy is a quadratic form,
+the purpose of this post is to derive closed form expressions of the underlying
+linear operators. These expressions will then be combined in the next
+instalments to a conjugate gradient algorithm in order to minimize the energy
+of the periodic-plus-smooth decomposition.
 
 In this post, it will be convenient to regard images as vectors. Given two
-$m\times n$ images $u$ and $v$, the scalar product $u\cdot v$ is then defined
-as
+$m\times n$ images $u$ and $v$, the scalar product $\langle u, v\rangle$ is
+then defined as
 \begin{equation*}
-u\cdot v=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{ij}v_{ij}.
+\langle u, v\rangle=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{ij}v_{ij}.
 \end{equation*}
 
 Likewise, a linear operator $A$ over the space of $m\times n$ images is defined
@@ -31,9 +33,15 @@ v=A\cdot u,\quad\text{with}\quad v_{ij}
 
 According to Moisan ([[moisan2011:][2011]]), the total energy $E(p, s)$ of the
 periodic-plus-smooth decomposition of an image $u=p+s$ is defined as the sum
-$E(p, s)=E_\mathrm p'(p)+E_\mathrm s(s)$. The contributions $E_\mathrm p(p)$ of
-the [[periodic-contrib][periodic component]] and $E_\mathrm s'(s)$ of the [[smooth-contrib][smooth component]] $s$ to the
-total energy $E$ are analyzed separately below.
+$E(p, s)=E_\mathrm p(p)+E'_\mathrm s(s)$ (see [[sb-blog-prev:][previous instalment]]). Our purpose is to derive expressions of the linear operators $Q_1$ and $Q'_2$ such that
+\begin{equation*}
+E_\mathrm p(p)=\langle p, Q_1\cdot p\rangle
+\quad\text{and}\quad
+E'_\mathrm s(s)=\langle s, Q'_2\cdot s\rangle.
+\end{equation*}
+
+The closed-form expression of $Q_1$ is derived in the [[periodic-contrib][first part]] of this
+post. Then, operator $Q'_2$ is derived in the [[smooth-contrib][second part]] of this post.
 
 * Contribution of the periodic component <<periodic-contrib>>
 
@@ -49,11 +57,11 @@ In order to transform the first term, we observe that, $u$ and $v$ being two
 $m\times n$ images
 
 \begin{equation}
-\begin{aligned}
+\begin{aligned}[b]
 \sum_{i=0}^{m-1}(u_{i, n-1}-u_{i, 0})(v_{i, n-1}-v_{i, 0})
 &=\sum_{i=0}^{m-1}u_{i, 0}(v_{i, 0}-v_{i, n-1})
 +\sum_{i=0}^{m-1}u_{i, n-1}(v_{i, n-1}-v_{i, 0})\\
-&=\tfrac12 u\cdot(Q_1^\mathrm h\cdot v),
+&=\tfrac12\langle u, Q_1^\mathrm h\cdot v\rangle,
 \end{aligned}
 \label{eq:2}
 \end{equation}
@@ -75,7 +83,7 @@ h$ thus defined is obviously symmetric and positive. Besides, the first term in
 Eq.  \eqref{eq:1} reads
 
 \begin{equation*}
-2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2=p\cdot Q_1^\mathrm h\cdot p.
+2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2=\langle p, Q_1^\mathrm h\cdot p\rangle.
 \end{equation*}
 
 Turning now to the second term in Eq. \eqref{eq:1}, we introduce the symmetric,
@@ -93,12 +101,12 @@ u_{m-1, j}-u_{0, j} & \text{if }i=m-1,\\
 so that
 
 \begin{equation*}
-2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=p\cdot Q_1^\mathrm v\cdot p.
+2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=\langle p, Q_1^\mathrm v\cdot p\rangle.
 \end{equation*}
 
 Gathering the above results and introducing the symmetric operator
 $Q_1=Q_1^\mathrm h+Q_1^\mathrm v$, we finally find that
-$E_\mathrm p(p)=p\cdot Q_1\cdot p$.
+$E_\mathrm p(p)=\langle p, Q_1\cdot p\rangle$.
 
 * Contribution of the smooth component <<smooth-contrib>>
 
@@ -133,7 +141,7 @@ that, $u$ and $v$ being two $m\times n$ images
 ={}&\sum_{i=1}^{m-2}\sum_{j=0}^{n-1}u_{i, j}(2v_{i, j}-v_{i-1, j}-v_{i+1,j})\\
 &+\sum_{j=0}^{n-1}u_{m-1, j}(v_{m-1, j}-v_{m-2, j})
 +\sum_{j=0}^{n-1}u_{0, j}(v_{0, j}-v_{1, j})\\
-={}&\tfrac12 u\cdot(Q_2^\mathrm h\cdot v),
+={}&\tfrac12\langle u, Q_2^\mathrm h\cdot v\rangle,
 \end{aligned}
 \label{eq:7}
 \end{equation}
@@ -156,7 +164,7 @@ first term in Eq. \eqref{eq:5} reads
 
 \begin{equation*}
 2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
-=s\cdot Q_2^\mathrm h\cdot s.
+=\langle s, Q_2^\mathrm h\cdot s\rangle.
 \end{equation*}
 
 Turning now to the second term in Eq. \eqref{eq:5}, we introduce the symmetric,
@@ -176,7 +184,7 @@ so that
 
 \begin{equation*}
 2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2
-=s\cdot Q_2^\mathrm v\cdot s.
+=\langle s, Q_2^\mathrm v\cdot s\rangle.
 \end{equation*}
 
 Finally
@@ -186,7 +194,7 @@ Finally
 (\operatorname{mean}u)(\operatorname{mean}v)
 &=\frac{\operatorname{mean}v}{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i,j}
 =\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i,j}\times\frac{\operatorname{mean}v}{mn}
-=\vec u\cdot(Q_2^\mathrm m\cdot v),
+=\langle u, Q_2^\mathrm m\cdot v\rangle,
 \end{aligned}
 \label{eq:10}
 \end{equation}
@@ -202,150 +210,18 @@ defined as follows
 
 Gathering the above results and introducing the symmetric, positive operator
 $Q_2=Q_2^\mathrm h+Q_2^\mathrm v+Q_2^\mathrm m$, we finally find that
-$E_\mathrm s(s)=s\cdot Q_2\cdot s$.
+$E_\mathrm s(s)=\langle s, Q_2\cdot s\rangle$.
 
-* Implementation of the operators /Q₁/ and /Q₂/
+* Conclusion
 
-The operators $A$ and $B$ defined above are linear operators. They may in
-principle be implemented as matrices. However, doing so would be a terrible
-idea. First, because the matrix would be huge ($mn\times mn$ coefficients for a
-$m\times n$ image), and second, because a new matrix would need to be created
-each time we work with a different image.
+In this post, we have defined two linear operators, namely $Q_1$ and $Q_2$,
+that operate on the space of $m\times n$ images, and such that the total energy
+of the $(p, s)$ pair is given by
 
-Instead, we will adopt here a /matrix-free/ approach, where $A$ and $B$ are
-implemented as =LinearOperator= from the =scipy.sparse.linalg= module (see
-[[https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.sparse.linalg.LinearOperator.html#scipy.sparse.linalg.LinearOperator][documentation]]). Essentially, what this means is that $A$ and $B$ are
-/functions/ that perform the matrix-vector product. Often times, this is enough
-to perform fairly complex linear algebra operations. In particular, solving
-linear systems that involve $A$ and $B$ can then be done by means of
-[[https://en.wikipedia.org/wiki/Iterative_method#Linear_systems][iterative linear solvers]], such as the [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]]. Interesting references on this topic are the book by Y. Saad:
-[[https://doi.org/10.1137/1.9780898718003][Iterative Methods for Sparse Linear Systems]] and the book by Barrett /et al./:
-[[http://epubs.siam.org/doi/book/10.1137/1.9781611971538][Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods]] (also freely available [[http://www.netlib.org/templates/][here]]).
+\begin{equation*}
+E_\mathrm p(p)+E_\mathrm s(s)
+=\langle p, Q_1\cdot p\rangle+\langle s, Q_2\cdot s\rangle.
+\end{equation*}
 
-It should be noted that instances of =LinearOperator= (in the Scipy sense)
-operate on 1D-vectors. Therefore, 2D images must be converted to 1D vectors
-each time linear operators are to ben invoked. We will assume C-ordering in the
-implementation below.
-
-We first create the base class =ImageLinearOperator=, that defines linear
-operators that operate on images. These operators store the shape of the image.
-
-#+BEGIN_SRC ipython :exports results :results output code
-  import inspect
-
-  import moisan2011
-
-  print(inspect.getsource(moisan2011.ImageLinearOperator))
-#+END_SRC
-
-#+RESULTS:
-#+BEGIN_SRC ipython
-class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
-    """Linear operator that operate on images.
-
-    This class defines a linear operator (in the SciPy sense) that
-    operates on n-dimensional images, the shape of which is passed to
-    the initializer
-
-    >>> a = ImageLinearOperator(10, 5)
-    >>> a.img_shape
-    (10, 5)
-    >>> a.shape
-    (50, 50)
-
-    SciPy linear operators operate on one-dimensional vectors: the
-    methods _matvec and _adjoint implemented by each subclass must
-    therefore first reshape the input array to a n-dimensional
-    image. By convention, C-ordering will always be assumed.
-
-        y = numpy.zeros_like(x)
-        x2 = x.reshape(self.img_shape)
-        y2 = y.reshape(self.img_shape)
-        ......................
-        # Operate on x2 and y2
-        ......................
-        return y
-
-    Alternatively, developers may implement the method _apply that
-    operates on n-dimensional images: the default implementation of
-    _matvec calls this method on the input vector, suitably reshaped to
-    a n-dimensional image.
-    """
-    def __init__(self, *args):
-        self.img_shape = tuple(int(n) for n in args)
-        n = np.product(self.img_shape)
-        shape = (n, n)
-        dtype = np.dtype(np.float64)
-        super().__init__(dtype, shape)
-
-    def _matvec(self, x):
-        y = np.zeros_like(x)
-        x2 = x.reshape(self.img_shape)
-        y2 = y.reshape(self.img_shape)
-        self.ddot(x2, y2)
-        return y
-
-    def _apply(x, y=None):
-        """Apply this operator on the input image x.
-
-        The shape of x must be self.img_shape. The returned array has
-        same shape as x.
-
-        If specified, the optional argument y must be an array of same
-        shape as x. It is modified in-place, and a reference to y is
-        returned.
-        """
-        raise NotImplementedError()
-
-#+END_SRC
-
-Then, implementation of the $Q_1$ operator is fairly simple.
-
-#+BEGIN_SRC ipython :exports results :results output code
-  import inspect
-
-  import moisan2011
-
-  print(inspect.getsource(moisan2011.OperatorQ1))
-#+END_SRC
-
-#+RESULTS:
-#+BEGIN_SRC ipython
-class OperatorQ1(ImageLinearOperator):
-    u"""Implementation of Q₁ as a ``ImageLinearOperator``.
-
-    Q₁ is defined by Eq. (9) of Moisan (2011)
-
-        F(s) = (u-s)ᵀ·Q₁·(u-s)+sᵀ·Q₂·s,
-
-    where F(s) is the function to be minimized, defined by Eq. (8)
-
-        F(s) = E(u-s, s) + mean(s)².
-
-    Image p = u-s must be passed as a 1-dimensional vector. Internally,
-    it is reshaped to a two-dimensional image (the shape of which is
-    passed to the initializer), **assuming C-ordering**.
-    """
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def _apply(self, x, y=None):
-        if y is None:
-            y = np.zeros_like(x)
-
-        dx = 2.0*(x[:, 0]-x[:, -1])
-        y[:, 0] = dx
-        y[:, -1] = -dx
-
-        dx = 2.0*(x[0, :]-x[-1, :])
-        y[0, :] += dx
-        y[-1, :] -= dx
-
-        return y
-
-    def _adjoint(self):
-        return self
-
-#+END_SRC
-
-Note that $Q_1$ is symmetric: the =_adjoint= method simply returns =self=.
+In the [[sb-blog-next:][next instalment]] of this series, we will proceed to implement $Q_1$ and
+$Q_2$ in Python. To do so, we will adopt a [[https://en.wikipedia.org/wiki/Matrix-free_methods][matrix-free]] approach.
