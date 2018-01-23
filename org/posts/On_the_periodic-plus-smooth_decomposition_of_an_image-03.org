@@ -40,10 +40,10 @@ E_\mathrm p(p)=\langle p, Q_1\cdot p\rangle
 E'_\mathrm s(s)=\langle s, Q'_2\cdot s\rangle.
 \end{equation*}
 
-The closed-form expression of $Q_1$ is derived in the [[periodic-contrib][first part]] of this
-post. Then, operator $Q'_2$ is derived in the [[smooth-contrib][second part]] of this post.
+The closed-form expression of $Q_1$ is derived in the [[periodic_contrib][first part]] of this
+post. Then, operator $Q'_2$ is derived in the [[smooth_contrib][second part]] of this post.
 
-* Contribution of the periodic component <<periodic-contrib>>
+* Contribution of the periodic component <<periodic_contrib>>
 
 The contribution to the total energy of the periodic component $p$ is defined
 by Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous post]])
@@ -108,7 +108,7 @@ Gathering the above results and introducing the symmetric operator
 $Q_1=Q_1^\mathrm h+Q_1^\mathrm v$, we finally find that
 $E_\mathrm p(p)=\langle p, Q_1\cdot p\rangle$.
 
-* Contribution of the smooth component <<smooth-contrib>>
+* Contribution of the smooth component <<smooth_contrib>>
 
 The contribution to the total energy of the smooth component $s$ is defined by
 Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous post]])
