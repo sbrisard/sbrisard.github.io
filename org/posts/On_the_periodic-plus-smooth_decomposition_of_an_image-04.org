@@ -9,31 +9,46 @@
 #+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
-* Implementation of the operators /Q₁/ and /Q₂/
+In the [[sb-blog-prev:][previous instalment]] of this series, we showed that the total energy of
+the periodic-plus-smooth decomposition of an image ([[moisan2011:][Moisan, 2011]]) is a
+quadratic form which can be cast in the standard form
 
-The operators $A$ and $B$ defined above are linear operators. They may in
-principle be implemented as matrices. However, doing so would be a terrible
-idea. First, because the matrix would be huge ($mn\times mn$ coefficients for a
-$m\times n$ image), and second, because a new matrix would need to be created
-each time we work with a different image.
+\begin{equation*}
+E(p, s)=E_\mathrm p(p)+E'_\mathrm s(s)
+\quad\text{with}\quad
+E_\mathrm p(p)=\langle p, Q_1\cdot p\rangle
+\quad\text{and}\quad
+E'_\mathrm s(s)=\langle s, Q'_2\cdot s\rangle.
+\end{equation*}
 
-Instead, we will adopt here a /matrix-free/ approach, where $A$ and $B$ are
-implemented as =LinearOperator= from the =scipy.sparse.linalg= module (see
-[[https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.sparse.linalg.LinearOperator.html#scipy.sparse.linalg.LinearOperator][documentation]]). Essentially, what this means is that $A$ and $B$ are
-/functions/ that perform the matrix-vector product. Often times, this is enough
-to perform fairly complex linear algebra operations. In particular, solving
-linear systems that involve $A$ and $B$ can then be done by means of
-[[https://en.wikipedia.org/wiki/Iterative_method#Linear_systems][iterative linear solvers]], such as the [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]]. Interesting references on this topic are the book by Y. Saad:
+In theory, the linear operators $Q_1$ and $Q_2$ are matrices, and could be
+implemented as such. However, for $m\times n$ images, the matrices would be
+unnecessarily large: $mn\times mn$! We will therefore adopt here a
+[[https://en.wikipedia.org/wiki/Matrix-free_methods][matrix-free approach]]. The remainder of this post is organized as follows. We
+will first discuss [[linear_operators][linear operators]] in the =scipy.sparse.linalg= sense. Then,
+we will [[Q1_implementation][implement the $Q_1$ operator]]. Finally, we will
+[[Q2_implementation][implement the $Q'_2$ operator]] (or rather, the $Q_2$ operator).
+
+* Matrix-free linear operators <<linear_operators>>
+
+The $Q_1$ and $Q'_2$ linear operators will be implemented as instances of
+=LinearOperator= from the =scipy.sparse.linalg= module (see [[https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.sparse.linalg.LinearOperator.html#scipy.sparse.linalg.LinearOperator][documentation]]).
+Essentially, what this means is that $Q_1$ and $Q'_2$ are seen as /functions/
+(linear maps) that perform the matrix-vector product. Often times, this is
+enough to perform fairly complex linear algebra operations. In particular,
+solving linear systems that involve $Q_1$ and $Q'_2$ can then be done by means
+of [[https://en.wikipedia.org/wiki/Iterative_method#Linear_systems][iterative linear solvers]], such as the [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]]. Interesting
+references on this topic are the book by Y. Saad:
 [[https://doi.org/10.1137/1.9780898718003][Iterative Methods for Sparse Linear Systems]] and the book by Barrett /et al./:
-[[http://epubs.siam.org/doi/book/10.1137/1.9781611971538][Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods]] (also freely available [[http://www.netlib.org/templates/][here]]).
+[[http://epubs.siam.org/doi/book/10.1137/1.9781611971538][Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods]]
+(also freely available [[http://www.netlib.org/templates/][here]]).
 
 It should be noted that instances of =LinearOperator= (in the Scipy sense)
 operate on 1D-vectors. Therefore, 2D images must be converted to 1D vectors
 each time linear operators are to ben invoked. We will assume C-ordering in the
-implementation below.
-
-We first create the base class =ImageLinearOperator=, that defines linear
-operators that operate on images. These operators store the shape of the image.
+implementation below. We first create the base class =ImageLinearOperator=,
+that defines linear operators that operate on images. These operators store the
+shape of the image.
 
 #+BEGIN_SRC ipython :exports results :results output code
   import inspect
@@ -104,7 +119,22 @@ class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
 
 #+END_SRC
 
-Then, implementation of the $Q_1$ operator is fairly simple.
+This class is to be used to implement the operators $Q_1$ and $Q'_2$.
+
+* Implementation of the $Q_1$ operator <<Q1_implementation>>
+
+The $Q_1$ operator was defined in the [[sb-blog-prev:periodic_contrib][previous post]] as follows
+
+\begin{equation*}
+\tfrac12(Q_1^\mathrm h\cdot u)_{ij}=
+\begin{cases}
+u_{i, 0}-u_{i, n-1} & \text{if }j=0,\\
+u_{i, n-1}-u_{i, 0} & \text{if }j=n-1,\\
+0                   & \text{otherwise},
+\end{cases}
+\end{equation*}
+
+its implementation is fairly simple.
 
 #+BEGIN_SRC ipython :exports results :results output code
   import inspect
@@ -154,3 +184,5 @@ class OperatorQ1(ImageLinearOperator):
 #+END_SRC
 
 Note that $Q_1$ is symmetric: the =_adjoint= method simply returns =self=.
+
+* Implementation of the $Q'_2$ operator <<Q2_implementation>>
