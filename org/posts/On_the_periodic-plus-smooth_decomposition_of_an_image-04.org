@@ -123,18 +123,30 @@ This class is to be used to implement the operators $Q_1$ and $Q'_2$.
 
 * Implementation of the $Q_1$ operator <<Q1_implementation>>
 
-The $Q_1$ operator was defined in the [[sb-blog-prev:periodic_contrib][previous post]] as follows
+The $Q_1$ operator was defined in the [[sb-blog-prev][previous post]] as the following sum:
+$Q_1=Q_1^\mathrm h+Q_1^\mathrm v$, with
 
 \begin{equation*}
 \tfrac12(Q_1^\mathrm h\cdot u)_{ij}=
 \begin{cases}
 u_{i, 0}-u_{i, n-1} & \text{if }j=0,\\
 u_{i, n-1}-u_{i, 0} & \text{if }j=n-1,\\
+0                   & \text{otherwise}
+\end{cases}
+\end{equation*}
+
+and
+
+\begin{equation*}
+\tfrac12(Q_1^\mathrm v\cdot u)_{ij}=\begin{cases}
+u_{0, j}-u_{m-1, j} & \text{if }i=0,\\
+u_{m-1, j}-u_{0, j} & \text{if }i=m-1,\\
 0                   & \text{otherwise},
 \end{cases}
 \end{equation*}
 
-its implementation is fairly simple.
+Implementation is fairly simple; note that $Q_1$ is symmetric: the =_adjoint=
+method simply returns =self=.
 
 #+BEGIN_SRC ipython :exports results :results output code
   import inspect
@@ -147,19 +159,20 @@ its implementation is fairly simple.
 #+RESULTS:
 #+BEGIN_SRC ipython
 class OperatorQ1(ImageLinearOperator):
-    u"""Implementation of Q₁ as a ``ImageLinearOperator``.
+    """Implementation of Q1 as a ImageLinearOperator.
 
-    Q₁ is defined by Eq. (9) of Moisan (2011)
+    Q1 is defined by Eq. (9) of Moisan (2011)
 
-        F(s) = (u-s)ᵀ·Q₁·(u-s)+sᵀ·Q₂·s,
+        F(s) = (u-s)'.Q1.(u-s)+s'.Q2.s,
 
-    where F(s) is the function to be minimized, defined by Eq. (8)
+    where ' is the transpose and F(s) is the function to be minimized
+    with respect to the smooth component s. F is defined by Eq. (8)
 
-        F(s) = E(u-s, s) + mean(s)².
+        F(s) = E(u-s, s) + mean(s)**2.
 
     Image p = u-s must be passed as a 1-dimensional vector. Internally,
     it is reshaped to a two-dimensional image (the shape of which is
-    passed to the initializer), **assuming C-ordering**.
+    passed to the initializer), assuming C-ordering.
     """
     def __init__(self, *args):
         super().__init__(*args)
@@ -183,6 +196,33 @@ class OperatorQ1(ImageLinearOperator):
 
 #+END_SRC
 
-Note that $Q_1$ is symmetric: the =_adjoint= method simply returns =self=.
-
 * Implementation of the $Q'_2$ operator <<Q2_implementation>>
+
+The $Q_2$ operator was defined in the [[sb-blog-prev][previous post]] as the following sum:
+$Q_2=Q_2^\mathrm h+Q_2^\mathrm v+Q_2^\mathrm m$, with
+
+\begin{equation*}
+\tfrac12(Q_2^\mathrm h\cdot u)_{i,j}=
+\begin{cases}
+u_{0, j}-u_{1, j}              & \text{if }i=0,\\
+u_{m-1, j}-u_{m-2, j}          & \text{if }i=m-1,\\
+2u_{i, j}-u_{i-1, j}-u_{i+1,j} & \text{otherwise},
+\end{cases}
+\end{equation*}
+
+\begin{equation*}
+\tfrac12(Q_2^\mathrm v\cdot u)_{i,j}=
+\begin{cases}
+u_{i, 0}-u_{i, 1}              & \text{if }j=0,\\
+u_{i, n-1}-u_{i, n-2}          & \text{if }j=n-1,\\
+2u_{i, j}-u_{i, j-1}-u_{i,j+1} & \text{otherwise},
+\end{cases}
+\label{eq:9}
+\end{equation*}
+
+and
+
+\begin{equation*}
+(Q_2^\mathrm m\cdot u)_{i,j}
+=\frac1{m^2n^2}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i,j}.
+\end{equation*}
