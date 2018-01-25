@@ -253,28 +253,3 @@ and optimize the total energy in the real space, using standard iterative
 techniques. This will allow us to generate reference decompositions that will
 eventually be used to set up unit tests in order to check our implementation of
 Moisan's method.
-
-#+BEGIN_SRC ipython :results output :results html :results string
-  import numpy as np
-  import sympy
-
-  from scipy.ndimage import convolve
-
-  k = np.array([[0, -1, 0],
-                [-1, 4, -1],
-                [0, -1, 0]], dtype=np.int32)
-
-  m, n = 4, 5
-  u = np.zeros((m, n), dtype=np.int32)
-
-  output = sympy.zeros(m, n)
-  for i in range(m):
-      for j in range(n):
-          u[i, j] = 1
-          u_ij = sympy.Symbol('u{}{}'.format(i, j))
-          output += u_ij*sympy.Matrix(convolve(u,k, mode='nearest'))
-          u[i, j] = 0
-  print('<math xmlns="http://www.w3.org/1998/Math/MathML">'+
-        sympy.printing.mathml(output)+
-        '</math>')
-#+END_SRC
