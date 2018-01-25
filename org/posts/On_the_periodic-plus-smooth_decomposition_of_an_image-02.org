@@ -247,15 +247,12 @@ the minimizer of Moisan's energy, under the constraint that the average gray
 level of the periodic component is equal to the average gray level of the
 initial image.
 
-Moisan ([[moisan2011:][2011]]) showed that this minimizer is explicit in Fourier space. However,
-observing that Moisan's energy is a quadratic form, we will temporarily ignore
-this result
-
-In the [[sb-blog-next:][next instalment]] of this series, we will however temporarily ignore this
-result, and optimize the total energy in the real space, using standard
-iterative techniques. This will allow us to generate reference decompositions
-that will eventually be used to set up unit tests in order to check our
-implementation of Moisan's method.
+Moisan ([[moisan2011:][2011]]) showed that this minimizer is explicit in Fourier space. In the
+[[sb-blog-next:][next instalment]] of this series, we will however temporarily ignore this result,
+and optimize the total energy in the real space, using standard iterative
+techniques. This will allow us to generate reference decompositions that will
+eventually be used to set up unit tests in order to check our implementation of
+Moisan's method.
 
 #+BEGIN_SRC ipython :results output :results html :results string
   import numpy as np
