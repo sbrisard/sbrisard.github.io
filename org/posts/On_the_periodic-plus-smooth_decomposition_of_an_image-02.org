@@ -95,15 +95,14 @@ neighbors. It shows that
 [[sb-blog-data-dir:direct_and_indirect_neighbors.svg]]
 
 Now, we need to quantify how periodic is $p$, and how smooth is $s$. To do so,
-we will define two energy functions: $E_\mathrm p$ and $E'_\mathrm s$ that
-penalize lack of periodicity and smoothness, respectively (why $E'_\mathrm s$ is
-not simply called $E_\mathrm s$ will become apparent in the [[sb-blog-next:][next instalment]] of
-this series). More precisely, $E_\mathrm p$ (resp. $E'_\mathrm s$) is greater
-for less periodic (resp. less smooth) $p$ (resp. $s$). The periodic-plus-smooth
-decomposition of an image $u$ is then defined as the pair of images $(p, s)$
-that minimize the total energy $E(p, s)=E_\mathrm p(p)+E'_\mathrm s(s)$ under
-the constraints $u=p+s$ and $\operatorname{mean}(s)=0$. The remainder of this
-post is dedicated to defining the energies $E_\mathrm p$ and $E'_\mathrm s$.
+we will define two energy functions: $E_\mathrm p$ and $E_\mathrm s$ that
+penalize lack of periodicity and smoothness, respectively. More precisely,
+$E_\mathrm p$ (resp. $E_\mathrm s$) is greater for less periodic (resp. less
+smooth) $p$ (resp. $s$). The periodic-plus-smooth decomposition of an image $u$
+is then defined as the pair of images $(p, s)$ that minimize the total energy
+$E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ under the constraints $u=p+s$ and
+$\operatorname{mean}(s)=0$. The remainder of this post is dedicated to defining
+the energies $E_\mathrm p$ and $E_\mathrm s$.
 
 * How to penalize lack of periodicity?
 
@@ -140,7 +139,7 @@ At this point, you might have guessed that smoothness is measured through the
 sum of squared differences between /direct/ neighbors
 
 \begin{equation*}
-E'_\mathrm s(s)=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}\bigl[(s_{i, j-1}-s_{i, j})^2
+E_\mathrm s(s)=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}\bigl[(s_{i, j-1}-s_{i, j})^2
 +(s_{i, j+1}-s_{i, j})^2+(s_{i-1, j}-s_{i, j})^2+(s_{i+1, j}-s_{i, j})^2\bigr],
 \end{equation*}
 
@@ -156,13 +155,13 @@ observed that in the above sum, each pair of direct neighbors appears exactly
 twice. In other words,
 
 \begin{equation*}
-E'_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
+E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 +2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
 \end{equation*}
 
 * Python implementation
 
-Implementation of the total energy $E(p, s)=E_\mathrm p(p)+E'_\mathrm s(s)$ is
+Implementation of the total energy $E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ is
 fairly trivial.
 
 #+BEGIN_SRC python :eval no-export :exports results :results output code
