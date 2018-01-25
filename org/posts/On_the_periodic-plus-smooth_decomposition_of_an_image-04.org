@@ -4,58 +4,64 @@
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 4: implementation of the linear operators
 #+DATE: [2018-01-22 Mon]
 #+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
+#+LINK: sb-blog-second ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org
 #+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
 #+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-05.org
 #+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
-In the [[sb-blog-prev:][previous instalment]] of this series, we showed that the total energy of
-the periodic-plus-smooth decomposition of an image ([[moisan2011:][Moisan, 2011]]) is a
-quadratic form which can be cast in the standard form
+In the [[sb-blog-prev:][previous instalment]] of this series, we introduced the linear operators
+$Q_1$ and $Q$ that allow to define Moisan's ([[moisan2011:][2011]]) periodic-plus-smooth
+decomposition $(p, s)$ of an image $u$ as follows
 
 \begin{equation*}
-E(p, s)=E_\mathrm p(p)+E'_\mathrm s(s)
-\quad\text{with}\quad
-E_\mathrm p(p)=\langle p, Q_1\cdot p\rangle
-\quad\text{and}\quad
-E'_\mathrm s(s)=\langle s, Q'_2\cdot s\rangle.
+s=\operatorname*{arg\,min}_v F(v, u)\quad\text{and}\quad p=u-s,
 \end{equation*}
 
-In theory, the linear operators $Q_1$ and $Q_2$ are matrices, and could be
-implemented as such. However, for $m\times n$ images, the matrices would be
-unnecessarily large: $mn\times mn$! We will therefore adopt here a
-[[https://en.wikipedia.org/wiki/Matrix-free_methods][matrix-free approach]]. The remainder of this post is organized as follows. We
-will first discuss [[linear_operators][linear operators]] in the =scipy.sparse.linalg= sense. Then,
-we will [[Q1_implementation][implement the $Q_1$ operator]]. Finally, we will
-[[Q2_implementation][implement the $Q'_2$ operator]] (or rather, the $Q_2$ operator).
+with
+
+\begin{equation*}
+F(v, u)=\langle v, Q\cdot v\rangle-2\langle v, Q_1\cdot u\rangle
++\langle u, Q_1\cdot u\rangle.
+\end{equation*}
+
+In theory, the linear operators $Q_1$ and $Q$ are matrices. However, for
+$m\times n$ images, these matrices would be unnecessarily large: $mn\times mn$!
+We will therefore adopt here a [[https://en.wikipedia.org/wiki/Matrix-free_methods][matrix-free approach]] for the Python
+implementation of these operators. The remainder of this post is organized as
+follows. We will first discuss [[linear_operators][linear operators]] in the =scipy.sparse.linalg=
+sense. Then, we will implement [[Q1_implementation][the $Q_1$ operator]] and [[Q_implementation][the $Q$ operator]].
+Finally, we will [[testing][test our implementation]].
 
 * Matrix-free linear operators <<linear_operators>>
 
-The $Q_1$ and $Q'_2$ linear operators will be implemented as instances of
+The $Q_1$ and $Q$ linear operators will be implemented as instances of
 =LinearOperator= from the =scipy.sparse.linalg= module (see [[https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.sparse.linalg.LinearOperator.html#scipy.sparse.linalg.LinearOperator][documentation]]).
-Essentially, what this means is that $Q_1$ and $Q'_2$ are seen as /functions/
+Essentially, what this means is that $Q_1$ and $Q$ are seen as /functions/
 (linear maps) that perform the matrix-vector product. Often times, this is
 enough to perform fairly complex linear algebra operations. In particular,
-solving linear systems that involve $Q_1$ and $Q'_2$ can then be done by means
-of [[https://en.wikipedia.org/wiki/Iterative_method#Linear_systems][iterative linear solvers]], such as the [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]]. Interesting
-references on this topic are the book by Y. Saad:
-[[https://doi.org/10.1137/1.9780898718003][Iterative Methods for Sparse Linear Systems]] and the book by Barrett /et al./:
-[[http://epubs.siam.org/doi/book/10.1137/1.9781611971538][Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods]]
-(also freely available [[http://www.netlib.org/templates/][here]]).
+solving linear systems that involve $Q_1$ and $Q$ can then be done by means of
+[[https://en.wikipedia.org/wiki/Iterative_method#Linear_systems][iterative linear solvers]], such as the [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]]. Interesting
+references on this topic are the book by Y. Saad: [[https://doi.org/10.1137/1.9780898718003][Iterative Methods for Sparse
+Linear Systems]] and the book by Barrett /et al./: [[http://epubs.siam.org/doi/book/10.1137/1.9781611971538][Templates for the Solution of
+Linear Systems: Building Blocks for Iterative Methods]] (also freely available
+[[http://www.netlib.org/templates/][here]]).
 
 It should be noted that instances of =LinearOperator= (in the Scipy sense)
-operate on 1D-vectors. Therefore, 2D images must be converted to 1D vectors
-each time linear operators are to ben invoked. We will assume C-ordering in the
+operate on 1D vectors. Therefore, 2D images must be converted to 1D vectors
+each time linear operators are to be invoked. We will assume C-ordering in the
 implementation below. We first create the base class =ImageLinearOperator=,
-that defines linear operators that operate on images. These operators store the
-shape of the image.
+that defines linear operators for images, the shape of which is stored in the
+class. This class will be used below to implement the operators $Q_1$ and $Q$.
 
-#+BEGIN_SRC ipython :exports results :results output code
+#+BEGIN_SRC ipython :exports none :results silent
   import inspect
 
-  import moisan2011
+  from moisan2011 import ImageLinearOperator, OperatorQ1, OperatorQ, energy
+#+END_SRC
 
-  print(inspect.getsource(moisan2011.ImageLinearOperator))
+#+BEGIN_SRC ipython :exports results :results output code
+  print(inspect.getsource(ImageLinearOperator))
 #+END_SRC
 
 #+RESULTS:
@@ -119,8 +125,6 @@ class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
 
 #+END_SRC
 
-This class is to be used to implement the operators $Q_1$ and $Q'_2$.
-
 * Implementation of the $Q_1$ operator <<Q1_implementation>>
 
 The $Q_1$ operator was defined in the [[sb-blog-prev][previous post]] as the following sum:
@@ -145,15 +149,11 @@ u_{m-1, j}-u_{0, j} & \text{if }i=m-1,\\
 \end{cases}
 \end{equation*}
 
-Implementation is fairly simple; note that $Q_1$ is symmetric: the =_adjoint=
+Implementation is fairly simple; note that $Q_1$ is symmetric: the =_adjoint()=
 method simply returns =self=.
 
 #+BEGIN_SRC ipython :exports results :results output code
-  import inspect
-
-  import moisan2011
-
-  print(inspect.getsource(moisan2011.OperatorQ1))
+  print(inspect.getsource(OperatorQ1))
 #+END_SRC
 
 #+RESULTS:
@@ -163,12 +163,16 @@ class OperatorQ1(ImageLinearOperator):
 
     Q1 is defined by Eq. (9) of Moisan (2011)
 
-        F(s) = (u-s)'.Q1.(u-s)+s'.Q2.s,
+        F(s) = <u-s, Q1.(u-s)> + <s, Q2.s>,
 
-    where ' is the transpose and F(s) is the function to be minimized
-    with respect to the smooth component s. F is defined by Eq. (8)
+    where F(s) is the function to be minimized with respect to the
+    smooth component s. F is defined by Eq. (8)
 
-        F(s) = E(u-s, s) + mean(s)**2.
+        F(s) = E(u-s, s) + mean(s)**2,
+
+    so that
+
+        <v, Q1.v> = E(v, 0) and <v, Q2.v> = E(0, v) + mean(v)**2.
 
     Image p = u-s must be passed as a 1-dimensional vector. Internally,
     it is reshaped to a two-dimensional image (the shape of which is
@@ -196,33 +200,130 @@ class OperatorQ1(ImageLinearOperator):
 
 #+END_SRC
 
-* Implementation of the $Q'_2$ operator <<Q2_implementation>>
+* Implementation of the $Q$ operator <<Q_implementation>>
 
-The $Q_2$ operator was defined in the [[sb-blog-prev][previous post]] as the following sum:
-$Q_2=Q_2^\mathrm h+Q_2^\mathrm v+Q_2^\mathrm m$, with
+The $Q$ operator was defined in the [[sb-blog-prev][previous post]] as the following sum:
+$Q=Q^\mathrm h+Q^\mathrm v+Q^\mathrm m$, with
 
-\begin{equation*}
-\tfrac12(Q_2^\mathrm h\cdot u)_{i,j}=
-\begin{cases}
-u_{0, j}-u_{1, j}              & \text{if }i=0,\\
-u_{m-1, j}-u_{m-2, j}          & \text{if }i=m-1,\\
-2u_{i, j}-u_{i-1, j}-u_{i+1,j} & \text{otherwise},
-\end{cases}
-\end{equation*}
+\begin{align*}
+\tfrac12(Q^\mathrm h\cdot u)_{ij}&=2v_{ij}-u_{i-1, j}-u_{i+1,j},\\
+\tfrac12(Q^\mathrm v\cdot u)_{ij}&=2v_{i, j}-u_{i, j-1}-u_{i,j+1},\\
+(Q^\mathrm m\cdot u)_{ij}
+&=\frac1{m^2n^2}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{ij},
+\end{align*}
 
-\begin{equation*}
-\tfrac12(Q_2^\mathrm v\cdot u)_{i,j}=
-\begin{cases}
-u_{i, 0}-u_{i, 1}              & \text{if }j=0,\\
-u_{i, n-1}-u_{i, n-2}          & \text{if }j=n-1,\\
-2u_{i, j}-u_{i, j-1}-u_{i,j+1} & \text{otherwise},
-\end{cases}
-\label{eq:9}
-\end{equation*}
-
-and
+where the following ghost cells have been defined
 
 \begin{equation*}
-(Q_2^\mathrm m\cdot u)_{i,j}
-=\frac1{m^2n^2}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i,j}.
+u_{i, -1}=u_{i, n-1}, \quad
+u_{i, n}=u_{0, n}, \quad
+u_{-1, j}=u_{m-1, j}\quad\text{and}\quad
+u_{m, j}=u_{0, j}.
 \end{equation*}
+
+It is readily seen that $(Q^\mathrm h+Q^\mathrm v)\cdot u$ is the periodic
+convolution of u with the following kernel
+
+#+BEGIN_SRC ipython
+  KERNEL = np.array([[0.0, -2.0, 0.0],
+                     [-2.0, 8.0, -2.0],
+                     [0.0, -2.0, 0.0]], dtype=np.float64)
+#+END_SRC
+
+Operator $Q$ is then readily implemented. Observe again that $Q$ being
+symmetric, =_adjoint()= returns =self=.
+
+#+BEGIN_SRC ipython :exports results :results output code
+  print(inspect.getsource(OperatorQ))
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC ipython
+class OperatorQ(ImageLinearOperator):
+    """Implementation of Q = Q1+Q2 as a ImageLinearOperator.
+
+    Q1 and Q2 are defined by Eq. (9) of Moisan (2011)
+
+        F(s) = <u-s, Q1.(u-s)> + <s, Q2.s>,
+
+    where F(s) is the function to be minimized with respect to the
+    smooth component s. F is defined by Eq. (8)
+
+        F(s) = E(u-s, s) + mean(s)**2,
+
+    so that
+
+        <v, Q1.v> = E(v, 0) and <v, Q2.v> = E(0, v) + mean(v)**2.
+
+    Image s must be passed as a 1-dimensional vector. Internally, it is
+    reshaped to a two-dimensional image (the shape of which is passed
+    to the initializer), assuming C-ordering.
+    """
+    def __init__(self, *args):
+        super().__init__(*args)
+
+    def _apply(self, x, y=None):
+        if y is None:
+            y = np.zeros_like(x)
+
+        scipy.ndimage.convolve(x, KERNEL, output=y, mode='wrap')
+        return y+x.mean()/self.shape[0]
+
+    def _adjoint(self):
+        return self
+
+#+END_SRC
+
+* Testing the implementation <<testing>>
+
+For any image $v$, we should have
+
+\begin{equation*}
+\langle v, Q_1\cdot v\rangle=E(v, 0)
+\quad\text{and}\quad
+\langle v, Q\cdot v\rangle=E(v, 0)+E(0, v)+(\operatorname{mean} v)^2,
+\end{equation*}
+
+where the energy $E$ was implemented in [[sb-blog-second:][part 2]] of this series.
+
+#+BEGIN_SRC ipython :results output
+  import numpy as np
+
+  np.random.seed(20180125)
+
+  def test_operator_Q1(u):
+      expected = energy(u, np.zeros_like(u))
+      Q1 = OperatorQ1(*u.shape)
+      actual = np.sum(u*Q1._apply(u))
+      return actual, expected
+
+  print(test_operator_Q1(np.random.rand(32, 33)))
+  print(test_operator_Q1(np.random.rand(33, 32)))
+
+  def test_operator_Q(u):
+      zero = np.zeros_like(u)
+      expected = energy(u, zero)+energy(zero, u)+np.mean(u)**2
+      Q = OperatorQ(*u.shape)
+      actual = np.sum(u*Q._apply(u))
+      return actual, expected
+
+  print(test_operator_Q(np.random.rand(32, 33)))
+  print(test_operator_Q(np.random.rand(33, 32)))
+#+END_SRC
+
+#+RESULTS:
+: (22.504502162057918, 22.504502162057918)
+: (15.127021786181793, 15.127021786181791)
+: (720.02484219562473, 720.02484219562484)
+: (736.86488847277735, 736.86488847277724)
+
+In the above tests (which should really be implemented as unit tests!), it
+should be noted that the seed of the random generator is fixed. This ensures
+reproducibility. Also, non-square images were used. This allows for detection
+of silly errors, such as rows and columns swapping.
+
+* Conclusion
+
+In this post, we have implemented the linear operators $Q_1$ and $Q$. We are
+now in a position to (at last!) compute the periodic-plus-smooth decomposition
+of an image. This will be done in the [[sb-blog-next:][next instalment]] of this series
