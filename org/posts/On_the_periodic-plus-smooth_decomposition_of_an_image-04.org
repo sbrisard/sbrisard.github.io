@@ -73,7 +73,7 @@ class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
     operates on n-dimensional images, the shape of which is passed to
     the initializer
 
-    >>> a = ImageLinearOperator(10, 5)
+    >>> a = ImageLinearOperator((10, 5))
     >>> a.img_shape
     (10, 5)
     >>> a.shape
@@ -97,18 +97,17 @@ class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
     _matvec calls this method on the input vector, suitably reshaped to
     a n-dimensional image.
     """
-    def __init__(self, *args):
-        self.img_shape = tuple(int(n) for n in args)
+    def __init__(self, img_shape, dtype=np.float64):
+        self.img_shape = img_shape
         n = np.product(self.img_shape)
         shape = (n, n)
-        dtype = np.dtype(np.float64)
         super().__init__(dtype, shape)
 
     def _matvec(self, x):
         y = np.zeros_like(x)
         x2 = x.reshape(self.img_shape)
         y2 = y.reshape(self.img_shape)
-        self.ddot(x2, y2)
+        self._apply(x2, y2)
         return y
 
     def _apply(x, y=None):
@@ -178,18 +177,18 @@ class OperatorQ1(ImageLinearOperator):
     it is reshaped to a two-dimensional image (the shape of which is
     passed to the initializer), assuming C-ordering.
     """
-    def __init__(self, *args):
-        super().__init__(*args)
+    def __init__(self, img_shape, dtype=np.float64):
+        super().__init__(img_shape, dtype)
 
     def _apply(self, x, y=None):
         if y is None:
             y = np.zeros_like(x)
 
-        dx = 2.0*(x[:, 0]-x[:, -1])
+        dx = 2*(x[:, 0]-x[:, -1])
         y[:, 0] = dx
         y[:, -1] = -dx
 
-        dx = 2.0*(x[0, :]-x[-1, :])
+        dx = 2*(x[0, :]-x[-1, :])
         y[0, :] += dx
         y[-1, :] -= dx
 
@@ -224,12 +223,6 @@ u_{m, j}=u_{0, j}.
 It is readily seen that $(Q^\mathrm h+Q^\mathrm v)\cdot u$ is the periodic
 convolution of u with the following kernel
 
-#+BEGIN_SRC ipython
-  KERNEL = np.array([[0.0, -2.0, 0.0],
-                     [-2.0, 8.0, -2.0],
-                     [0.0, -2.0, 0.0]], dtype=np.float64)
-#+END_SRC
-
 Operator $Q$ is then readily implemented. Observe again that $Q$ being
 symmetric, =_adjoint()= returns =self=.
 
@@ -259,20 +252,27 @@ class OperatorQ(ImageLinearOperator):
     reshaped to a two-dimensional image (the shape of which is passed
     to the initializer), assuming C-ordering.
     """
-    def __init__(self, *args):
-        super().__init__(*args)
+    def __init__(self, img_shape, dtype=np.float64):
+        super().__init__(img_shape, dtype)
+        self.kernel = np.array([[0, -2, 0],
+                                [-2, 8, -2],
+                                [0, -2, 0]], dtype=dtype)
 
     def _apply(self, x, y=None):
         if y is None:
             y = np.zeros_like(x)
 
-        scipy.ndimage.convolve(x, KERNEL, output=y, mode='wrap')
+        scipy.ndimage.convolve(x, self.kernel, output=y, mode='wrap')
         return y+x.mean()/self.shape[0]
 
     def _adjoint(self):
         return self
 
 #+END_SRC
+
+Note that in the above implementation, attention is paid to the definition of
+the kernel, which is of the same =dtype= as the images to which the operator
+is to be applied. This allows for /exact/ computations on integer images.
 
 * Testing the implementation <<testing>>
 
@@ -286,41 +286,57 @@ For any image $v$, we should have
 
 where the energy $E$ was implemented in [[sb-blog-second:][part 2]] of this series.
 
-#+BEGIN_SRC ipython :results output
-  import numpy as np
+#+BEGIN_SRC ipython :exports results :results output code
+  from test_moisan2011 import img_shapes, test_OperatorQ1, test_OperatorQ
 
-  np.random.seed(20180125)
-
-  def test_operator_Q1(u):
-      expected = energy(u, np.zeros_like(u))
-      Q1 = OperatorQ1(*u.shape)
-      actual = np.sum(u*Q1._apply(u))
-      return actual, expected
-
-  print(test_operator_Q1(np.random.rand(32, 33)))
-  print(test_operator_Q1(np.random.rand(33, 32)))
-
-  def test_operator_Q(u):
-      zero = np.zeros_like(u)
-      expected = energy(u, zero)+energy(zero, u)+np.mean(u)**2
-      Q = OperatorQ(*u.shape)
-      actual = np.sum(u*Q._apply(u))
-      return actual, expected
-
-  print(test_operator_Q(np.random.rand(32, 33)))
-  print(test_operator_Q(np.random.rand(33, 32)))
+  print(inspect.getsource(img_shapes))
+  print()
+  print(inspect.getsource(test_OperatorQ))
+  print()
+  print(inspect.getsource(test_OperatorQ1))
 #+END_SRC
 
 #+RESULTS:
-: (22.504502162057918, 22.504502162057918)
-: (15.127021786181793, 15.127021786181791)
-: (720.02484219562473, 720.02484219562484)
-: (736.86488847277735, 736.86488847277724)
+#+BEGIN_SRC ipython
+def img_shapes():
+    sizes = (16, 17, 32, 33)
+    return itertools.product(sizes, sizes)
 
-In the above tests (which should really be implemented as unit tests!), it
-should be noted that the seed of the random generator is fixed. This ensures
-reproducibility. Also, non-square images were used. This allows for detection
-of silly errors, such as rows and columns swapping.
+
+@pytest.mark.parametrize('shape', list(img_shapes()))
+def test_OperatorQ(shape):
+    np.random.seed(20180125)
+    q = OperatorQ(shape, dtype=np.int64)
+    # Force non-zero mean
+    u1 = (np.random.randint(-128, 128)
+          + np.random.randint(-128, 128, size=q.shape[0:1], dtype=np.int64))
+    u1[0] -= np.sum(u1) % u1.shape[0]
+    u2 = u1.reshape(shape)
+    expected = energy(u2, 0)+energy(0, u2)
+    actual = np.dot(q@u1, u1)
+    assert_array_equal(actual, expected)
+
+
+@pytest.mark.parametrize('shape', list(img_shapes()))
+def test_OperatorQ1(shape):
+    np.random.seed(20180125)
+    q = OperatorQ1(shape, dtype=np.int64)
+    p1 = np.random.randint(-128, 128, size=(q.shape[0],), dtype=np.int64)
+    p2 = p1.reshape(shape)
+    expected = energy(p2, 0)
+    actual = np.dot(q@p1, p1)
+    assert_array_equal(actual, expected)
+
+#+END_SRC
+
+The above code snippet calls for several remarks
+
+  1. The great [[https://pytest.org/][pytest]] library to write the unit tests: this allows for
+     parameterized tests.
+  2. The seed of the random generator is fixed: this ensures reproducibility.
+  3. Non-square images were used: this allows for the detection of some silly
+     errors, such as rows and columns swapping.
+  4. Integer images were used: /exact/ equality can then be asserted.
 
 * Conclusion
 
