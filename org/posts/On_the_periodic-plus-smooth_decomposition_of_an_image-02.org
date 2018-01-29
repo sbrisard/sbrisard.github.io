@@ -162,7 +162,7 @@ E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 * Python implementation
 
 Implementation of the total energy $E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ is
-fairly trivial.
+fairly trivial (note the use of the =broadcast_arrays=).
 
 #+BEGIN_SRC python :eval no-export :exports results :results output code
   import inspect
@@ -209,6 +209,7 @@ def energy(p, s):
 
         E(p, s) = E_p(p) + E_s(s).
     """
+    p, s = np.broadcast_arrays(p, s)
     return 2*(ssd(p[:, 0], p[:, -1]) +
               ssd(p[0, :], p[-1, :]) +
               ssd(s[:-1, :], s[1:, :]) +
