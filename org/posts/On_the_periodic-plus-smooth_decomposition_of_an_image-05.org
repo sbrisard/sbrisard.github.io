@@ -1,0 +1,123 @@
+# -*- coding: utf-8; fill-column: 79 -*-
+#+SETUPFILE: "../include/css-1.org"
+#+SETUPFILE: "../include/mathjax.org"
+#+TITLE: On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the crude way
+#+DATE: [2018-01-30 Tue]
+#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
+#+LINK: sb-blog-part-02 ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org
+#+LINK: sb-blog-part-03 ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
+#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-04.org
+#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org
+#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
+
+In this post, we will compute Moisan's ([[moisan2011:][2011]]) periodic-plus-smooth
+decomposition of an image by direct minimization of the energy introduced in
+[[sb-blog-part-02:][part 2]] of this series. More precisely, $u$ being a $m\times n$ image, we will
+minimize the function $F(v, u)$ over the space of $m\times n$ images $v$. The
+minimizer, $s$, is the smooth component of $u$, while its complement $p=u-s$ is
+the periodic component of $u$. We showed in [[sb-blog-part-03:][part 3]] that $F$ was in fact a
+quadratic form, and expressed the underlying linear operators, which were
+subsequently implemented in [[sb-blog-prev:][part 4]]. It is recalled (see [[sb-blog-part-03:][part 3]]) that
+
+\begin{equation*}
+F(v, u)=\langle v, Q\cdot v\rangle-2\langle v, Q_1\cdot u\rangle
++\langle u, Q_1\cdot u\rangle,
+\end{equation*}
+
+where $Q$ and $Q_1$ are symmetric, positive linear operators. Minimizing $F$
+with respect to $v$ therefore amounts to solving the linear system: $Q\cdot
+s=Q_1\cdot u$. It can in fact be shown that $Q$ is positive definite, therefore
+the solution to this linear system is unique: $s=Q^{-1}\cdot Q_1\cdot u$. It
+can be computed by means of the [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]], as illustrated
+below.
+
+Let us start by loading up some modules and the input image to be periodized
+(see Fig. [[fig:1]]).
+
+#+HEADER: :var DATA_DIR=(cdr (assoc "sb-blog-data-dir" org-link-abbrev-alist-local))
+#+BEGIN_SRC ipython :results silent
+  import numpy as np
+
+  from scipy.sparse.linalg import cg
+  from skimage.io import imread, imsave
+
+  u = skimage.io.imread(DATA_DIR+'hut-648x364.png')
+  u = u.astype(np.float64)
+#+END_SRC
+
+#+CAPTION: The initial image to be periodized.
+#+NAME: fig:1
+#+ATTR_HTML: :width 80%
+[[sb-blog-data-dir:hut-648x364.png]]
+
+We then create the operators $Q_1$ and $Q$ that were implemented in the
+[[sb-blog-prev:][previous instalment]] of this series.
+
+#+BEGIN_SRC ipython :exports none :results none
+  from moisan2011 import OperatorQ1, OperatorQ
+#+END_SRC
+
+#+BEGIN_SRC ipython :results none
+  Q1 = OperatorQ1(u.shape)
+  Q = OperatorQ(u.shape)
+#+END_SRC
+
+We then compute the right-hand side of the system, namely $Q_1\cdot
+u$. Attention must be paid to the fact that $u$ must be flattened to a 1D
+array.
+
+#+BEGIN_SRC ipython :results none
+  m, n = u.shape
+  Q1u = Q1@u.reshape((m*n,))
+#+END_SRC
+
+We then use the =scipy.sparse.linalg.cg= function (see [[https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg][documentation]]) to solve
+the linear system
+
+#+BEGIN_SRC ipython :results output
+  x, info = cg(Q, Q1u)
+  if info == 0:
+      print('success!')
+  else:
+      print(info)
+  s = x.reshape(u.shape)
+  p = u-s
+#+END_SRC
+
+#+RESULTS:
+: success!
+
+We can now save the results (for future reference).
+
+#+BEGIN_SRC ipython :results silent
+  def to_uint8(v):
+      m, n = v.shape
+      v_min = v.min()
+      v_max = v.max()
+      return (255.0*(v-v_min)/(v_max-v_min)).astype(np.uint8)
+
+  imsave(DATA_DIR+'hut-648x364-smooth-cg.png', to_uint8(s))
+  imsave(DATA_DIR+'hut-648x364-periodic-cg.png', to_uint8(p))
+  imsave(DATA_DIR+'hut-648x364-periodic-cg-fftshift.png',
+         to_uint8(np.fft.fftshift(p)))
+#+END_SRC
+
+Again, periodization is best observed by swapping the quadrants (see
+Fig. [[fig:2]]).
+
+#+CAPTION: The periodic component of the initial image shown in Fig. [[fig:1]],
+#+CAPTION: resulting from conjugate gradient minimization of
+#+CAPTION: [[moisan2011:][Moisan]]'s energy.
+#+NAME: fig:2
+#+ATTR_HTML: :width 80%
+[[sb-blog-data-dir:hut-648x364-periodic-cg-fftshift.png]]
+
+Et voilà…
+
+In this fairly quick post, we derived a reference periodic-plus-smooth
+decomposition of a specific image. The conjugate gradient iterations are highly
+inefficient, and we will show in the [[sb-blog-next:][next instalment]] of this series that a very
+efficient alternative, based on the fast Fourier transform, was proposed by
+Moisan ([[moisan2011:][2011]]). The decomposition that we obtained in the present post will then
+be used as a reference for testing our implementation of Moisan's algorithm.
