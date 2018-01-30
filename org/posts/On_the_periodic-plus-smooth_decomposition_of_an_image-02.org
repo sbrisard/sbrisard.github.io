@@ -232,14 +232,7 @@ F(s, u)=E_\mathrm p(u-s)+E_\mathrm s(s)+(\operatorname{mean}s)^2,
 \end{equation*}
 
 and the periodic component $p$ reads: $p=u-s$. This is the minimization problem
-that we will eventually solve. To do so, it will prove convenient to introduce
-the following functionals
-
-\begin{equation*}
-F_1(s, u)=E_\mathrm p(u-s)
-\quad\text{and}\quad
-F_2(s)=E_\mathrm s(s)+(\operatorname{mean}s)^2.
-\end{equation*}
+that we will eventually solve.
 
 * Conclusion
 
