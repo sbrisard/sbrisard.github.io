@@ -221,7 +221,15 @@ u_{m, j}=u_{0, j}.
 \end{equation*}
 
 It is readily seen that $(Q^\mathrm h+Q^\mathrm v)\cdot u$ is the periodic
-convolution of u with the following kernel
+convolution of $u$ with the following kernel
+
+\begin{equation*}
+\begin{bmatrix}
+0 & -2 & 0\\
+-2 & 8 & -2\\
+0 & -2 & 0
+\end{bmatrix}.
+\end{equation*}
 
 Operator $Q$ is then readily implemented. Observe again that $Q$ being
 symmetric, =_adjoint()= returns =self=.
