@@ -20,29 +20,35 @@ nature of the method. Moisan actually showed that the whole decomposition could
 be computed explicitely in Fourier space. This will be discussed in the present
 post.
 
-Let $u$ be a $m\times n$ image; its [[https://en.wikipedia.org/wiki/Discrete_Fourier_transform][discrete Fourier transform]] $\hat u$ is the
-$m\times n$ image defined as follows
+Before we proceed, let us recall how the [[https://en.wikipedia.org/wiki/Discrete_Fourier_transform][discrete Fourier transform]] $\hat u$ of
+the $m\times n$ image $u$ is defined
 
-\begin{equation}
+\begin{equation*}
 \hat u_{\alpha\beta}=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{ij}
-\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta j}n\Bigr)\Bigr]
-\label{eq:1}
-\end{equation}
+\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta j}n\Bigr)\Bigr],
+\end{equation*}
 
-and we have the inversion formula
+for $\alpha=0, \ldots, m-1$ and $\beta=0, \ldots, n-1$. We have the well-known
+inversion formula
 
-\begin{equation}
+\begin{equation*}
 u_{ij}=\frac1{mn}\sum_{\alpha=0}^{m-1}\sum_{\beta=0}^{n-1}\hat u_{\alpha\beta}
 \exp\Bigl[2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta j}n\Bigr)\Bigr].
-\label{eq:2}
-\end{equation}
+\end{equation*}
+
+The remainder of this post is organized as follows. We will first introduce
+[[algorithm][Moisan's algorithm]] ([[moisan2011:][2011]]). Then a [[implementation][first implementation]] of this algorithm will
+be proposed. Improved implementations will be discussed in the [[sb-blog-next:][next instalment]]
+of this series.
+
+* Moisan's algorithm <<algorithm>>
 
 It is recalled (see [[sb-blog-prev:][previous post]]) that the smooth component $s$ of a $m\times
 n$ image $u$ is found from the solution to the following linear system
 
 \begin{equation}
 Q\cdot s=Q_1\cdot u,
-\label{eq:3}
+\label{eq:1}
 \end{equation}
 
 where $Q$ and $Q_1$ are symmetric, positive linear operators defined in [[sb-blog-part-03:][part 3]]
@@ -65,108 +71,54 @@ $\operatorname{mean}u/mn$. It then results from the
 \begin{equation}
 (\widehat{Q\cdot s})_{\alpha\beta}=
 \begin{cases}
-\displaystyle\frac{\hat s_{00}}{m^2n^2} & \text{if }(\alpha, \beta) = (0, 0),\\
-\displaystyle4\bigl(2-\cos\frac{2\pi\alpha}m-\cos\frac{2\pi\beta}n\bigr)
+m^{-2}n^{-2}\hat s_{00} & \text{if }(\alpha, \beta) = (0, 0),\\
+\bigl(8-4\cos\frac{2\pi\alpha}m-4\cos\frac{2\pi\beta}n\bigr)
 \hat s_{\alpha\beta} & \text{otherwise}.
+\end{cases}
+\label{eq:2}
+\end{equation}
+
+Combining Eqs. \eqref{eq:1} and \eqref{eq:2}, we find the following expression
+of the discrete Fourier transform of the smooth component $s$
+\begin{equation}
+\hat s_{\alpha\beta}=\frac{\hat v_{\alpha\beta}}
+{2\cos\frac{2\pi\alpha}m+2\cos\frac{2\pi\beta}n-4}
+\quad\text{for}\quad
+(\alpha, \beta)\neq(0, 0),
+\label{eq:3}
+\end{equation}
+
+where we have introduced $v=-\frac12Q_1\cdot u$. Since $\operatorname{mean}s=0$,
+we also have $\hat s_{00}=0$. From the definition of $Q_1$ (see [[sb-blog-part-03:][part 3]] of this
+series), we have $v=v^\mathrm h+v^\mathrm v$, with
+
+\begin{equation}
+v^\mathrm h_{ij}=
+\begin{cases}
+u_{i, n-1}-u_{i, 0} & \text{if }j=0,\\
+u_{i, 0}-u_{i, n-1} & \text{if }j=n-1,\\
+0                   & \text{otherwise},
+\end{cases}
+\quad\text{and}\quad
+v^\mathrm v_{ij}=
+\begin{cases}
+u_{m-1, j}-u_{0, j} & \text{if }i=0,\\
+u_{0, j}-u_{m-1, j} & \text{if }i=m-1,\\
+0                   & \text{otherwise}.
 \end{cases}
 \label{eq:4}
 \end{equation}
 
-Combining Eqs. \eqref{eq:3} and \eqref{eq:4}, we find the following expression
-of the discrete Fourier transform of the periodic component $p=u-s$
-\begin{equation}
-\hat p_{\alpha\beta}=\hat u_{\alpha\beta}+\frac{\hat v_{\alpha\beta}}
-{\displaystyle 4\bigl(2-\cos\frac{2\pi\alpha}m-\cos\frac{2\pi\beta}n\bigr)},
-\end{equation}
+Moisan's algorithm ([[moisan2011:][2011]]) readily follows from this analysis
 
-where we have introduced $v=-Q_1\cdot u$.
+  1. compute $v$ [use Eq. \eqref{eq:4}],
+  2. compute its discrete Fourier transform $\hat v$,
+  3. compute $\hat s$ [use Eq. \eqref{eq:3}],
+  4. compute compute its inverse discrete Fourier transform $s$,
+  5. compute $p=u-s$.
 
-Let us start by loading up some modules and the input image to be periodized
-(see Fig. [[fig:1]]).
+Of course, the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Fourier transform]] will be used for steps 2 and 4.
 
-#+HEADER: :var DATA_DIR=(cdr (assoc "sb-blog-data-dir" org-link-abbrev-alist-local))
-#+BEGIN_SRC ipython :results silent
-  import numpy as np
+* A first implementation of Moisan's algorithm <<implementation>>
 
-  from scipy.sparse.linalg import cg
-  from skimage.io import imread, imsave
-
-  u = skimage.io.imread(DATA_DIR+'hut-648x364.png')
-  u = u.astype(np.float64)
-#+END_SRC
-
-#+CAPTION: The initial image to be periodized.
-#+NAME: fig:1
-#+ATTR_HTML: :width 80%
-[[sb-blog-data-dir:hut-648x364.png]]
-
-We then create the operators $Q_1$ and $Q$ that were implemented in the
-[[sb-blog-prev:][previous instalment]] of this series.
-
-#+BEGIN_SRC ipython :exports none :results none
-  from moisan2011 import OperatorQ1, OperatorQ
-#+END_SRC
-
-#+BEGIN_SRC ipython :results none
-  Q1 = OperatorQ1(u.shape)
-  Q = OperatorQ(u.shape)
-#+END_SRC
-
-We then compute the right-hand side of the system, namely $Q_1\cdot
-u$. Attention must be paid to the fact that $u$ must be flattened to a 1D
-array.
-
-#+BEGIN_SRC ipython :results none
-  m, n = u.shape
-  Q1u = Q1@u.reshape((m*n,))
-#+END_SRC
-
-We then use the =scipy.sparse.linalg.cg= function (see [[https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg][documentation]]) to solve
-the linear system
-
-#+BEGIN_SRC ipython :results output
-  x, info = cg(Q, Q1u)
-  if info == 0:
-      print('success!')
-  else:
-      print(info)
-  s = x.reshape(u.shape)
-  p = u-s
-#+END_SRC
-
-#+RESULTS:
-: success!
-
-We can now save the results (for future reference).
-
-#+BEGIN_SRC ipython :results silent
-  def to_uint8(v):
-      m, n = v.shape
-      v_min = v.min()
-      v_max = v.max()
-      return (255.0*(v-v_min)/(v_max-v_min)).astype(np.uint8)
-
-  imsave(DATA_DIR+'hut-648x364-smooth-cg.png', to_uint8(s))
-  imsave(DATA_DIR+'hut-648x364-periodic-cg.png', to_uint8(p))
-  imsave(DATA_DIR+'hut-648x364-periodic-cg-fftshift.png',
-         to_uint8(np.fft.fftshift(p)))
-#+END_SRC
-
-Again, periodization is best observed by swapping the quadrants (see
-Fig. [[fig:2]]).
-
-#+CAPTION: The periodic component of the initial image shown in Fig. [[fig:1]],
-#+CAPTION: resulting from conjugate gradient minimization of
-#+CAPTION: [[moisan2011:][Moisan]]'s energy.
-#+NAME: fig:2
-#+ATTR_HTML: :width 80%
-[[sb-blog-data-dir:hut-648x364-periodic-cg-fftshift.png]]
-
-Et voilà…
-
-In this fairly quick post, we derived a reference periodic-plus-smooth
-decomposition of a specific image. The conjugate gradient iterations are highly
-inefficient, and we will show in the [[sb-blog-next:][next instalment]] of this series that a very
-efficient alternative, based on the fast Fourier transform, was proposed by
-Moisan ([[moisan2011:][2011]]). The decomposition that we obtained in the present post will then
-be used as a reference for testing our implementation of Moisan's algorithm.
+* Conclusion
