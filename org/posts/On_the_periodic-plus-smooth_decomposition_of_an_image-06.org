@@ -121,4 +121,96 @@ Of course, the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Four
 
 * A first implementation of Moisan's algorithm <<implementation>>
 
+Reference implementation of Moisan's algorithm results directly from the above
+analysis.
+
+#+BEGIN_SRC ipython :exports none :results silent
+  import inspect
+
+  from moisan2011 import _per
+#+END_SRC
+
+#+BEGIN_SRC ipython :exports results :results output code
+  print(inspect.getsource(_per))
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC ipython
+def _per(u, inverse_dft=False):
+    """Compute the periodic component of the 2D image u.
+
+    This function returns the periodic-plus-smooth decomposition of
+    the 2D array-like u.
+
+    If inverse_dft is True, then the pair (p, s) is returned
+    (p: periodic component; s: smooth component).
+
+    If inverse_dft is False, then the pair (DFT[p], DFT[s]) is
+    returned, where DFT denotes the discrete Fourier transform
+    (with same conventions regarding sign and normalization as in the
+    numpy.fft module).
+
+    This is a reference (unoptimized) implementation of Algorithm 1.
+    """
+    u = np.asarray(u, dtype=np.float64)
+
+    v = np.zeros_like(u)
+    du = u[-1, :]-u[0, :]
+    v[0, :] = du
+    v[-1, :] = -du
+
+    du = u[:, -1]-u[:, 0]
+    v[:, 0] += du
+    v[:, -1] -= du
+
+    v_dft = np.fft.fft2(v)
+
+    m, n = u.shape
+    cos_m = np.cos(2.*np.pi*np.fft.fftfreq(m, 1.))
+    cos_n = np.cos(2.*np.pi*np.fft.fftfreq(n, 1.))
+
+    k_dft = 2.0*(cos_m[:, None]+cos_n[None, :]-2.0)
+    k_dft[0, 0] = 1.0
+    s_dft = v_dft/k_dft
+    s_dft[0, 0] = 0.0
+
+    if inverse_dft:
+        s = np.fft.ifft2(s_dft)
+        return u-s, s
+    else:
+        u_dft = np.fft.fft2(u)
+        return u_dft-s_dft, s_dft
+
+#+END_SRC
+
+Which can be tested with the following image.
+
+#+HEADER: :var DATA_DIR=(cdr (assoc "sb-blog-data-dir" org-link-abbrev-alist-local))
+#+BEGIN_SRC ipython :results silent
+  import numpy as np
+
+  from skimage.io import imread, imsave
+
+  u = imread(DATA_DIR+'hut-648x364.png')
+  u = u.astype(np.float64)
+#+END_SRC
+
+#+ATTR_HTML: :width 80%
+[[sb-blog-data-dir:hut-648x364.png]]
+
+The periodic-plus-smooth decomposition is then computed as follows.
+
+#+BEGIN_SRC ipython :results silent
+  p, s = _per(u, inverse_dft=True)
+
+  imsave(DATA_DIR+'hut-648x364-periodic-_per-fftshift.png',
+         np.fft.fftshift(p.real).astype(np.uint8))
+#+END_SRC
+
+Which results in the following image ($p$ has been FFT-shifted, in order to
+demonstrate the effect of periodization).
+
+#+ATTR_HTML: :width 80%
+[[sb-blog-data-dir:hut-648x364-periodic-_per-fftshift.png]]
+
 * Conclusion
