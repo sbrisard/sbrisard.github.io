@@ -1,24 +1,23 @@
 # -*- coding: utf-8; fill-column: 80 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+OPTIONS: ':t
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition
 #+DATE: [2017-10-02 Mon]
-#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
-#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-01.org
-#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
-#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
-#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
-In the [[sb-blog-prev:][previous instalment]] of this series, I discussed the need for periodic
+In the [[sb-blog-01:][previous instalment]] of this series, we discussed the need for periodic
 images. Although not all images are periodic, some image analysis techniques are
 best performed in Fourier space (using the fast Fourier transform). Applying
 Fourier-based techniques to images that are /not/ periodic (as is often the
 case) generates artifacts. In order to reduce these artifacts, Moisan ([[moisan2011:][2011]])
 proposed to construct a periodic image that is as close as possible to the
 original image. For reasons that will become clearer in the remainder of this
-post, he called the resulting construction the “periodic-plus-smooth
-decomposition”. In this post, I will define this decomposition, a first
-implementation of which will be proposed in the [[sb-blog-next:][next instalment]].
+post, he called the resulting construction the "periodic-plus-smooth
+decomposition". We will define this decomposition in the remainder of this post, which is the second part in an eight-part series
+
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 
 As an appetizer, Figure [[fig:1]] shows the original image (left) and its periodic
 (middle) and smooth components (right). Gray levels of the smooth component have
@@ -31,21 +30,21 @@ corrects the jumps induced by the lack of periodicity of the initial image.
   import numpy as np
   import scipy.misc
 
-  u = scipy.misc.imread(DATA_DIR+'hut-648x364.png')
+  from skimage.io import imread, imsave
+
+  u = imread(DATA_DIR+'hut-648x364.png')
   u = u.astype(np.float64)
 
-  from moisan2011 import per_ref as per
-  p = per(u, inverse_fft=True)
-  s = u-p
+  from moisan2011 import rper
+  p, s = rper(u, inverse_dft=True)
 
   p = p.astype(np.uint8)
   s_min, s_ptp = s.min(), s.ptp()
   s = (255*(s-s_min)/s_ptp).astype(np.uint8)
 
-  scipy.misc.imsave(DATA_DIR+'hut-648x364-periodic.png', p)
-  scipy.misc.imsave(DATA_DIR+'hut-648x364-smooth.png', s)
-  scipy.misc.imsave(DATA_DIR+'hut-648x364-periodic-fftshift.png',
-                    np.fft.fftshift(p))
+  imsave(DATA_DIR+'hut-648x364-periodic.png', p)
+  imsave(DATA_DIR+'hut-648x364-smooth.png', s)
+  imsave(DATA_DIR+'hut-648x364-periodic-fftshift.png', np.fft.fftshift(p))
 
   margin = 20
   m, n = u.shape
@@ -54,7 +53,7 @@ corrects the jumps induced by the lack of periodicity of the initial image.
   img[:, :n] = u
   img[:, n+margin:2*n+margin] = p
   img[:, 2*n+2*margin:3*n+2*margin] = s
-  scipy.misc.imsave(DATA_DIR+'hut-648x364-periodic-plus-smooth.png', img)
+  imsave(DATA_DIR+'hut-648x364-periodic-plus-smooth.png', img)
 #+END_SRC
 
 #+CAPTION: Illustration of the periodic-plus-smooth decomposition of an image.
@@ -66,8 +65,8 @@ corrects the jumps induced by the lack of periodicity of the initial image.
 
 * The decomposition as a minimization problem
 
-Let $u$ be a $m\times n$ image. We want to find two images $p$ (“periodic”
-component) and $s$ (“smooth” component), such that $u=p+s$ and
+Let $u$ be a $m\times n$ image. We want to find two images $p$ ("periodic"
+component) and $s$ ("smooth" component), such that $u=p+s$ and
 
   1. $p$ minimizes jumps across boundaries (periodicity),
   2. $s$ minimizes jumps between neighbor pixels (smoothness),
@@ -242,7 +241,7 @@ level of the periodic component is equal to the average gray level of the
 initial image.
 
 Moisan ([[moisan2011:][2011]]) showed that this minimizer is explicit in Fourier space. In the
-[[sb-blog-next:][next instalment]] of this series, we will however temporarily ignore this result,
+[[sb-blog-03:][next instalment]] of this series, we will however temporarily ignore this result,
 and optimize the total energy in the real space, using standard iterative
 techniques. This will allow us to generate reference decompositions that will
 eventually be used to set up unit tests in order to check our implementation of
