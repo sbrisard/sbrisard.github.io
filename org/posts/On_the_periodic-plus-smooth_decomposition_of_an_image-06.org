@@ -127,7 +127,7 @@ analysis.
 #+BEGIN_SRC ipython :exports none :results silent
   import inspect
 
-  from moisan2011 import _per
+  from moisan2011 import OperatorQ1, OperatorQ, _per
 #+END_SRC
 
 #+BEGIN_SRC ipython :exports results :results output code
@@ -183,7 +183,7 @@ def _per(u, inverse_dft=False):
 
 #+END_SRC
 
-Which can be tested with the following image.
+Which can be applied to the following image.
 
 #+HEADER: :var DATA_DIR=(cdr (assoc "sb-blog-data-dir" org-link-abbrev-alist-local))
 #+BEGIN_SRC ipython :results silent
@@ -213,4 +213,90 @@ demonstrate the effect of periodization).
 #+ATTR_HTML: :width 80%
 [[sb-blog-data-dir:hut-648x364-periodic-_per-fftshift.png]]
 
+It should be noted that the resulting decomposition is a pair of /complex/
+images (since we used the complex DFT to perform the decomposition). We ought
+to check that the imaginary parts of $p$ and $s$ are indeed nearly null
+
+#+BEGIN_SRC ipython :results output
+  print('Imaginary part of')
+  print('  p: min = {}, max = {}'.format(p.imag.min(), p.imag.max()))
+  print('  s: min = {}, max = {}'.format(s.imag.min(), s.imag.max()))
+#+END_SRC
+
+#+RESULTS:
+: Imaginary part of
+:   p: min = -2.712553866755778e-12, max = 4.208651906766632e-12
+:   s: min = -4.208651906766632e-12, max = 2.712553866755778e-12
+
+We can then readily set $p$ and $s$ to their real parts
+
+#+BEGIN_SRC ipython :results silent
+  p_act = p.real
+  s_act = s.real
+#+END_SRC
+
+* Testing our implementation
+
+In the [[sb-blog-prev:][previous instalment]] of this series, we computed a reference
+periodic-plus-smooth decomposition by means of the conjugate gradient
+method. Let's do that again.
+
+#+BEGIN_SRC ipython :results output
+  from scipy.sparse.linalg import cg
+
+  tol = 1E-8
+  Q1 = OperatorQ1(u.shape)
+  Q = OperatorQ(u.shape)
+  m, n = u.shape
+  b = Q1@u.reshape((m*n,))
+  x_exp, info = cg(Q, b, tol=tol)
+  if info == 0:
+      res_exp = np.linalg.norm(b-Q@x_exp)
+      print('Residual: {}'.format(res_exp))
+  else:
+      print(info)
+  s_exp = x_exp.reshape(u.shape)
+  p_exp = u-s_exp
+#+END_SRC
+
+#+RESULTS:
+: Residual: 3.9422689305508705e-05
+
+We can then compute the norm of the difference
+
+#+BEGIN_SRC ipython :results output
+  abs_err = np.linalg.norm(s_act-s_exp)
+  rel_err = abs_err/np.linalg.norm(0.5*(s_act+s_exp))
+  print('Error in L2-norm:')
+  print('  - absolute: {}'.format(abs_err))
+  print('  - relative: {}'.format(rel_err))
+#+END_SRC
+
+#+RESULTS:
+: Error in L2-norm:
+:   - absolute: 0.004504952971514239
+:   - relative: 1.3139651710573028e-06
+
+This is already quite satisfactory. We can also compute the residual with the
+value of $s$ found through the DFT approach
+
+#+BEGIN_SRC ipython :results output
+  x_act = s_act.reshape((m*n,))
+  res_act = np.linalg.norm(b-Q@x_act)
+  print('Residual: {}'.format(res_act))
+#+END_SRC
+
+#+RESULTS:
+: Residual: 1.883218469281773e-11
+
+Which is much smaller than the residual obtained through conjugate gradient
+iterations! Surely, our implementation delivers the correct
+periodic-plus-smooth decomposition!
+
 * Conclusion
+
+In the present post, we have implemented Moisans's algorithm ([[moisan2011:][2011]]) for
+computing the periodic-plus-smooth decomposition of an image. This algorithm is
+much faster than our [[sb-blog-prev:][previous]] implementation, relying on the conjugate gradient
+method. We will show in the [[sb-blog-next:][next instalment]] of this series that we can do
+slightly better, though.
