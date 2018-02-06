@@ -1,20 +1,22 @@
-# -*- coding: utf-8; -*-
+# -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
+#+OPTIONS: ':t
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 1: introduction
 #+DATE: [2017-09-23 Sat]
-#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
 In this new series, we will explore the so-called /periodic-plus-smooth/
 decomposition of an image, introduced by Moisan in 2011. This series is largely
-based on Moisan's paper, called [[https://doi.org/10.1007/s10851-010-0227-1][Periodic plus Smooth Image Decomposition]] (the
+based on Moisan's paper, called [[moisan2011:][Periodic plus Smooth Image Decomposition]] (the
 author's version can be found on [[https://hal.archives-ouvertes.fr/hal-00388020][HAL]]). Besides introducing a quite smart
 technique (that I do use for real materials science applications), this series
 will be an opportunity to discuss an important topic: how to test the
 implementation of an algorithm, and be confident that the test actually
 validates the implementation.
 
-To do so, I will first define the periodic-plus-smooth decomposition as a
-minimiazation problem. This will lead to a first implementation of this
+To do so, we will first define the periodic-plus-smooth decomposition as a
+minimization problem. This will lead to a first implementation of this
 decomposition: the objective function is quadratic, and the minimization problem
 therefore merely reduces to a linear system. However, this system is large (the
 number of unknowns is the number of pixels!). We will therefore use matrix-free
@@ -24,8 +26,12 @@ This first –quite inefficient– implementation will then serve as a reference
 implementation of the decomposition, for testing purposes. Indeed, Moisan showed
 that the minimization problem he introduced could in fact be explicitely solved
 in Fourier space. He proposed two efficient algorithms to compute the
-decomposition. Both rely, of course, on the FFT. We will implement both, test
-them against the reference implementation, and compare their merits.
+decomposition. Both rely, of course, on the FFT. We will implement one of these
+and test it against the reference implementation.
+
+This is a eight-part series, organized as follows
+
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 
 That's a lot of work! So, without further ado, let's start introducing this
 decomposition!
@@ -67,10 +73,11 @@ snippet[fn:1]
 #+HEADER: :var DATA_DIR=(cdr (assoc "sb-blog-data-dir" org-link-abbrev-alist-local))
 #+BEGIN_SRC ipython :results silent
   import numpy as np
-  import scipy.misc
 
-  u = scipy.misc.imread(DATA_DIR+'hut-648x364.png')
-  scipy.misc.imsave(DATA_DIR+'hut-648x364-fftshift.png', np.fft.fftshift(u))
+  from skimage.io import imread, imsave
+
+  u = imread(DATA_DIR+'hut-648x364.png')
+  imsave(DATA_DIR+'hut-648x364-fftshift.png', np.fft.fftshift(u))
 #+END_SRC
 
 Why would this lack of periodicity be a problem? Well, many image analysis
@@ -88,8 +95,7 @@ code snippet was executed to produce this image.
   a_min, a_max = np.min(a), np.max(a)
   a = 255*(a-a_min)/(a_max-a_min)
 
-  scipy.misc.imsave(DATA_DIR+'hut-648x364-power_spectrum.png',
-                    a.astype(np.uint8))
+  imsave(DATA_DIR+'hut-648x364-power_spectrum.png', a.astype(np.uint8))
 #+END_SRC
 
 #+CAPTION: The power spectrum of the image shown in Figure [[fig:1]].
@@ -116,7 +122,7 @@ images of the same initial image as follows (see figure [[fig:4]])
   u_mirrored[right, bottom] = u
   u_mirrored[left, top] = u
   u_mirrored[right, top] = u
-  scipy.misc.imsave(DATA_DIR+'hut-648x364-mirrored.png', u_mirrored)
+  imsave(DATA_DIR+'hut-648x364-mirrored.png', u_mirrored)
 #+END_SRC
 
 #+CAPTION: Periodization by symmetrization of the image shown in
@@ -130,7 +136,7 @@ figure [[fig:5]]. It is observed that symmetrization does not remove entirely th
 cross at the center of the power spectrum. Worse, “it makes the DFT symmetric
 and real-valued, which can be dramatic if the phase component of the Fourier
 transform has to be analyzed, or if orientation issues are concerned”
-([[https://doi.org/10.1007/s10851-010-0227-1][Moisan, 2011]]). This led Moisan to introduce the /periodic-plus-smooth/
+([[moisan2011:][Moisan, 2011]]). This led Moisan to introduce the /periodic-plus-smooth/
 decomposition.
 
 #+BEGIN_SRC ipython :results silent
@@ -140,8 +146,7 @@ decomposition.
   a_min, a_max = np.min(a), np.max(a)
   a = 255*(a-a_min)/(a_max-a_min)
 
-  scipy.misc.imsave(DATA_DIR+'hut-648x364-mirrored-power_spectrum.png',
-                    a.astype(np.uint8))
+  imsave(DATA_DIR+'hut-648x364-mirrored-power_spectrum.png', a.astype(np.uint8))
 #+END_SRC
 
 #+CAPTION: The power spectrum of the image shown in Figure [[fig:4]].
@@ -153,15 +158,10 @@ decomposition.
 
 In this post, we set the stage for the subsequent instalments of this series,
 arguing that it is sometimes desirable that an image should be periodic. In the
-next instalment of this series, we will define the /periodic-plus-smooth/
-decomposition of Moisan ([[https://doi.org/10.1007/s10851-010-0227-1][2011]]). We will then turn to the implementation of this
+[[sb-blog-02:][next instalment]] of this series, we will define the /periodic-plus-smooth/
+decomposition of Moisan ([[moisan2011:][2011]]). We will then turn to the implementation of this
 decomposition.
 
 [fn:1] In this code snippet, you should not pay attention to the fact that
 =DATA_DIR= has not been defined. I actually used some [[http://orgmode.org/worg/org-contrib/babel/][Org-babel]] tricks to define
 this variable programatically from =emacs-lisp=.
-
-# Local Variables:
-# eval: (sb-blog-init-data-dir)
-# fill-column: 80
-# End:

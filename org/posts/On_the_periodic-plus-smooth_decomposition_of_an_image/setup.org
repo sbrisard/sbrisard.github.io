@@ -1,0 +1,9 @@
+#+LINK: moisan2011  https://doi.org/10.1007/s10851-010-0227-1
+#+LINK: sb-blog-01 ./On_the_periodic-plus-smooth_decomposition_of_an_image-01.org
+#+LINK: sb-blog-02 ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org
+#+LINK: sb-blog-03 ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
+#+LINK: sb-blog-04 ./On_the_periodic-plus-smooth_decomposition_of_an_image-04.org
+#+LINK: sb-blog-05 ./On_the_periodic-plus-smooth_decomposition_of_an_image-05.org
+#+LINK: sb-blog-06 ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org
+#+LINK: sb-blog-07 ./On_the_periodic-plus-smooth_decomposition_of_an_image-07.org
+#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
