@@ -1,0 +1,323 @@
+# -*- coding: utf-8; fill-column: 79 -*-
+#+SETUPFILE: "../include/css-1.org"
+#+SETUPFILE: "../include/mathjax.org"
+#+TITLE: On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan's algorithm
+#+DATE: [2018-02-06 Tue]
+#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
+#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org
+#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-09.org
+#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
+
+In the [[sb-blog-prev:][previous instalment]] of this series, we implemented Moisan's ([[moisan2011:][2011]])
+efficient algorithm to compute the periodic-plus-smooth decomposition of an
+image. This algorithm relies heavily on the discrete Fourier transform, and
+already improves quite a lot over our previous conjugate gradient-based
+implementation. In the present post, we will show that performance of the
+implementation can be slightly improved with very little effort.
+
+* Computing the DFT of the intensity gaps
+
+In the [[sb-blog-prev:][previous instalment]] of this series, we showed that the DFT $\hat s$ of
+the smooth component $s$ of a $m\times n$ image $u$ can be deduced from the DFT
+$\hat v$ of the image $v$ which, according to Moisan ([[moisan2011:][2011]]) “captures the
+intensity gaps of $u$ across its borders”: $v=v^\mathrm h+v^\mathrm v$, with
+
+\begin{equation*}
+v^\mathrm h_{ij}=
+\begin{cases}
+u_{i, n-1}-u_{i, 0} & \text{if }j=0,\\
+u_{i, 0}-u_{i, n-1} & \text{if }j=n-1,\\
+0                   & \text{otherwise},
+\end{cases}
+\quad\text{and}\quad
+v^\mathrm v_{ij}=
+\begin{cases}
+u_{m-1, j}-u_{0, j} & \text{if }i=0,\\
+u_{0, j}-u_{m-1, j} & \text{if }i=m-1,\\
+0                   & \text{otherwise}.
+\end{cases}
+\end{equation*}
+
+In our first implementation of Moisan's algorigthm, we computed $\hat v$ as a
+/two-dimensional/ DFT. While correct and simple to implement, this is
+unnecessarily expensive. Indeed, we readily find that
+
+\begin{equation*}
+\begin{aligned}[b]
+\hat v_{\alpha\beta}^\mathrm h&=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}v_{ij}
+\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta j}n\Bigr)\Bigr]\\
+&=\sum_{i=0}^{m-1}\bigl(u_{i, n-1}-u_{i, 0}\bigr)\Bigl\{
+\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m\Bigr)\Bigr]
+-\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta(n-1)}n\Bigr)\Bigr]
+\Bigr\}\\
+&=\Bigl(1-\exp\frac{2\pi\mathrm i\beta}n\Bigr)
+\sum_{i=0}^{m-1}\bigl(u_{i, n-1}-u_{i, 0}\bigr)
+\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m\Bigr)\Bigr],
+\end{aligned}
+\end{equation*}
+
+and the sum turns out to be the one-dimensional DFT of the
+$\bigl(u_{i, n-1}-u_{i, 0}\bigr)_{i=0,\ldots, m-1}$.
+
+This leads to the following implementation of function =per= (compare with the
+implementation of =_per= in the previous post).
+
+#+BEGIN_SRC ipython :exports none :results silent
+  import inspect
+
+  from moisan2011 import _per, per, rper
+#+END_SRC
+
+#+BEGIN_SRC ipython :exports results :results output code
+  print(inspect.getsource(per))
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC ipython
+def per(u, inverse_dft=False):
+    """Compute the periodic component of the 2D image u.
+
+    This function returns the periodic-plus-smooth decomposition of
+    the 2D array-like u.
+
+    If inverse_dft is True, then the pair (p, s) is returned
+    (p: periodic component; s: smooth component).
+
+    If inverse_dft is False, then the pair (DFT[p], DFT[s]) is
+    returned, where DFT denotes the discrete Fourier transform
+    (with same conventions regarding sign and normalization as in the
+    numpy.fft module).
+
+    This function implements Algorithm 1.
+    """
+    u = np.asarray(u, dtype=np.float64)
+
+    m, n = u.shape
+
+    arg = 2.*np.pi*np.fft.fftfreq(m, 1.)
+    cos_m, sin_m = np.cos(arg), np.sin(arg)
+    one_minus_exp_m = 1.0-cos_m-1j*sin_m
+
+    arg = 2.*np.pi*np.fft.fftfreq(n, 1.)
+    cos_n, sin_n = np.cos(arg), np.sin(arg)
+    one_minus_exp_n = 1.0-cos_n-1j*sin_n
+
+    w1 = u[:, -1]-u[:, 0]
+    w1_dft = np.fft.fft(w1)
+    v_dft = w1_dft[:, None]*one_minus_exp_n[None, :]
+
+    w2 = u[-1, :]-u[0, :]
+    w2_dft = np.fft.fft(w2)
+    v_dft += one_minus_exp_m[:, None]*w2_dft[None, :]
+
+    denom = 2.0*(cos_m[:, None]+cos_n[None, :]-2.0)
+    denom[0, 0] = 1.0
+    s_dft = v_dft/denom
+    s_dft[0, 0] = 0.0
+
+    if inverse_dft:
+        s = np.fft.ifft2(s_dft)
+        return u-s, s
+    else:
+        u_dft = np.fft.fft2(u)
+        return u_dft-s_dft, s_dft
+
+#+END_SRC
+
+We can test the new implementation.
+
+#+HEADER: :var DATA_DIR=(cdr (assoc "sb-blog-data-dir" org-link-abbrev-alist-local))
+#+BEGIN_SRC ipython :results silent
+  import numpy as np
+
+  from skimage.io import imread, imsave
+
+  u = imread(DATA_DIR+'hut-648x364.png')
+  u = u.astype(np.float64)
+
+  p_exp, s_exp = _per(u, inverse_dft=True)
+  p_act, s_act = per(u, inverse_dft=True)
+#+END_SRC
+
+#+BEGIN_SRC ipython :results output
+  print('Error in L2-norm:')
+  print('  - on p: {}'.format(np.linalg.norm(p_act-p_exp)))
+  print('  - on s: {}'.format(np.linalg.norm(s_act-s_exp)))
+  print()
+  print('Maximum absolute error')
+  print('  - on p: {}'.format(np.max(np.abs(p_act-p_exp))))
+  print('  - on s: {}'.format(np.max(np.abs(s_act-s_exp))))
+  print()
+  print('Maximum relative error')
+  print('  - on p: {}'.format(np.max(np.abs(2*(p_act-p_exp)/(p_act+p_exp)))))
+  print('  - on s: {}'.format(np.max(np.abs(2*(s_act-s_exp)/(s_act+s_exp)))))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Error in L2-norm:
+  - on p: 5.787321019913803e-10
+  - on s: 5.787251634981644e-10
+
+Maximum absolute error
+  - on p: 4.325417727292286e-12
+  - on s: 4.325417727292286e-12
+
+Maximum relative error
+  - on p: 8.436547577347072e-11
+  - on s: 6.997816233173698e-08
+#+end_example
+
+Which validates this new implementation. Let us check how much we gained,
+speed-wise.
+
+#+BEGIN_SRC ipython :results output
+  import timeit
+  t1 = timeit.timeit('p, s = _per(u, inverse_dft=True)',
+                     number=100, globals=globals())
+  t2 = timeit.timeit('p, s = per(u, inverse_dft=True)',
+                     number=100, globals=globals())
+  print('Timings:')
+  print('  - _per  : {}'.format(t1))
+  print('  - per   : {}'.format(t2))
+  print('  - ratio : {}'.format(t1/t2))
+#+END_SRC
+
+#+RESULTS:
+: Timings:
+:   - _per  : 4.976198159628511
+:   - per   : 3.7007283342608277
+:   - ratio : 1.3446537303372317
+
+So the new implementation is about 1.3× faster than the old one! Do you think
+we can do better? Wait and see!
+
+* Moisans's algorithm for /real/ images
+
+In our previous implementation, we have overlooked an important fact: $u$ is
+(often) a /real/ image. Its DFT ought to be computed through the
+=numpy.fft.rfft2= function rather than =numpy.fft.fft2=. This what is done
+below.
+
+#+BEGIN_SRC ipython :exports results :results output code
+  print(inspect.getsource(rper))
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC ipython
+def rper(u, inverse_dft=False):
+    """Compute the periodic component of the 2D image u.
+
+    This function returns the periodic-plus-smooth decomposition of
+    the 2D array-like u.
+
+    If inverse_dft is True, then the pair (p, s) is returned
+    (p: periodic component; s: smooth component).
+
+    If inverse_dft is False, then the pair (DFT[p], DFT[s]) is
+    returned, where DFT denotes the discrete Fourier transform
+    (as defined by the numpy.fft.rfft2 function).
+
+    This function implements Algorithm 1.
+    """
+    u = np.asarray(u, dtype=np.float64)
+    m, n = u.shape
+
+    arg = 2.*np.pi*np.fft.fftfreq(m, 1.)
+    cos_m, sin_m = np.cos(arg), np.sin(arg)
+    one_minus_exp_m = 1.0-cos_m-1j*sin_m
+
+    arg = 2.*np.pi*np.fft.rfftfreq(n, 1.)
+    cos_n, sin_n = np.cos(arg), np.sin(arg)
+    one_minus_exp_n = 1.0-cos_n-1j*sin_n
+
+    w1 = u[:, -1]-u[:, 0]
+    w1_dft = np.fft.fft(w1)
+    # Use complex fft because irfft2 needs all modes in the first direction
+    v1_dft = w1_dft[:, None]*one_minus_exp_n[None, :]
+
+    w2 = u[-1, :]-u[0, :]
+    w2_dft = np.fft.rfft(w2)
+    v2_dft = one_minus_exp_m[:, None]*w2_dft[None, :]
+
+    k_dft = 2.0*(cos_m[:, None]+cos_n[None, :]-2.0)
+    k_dft[0, 0] = 1.0
+    s_dft = (v1_dft+v2_dft)/k_dft
+    s_dft[0, 0] = 0.0
+
+    if inverse_dft:
+        s = np.fft.irfft2(s_dft, u.shape)
+        return u-s, s
+    else:
+        u_dft = np.fft.rfft2(u)
+        return u_dft-s_dft, s_dft
+
+#+END_SRC
+
+And we can again test this new implementation
+
+#+BEGIN_SRC ipython :results output
+  p_act, s_act = rper(u, inverse_dft=True)
+
+  print('Error in L2-norm:')
+  print('  - on p: {}'.format(np.linalg.norm(p_act-p_exp)))
+  print('  - on s: {}'.format(np.linalg.norm(s_act-s_exp)))
+  print()
+  print('Maximum absolute error')
+  print('  - on p: {}'.format(np.max(np.abs(p_act-p_exp))))
+  print('  - on s: {}'.format(np.max(np.abs(s_act-s_exp))))
+  print()
+  print('Maximum relative error')
+  print('  - on p: {}'.format(np.max(np.abs(2*(p_act-p_exp)/(p_act+p_exp)))))
+  print('  - on s: {}'.format(np.max(np.abs(2*(s_act-s_exp)/(s_act+s_exp)))))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Error in L2-norm:
+  - on p: 5.790660197300149e-10
+  - on s: 5.790544700525198e-10
+
+Maximum absolute error
+  - on p: 4.22587780435485e-12
+  - on s: 4.226528872610927e-12
+
+Maximum relative error
+  - on p: 8.499207002330137e-11
+  - on s: 7.1707944520634e-08
+#+end_example
+
+Which is again quite satisfactory! Let us time the new implementation.
+
+#+BEGIN_SRC ipython :results output
+  t3 = timeit.timeit('p, s = rper(u, inverse_dft=True)',
+  number=100, globals=globals())
+  print('Timings:')
+  print('  - _per : {}'.format(t1))
+  print('  - per  : {}'.format(t2))
+  print('  - rper : {}'.format(t3))
+  print('Ratios:')
+  print('  - _per/per  : {}'.format(t1/t2))
+  print('  - _per/rper : {}'.format(t1/t3))
+#+END_SRC
+
+#+RESULTS:
+: Timings:
+:   - _per : 4.976198159628511
+:   - per  : 3.7007283342608277
+:   - rper : 2.0860749333071666
+: Ratios:
+:   - _per/per  : 1.3446537303372317
+:   - _per/rper : 2.385435959263207
+
+… and we are now more than 2.3× faster!
+
+* Conclusion
+
+This is nearly the end of the story. We now have good implementation of
+Moisan's algorithm. We have optimized its implementation, but the code did not
+lose in clarity.
+
+In the [[sb-blog-next:][next instalment]] of this series, I will put everything together in a
+python module.
