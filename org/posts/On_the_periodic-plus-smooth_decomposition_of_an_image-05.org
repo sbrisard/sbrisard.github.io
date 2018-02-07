@@ -1,7 +1,7 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
-#+TITLE: On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the crude way
+#+TITLE: On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way
 #+DATE: [2018-01-30 Tue]
 #+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
 #+LINK: sb-blog-part-02 ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org
