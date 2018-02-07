@@ -15,7 +15,7 @@ linear operators. These expressions will then be combined in the next
 instalments to a conjugate gradient algorithm in order to minimize the energy
 of the periodic-plus-smooth decomposition.
 
-This post is the third instalment of an eight-part series:
+This post is the third instalment of a series in {{{sb-blog-num-posts}}} parts:
 
 #+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 

@@ -14,3 +14,4 @@
 #+LINK: sb-blog-06a ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org::%s
 #+LINK: sb-blog-07a ./On_the_periodic-plus-smooth_decomposition_of_an_image-07.org::%s
 #+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
+#+MACRO: sb-blog-num-posts eight

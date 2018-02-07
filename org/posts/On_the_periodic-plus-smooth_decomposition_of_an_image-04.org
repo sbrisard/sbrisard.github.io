@@ -30,7 +30,8 @@ follows. We will first discuss [[#operators][linear operators]] in the =scipy.sp
 sense. Then, we will implement [[#Q1][the $Q_1$ operator]] and [[#Q][the $Q$ operator]].
 Finally, we will [[#testing][test our implementation]].
 
-This post is the fourth instalment of an eight-part series:
+This post is the fourth instalment of a series in {{{sb-blog-num-posts}}}
+parts:
 
 #+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 

@@ -29,7 +29,7 @@ in Fourier space. He proposed two efficient algorithms to compute the
 decomposition. Both rely, of course, on the FFT. We will implement one of these
 and test it against the reference implementation.
 
-This is a eight-part series, organized as follows
+This is a series in {{{sb-blog-num-posts}}} parts, organized as follows:
 
 #+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 

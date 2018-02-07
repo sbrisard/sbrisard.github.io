@@ -15,7 +15,8 @@ case) generates artifacts. In order to reduce these artifacts, Moisan ([[moisan2
 proposed to construct a periodic image that is as close as possible to the
 original image. For reasons that will become clearer in the remainder of this
 post, he called the resulting construction the "periodic-plus-smooth
-decomposition". We will define this decomposition in the remainder of this post, which is the second part in an eight-part series
+decomposition". We will define this decomposition in the remainder of this post,
+which is the second in a series in {{{sb-blog-num-posts}}} parts:
 
 #+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 
