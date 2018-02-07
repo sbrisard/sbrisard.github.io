@@ -4,7 +4,7 @@
 #+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
-#+TITLE: On the periodic-plus-smooth decomposition of an image, part 4: implementation of the linear operators
+#+TITLE: On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators
 #+DATE: [2018-01-22 Mon]
 
 In the [[sb-blog-03:][previous instalment]] of this series, we introduced the linear operators

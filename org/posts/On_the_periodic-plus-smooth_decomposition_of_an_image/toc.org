@@ -1,7 +1,7 @@
   1. [[sb-blog-01:][Introduction]]
   2. [[sb-blog-02:][Defining the decomposition]]
   3. [[sb-blog-03:][The energy as a quadratic form]]
-  4. [[sb-blog-04:][Implementation of the linear operators]]
+  4. [[sb-blog-04:][Implementing the linear operators]]
   5. [[sb-blog-05:][Minimizing the energy, the clumsy way]]
   6. [[sb-blog-06:][Minimizing the energy, the clever way]]
   7. [[sb-blog-07:][Improved implementation of Moisan's algorithm]]
