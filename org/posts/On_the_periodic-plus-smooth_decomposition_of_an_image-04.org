@@ -1,16 +1,13 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+OPTIONS: ':t
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 4: implementation of the linear operators
 #+DATE: [2018-01-22 Mon]
-#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
-#+LINK: sb-blog-second ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org
-#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
-#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-05.org
-#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
-#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
-In the [[sb-blog-prev:][previous instalment]] of this series, we introduced the linear operators
+In the [[sb-blog-03:][previous instalment]] of this series, we introduced the linear operators
 $Q_1$ and $Q$ that allow to define Moisan's ([[moisan2011:][2011]]) periodic-plus-smooth
 decomposition $(p, s)$ of an image $u$ as follows
 
@@ -32,6 +29,10 @@ implementation of these operators. The remainder of this post is organized as
 follows. We will first discuss [[linear_operators][linear operators]] in the =scipy.sparse.linalg=
 sense. Then, we will implement [[Q1_implementation][the $Q_1$ operator]] and [[Q_implementation][the $Q$ operator]].
 Finally, we will [[testing][test our implementation]].
+
+This post is the fourth instalment of an eight-part series:
+
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 
 * Matrix-free linear operators <<linear_operators>>
 
@@ -124,9 +125,10 @@ class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
 
 #+END_SRC
 
+
 * Implementation of the $Q_1$ operator <<Q1_implementation>>
 
-The $Q_1$ operator was defined in the [[sb-blog-prev][previous post]] as the following sum:
+The $Q_1$ operator was defined in the [[sb-blog-03:][previous post]] as the following sum:
 $Q_1=Q_1^\mathrm h+Q_1^\mathrm v$, with
 
 \begin{equation*}
@@ -201,7 +203,7 @@ class OperatorQ1(ImageLinearOperator):
 
 * Implementation of the $Q$ operator <<Q_implementation>>
 
-The $Q$ operator was defined in the [[sb-blog-prev][previous post]] as the following sum:
+The $Q$ operator was defined in the [[sb-blog-03:][previous post]] as the following sum:
 $Q=Q^\mathrm h+Q^\mathrm v+Q^\mathrm m$, with
 
 \begin{align*}
@@ -292,7 +294,7 @@ For any image $v$, we should have
 \langle v, Q\cdot v\rangle=E(v, 0)+E(0, v)+(\operatorname{mean} v)^2,
 \end{equation*}
 
-where the energy $E$ was implemented in [[sb-blog-second:][part 2]] of this series.
+where the energy $E$ was implemented in [[sb-blog-02:][part 2]] of this series.
 
 #+BEGIN_SRC ipython :exports results :results output code
   from test_moisan2011 import img_shapes, test_OperatorQ1, test_OperatorQ
@@ -339,7 +341,7 @@ def test_OperatorQ1(shape):
 
 The above code snippet calls for several remarks
 
-  1. The great [[https://pytest.org/][pytest]] library to write the unit tests: this allows for
+  1. We used the great [[https://pytest.org/][pytest]] library to write the unit tests: this allows for
      parameterized tests.
   2. The seed of the random generator is fixed: this ensures reproducibility.
   3. Non-square images were used: this allows for the detection of some silly
@@ -350,4 +352,4 @@ The above code snippet calls for several remarks
 
 In this post, we have implemented the linear operators $Q_1$ and $Q$. We are
 now in a position to (at last!) compute the periodic-plus-smooth decomposition
-of an image. This will be done in the [[sb-blog-next:][next instalment]] of this series
+of an image. This will be done in the [[sb-blog-05:][next instalment]] of this series
