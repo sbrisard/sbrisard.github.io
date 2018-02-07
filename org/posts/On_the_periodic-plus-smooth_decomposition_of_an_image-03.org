@@ -1,21 +1,23 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+OPTIONS: ':t
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form
 #+DATE: [2018-01-15 Mon]
-#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
-#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org
-#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-04.org
-#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
-#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
-In the [[sb-blog-prev:][previous instalment]] of this series, we introduced the
+In the [[sb-blog-02:][previous instalment]] of this series, we introduced the
 periodic-plus-smooth decomposition of an image as a pair of images which
 minimizes an energy functional. Observing that this energy is a quadratic form,
 the purpose of this post is to derive closed form expressions of the underlying
 linear operators. These expressions will then be combined in the next
 instalments to a conjugate gradient algorithm in order to minimize the energy
 of the periodic-plus-smooth decomposition.
+
+This post is the third instalment of an eight-part series:
+
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 
 In this post, it will be convenient to regard images as vectors. Given two
 $m\times n$ images $u$ and $v$, the scalar product $\langle u, v\rangle$ is
@@ -33,7 +35,7 @@ v=A\cdot u,\quad\text{with}\quad v_{ij}
 
 According to Moisan ([[moisan2011:][2011]]), the total energy $E(p, s)$ of the
 periodic-plus-smooth decomposition of an image $u=p+s$ is defined as the sum
-$E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ (see [[sb-blog-prev:][previous instalment]]), and the
+$E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ (see [[sb-blog-02:][previous instalment]]), and the
 smooth component $s$ is the solution to the following minimization problem
 
 \begin{equation*}
@@ -68,7 +70,7 @@ post. Then, operator $Q$ is derived in the [[operator_Q][second part]] of this p
 * Derivation of the $Q_1$ operator <<operator_Q1>>
 
 The contribution to the total energy of the periodic component $p$ is defined
-by Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous post]])
+by Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-02:][previous post]])
 \begin{equation}
 \label{eq:1}
 E_\mathrm p(p)=2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
@@ -133,7 +135,7 @@ $E_\mathrm p(p)=\langle p, Q_1\cdot p\rangle$.
 * Derivation of the $Q$ operator <<operator_Q>>
 
 The contribution to the total energy of the smooth component $s$ is defined by
-Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-prev:][previous post]])
+Moisan ([[moisan2011:][2011]]) as follows (see also [[sb-blog-02:][previous post]])
 
 \begin{equation}
 \label{eq:5}
@@ -141,8 +143,8 @@ E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 +2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
 \end{equation}
 
-In the present section, all $mxn$ images $v$ will be extended by periodicity as
-follows
+In the present section, all $m\times n$ images $v$ will be extended by
+periodicity as follows
 
 \begin{equation}
 v_{i, -1}=v_{i, n-1}, \quad
@@ -250,5 +252,5 @@ F(v, u)=\langle v, Q\cdot v\rangle-2\langle v, Q_1\cdot u\rangle
 
 where the minimizer of $F$ with respect to its first argument $v$ is the smooth
 component $s$ of $u$ (the periodic component $p$ is then obtained from
-$p=u-s$). In the [[sb-blog-next:][next instalment]] of this series, we will proceed to implement
+$p=u-s$). In the [[sb-blog-04:][next instalment]] of this series, we will proceed to implement
 $Q_1$ and $Q$ in Python. To do so, we will adopt a [[https://en.wikipedia.org/wiki/Matrix-free_methods][matrix-free]] approach.
