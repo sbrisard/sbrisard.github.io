@@ -6,4 +6,11 @@
 #+LINK: sb-blog-05 ./On_the_periodic-plus-smooth_decomposition_of_an_image-05.org
 #+LINK: sb-blog-06 ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org
 #+LINK: sb-blog-07 ./On_the_periodic-plus-smooth_decomposition_of_an_image-07.org
+#+LINK: sb-blog-01a ./On_the_periodic-plus-smooth_decomposition_of_an_image-01.org::%s
+#+LINK: sb-blog-02a ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org::%s
+#+LINK: sb-blog-03a ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org::%s
+#+LINK: sb-blog-04a ./On_the_periodic-plus-smooth_decomposition_of_an_image-04.org::%s
+#+LINK: sb-blog-05a ./On_the_periodic-plus-smooth_decomposition_of_an_image-05.org::%s
+#+LINK: sb-blog-06a ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org::%s
+#+LINK: sb-blog-07a ./On_the_periodic-plus-smooth_decomposition_of_an_image-07.org::%s
 #+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
