@@ -26,15 +26,18 @@ In theory, the linear operators $Q_1$ and $Q$ are matrices. However, for
 $m\times n$ images, these matrices would be unnecessarily large: $mn\times mn$!
 We will therefore adopt here a [[https://en.wikipedia.org/wiki/Matrix-free_methods][matrix-free approach]] for the Python
 implementation of these operators. The remainder of this post is organized as
-follows. We will first discuss [[linear_operators][linear operators]] in the =scipy.sparse.linalg=
-sense. Then, we will implement [[Q1_implementation][the $Q_1$ operator]] and [[Q_implementation][the $Q$ operator]].
-Finally, we will [[testing][test our implementation]].
+follows. We will first discuss [[#operators][linear operators]] in the =scipy.sparse.linalg=
+sense. Then, we will implement [[#Q1][the $Q_1$ operator]] and [[#Q][the $Q$ operator]].
+Finally, we will [[#testing][test our implementation]].
 
 This post is the fourth instalment of an eight-part series:
 
 #+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 
-* Matrix-free linear operators <<linear_operators>>
+* Matrix-free linear operators
+:PROPERTIES:
+:CUSTOM_ID: operators
+:END:
 
 The $Q_1$ and $Q$ linear operators will be implemented as instances of
 =LinearOperator= from the =scipy.sparse.linalg= module (see [[https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.sparse.linalg.LinearOperator.html#scipy.sparse.linalg.LinearOperator][documentation]]).
@@ -125,9 +128,12 @@ class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
 #+END_SRC
 
 
-* Implementation of the $Q_1$ operator <<Q1_implementation>>
+* Implementation of the $Q_1$ operator
+:PROPERTIES:
+:CUSTOM_ID: Q1
+:END:
 
-The $Q_1$ operator was defined in the [[sb-blog-03:][previous post]] as the following sum:
+The $Q_1$ operator was defined in the [[sb-blog-03a:#Q1][previous post]] as the following sum:
 $Q_1=Q_1^\mathrm h+Q_1^\mathrm v$, with
 
 \begin{equation*}
@@ -200,9 +206,12 @@ class OperatorQ1(ImageLinearOperator):
 
 #+END_SRC
 
-* Implementation of the $Q$ operator <<Q_implementation>>
+* Implementation of the $Q$ operator
+:PROPERTIES:
+:CUSTOM_ID: Q
+:END:
 
-The $Q$ operator was defined in the [[sb-blog-03:][previous post]] as the following sum:
+The $Q$ operator was defined in the [[sb-blog-03a:#Q][previous post]] as the following sum:
 $Q=Q^\mathrm h+Q^\mathrm v+Q^\mathrm m$, with
 
 \begin{align*}
@@ -283,7 +292,10 @@ Note that in the above implementation, attention is paid to the definition of
 the kernel, which is of the same =dtype= as the images to which the operator
 is to be applied. This allows for /exact/ computations on integer images.
 
-* Testing the implementation <<testing>>
+* Testing the implementation
+:PROPERTIES:
+:CUSTOM_ID: testing
+:END:
 
 For any image $v$, we should have
 
@@ -293,7 +305,7 @@ For any image $v$, we should have
 \langle v, Q\cdot v\rangle=E(v, 0)+E(0, v)+(\operatorname{mean} v)^2,
 \end{equation*}
 
-where the energy $E$ was implemented in [[sb-blog-02:][part 2]] of this series.
+where the energy $E$ was implemented in [[sb-blog-02a:#implementation][part 2]] of this series.
 
 #+BEGIN_SRC ipython :exports results :results output code
   from test_moisan2011 import img_shapes, test_OperatorQ1, test_OperatorQ
