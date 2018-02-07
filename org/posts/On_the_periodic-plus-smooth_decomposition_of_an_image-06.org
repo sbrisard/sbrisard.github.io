@@ -1,24 +1,21 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+OPTIONS: ':t
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way
 #+DATE: [2018-01-31 Wed]
-#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
-#+LINK: sb-blog-part-02 ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org
-#+LINK: sb-blog-part-03 ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
-#+LINK: sb-blog-part-04 ./On_the_periodic-plus-smooth_decomposition_of_an_image-04.org
-#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-05.org
-#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-07.org
-#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
-#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
-In the [[sb-blog-prev:][previous instalment]] of this series, we computed Moisan's ([[moisan2011:][2011]])
+In the [[sb-blog-05][previous instalment]] of this series, we computed Moisan's ([[moisan2011:][2011]])
 periodic-plus-smooth decomposition of an image by means of the
 [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]].
 This worked like a charm, but was fairly inefficient, owing to the iterative
 nature of the method. Moisan actually showed that the whole decomposition could
 be computed explicitely in Fourier space. This will be discussed in the present
-post.
+post, which is the sixth in a series in {{{sb-blog-num-posts}}} parts:
+
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
 
 Before we proceed, let us recall how the [[https://en.wikipedia.org/wiki/Discrete_Fourier_transform][discrete Fourier transform]] $\hat u$ of
 the $m\times n$ image $u$ is defined
@@ -37,13 +34,16 @@ u_{ij}=\frac1{mn}\sum_{\alpha=0}^{m-1}\sum_{\beta=0}^{n-1}\hat u_{\alpha\beta}
 \end{equation*}
 
 The remainder of this post is organized as follows. We will first introduce
-[[algorithm][Moisan's algorithm]] ([[moisan2011:][2011]]). Then a [[implementation][first implementation]] of this algorithm will
-be proposed. Improved implementations will be discussed in the [[sb-blog-next:][next instalment]]
-of this series.
+[[#algorithm][Moisan's algorithm]] ([[moisan2011:][2011]]). Then a [[#implementation][first implementation]] of this algorithm will
+be proposed and [[#testing][tested]]. Improved implementations will be discussed in the
+[[sb-blog-07][next instalment]] of this series.
 
-* Moisan's algorithm <<algorithm>>
+* Moisan's algorithm
+:PROPERTIES:
+:CUSTOM_ID: algorithm
+:END:
 
-It is recalled (see [[sb-blog-prev:][previous post]]) that the smooth component $s$ of a $m\times
+It is recalled (see [[sb-blog-05][previous post]]) that the smooth component $s$ of a $m\times
 n$ image $u$ is found from the solution to the following linear system
 
 \begin{equation}
@@ -51,8 +51,8 @@ Q\cdot s=Q_1\cdot u,
 \label{eq:1}
 \end{equation}
 
-where $Q$ and $Q_1$ are symmetric, positive linear operators defined in [[sb-blog-part-03:][part 3]]
-of this series ($Q$ is actually positive definite). As observed in [[sb-blog-part-04:][part 4]] of
+where $Q$ and $Q_1$ are symmetric, positive linear operators defined in [[sb-blog-03][part 3]]
+of this series ($Q$ is actually positive definite). As observed in [[sb-blog-04a:#Q][part 4]] of
 this series, operator $Q$ is in fact the sum of the periodic convolution
 operator with the following kernel
 
@@ -89,7 +89,7 @@ of the discrete Fourier transform of the smooth component $s$
 \end{equation}
 
 where we have introduced $v=-\frac12Q_1\cdot u$. Since $\operatorname{mean}s=0$,
-we also have $\hat s_{00}=0$. From the definition of $Q_1$ (see [[sb-blog-part-03:][part 3]] of this
+we also have $\hat s_{00}=0$. From the definition of $Q_1$ (see [[sb-blog-03a:#Q1][part 3]] of this
 series), we have $v=v^\mathrm h+v^\mathrm v$, with
 
 \begin{equation}
@@ -114,12 +114,15 @@ Moisan's algorithm ([[moisan2011:][2011]]) readily follows from this analysis
   1. compute $v$ [use Eq. \eqref{eq:4}],
   2. compute its discrete Fourier transform $\hat v$,
   3. compute $\hat s$ [use Eq. \eqref{eq:3}],
-  4. compute compute its inverse discrete Fourier transform $s$,
+  4. compute its inverse discrete Fourier transform $s$,
   5. compute $p=u-s$.
 
 Of course, the [[https://en.wikipedia.org/wiki/Fast_Fourier_transform][fast Fourier transform]] will be used for steps 2 and 4.
 
-* A first implementation of Moisan's algorithm <<implementation>>
+* A first implementation of Moisan's algorithm
+:PROPERTIES:
+:CUSTOM_ID: implementation
+:END:
 
 Reference implementation of Moisan's algorithm results directly from the above
 analysis.
@@ -236,8 +239,11 @@ We can then readily set $p$ and $s$ to their real parts
 #+END_SRC
 
 * Testing our implementation
+:PROPERTIES:
+:CUSTOM_ID: testing
+:END:
 
-In the [[sb-blog-prev:][previous instalment]] of this series, we computed a reference
+In the [[sb-blog-05][previous instalment]] of this series, we computed a reference
 periodic-plus-smooth decomposition by means of the conjugate gradient
 method. Let's do that again.
 
@@ -297,6 +303,6 @@ periodic-plus-smooth decomposition!
 
 In the present post, we have implemented Moisans's algorithm ([[moisan2011:][2011]]) for
 computing the periodic-plus-smooth decomposition of an image. This algorithm is
-much faster than our [[sb-blog-prev:][previous]] implementation, relying on the conjugate gradient
-method. We will show in the [[sb-blog-next:][next instalment]] of this series that we can do
+much faster than our [[sb-blog-05:][previous]] implementation, relying on the conjugate gradient
+method. We will show in the [[sb-blog-07][next instalment]] of this series that we can do
 slightly better, though.
