@@ -44,8 +44,7 @@ enough to perform fairly complex linear algebra operations. In particular,
 solving linear systems that involve $Q_1$ and $Q$ can then be done by means of
 [[https://en.wikipedia.org/wiki/Iterative_method#Linear_systems][iterative linear solvers]], such as the [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]]. Interesting
 references on this topic are the book by Y. Saad: [[https://doi.org/10.1137/1.9780898718003][Iterative Methods for Sparse
-Linear Systems]] and the book by Barrett /et al./: [[http://epubs.siam.org/doi/book/10.1137/1.9781611971538][Templates for the Solution of
-Linear Systems: Building Blocks for Iterative Methods]] (also freely available
+Linear Systems]] and the book by Barrett /et al./: [[http://epubs.siam.org/doi/book/10.1137/1.9781611971538][Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods]] (also freely available
 [[http://www.netlib.org/templates/][here]]).
 
 It should be noted that instances of =LinearOperator= (in the Scipy sense)
