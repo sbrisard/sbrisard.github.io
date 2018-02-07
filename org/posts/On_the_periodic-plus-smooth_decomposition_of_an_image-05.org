@@ -1,24 +1,25 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+OPTIONS: ':t
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way
 #+DATE: [2018-01-30 Tue]
-#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
-#+LINK: sb-blog-part-02 ./On_the_periodic-plus-smooth_decomposition_of_an_image-02.org
-#+LINK: sb-blog-part-03 ./On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
-#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-04.org
-#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org
-#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
-#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
 In this post, we will compute Moisan's ([[moisan2011:][2011]]) periodic-plus-smooth
 decomposition of an image by direct minimization of the energy introduced in
-[[sb-blog-part-02:][part 2]] of this series. More precisely, $u$ being a $m\times n$ image, we will
-minimize the function $F(v, u)$ over the space of $m\times n$ images $v$. The
-minimizer, $s$, is the smooth component of $u$, while its complement $p=u-s$ is
-the periodic component of $u$. We showed in [[sb-blog-part-03:][part 3]] that $F$ was in fact a
-quadratic form, and expressed the underlying linear operators, which were
-subsequently implemented in [[sb-blog-prev:][part 4]]. It is recalled (see [[sb-blog-part-03:][part 3]]) that
+the [[sb-blog-02][second instalment]] of this series. More precisely, $u$ being a $m\times n$
+image, we will minimize the function $F(v, u)$ over the space of $m\times n$
+images $v$. The minimizer, $s$, is the smooth component of $u$, while its
+complement $p=u-s$ is the periodic component of $u$. This post is the fifth
+instalment of a series in {{{sb-blog-num-posts}}} parts:
+
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
+
+We showed in the [[sb-blog-03][part 3]] that $F$ was in fact a quadratic form, and expressed
+the underlying linear operators, which were subsequently implemented in
+[[sb-blog-04][part 4]]. It is recalled (see [[sb-blog-03][part 3]]) that
 
 \begin{equation*}
 F(v, u)=\langle v, Q\cdot v\rangle-2\langle v, Q_1\cdot u\rangle
@@ -33,7 +34,7 @@ can be computed by means of the [[https://en.wikipedia.org/wiki/Conjugate_gradie
 below.
 
 Let us start by loading up some modules and the input image to be periodized
-(see Fig. [[fig:1]]).
+(see Fig. [[fig01]]).
 
 #+HEADER: :var DATA_DIR=(cdr (assoc "sb-blog-data-dir" org-link-abbrev-alist-local))
 #+BEGIN_SRC ipython :results silent
@@ -47,12 +48,12 @@ Let us start by loading up some modules and the input image to be periodized
 #+END_SRC
 
 #+CAPTION: The initial image to be periodized.
-#+NAME: fig:1
+#+NAME: fig01
 #+ATTR_HTML: :width 80%
 [[sb-blog-data-dir:hut-648x364.png]]
 
 We then create the operators $Q_1$ and $Q$ that were implemented in the
-[[sb-blog-prev:][previous instalment]] of this series.
+[[sb-blog-04][previous instalment]] of this series.
 
 #+BEGIN_SRC ipython :exports none :results none
   from moisan2011 import OperatorQ1, OperatorQ
@@ -104,12 +105,12 @@ We can now save the results (for future reference).
 #+END_SRC
 
 Again, periodization is best observed by swapping the quadrants (see
-Fig. [[fig:2]]).
+Fig. [[fig02]]).
 
-#+CAPTION: The periodic component of the initial image shown in Fig. [[fig:1]],
+#+CAPTION: The periodic component of the initial image shown in Fig. [[fig01]],
 #+CAPTION: resulting from conjugate gradient minimization of
 #+CAPTION: [[moisan2011:][Moisan]]'s energy.
-#+NAME: fig:2
+#+NAME: fig02
 #+ATTR_HTML: :width 80%
 [[sb-blog-data-dir:hut-648x364-periodic-cg-fftshift.png]]
 
@@ -117,7 +118,7 @@ Et voilà…
 
 In this fairly quick post, we derived a reference periodic-plus-smooth
 decomposition of a specific image. The conjugate gradient iterations are highly
-inefficient, and we will show in the [[sb-blog-next:][next instalment]] of this series that a very
+inefficient, and we will show in the [[sb-blog-06][next instalment]] of this series that a very
 efficient alternative, based on the fast Fourier transform, was proposed by
 Moisan ([[moisan2011:][2011]]). The decomposition that we obtained in the present post will then
 be used as a reference for testing our implementation of Moisan's algorithm.
