@@ -1,27 +1,29 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+OPTIONS: ':t
+#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan's algorithm
 #+DATE: [2018-02-06 Tue]
-#+LINK: moisan2011   https://doi.org/10.1007/s10851-010-0227-1
-#+LINK: sb-blog-prev ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org
-#+LINK: sb-blog-next ./On_the_periodic-plus-smooth_decomposition_of_an_image-09.org
-#+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
-#+PROPERTY: header-args:ipython :session :eval no-export :exports both
 
-In the [[sb-blog-prev:][previous instalment]] of this series, we implemented Moisan's ([[moisan2011:][2011]])
+In the [[sb-blog-06][previous instalment]] of this series, we implemented Moisan's ([[moisan2011:][2011]])
 efficient algorithm to compute the periodic-plus-smooth decomposition of an
 image. This algorithm relies heavily on the discrete Fourier transform, and
 already improves quite a lot over our previous conjugate gradient-based
 implementation. In the present post, we will show that performance of the
-implementation can be slightly improved with very little effort.
+implementation can be slightly improved with very little effort. This post is
+the seventh in a series in {{{sb-blog-num-posts}}} parts:
+
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
+
 
 * Computing the DFT of the intensity gaps
 
-In the [[sb-blog-prev:][previous instalment]] of this series, we showed that the DFT $\hat s$ of
+In the [[sb-blog-06a:#algorithm][previous instalment]] of this series, we showed that the DFT $\hat s$ of
 the smooth component $s$ of a $m\times n$ image $u$ can be deduced from the DFT
-$\hat v$ of the image $v$ which, according to Moisan ([[moisan2011:][2011]]) “captures the
-intensity gaps of $u$ across its borders”: $v=v^\mathrm h+v^\mathrm v$, with
+$\hat v$ of the image $v$ which, according to Moisan ([[moisan2011:][2011]]) "captures the
+intensity gaps of $u$ across its borders": $v=v^\mathrm h+v^\mathrm v$, with
 
 \begin{equation*}
 v^\mathrm h_{ij}=
@@ -61,7 +63,7 @@ and the sum turns out to be the one-dimensional DFT of the
 $\bigl(u_{i, n-1}-u_{i, 0}\bigr)_{i=0,\ldots, m-1}$.
 
 This leads to the following implementation of function =per= (compare with the
-implementation of =_per= in the previous post).
+implementation of =_per= in the [[sb-blog-06a:#implementation][previous post]]).
 
 #+BEGIN_SRC ipython :exports none :results silent
   import inspect
@@ -197,8 +199,8 @@ we can do better? Wait and see!
 
 In our previous implementation, we have overlooked an important fact: $u$ is
 (often) a /real/ image. Its DFT ought to be computed through the
-=numpy.fft.rfft2= function rather than =numpy.fft.fft2=. This what is done
-below.
+=numpy.fft.rfft2= function ([[https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.rfft2.html#numpy.fft.rfft2][documentation]]) rather than =numpy.fft.fft2=
+([[https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fft2.html#numpy.fft.fft2][documentation]]). This is what is done below.
 
 #+BEGIN_SRC ipython :exports results :results output code
   print(inspect.getsource(rper))
@@ -315,9 +317,9 @@ Which is again quite satisfactory! Let us time the new implementation.
 
 * Conclusion
 
-This is nearly the end of the story. We now have good implementation of
+This is nearly the end of the story. We now have a good implementation of
 Moisan's algorithm. We have optimized its implementation, but the code did not
 lose in clarity.
 
-In the [[sb-blog-next:][next instalment]] of this series, I will put everything together in a
+In the next instalment of this series, I will put everything together in a
 python module.
