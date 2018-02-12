@@ -4,6 +4,23 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
+      <title>On the periodic-plus-smooth decomposition of an image, part 1: introduction</title>
+      <link>http://sbrisard.github.io/posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.html</link>
+      <guid>posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.html</guid>
+      <pubDate>Mon, 12 Feb 2018</pubDate>
+      <description>
+        In this new series, we will explore the so-called
+        periodic-plus-smooth decomposition of an image, introduced by
+        Moisan in 2011. This series is largely based on Moisan's paper
+        (https://doi.org/10.1007/s10851-010-0227-1). Besides
+        introducing a quite smart technique (that I do use for real
+        materials science applications), this series will be an
+        opportunity to discuss an important topic: how to test the
+        implementation of an algorithm, and be confident that the test
+        actually validates the implementation.
+      </description>
+    </item>
+    <item>
       <title>Announcing the defense of my “Habilitation à Diriger des Recherches”</title>
       <link>http://sbrisard.github.io/posts/20171117-Announcing_the_defense_of_my_habilitation.html</link>
       <guid>posts/20171117-Announcing_the_defense_of_my_habilitation.html</guid>
