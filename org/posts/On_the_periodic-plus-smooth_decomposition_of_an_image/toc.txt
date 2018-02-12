@@ -5,4 +5,5 @@
   5. [[sb-blog-05:][Minimizing the energy, the clumsy way]]
   6. [[sb-blog-06:][Minimizing the energy, the clever way]]
   7. [[sb-blog-07:][Improved implementation of Moisan's algorithm]]
-  8. The moisan2011 module
+
+The code discussed in this series is available as a Python module on [[https://github.com/sbrisard/moisan2011][GitHub]].
