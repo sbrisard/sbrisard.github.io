@@ -1,7 +1,7 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
-#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.txt"
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators
@@ -33,7 +33,7 @@ Finally, we will [[#testing][test our implementation]].
 This post is the fourth instalment of a series in {{{sb-blog-num-posts}}}
 parts:
 
-#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.txt
 
 * Matrix-free linear operators
 :PROPERTIES:

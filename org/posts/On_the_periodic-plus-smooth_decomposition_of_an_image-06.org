@@ -1,7 +1,7 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
-#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.txt"
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way
@@ -15,7 +15,7 @@ nature of the method. Moisan actually showed that the whole decomposition could
 be computed explicitely in Fourier space. This will be discussed in the present
 post, which is the sixth in a series in {{{sb-blog-num-posts}}} parts:
 
-#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.txt
 
 Before we proceed, let us recall how the [[https://en.wikipedia.org/wiki/Discrete_Fourier_transform][discrete Fourier transform]] $\hat u$ of
 the $m\times n$ image $u$ is defined

@@ -1,7 +1,7 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
-#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.txt"
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form
@@ -17,7 +17,7 @@ of the periodic-plus-smooth decomposition.
 
 This post is the third instalment of a series in {{{sb-blog-num-posts}}} parts:
 
-#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.txt
 
 In this post, it will be convenient to regard images as vectors. Given two
 $m\times n$ images $u$ and $v$, the scalar product $\langle u, v\rangle$ is

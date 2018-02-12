@@ -1,7 +1,7 @@
 # -*- coding: utf-8; fill-column: 80 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
-#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.txt"
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition
@@ -18,7 +18,7 @@ post, he called the resulting construction the "periodic-plus-smooth
 decomposition". We will define this decomposition in the remainder of this post,
 which is the second in a series in {{{sb-blog-num-posts}}} parts:
 
-#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.txt
 
 As an appetizer, Figure [[fig:1]] shows the original image (left) and its periodic
 (middle) and smooth components (right). Gray levels of the smooth component have

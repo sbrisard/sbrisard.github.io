@@ -1,7 +1,7 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
-#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.txt"
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan's algorithm
@@ -15,8 +15,7 @@ implementation. In the present post, we will show that performance of the
 implementation can be slightly improved with very little effort. This post is
 the seventh in a series in {{{sb-blog-num-posts}}} parts:
 
-#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
-
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.txt
 
 * Computing the DFT of the intensity gaps
 

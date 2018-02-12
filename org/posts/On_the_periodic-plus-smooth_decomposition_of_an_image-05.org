@@ -1,7 +1,7 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
 #+SETUPFILE: "../include/mathjax.org"
-#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.txt"
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way
@@ -15,7 +15,7 @@ images $v$. The minimizer, $s$, is the smooth component of $u$, while its
 complement $p=u-s$ is the periodic component of $u$. This post is the fifth
 instalment of a series in {{{sb-blog-num-posts}}} parts:
 
-#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.txt
 
 We showed in the [[sb-blog-03][part 3]] that $F$ was in fact a quadratic form, and expressed
 the underlying linear operators, which were subsequently implemented in
