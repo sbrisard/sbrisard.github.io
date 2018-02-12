@@ -5,6 +5,17 @@
 
 You've reached the blog of Sébastien Brisard (follow the [[file:./pages/about.org][About me]] link for a brief CV). My most recent posts are listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] page. These posts frequently refer to work published by myself or others; the full bibliographic references are provided in the [[file:./pages/references.org][References]] page.
 
+* [[file:./posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.org][2018-02-12 – On the periodic-plus-smooth decomposition of an image, part 1: introduction]]
+
+In this new series, we will explore the so-called /periodic-plus-smooth/
+decomposition of an image, introduced by Moisan in 2011. This series is largely
+based on Moisan's paper, called [[https://doi.org/10.1007/s10851-010-0227-1][Periodic plus Smooth Image Decomposition]] (the
+author's version can be found on [[https://hal.archives-ouvertes.fr/hal-00388020][HAL]]). Besides introducing a quite smart
+technique (that I do use for real materials science applications), this series
+will be an opportunity to discuss an important topic: how to test the
+implementation of an algorithm, and be confident that the test actually
+validates the implementation.
+
 * [[file:./posts/20171117-Announcing_the_defense_of_my_habilitation.org][2017-11-17 – Announcing the defense of my “Habilitation à Diriger des Recherches”]]
 
 On monday 20^th, november 2017 (at 13:30), I will be defending my

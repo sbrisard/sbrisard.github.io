@@ -1,10 +1,10 @@
 # -*- coding: utf-8; fill-column: 79 -*-
 #+SETUPFILE: "../include/css-1.org"
-#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.org"
+#+SETUPFILE: "./On_the_periodic-plus-smooth_decomposition_of_an_image/setup.txt"
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+OPTIONS: ':t
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 1: introduction
-#+DATE: [2017-09-23 Sat]
+#+DATE: [2018-02-12 Mon]
 
 In this new series, we will explore the so-called /periodic-plus-smooth/
 decomposition of an image, introduced by Moisan in 2011. This series is largely
@@ -31,7 +31,7 @@ and test it against the reference implementation.
 
 This is a series in {{{sb-blog-num-posts}}} parts, organized as follows:
 
-#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.org
+#+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.txt
 
 That's a lot of work! So, without further ado, let's start introducing this
 decomposition!
