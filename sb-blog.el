@@ -115,8 +115,10 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 (defun sb-blog-link-home (level)
   (sb-blog-rel-link "index.html" "Home" (sb-blog-fa "home") level))
 
-(defun sb-blog-link-about (level)
-  (sb-blog-rel-link "pages/about.html" "About me" (sb-blog-fa "user") level))
+(defvar sb-blog-link-about
+  (sb-blog-link "https://cv.archives-ouvertes.fr/sbrisard"
+                "About me"
+                (sb-blog-fa "user")))
 
 (defun sb-blog-link-references (level)
   (sb-blog-rel-link "pages/references.html" "References" (sb-blog-fa "book")
@@ -174,7 +176,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                                level)
             "</span>\n"
             (sb-blog-unordered-list `(,(sb-blog-link-home level)
-                                      ,(sb-blog-link-about level)
+                                      ,sb-blog-link-about
                                       ,(sb-blog-link-references level)
                                       ,(sb-blog-link-archives level)
                                       ,sb-blog-link-github
