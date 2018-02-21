@@ -1,4 +1,5 @@
 # -*- coding: utf-8; fill-column: 79 -*-
+#+OPTIONS: ':t
 #+SETUPFILE: ./include/css-0.org
 #+BIND: sb-blog-comments nil
 #+TITLE: Welcome!
@@ -9,6 +10,18 @@ listed below. A full list of posts can be found in the [[file:./posts/archives.o
 class="fa fa-archive"></span>@@ page. These posts frequently refer to work
 published by myself or others; the full bibliographic references are provided
 in the [[file:./pages/references.org][References]] @@html:<span class="fa fa-book"></span>@@ page.
+
+* [[file:posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.org][2018-02-19 – On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition]]
+
+In the [[file:posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.org][previous instalment]] of this series, we discussed the need for periodic
+images. Although not all images are periodic, some image analysis techniques
+are best performed in Fourier space (using the fast Fourier
+transform). Applying Fourier-based techniques to images that are /not/ periodic
+(as is often the case) generates artifacts. In order to reduce these artifacts,
+Moisan ([[https://doi.org/10.1007/s10851-010-0227-1][2011]]) proposed to construct a periodic image that is as close as
+possible to the original image. For reasons that will become clearer in the
+remainder of this post, he called the resulting construction the
+"periodic-plus-smooth decomposition".
 
 * [[file:./posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.org][2018-02-12 – On the periodic-plus-smooth decomposition of an image, part 1: introduction]]
 

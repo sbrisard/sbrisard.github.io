@@ -4,6 +4,25 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
+      <title>On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition</title>
+      <link>http://sbrisard.github.io/posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.html</link>
+      <guid>posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.html</guid>
+      <pubDate>Mon, 19 Feb 2018</pubDate>
+      <description>
+        In the previous instalment of this series, we discussed the need for
+        periodic images. Although not all images are periodic, some image
+        analysis techniques are best performed in Fourier space (using the fast
+        Fourier transform). Applying Fourier-based techniques to images that
+        are not periodic (as is often the case) generates artifacts. In order
+        to reduce these artifacts, Moisan
+        (https://doi.org/10.1007/s10851-010-0227-1) proposed to construct a
+        periodic image that is as close as possible to the original image. For
+        reasons that will become clearer in the remainder of this post, he
+        called the resulting construction the "periodic-plus-smooth
+        decomposition".
+      </description>
+    </item>
+    <item>
       <title>On the periodic-plus-smooth decomposition of an image, part 1: introduction</title>
       <link>http://sbrisard.github.io/posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.html</link>
       <guid>posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.html</guid>

@@ -5,7 +5,7 @@
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition
-#+DATE: [2017-10-02 Mon]
+#+DATE: [2018-02-19 Mon]
 
 In the [[sb-blog-01:][previous instalment]] of this series, we discussed the need for periodic
 images. Although not all images are periodic, some image analysis techniques are
@@ -165,7 +165,7 @@ E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 :END:
 
 Implementation of the total energy $E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ is
-fairly trivial (note the use of the =broadcast_arrays=).
+fairly trivial (note the use of the =broadcast_arrays= function).
 
 #+BEGIN_SRC python :eval no-export :exports results :results output code
   import inspect
