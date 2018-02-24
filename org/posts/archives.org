@@ -2,6 +2,7 @@
 #+SETUPFILE: "../include/css-1.org"
 #+BIND: sb-blog-comments nil
 
+   + [[file:20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.org][2018-02-26 – On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form]]
    + [[file:20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.org][2018-02-19 – On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition]]
    + [[file:20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.org][2018-02-12 – On the periodic-plus-smooth decomposition of an image, part 1: introduction]]
    + [[file:./20171117-Announcing_the_defense_of_my_habilitation.org][2017-11-17 – Announcing the defense of my “Habilitation à Diriger des Recherches”]]

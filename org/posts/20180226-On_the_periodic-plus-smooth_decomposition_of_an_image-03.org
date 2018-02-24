@@ -5,7 +5,7 @@
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form
-#+DATE: [2018-01-15 Mon]
+#+DATE: [2018-02-26 Mon]
 
 In the [[sb-blog-02:][previous instalment]] of this series, we introduced the
 periodic-plus-smooth decomposition of an image as a pair of images which

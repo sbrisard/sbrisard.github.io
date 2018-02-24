@@ -11,6 +11,16 @@ class="fa fa-archive"></span>@@ page. These posts frequently refer to work
 published by myself or others; the full bibliographic references are provided
 in the [[file:./pages/references.org][References]] @@html:<span class="fa fa-book"></span>@@ page.
 
+* [[file:posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.org][2018-02-26 – On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form]]
+
+In the [[file:posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.org][previous instalment]] of this series, we introduced the
+periodic-plus-smooth decomposition of an image as a pair of images which
+minimizes an energy functional. Observing that this energy is a quadratic form,
+the purpose of this post is to derive closed form expressions of the underlying
+linear operators. These expressions will then be combined in the next
+instalments to a conjugate gradient algorithm in order to minimize the energy
+of the periodic-plus-smooth decomposition.
+
 * [[file:posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.org][2018-02-19 – On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition]]
 
 In the [[file:posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.org][previous instalment]] of this series, we discussed the need for periodic
