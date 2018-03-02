@@ -4,6 +4,20 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
+      <title>On the periodic-plus-smooth decomposition of an image, part  4: implementing the linear operators</title>
+      <link>http://sbrisard.github.io/posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.html</link>
+      <guid>posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.html</guid>
+      <pubDate>Mon, 05 Mar 2018</pubDate>
+      <description>
+        In the previous instalment of this series, we introduced the linear
+        operators Q₁ and Q that allow to define Moisan's (2011)
+        periodic-plus-smooth decomposition. In theory, the linear operators Q₁
+        and Q are matrices. However, for m×n images, these matrices would be
+        unnecessarily large: mn×mn!  We will therefore adopt here a matrix-free
+        approach for the Python implementation of these operators.
+      </description>
+    </item>
+    <item>
       <title>On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form</title>
       <link>http://sbrisard.github.io/posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html</link>
       <guid>posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html</guid>

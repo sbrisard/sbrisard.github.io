@@ -11,6 +11,14 @@ class="fa fa-archive"></span>@@ page. These posts frequently refer to work
 published by myself or others; the full bibliographic references are provided
 in the [[file:./pages/references.org][References]] @@html:<span class="fa fa-book"></span>@@ page.
 
+* [[file:posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.org][2018-03-05 – On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators]]
+
+In the [[file:posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.org][previous instalment]] of this series, we introduced the linear operators Q₁
+and Q that allow to define Moisan's ([[https://doi.org/10.1007/s10851-010-0227-1][2011]]) periodic-plus-smooth decomposition.
+In theory, the linear operators Q₁ and Q are matrices. However, for m×n images,
+these matrices would be unnecessarily large: mn×mn!  We will therefore adopt
+here a [[https://en.wikipedia.org/wiki/Matrix-free_methods][matrix-free approach]] for the Python implementation of these operators.
+
 * [[file:posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.org][2018-02-26 – On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form]]
 
 In the [[file:posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.org][previous instalment]] of this series, we introduced the

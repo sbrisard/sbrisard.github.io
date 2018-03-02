@@ -5,7 +5,7 @@
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators
-#+DATE: [2018-01-22 Mon]
+#+DATE: [2018-03-05 Mon]
 
 In the [[sb-blog-03:][previous instalment]] of this series, we introduced the linear operators
 $Q_1$ and $Q$ that allow to define Moisan's ([[moisan2011:][2011]]) periodic-plus-smooth
@@ -105,7 +105,7 @@ class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
         self.img_shape = img_shape
         n = np.product(self.img_shape)
         shape = (n, n)
-        super().__init__(dtype, shape)
+        super(ImageLinearOperator, self).__init__(dtype, shape)
 
     def _matvec(self, x):
         y = np.zeros_like(x)
@@ -127,7 +127,6 @@ class ImageLinearOperator(scipy.sparse.linalg.LinearOperator):
         raise NotImplementedError()
 
 #+END_SRC
-
 
 * Implementation of the $Q_1$ operator
 :PROPERTIES:
@@ -186,7 +185,7 @@ class OperatorQ1(ImageLinearOperator):
     passed to the initializer), assuming C-ordering.
     """
     def __init__(self, img_shape, dtype=np.float64):
-        super().__init__(img_shape, dtype)
+        super(OperatorQ1, self).__init__(img_shape, dtype)
 
     def _apply(self, x, y=None):
         if y is None:
@@ -272,7 +271,7 @@ class OperatorQ(ImageLinearOperator):
     to the initializer), assuming C-ordering.
     """
     def __init__(self, img_shape, dtype=np.float64):
-        super().__init__(img_shape, dtype)
+        super(OperatorQ, self).__init__(img_shape, dtype)
         self.kernel = np.array([[0, -2, 0],
                                 [-2, 8, -2],
                                 [0, -2, 0]], dtype=dtype)
@@ -328,25 +327,25 @@ def img_shapes():
 @pytest.mark.parametrize('shape', list(img_shapes()))
 def test_OperatorQ(shape):
     np.random.seed(20180125)
-    q = OperatorQ(shape, dtype=np.int64)
+    q = moisan2011.OperatorQ(shape, dtype=np.int64)
     # Force non-zero mean
     u1 = (np.random.randint(-128, 128)
           + np.random.randint(-128, 128, size=q.shape[0:1], dtype=np.int64))
     u1[0] -= np.sum(u1) % u1.shape[0]
     u2 = u1.reshape(shape)
-    expected = energy(u2, 0)+energy(0, u2)
-    actual = np.dot(q@u1, u1)
+    expected = moisan2011.energy(u2, 0)+moisan2011.energy(0, u2)
+    actual = np.dot(q.matvec(u1), u1)
     assert_array_equal(actual, expected)
 
 
 @pytest.mark.parametrize('shape', list(img_shapes()))
 def test_OperatorQ1(shape):
     np.random.seed(20180125)
-    q = OperatorQ1(shape, dtype=np.int64)
+    q = moisan2011.OperatorQ1(shape, dtype=np.int64)
     p1 = np.random.randint(-128, 128, size=(q.shape[0],), dtype=np.int64)
     p2 = p1.reshape(shape)
-    expected = energy(p2, 0)
-    actual = np.dot(q@p1, p1)
+    expected = moisan2011.energy(p2, 0)
+    actual = np.dot(q.matvec(p1), p1)
     assert_array_equal(actual, expected)
 
 #+END_SRC
