@@ -11,6 +11,15 @@ class="fa fa-archive"></span>@@ page. These posts frequently refer to work
 published by myself or others; the full bibliographic references are provided
 in the [[file:./pages/references.org][References]] @@html:<span class="fa fa-book"></span>@@ page.
 
+* [[file:posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.org][2018-03-12 – On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way]]
+
+In this post, we will compute Moisan's ([[https://doi.org/10.1007/s10851-010-0227-1][2011]]) periodic-plus-smooth
+decomposition of an image by direct minimization of the energy introduced in the
+[[file:posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.org][second instalment]] of this series. More precisely, u being a m×n image, we will
+minimize the function F(v, u) over the space of m×n images v. The minimizer, s,
+is the smooth component of u, while its complement p=u-s is the periodic
+component of u.
+
 * [[file:posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.org][2018-03-05 – On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators]]
 
 In the [[file:posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.org][previous instalment]] of this series, we introduced the linear operators Q₁

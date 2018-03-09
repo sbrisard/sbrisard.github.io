@@ -5,7 +5,7 @@
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way
-#+DATE: [2018-01-30 Tue]
+#+DATE: [2018-03-12 Mon]
 
 In this post, we will compute Moisan's ([[moisan2011:][2011]]) periodic-plus-smooth
 decomposition of an image by direct minimization of the energy introduced in
@@ -43,7 +43,7 @@ Let us start by loading up some modules and the input image to be periodized
   from scipy.sparse.linalg import cg
   from skimage.io import imread, imsave
 
-  u = skimage.io.imread(DATA_DIR+'hut-648x364.png')
+  u = imread(DATA_DIR+'hut-648x364.png')
   u = u.astype(np.float64)
 #+END_SRC
 

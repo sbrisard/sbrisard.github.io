@@ -4,7 +4,22 @@
     <title>Sébastien Brisard's blog</title>
     <link>http://sbrisard.github.io/</link>
     <item>
-      <title>On the periodic-plus-smooth decomposition of an image, part  4: implementing the linear operators</title>
+      <title>On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way</title>
+      <link>http://sbrisard.github.io/posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html</link>
+      <guid>posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html</guid>
+      <pubDate>Mon, 12 Mar 2018</pubDate>
+      <description>
+        In this post, we will compute Moisan's (2011)
+        periodic-plus-smooth decomposition of an image by direct
+        minimization of the energy introduced in the second instalment
+        of this series. More precisely, u being a m×n image, we will
+        minimize the function F(v, u) over the space of m×n images
+        v. The minimizer, s, is the smooth component of u, while its
+        complement p=u-s is the periodic component of u.
+      </description>
+    </item>
+    <item>
+      <title>On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators</title>
       <link>http://sbrisard.github.io/posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.html</link>
       <guid>posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.html</guid>
       <pubDate>Mon, 05 Mar 2018</pubDate>
