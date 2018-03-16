@@ -11,6 +11,15 @@ class="fa fa-archive"></span>@@ page. These posts frequently refer to work
 published by myself or others; the full bibliographic references are provided
 in the [[file:./pages/references.org][References]] @@html:<span class="fa fa-book"></span>@@ page.
 
+* [[file:posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.org][2018-03-19 – On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way]]
+
+In the [[file:posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.org][previous instalment]] of this series, we computed Moisan's ([[https://doi.org/10.1007/s10851-010-0227-1][2011]])
+periodic-plus-smooth decomposition of an image by means of the
+[[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]].
+This worked like a charm, but was fairly inefficient, owing to the iterative
+nature of the method. Moisan actually showed that the whole decomposition could
+be computed explicitly in Fourier space.
+
 * [[file:posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.org][2018-03-12 – On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way]]
 
 In this post, we will compute Moisan's ([[https://doi.org/10.1007/s10851-010-0227-1][2011]]) periodic-plus-smooth

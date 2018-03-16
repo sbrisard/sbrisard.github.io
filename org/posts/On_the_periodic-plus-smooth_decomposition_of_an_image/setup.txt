@@ -4,14 +4,14 @@
 #+LINK: sb-blog-03 ./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.org
 #+LINK: sb-blog-04 ./20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.org
 #+LINK: sb-blog-05 ./20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.org
-#+LINK: sb-blog-06 ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org
+#+LINK: sb-blog-06 ./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.org
 #+LINK: sb-blog-07 ./On_the_periodic-plus-smooth_decomposition_of_an_image-07.org
 #+LINK: sb-blog-01a ./20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.org::%s
 #+LINK: sb-blog-02a ./20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.org::%s
 #+LINK: sb-blog-03a ./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.org::%s
 #+LINK: sb-blog-04a ./20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.org::%s
 #+LINK: sb-blog-05a ./20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.org::%s
-#+LINK: sb-blog-06a ./On_the_periodic-plus-smooth_decomposition_of_an_image-06.org::%s
+#+LINK: sb-blog-06a ./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.org::%s
 #+LINK: sb-blog-07a ./On_the_periodic-plus-smooth_decomposition_of_an_image-07.org::%s
 #+LINK: sb-blog-data-dir ./On_the_periodic-plus-smooth_decomposition_of_an_image/
 #+MACRO: sb-blog-num-posts seven

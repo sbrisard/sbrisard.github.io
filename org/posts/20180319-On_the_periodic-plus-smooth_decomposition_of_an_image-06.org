@@ -5,14 +5,14 @@
 #+OPTIONS: ':t
 #+PROPERTY: header-args:ipython :session :eval no-export :exports both
 #+TITLE: On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way
-#+DATE: [2018-01-31 Wed]
+#+DATE: [2018-03-19 Mon]
 
 In the [[sb-blog-05][previous instalment]] of this series, we computed Moisan's ([[moisan2011:][2011]])
 periodic-plus-smooth decomposition of an image by means of the
 [[https://en.wikipedia.org/wiki/Conjugate_gradient_method][conjugate gradient method]].
 This worked like a charm, but was fairly inefficient, owing to the iterative
 nature of the method. Moisan actually showed that the whole decomposition could
-be computed explicitely in Fourier space. This will be discussed in the present
+be computed explicitly in Fourier space. This will be discussed in the present
 post, which is the sixth in a series in {{{sb-blog-num-posts}}} parts:
 
 #+INCLUDE: ./On_the_periodic-plus-smooth_decomposition_of_an_image/toc.txt
@@ -139,7 +139,7 @@ analysis.
 
 #+RESULTS:
 #+BEGIN_SRC ipython
-def _per(u, inverse_dft=False):
+def _per(u, inverse_dft=True):
     """Compute the periodic component of the 2D image u.
 
     This function returns the periodic-plus-smooth decomposition of
@@ -148,10 +148,11 @@ def _per(u, inverse_dft=False):
     If inverse_dft is True, then the pair (p, s) is returned
     (p: periodic component; s: smooth component).
 
-    If inverse_dft is False, then the pair (DFT[p], DFT[s]) is
-    returned, where DFT denotes the discrete Fourier transform
-    (with same conventions regarding sign and normalization as in the
-    numpy.fft module).
+    If inverse_dft is False, then the pair
+
+        (numpy.fft.fft2(p), numpy.fft.fft2(s))
+
+    is returned.
 
     This is a reference (unoptimized) implementation of Algorithm 1.
     """
@@ -228,8 +229,8 @@ to check that the imaginary parts of $p$ and $s$ are indeed nearly null
 
 #+RESULTS:
 : Imaginary part of
-:   p: min = -2.712553866755778e-12, max = 4.208651906766632e-12
-:   s: min = -4.208651906766632e-12, max = 2.712553866755778e-12
+:   p: min = -2.6931883320843306e-12, max = 4.161745834921434e-12
+:   s: min = -4.161745834921434e-12, max = 2.6931883320843306e-12
 
 We can then readily set $p$ and $s$ to their real parts
 
@@ -266,7 +267,7 @@ method. Let's do that again.
 #+END_SRC
 
 #+RESULTS:
-: Residual: 3.9422689305508705e-05
+: Residual: 3.9422689362828e-05
 
 We can then compute the norm of the difference
 
@@ -280,8 +281,8 @@ We can then compute the norm of the difference
 
 #+RESULTS:
 : Error in L2-norm:
-:   - absolute: 0.004504952971514239
-:   - relative: 1.3139651710573028e-06
+:   - absolute: 0.004504952971826568
+:   - relative: 1.3139651711483983e-06
 
 This is already quite satisfactory. We can also compute the residual with the
 value of $s$ found through the DFT approach
@@ -293,7 +294,7 @@ value of $s$ found through the DFT approach
 #+END_SRC
 
 #+RESULTS:
-: Residual: 1.883218469281773e-11
+: Residual: 1.8964547594731774e-11
 
 Which is much smaller than the residual obtained through conjugate gradient
 iterations! Surely, our implementation delivers the correct
