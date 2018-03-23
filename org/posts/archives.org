@@ -2,7 +2,7 @@
 #+SETUPFILE: "../include/css-1.org"
 #+BIND: sb-blog-comments nil
 
-
+   + [[file:20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07.org][2018-03-26 – On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan's algorithm]]
    + [[file:20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.org][2018-03-19 – On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way]]
    + [[file:20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.org][2018-03-12 – On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way]]
    + [[file:20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.org][2018-03-05 – On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators]]

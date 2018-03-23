@@ -11,6 +11,15 @@ class="fa fa-archive"></span>@@ page. These posts frequently refer to work
 published by myself or others; the full bibliographic references are provided
 in the [[file:./pages/references.org][References]] @@html:<span class="fa fa-book"></span>@@ page.
 
+* [[file:posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07.org][2018-03-26 – On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan's algorithm]]
+
+In the [[file:posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.org][previous instalment]] of this series, we implemented Moisan's ([[https://doi.org/10.1007/s10851-010-0227-1][2011]])
+efficient algorithm to compute the periodic-plus-smooth decomposition of an
+image. This algorithm relies heavily on the discrete Fourier transform, and
+already improves quite a lot over our previous conjugate gradient-based
+implementation. In the present post, we will show that performance of the
+implementation can be slightly improved with very little effort.
+
 * [[file:posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.org][2018-03-19 – On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way]]
 
 In the [[file:posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.org][previous instalment]] of this series, we computed Moisan's ([[https://doi.org/10.1007/s10851-010-0227-1][2011]])
