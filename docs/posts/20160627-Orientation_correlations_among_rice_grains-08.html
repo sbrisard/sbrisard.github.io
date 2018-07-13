@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:57 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orientation correlations among rice grains, part 8: estimating the correlations</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2016-06-27</p>
+<h1 class="title">Orientation correlations among rice grains, part 8: estimating the correlations</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">Orientation correlations among rice grains, part 8: estimating the correlations</h1>
+<p>
+In the <a href="./20160219-Orientation_correlations_among_rice_grains-07.html">previous instalment</a> of this series, we have analyzed the morphology of the rice grains. In particular, we have defined their <i>orientation</i> as that of the major axis of inertia. We are now in a position to quantify the statistics of the orientations. We will first discuss <a href="#S1">one-point statistics</a> (each grain is considered individually), then <a href="#S2">two-point statistics</a> (mutual orientations of pairs of grains are considered). Finally, we will try to quantify how <a href="#Boundary_effects">the wall of the sample container</a> influences the orientation of the rice grains.
+</p>
+
+<div id="outline-container-orgd7df5cf" class="outline-2">
+<h2 id="S1"><a id="orgd7df5cf"></a>One-point order parameter</h2>
+<div class="outline-text-2" id="text-S1">
+<p>
+Various order parameters have been introduced in order to identify preferred orientations in assemblies of anisotropic particles. In the present post, we will use the so-called nematic order parameter, which is used to monitor isotropic-nematic phase transitions (<a href="../pages/references.html#EPPE1984">Eppenga and Frenkel, 1984</a>)
+</p>
+
+\begin{equation}
+\label{eq:1}
+S_1=\mathbb E\left(\frac{3\cos^2\theta-1}2\right)=\frac1N\sum_{i=1}^N\frac{3\cos^2\theta_i-1}2,
+\end{equation}
+
+<p>
+where \(\mathbb E\) denotes the ensemble average, and \(\theta\) is the angle of the current particle with respect to a fixed direction. In the last equality, the ensemble average was replaced with an empirical average over all particles in the system.
+</p>
+
+<p>
+If the distribution of particles is isotropic, then the pdf of the orientations reads (in <a href="https://en.wikipedia.org/wiki/Spherical_coordinate_system">spherical coordinates</a>, physics convention)
+</p>
+
+\begin{equation*}
+p(\theta, \varphi)=\frac1{4\pi}\sin\theta\,{\mathrm d}\theta\,{\mathrm d}\varphi,
+\end{equation*}
+
+<p>
+(\(\theta\): polar angle; \(\varphi\): azimuthal angle), and we find
+</p>
+
+\begin{equation*}
+S_1=\frac1{4\pi}\int_{0\leq\theta\leq\pi}\int_{0\leq\varphi\leq2\pi}\frac{3\cos^2\theta-1}2\sin\theta\,{\mathrm d}\theta\,{\mathrm d}\varphi=0.
+\end{equation*}
+
+<p>
+Conversely, for particles with fixed orientation, \(\theta=0\) for all particles and \(S_1=1\).
+</p>
+
+<p>
+Let us compute \(S_1\) for the assembly of rice grains. In the <a href="./20160219-Orientation_correlations_among_rice_grains-07.html">previous instalment</a> of this series, we have computed the orientation (unit vector) of each grain. We first retrieve this data.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-keyword">import</span> os.path
+
+<span class="org-keyword">import</span> h5py
+<span class="org-keyword">import</span> matplotlib.pyplot <span class="org-keyword">as</span> plt
+<span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+<span class="org-keyword">import</span> scipy.ndimage
+<span class="org-keyword">import</span> scipy.spatial
+
+plt.style.use(<span class="org-string">'../include/zenburn-light.mplstyle'</span>)
+
+<span class="org-variable-name">filename</span> = os.path.join(<span class="org-string">'Z:'</span>, <span class="org-string">'sebastien'</span>, <span class="org-string">'experimental_data'</span>,
+                        <span class="org-string">'navier'</span>, <span class="org-string">'riz'</span>, <span class="org-string">'rice-bin_4x4x4.hdf5'</span>)
+
+<span class="org-keyword">with</span> h5py.File(filename, <span class="org-string">'r'</span>) <span class="org-keyword">as</span> f:
+    <span class="org-variable-name">center</span> = np.asarray(f[<span class="org-string">'center_of_mass'</span>])
+    <span class="org-variable-name">orientation</span> = np.asarray(f[<span class="org-string">'orientation'</span>])
+</pre>
+</div>
+
+<p>
+Now, <code>center[i, :]</code> denotes the coordinates of the center of grain <code>i</code>, while <code>orientation[i, :]</code> denotes the orientation of grain <code>i</code>. In what follows, we will compute \(S_1\), taking the vertical as reference direction. At this point, it should be recalled that the \(z\) coordinate (along the vertical) is the first index in the 3D image (slice number). Therefore, \(\cos\theta_i\) is given by <code>orientation[i, 0]</code> in this context.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">cos_theta</span> = orientation[:, 0]
+<span class="org-variable-name">p2_cos_theta</span> = (3*cos_theta**2-1)/2
+<span class="org-keyword">print</span>(<span class="org-string">'S1 = {}'</span>.<span class="org-builtin">format</span>(p2_cos_theta.mean()))
+</pre>
+</div>
+
+<pre class="example">
+S1 = -0.09220327774809803
+
+</pre>
+
+<p>
+It is observed that \(S_1\) is non-zero, which indicates a slight anisotropy. \(S_1\) is a one-point descriptor of the microsctructure. In other words, only one particle is considered at a time (orientational correlations are not accounted for). In the next section, we will show how such correlations can be quantified.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1c4b40e" class="outline-2">
+<h2 id="S2"><a id="org1c4b40e"></a>Two-point order parameter</h2>
+<div class="outline-text-2" id="text-S2">
+<p>
+The initial motivation of this series was the quantification of orientation correlation between anisotropic particles. The basic idea is this: anisotropic, hard particles tend to be locally well ordered (in terms of orientation). In other words, the closer the particles, the higher the probability that they are (nearly) parallel. This is definitely true of flat particles (platelets), but it is less obvious for elongated particles.
+</p>
+
+<p>
+To measure orientation correlations between particles, Frenkel and Mulder (<a href="../pages/references.html#FREN2002">2002</a>) introduce \(S_2(r)\), which is defined from the above order parameter as follows. A “central particle”, \(i\), is first selected. The reference direction is the orientation \(\vec n_i\) of this central particle. Then, \(S_2(r)\) is computed from Eq. \eqref{eq:1}, for all particles \(j\) located at a distance \(r\) from the central particle \(i\). In this context, we have \(\cos\theta_j=\vec n_i\cdot\vec n_j\). The empirical estimation of this two-point order parameter therefore reads
+</p>
+
+\begin{equation}
+\label{eq:2}
+S_2(r)=\frac1N\sum_{i=1}^N\frac1{\operatorname{\#}\mathcal C_i(r, r+\Delta r)}\sum_{j\in\mathcal C_i(r, r+\Delta r)}\frac{3\left(\vec n_i\cdot\vec n_j\right)^2-1}2,
+\end{equation}
+
+<p>
+where \(\vec n_j\) denotes the orientation of particle \(j\). \(\mathcal C_i(r_1, r_2)\) is the set of particles centered at a distance \(r\) from particle \(i\), with \(r_1\leq r\leq r_2\)
+</p>
+
+\begin{equation}
+\mathcal C_i(r_1, r_2)=\left\{j, 1\leq j\leq N, r_1\leq\lVert\vec x_j-\vec x_i\rVert\leq r_2\right\}
+\end{equation}
+
+<p>
+(\(\vec x_i\): center of particle \(i\)). Eq. \eqref{eq:2} is readily implemented in Python (using <code>numpy</code> and <code>scipy</code>). We first compute the distance matrix, and round it to the nearest integer, which then defines <code>labels[i, j]</code> (to be passed to <code>scipy.ndimage.mean</code>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">distance</span> = scipy.spatial.distance_matrix(center, center)
+<span class="org-variable-name">labels</span> = np.<span class="org-builtin">round</span>(distance)
+</pre>
+</div>
+
+<p>
+We then compute, for each pair <code>(i, j)</code>, the cosine <code>cos_theta[i, j]</code> of the angle between particles <code>i</code> and <code>j</code>. We also evaluate the second Legendre polynomial \(P_2\) for each value of \(\cos\theta\)
+</p>
+
+\begin{equation}
+P_2(x)=(3x^2-1)/2.
+\end{equation}
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">cos_theta</span> = np.<span class="org-builtin">sum</span>(orientation[:, <span class="org-constant">None</span>, :]*orientation[<span class="org-constant">None</span>, :, :], axis=-1)
+<span class="org-variable-name">p2_cos_theta</span> = (3*cos_theta**2-1)/2
+</pre>
+</div>
+
+<p>
+Now comes the tricky part: the double sum over <i>all</i> grains \(i\), and only grains \(j\) belonging to \(\mathcal C_i(r, r+\Delta r)\) (where \(\Delta r=1\,\text{pix}\)). For \(i\) fixed, the inner sum
+</p>
+
+\begin{equation}
+\frac1{\operatorname{\#}\mathcal C_i(r, r+1)}\sum_{j\in\mathcal C_i(r, r+1)}\frac{3\left(\vec n_i\cdot\vec n_j\right)^2-1}2,
+\end{equation}
+
+<p>
+can be seen as the mean of all cells <code>p2_cos_theta[i, j]</code> for which <code>labels[i, j]==r</code>. As such, it can be computed with the <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.mean.html#scipy-ndimage-mean">scipy.ndimage.mean</a> function (similar in spirit to the <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html#scipy.ndimage.sum">scipy.ndimage.sum</a> function that was used in the <a href="./20160219-Orientation_correlations_among_rice_grains-07.html">previous instalment</a> of this series). In the following snippet, we apply this function to each row of <code>p2_cos_theta</code> in turn (I could not find a way to get rid of this loop!).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">num_grains</span> = center.shape[0]
+<span class="org-variable-name">r</span> = np.unique(labels)
+<span class="org-variable-name">inner_sum</span> = np.empty((num_grains, <span class="org-builtin">len</span>(r)),
+                     dtype=np.float64)
+<span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(num_grains):
+    <span class="org-variable-name">inner_sum</span>[i] = scipy.ndimage.mean(p2_cos_theta[i], labels[i], r)
+</pre>
+</div>
+
+<p>
+Then, the outer sum in Eq. \eqref{eq:2} is a simple mean (ignoring NaNs).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">S2</span> = np.nanmean(inner_sum, axis=0)
+</pre>
+</div>
+
+<p>
+The resulting correlation function is plotted on Fig. <a href="#org62dc7fc">1</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">fig</span>, <span class="org-variable-name">ax</span> = plt.subplots()
+ax.set_xlabel(r<span class="org-string">'$r\;[\mathrm{pix}]$'</span>)
+ax.set_ylabel(r<span class="org-string">'$S_2(r)$'</span>)
+ax.set_ylim(-0.1, 0.5)
+ax.plot(r, S2)
+fig.tight_layout()
+fig.savefig(<span class="org-string">'./20160627-Orientation_correlations_among_rice_grains-08/S2.png'</span>,
+            transparent=<span class="org-constant">True</span>)
+</pre>
+</div>
+
+
+<div id="org62dc7fc" class="figure">
+<p><img src="./20160627-Orientation_correlations_among_rice_grains-08/S2.png" alt="S2.png">
+</p>
+<p><span class="figure-number">Figure 1: </span>The orientational correlation function \(S_2(r)\).</p>
+</div>
+
+<p>
+For small values of \(r\), the curve is not relevant, since very little grains are close enough (remember that rice grains are non-overlapping particles!). Similarly, the increase at large values of the center-to-center distance \(r\) should be considered with caution. Indeed, due to the limited size of the specimen, sampling is insufficient at high \(r\). For intermediate values of \(r\), the curve is interesting. It shows a rather good correlation at small distances, but this correlation decreases rapidly. For larger values of \(r\), we do not observe \(S_2(r)\to0\), which might reflect the fact that the specimen is not isotropic (as shown in the <a href="#S1">previous section</a>); this should be investigated further.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4170c1c" class="outline-2">
+<h2 id="Boundary_effects"><a id="org4170c1c"></a>Boundary effects</h2>
+<div class="outline-text-2" id="text-Boundary_effects">
+<p>
+To close this post on orientation correlations, we investigate boundary effects in the specimen. The wall of the cylindrical sample container is impenetrable. Therefore, the particles closest to the wall are tangent this wall. We want to quantify the distance over which the grains keep the memory of this preferred orientation.
+</p>
+
+<p>
+To do so, for each grain, we locate the closest point on the wall, and the corresponding normal vector. We first recall the location of the axis of the container, and its radius (see <a href="./20150529-Orientation_correlations_among_rice_grains-04.html">this post</a>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">x_center</span> = 219
+<span class="org-variable-name">y_center</span> = 217
+<span class="org-variable-name">radius</span> = 208
+</pre>
+</div>
+
+<p>
+We then compute the radius-vector (we discard the $z$-coordinate, which is the first index), from which we deduce the normal to the boundary, \(\vec e_r\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">radius_vector</span> = center-[0, x_center, y_center]
+<span class="org-comment-delimiter"># </span><span class="org-comment">Discard first (z) coordinate!</span>
+<span class="org-variable-name">distance_to_axis</span> = np.sqrt(np.<span class="org-builtin">sum</span>(radius_vector[:, 1:]**2, axis=-1))
+<span class="org-variable-name">distance_to_boundary</span> = radius-distance_to_axis
+<span class="org-variable-name">e_r</span> = radius_vector/distance_to_axis[:, <span class="org-constant">None</span>]
+<span class="org-variable-name">e_r</span>[:, 0] = 0
+</pre>
+</div>
+
+<p>
+We now compute the orthoradial vector \(\vec e_\theta\),
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">e_theta</span> = np.zeros_like(e_r)
+<span class="org-variable-name">e_theta</span>[:, 1] = -e_r[:, 2]
+<span class="org-variable-name">e_theta</span>[:, 2] = e_r[:, 1]
+</pre>
+</div>
+
+<p>
+For each grain, the direction \(\vec n_i\) is decomposed in the local basis \((\vec e_r, \vec e_\theta, \vec e_z)\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">orientation_local</span> = np.zeros_like(orientation)
+<span class="org-variable-name">orientation_local</span>[:, 0] = np.<span class="org-builtin">sum</span>(e_r*orientation, axis=-1)
+<span class="org-variable-name">orientation_local</span>[:, 1] = np.<span class="org-builtin">sum</span>(e_theta*orientation, axis=-1)
+<span class="org-variable-name">orientation_local</span>[:, 2] = orientation[:, 0]
+</pre>
+</div>
+
+<p>
+We then compute the matrix representation of the tensor \(\vec n_i\otimes\vec n_i\) in the local basis.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">nxn</span> = orientation_local[:, :, <span class="org-constant">None</span>]*orientation_local[:, <span class="org-constant">None</span>, :]
+<span class="org-variable-name">labels</span> = np.<span class="org-builtin">round</span>(distance_to_boundary/4)*4
+<span class="org-variable-name">indices</span> = np.unique(labels)
+<span class="org-variable-name">nxn_mean</span> = np.array([[scipy.ndimage.mean(nxn[:, i, j], labels, indices)
+                      <span class="org-keyword">for</span> j <span class="org-keyword">in</span> <span class="org-builtin">range</span>(3)] <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(3)])
+</pre>
+</div>
+
+<p>
+The resulting statistical descriptors are plotted in Fig. <a href="#orge71e5d2">2</a>. Honestly, the results are not very conclusive. Both \(\langle n_r\otimes n_r\rangle\) and \(\langle n_\theta\otimes n_\theta\rangle\) seem to decrease rapidly over a distance of (roughly) 30 voxels. However, they both converge to a value which is non-zero.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">fig</span>, <span class="org-variable-name">ax</span> = plt.subplots()
+ax.set_xlabel(r<span class="org-string">'$r\;[\mathrm{vox}]$'</span>)
+ax.set_ylabel(r<span class="org-string">'$\langle n_i\otimes n_i\rangle$'</span>)
+ax.set_xlim(0, 200)
+
+ax.plot(indices, nxn_mean[0, 0],
+        label=r<span class="org-string">'$\langle n_r\otimes n_r\rangle$'</span>)
+ax.plot(indices, nxn_mean[1, 1],
+        label=r<span class="org-string">'$\langle n_\theta\otimes n_\theta\rangle$'</span>)
+ax.plot(indices, nxn_mean[2, 2],
+        label=r<span class="org-string">'$\langle n_z\otimes n_z\rangle$'</span>)
+ax.legend(loc=<span class="org-string">'upper left'</span>)
+
+fig.tight_layout()
+fig.savefig(<span class="org-string">'./20160627-Orientation_correlations_among_rice_grains-08/boundary_e</span><span class="org-string"><span class="org-whitespace-line">ffects.png'</span></span><span class="org-whitespace-line">,</span>
+            transparent=<span class="org-constant">True</span>)
+</pre>
+</div>
+
+
+<div id="orge71e5d2" class="figure">
+<p><img src="./20160627-Orientation_correlations_among_rice_grains-08/boundary_effects.png" alt="boundary_effects.png">
+</p>
+<p><span class="figure-number">Figure 2: </span>Angular correlations with the orientation of the wall.</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org447a9e5" class="outline-2">
+<h2 id="org447a9e5">Conclusion</h2>
+<div class="outline-text-2" id="text-org447a9e5">
+<p>
+This was the last post of this series on <i>Orientation correlations among rice grains</i>. This post was dedicated to the <i>quantification</i> of orientation correlations. To do so, we have recalled the definition of several statistical descriptors. These descriptors were then evaluated on the sample.
+</p>
+
+<p>
+The resulting values indeed indicate the existence of orientation correlations. However, further investigations should be carried out in order to draw reliable conclusions. In particular, the descriptors plotted in Figs. <a href="#org62dc7fc">1</a> and <a href="#orge71e5d2">2</a> are histograms, and filtering of some sort should be used to smooth the curves. Besides, the analysis of <a href="#S1">the first section</a> shows that the sample is globally anisotropic. This global anisotropy should be accounted for (“subtracted”) while analyzing local anisotropy. In short, the present post should be considered as a mere introduction to the matter and the relevant tools.
+</p>
+
+<p>
+Well, I hope you enjoyed this series! We initially set out to quantify orientation correlations in an assembly of rice grains. To do so, a fair amount of image analysis was required. We introduced <a href="./20150330-Orientation_correlations_among_rice_grains-03.html">binning</a>, the <a href="./20150529-Orientation_correlations_among_rice_grains-04.html">Hough transform</a>, <a href="./20150709-Orientation_correlations_among_rice_grains-05.html">Otsu's method</a>, a dedicated seeding technique for the <a href="./20150930-Orientation_correlations_among_rice_grains-06.html">watershed transform</a> and the quantification of the <a href="./20160219-Orientation_correlations_among_rice_grains-07.html">morphology</a> of the grains. All these techniques have a wide range of applications, which goes far beyond the analysis of rice grains!
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20160627-Orientation_correlations_among_rice_grains-08';
+var disqus_title = 'Orientation correlations among rice grains, part 8: estimating the correlations';
+var disqus_url = 'http://sbrisard.github.io/posts/20160627-Orientation_correlations_among_rice_grains-08.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

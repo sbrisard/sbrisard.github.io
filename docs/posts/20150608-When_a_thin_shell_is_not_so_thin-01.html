@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:57 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When a thin shell is not so thin, part&nbsp;1: Koiter's linear theory</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2015-06-08</p>
+<h1 class="title">When a thin shell is not so thin, part&nbsp;1: Koiter's linear theory</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">When a thin shell is not so thin, part&nbsp;1: Koiter's linear theory</h1>
+<p>
+In structural analysis, thick beams (resp. plates) usually refer to shear deformability, and the <a href="http://en.wikipedia.org/wiki/Timoshenko_beam_theory">Timoshenko beam theory</a> (resp. <a href="http://en.wikipedia.org/wiki/Mindlin%E2%80%93Reissner_plate_theory">Mindlin–Reissner plate theory</a>). With curved elements however (e.g. curved beams or shells), the situation is more subtle, as thickness corrections may be necessary even in shells <i>where the shear stress is null at any point</i>. In this series, this is illustrated with a spherical pressure vessel, for which the stress resultants and couples are studied. "Easy enough", you probably think: \(N=pR/2\), \(M=0\) and that's the end of it (<a href="http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels">Wikipedia</a>). Well, maybe&#x2026;
+</p>
+
+<p>
+In the first part of this series, Koiter's thin shell theory (<a href="../pages/references.html#KOIT1970">Koiter, 1970</a>) is used to analyse the equilibrium of the spherical pressure vessel. In particular, it is shown that the results deviate slightly from what is expected from the membrane theory.
+</p>
+
+<div id="outline-container-org9c7887b" class="outline-2">
+<h2 id="org9c7887b">Description of the problem</h2>
+<div class="outline-text-2" id="text-org9c7887b">
+<p>
+We consider a spherical vessel, subjected to an internal pressure \(p\). \(R\) denotes the radius of the midsurface, \(h\) the thickness of the shell, so that the inner and outer radii of the shell are
+</p>
+\begin{align}
+R_\text{in}&=R-\frac h2,\\
+R_\text{out}&=R+\frac h2.
+\end{align}
+
+<p>
+The problem is solved in spherical coordinates. From symmetry considerations (the problem is fully isotropic), the deflection \(w\) (normal displacement of the midsurface) is constant. Similarly, the strain \(\epsilon_{\alpha\beta}\), the change of curvature \(\kappa_{\alpha\beta}\), the membrane force \(N_{\alpha\beta}\) and the bending moment \(M_{\alpha\beta}\) are all diagonal tensors with constant components
+</p>
+
+\begin{align}
+\label{eq:6}\epsilon_{\theta\theta}&=\epsilon,&\epsilon_{\phi\phi}&=\epsilon,&\epsilon_{\theta\phi}&=0,\\
+\label{eq:7}\kappa_{\theta\theta}&=\kappa,&\kappa_{\phi\phi}&=\kappa,&\kappa_{\theta\phi}&=0,\\
+N_{\theta\theta}&=N,&N_{\phi\phi}&=N,&N_{\theta\phi}&=0,\\
+M_{\theta\theta}&=M,&M_{\phi\phi}&=M,&M_{\theta\phi}&=0,
+\end{align}
+
+<p>
+where \(\epsilon\), \(\kappa\), \(N\) and \(M\) are four scalar constants, which will be determined in the next section by means of Koiter's linear theory of thin shells (<a href="../pages/references.html#KOIT1970">Koiter, 1970</a>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc503c9a" class="outline-2">
+<h2 id="orgc503c9a">The thin shell solution</h2>
+<div class="outline-text-2" id="text-orgc503c9a">
+<p>
+Up to terms which are quadratic in the displacement, the trace of the tensor of membrane strains is equal to the relative variation of surface area of the shell. Therefore
+</p>
+
+\begin{equation}
+\label{eq:2}\epsilon=\frac12\epsilon_{\alpha\alpha}=\frac12\frac{4\pi\left(R+w\right)^2-4\pi R^2}{4\pi R^2}\simeq\frac wR.
+\end{equation}
+
+<p>
+There is no simple geometrical derivation that I know of for the determination of the change of curvature, and you will have to trust me on this [&#x2026; or use Eq. (3.4) in the paper by Koiter (<a href="../pages/references.html#KOIT1970">1970</a>)].
+</p>
+
+\begin{equation}
+\label{eq:3}\kappa=-\frac w{R^2}.
+\end{equation}
+
+<p>
+The deflection \(w\) of the shell is found by minimizing its total potential energy \(\Pi=U-V\), where \(U\) denotes the srain energy, and \(V\) denotes the potential of external forces. In Koiter's theory of thin shells, the strain energy \(U\) of the shell is the sum of two contributions: \(U=U_\epsilon+U_\kappa\), with
+</p>
+
+\begin{align}
+U_\epsilon&=\frac12\frac{Eh}{1-\nu^2}\int_{\Sigma}\left(\left(1-\nu\right)\epsilon_{\alpha\beta}\epsilon^{\alpha\beta}+\nu\left(\epsilon_\gamma^\gamma\right)^2\right)\mathrm{d}\Sigma=4\pi R^2\frac{Eh}{1-\nu}\epsilon^2,\\
+U_\kappa&=\frac12\frac{Eh^3}{12\left(1-\nu^2\right)}\int_{\Sigma}\left(\left(1-\nu\right)\kappa_{\alpha\beta}\kappa^{\alpha\beta}+\nu\left(\kappa_\gamma^\gamma\right)^2\right)\mathrm{d}\Sigma=4\pi R^2\frac{Eh^3}{12\left(1-\nu\right)}\kappa^2,
+\end{align}
+
+<p>
+where use has been made of Eqs. \eqref{eq:6} and \eqref{eq:7}. The strain energy of the shell therefore reads
+</p>
+
+\begin{equation}
+U=4\pi R^2\frac{Eh}{1-\nu}\left(1+\frac{h^2}{12R^2}\right)\frac{w^2}{R^2},
+\end{equation}
+
+<p>
+while the potential of external loads \(V\) is clearly given by the following expression
+</p>
+
+\begin{equation}
+V=4\pi R^2 pw.
+\end{equation}
+
+<p>
+The total potential energy
+</p>
+
+\begin{equation}
+\frac{\Pi}{4\pi R^2}=\frac{Eh}{1-\nu}\left(1+\frac{h^2}{12R^2}\right)\frac{w^2}{R^2}-pw
+\end{equation}
+
+<p>
+is then minimized with respect to the deflection \(w\), which leads to
+</p>
+
+\begin{equation}
+\label{eq:1}w=\frac{pR^2}{2Eh}\frac{1-\nu}{1+\frac{h^2}{12R^2}}.
+\end{equation}
+
+<p>
+The stress resultants and couples are then retrieved from the constitutive laws. For the stress resultants, we have
+</p>
+
+\begin{equation}
+\label{eq:4}N=N_{\theta\theta}=\frac{Eh}{1-\nu^2}\left(\epsilon_{\theta\theta}+\nu\epsilon_{\phi\phi}\right)=\frac{Eh}{1-\nu^2}\left(1+\nu\right)\epsilon=\frac{Eh}{1-\nu}\epsilon,
+\end{equation}
+
+<p>
+and similarly for the stress couples
+</p>
+
+\begin{equation}
+\label{eq:5}M=\frac{Eh^3}{12\left(1-\nu\right)}\kappa.
+\end{equation}
+
+<p>
+<a id="org721008f"></a>Substituting Eqs.\eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} in Eqs. \eqref{eq:4} and \eqref{eq:5} finally leads to the following expansions
+</p>
+
+\begin{align}
+N &= \frac{pR}2\left(1-\frac{h^2}{12R^2}\right)+\mathcal O\left(\frac{h^4}{R^4}\right),\\
+M &= -\frac{ph^2}{24}\left(1-\frac{h^2}{12R^2}\right)+\mathcal O\left(\frac{h^6}{R^6}\right).
+\end{align}
+
+<p>
+This is the first surprise in this series: the stress couple is <i>not</i> null, and the stress resultant differ slightly from the well-known formula \(N=pR/2\) (see <a href="http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels">Wikipedia</a>).
+</p>
+
+<p>
+Nota: the above-mentioned formula \(N=pR/2\) is called "formule des chaudronniers" (formula of boilermakers?) in French, but I could not find any English translation. If you happen to know the name of this formula, please let me know.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0a38918" class="outline-2">
+<h2 id="org0a38918">Conclusion</h2>
+<div class="outline-text-2" id="text-org0a38918">
+<p>
+We started with a very simple shell, which we expected to be in a state of membrane equilibrium. However, using Koiter's linear theory of thin shells, we found that the stress couples, though small, are not null!
+</p>
+
+<p>
+So what's wrong with the above analysis? To dig deeper into this problem, we will use its full 3D solution to compute <i>exact</i> values of the stress resultants and couples&#x2026; which will lead to other exciting findings in the <a href="./20150701-When_a_thin_shell_is_not_so_thin-02.html">next instalment</a> of this series!
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20150608-When_a_thin_shell_is_not_so_thin-01';
+var disqus_title = 'When a thin shell is not so thin, part&amp;nbsp;1: Koiter\'s linear theory';
+var disqus_url = 'http://sbrisard.github.io/posts/20150608-When_a_thin_shell_is_not_so_thin-01.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

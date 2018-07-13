@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:57 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When a thin shell is not so thin, part&nbsp;2: the 3D, exact solution</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2015-07-01</p>
+<h1 class="title">When a thin shell is not so thin, part&nbsp;2: the 3D, exact solution</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">When a thin shell is not so thin, part&nbsp;2: the 3D, exact solution</h1>
+<p>
+In the <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html">previous instalment</a> of this series, we analysed a spherical pressure vessel by means of Koiter's linear theory of thin shells. We found the somewhat unexpected result that the stress couple was not null. Besides, we also found that the stress resultant was slightly different from the well-known value \(N=pR/2\). So what was wrong with the previous analysis? To explore this question, we will make use of the exact solution in 3D elasticity.
+</p>
+
+<div id="outline-container-org4013838" class="outline-2">
+<h2 id="org4013838">The spherical pressure vessel, exact solution</h2>
+<div class="outline-text-2" id="text-org4013838">
+<p>
+Finding the stresses and displacements in a pressure vessel is a classical exercise in 3D linear elasticity. In this post, I will spare you the details of the derivation (which can be found in e.g. <a href="../pages/references.html#TIMO1951">Timoshenko and Goodier, 1951</a>, art. 121). Instead, I will come straight to the point, and provide you with the exact expression of the stress tensor in spherical coordinates (\(r\): distance to the center of the spherical pressure vessel)
+</p>
+
+\begin{gather}
+\label{eq:1}\sigma_{rr}(r)=A-\frac{2B}{r^3},\\
+\label{eq:2}\sigma_{\theta\theta}(r)=\sigma_{\phi\phi}(r)=A+\frac{B}{r^3},
+\end{gather}
+
+<p>
+all other components being null. The integration constants \(A\) and \(B\) are defined below
+</p>
+
+\begin{align}
+A&=-\frac{p_\text{ext}R_\text{ext}^3-p_\text{int}R_\text{int}^3}{R_\text{ext}^3-R_\text{int}^3},\\
+B&=-\frac12\frac{\left(p_\text{ext}-p_\text{int}\right)R_\text{int}^3R_\text{ext}^3}{R_\text{ext}^3-R_\text{int}^3},\\
+\end{align}
+
+<p>
+where \(R_\text{int}=R-h/2\) and \(R_\text{ext}=R+h/2\) denote the internal and external radii of the spherical pressure vessel (\(R\): radius of midsurface, \(h\): thickness); \(p_\text{int}\) and \(p_\text{ext}\) denote the internal and external pressures. To make a fair comparison between the shell theory and the 3D exact solution, it is customary to share the load equally between the upper and lower faces (see e.g. <a href="../pages/references.html#REIS1947">Reissner, 1947</a>). In other words,
+</p>
+
+\begin{equation}
+p_\text{int}=-p_\text{ext}=\frac p2.
+\end{equation}
+
+<p>
+In the remainder of this post, \(\sigma\) will denote the common value of the in-plane stresses
+</p>
+
+\begin{equation}
+\label{eq:6}\sigma=\sigma_{\theta\theta}=\sigma_{\phi\phi}.
+\end{equation}
+
+<p>
+From Eq. \eqref{eq:2}, we readily find the following expressions of the stress resultant \(N=N_{\theta\theta}=N_{\phi\phi}\) and stress couple \(M=M_{\theta\theta}=M_{\phi\phi}\)
+</p>
+
+\begin{align}
+\label{eq:7}N &= \int_{R_\text{int}}^{R_\text{ext}}\sigma(r)\,\mathrm{d}r=\frac{pR}2\frac{1+\frac{5h^2}{12R^2}}{1+\frac{h^2}{12R^2}}=\frac{pR}2\left(1+\frac{h^2}{3R^2}\right)+\mathcal O\left(\frac{h^4}{R^4}\right),\\
+\label{eq:8}M &= -\int_{R_\text{int}}^{R_\text{ext}}\left(r-R\right)\sigma(r)\,\mathrm{d}r=\frac{ph^2}{24}\frac{1-\frac{h^2}{4R^2}}{1+\frac{h^2}{12R^2}}=\frac{ph^2}{24}\left(1-\frac{h^2}{3R^2}\right)+\mathcal O\left(\frac{h^6}{R^6}\right).
+\end{align}
+
+<p>
+Comparing with <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html#org721008f">Koiter's solution</a>, it is found that the dominant terms of the stress resultant coincide. This is not true of the stress couple, though. Even worse, the signs differ! While in Koiter's solution, the stress couple is negative (as expected), integration of the 3D solution leads to a <i>positive</i> stress couple, which is unphysical. Something nasty is definitely taking place, here!
+</p>
+
+<p>
+In the next section, I will show that Eqs. \eqref{eq:7} and \eqref{eq:8} are in fact (poor) approximations of the true expression of the stress resultant and couple.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7ba24d4" class="outline-2">
+<h2 id="org7ba24d4">Stress resultants and stress couples: the correct definition</h2>
+<div class="outline-text-2" id="text-org7ba24d4">
+<p>
+Stress resultants and stress couples are defined from the internal resultant forces and moments exerted on subdomains of the shell. In this section, I will show how such subsystems are constructed from a closed path drawn on the midsurface.
+</p>
+
+
+<div class="figure">
+<p><object type="image/svg+xml" data="./20150701-When_a_thin_shell_is_not_so_thin-02/fig01.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+<p>
+The story begins with a shell, seen as a continuum.
+</p>
+
+
+<div class="figure">
+<p><object type="image/svg+xml" data="./20150701-When_a_thin_shell_is_not_so_thin-02/fig02.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+<p>
+We will focus on the upper and lower faces of the shell, \(\Sigma^+\) and \(\Sigma^-\), as well as the base surface, \(\Sigma\). For homogeneous shells, the base surface usually coincides with the midsurface (in other words, it is equidistant to the upper and lower faces). This is not really required here, as we are only discussing equilibrium issues. However, for the sake of simplicity, we will just assume that the base surface <i>is</i> the midsurface.
+</p>
+
+
+<div class="figure">
+<p><object type="image/svg+xml" data="./20150701-When_a_thin_shell_is_not_so_thin-02/fig03.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+<p>
+To define a subregion of the shell, we first draw a closed path \(\Gamma\) on the base surface, and define the local basis \((\boldsymbol\tau, \mathbf n, \boldsymbol\nu)\) attached to this curve: \(\boldsymbol\tau\) is the unit tangent, \(\mathbf n\) is the unit normal to the base surface, and \(\boldsymbol\nu=\boldsymbol\tau\times\mathbf n\) is the unit in-plane normal to \(\Gamma\).
+</p>
+
+
+<div class="figure">
+<p><object type="image/svg+xml" data="./20150701-When_a_thin_shell_is_not_so_thin-02/fig04.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+<p>
+As the current point moves along this path, the normal to the base surface sweeps a new surface, which will be the <i>lateral surface</i> of the subregion. It should be noted that, by construction, the lateral surface is a ruled surface. The outer normal to this surface is constant, equal to \(\boldsymbol\nu\) along each of the generating lines.
+</p>
+
+
+<div class="figure">
+<p><object type="image/svg+xml" data="./20150701-When_a_thin_shell_is_not_so_thin-02/fig05.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+<p>
+The lateral surface intersects the upper and lower faces of the shell&#x2026;
+</p>
+
+
+<div class="figure">
+<p><object type="image/svg+xml" data="./20150701-When_a_thin_shell_is_not_so_thin-02/fig06.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+<p>
+&#x2026; thus defining the upper and lower boundaries of the subregion. That's it! We have defined our subsystem!
+</p>
+
+<p>
+Let us now compute the resultant force \(\boldsymbol{\mathcal R}\) and moment \(\boldsymbol{\mathcal M}\) exerted by the remainder of the shell on this subregion. By definition of the Cauchy stress tensor \(\boldsymbol\sigma\), we have
+</p>
+
+\begin{align}
+\label{eq:9}\boldsymbol{\mathcal R} &= \int_{\mathbf x\in\Sigma^\mathrm{lat}}\boldsymbol\sigma\cdot\boldsymbol\nu\,\mathrm{d}\Sigma_{\mathbf x}^\mathrm{lat},\\
+\label{eq:10}\boldsymbol{\mathcal M} &= \int_{\mathbf x\in\Sigma^\mathrm{lat}}\mathbf{x}\times\left(\boldsymbol\sigma\cdot\boldsymbol\nu\right)\mathrm{d}\Sigma_{\mathbf x}^\mathrm{lat},
+\end{align}
+
+<p>
+where \(\mathbf x\) denotes the current point on the lateral surface. By definition, the membrane stress resultant \(\mathbf N\) (second order tensor), the shear stress resultant \(\mathbf Q\) (vector) and the stress couple \(\mathbf M\) (second order tensor) allow the reduction of the above surface integrals to contour integrals
+</p>
+
+\begin{align}
+\label{eq:11}\boldsymbol{\mathcal R} &= \int_{\mathbf x\in\Gamma}\left[\mathbf N\cdot\boldsymbol\nu+\left(\mathbf Q\cdot\boldsymbol\nu\right)\mathbf n\right]\mathrm{d}s,\\
+\label{eq:12}\boldsymbol{\mathcal M} &= \int_{\mathbf x\in\Gamma}\mathbf x\times\left[\mathbf N\cdot\boldsymbol\nu+\left(\mathbf Q\cdot\boldsymbol\nu\right)\mathbf n\right]\mathrm{d}s-\int_{\mathbf x\in\Gamma}\mathbf n\times\left(\mathbf M\cdot\boldsymbol\nu\right)\mathrm ds.
+\end{align}
+
+<p>
+This definition will be used in the next section to compute the stress resultant and couple in the spherical pressure vessel.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgccdc077" class="outline-2">
+<h2 id="orgccdc077">Stress resultant and couple in the spherical pressure vessel</h2>
+<div class="outline-text-2" id="text-orgccdc077">
+
+<div class="figure">
+<p><object type="image/svg+xml" data="./20150701-When_a_thin_shell_is_not_so_thin-02/fig07.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+
+<p>
+In order to compute \(N\) and \(M\) from the stress distribution in the spherical pressure vessel, we consider a subdomain obtained by taking the equator as closed path \(\Gamma\). Then, the lateral surface \(\Sigma^\mathrm{lat}\) is an annulus, and the outer normal \(\boldsymbol\nu\) is constant, vertical. Points on the lateral surface are specified by their radial distance \(r\) and polar angle \(\phi\).
+</p>
+
+<p>
+We first use Eq. \eqref{eq:9} to compute the resultant internal force \(\boldsymbol{\mathcal R}\). The surface element \(\mathrm{d}\Sigma^\mathrm{lat}\) reads
+</p>
+
+\begin{equation}
+\mathrm{d}\Sigma^\mathrm{lat}=r\,\mathrm{d}r\,\mathrm{d}\phi=\frac rR\,\mathrm{d}r\,\mathrm{d}s.
+\end{equation}
+
+<p>
+where it is observed that \(\mathrm{d}s=R\mathrm{d}\phi\) (\(s\): arc-length measured on \(\Gamma\)). Furthermore, from Eq. \eqref{eq:6}, we have \(\boldsymbol\sigma\cdot\boldsymbol\nu=\sigma(r)\,\boldsymbol\nu\). Eq. \eqref{eq:9} then reads
+</p>
+
+\begin{equation}
+\label{eq:14}\boldsymbol{\mathcal R}=\int_\Gamma\left[\int_{R_\mathrm{int}}^{R_\mathrm{ext}}\sigma(r)\,\frac rR\,\mathrm{d}r\right]\boldsymbol\nu\,\mathrm{d}s,
+\end{equation}
+
+<p>
+where we have used the fact that \(\boldsymbol\nu\) is constant along \(\Gamma\). Turning now to Eq. \eqref{eq:11}, and recalling that \(N_{\theta\theta}=N_{\phi\phi}=N\) and \(\mathbf Q=\mathbf 0\), we find
+</p>
+
+\begin{equation}
+\label{eq:15}\boldsymbol{\mathcal R}=\int_{\Gamma}N\,\boldsymbol\nu\mathrm{d}s.
+\end{equation}
+
+<p>
+Upon identification of Eqs. \eqref{eq:14} and \eqref{eq:15}, we finally find the following expression of the stress resultant \(N\)
+</p>
+
+\begin{equation}
+\label{eq:16}\require{color}N=\int_{R_\mathrm{int}}^{R_\mathrm{ext}}\sigma(r)\,{\color{red}\frac rR}\,\mathrm{d}r,
+\end{equation}
+
+<p>
+while a similar calculation delivers the stress couple \(M\)
+</p>
+
+\begin{equation}
+\label{eq:17}M=\int_{R_\mathrm{int}}^{R_\mathrm{ext}}-\left(r-R\right)\sigma(r)\,{\color{red}\frac rR}\,\mathrm{d}r.
+\end{equation}
+
+<p>
+Comparing Eqs. \eqref{eq:16} and \eqref{eq:17} with Eqs. \eqref{eq:7} and \eqref{eq:8}, we observe that we forgot the Jacobian \(r/R\)! For thin shells, we have \(r\simeq R\) and this correction is usually neglected.
+</p>
+
+<p>
+In the present case, using Eq. \eqref{eq:2}, we find
+</p>
+
+\begin{align}
+\label{eq:18}N &= \frac{pR}2\left(1+\frac{h^2}{4R^2}\right),\\
+\label{eq:19}M &= -\frac{ph^2}{30}\,\frac{h^2}{R^2}+\mathcal O\left(\frac{h^6}{R^6}\right).
+\end{align}
+
+<p>
+Comparing Eqs. \eqref{eq:18} and \eqref{eq:19} with Eqs. \eqref{eq:7} and \eqref{eq:8}, we see that the results are dramatically different! Indeed, the stress couple has a different sign, and is two order of magnitude smaller (with respect to the thickness of the shell)! Clearly, the thin shell approximation is questionable in the present case.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8878a7a" class="outline-2">
+<h2 id="org8878a7a">Conclusion</h2>
+<div class="outline-text-2" id="text-org8878a7a">
+<p>
+In this post, we used the exact stress distribution within the spherical vessel to compute the stress resultant and stress couple. We showed that the thin shell approximation, which amounts to neglecting the jacobian in a surface integral, results in poor estimates in this case. Exact integration delivers much more convincing results. However, we still have not completely solved the problem. Indeed, comparing Eqs. \eqref{eq:18} and \eqref{eq:19} with Eqs. (17) and (18) in the <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html">previous instalment</a> of this series, we still observe major differences: the two values of the stress couple have the same sign, but they differ by two orders of magnitude (with respect to the thickness of the shell).
+</p>
+
+<p>
+In the <a href="./20150706-When_a_thin_shell_is_not_so_thin-03.html">next instalment</a> of this series, we will go back to Koiter's shell model and use constitutive equations for <i>thick shells</i> to finally resolve the apparent contradiction.
+</p>
+
+<p>
+Figures in this post were generated with the nice <a href="http://pyx.sourceforge.net/">PyX</a> library.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20150701-When_a_thin_shell_is_not_so_thin-02';
+var disqus_title = 'When a thin shell is not so thin, part&amp;nbsp;2: the 3D, exact solution';
+var disqus_url = 'http://sbrisard.github.io/posts/20150701-When_a_thin_shell_is_not_so_thin-02.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

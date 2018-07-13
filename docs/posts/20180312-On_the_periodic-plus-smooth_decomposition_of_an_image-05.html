@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:57 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2018-03-12</p>
+<h1 class="title">On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way</h1>
+<p>
+In this post, we will compute Moisan&rsquo;s (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) periodic-plus-smooth
+decomposition of an image by direct minimization of the energy introduced in
+the <a href="./20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.html">second instalment</a> of this series. More precisely, \(u\) being a \(m\times n\)
+image, we will minimize the function \(F(v, u)\) over the space of \(m\times n\)
+images \(v\). The minimizer, \(s\), is the smooth component of \(u\), while its
+complement \(p=u-s\) is the periodic component of \(u\). This post is the fifth
+instalment of a series in seven parts:
+</p>
+
+<ol class="org-ol">
+<li><a href="./20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.html">Introduction</a></li>
+<li><a href="./20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.html">Defining the decomposition</a></li>
+<li><a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html">The energy as a quadratic form</a></li>
+<li><a href="./20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.html">Implementing the linear operators</a></li>
+<li><a href="./20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html">Minimizing the energy, the clumsy way</a></li>
+<li><a href="./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.html">Minimizing the energy, the clever way</a></li>
+<li><a href="./20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07.html">Improved implementation of Moisan&rsquo;s algorithm</a></li>
+</ol>
+
+<p>
+The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.
+</p>
+
+<p>
+We showed in the <a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html">part 3</a> that \(F\) was in fact a quadratic form, and expressed
+the underlying linear operators, which were subsequently implemented in
+<a href="./20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.html">part 4</a>. It is recalled (see <a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html">part 3</a>) that
+</p>
+
+\begin{equation*}
+F(v, u)=\langle v, Q\cdot v\rangle-2\langle v, Q_1\cdot u\rangle
++\langle u, Q_1\cdot u\rangle,
+\end{equation*}
+
+<p>
+where \(Q\) and \(Q_1\) are symmetric, positive linear operators. Minimizing \(F\)
+with respect to \(v\) therefore amounts to solving the linear system: \(Q\cdot
+s=Q_1\cdot u\). It can in fact be shown that \(Q\) is positive definite, therefore
+the solution to this linear system is unique: \(s=Q^{-1}\cdot Q_1\cdot u\). It
+can be computed by means of the <a href="https://en.wikipedia.org/wiki/Conjugate_gradient_method">conjugate gradient method</a>, as illustrated
+below.
+</p>
+
+<p>
+Let us start by loading up some modules and the input image to be periodized
+(see Fig. <a href="#org63bb4a6">1</a>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+
+<span class="org-keyword">from</span> scipy.sparse.linalg <span class="org-keyword">import</span> cg
+<span class="org-keyword">from</span> skimage.io <span class="org-keyword">import</span> imread, imsave
+
+<span class="org-variable-name">u</span> = imread(DATA_DIR+<span class="org-string">'hut-648x364.png'</span>)
+<span class="org-variable-name">u</span> = u.astype(np.float64)
+</pre>
+</div>
+
+
+<div id="org63bb4a6" class="figure">
+<p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364.png" alt="hut-648x364.png" width="80%">
+</p>
+<p><span class="figure-number">Figure 1: </span>The initial image to be periodized.</p>
+</div>
+
+<p>
+We then create the operators \(Q_1\) and \(Q\) that were implemented in the
+<a href="./20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.html">previous instalment</a> of this series.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">Q1</span> = OperatorQ1(u.shape)
+<span class="org-variable-name">Q</span> = OperatorQ(u.shape)
+</pre>
+</div>
+
+<p>
+We then compute the right-hand side of the system, namely \(Q_1\cdot
+u\). Attention must be paid to the fact that \(u\) must be flattened to a 1D
+array.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">m</span>, <span class="org-variable-name">n</span> = u.shape
+<span class="org-variable-name">Q1u</span> = Q1@u.reshape((m*n,))
+</pre>
+</div>
+
+<p>
+We then use the <code>scipy.sparse.linalg.cg</code> function (see <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg">documentation</a>) to solve
+the linear system
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">x</span>, <span class="org-variable-name">info</span> = cg(Q, Q1u)
+<span class="org-keyword">if</span> info == 0:
+    <span class="org-keyword">print</span>(<span class="org-string">'success!'</span>)
+<span class="org-keyword">else</span>:
+    <span class="org-keyword">print</span>(info)
+<span class="org-variable-name">s</span> = x.reshape(u.shape)
+<span class="org-variable-name">p</span> = u-s
+</pre>
+</div>
+
+<pre class="example">
+success!
+
+</pre>
+
+<p>
+We can now save the results (for future reference).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-keyword">def</span> <span class="org-function-name">to_uint8</span>(v):
+    <span class="org-variable-name">m</span>, <span class="org-variable-name">n</span> = v.shape
+    <span class="org-variable-name">v_min</span> = v.<span class="org-builtin">min</span>()
+    <span class="org-variable-name">v_max</span> = v.<span class="org-builtin">max</span>()
+    <span class="org-keyword">return</span> (255.0*(v-v_min)/(v_max-v_min)).astype(np.uint8)
+
+imsave(DATA_DIR+<span class="org-string">'hut-648x364-smooth-cg.png'</span>, to_uint8(s))
+imsave(DATA_DIR+<span class="org-string">'hut-648x364-periodic-cg.png'</span>, to_uint8(p))
+imsave(DATA_DIR+<span class="org-string">'hut-648x364-periodic-cg-fftshift.png'</span>,
+       to_uint8(np.fft.fftshift(p)))
+</pre>
+</div>
+
+<p>
+Again, periodization is best observed by swapping the quadrants (see
+Fig. <a href="#org0fc1941">2</a>).
+</p>
+
+
+<div id="org0fc1941" class="figure">
+<p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-periodic-cg-fftshift.png" alt="hut-648x364-periodic-cg-fftshift.png" width="80%">
+</p>
+<p><span class="figure-number">Figure 2: </span>The periodic component of the initial image shown in Fig. <a href="#org63bb4a6">1</a>, resulting from conjugate gradient minimization of <a href="https://doi.org/10.1007/s10851-010-0227-1">Moisan</a>&rsquo;s energy.</p>
+</div>
+
+<p>
+Et voilà…
+</p>
+
+<p>
+In this fairly quick post, we derived a reference periodic-plus-smooth
+decomposition of a specific image. The conjugate gradient iterations are highly
+inefficient, and we will show in the <a href="./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.html">next instalment</a> of this series that a very
+efficient alternative, based on the fast Fourier transform, was proposed by
+Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>). The decomposition that we obtained in the present post will then
+be used as a reference for testing our implementation of Moisan&rsquo;s algorithm.
+</p>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05';
+var disqus_title = 'On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way';
+var disqus_url = 'http://sbrisard.github.io/posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

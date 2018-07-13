@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:57 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2018-02-19</p>
+<h1 class="title">On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition</h1>
+<p>
+In the <a href="./20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.html">previous instalment</a> of this series, we discussed the need for periodic
+images. Although not all images are periodic, some image analysis techniques are
+best performed in Fourier space (using the fast Fourier transform). Applying
+Fourier-based techniques to images that are <i>not</i> periodic (as is often the
+case) generates artifacts. In order to reduce these artifacts, Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>)
+proposed to construct a periodic image that is as close as possible to the
+original image. For reasons that will become clearer in the remainder of this
+post, he called the resulting construction the &ldquo;periodic-plus-smooth
+decomposition&rdquo;. We will define this decomposition in the remainder of this post,
+which is the second in a series in seven parts:
+</p>
+
+<ol class="org-ol">
+<li><a href="./20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.html">Introduction</a></li>
+<li><a href="./20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.html">Defining the decomposition</a></li>
+<li><a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html">The energy as a quadratic form</a></li>
+<li><a href="./20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.html">Implementing the linear operators</a></li>
+<li><a href="./20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html">Minimizing the energy, the clumsy way</a></li>
+<li><a href="./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.html">Minimizing the energy, the clever way</a></li>
+<li><a href="./20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07.html">Improved implementation of Moisan&rsquo;s algorithm</a></li>
+</ol>
+
+<p>
+The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.
+</p>
+
+<p>
+As an appetizer, Figure <a href="#orge7e906d">1</a> shows the original image (left) and its periodic
+(middle) and smooth components (right). Gray levels of the smooth component have
+been rescaled so as to fit between 0 and 255. Most of this image is grayish,
+meaning it is zero almost everywhere, except at the boundaries, where it
+corrects the jumps induced by the lack of periodicity of the initial image.
+</p>
+
+
+<div id="orge7e906d" class="figure">
+<p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-periodic-plus-smooth.png" alt="hut-648x364-periodic-plus-smooth.png" width="100%">
+</p>
+<p><span class="figure-number">Figure 1: </span>Illustration of the periodic-plus-smooth decomposition of an image. The original image (left), its periodic component (middle) and its smooth (rescaled) component (right).</p>
+</div>
+
+<div id="outline-container-org90f7681" class="outline-2">
+<h2 id="org90f7681">The decomposition as a minimization problem</h2>
+<div class="outline-text-2" id="text-org90f7681">
+<p>
+Let \(u\) be a \(m\times n\) image. We want to find two images \(p\) (&ldquo;periodic&rdquo;
+component) and \(s\) (&ldquo;smooth&rdquo; component), such that \(u=p+s\) and
+</p>
+
+<ol class="org-ol">
+<li>\(p\) minimizes jumps across boundaries (periodicity),</li>
+<li>\(s\) minimizes jumps between neighbor pixels (smoothness),</li>
+<li>\(p\) and \(u\) have same mean value (conservation of brigthness).</li>
+</ol>
+
+<p>
+In Moisan&rsquo;s work, neighbor pixels refer to the <a href="https://en.wikipedia.org/wiki/Pixel_connectivity#4-connected">4-connectivity</a>. Furthermore, we
+define
+</p>
+
+<ul class="org-ul">
+<li><i>direct</i> neighbors, that are adjacent to the pixel under consideration</li>
+<li><i>indirect</i> neighbors, that are periodic images of these neigbors that would
+normally fall outside the image.</li>
+</ul>
+
+<p>
+Figure <a href="#org3120cf8">2</a> illustrates direct and indirect
+neighbors. It shows that
+</p>
+
+<ul class="org-ul">
+<li>corner pixels have 2 direct neighbors and 2 indirect neighbors,</li>
+<li>off-corner, boundary pixels have 3 direct neighbors and 1 indirect neighbor,</li>
+<li>off-boundary (inner) pixels have 4 direct neighbors.</li>
+</ul>
+
+
+<div id="org3120cf8" class="figure">
+<p><object type="image/svg+xml" data="./On_the_periodic-plus-smooth_decomposition_of_an_image/direct_and_indirect_neighbors.svg" class="org-svg" width="90%">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 2: </span>Direct (blue) and indirect (green) neighbors of corner pixels (orange, top row), off-corner, boundary pixels (orange, middle row) and off-boundary pixels (orange, bottom row).</p>
+</div>
+
+<p>
+Now, we need to quantify how periodic is \(p\), and how smooth is \(s\). To do so,
+we will define two energy functions: \(E_\mathrm p\) and \(E_\mathrm s\) that
+penalize lack of periodicity and smoothness, respectively. More precisely,
+\(E_\mathrm p\) (resp. \(E_\mathrm s\)) is greater for less periodic (resp. less
+smooth) \(p\) (resp. \(s\)). The periodic-plus-smooth decomposition of an image \(u\)
+is then defined as the pair of images \((p, s)\) that minimize the total energy
+\(E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)\) under the constraints \(u=p+s\) and
+\(\operatorname{mean}(s)=0\). The remainder of this post is dedicated to defining
+the energies \(E_\mathrm p\) and \(E_\mathrm s\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb58e58e" class="outline-2">
+<h2 id="orgb58e58e">How to penalize lack of periodicity?</h2>
+<div class="outline-text-2" id="text-orgb58e58e">
+<p>
+For each pixel located at the boundary of an image, we compute the sum of
+squared differences (SSD) with <i>indirect</i> neighbors. The sum of all these SSDs
+is the energy of the periodic component. Note that <i>direct</i> neighbors are
+excluded from this sum, as we focus here on the jumps across image
+boundaries. This leads to the following expression
+</p>
+
+\begin{equation*}
+\begin{aligned}[b]
+E_\mathrm p(p)={}
+&\underbrace{(p_{m-1, 0}-p_{0, 0})^2+(p_{0, n-1}-p_{0, 0})^2}_\text{top-left corner}\\
+&+\underbrace{(p_{0, 0}-p_{0, n-1})^2+(p_{m-1, n-1}-p_{0, n-1})^2}_\text{top-right corner}\\
+&+\underbrace{(p_{0, 0}-p_{m-1, 0})^2+(p_{m-1, n-1}-p_{m-1, 0})^2}_\text{bottom-left corner}\\
+&+\underbrace{(p_{0, n-1}-p_{m-1, n-1})^2+(p_{m-1, 0}-p_{m-1, n-1})^2}_\text{bottom-right corner}\\
+&+\underbrace{\sum_{i=1}^{m-2}(p_{i, n-1}-p_{i, 0})^2}_\text{left column}
++\underbrace{\sum_{i=1}^{m-2}(p_{i, 0}-p_{i, n-1})^2}_\text{right column}\\
+&+\underbrace{\sum_{j=1}^{n-2}(p_{m-1, j}-p_{0, j})^2}_\text{top row}
++\underbrace{\sum_{j=1}^{n-2}(p_{0, j}-p_{m-1, j})^2}_\text{bottom row},
+\end{aligned}
+\end{equation*}
+
+<p>
+which reduces to
+</p>
+
+\begin{equation*}
+E_\mathrm p(p)=2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
++2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2.
+\end{equation*}
+</div>
+</div>
+
+<div id="outline-container-org67019f8" class="outline-2">
+<h2 id="org67019f8">How to penalize lack of smoothness?</h2>
+<div class="outline-text-2" id="text-org67019f8">
+<p>
+At this point, you might have guessed that smoothness is measured through the
+sum of squared differences between <i>direct</i> neighbors
+</p>
+
+\begin{equation*}
+E_\mathrm s(s)=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}\bigl[(s_{i, j-1}-s_{i, j})^2
++(s_{i, j+1}-s_{i, j})^2+(s_{i-1, j}-s_{i, j})^2+(s_{i+1, j}-s_{i, j})^2\bigr],
+\end{equation*}
+
+<p>
+where we have defined the following ghost cells
+</p>
+
+\begin{equation*}
+s_{i, -1}=s_{i, 0}, \quad s_{i, n}=s_{i, n-1}, \quad s_{-1, j}=s_{0, j}
+\quad\text{and}\quad s_{m, j}=s_{m-1, j},
+\end{equation*}
+
+<p>
+in order to make sure that indirect neighbors are indeed excluded. It is readily
+observed that in the above sum, each pair of direct neighbors appears exactly
+twice. In other words,
+</p>
+
+\begin{equation*}
+E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
++2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.
+\end{equation*}
+</div>
+</div>
+
+<div id="outline-container-org5f36715" class="outline-2">
+<h2 id="implementation"><a id="org5f36715"></a>Python implementation</h2>
+<div class="outline-text-2" id="text-implementation">
+<p>
+Implementation of the total energy \(E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)\) is
+fairly trivial (note the use of the <code>broadcast_arrays</code> function).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">ssd</span>(a, b):
+    <span class="org-doc">"""Sum of squared differences."""</span>
+    <span class="org-variable-name">delta2</span> = b-a
+    <span class="org-variable-name">delta2</span> *= delta2
+    <span class="org-keyword">return</span> np.<span class="org-builtin">sum</span>(delta2)
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">energy</span>(p, s):
+    <span class="org-doc">"""Return the total energy of the periodic-plus-smooth decomposition.</span>
+
+<span class="org-doc">    The periodic and smooth components p and s are 2D arrays of</span>
+<span class="org-doc">    float64. They should have the same shape, although this is not</span>
+<span class="org-doc">    required by this function.  2D arrays.</span>
+
+<span class="org-doc">    The energy is defined in Moisan (2011), Theorem 1. The</span>
+<span class="org-doc">    contribution of the periodic component is</span>
+
+<span class="org-doc">        E_p(p) = sum sum [p(x)-p(y)]**2,</span>
+<span class="org-doc">                  x   y</span>
+
+<span class="org-doc">    where the first sum is carried over all boundary pixels x, and the</span>
+<span class="org-doc">    second sum is carried over the indirect neighbors y of x. The</span>
+<span class="org-doc">    contribution of the smooth component is</span>
+
+<span class="org-doc">        E_s(s) = sum sum [s(x)-s(y)]**2,</span>
+<span class="org-doc">                  x   y</span>
+
+<span class="org-doc">    where the first sum is carried over all pixels x, and the second</span>
+<span class="org-doc">    sum is carried over the direct neighbors y of x. The total energy</span>
+<span class="org-doc">    is then defined as</span>
+
+<span class="org-doc">        E(p, s) = E_p(p) + E_s(s).</span>
+<span class="org-doc">    """</span>
+    <span class="org-variable-name">p</span>, <span class="org-variable-name">s</span> = np.broadcast_arrays(p, s)
+    <span class="org-keyword">return</span> 2*(ssd(p[:, 0], p[:, -1]) +
+              ssd(p[0, :], p[-1, :]) +
+              ssd(s[:-1, :], s[1:, :]) +
+              ssd(s[:, :-1], s[:, 1:]))
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org38779b8" class="outline-2">
+<h2 id="org38779b8">An equivalent, unconstrained minimization problem</h2>
+<div class="outline-text-2" id="text-org38779b8">
+<p>
+The periodic-plus-smooth decomposition \((p, s)\) of an image \(u\) is defined as
+the minimizer of the above defined energy \(E(p, s)\), under the constraints:
+\(u=p+s\) and \(\operatorname{mean}s=0\). Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) reformulates this
+constrained minimization problem as the following unconstrained minimization
+problem
+</p>
+
+\begin{equation*}
+s=\operatorname*{arg\,min}_v F(v, u),
+\quad\text{with}\quad
+F(s, u)=E_\mathrm p(u-s)+E_\mathrm s(s)+(\operatorname{mean}s)^2,
+\end{equation*}
+
+<p>
+and the periodic component \(p\) reads: \(p=u-s\). This is the minimization problem
+that we will eventually solve.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org079a569" class="outline-2">
+<h2 id="org079a569">Conclusion</h2>
+<div class="outline-text-2" id="text-org079a569">
+<p>
+In the present post, we have defined the periodic-plus-smooth decomposition as
+the minimizer of Moisan&rsquo;s energy, under the constraint that the average gray
+level of the periodic component is equal to the average gray level of the
+initial image.
+</p>
+
+<p>
+Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) showed that this minimizer is explicit in Fourier space. In the
+<a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html">next instalment</a> of this series, we will however temporarily ignore this result,
+and optimize the total energy in the real space, using standard iterative
+techniques. This will allow us to generate reference decompositions that will
+eventually be used to set up unit tests in order to check our implementation of
+Moisan&rsquo;s method.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02';
+var disqus_title = 'On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition';
+var disqus_url = 'http://sbrisard.github.io/posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

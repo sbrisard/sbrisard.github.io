@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:56 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scientific computing under Windows 7, part 6: ITK (prerequisites)</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2013-12-18</p>
+<h1 class="title">Scientific computing under Windows 7, part 6: ITK (prerequisites)</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">Scientific computing under Windows 7, part 6: ITK (prerequisites)</h1>
+<p>
+From the <a href="http://www.itk.org">official website</a>
+</p>
+
+<blockquote>
+<p>
+ITK is an open-source, cross-platform system that provides developers with an extensive suite of software tools for image analysis.  Developed through extreme programming methodologies, ITK employs leading-edge algorithms for registering and segmenting multidimensional data.
+</p>
+</blockquote>
+
+<p>
+Building ITK under Windows 7 is quite a trip, and will actually require several posts. We start with all prerequisites for this project.<!-- more -->
+</p>
+
+<div id="outline-container-org2f6d2bd" class="outline-2">
+<h2 id="org2f6d2bd">libjpeg</h2>
+<div class="outline-text-2" id="text-org2f6d2bd">
+<p>
+From the <a href="http://www.ijg.org/">official website</a>
+</p>
+
+<blockquote>
+<p>
+IJG is an informal group that writes and distributes a widely used free library for JPEG image compression. The first version was released on 7-Oct-1991.
+</p>
+</blockquote>
+
+<p>
+Download and unarchive the source code. Then, from the MSYS console
+</p>
+
+<pre class="example">
+$ ./configure --prefix=/mingw
+$ make
+$ make install
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org86851f2" class="outline-2">
+<h2 id="org86851f2">libpng</h2>
+<div class="outline-text-2" id="text-org86851f2">
+<p>
+From the <a href="http://www.libpng.org/pub/png/libpng.html">official website</a>
+</p>
+
+<blockquote>
+<p>
+libpng is the official PNG reference library. It supports almost all PNG features, is extensible, and has been extensively tested for over 18 years.
+</p>
+</blockquote>
+
+<p>
+Make sure you have installed the <code>mingw32-libz</code> (<code>dev</code> <i>and</i> <code>dll</code>). Download and unarchive the source code. Then, from the MSYS console
+</p>
+
+<pre class="example">
+$ ./configure --prefix=/mingw
+$ make
+$ make install
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org73eb231" class="outline-2">
+<h2 id="org73eb231">libtiff</h2>
+<div class="outline-text-2" id="text-org73eb231">
+<p>
+From the <a href="http://www.libtiff.org/">official website</a>
+</p>
+
+<blockquote>
+<p>
+This software provides support for the Tag Image File Format (TIFF), a widely used format for storing image data. The latest version of the TIFF specification is available on-line in several different formats, as are a number of Technical Notes (TTN's).
+</p>
+</blockquote>
+
+<p>
+Make sure you have installed the <code>mingw32-libzma</code> (<code>dev</code> <i>and</i> <code>dll</code>). Download and unarchive the source code. Then, from the MSYS console.
+</p>
+
+<pre class="example">
+./configure --prefix=/mingw
+make
+make install
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org423270c" class="outline-2">
+<h2 id="org423270c">HDF5</h2>
+<div class="outline-text-2" id="text-org423270c">
+<p>
+From the <a href="http://www.hdfgroup.org/HDF5/">official website</a>
+</p>
+
+<blockquote>
+<p>
+HDF5 is a data model, library, and file format for storing and managing data. It supports an unlimited variety of datatypes, and is designed for flexible and efficient I/O and for high volume and complex data. HDF5 is portable and is extensible, allowing applications to evolve in their use of HDF5. The HDF5 Technology suite includes tools and applications for managing, manipulating, viewing, and analyzing data in the HDF5 format.
+</p>
+</blockquote>
+
+<p>
+ITK ships with a version of HDF5 which it can compile automatically. However, compiling HDF5 from the ITK compilation process leads to errors
+</p>
+
+<pre class="example">
+[ 16%] Building C object Modules/ThirdParty/HDF5/src/itkhdf5/src/CMakeFiles/H5detect.dir/H5detect.c.obj
+In file included from c:\mingw\include\fcntl.h:37:0,
+                 from C:\src\InsightToolkit-4.4.2\Modules\ThirdParty\HDF5\src\itkhdf5\src\H5private.h:55,
+                 from C:\src\InsightToolkit-4.4.2\Modules\ThirdParty\HDF5\src\itkhdf5\src\H5detect.c:57:
+c:\mingw\include\io.h:301:1: error: unknown type name 'off64_t'
+ __CRT_INLINE off64_t lseek64 (int, off64_t, int);
+ ^
+c:\mingw\include\io.h:301:36: error: unknown type name 'off64_t'
+ __CRT_INLINE off64_t lseek64 (int, off64_t, int);
+                                    ^
+c:\mingw\include\io.h:302:1: error: unknown type name 'off64_t'
+ __CRT_INLINE off64_t lseek64 (int fd, off64_t offset, int whence) {
+ ^
+c:\mingw\include\io.h:302:39: error: unknown type name 'off64_t'
+ __CRT_INLINE off64_t lseek64 (int fd, off64_t offset, int whence) {
+                                       ^
+In file included from C:\src\InsightToolkit-4.4.2\Modules\ThirdParty\HDF5\src\itkhdf5\src\H5private.h:72:0,
+                 from C:\src\InsightToolkit-4.4.2\Modules\ThirdParty\HDF5\src\itkhdf5\src\H5detect.c:57:
+c:\mingw\include\unistd.h:65:20: error: unknown type name 'off_t'
+ int ftruncate(int, off_t);
+                    ^
+c:\mingw\include\unistd.h:67:38: error: unknown type name 'off_t'
+ __CRT_INLINE int ftruncate(int __fd, off_t __length)
+                                      ^
+Modules\ThirdParty\HDF5\src\itkhdf5\src\CMakeFiles\H5detect.dir\build.make:57: recipe for target 'Modules/ThirdParty/HDF5/src/itkhdf5/src/CMakeFiles/H5detect.dir/H5detect.c.obj' failed
+mingw32-make[2]: *** [Modules/ThirdParty/HDF5/src/itkhdf5/src/CMakeFiles/H5detect.dir/H5detect.c.obj] Error 1
+CMakeFiles\Makefile2:6329: recipe for target 'Modules/ThirdParty/HDF5/src/itkhdf5/src/CMakeFiles/H5detect.dir/all' failed
+mingw32-make[1]: *** [Modules/ThirdParty/HDF5/src/itkhdf5/src/CMakeFiles/H5detect.dir/all] Error 2
+Makefile:135: recipe for target 'all' failed
+mingw32-make: *** [all] Error 2
+</pre>
+
+<p>
+This seems to be caused by <code>H5_HAVE_WIN32_API</code> not being defined. From this <a href="http://lists.hdfgroup.org/pipermail/hdf-forum_lists.hdfgroup.org/2012-April/005692.html">mailing list</a>,
+</p>
+
+<blockquote>
+<p>
+Rob,
+</p>
+
+<p>
+   The defines should be in the generated H5pubconf.h file. However, because I
+could only successfully test CMake on MinGW, I did not want to insert MinGW
+checks into configure and not be able to verify them. End result is that those
+defines must be added to your H5pubconf.h.  Also those defines are needed by
+src/H5win32defs.h so that all the proper defines are set before the defines in
+H5private.h/H5public.h.
+</p>
+
+<p>
+Allen
+</p>
+</blockquote>
+
+<p>
+Unfortunately, the fix proposed in the above mailing list does <i>not</i> solve the problem. The solution is to download and install the pre-built binaries. Then, while compiling ITK, set <code>HDF5_DIR</code> appropriately.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org168268b" class="outline-2">
+<h2 id="org168268b">SWIG (Simplified Wrapper and Interface Generator)</h2>
+<div class="outline-text-2" id="text-org168268b">
+<p>
+From the <a href="http://www.swig.org/">official website</a>
+</p>
+
+<blockquote>
+<p>
+SWIG is a software development tool that connects programs written in C and C++ with a variety of high-level programming languages. SWIG is used with different types of target languages including common scripting languages such as Perl, PHP, Python, Tcl and Ruby.
+</p>
+</blockquote>
+
+<p>
+As I would like to use ITK with Python, I need to build the Python bindings, which requires SWIG. Under Windows, the recommended procedure is to install the pre-built binaries (swigwin). Download the archive, and unzip it to the place of your choice (for example, <code>C:\opt\</code>). The executable program <code>swig.exe</code> should be available.
+</p>
+
+<p>
+<b>Update</b>: I still have not managed to compile the Python bindings for ITK. So for the time being, installing SWIG is not really necessary.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga342767" class="outline-2">
+<h2 id="orga342767">Doxygen</h2>
+<div class="outline-text-2" id="text-orga342767">
+<p>
+From the <a href="http://www.stack.nl/=dimitri/doxygen/index.html">official website</a>
+</p>
+
+<blockquote>
+<p>
+Doxygen is the de facto standard tool for generating documentation from annotated C++ sources, but it also supports other popular programming languages such as C, Objective-C, C#, PHP, Java, Python, IDL (Corba, Microsoft, and UNO/OpenOffice flavors), Fortran, VHDL, Tcl, and to some extent D.
+</p>
+</blockquote>
+
+<p>
+Doxygen is required only if you plan to build the documentation of ITK. Use the windows installer.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgff7e132" class="outline-2">
+<h2 id="orgff7e132">GCC-XML</h2>
+<div class="outline-text-2" id="text-orgff7e132">
+<p>
+From the <a href="http://gccxml.github.io/HTML/Index.html">official website</a>
+</p>
+
+<blockquote>
+<p>
+The purpose of the GCC-XML extension is to generate an XML description of a C++ program from GCC's internal representation. Since XML is easy to parse, other development tools will be able to work with C++ programs without the burden of a complicated C++ parser.
+</p>
+</blockquote>
+
+<p>
+I am not entirely sure that GCC-XML is necessary for building ITK (I think in the end, I did not use it). ITK can install GCC-XML automatically. However, the automatic installation procedure failed under MinGW. I therefore installed GCC-XML manually, as a prerequisite. First, download the development version from Git
+</p>
+
+<pre class="example">
+$ git clone git://github.com/gccxml/gccxml.git
+</pre>
+
+<p>
+Use CMake to generate the <code>Makefile</code>, then compile the sources
+</p>
+
+<pre class="example">
+$ mingw32-make
+$ mingw32-make install
+</pre>
+
+<p>
+Unfortunately, the <code>Makefile</code> does not provide an <code>uninstall</code> target. For the record, here is the list of files and directories which are created
+</p>
+
+<ul class="org-ul">
+<li><code>$CMAKE_INSTALL_PREFIX/bin/gccxml.exe</code></li>
+<li><code>$CMAKE_INSTALL_PREFIX/bin/gccxml_cc1plus.exe</code></li>
+<li><code>$CMAKE_INSTALL_PREFIX/bin/gccxml_vccconfig.bat</code></li>
+<li><code>$CMAKE_INSTALL_PREFIX/bin/gccxml_vccconfig.exe</code></li>
+<li><code>$CMAKE_INSTALL_PREFIX/share/doc/gccxml-0.9</code></li>
+<li><code>$CMAKE_INSTALL_PREFIX/share/gccxml-0.9</code></li>
+<li><code>$CMAKE_INSTALL_PREFIX/man/man1/gccxml.1</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org42b64fd" class="outline-2">
+<h2 id="org42b64fd">Conclusion</h2>
+<div class="outline-text-2" id="text-org42b64fd">
+<p>
+We are now ready to compile ITK itself&#x2026; to be continued in the <a href="./20131219-Scientific_computing_under_windows_7-07.html">next installment</a> of this series.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20131218-Scientific_computing_under_windows_7-06';
+var disqus_title = 'Scientific computing under Windows 7, part 6: ITK (prerequisites)';
+var disqus_url = 'http://sbrisard.github.io/posts/20131218-Scientific_computing_under_windows_7-06.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

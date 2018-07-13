@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:56 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scientific computing under Windows 7, part 2: OpenMP</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2013-09-18</p>
+<h1 class="title">Scientific computing under Windows 7, part 2: OpenMP</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">Scientific computing under Windows 7, part 2: OpenMP</h1>
+<p>
+From the <a href="http://www.openmp.org/">official website</a>
+</p>
+
+<blockquote>
+<p>
+The OpenMP API defines a portable, scalable model with a simple and flexible interface for developing parallel applications on platforms from the desktop to the supercomputer.
+</p>
+</blockquote>
+
+<p>
+To use OpenMP with MinGW, you must install the following packages (using the <code>mingw-get</code> installer)
+</p>
+
+<ul class="org-ul">
+<li><code>mingw32-pthreads-w32</code>,</li>
+<li><code>mingw32-libgomp</code>.</li>
+</ul>
+
+<p>
+To check that OpenMP indeed works, create the following <code>hello.c</code> source file
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;omp.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>(<span class="org-type">int</span> <span class="org-variable-name">argc</span>, <span class="org-type">char</span> <span class="org-variable-name">argv</span>[]) {
+  <span class="org-type">int</span> <span class="org-variable-name">id</span>;
+<span class="org-preprocessor">#pragma</span> omp parallel private(id)
+  {
+    id = omp_get_thread_num();
+    printf(<span class="org-string">"%d: Hello World!\n"</span>, id);
+  }
+  <span class="org-keyword">return</span> 0;
+}
+</pre>
+</div>
+
+<p>
+and compile it as follows (in the MSYS console)
+</p>
+
+<pre class="example">
+$ gcc -fopenmp -o hello hello.c
+</pre>
+
+<p>
+Running the resulting executable on my laptop (4 processors) leads to the following output
+</p>
+
+<pre class="example">
+$ ./hello.exe
+2: Hello World!
+0: Hello World!
+1: Hello World!
+3: Hello World!
+</pre>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20130918-Scientific_computing_under_Windows_7-02';
+var disqus_title = 'Scientific computing under Windows 7, part 2: OpenMP';
+var disqus_url = 'http://sbrisard.github.io/posts/20130918-Scientific_computing_under_Windows_7-02.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

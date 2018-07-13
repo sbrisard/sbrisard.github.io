@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:57 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When a thin shell is not so thin, part&nbsp;3: the thick shell solution</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2015-07-06</p>
+<h1 class="title">When a thin shell is not so thin, part&nbsp;3: the thick shell solution</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">When a thin shell is not so thin, part&nbsp;3: the thick shell solution</h1>
+<p>
+Finding the stress resultant and stress couple in a spherical pressure vessel seems easy enough. Well, this apparently simple problem allows us to highlight subtle thickness effects within shells. It should be emphasized again that these thickness effects have nothing to do with shear corrections. Indeed, shear stresses are null at any point of the spherical pressure vessel. Rather, the thickness effects we are discussing in this series are due to curvature.
+</p>
+
+<p>
+In the <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html">first instalment</a> of this series, I showed that using Koiter's thin shell solution leads to a non-null stress couple, which came as quite a surprise. In the <a href="./20150701-When_a_thin_shell_is_not_so_thin-02.html">second instalment</a>, I used the exact, 3D solution to derive reference values of the stress couple and stress resultant through integration over the thickness of the shell. In particular, I showed that thickness corrections <i>had</i> to be incorporated.
+</p>
+
+<p>
+This still does not settle the matter, since the results obtained within the framework of Koiter's thin shell theory (see <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html">first instalment</a>) are inconsistent with the reference, 3D elasticity values (see <a href="./20150701-When_a_thin_shell_is_not_so_thin-02.html">second instalment</a>). To reconcile both approaches (3D elasticity vs. shell theory), we need to use a <i>thick</i> shell theory, as illustrated below.
+</p>
+
+<div id="outline-container-org55f7e97" class="outline-2">
+<h2 id="org55f7e97">Strain distribution in the spherical pressure vessel</h2>
+<div class="outline-text-2" id="text-org55f7e97">
+<p>
+The fundamental assumption of all shell theories is that displacement of any point of the shell is completely defined by the rigid body motion (translation and rotation) of its projection onto the base surface. In the present case, owing to the symmetries of the problem, points of the base surface move along the normal \(\mathbf n\)
+</p>
+
+\begin{equation}
+\label{eq:1}\mathbf u = w\mathbf n,
+\end{equation}
+
+<p>
+where \(w\) is the normal displacement, which is constant over the base surface. Since the rotation is null, all points (across the thickness of the shell) have the same normal displacement. Therefore, Eq. \eqref{eq:1} defines the 3D displacement field within the shell, seen as a 3D continuum. From this 3D displacement field, we can readily derive the corresponding strain field. We will use a simplified, geometric approach, rather than the general formulas in spherical coordinates. This is possible because there are so many symmetries in the problem at hand!
+</p>
+
+<p>
+The in-plane strain \(\epsilon\) at the distance \(r\) of the center is given by the relative change of length of the equator
+</p>
+
+\begin{equation}
+\label{eq:2}\epsilon=\frac{2\pi\left(r+w\right)-2\pi r}{2\pi r}=\frac wr.
+\end{equation}
+
+<p>
+In the <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html">first instalment</a>, we found \(\epsilon=w/R\), where \(R\) is the radius of the midsurface. Eq. \eqref{eq:2} therefore incorporates thickness corrections which we previously overlooked.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6b21166" class="outline-2">
+<h2 id="org6b21166">Stress distribution in the spherical pressure vessel</h2>
+<div class="outline-text-2" id="text-org6b21166">
+<p>
+Stresses in the spherical pressure vessel are derived from the strains [see Eq. \eqref{eq:2}], within the framework of plane stress elasticity
+</p>
+
+\begin{align}
+\label{eq:3}\sigma_{\theta\theta}&=\frac E{1-\nu^2}\left(\epsilon_{\theta\theta}+\nu\epsilon_{\phi\phi}\right)\\
+\label{eq:4}\sigma_{\phi\phi}&=\frac E{1-\nu^2}\left(\epsilon_{\phi\phi}+\nu\epsilon_{\theta\theta}\right).
+\end{align}
+
+<p>
+Since the solution is isotropic (\(\epsilon_{\theta\theta}=\epsilon_{\phi\phi}=\epsilon\) and \(\sigma_{\theta\theta}=\sigma_{\phi\phi}=\sigma\)), Eqs. \eqref{eq:3} and \eqref{eq:4} lead to
+</p>
+
+\begin{equation}
+\label{eq:5}\sigma=\frac E{1-\nu}\epsilon=\frac E{1-\nu}\frac wr.
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-org171cf07" class="outline-2">
+<h2 id="org171cf07">Stress resultant and stress couple</h2>
+<div class="outline-text-2" id="text-org171cf07">
+<p>
+Eq. \eqref{eq:5} is finally integrated over the thickness of the shell to obtain the stress resultant and stress couple. Integration must include thickness corrections, which amount to a \(r/R\) factor within the integral (see <a href="./20150701-When_a_thin_shell_is_not_so_thin-02.html">previous instalment</a> of this series).
+</p>
+
+\begin{align}
+\label{eq:6}N&=\int_{R_\mathrm{int}}^{R_\mathrm{ext}}\sigma(r)\,\frac rR\,\mathrm{d}r=\frac{Eh}{1-\nu}\frac wR,\\
+\label{eq:7}M&=\int_{R_\mathrm{int}}^{R_\mathrm{ext}}-\left(r-R\right)\sigma(r)\,\frac rR\,\mathrm{d}r=0.
+\end{align}
+
+<p>
+Now, things start getting really interesting! Indeed, in the thick shell approach, the stress couple is (as expected) rigorously null! Since \(M=0\), it can readily be deduced that
+</p>
+
+\begin{equation}
+\label{eq:8}N=\frac{pR}2.
+\end{equation}
+
+<p>
+In other words, the classical formula is retrieved (see <a href="http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels">Wikipedia</a>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgde8c279" class="outline-2">
+<h2 id="orgde8c279">Conclusion</h2>
+<div class="outline-text-2" id="text-orgde8c279">
+<p>
+In the present post, we finally resolved all contradictions regarding the computation of stress resultant and stress couple within a spherical pressure vessel. In the discussion below, \(\eta\) denotes the slenderness of the shell, \(\eta=h/R\). Besides, by "k-th order terms", we mean terms of order \(\eta^k\).
+</p>
+
+<p>
+Four difference approaches can be followed to analyse the equilibrium of a spherical pressure vessel (see Tab. <a href="#org88d834d">1</a> for a summary). In the classical membrane approach, stress couples are overlooked, and the classical formula \(N=pR/2\) is obtained.
+</p>
+
+<p>
+In the thin shell approach, the stress resultant deviates slightly from this classical value (by second order terms) and the stress couple is <i>not</i> null (rather, it is of second order).
+</p>
+
+<p>
+In the thick shell approach, the stress couple is rigorously null and the classical formula is retrieved for the stress resultant. Thickness corrections appear in two different places
+</p>
+
+<ol class="org-ol">
+<li>in the strain distribution across the thickness of the shell [see Eq. \eqref{eq:2}]: the distribution is hyperbolic with respect to the thickness coordinate,</li>
+<li>in the stress-stress resultant and stress-stress couple integral relations [see Eqs. \eqref{eq:6} and \eqref{eq:7}].</li>
+</ol>
+
+<p>
+In the 3D approach, the true stress resultant differs from \(N=pR/2\) by second order terms, while the true stress couple is of fourth order.
+</p>
+
+<p>
+What should we deduce from this study? Obviously, beware thin shell theories! Fortunately, I believe that most FE codes implement the thick shell theory. More fundamentally, I am still trying to understand what these results really imply. Does that mean that the asymptotic convergence (as the thickness tends to zero) of thick shell models is faster than that of thin shell models? That is something I am going to investigate.
+</p>
+
+<p>
+This closes our series on thick shells. I hope you enjoyed reading it&#x2026; and maybe learned something! Should you want to dig deeper into various thick shell theories, do start with Leissa (<a href="../pages/references.html#LEIS1973">1973</a>), who gives a good overview.
+</p>
+
+<table id="org88d834d" rules="groups" frame="hsides" border="2" cellpadding="6" cellspacing="0">
+<caption class="t-above"><span class="table-number">Table 1:</span> Comparison of three different approaches for the analysis of the spherical pressure vessel</caption>
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-center">
+
+<col  class="org-center">
+
+<col  class="org-center">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-center">Exact 3D theory</th>
+<th scope="col" class="org-center">Thin shell theory</th>
+<th scope="col" class="org-center">Thick shell theory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Stress resultant (deviation from pR/2)</td>
+<td class="org-center">&eta;<sup>2</sup></td>
+<td class="org-center">&eta;<sup>2</sup></td>
+<td class="org-center">0</td>
+</tr>
+
+<tr>
+<td class="org-left">Stress couple</td>
+<td class="org-center">&eta;<sup>4</sup></td>
+<td class="org-center">&eta;<sup>2</sup></td>
+<td class="org-center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20150706-When_a_thin_shell_is_not_so_thin-03';
+var disqus_title = 'When a thin shell is not so thin, part&amp;nbsp;3: the thick shell solution';
+var disqus_url = 'http://sbrisard.github.io/posts/20150706-When_a_thin_shell_is_not_so_thin-03.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

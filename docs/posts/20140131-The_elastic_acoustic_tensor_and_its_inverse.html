@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:56 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The elastic acoustic tensor and its inverse</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2014-01-31</p>
+<h1 class="title">The elastic acoustic tensor and its inverse</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">The elastic acoustic tensor and its inverse</h1>
+<div class="ABSTRACT">
+<p>
+In this post, I will introduce the acoustic tensor of linearly elastic materials. Closed-form expressions of the inverse of this tensor can be derived in the case of <i>isotropic</i> materials. This will later come in handy to derive closed-form expressions of the periodic Green operator for strains.
+</p>
+
+</div>
+
+<p>
+We consider a linearly elastic material with stiffness \(\stiffness\). For any wave-vector \(\vec k\), the elastic acoustic tensor \(\acoustic(\vec k)\) is defined as follows
+</p>
+
+\begin{equation}
+\label{eq:1}
+\acoustic(\vec k)=\vec k\cdot\stiffness\cdot\vec k=k^2\vec n\cdot\stiffness\cdot\vec n,
+\end{equation}
+
+<p>
+where \(k\) is the amplitude of the wave-vector \(\vec k\), \(k=\sqrt{\vec k\cdot\vec k}\), and \(\vec n\) is its direction (\(\vec k=k\vec n\)). The acoustic tensor is used to assess material stability (<a href="../pages/references.html#BIGO1994">Bigoni and Zaccaria, 1994</a>) and study the propagation of waves (<a href="../pages/references.html#GENT2013">Gentile and Straughan, 2013</a>). As far as we are concerned, the derivation of the periodic Green operator for strains will require the expressions of the inverse of the acoustic tensor<!-- TODO Insert hyperlink -->. This is the topic of the present post<!-- more -->, which is restricted to isotropic materials: the stiffness tensor \(\stiffness\) of isotropic materials is therefore a linear combination of the <a href="./20140112-Elastic_constants_of_an_isotropic_material-03.html">isotropic projection tensors</a> \(\sphprojiv,\devprojiv\)
+</p>
+
+\begin{equation}
+\label{eq:2}
+\stiffness=d\bulkmod\sphprojiv+2\shearmod\devprojiv
+\end{equation}
+
+<p>
+To compute the elastic acoustic tensor, we therefore need to find the expressions of \(\vec n\cdot\sphprojiv\cdot\vec n\) and \(\vec n\cdot\devprojiv\cdot\vec n\), for any unit vector \(\vec n\). We start with the computation of \(\vec n\cdot\identiv\cdot\vec n\), where \(\identiv\) denotes the fourth-rank identity tensor. We have
+</p>
+
+\begin{equation*}
+\left(\vec n\cdot\identiv\cdot\vec n\right)_{jk}=n_i\identivcomp_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta_{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
+\end{equation*}
+
+<p>
+Since \(\vec n\) is a unit vector, we have \(n_in_i=1\), and
+</p>
+
+\begin{equation*}
+\vec n\cdot\identiv\cdot\vec n=\frac12\left(\identii+\vec n\otimes\vec n\right),
+\end{equation*}
+
+<p>
+where \(\identii\) denotes the second-rank identity tensor. It will be convenient to introduce the projectors \(\tensii p\) and \(\tensii q\), defined as follows
+</p>
+
+\begin{equation*}
+\tensii p=\vec n\otimes\vec n\qquad\tensii q=\identii-\tensii p,
+\end{equation*}
+
+<p>
+or, using indices
+</p>
+
+\begin{equation*}
+p_{ij}=n_in_j\qquad q_{ij}=\delta_{ij}-n_in_j.
+\end{equation*}
+
+<p>
+It can readily be verified that
+</p>
+\begin{equation}
+\label{eq:3}
+\tensii p\cdot\tensii p=\tensii p,\qquad\tensii q\cdot\tensii q=\tensii q,\qquad\tensii p\cdot\tensii q=\tensii q\cdot\tensii p=\tensii0,
+\end{equation}
+
+<p>
+and
+</p>
+
+\begin{equation}
+\label{eq:4}
+\vec n\cdot\identiv\cdot\vec n=\tensii p+\frac12\tensii q.
+\end{equation}
+
+<p>
+Similarly
+</p>
+
+\begin{equation}
+\label{eq:5}
+\vec n\cdot\sphprojiv\cdot\vec n=\frac1d\vec n\cdot\left(\identii\otimes\identii\right)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tensii p.
+\end{equation}
+
+<p>
+Finally, combining identity \(\devprojiv=\identiv-\sphprojiv\) with Eqs. \eqref{eq:4} and \eqref{eq:5}
+</p>
+
+\begin{equation}
+\label{eq:6}
+\vec n\cdot\devprojiv\cdot\vec n=\frac{d-1}d\tensii p+\frac12\tensii q.
+\end{equation}
+
+<p>
+The acoustic tensor of an elastic, linear, isotropic material is obtained from Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:5} and \eqref{eq:6}
+</p>
+
+\begin{equation*}
+\acoustic(\vec n)=\left(\bulkmod+2\shearmod\frac{d-1}d\right)\tensii p+\shearmod\tensii q.
+\end{equation*}
+
+<p>
+From <a href="./20140112-Elastic_constants_of_an_isotropic_material-03.html">this post</a>, it can readily be verified that
+</p>
+
+\begin{equation*}
+\bulkmod+2\shearmod\frac{d-1}d=2\shearmod\frac{1-\nu}{1-2\nu},
+\end{equation*}
+
+<p>
+this identity being true in both 3D and plane strain elasticity. The acoustic tensor therefore reads
+</p>
+
+\begin{equation*}
+\acoustic(\vec k)=k^2\shearmod\left(\frac{2\left(1-\nu\right)}{1-2\nu}\tensii p+\tensii q\right).
+\end{equation*}
+
+<p>
+Finally, using the properties of the projectors \(\tensii p\) and \(\tensii q\) [see Eq. \eqref{eq:3}], the <i>inverse</i> of the acoustic tensor can be derived
+</p>
+
+\begin{equation*}
+\acoustic^{-1}(\vec k)=\frac1{k^2\shearmod}\left(\frac{1-2\nu}{2\left(1-\nu\right)}\tensii p+\tensii q\right).
+\end{equation*}
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20140131-The_elastic_acoustic_tensor_and_its_inverse';
+var disqus_title = 'The elastic acoustic tensor and its inverse';
+var disqus_url = 'http://sbrisard.github.io/posts/20140131-The_elastic_acoustic_tensor_and_its_inverse.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

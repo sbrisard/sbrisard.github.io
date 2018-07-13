@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:56 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Towards polarization methods, part 1: the Lippmann&#x2013;Schwinger equation</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2011-10-04</p>
+<h1 class="title">Towards polarization methods, part 1: the Lippmann&#x2013;Schwinger equation</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">Towards polarization methods, part 1: the Lippmann&#x2013;Schwinger equation</h1>
+<p>
+In this series, we will enter the heart of the matter. We will look at non-standard ways of numerically solving the local problem of micromechanics, introducing first the Lippmann&#x2013;Schwinger equation (in this instalment), then the energy principle of Hashin and Shtrikman (in the next instalment).<!-- more -->
+</p>
+
+<p>
+We again consider a heterogeneous material, with local stiffness \(\stiffness\), located in domain \(\domain\subset\reals^d\). As will be discussed elsewhere, the local problem of micromechanics reads
+</p>
+
+\begin{align}
+    \label{eq:1}
+    \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
+    \label{eq:2}
+    \stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\domain),\\
+    \label{eq:3}
+    \strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
+    \label{eq:4}
+    \displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+\end{align}
+
+<p>
+where \(\Strain\) is the macroscopic (imposed) strain. The solution to this problem defines the effective elastic properties \(\stiffness^\text{eff}\), since, by definition
+</p>
+
+\begin{equation*}
+\Stress=\volavg{\stress}=\stiffness^\text{eff}:\Strain,
+\end{equation*}
+
+<p>
+where \(\Stress\) is the macroscopic stress.
+</p>
+
+<p>
+Eqs. \eqref{eq:1} &#x2013; \eqref{eq:4} would be trivial if we had \(\stiffness(\vec x)=\stiffness_0\) for any \(\vec x\in\domain\) (\(\stiffness_0\) is a <i>constant</i> stiffness tensor). Indeed, the solution would then be
+</p>
+
+\begin{equation*}
+\strain(\vec x)=\Strain,\qquad\stress(\vec x)=\stiffness_0:\Strain.
+\end{equation*}
+
+<p>
+In other words, our life would be easier if we were to homogenize materials which are <i>already</i> homogeneous!
+</p>
+
+<p>
+So we see that the complexity of Eqs. \eqref{eq:1} &#x2013; \eqref{eq:4} comes from the heterogeneity of the material. We would like to <i>force</i> a homogeneous material <i>into</i> this problem. More precisely, we select a so-called <i>reference</i> material, with <i>arbitrary</i> stiffness \(\stiffness_0\). Then the local stress-strain relationship \eqref{eq:2} can always be written as follows
+</p>
+
+\begin{equation}
+\label{eq:5}
+\stress(\vec x)=\stiffness(\vec x):\strain(\vec x)=\stiffness_0:\strain(\vec x)+\left[\stiffness(\vec x)-\stiffness_0\right]:\strain(\vec x).
+\end{equation}
+
+<p>
+Introducing the so-called <i>polarization</i> \(\polarization\)
+</p>
+
+\begin{equation}
+\label{eq:6}
+\polarization(\vec x)=\left[\stiffness(\vec x)-\stiffness_0\right]:\strain(\vec x),
+\end{equation}
+
+<p>
+Eq. \eqref{eq:5} then takes the following compact form
+</p>
+
+\begin{equation}
+\label{eq:7}
+\stress(\vec x)=\stiffness_0:\strain(\vec x)+\polarization(\vec x).
+\end{equation}
+
+<p>
+Determination of the polarization \(\polarization\) requires the solution to Eqs. \eqref{eq:1} &#x2013; \eqref{eq:4}; therefore, it would seem that Eq. \eqref{eq:7} achieved nothing! However, let us assume for a moment that we <i>know</i> \(\polarization\) beforehand. Then Eqs. (1) &#x2013; (4) reduce to
+</p>
+
+\begin{align*}
+\nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
+\stress(\vec x)&=\stiffness_0:\strain(\vec x)+\polarization(\vec x)&&(\vec x\in\domain),\\
+\strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
+\displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+\end{align*}
+
+<p>
+which characterize the elastic equilibrium of a <i>homogeneous</i>, <i>prestressed</i> linear elastic material \(\stiffness_0\). From <a href="./20110911-The_Green_operator_for_strains-01.html">this series</a>, the solution to the above problem is known (at least, formally)
+</p>
+
+\begin{equation}
+\label{eq:8}
+\strain(\vec x)=\Strain-(\greeniv_0\circledast\polarization)(\vec x),
+\end{equation}
+
+<p>
+where the Green operator for strains \(\greeniv_0\) associated with \(\stiffness_0\) has been introduced. We now need to remember that the polarization \(\polarization\) is <i>not</i> known. Rather, it is given by Eq. \eqref{eq:6}. Upon introduction into Eq. \eqref{eq:8}, we get the so-called Lippmann&#x2013;Schwinger equation
+</p>
+
+\begin{equation}
+\label{eq:9}
+\strain(\vec x)+\left\{\greeniv_0\circledast\left[\left(\stiffness-\stiffness_0\right):\strain\right]\right\}(\vec x)=\Strain.
+\end{equation}
+
+<p>
+This equation was first introduced by <a href="../pages/references.html#ZELL1973">Zeller and Dederichs (1973)</a>. In the next instalments of this series, it will be more convenient to chose the polarization \(\polarization\), rather that the strain \(\strain\) as principal unknown. This leads to the equivalent integral equation
+</p>
+
+\begin{equation}
+\label{eq:10}
+\left[\stiffness(\vec x)-\stiffness_0\right]^{-1}:\polarization(\vec x)+\left(\greeniv_0\circledast\polarization\right)(\vec x)=\Strain.
+\end{equation}
+
+<p>
+To sum up, we started with the set of partial differential equations \eqref{eq:1} &#x2013; \eqref{eq:4}, and ended up with one <i>single</i>, <i>equivalent</i>, integral equation. Discretization of the Lippmann-Schwinger equation \eqref{eq:9} has already been considered in the past. This leads to some well-known numerical schemes (Moulinec &amp; Suquet, <a href="../pages/references.html#MOUL1994">1994</a>, <a href="../pages/references.html#MOUL1998">1998</a>).
+</p>
+
+<p>
+However, I do think it is not the best way to proceed. A much more fruitful approach is to consider the variational form of Eq. \eqref{eq:10}. This will be done in the <a href="./20111019-Towards_polarization_methods-02.html">next instalment</a> of this series.
+</p>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20111004-Towards_polarization_methods-01';
+var disqus_title = 'Towards polarization methods, part 1: the Lippmann&amp;#x2013;Schwinger equation';
+var disqus_url = 'http://sbrisard.github.io/posts/20111004-Towards_polarization_methods-01.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

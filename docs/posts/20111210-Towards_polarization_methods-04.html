@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:56 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Towards polarization methods, part 4: bounds on the macroscopic elastic properties</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2011-12-10</p>
+<h1 class="title">Towards polarization methods, part 4: bounds on the macroscopic elastic properties</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">Towards polarization methods, part 4: bounds on the macroscopic elastic properties</h1>
+<p>
+Back from a long silent period&#x2026; In <a href="./20111019-Towards_polarization_methods-02.html">part 2</a> of this series, I introduced the <i>variational</i> principle of <a href="../pages/references.html#HASH1962">Hashin and Shtrikman (1962)</a>. Then, in <a href="./20111031-Towards_polarization_methods-03.html">part 3</a>, I showed how further assumptions on the reference material led to the <i>energy</i> principle of Hashin and Shtrikman. Both principles are great tools to derive numerical methods for the computation of strain/stress fields in highly heterogeneous materials (where other methods &#x2013; eg finite elements &#x2013; would have a hard time doing the same calculation). But the energy principle also allows the derivation of theoretical results, such as rigorous bounds on the macroscopic properties. Why this is so is the topic of today's instalment.<!-- more -->
+</p>
+
+<p>
+Let \(\polarization\) be the solution of the Lippmann-Schwinger equation
+</p>
+
+\begin{equation}
+\label{eq:1}
+\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\greeniv_0\circledast\polarization=\Strain,
+\end{equation}
+
+<p>
+where \(\Strain\) is the (imposed) macroscopic strain. We seek the value \(\mathcal H(\polarization)\) of the functional of Hashin and Shtrikman \(\mathcal H\) (defined in <a href="./20111019-Towards_polarization_methods-02.html">part 2</a> of this series), at point \(\polarization\)
+</p>
+
+\begin{equation}
+\label{eq:2}
+\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)}.
+\end{equation}
+
+<p>
+Substituting Eq. \eqref{eq:1} in Eq. \eqref{eq:2}, we find
+</p>
+
+\begin{equation}
+\label{eq:3}
+\mathcal H(\polarization)=\frac12\Strain:\volavg{\polarization}.
+\end{equation}
+
+<p>
+Now is a good time to remember that the polarization \(\polarization\) is related to the strain \(\strain\) by the following equation
+</p>
+
+\begin{equation}
+\label{eq:4}
+\polarization=\left(\stiffness-\stiffness_0\right):\strain,
+\end{equation}
+
+<p>
+Combining Eqs. \eqref{eq:3} and \eqref{eq:4} then leads to
+</p>
+
+\begin{equation}
+\label{eq:5}
+\mathcal H(\polarization)=\frac12\Strain:\volavg{\left(\stiffness-\stiffness_0\right):\strain}=\frac12\Strain:\volavg{\stiffness:\strain}-\frac12\Strain:\stiffness_0:\volavg{\strain},
+\end{equation}
+
+<p>
+where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, \(\volavg\strain=\Strain\) (this is the very definition of the macroscopic strain \(\Strain\)). Furthermore, \(\volavg{\stiffness:\strain} = \volavg{\stress} = \Stress\), where \(\Stress\) is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
+</p>
+
+\begin{equation}
+\label{eq:6}
+\Stress=\stiffness^\eff:\Strain,
+\end{equation}
+
+<p>
+where \(\stiffness^\eff\) is the macroscopic (or effective, or homogenized) stiffness of the composite. Eq. \eqref{eq:5} finally reduces to
+</p>
+
+\begin{equation}
+\label{eq:7}
+\mathcal H(\polarization)=\frac12\Strain:\stiffness^\eff:\Strain-\frac12\Strain:\stiffness_0:\Strain.
+\end{equation}
+
+<p>
+In other words, the value of the functional of Hashin and Shtrikman at the solution of the Lippmann-Schwinger equation is the difference between the strain energy of the composite and the strain energy of the reference material.
+</p>
+
+<p>
+While the above result is fully general, we now assume that the reference material is <i>stiffer</i> than the composite. In other words, \(\stiffness(\vec x)\leq\stiffness_0\) at any point \(\vec x\in\domain\). We then saw in <a href="./20111031-Towards_polarization_methods-03.html">part 3</a> of this series that the following inequality holds for <i>any</i> polarization field \(\prestress\)
+</p>
+
+\begin{equation}
+\label{eq:8}
+\mathcal H(\polarization)\leq\mathcal H(\prestress).
+\end{equation}
+
+<p>
+Inserting Eq. \eqref{eq:7} in Eq. \eqref{eq:8} leads for any polarization field \(\prestress\) to the following bound on the macroscopic potential energy of the composite
+</p>
+
+\begin{equation}
+\label{eq:9}
+\frac12\Strain:\stiffness^\eff:\Strain\leq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\prestress).
+\end{equation}
+
+<p>
+Similarly, if the reference material is <i>softer</i> than the composite, that is \(\stiffness(\vec x)\geq\stiffness_0\) for any \(\vec x\in\domain\), then Eq. \eqref{eq:9} should be replaced with
+</p>
+
+\begin{equation}
+\label{eq:10}
+\frac12\Strain:\stiffness^\eff:\Strain\geq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\prestress).
+\end{equation}
+
+<p>
+Eqs. \eqref{eq:9} and \eqref{eq:10} have deep (deep, deep) implications, which will be explored in the next instalment of this series.
+</p>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20111210-Towards_polarization_methods-04';
+var disqus_title = 'Towards polarization methods, part 4: bounds on the macroscopic elastic properties';
+var disqus_url = 'http://sbrisard.github.io/posts/20111210-Towards_polarization_methods-04.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

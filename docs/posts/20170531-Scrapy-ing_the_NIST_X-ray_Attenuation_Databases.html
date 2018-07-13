@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:57 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scrapy-ing the NIST X-ray Attenuation Databases</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2017-05-31</p>
+<h1 class="title">Scrapy-ing the NIST X-ray Attenuation Databases</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">Scrapy-ing the NIST X-ray Attenuation Databases</h1>
+<p>
+I am currently preparing with two other colleagues a review paper on
+X-ray tomography of cementitious materials, for which I need to
+retrieve tabulated values of the <a href="https://en.wikipedia.org/wiki/Mass_attenuation_coefficient#Mass_attenuation_coefficients_for_X-rays">X-ray mass attenuation coefficients</a>
+of all elements. NIST provides such data (see <a href="https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients">X-Ray Mass Attenuation
+Coefficients</a> by J. H. Hubbell and S. M. Seltzer). However, it does not
+come in the form of simple files that can be downloaded. Rather, the
+values are presented in nicely formatted HTML tables (see <a href="http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html">here</a> for an
+example).
+</p>
+
+<p>
+In this post, I set out to extract this data as a HDF5 table. Of
+course, this looks like a job for <a href="https://scrapy.org/">Scrapy</a>!
+</p>
+
+<div id="outline-container-org8cbf0cb" class="outline-2">
+<h2 id="org8cbf0cb">First steps with Scrapy</h2>
+<div class="outline-text-2" id="text-org8cbf0cb">
+<p>
+ I am brand new to Scrapy, but found the excellent <a href="https://docs.scrapy.org/en/latest/">tutorial</a> extremely
+useful. If you use Miniconda from <a href="https://www.continuum.io/">Continuum Analytics</a>, then
+installation of Scrapy is a very smooth procedure
+</p>
+
+<pre class="example">
+conda create --name scrapy python=3 scrapy
+activate scrapy
+</pre>
+
+<p>
+which installs Scrapy in a new environment (called <code>scrapy</code>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org80fcff3" class="outline-2">
+<h2 id="org80fcff3">Downloading the table for one single element</h2>
+<div class="outline-text-2" id="text-org80fcff3">
+<p>
+In this section, we retrieve the data for the mass attenuation
+coefficient of one single element. We start with the data for
+hydrogen, which can be found <a href="http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html">here</a>. Following the <a href="https://docs.scrapy.org/en/latest/intro/tutorial.html#extracting-data">Scrapy tutorial</a>, we
+first use the Scrapy shell.
+</p>
+
+<pre class="example">
+scrapy shell "http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z01.html"
+</pre>
+
+<p>
+Looking at the page source, it is observed that the table in ASCII
+format is located within a <code>pre</code> tag. This suggests the following CSS
+selector
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">out</span> = response.css(<span class="org-string">'pre'</span>).extract_first()
+<span class="org-keyword">print</span>(out)
+</pre>
+</div>
+
+<p>
+which produces the following abbreviated output
+</p>
+
+<pre class="example">
+&lt;pre&gt;__________________________________
+
+   &lt;b&gt;Energy&lt;/b&gt;&lt;sub&gt; &lt;/sub&gt;       &lt;i&gt;µ&lt;/i&gt;/&lt;i&gt;?&lt;/i&gt;        &lt;i&gt;µ&lt;/i&gt;&lt;sub&gt;en&lt;/sub&gt;/&lt;i&gt;?&lt;/i&gt;
+   &lt;sup&gt; &lt;/sup&gt;(MeV)      (cm&lt;sup&gt;2&lt;/sup&gt;/g)     (cm&lt;sup&gt;2&lt;/sup&gt;/g)
+__________________________________
+
+ 1.00000E-03  7.217E+00  6.820E+00
+ 1.50000E-03  2.148E+00  1.752E+00
+ .................................
+ 1.50000E+01  2.539E-02  1.837E-02
+ 2.00000E+01  2.153E-02  1.606E-02
+&lt;/pre&gt;
+</pre>
+
+<p>
+This is already quite good. We now break the above output in lines,
+eliminate the first six lines which correspond to the header, and
+convert each row to floats.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">lines</span> = out.splitlines()
+<span class="org-variable-name">table</span> = [[<span class="org-builtin">float</span>(x) <span class="org-keyword">for</span> x <span class="org-keyword">in</span> line.split()] <span class="org-keyword">for</span> line <span class="org-keyword">in</span> lines[6:-1]]
+<span class="org-keyword">print</span>(table)
+</pre>
+</div>
+
+<pre class="example">
+[[0.001, 7.217, 6.82], [0.0015, 2.148, 1.752],
+..................................................,
+[15.0, 0.02539, 0.01837], [20.0, 0.02153, 0.01606]]
+</pre>
+
+<p>
+… and we're done! Or?!? Let's see what happens with <a href="http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z13.html">aluminum</a>.
+</p>
+
+<pre class="example">
+activate scrapy
+scrapy shell "http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z13.html"
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">out</span> = response.css(<span class="org-string">'pre'</span>).extract_first()
+<span class="org-variable-name">lines</span> = out.splitlines()
+<span class="org-variable-name">table</span> = [[<span class="org-builtin">float</span>(x) <span class="org-keyword">for</span> x <span class="org-keyword">in</span> line.split()] <span class="org-keyword">for</span> line <span class="org-keyword">in</span> lines[6:-1]]
+</pre>
+</div>
+
+<p>
+This produces the following error
+</p>
+
+<pre class="example">
+Traceback (most recent call last):
+  File "&lt;console&gt;", line 1, in &lt;module&gt;
+  File "&lt;console&gt;", line 1, in &lt;listcomp&gt;
+  File "&lt;console&gt;", line 1, in &lt;listcomp&gt;
+ValueError: could not convert string to float: 'K'
+</pre>
+
+<p>
+which has to do with the <a href="https://en.wikipedia.org/wiki/Absorption_edge">absorption edge</a> of the element. It is marked
+by a letter in the first column of the table
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">lines[9]
+</pre>
+</div>
+
+<pre class="example">
+'K  1.55960E-03  3.957E+03  3.829E+03 '
+</pre>
+
+<p>
+So, we need to check wether each element of the current row is indeed
+a float (see function <code>is_float</code> below).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb6a8113" class="outline-2">
+<h2 id="orgb6a8113">Downloading tables for all elements</h2>
+<div class="outline-text-2" id="text-orgb6a8113">
+<p>
+All links follow the same pattern
+<code>http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/zZZ.html</code>,
+where ZZ is the <a href="https://en.wikipedia.org/wiki/Atomic_number">atomic number</a>. So we only need to generate a list of
+links in the <code>Spider</code>.
+</p>
+
+<p>
+We start by creating a Scrapy project.
+</p>
+
+<pre class="example">
+scrapy startproject scrapymu
+</pre>
+
+<p>
+We then edit the <code>scrapymu/scrapymu/spiders/table3.py</code> file
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> scrapy
+
+<span class="org-variable-name">BASE_URL</span> = <span class="org-string">'http://physics.nist.gov/PhysRefData/XrayMassCoef'</span>
+<span class="org-variable-name">TABLE3_URL</span> = <span class="org-string">'/'</span>.join([BASE_URL, <span class="org-string">'ElemTab/z{:02d}.html'</span>])
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">is_float</span>(x):
+    <span class="org-keyword">try</span>:
+        <span class="org-builtin">float</span>(x)
+        <span class="org-keyword">return</span> <span class="org-constant">True</span>
+    <span class="org-keyword">except</span> <span class="org-type">ValueError</span>:
+        <span class="org-keyword">return</span> <span class="org-constant">False</span>
+
+
+<span class="org-keyword">class</span> <span class="org-type">Table3Spider</span>(scrapy.Spider):
+    <span class="org-variable-name">name</span> = <span class="org-string">'table3'</span>
+
+    <span class="org-variable-name">start_urls</span> = [TABLE3_URL.<span class="org-builtin">format</span>(z) <span class="org-keyword">for</span> z <span class="org-keyword">in</span> <span class="org-builtin">range</span>(1, 93)]
+
+    <span class="org-keyword">def</span> <span class="org-function-name">parse</span>(<span class="org-keyword">self</span>, response):
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Retrieving the atomic number from the URL</span>
+        <span class="org-variable-name">z</span> = <span class="org-builtin">int</span>(response.url[-7:-5])
+
+        <span class="org-variable-name">pre</span> = response.css(<span class="org-string">'pre'</span>).extract_first()
+        <span class="org-variable-name">lines</span> = pre.splitlines()
+        <span class="org-variable-name">all_rows</span> = ([x <span class="org-keyword">for</span> x <span class="org-keyword">in</span> line.split() <span class="org-keyword">if</span> is_float(x)]
+                    <span class="org-keyword">for</span> line <span class="org-keyword">in</span> lines[6:-1])
+        <span class="org-variable-name">rows</span> = [r <span class="org-keyword">for</span> r <span class="org-keyword">in</span> all_rows <span class="org-keyword">if</span> r <span class="org-keyword">is</span> <span class="org-keyword">not</span> <span class="org-constant">None</span> <span class="org-keyword">and</span> r != []]
+        <span class="org-keyword">yield</span> {z: rows}
+</pre>
+</div>
+
+<p>
+It returns a <code>dict</code> of <code>dict</code>, each of which maps the element's
+atomic number Z to the corresponding table (as a list of rows, each
+row being itself a list). It can be run as follows
+</p>
+
+<pre class="example">
+scrapy crawl table3 -o table3.json
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7a70e59" class="outline-2">
+<h2 id="org7a70e59">Retrieving the material constants of all elements</h2>
+<div class="outline-text-2" id="text-org7a70e59">
+<p>
+We will also need the data from <a href="http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html">Table 1</a>. The spider is quite simple.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> scrapy
+
+<span class="org-variable-name">BASE_URL</span> = <span class="org-string">'http://physics.nist.gov/PhysRefData/XrayMassCoef'</span>
+<span class="org-variable-name">TABLE1_URL</span> = <span class="org-string">'/'</span>.join([BASE_URL, <span class="org-string">'tab1.html'</span>])
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">parse_table1_row</span>(row):
+    <span class="org-variable-name">all_cols</span> = (c.strip() <span class="org-keyword">for</span> c <span class="org-keyword">in</span> row.css(<span class="org-string">'td::text'</span>).extract())
+    <span class="org-variable-name">cols</span> = [c <span class="org-keyword">for</span> c <span class="org-keyword">in</span> all_cols <span class="org-keyword">if</span> c != <span class="org-string">''</span>]
+    <span class="org-keyword">if</span> cols != []:
+        <span class="org-keyword">try</span>:
+            <span class="org-variable-name">z</span> = <span class="org-builtin">int</span>(cols[0])
+            <span class="org-variable-name">data</span> = {<span class="org-string">'symbol'</span>: cols[1],
+                    <span class="org-string">'name'</span>: cols[2],
+                    <span class="org-string">'Z/A'</span>: cols[3],
+                    <span class="org-string">'density [g/cm^3]'</span>: cols[5]}
+            <span class="org-keyword">return</span> z, data
+        <span class="org-keyword">except</span> <span class="org-type">ValueError</span>:
+            <span class="org-keyword">return</span> <span class="org-constant">None</span>
+
+
+<span class="org-keyword">class</span> <span class="org-type">Table1Spider</span>(scrapy.Spider):
+    <span class="org-variable-name">name</span> = <span class="org-string">'table1'</span>
+
+    <span class="org-variable-name">start_urls</span> = [TABLE1_URL]
+
+    <span class="org-keyword">def</span> <span class="org-function-name">parse</span>(<span class="org-keyword">self</span>, response):
+        <span class="org-variable-name">all_rows</span> = (parse_table1_row(r) <span class="org-keyword">for</span> r <span class="org-keyword">in</span> response.css(<span class="org-string">'tr'</span>))
+        <span class="org-variable-name">rows</span> = (r <span class="org-keyword">for</span> r <span class="org-keyword">in</span> all_rows <span class="org-keyword">if</span> r <span class="org-keyword">is</span> <span class="org-keyword">not</span> <span class="org-constant">None</span>)
+        <span class="org-keyword">yield</span> {k: v <span class="org-keyword">for</span> k, v <span class="org-keyword">in</span> rows}
+</pre>
+</div>
+
+<p>
+It returns a <code>dict</code> which maps the element's atomic number Z to a
+<code>dict</code> containing the element's <code>symbol</code>, <code>name</code>, <code>Z/A</code> ratio and
+<code>density</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb16d6d6" class="outline-2">
+<h2 id="orgb16d6d6">Putting it all together in a HDF5 file</h2>
+<div class="outline-text-2" id="text-orgb16d6d6">
+<p>
+We are now ready to run our two spiders
+</p>
+
+<pre class="example">
+scrapy crawl table1 -o table1.json
+scrapy crawl table3 -o table3.json
+</pre>
+
+<p>
+You can download the json files here: <a href="./20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases/table1.json">Table 1</a> and <a href="./20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases/table3.json">Table 3</a>. We use the
+<code>json</code> module in the standard library to read this files, and merge
+the <code>dict</code> of <code>dicts</code> that corresponds to Table 3 into one single
+<code>dict</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-keyword">import</span> json
+<span class="org-keyword">import</span> os.path
+
+<span class="org-keyword">with</span> <span class="org-builtin">open</span>(os.path.join(<span class="org-string">'.'</span>, ROOT, <span class="org-string">'table1.json'</span>), <span class="org-string">'r'</span>) <span class="org-keyword">as</span> f:
+    <span class="org-variable-name">table1</span> = json.load(f)[0]
+<span class="org-keyword">with</span> <span class="org-builtin">open</span>(os.path.join(<span class="org-string">'.'</span>, ROOT, <span class="org-string">'table3.json'</span>), <span class="org-string">'r'</span>) <span class="org-keyword">as</span> f:
+    <span class="org-variable-name">table3</span> = <span class="org-builtin">dict</span>(<span class="org-builtin">next</span>(<span class="org-builtin">iter</span>(i.items())) <span class="org-keyword">for</span> i <span class="org-keyword">in</span> json.load(f))
+
+<span class="org-keyword">print</span>(table1[<span class="org-string">'1'</span>])
+<span class="org-keyword">print</span>(table3[<span class="org-string">'1'</span>][0:5])
+</pre>
+</div>
+
+<pre class="example">
+{'symbol': 'H', 'name': 'Hydrogen', 'Z/A': '0.99212', 'density [g/cm^3]': '8.375E-05'}
+[['1.00000E-03', '7.217E+00', '6.820E+00'], ['1.50000E-03', '2.148E+00', '1.752E+00'], ['2.00000E-03', '1.059E+00', '6.643E-01'], ['3.00000E-03', '5.612E-01', '1.693E-01'], ['4.00000E-03', '4.546E-01', '6.549E-02']]
+
+</pre>
+
+<p>
+We are now ready to create our HDF5 file. Its structure is very
+simple: we create one dataset per element. The dataset's label is the
+element's symbol. The table attached to the dataset is the linear
+absorption coefficient. A few attributes are further attached to the
+dataset
+</p>
+
+<ul class="org-ul">
+<li><code>name</code>: the element's name,</li>
+<li><code>Z</code>: the element's atomic number (byte),</li>
+<li><code>Z/A</code>, <code>density [g/cm^3]</code>: double precision floats.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-keyword">import</span> h5py
+<span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+
+<span class="org-variable-name">name</span> = <span class="org-string">'X-ray_mass_absorption_coefficients.hdf5'</span>
+
+<span class="org-keyword">with</span> h5py.File(os.path.join(<span class="org-string">'.'</span>, ROOT, name), <span class="org-string">'w'</span>) <span class="org-keyword">as</span> f:
+    <span class="org-keyword">for</span> z, attrs <span class="org-keyword">in</span> table1.items():
+        <span class="org-variable-name">mu</span> = [[np.float64(x) <span class="org-keyword">for</span> x <span class="org-keyword">in</span> row] <span class="org-keyword">for</span> row <span class="org-keyword">in</span> table3[z]]
+        <span class="org-variable-name">dset</span> = f.create_dataset(attrs[<span class="org-string">'symbol'</span>],
+                                data=np.asarray(mu))
+        <span class="org-variable-name">dset.attrs</span>[<span class="org-string">'name'</span>] = attrs[<span class="org-string">'name'</span>]
+        <span class="org-variable-name">dset.attrs</span>[<span class="org-string">'Z'</span>] = np.int8(z)
+        <span class="org-keyword">for</span> key <span class="org-keyword">in</span> [<span class="org-string">'Z/A'</span>, <span class="org-string">'density [g/cm^3]'</span>]:
+            <span class="org-variable-name">dset.attrs</span>[key] = np.float64(attrs[key])
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org401e409" class="outline-2">
+<h2 id="org401e409">X-ray mass attenuation coefficients of concrete</h2>
+<div class="outline-text-2" id="text-org401e409">
+<p>
+In order to check that everythin went fine, we will use the above
+table to compute the X-ray mass attenuation coefficients of a typical
+concrete and compare the results to that of <a href="http://physics.nist.gov/PhysRefData/XrayMassCoef/ComTab/concrete.html">Table 4</a>. The composition
+of the concrete under consideration is given in <a href="http://physics.nist.gov/PhysRefData/XrayMassCoef/tab2.html">Table 2</a>. It is
+reproduced below
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Symbol</th>
+<th scope="col" class="org-right">Z</th>
+<th scope="col" class="org-right">Mass fraction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">H</td>
+<td class="org-right">1</td>
+<td class="org-right">0.022100</td>
+</tr>
+
+<tr>
+<td class="org-left">C</td>
+<td class="org-right">6</td>
+<td class="org-right">0.002484</td>
+</tr>
+
+<tr>
+<td class="org-left">O</td>
+<td class="org-right">8</td>
+<td class="org-right">0.574930</td>
+</tr>
+
+<tr>
+<td class="org-left">Na</td>
+<td class="org-right">11</td>
+<td class="org-right">0.015208</td>
+</tr>
+
+<tr>
+<td class="org-left">Mg</td>
+<td class="org-right">12</td>
+<td class="org-right">0.001266</td>
+</tr>
+
+<tr>
+<td class="org-left">Al</td>
+<td class="org-right">13</td>
+<td class="org-right">0.019953</td>
+</tr>
+
+<tr>
+<td class="org-left">Si</td>
+<td class="org-right">14</td>
+<td class="org-right">0.304627</td>
+</tr>
+
+<tr>
+<td class="org-left">K</td>
+<td class="org-right">19</td>
+<td class="org-right">0.010045</td>
+</tr>
+
+<tr>
+<td class="org-left">Ca</td>
+<td class="org-right">20</td>
+<td class="org-right">0.042951</td>
+</tr>
+
+<tr>
+<td class="org-left">Fe</td>
+<td class="org-right">26</td>
+<td class="org-right">0.006435</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+So we need to combine linearly the mass attenuation coefficients for
+all these elements. We first start a new python session, define the
+chemical composition and import the table. Then, we interpolate
+linearly (in log-space) the tables and compute the linear combination.
+</p>
+
+<p>
+Note that I shifted the sampling points slightly to the left and right
+of each absorption edges in order to facilitate interpolation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-keyword">import</span> os.path
+
+<span class="org-keyword">import</span> h5py
+<span class="org-keyword">import</span> matplotlib.pyplot <span class="org-keyword">as</span> plt
+<span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+
+<span class="org-keyword">from</span> scipy.interpolate <span class="org-keyword">import</span> interp1d
+
+<span class="org-variable-name">composition</span> = {<span class="org-string">'H'</span>: 0.022100,
+               <span class="org-string">'C'</span>: 0.002484,
+               <span class="org-string">'O'</span>: 0.574930,
+               <span class="org-string">'Na'</span>: 0.015208,
+               <span class="org-string">'Mg'</span>: 0.001266,
+               <span class="org-string">'Al'</span>: 0.019953,
+               <span class="org-string">'Si'</span>: 0.304627,
+               <span class="org-string">'K'</span> : 0.010045,
+               <span class="org-string">'Ca'</span>: 0.042951,
+               <span class="org-string">'Fe'</span>: 0.006435}
+
+<span class="org-variable-name">ref_data</span> = np.array([[1.00000E-03, 3.466E+03],
+                     [1.03542E-03, 3.164E+03],
+                     [1.07209999E-03, 2.889E+03],
+                     [1.07210001E-03, 2.978E+03],
+                     [1.18283E-03, 2.302E+03],
+                     [1.30499999E-03, 1.775E+03],
+                     [1.30500001E-03, 1.781E+03],
+                     [1.50000E-03, 1.227E+03],
+                     [1.55959999E-03, 1.104E+03],
+                     [1.55960001E-03, 1.176E+03],
+                     [1.69350E-03, 9.419E+02],
+                     [1.83889999E-03, 7.525E+02],
+                     [1.83890001E-03, 1.631E+03],
+                     [2.00000E-03, 1.368E+03],
+                     [3.00000E-03, 4.646E+02],
+                     [3.60739999E-03, 2.804E+02],
+                     [3.60740001E-03, 2.911E+02],
+                     [4.00000E-03, 2.188E+02],
+                     [4.03809999E-03, 2.131E+02],
+                     [4.03810001E-03, 2.520E+02],
+                     [5.00000E-03, 1.401E+02],
+                     [6.00000E-03, 8.401E+01],
+                     [7.11199999E-03, 5.187E+01],
+                     [7.11200001E-03, 5.415E+01],
+                     [8.00000E-03, 3.878E+01],
+                     [1.00000E-02, 2.045E+01],
+                     [1.50000E-02, 6.351E+00],
+                     [2.00000E-02, 2.806E+00],
+                     [3.00000E-02, 9.601E-01],
+                     [4.00000E-02, 5.058E-01],
+                     [5.00000E-02, 3.412E-01],
+                     [6.00000E-02, 2.660E-01],
+                     [8.00000E-02, 2.014E-01],
+                     [1.00000E-01, 1.738E-01],
+                     [1.50000E-01, 1.436E-01],
+                     [2.00000E-01, 1.282E-01],
+                     [3.00000E-01, 1.097E-01],
+                     [4.00000E-01, 9.783E-02],
+                     [5.00000E-01, 8.915E-02],
+                     [6.00000E-01, 8.236E-02],
+                     [8.00000E-01, 7.227E-02],
+                     [1.00000E+00, 6.495E-02],
+                     [1.25000E+00, 5.807E-02],
+                     [1.50000E+00, 5.288E-02],
+                     [2.00000E+00, 4.557E-02],
+                     [3.00000E+00, 3.701E-02],
+                     [4.00000E+00, 3.217E-02],
+                     [5.00000E+00, 2.908E-02],
+                     [6.00000E+00, 2.697E-02],
+                     [8.00000E+00, 2.432E-02],
+                     [1.00000E+01, 2.278E-02],
+                     [1.50000E+01, 2.096E-02],
+                     [2.00000E+01, 2.030E-02]], dtype=np.float64)
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">interp_loglog</span>(x, y):
+    <span class="org-variable-name">f</span> = interp1d(np.log(x), np.log(y),
+                 kind=<span class="org-string">'linear'</span>, assume_sorted=<span class="org-constant">True</span>)
+    <span class="org-keyword">return</span> <span class="org-keyword">lambda</span> t: np.exp(f(np.log(t)))
+
+
+<span class="org-keyword">with</span> h5py.File(os.path.join(<span class="org-string">'.'</span>, root, input_name), <span class="org-string">'r'</span>) <span class="org-keyword">as</span> f:
+    <span class="org-variable-name">mu</span> = {i: interp_loglog(f[i][:, 0], f[i][:, 1])
+          <span class="org-keyword">for</span> i <span class="org-keyword">in</span> composition.keys()}
+
+<span class="org-variable-name">x</span> = ref_data[:, 0]
+<span class="org-variable-name">y_expected</span> = ref_data[:, 1]
+<span class="org-variable-name">y_actual</span> = np.empty_like(y_expected)
+
+<span class="org-variable-name">y_actual</span> = <span class="org-builtin">sum</span>(composition[i]*mu[i](x) <span class="org-keyword">for</span> i <span class="org-keyword">in</span> composition.keys())
+
+plt.style.use(<span class="org-string">'../include/zenburn-light.mplstyle'</span>)
+<span class="org-variable-name">fig</span>, <span class="org-variable-name">ax</span> = plt.subplots()
+ax.loglog(x, y_expected, <span class="org-string">'-'</span>, label=<span class="org-string">'NIST'</span>)
+ax.loglog(x, y_actual, <span class="org-string">'x'</span>, label=<span class="org-string">'This post'</span>)
+ax.legend()
+ax.set_xlabel(<span class="org-string">'Photon energy [MeV]'</span>)
+ax.set_ylabel(r<span class="org-string">'$\mu/\rho [\mathrm{cm}^2/\mathrm{g}]$'</span>)
+
+fig.tight_layout(pad=0.1)
+fig.savefig(os.path.join(root, output_name), transparent=<span class="org-constant">True</span>)
+</pre>
+</div>
+
+<p>
+This produces the following figure, which shows an excellent agreement
+with the NIST reference data (which is interpolated much more
+cleverly). This validates our Scrapy procedure!
+</p>
+
+
+<div class="figure">
+<p><img src="./20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases/cement.png" alt="cement.png">
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4e9a2a0" class="outline-2">
+<h2 id="org4e9a2a0">Closing words</h2>
+<div class="outline-text-2" id="text-org4e9a2a0">
+<p>
+In this blog, we learned how to use <a href="https://scrapy.org/">Scrapy</a> to retrieve some tabulated
+data that is not available as downloaded files. This is probably the
+most basic use of this tool, which is very simple, and a joy to use!
+</p>
+
+<p>
+The whole <code>scrapymu</code> project is available on <a href="https://github.com/sbrisard/scrapymu.git">GitHub</a>.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases';
+var disqus_title = 'Scrapy-ing the NIST X-ray Attenuation Databases';
+var disqus_url = 'http://sbrisard.github.io/posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

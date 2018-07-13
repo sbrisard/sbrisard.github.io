@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:57 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On the periodic-plus-smooth decomposition of an image, part 1: introduction</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2018-02-12</p>
+<h1 class="title">On the periodic-plus-smooth decomposition of an image, part 1: introduction</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">On the periodic-plus-smooth decomposition of an image, part 1: introduction</h1>
+<p>
+In this new series, we will explore the so-called <i>periodic-plus-smooth</i>
+decomposition of an image, introduced by Moisan in 2011. This series is largely
+based on Moisan&rsquo;s paper, called <a href="https://doi.org/10.1007/s10851-010-0227-1">Periodic plus Smooth Image Decomposition</a> (the
+author&rsquo;s version can be found on <a href="https://hal.archives-ouvertes.fr/hal-00388020">HAL</a>). Besides introducing a quite smart
+technique (that I do use for real materials science applications), this series
+will be an opportunity to discuss an important topic: how to test the
+implementation of an algorithm, and be confident that the test actually
+validates the implementation.
+</p>
+
+<p>
+To do so, we will first define the periodic-plus-smooth decomposition as a
+minimization problem. This will lead to a first implementation of this
+decomposition: the objective function is quadratic, and the minimization problem
+therefore merely reduces to a linear system. However, this system is large (the
+number of unknowns is the number of pixels!). We will therefore use matrix-free
+techniques.
+</p>
+
+<p>
+This first –quite inefficient– implementation will then serve as a reference
+implementation of the decomposition, for testing purposes. Indeed, Moisan showed
+that the minimization problem he introduced could in fact be explicitely solved
+in Fourier space. He proposed two efficient algorithms to compute the
+decomposition. Both rely, of course, on the FFT. We will implement one of these
+and test it against the reference implementation.
+</p>
+
+<p>
+This is a series in seven parts, organized as follows:
+</p>
+
+<ol class="org-ol">
+<li><a href="./20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.html">Introduction</a></li>
+<li><a href="./20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.html">Defining the decomposition</a></li>
+<li><a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html">The energy as a quadratic form</a></li>
+<li><a href="./20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.html">Implementing the linear operators</a></li>
+<li><a href="./20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html">Minimizing the energy, the clumsy way</a></li>
+<li><a href="./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.html">Minimizing the energy, the clever way</a></li>
+<li><a href="./20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07.html">Improved implementation of Moisan&rsquo;s algorithm</a></li>
+</ol>
+
+<p>
+The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.
+</p>
+
+<p>
+That&rsquo;s a lot of work! So, without further ado, let&rsquo;s start introducing this
+decomposition!
+</p>
+
+<div id="outline-container-org521bd5a" class="outline-2">
+<h2 id="org521bd5a">The need for periodic images</h2>
+<div class="outline-text-2" id="text-org521bd5a">
+<p>
+Let us start by briefly discussing what <i>is</i> a periodic image, and why we would
+ever need one. Loosely speaking, an image is periodic if placing copies of the
+same image on a 2×2 grid can be done (almost) seamlessly. Remember that an image
+is defined for a <i>discrete</i> set of pixels, and that the pixel values themselves
+are also <i>discrete</i>. Therefore, it is not possible to refer to the <a href="https://en.wikipedia.org/wiki/Continuous_function">continuity</a> of
+an image, which explains why it is difficult to define periodic images more
+precisely.
+</p>
+
+<p>
+It is actually easier to verify that an image is <i>not</i> periodic. Let us consider
+the following image as an example (see Figure <a href="#org0ed626c">1</a>).
+</p>
+
+
+<div id="org0ed626c" class="figure">
+<p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364.png" alt="hut-648x364.png" width="80%">
+</p>
+<p><span class="figure-number">Figure 1: </span>The original image.</p>
+</div>
+
+<p>
+Instead of putting aside 4 copies of the same image, we can simply swap the
+quadrants, as shown in Figure <a href="#org41140a5">2</a>. Alternatively, you could also ask my
+three-year old daughter if her hut is periodic ;-). In Figure <a href="#org41140a5">2</a>, the four
+corners certainly do <i>not</i> join seamlessly at the center, which is a sure
+indication that the image is not periodic.
+</p>
+
+
+<div id="org41140a5" class="figure">
+<p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-fftshift.png" alt="hut-648x364-fftshift.png" width="80%">
+</p>
+<p><span class="figure-number">Figure 2: </span>The original image shown in Figure <a href="#org0ed626c">1</a>, with swapped quadrants.</p>
+</div>
+
+<p>
+It should be noted that the image shown in Figure <a href="#org41140a5">2</a> is readily produced with
+the <a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift">numpy.fft.fftshift</a> function, as illustrated by the following code
+snippet<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+
+<span class="org-keyword">from</span> skimage.io <span class="org-keyword">import</span> imread, imsave
+
+<span class="org-variable-name">u</span> = imread(DATA_DIR+<span class="org-string">'hut-648x364.png'</span>)
+imsave(DATA_DIR+<span class="org-string">'hut-648x364-fftshift.png'</span>, np.fft.fftshift(u))
+</pre>
+</div>
+
+<p>
+Why would this lack of periodicity be a problem? Well, many image analysis
+techniques rely on the <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">fast Fourier transform</a> (FFT) for efficiency. In turn, the
+discrete Fourier transform implicitely assumes that the data is periodic;
+otherwise, artifacts can result. An archetypal example is the power spectrum of
+an image (we shall come back to this specific issue in a dedicated series). The
+power spectrum of Figure <a href="#org0ed626c">1</a> is displayed in Figure <a href="#org4eb8348">3</a> below; the following
+code snippet was executed to produce this image.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">u_dft</span> = np.fft.fft2(u)
+<span class="org-variable-name">u_ps</span> = np.<span class="org-builtin">abs</span>(np.fft.fftshift(u_dft))**2
+<span class="org-variable-name">a</span> = np.log10(u_ps)
+<span class="org-variable-name">a_min</span>, <span class="org-variable-name">a_max</span> = np.<span class="org-builtin">min</span>(a), np.<span class="org-builtin">max</span>(a)
+<span class="org-variable-name">a</span> = 255*(a-a_min)/(a_max-a_min)
+
+imsave(DATA_DIR+<span class="org-string">'hut-648x364-power_spectrum.png'</span>, a.astype(np.uint8))
+</pre>
+</div>
+
+
+<div id="org4eb8348" class="figure">
+<p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-power_spectrum.png" alt="hut-648x364-power_spectrum.png" width="80%">
+</p>
+<p><span class="figure-number">Figure 3: </span>The power spectrum of the image shown in Figure <a href="#org0ed626c">1</a>.</p>
+</div>
+
+<p>
+In Figure <a href="#org4eb8348">3</a>, the bright cross at the center is the signature of the jumps
+across the boundaries of the image. Indeed, remember that discontinuities at
+large correlation lengths translate to oscillations at low frequencies (the
+center of the power spectrum image).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org392ce2d" class="outline-2">
+<h2 id="org392ce2d">Periodization by symmetrization</h2>
+<div class="outline-text-2" id="text-org392ce2d">
+<p>
+Of course, it is possible to enforce periodicity by tiling together 4 mirror
+images of the same initial image as follows (see figure <a href="#org3c3a338">4</a>)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">m</span>, <span class="org-variable-name">n</span> = u.shape
+<span class="org-variable-name">left</span>, <span class="org-variable-name">right</span> = <span class="org-builtin">slice</span>(0, m), <span class="org-builtin">slice</span>(2*m-1, m-1, -1)
+<span class="org-variable-name">top</span>, <span class="org-variable-name">bottom</span> = <span class="org-builtin">slice</span>(0, n), <span class="org-builtin">slice</span>(2*n-1, n-1, -1)
+<span class="org-variable-name">u_mirrored</span> = np.zeros((2*m, 2*n), dtype=u.dtype)
+<span class="org-variable-name">u_mirrored</span>[left, bottom] = u
+<span class="org-variable-name">u_mirrored</span>[right, bottom] = u
+<span class="org-variable-name">u_mirrored</span>[left, top] = u
+<span class="org-variable-name">u_mirrored</span>[right, top] = u
+imsave(DATA_DIR+<span class="org-string">'hut-648x364-mirrored.png'</span>, u_mirrored)
+</pre>
+</div>
+
+
+<div id="org3c3a338" class="figure">
+<p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-mirrored.png" alt="hut-648x364-mirrored.png" width="80%">
+</p>
+<p><span class="figure-number">Figure 4: </span>Periodization by symmetrization of the image shown in Figure <a href="#org0ed626c">1</a>.</p>
+</div>
+
+<p>
+The resulting power spectrum (computed with the code snippet below) is shown in
+figure <a href="#org4606aee">5</a>. It is observed that symmetrization does not remove entirely the
+cross at the center of the power spectrum. Worse, “it makes the DFT symmetric
+and real-valued, which can be dramatic if the phase component of the Fourier
+transform has to be analyzed, or if orientation issues are concerned”
+(<a href="https://doi.org/10.1007/s10851-010-0227-1">Moisan, 2011</a>). This led Moisan to introduce the <i>periodic-plus-smooth</i>
+decomposition.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ipython"><span class="org-variable-name">a</span> = np.<span class="org-builtin">abs</span>(np.fft.fftshift(np.fft.fft2(u_mirrored)))**2
+<span class="org-variable-name">a</span>[a==0.0]=1.0
+<span class="org-variable-name">a</span> = np.log10(a)
+<span class="org-variable-name">a_min</span>, <span class="org-variable-name">a_max</span> = np.<span class="org-builtin">min</span>(a), np.<span class="org-builtin">max</span>(a)
+<span class="org-variable-name">a</span> = 255*(a-a_min)/(a_max-a_min)
+
+imsave(DATA_DIR+<span class="org-string">'hut-648x364-mirrored-power_spectrum.png'</span>, a.astype(np.uint8))
+</pre>
+</div>
+
+
+<div id="org4606aee" class="figure">
+<p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-mirrored-power_spectrum.png" alt="hut-648x364-mirrored-power_spectrum.png" width="80%">
+</p>
+<p><span class="figure-number">Figure 5: </span>The power spectrum of the image shown in Figure <a href="#org3c3a338">4</a>.</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org68ff0d7" class="outline-2">
+<h2 id="org68ff0d7">Conclusion</h2>
+<div class="outline-text-2" id="text-org68ff0d7">
+<p>
+In this post, we set the stage for the subsequent instalments of this series,
+arguing that it is sometimes desirable that an image should be periodic. In the
+<a href="./20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.html">next instalment</a> of this series, we will define the <i>periodic-plus-smooth</i>
+decomposition of Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>). We will then turn to the implementation of this
+decomposition.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+In this code snippet, you should not pay attention to the fact that
+<code>DATA_DIR</code> has not been defined. I actually used some <a href="http://orgmode.org/worg/org-contrib/babel/">Org-babel</a> tricks to define
+this variable programatically from <code>emacs-lisp</code>.
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01';
+var disqus_title = 'On the periodic-plus-smooth decomposition of an image, part 1: introduction';
+var disqus_url = 'http://sbrisard.github.io/posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

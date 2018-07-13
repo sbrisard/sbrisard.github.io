@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:56 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Green operator for strains, part 2: elementary properties</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2011-09-18</p>
+<h1 class="title">The Green operator for strains, part 2: elementary properties</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">The Green operator for strains, part 2: elementary properties</h1>
+<p>
+In <a href="./20110911-The_Green_operator_for_strains-01.html">part 1</a> of this series, we have seen how the Green operator for strains (\(\greeniv_0\)) was defined as the operator providing the solution to the problem of elastic equilibrium of a <i>prestressed</i> homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.<!-- more --> We again consider the bounded domain \(\domain\subset\reals^d\), occupied by a homogeneous, linearly elastic material with stiffness \(\stiffness_0\). \(\greeniv_0\) denotes the Green operator for strains for the material \(\stiffness_0\), over the domain \(\domain\). The first property is a direct consequence of the definition of \(\greeniv_0\), given in <a href="./20110911-The_Green_operator_for_strains-01.html">part 1</a>.
+</p>
+
+<div id="outline-container-org1d0a63b" class="outline-2">
+<h2 id="org1d0a63b">Application to self-equilibrated prestresses</h2>
+<div class="outline-text-2" id="text-org1d0a63b">
+<p>
+We consider a <i>self-equilibrated</i> prestress \(\prestress\) (that is, \(\nabla\cdot\prestress=\tensii0\)). We will prove that \(\greeniv_0\circledast\prestress=\tensii0\). By definition of the Green operator, \(\greeniv_0\circledast\prestress=-\strain\), where \(\strain\) is the strain which solves the following problem
+</p>
+\begin{align}
+\label{eq:1}
+\nabla_{\vec x}\cdot\left(\stiffness_0:\strain+\prestress\right)&=\vec{0}&&(\vec x\in\domain),\\
+\label{eq:2}
+\strain(\vec x)&=\nabla_\vec x^\text{s}\displ&&(\vec x\in\domain),\\
+\label{eq:3}
+\displ(\vec x)&=\vec 0&&(\vec x\in\partial\domain).
+\end{align}
+
+<p>
+Since \(\nabla\cdot\prestress=\vec 0\), it is found that Eq. \eqref{eq:1} reduces to
+</p>
+\begin{align*}
+    \nabla_{\vec x}\cdot\left(\stiffness_0:\strain\right)&=\vec{0}&&(\vec x\in\domain).
+\end{align*}
+
+<p>
+Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is \(\displ=\vec 0\) (and \(\strain=\nabla^\text{s}\displ=\tensii0\)). Since \(\greeniv_0\circledast\prestress=-\strain\), it is finally found that \(\greeniv_0\circledast\prestress=\tensiv 0\). To sum up, we have proved the following property
+</p>
+
+<div class="THEOREM">
+<p>
+For any self-equilibrated prestress \(\prestress\)
+</p>
+\begin{equation*}
+    \greeniv_0\circledast\prestress=\tensii 0.
+\end{equation*}
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge230a86" class="outline-2">
+<h2 id="orge230a86">"Square" of the Green operator</h2>
+<div class="outline-text-2" id="text-orge230a86">
+<p>
+Application of the previous result leads to a useful property, which can be found in e.g. <a href="../pages/references.html#WILL2001">Willis (2001)</a>, where it is written somewhat abusively (but quite efficiently!) \(\greeniv_0\stiffness_0\greeniv_0=\greeniv_0\).
+</p>
+
+<p>
+Let \(\strain=-\greeniv_0\circledast\prestress\), and \(\stress=\stiffness_0:\strain+\prestress\). By definition of \(\greeniv_0\), \(\strain\) is geometrically compatible and \(\stress\) is self-equilibrated: \(\nabla\cdot\stress=\tensii 0\). From the previous property, we have \(\greeniv_0\circledast\stress=\tensii0\). In other words
+</p>
+\begin{equation*}
+    \greeniv_0\circledast\left(\stiffness_0:\strain+\prestress\right)=\tensii0
+\end{equation*}
+<p>
+and, since \(\strain=-\greeniv_0\circledast\prestress\), we find the following property:
+</p>
+
+<div class="THEOREM">
+<p>
+For any prestress \(\prestress\),
+</p>
+\begin{equation*}
+    \greeniv_0\circledast\left[\stiffness_0:\left(\greeniv_0\circledast\prestress\right)\right]=\greeniv_0\circledast\prestress.
+\end{equation*}
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0324327" class="outline-2">
+<h2 id="org0324327">Volume average</h2>
+<div class="outline-text-2" id="text-org0324327">
+<p>
+To close this instalment, we again consider a prestress \(\prestress\), and the associated strain \(\strain=-\greeniv_0\circledast\prestress\). We seek the value of \(\volavg\strain\), where overlined quantities denote <i>volume averages</i>
+</p>
+\begin{equation*}
+    \volavg{\strain} = \frac 1{\meas{\domain}}\int_\domain\strain(\vec x)\dV{\vec x}.
+\end{equation*}
+
+<p>
+Using Stokes' theorem, and the definition of \(\displ\)
+</p>
+\begin{equation*}
+    \volavg\strain=\frac1{\meas{\domain}}\int_\domain\nabla_\vec x^\text s\displ\dV{\vec x}=\frac1{2\meas{\domain}}\int_{\partial\domain}\left[\displ(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\displ(\vec x)\right]\dS{\vec x},
+\end{equation*}
+<p>
+where \(\displ\) is the displacement associated to the strain \(\strain\), and \(\vec n\) is the outward normal to the boundary \(\partial\domain\) of the domain \(\domain\). From the boundary condition \eqref{eq:3}, we finally find \(\volavg\strain=\tensii0\). Finally
+</p>
+
+<div class="THEOREM">
+<p>
+For any prestress \(\prestress\),
+</p>
+\begin{equation*}
+    \volavg{\greeniv_0\circledast\prestress}=\tensii 0.
+\end{equation*}
+
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20110918-The_Green_operator_for_strains-02';
+var disqus_title = 'The Green operator for strains, part 2: elementary properties';
+var disqus_url = 'http://sbrisard.github.io/posts/20110918-The_Green_operator_for_strains-02.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

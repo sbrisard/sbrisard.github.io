@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:56 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The periodic Green operator for strains</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2014-03-06</p>
+<h1 class="title">The periodic Green operator for strains</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">The periodic Green operator for strains</h1>
+<div class="ABSTRACT">
+<p>
+The Green operator for strains is defined as the linear operator which maps &#x2013;in a homogeneous material&#x2013; the local prestress to the (opposite of the) local strain. Closed-form expressions of this operator can be derived in the case of periodic boundary conditions, as will be demonstrated in the present post.
+</p>
+
+</div>
+
+<p>
+Let \(\stiffness\) be the stiffness of a homogeneous, linearly elastic material occupying the whole, $d$-dimensional, space \(\reals^d\). This material is submitted to the local, $(L<sub>1,&ctdot;,L</sub><sub>d</sub>)$-periodic prestress \(\prestress(\vec x)\). The elastic equilibrium of this medium is governed by the following equations over \(\reals^d\)
+</p>
+
+\begin{align}
+\label{eq:1}
+\nabla_\vec x\cdot\stress&=\vec0 & (\vec x\in\reals^d)\\
+\label{eq:2}
+\stress(\vec x)&=\stiffness:\strain(\vec x)+\prestress(\vec x)&(\vec x\in\reals^d)\\
+\label{eq:3}
+\strain(\vec x)&=\nabla_\vec x^\text s\displ&(\vec x\in\reals^d)\\
+\label{eq:4}
+\displ(\vec x+L_i\vec e_i)&=\displ(\vec x)&(\vec x\in\reals^d)\\
+\end{align}
+
+<p>
+It should be noted that in Eq. \eqref{eq:4}, no summation should be carried out on the repeated index \(i\). For this problem to be well-posed, the functional space to which the displacement belongs should be specified; this is beyond the scope of this post. Eqs. \eqref{eq:1} to \eqref{eq:4} are conveniently solved in Fourier space. Indeed, since the local displacement \(\displ\) is periodic, it can be decomposed in a Fourier series
+</p>
+
+\begin{equation}
+\label{eq:5}
+\displ(\vec x)=\sum_{b\in\integers^d}\hat\displ_b\exp(i\vec k_b\cdot\vec x),
+\end{equation}
+
+<p>
+with
+</p>
+
+\begin{equation}
+\label{eq:10}
+\vec k_b=\frac{2\pi b_1}{L_1}\vec e_1+\cdots+\frac{2\pi b_d}{L_d}\vec e_d,
+\end{equation}
+
+<p>
+and
+</p>
+
+\begin{equation*}
+\hat\displ_b=\frac1{\meas{\domain}}\int_\domain\displ(\vec x)\exp(-i\vec k_b\cdot\vec x)\dV{\vec x},
+\end{equation*}
+
+<p>
+where \(b=(b_1,\ldots,b_d)\in\integers^d\) is a multi-index, and \(\domain=(0,L_1)\times\cdots\times(0,L_d)\) denotes the unit-cell. Similarly, the strain \(\strain\), stress \(\stress\) and prestress \(\prestress\) are expanded in Fourier series
+</p>
+
+\begin{align*}
+\strain(\vec x)&=\sum_{b\in\integers^d}\hat\strain_b\exp(i\vec k_b\cdot\vec x),\\
+\stress(\vec x)&=\sum_{b\in\integers^d}\hat\stress_b\exp(i\vec k_b\cdot\vec x),\\
+\prestress(\vec x)&=\sum_{b\in\integers^d}\hat\prestress_b\exp(i\vec k_b\cdot\vec x).
+\end{align*}
+
+<p>
+Eq. \eqref{eq:3} then reads
+</p>
+
+\begin{align*}
+\hat\strain_b&=\frac i2\left(\vec k_b\otimes\hat\displ_b+\hat\displ_b\otimes\vec k_b\right)&(b\in\integers^d),
+\end{align*}
+
+<p>
+and, from Eq. \eqref{eq:2} (keeping in mind that \(\stiffness\) has minor symmetries)
+</p>
+
+\begin{align*}
+\hat\stress_b&=i\left(\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\hat\prestress_b&(b\in\integers^d).
+\end{align*}
+
+<p>
+The equilibrium equation \eqref{eq:1} finally gives
+</p>
+
+\begin{align*}
+\vec 0&=\vec k_b\cdot\hat\stress_b=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\vec k_b\cdot\hat\prestress_b&(b\in\integers^d).
+\end{align*}
+
+<p>
+The term in brackets \(\vec k\cdot\stiffness\cdot\vec k\) is the <a href="./20140131-The_elastic_acoustic_tensor_and_its_inverse.html">acoustic tensor</a> associated with the elastic material \(\stiffness\), and the above equation is readily solved for the Fourier modes of the displacement
+</p>
+
+\begin{align*}
+\hat\displ_b&=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)&(b\in\integers^d).
+\end{align*}
+
+<p>
+As a consequence, the Fourier modes of the strain read
+</p>
+
+\begin{align*}
+\hat\strain_b={}&-\frac12\vec k_b\otimes\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)\right)\\
+&-\frac12\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\prestress_b\right)\right)\otimes\vec k_b&(b\in\integers^d).
+\end{align*}
+
+<p>
+The above expression can be simplified; handling both terms separately, it is successively found
+</p>
+
+\begin{align*}
+\vec k\otimes\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\prestress\right)\right)&=\vec k\otimes\left(\vec k\cdot\hat\prestress\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)}\right)\\
+&=\left(\vec k\otimes\vec k\right)\cdot\hat\prestress\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)},\\
+\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\prestress\right)\right)\otimes\vec k&=\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\prestress}\cdot\vec k\right)\otimes\vec k\\
+&=\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k\otimes\vec k\right),
+\end{align*}
+
+<p>
+and
+</p>
+
+\begin{align*}
+\hat\strain_b={}&-\frac12\left(\vec k_b\otimes\vec k_b\right)\cdot\hat\prestress\cdot\transpinv{\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)}\\
+&-\frac12\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\transp{\hat\prestress}\cdot\left(\vec k_b\otimes\vec k_b\right)&(b\in\integers^d).
+\end{align*}
+
+<p>
+Introducing the <a href="./20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.html">tensor product of linear transformations</a> \(\boxtimes\), and recalling that the prestress \(\prestress\) is symmetric, the following compact expression can be found
+</p>
+
+\begin{align*}
+\hat\strain_b={}&-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\right):\hat\prestress_b\\
+&-\frac12\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\boxtimes\left(\vec k_b\otimes\vec k_b\right)\right):\hat\prestress_b&(b\in\integers^d).
+\end{align*}
+
+<p>
+In other words, the Fourier modes of the strain are deduced from the Fourier modes of the prestress by application of a fourth-rank tensor, which can be symmetrized with respect to the last two indices (the prestress being symmetric). It is finally found that
+</p>
+
+\begin{align*}
+\hat\strain_b&=-\hat\greeniv(\vec k_b):\hat\prestress_b&(b\in\integers^d),
+\end{align*}
+
+<p>
+where \(\hat\greeniv\) is the periodic Green operator for strains of the homogeneous material \(\stiffness\), defined as follows
+</p>
+
+\begin{equation}
+\label{eq:6}
+\hat\greeniv(\vec k)=\frac12\left(\left(\vec n\otimes\vec n\right)\boxtimessym\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}\boxtimessym\left(\vec n\otimes\vec n\right)\right),
+\end{equation}
+
+<p>
+where \(\vec n\) is the direction of the wave-vector \(\vec k\), \(\vec n=\vec k/\lVert\vec k\rVert\) (\(\vec n\otimes\vec n\) is the second-rank projector onto \(\vec n\)).
+</p>
+
+<div id="outline-container-org0355f26" class="outline-2">
+<h2 id="org0355f26">The case of isotropic materials</h2>
+<div class="outline-text-2" id="text-org0355f26">
+<p>
+I have shown in a <a href="./20140131-The_elastic_acoustic_tensor_and_its_inverse.html">previous post</a> that in this case, the inverse of the acoustic tensor reads
+</p>
+
+\begin{equation*}
+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}=\frac1\shearmod\left(\frac{1-2\nu}{2\left(1-\nu\right)}\left(\vec n\otimes\vec n\right)+\identii-\left(\vec n\otimes\vec n\right)\right)=\frac1\shearmod\identii-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n,
+\end{equation*}
+
+<p>
+which leads to the following expression of the periodic Green operator for strains
+</p>
+
+\begin{equation}
+\label{eq:7}
+\hat\greeniv(\vec k)=\frac1{2\shearmod}\left(\left(\vec n\otimes\vec n\right)\boxtimessym\identii+\identii\boxtimessym\left(\vec n\otimes\vec n\right)\right)-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n\otimes\vec n\otimes\vec n,
+\end{equation}
+
+<p>
+where the following identity has been used
+</p>
+
+\begin{equation*}
+\left(\vec n\otimes\vec n\right)\boxtimessym\left(\vec n\otimes\vec n\right)=\vec n\otimes\vec n\otimes\vec n\otimes\vec n.
+\end{equation*}
+
+<p>
+The components of \(\hat\greeniv\) are
+</p>
+
+\begin{equation}
+\label{eq:8}
+\hat\greenivcomp_{ijkl}=\frac1{4\shearmod}\left(\delta_{ik}n_jn_l+\delta_{il}n_jn_k+\delta_{jk}n_in_l+\delta_{jl}n_in_k\right)-\frac1{2\shearmod\left(1-\nu\right)}n_in_jn_kn_l.
+\end{equation}
+</div>
+</div>
+
+
+<div id="outline-container-org7106aa2" class="outline-2">
+<h2 id="org7106aa2">Summary</h2>
+<div class="outline-text-2" id="text-org7106aa2">
+<p>
+In a homogeneous, linearly elastic material with stiffness \(\stiffness\), the $(L<sub>1,&sdot;,L</sub><sub>d</sub>)$&#x2013;periodic prestress \(\prestress\) given by
+</p>
+
+\begin{equation*}
+\prestress(\vec x)=\sum_{b\in\integers^d}\hat\prestress_b\exp(i\vec k_b\cdot\vec x)
+\end{equation*}
+
+<p>
+[where \(\vec k_b\) is defined by Eq. \eqref{eq:10}] gives rise to the periodic strain
+</p>
+
+\begin{equation}
+\label{eq:9}
+\strain(\vec x)=-\sum_{b\in\integers^d}\hat\greeniv(\vec k_b):\hat\prestress_b\exp(i\vec k_b\cdot\vec x),
+\end{equation}
+
+<p>
+where \(\hat\greeniv\) is the periodic Green operator for strains, defined in Fourier space by Eq. \eqref{eq:6}. It should be noted that this expression is valid regardless of the dimension of the physical space, and the material symmetries. If the material is isotropic, the Fourier modes of the Green operator for strains are given by Eqs. \eqref{eq:7} and \eqref{eq:8}, which are valid in both plane strain and 3D elasticity (since the expression of the inverse of the <a href="./20140131-The_elastic_acoustic_tensor_and_its_inverse.html">acoustic tensor</a> is).
+</p>
+
+<p>
+Finally, it is worth noting that Eq. \eqref{eq:9} is a direct product in Fourier space. Therefore, it is a <i>convolution product</i> in the real space, and we shall write \(\strain=-\greeniv\ast\prestress\). To the best of my knowledge, though, there is no closed-form expression of \(\greeniv\) in the real space, and this convenient notation is purely formal.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20140306-The_periodic_Green_operator_for_strains';
+var disqus_title = 'The periodic Green operator for strains';
+var disqus_url = 'http://sbrisard.github.io/posts/20140306-The_periodic_Green_operator_for_strains.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

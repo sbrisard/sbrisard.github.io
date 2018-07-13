@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2018-07-13 Fri 08:56 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elastic constants of an isotropic material, part 1: 3D elasticity</title>
+<meta name="generator" content="Org mode">
+<link rel="stylesheet" href="../theme.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+extensions: ['tex2jax.js', 'TeX/AMSmath.js',
+'TeX/AMSsymbols.js'],
+jax: ['input/TeX', 'output/HTML-CSS'],
+tex2jax: {
+inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+processEscapes: true,
+},
+TeX: {
+TagSide: 'left',
+Macros: {
+abs: ['\\left\|#1\\right\|', 1],
+acoustic: '\\tensii A',
+boxtimessym : '\\boxtimes^\\text s',
+bulkmod: '\\kappa',
+complexes: '\\mathbb C',
+devprojiv: '\\tensiv{K}',
+diff: '\\mathrm{d}',
+displ: '\\vec{u}',
+domain: '\\Omega',
+dS: ['\\operatorname{dS}_{#1}', 1],
+dV: ['\\operatorname{dV}_{#1}', 1],
+eff: '\\text{eff}',
+eshelby: '\\tensiv{S}',
+greeniv: '\\stensiv{\\Gamma}',
+greenivcomp: '\\Gamma',
+hill: '\\tensiv{P}',
+identii: '\\stensii{\\delta}',
+identiv: '\\tensiv{I}',
+identivcomp: 'I',
+indicator: '\\boldsymbol{1}',
+integers: '\\mathbb Z',
+meas: ['\\left\|#1\\right\|', 1],
+naturals: '\\mathbb N',
+polarization: '\\stensii{\\tau}',
+polarizationcomp: '\\tau',
+prestress: '\\stensii{\\varpi}',
+prestresscomp: '\\varpi',
+rationals: '\\mathbb Q',
+reals: '\\mathbb R',
+shearmod: '\\mu',
+sphprojiv: '\\tensiv{J}',
+stensii: ['\\svec{#1}', 1],
+stensiv: ['\\svec{#1}', 1],
+stiffness: '\\tensiv{C}',
+strain: '\\stensii{\\varepsilon}',
+straincomp: '\\varepsilon',
+stress: '\\stensii{\\sigma}',
+stresscomp: '\\sigma',
+svec: ['{\\boldsymbol{#1}}', 1],
+tens: ['\\vec{#1}', 1],
+tensii: ['\\vec{#1}', 1],
+tensiv: ['\\vec{#1}', 1],
+tr: '\\operatorname{tr}',
+transp: ['{#1}^{\\text T}', 1],
+transpinv: ['{#1}^{-\\text T}', 1],
+vec: ['{\\mathbf{#1}}', 1],
+volavg: ['\\overline{#1}', 1],
+Prestress: '\\stensii{\\Pi}',
+Strain: '\\tensii{E}',
+Stress: '\\stensii{\\Sigma}',
+}
+},
+'HTML-CSS': { availableFonts: ['TeX'] }
+});
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<img id="banner" src="../images/banner.jpg"/>
+<div class="navbar">
+<span class="sitename"><a href="../index.html" title="">Sébastien Brisard's blog</a></span>
+<ul>
+<li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
+<li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
+<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
+<li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
+<li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
+<li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
+<li><a href="https://twitter.com/SebBrisard" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li><a href="../feed.xml" title="RSS"><span class="fa fa-rss"></span></a></li>
+</ul>
+</div>
+<div id="titleblock">
+<p class="date">2013-12-05</p>
+<h1 class="title">Elastic constants of an isotropic material, part 1: 3D elasticity</h1>
+</div>
+</div>
+<div id="content">
+<h1 class="title">Elastic constants of an isotropic material, part 1: 3D elasticity</h1>
+<p>
+Among all classes of materials, the class of linearly elastic and isotropic materials is probably the simplest. Such materials are defined by two elastic constants: for example, Young's modulus \(E\) and Poisson's ratio \(\nu\). However, depending on the situation, this pair of constants might not be the most appropriate<!-- more --> (meaning that they may not lead to the most compact expressions). Alternative sets of elastic constants are
+</p>
+
+<ul class="org-ul">
+<li>Lamé's constants \(\lambda\) and \(\shearmod\),</li>
+<li>bulk and shear moduli \(\bulkmod\) and \(\shearmod\),</li>
+<li>shear modulus and Poisson ratio \(\shearmod\) and \(\nu\).</li>
+</ul>
+
+<p>
+Each pair of constants is of course strictly equivalent to any other. I tend to work primarily with \(\shearmod\) and \(\nu\), and always find myself looking for the expression of E, \(\lambda\) and \(\bulkmod\) as a function of \(\shearmod\) and \(\nu\). In this series, we will derive these expressions, starting with 3D elasticity.
+</p>
+
+<div id="outline-container-org5e20896" class="outline-2">
+<h2 id="org5e20896">Lamé's constants</h2>
+<div class="outline-text-2" id="text-org5e20896">
+<p>
+The constitutive equation of a linearly elastic and isotropic material reads
+</p>
+\begin{equation}
+    \label{eq:1}
+    \stresscomp_{ij} = \lambda\straincomp_{kk}\delta_{ij} + 2\shearmod\straincomp_{ij}
+\end{equation}
+
+<p>
+where \(\stresscomp_{ij}\) (resp. \(\straincomp_{ij}\)) denotes the stress (resp. strain) tensor, while \(\lambda\) (resp. \(\shearmod\)) is Lamé's first (resp. second) constant; \(\shearmod\) is also called the <i>shear modulus</i>. Eq. \eqref{eq:1} is inverted so as to express the strain tensor as a function of the stress tensor. Taking \(i = j\) and summing over repeated indices, we find
+</p>
+\begin{equation*}
+    \stresscomp_{ii} = (3\lambda + 2\shearmod)\straincomp_{kk},
+\end{equation*}
+
+<p>
+where it is recalled that \(\delta_{ii} = 3\) (the dimension of the physical space). Plugging into Eq. \eqref{eq:1}
+</p>
+\begin{equation*}
+    \stresscomp_{ij} = \frac{\lambda}{3\lambda+2\shearmod}\stresscomp_{kk}\delta_{ij} + 2\shearmod\straincomp_{ij}
+\end{equation*}
+
+<p>
+and finally
+</p>
+\begin{equation}
+    \label{eq:2}
+    \straincomp_{ij} = \frac{\stresscomp_{ij}}{2\shearmod} - \frac{\lambda}{2\shearmod(3\lambda+2\shearmod)}\stresscomp_{kk}\delta_{ij}.
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-orgc600cdd" class="outline-2">
+<h2 id="orgc600cdd">Young's modulus and Poisson ratio</h2>
+<div class="outline-text-2" id="text-orgc600cdd">
+<p>
+We consider a uniaxial traction experiment, where the stress tensor reduces to \(\stresscomp\vec e_3\otimes\vec e_3\) (\(\stresscomp\) is the imposed uniaxial stress). Substitution in Eq. \eqref{eq:2} leads to the following expression of the longitudinal strain
+</p>
+\begin{equation*}
+    \straincomp_{33} = \frac{\lambda+\shearmod}{\shearmod(3\lambda+2\shearmod)}\stresscomp.
+\end{equation*}
+
+<p>
+By definition, Young's modulus is the longitudinal stress to longitudinal strain ratio: \(E=\stresscomp/\straincomp_{33}\), so that
+</p>
+\begin{equation}
+    \label{eq:3}
+    E = \frac{\shearmod(3\lambda+2\shearmod)}{\lambda+\shearmod}.
+\end{equation}
+
+<p>
+The expression of the transverse strains is again derived using Eq. \eqref{eq:2}
+</p>
+\begin{equation*}
+    \straincomp_{11} = \straincomp_{22} = -\frac{\lambda}{2\shearmod(3\lambda+2\shearmod)}
+\end{equation*}
+
+<p>
+and by definition, Poisson's ratio is the oposite of the transverse to longitudinal strain ratio
+</p>
+\begin{equation}
+    \label{eq:4}
+    \nu = -\frac{\straincomp_{11}}{\straincomp_{33}} = -\frac{\straincomp_{22}}{\straincomp_{33}} = \frac{\lambda}{2(\lambda+\shearmod)}.
+\end{equation}
+
+<p>
+Expressions \eqref{eq:3} and \eqref{eq:4} can be substituted in the constitutive equation \eqref{eq:2}, leading to
+</p>
+\begin{equation}
+    \label{eq:5}
+    \straincomp_{ij} = \frac{1+\nu}E\stresscomp_{ij} - \frac\nu E\stresscomp_{kk}\delta_{ij}.
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-org9219f79" class="outline-2">
+<h2 id="org9219f79">Bulk and shear moduli</h2>
+<div class="outline-text-2" id="text-org9219f79">
+<p>
+We now consider an isotropic compression experiment, where the stress tensor reduces to a hydrostatic pressure \(\stresscomp_{ij}=-p\delta_{ij}\). Using Eq. \eqref{eq:1}, we find that the strain tensor is also isotropic
+</p>
+\begin{equation}
+    \label{eq:6}
+    \straincomp_{ij} = -\frac{p\delta_{ij}}{3\lambda+2\shearmod}.
+\end{equation}
+
+<p>
+It is recalled that \(\straincomp_\text v=\straincomp_{kk} / 3\) denotes the relative volume change of the material. Then, from Eq. \eqref{eq:6}
+</p>
+\begin{equation*}
+    \straincomp_\text v = -\frac p{\bulkmod_\text{3D}},
+\end{equation*}
+
+<p>
+where \(\bulkmod_\text{3D}\) denotes the bulk modulus, defined as follows
+</p>
+\begin{equation}
+    \label{eq:7}
+    \bulkmod_\text{3D} = \lambda + \frac 23\shearmod.
+\end{equation}
+
+<p>
+As we shall see in the <a href="./20131229-Elastic_constants_of_an_isotropic_material-02.html">next instalment</a> of this series, the definition of the bulk modulus <i>depends on the dimension of the physical space</i>, hence the '3D' subscript. Using \(\bulkmod\) and \(\shearmod\) as elastic constants, Eq. \eqref{eq:1} reads
+</p>
+\begin{equation}
+    \label{eq:8}
+    \stresscomp_{ij} = \bulkmod_\text{3D}\straincomp_{kk}\delta_{ij}+2\shearmod\left(\straincomp_{ij}-\frac{\straincomp_{kk}}3\delta_{ij}\right)
+\end{equation}
+</div>
+</div>
+
+<div id="outline-container-org64a390f" class="outline-2">
+<h2 id="org64a390f">Shear modulus and Poisson ratio</h2>
+<div class="outline-text-2" id="text-org64a390f">
+<p>
+I quite often use the shear modulus \(\shearmod\) and Poisson ratio \(\nu\) as the constants defining the elastic material. One of the reasons for this is the fact that the components of the fourth-rank Green operator for strains have the same expression in 3D and 2D (plane strain) elasticity when expressed as a function of \(\shearmod\) and \(\nu\).
+</p>
+
+<p>
+In the present section, all other elastic constants are expressed as functions of these two constants. First, from Eq. \eqref{eq:4}, it is readily found that
+</p>
+\begin{equation}
+    \label{eq:9}
+    \lambda = \frac{2\shearmod\nu}{1-2\nu}.
+\end{equation}
+
+<p>
+Then, combining Eqs. \eqref{eq:3} and \eqref{eq:4}
+</p>
+\begin{equation*}
+    E = 2\shearmod(1+\nu).
+\end{equation*}
+
+<p>
+Finally, from Eqs. \eqref{eq:7} and \eqref{eq:9}
+</p>
+\begin{equation*}
+    \bulkmod_\text{3D} = \frac23\frac{1+\nu}{1-2\nu}\shearmod.
+\end{equation*}
+</div>
+</div>
+
+<div id="outline-container-org60abbf2" class="outline-2">
+<h2 id="org60abbf2">Conclusion</h2>
+<div class="outline-text-2" id="text-org60abbf2">
+<p>
+In this instalment, we have defined Lamé's first and second constants, Young's modulus, Poisson's ratio, as well as the (3D) bulk modulus. Expressions relating these various constants have also been derived. In the <a href="./20131229-Elastic_constants_of_an_isotropic_material-02.html">next instalment</a> of this series, we will discuss the case of 2D (plane strain elasticity).
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'sbrisard';
+var disqus_identifier = 'posts/20131205-Elastic_constants_of_an_isotropic_material-01';
+var disqus_title = 'Elastic constants of an isotropic material, part 1: 3D elasticity';
+var disqus_url = 'http://sbrisard.github.io/posts/20131205-Elastic_constants_of_an_isotropic_material-01.html';
+(function() {
+var dsq = document.createElement('script');
+dsq.type = 'text/javascript';
+dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>
