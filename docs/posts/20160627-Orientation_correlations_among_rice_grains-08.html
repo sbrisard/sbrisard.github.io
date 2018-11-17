@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:57 -->
+<!-- 2018-11-17 Sat 06:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation correlations among rice grains, part 8: estimating the correlations</title>
@@ -127,8 +127,8 @@ Stress: '\\stensii{\\Sigma}',
 In the <a href="./20160219-Orientation_correlations_among_rice_grains-07.html">previous instalment</a> of this series, we have analyzed the morphology of the rice grains. In particular, we have defined their <i>orientation</i> as that of the major axis of inertia. We are now in a position to quantify the statistics of the orientations. We will first discuss <a href="#S1">one-point statistics</a> (each grain is considered individually), then <a href="#S2">two-point statistics</a> (mutual orientations of pairs of grains are considered). Finally, we will try to quantify how <a href="#Boundary_effects">the wall of the sample container</a> influences the orientation of the rice grains.
 </p>
 
-<div id="outline-container-orgd7df5cf" class="outline-2">
-<h2 id="S1"><a id="orgd7df5cf"></a>One-point order parameter</h2>
+<div id="outline-container-org101c187" class="outline-2">
+<h2 id="S1"><a id="org101c187"></a>One-point order parameter</h2>
 <div class="outline-text-2" id="text-S1">
 <p>
 Various order parameters have been introduced in order to identify preferred orientations in assemblies of anisotropic particles. In the present post, we will use the so-called nematic order parameter, which is used to monitor isotropic-nematic phase transitions (<a href="../pages/references.html#EPPE1984">Eppenga and Frenkel, 1984</a>)
@@ -209,8 +209,8 @@ It is observed that \(S_1\) is non-zero, which indicates a slight anisotropy. \(
 </div>
 </div>
 
-<div id="outline-container-org1c4b40e" class="outline-2">
-<h2 id="S2"><a id="org1c4b40e"></a>Two-point order parameter</h2>
+<div id="outline-container-org8fdef18" class="outline-2">
+<h2 id="S2"><a id="org8fdef18"></a>Two-point order parameter</h2>
 <div class="outline-text-2" id="text-S2">
 <p>
 The initial motivation of this series was the quantification of orientation correlation between anisotropic particles. The basic idea is this: anisotropic, hard particles tend to be locally well ordered (in terms of orientation). In other words, the closer the particles, the higher the probability that they are (nearly) parallel. This is definitely true of flat particles (platelets), but it is less obvious for elongated particles.
@@ -289,7 +289,7 @@ Then, the outer sum in Eq. \eqref{eq:2} is a simple mean (ignoring NaNs).
 </div>
 
 <p>
-The resulting correlation function is plotted on Fig. <a href="#org62dc7fc">1</a>.
+The resulting correlation function is plotted on Fig. <a href="#org56eca67">1</a>.
 </p>
 
 <div class="org-src-container">
@@ -305,7 +305,7 @@ fig.savefig(<span class="org-string">'./20160627-Orientation_correlations_among_
 </div>
 
 
-<div id="org62dc7fc" class="figure">
+<div id="org56eca67" class="figure">
 <p><img src="./20160627-Orientation_correlations_among_rice_grains-08/S2.png" alt="S2.png">
 </p>
 <p><span class="figure-number">Figure 1: </span>The orientational correlation function \(S_2(r)\).</p>
@@ -317,8 +317,8 @@ For small values of \(r\), the curve is not relevant, since very little grains a
 </div>
 </div>
 
-<div id="outline-container-org4170c1c" class="outline-2">
-<h2 id="Boundary_effects"><a id="org4170c1c"></a>Boundary effects</h2>
+<div id="outline-container-orgb277da5" class="outline-2">
+<h2 id="Boundary_effects"><a id="orgb277da5"></a>Boundary effects</h2>
 <div class="outline-text-2" id="text-Boundary_effects">
 <p>
 To close this post on orientation correlations, we investigate boundary effects in the specimen. The wall of the cylindrical sample container is impenetrable. Therefore, the particles closest to the wall are tangent this wall. We want to quantify the distance over which the grains keep the memory of this preferred orientation.
@@ -386,7 +386,7 @@ We then compute the matrix representation of the tensor \(\vec n_i\otimes\vec n_
 </div>
 
 <p>
-The resulting statistical descriptors are plotted in Fig. <a href="#orge71e5d2">2</a>. Honestly, the results are not very conclusive. Both \(\langle n_r\otimes n_r\rangle\) and \(\langle n_\theta\otimes n_\theta\rangle\) seem to decrease rapidly over a distance of (roughly) 30 voxels. However, they both converge to a value which is non-zero.
+The resulting statistical descriptors are plotted in Fig. <a href="#orgdbee896">2</a>. Honestly, the results are not very conclusive. Both \(\langle n_r\otimes n_r\rangle\) and \(\langle n_\theta\otimes n_\theta\rangle\) seem to decrease rapidly over a distance of (roughly) 30 voxels. However, they both converge to a value which is non-zero.
 </p>
 
 <div class="org-src-container">
@@ -410,7 +410,7 @@ fig.savefig(<span class="org-string">'./20160627-Orientation_correlations_among_
 </div>
 
 
-<div id="orge71e5d2" class="figure">
+<div id="orgdbee896" class="figure">
 <p><img src="./20160627-Orientation_correlations_among_rice_grains-08/boundary_effects.png" alt="boundary_effects.png">
 </p>
 <p><span class="figure-number">Figure 2: </span>Angular correlations with the orientation of the wall.</p>
@@ -418,15 +418,15 @@ fig.savefig(<span class="org-string">'./20160627-Orientation_correlations_among_
 </div>
 </div>
 
-<div id="outline-container-org447a9e5" class="outline-2">
-<h2 id="org447a9e5">Conclusion</h2>
-<div class="outline-text-2" id="text-org447a9e5">
+<div id="outline-container-org14869b8" class="outline-2">
+<h2 id="org14869b8">Conclusion</h2>
+<div class="outline-text-2" id="text-org14869b8">
 <p>
 This was the last post of this series on <i>Orientation correlations among rice grains</i>. This post was dedicated to the <i>quantification</i> of orientation correlations. To do so, we have recalled the definition of several statistical descriptors. These descriptors were then evaluated on the sample.
 </p>
 
 <p>
-The resulting values indeed indicate the existence of orientation correlations. However, further investigations should be carried out in order to draw reliable conclusions. In particular, the descriptors plotted in Figs. <a href="#org62dc7fc">1</a> and <a href="#orge71e5d2">2</a> are histograms, and filtering of some sort should be used to smooth the curves. Besides, the analysis of <a href="#S1">the first section</a> shows that the sample is globally anisotropic. This global anisotropy should be accounted for (“subtracted”) while analyzing local anisotropy. In short, the present post should be considered as a mere introduction to the matter and the relevant tools.
+The resulting values indeed indicate the existence of orientation correlations. However, further investigations should be carried out in order to draw reliable conclusions. In particular, the descriptors plotted in Figs. <a href="#org56eca67">1</a> and <a href="#orgdbee896">2</a> are histograms, and filtering of some sort should be used to smooth the curves. Besides, the analysis of <a href="#S1">the first section</a> shows that the sample is globally anisotropic. This global anisotropy should be accounted for (“subtracted”) while analyzing local anisotropy. In short, the present post should be considered as a mere introduction to the matter and the relevant tools.
 </p>
 
 <p>

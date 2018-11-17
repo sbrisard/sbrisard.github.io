@@ -76,7 +76,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   (let (id url)
     (setq id (s-chop-prefix sb-blog-base-directory
                             (s-chop-suffix ".org" buffer-file-name)))
-    (setq url (concat "http://sbrisard.github.io/" id ".html"))
+    (setq url (concat "https://sbrisard.github.io/" id ".html"))
     (format sb-blog-disqus-script-format
             id
             (org-export-data
@@ -87,7 +87,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
 ;; Creative commons license
 ;; ------------------------
-(defvar sb-blog-license "<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-nc/4.0/88x31.png\" /></a><br /><span xmlns:dct=\"http://purl.org/dc/terms/\" property=\"dct:title\">Except where otherwise noted, this blog</span> by <a xmlns:cc=\"http://creativecommons.org/ns#\" href=\"http://sbrisard.github.io/\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Sébastien Brisard</a> is licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+(defvar sb-blog-license "<a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-nc/4.0/88x31.png\" /></a><br /><span xmlns:dct=\"https://purl.org/dc/terms/\" property=\"dct:title\">Except where otherwise noted, this blog</span> by <a xmlns:cc=\"https://creativecommons.org/ns#\" href=\"https://sbrisard.github.io/\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Sébastien Brisard</a> is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 ")
 
 ;; Functions for generation of HTML tags
@@ -161,7 +161,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 (defun sb-blog-html-head (level)
   (concat (format "<link rel=\"stylesheet\" href=\"%s\"/>"
                   (f-join (sb-blog-path-to-root level) "theme.css"))
-          "<link rel=\"stylesheet\" href=\"http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
+          "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css\">"))
 
 (defun sb-blog-get-date-as-html (info)
   (let ((date (org-export-get-date info "%Y-%m-%d")))

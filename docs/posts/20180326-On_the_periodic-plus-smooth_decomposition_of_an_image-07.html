@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:57 -->
+<!-- 2018-11-17 Sat 06:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan&rsquo;s algorithm</title>
@@ -147,9 +147,9 @@ the seventh in a series in seven parts:
 The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.
 </p>
 
-<div id="outline-container-orged81078" class="outline-2">
-<h2 id="orged81078">Computing the DFT of the intensity gaps</h2>
-<div class="outline-text-2" id="text-orged81078">
+<div id="outline-container-orgb74c592" class="outline-2">
+<h2 id="orgb74c592">Computing the DFT of the intensity gaps</h2>
+<div class="outline-text-2" id="text-orgb74c592">
 <p>
 In the <a href="./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.html#algorithm">previous instalment</a> of this series, we showed that the DFT \(\hat s\) of
 the smooth component \(s\) of a \(m\times n\) image \(u\) can be deduced from the DFT
@@ -335,9 +335,9 @@ we can do better? Wait and see!
 </div>
 </div>
 
-<div id="outline-container-org9bd0935" class="outline-2">
-<h2 id="org9bd0935">Moisans&rsquo;s algorithm for <i>real</i> images</h2>
-<div class="outline-text-2" id="text-org9bd0935">
+<div id="outline-container-org0b4cb37" class="outline-2">
+<h2 id="org0b4cb37">Moisans&rsquo;s algorithm for <i>real</i> images</h2>
+<div class="outline-text-2" id="text-org0b4cb37">
 <p>
 In our previous implementation, we have overlooked an important fact: \(u\) is
 (often) a <i>real</i> image. Its DFT ought to be computed through the
@@ -467,9 +467,9 @@ Ratios:
 </div>
 </div>
 
-<div id="outline-container-org8536c47" class="outline-2">
-<h2 id="org8536c47">Conclusion</h2>
-<div class="outline-text-2" id="text-org8536c47">
+<div id="outline-container-orgd3e2335" class="outline-2">
+<h2 id="orgd3e2335">Conclusion</h2>
+<div class="outline-text-2" id="text-orgd3e2335">
 <p>
 This is the end of the story. We now have a good implementation of Moisan&rsquo;s
 algorithm. We have optimized its implementation, but the code did not lose in

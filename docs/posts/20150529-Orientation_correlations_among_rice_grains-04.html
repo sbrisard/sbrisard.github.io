@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:57 -->
+<!-- 2018-11-17 Sat 06:24 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation correlations among rice grains, part 4: defining the ROI</title>
@@ -55,19 +55,19 @@
 <div id="content">
 <h1 class="title">Orientation correlations among rice grains, part 4: defining the ROI</h1>
 <p>
-In the <a href="./20150330-Orientation_correlations_among_rice_grains-03.html">previous instalment</a> of this series, we obtained binned slices of the sample. Fig. <a href="#orga2dfc1a">1</a> is a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within the Region Of Interest (ROI) thus defined.
+In the <a href="./20150330-Orientation_correlations_among_rice_grains-03.html">previous instalment</a> of this series, we obtained binned slices of the sample. Fig. <a href="#orgb88a0fb">1</a> is a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within the Region Of Interest (ROI) thus defined.
 </p>
 
 
-<div id="orga2dfc1a" class="figure">
+<div id="orgb88a0fb" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-099.png" alt="rice-bin_4x4x4-099.png" width="50%">
 </p>
 <p><span class="figure-number">Figure 1: </span>A typical slice of the 3D reconstruction of the sample. The original image has been reduced by 4×4×4 binning; the size of each binned slice is 436×437.</p>
 </div>
 
-<div id="outline-container-org6061b47" class="outline-2">
-<h2 id="org6061b47">The circle Hough Transform</h2>
-<div class="outline-text-2" id="text-org6061b47">
+<div id="outline-container-orgb559e4e" class="outline-2">
+<h2 id="orgb559e4e">The circle Hough Transform</h2>
+<div class="outline-text-2" id="text-orgb559e4e">
 <p>
 The sample container is cylindrical; since it was nearly vertical during the tomography experiment, its trace is a circular ring on each slice. We are going to use the <a href="http://en.wikipedia.org/wiki/Circle_Hough_Transform">Circle Hough Transform</a> in order to locate the inner and outer circular boundaries which define this ring. To do so, we will use <a href="https://www.python.org/">python</a>, <a href="http://www.numpy.org/">numpy</a> and <a href="http://scikit-image.org/docs/dev/api/skimage.html">scikit-image</a>. We first import these modules, and load the image
 </p>
@@ -110,14 +110,14 @@ imsave(os.path.join(root, <span class="org-string">'rice-bin_4x4x4-edges-099.png
 </div>
 
 <p>
-The resulting image is shown in Fig. <a href="#orgb7e5942">2</a>. It should be noted that due to the preliminary binning (which is nothing but a mean filter), the input image exhibits very little noise. Therefore, <code>sigma=0.0</code> in the above call to <code>skimage.feature.canny</code>.
+The resulting image is shown in Fig. <a href="#orgc981a24">2</a>. It should be noted that due to the preliminary binning (which is nothing but a mean filter), the input image exhibits very little noise. Therefore, <code>sigma=0.0</code> in the above call to <code>skimage.feature.canny</code>.
 </p>
 
 
-<div id="orgb7e5942" class="figure">
+<div id="orgc981a24" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-edges-099.png" alt="rice-bin_4x4x4-edges-099.png" width="50%">
 </p>
-<p><span class="figure-number">Figure 2: </span>Canny edge detection performed on the initial image shown in Fig. <a href="#orga2dfc1a">1</a>.</p>
+<p><span class="figure-number">Figure 2: </span>Canny edge detection performed on the initial image shown in Fig. <a href="#orgb88a0fb">1</a>.</p>
 </div>
 
 <p>
@@ -163,11 +163,11 @@ How is this representation in parameter space to be used? We consider a binary (
 </div>
 
 <p>
-The above code snippet saves a series of images, which is displayed below in 3D as an animated GIF (see Fig. <a href="#org3ff60ba">3</a>). The two bright spots indicate the location of the inner and outer boundaries in the parameter space. We will use a very crude procedure to locate these two peaks (a more elaborate method is not required as we do not seek sub-pixel accuracy).
+The above code snippet saves a series of images, which is displayed below in 3D as an animated GIF (see Fig. <a href="#org189bc21">3</a>). The two bright spots indicate the location of the inner and outer boundaries in the parameter space. We will use a very crude procedure to locate these two peaks (a more elaborate method is not required as we do not seek sub-pixel accuracy).
 </p>
 
 
-<div id="org3ff60ba" class="figure">
+<div id="org189bc21" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-hough-3D_rot-099.gif" alt="rice-bin_4x4x4-hough-3D_rot-099.gif" width="50%">
 </p>
 <p><span class="figure-number">Figure 3: </span>3D view of the Hough transform. The two bright spots correspond to the inner and outer boundaries of the sample container.</p>
@@ -205,32 +205,32 @@ imsave(os.path.join(root, <span class="org-string">'rice-bin_4x4x4-boundary-099.
 </div>
 
 <p>
-Which produces the following image (see Fig. <a href="#orge898fd6">4</a>).
+Which produces the following image (see Fig. <a href="#org2af3610">4</a>).
 </p>
 
 
-<div id="orge898fd6" class="figure">
+<div id="org2af3610" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-boundary-099.png" alt="rice-bin_4x4x4-boundary-099.png" width="50%">
 </p>
 <p><span class="figure-number">Figure 4: </span>The original image overlaid with the identified boundary.</p>
 </div>
 
 <p>
-A closer look (see Fig. <a href="#orgac877aa">5</a>) shows that we roughly achieved pixel accuracy, which will be sufficient for the analysis to come.
+A closer look (see Fig. <a href="#org7a7972b">5</a>) shows that we roughly achieved pixel accuracy, which will be sufficient for the analysis to come.
 </p>
 
 
-<div id="orgac877aa" class="figure">
+<div id="org7a7972b" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-roi_64x64+10+110-boundary-resized-099.png" alt="rice-bin_4x4x4-roi_64x64+10+110-boundary-resized-099.png" width="50%">
 </p>
-<p><span class="figure-number">Figure 5: </span>Close-up of Fig. <a href="#orge898fd6">4</a>; pixel accuracy was approximately achieved.</p>
+<p><span class="figure-number">Figure 5: </span>Close-up of Fig. <a href="#org2af3610">4</a>; pixel accuracy was approximately achieved.</p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1d43c81" class="outline-2">
-<h2 id="org1d43c81">Analysis of the whole stack</h2>
-<div class="outline-text-2" id="text-org1d43c81">
+<div id="outline-container-org68ea83b" class="outline-2">
+<h2 id="org68ea83b">Analysis of the whole stack</h2>
+<div class="outline-text-2" id="text-org68ea83b">
 <p>
 We are now ready to carry out the above analysis on all 172 images of the stack. This is what the script below does (<a href="./20150529-Orientation_correlations_among_rice_grains-04/find_boundary.py">download</a>); in order to check that nothing went wrong, each image with overlaid boundary is saved for visual inspection.
 </p>
@@ -308,20 +308,20 @@ Which shows that there is very little variation of the circle parameters across 
 </div>
 </div>
 
-<div id="outline-container-org99476af" class="outline-2">
-<h2 id="org99476af">Closing words</h2>
-<div class="outline-text-2" id="text-org99476af">
+<div id="outline-container-orgc4f4003" class="outline-2">
+<h2 id="orgc4f4003">Closing words</h2>
+<div class="outline-text-2" id="text-orgc4f4003">
 <p>
 In this post, we saw how to define the (cylindrical) ROI on our stack of images. To do so, we used the Circle Hough Transform to find circular edges in the slices. In the <a href="./20150709-Orientation_correlations_among_rice_grains-05.html">next</a> instalment of this series, I will start discussing segmentation <i>per se</i>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1429e1f" class="outline-2">
-<h2 id="org1429e1f">Side-note: how to produce animated GIFs</h2>
-<div class="outline-text-2" id="text-org1429e1f">
+<div id="outline-container-org0b474f5" class="outline-2">
+<h2 id="org0b474f5">Side-note: how to produce animated GIFs</h2>
+<div class="outline-text-2" id="text-org0b474f5">
 <p>
-The animated GIF in Fig. <a href="#org3ff60ba">3</a> was produced with <a href="http://imagej.nih.gov/ij/">ImageJ</a>. The procedure is
+The animated GIF in Fig. <a href="#org189bc21">3</a> was produced with <a href="http://imagej.nih.gov/ij/">ImageJ</a>. The procedure is
 </p>
 
 <ol class="org-ol">

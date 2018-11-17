@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:57 -->
+<!-- 2018-11-17 Sat 06:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators</title>
@@ -171,8 +171,8 @@ parts:
 The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.
 </p>
 
-<div id="outline-container-orga1d0ea1" class="outline-2">
-<h2 id="operators"><a id="orga1d0ea1"></a>Matrix-free linear operators</h2>
+<div id="outline-container-org2242bb0" class="outline-2">
+<h2 id="operators"><a id="org2242bb0"></a>Matrix-free linear operators</h2>
 <div class="outline-text-2" id="text-operators">
 <p>
 The \(Q_1\) and \(Q\) linear operators will be implemented as instances of
@@ -258,8 +258,8 @@ class. This class will be used below to implement the operators \(Q_1\) and \(Q\
 </div>
 </div>
 
-<div id="outline-container-org3ce9df2" class="outline-2">
-<h2 id="Q1"><a id="org3ce9df2"></a>Implementation of the \(Q_1\) operator</h2>
+<div id="outline-container-org37c5673" class="outline-2">
+<h2 id="Q1"><a id="org37c5673"></a>Implementation of the \(Q_1\) operator</h2>
 <div class="outline-text-2" id="text-Q1">
 <p>
 The \(Q_1\) operator was defined in the <a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html#Q1">previous post</a> as the following sum:
@@ -338,8 +338,8 @@ method simply returns <code>self</code>.
 </div>
 </div>
 
-<div id="outline-container-orge2faf1c" class="outline-2">
-<h2 id="Q"><a id="orge2faf1c"></a>Implementation of the \(Q\) operator</h2>
+<div id="outline-container-orgcc587c0" class="outline-2">
+<h2 id="Q"><a id="orgcc587c0"></a>Implementation of the \(Q\) operator</h2>
 <div class="outline-text-2" id="text-Q">
 <p>
 The \(Q\) operator was defined in the <a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html#Q">previous post</a> as the following sum:
@@ -430,8 +430,8 @@ is to be applied. This allows for <i>exact</i> computations on integer images.
 </div>
 </div>
 
-<div id="outline-container-orgb76dd75" class="outline-2">
-<h2 id="testing"><a id="orgb76dd75"></a>Testing the implementation</h2>
+<div id="outline-container-org199ef43" class="outline-2">
+<h2 id="testing"><a id="org199ef43"></a>Testing the implementation</h2>
 <div class="outline-text-2" id="text-testing">
 <p>
 For any image \(v\), we should have
@@ -495,9 +495,9 @@ errors, such as rows and columns swapping.</li>
 </div>
 </div>
 
-<div id="outline-container-orgffc0a8d" class="outline-2">
-<h2 id="orgffc0a8d">Conclusion</h2>
-<div class="outline-text-2" id="text-orgffc0a8d">
+<div id="outline-container-org8aa674b" class="outline-2">
+<h2 id="org8aa674b">Conclusion</h2>
+<div class="outline-text-2" id="text-org8aa674b">
 <p>
 In this post, we have implemented the linear operators \(Q_1\) and \(Q\). We are
 now in a position to (at last!) compute the periodic-plus-smooth decomposition

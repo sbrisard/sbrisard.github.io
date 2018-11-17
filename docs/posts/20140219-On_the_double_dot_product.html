@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:56 -->
+<!-- 2018-11-17 Sat 06:24 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the double dot product</title>
@@ -134,17 +134,17 @@ The double dot product of two tensors is the contraction of these tensors with r
 Let \(\tensii a\) and \(\tensii b\) be two second-rank tensors. The following two alternative definitions might be adopted for the double dot product \(\tensii a:\tensii b\)
 </p>
 <dl class="org-dl">
-<dt><a id="org7020e57"></a> Definition 1</dt><dd>\(\tensii a:\tensii b=a_{ij}b_{ji}\) (contraction on the closest indices),</dd>
-<dt><a id="org0139e2b"></a> Definition 2</dt><dd>\(\tensii a:\tensii b=a_{ij}b_{ij}\).</dd>
+<dt><a id="org3504e01"></a> Definition 1</dt><dd>\(\tensii a:\tensii b=a_{ij}b_{ji}\) (contraction on the closest indices),</dd>
+<dt><a id="orgab15283"></a> Definition 2</dt><dd>\(\tensii a:\tensii b=a_{ij}b_{ij}\).</dd>
 </dl>
 
 <p>
 In continuum mechanics, most second-rank tensors (strain, stress) are symmetric, so that both definitions coincide. In the general case of asymmetric tensors however, it is important to check which convention is adopted by the author. In the present post, we examine both definitions in turn, and how they affect the expression of the transpose of fourth-rank tensors, the definition of which is first recalled.
 </p>
 
-<div id="outline-container-orgb4f53dc" class="outline-2">
-<h2 id="orgb4f53dc">Transpose of a fourth-rank tensor</h2>
-<div class="outline-text-2" id="text-orgb4f53dc">
+<div id="outline-container-orgb827818" class="outline-2">
+<h2 id="orgb827818">Transpose of a fourth-rank tensor</h2>
+<div class="outline-text-2" id="text-orgb827818">
 <p>
 Let \(\tensiv A\) be a fourth-rank tensor. Then the linear mapping \(\tensii x\mapsto\tensiv A:\tensii x\) (\(\tensii x\): second-rank tensor) is an endomorphism over the space of second-rank tensors. As such, it is possible to define its transpose \(\transp{\tensiv A}\), provided that the space of second-rank tensors is equipped with a scalar product \(\langle\cdot,\cdot\rangle\). Then, by definition
 </p>
@@ -169,11 +169,11 @@ so that the scalar product of two second-rank tensors is closely related to eith
 </div>
 </div>
 
-<div id="outline-container-org4c21a34" class="outline-2">
-<h2 id="org4c21a34">Definition 1</h2>
-<div class="outline-text-2" id="text-org4c21a34">
+<div id="outline-container-orge35497a" class="outline-2">
+<h2 id="orge35497a">Definition 1</h2>
+<div class="outline-text-2" id="text-orge35497a">
 <p>
-In this section, the <a href="#org7020e57">first definition</a> of the double dot product is examined
+In this section, the <a href="#org3504e01">first definition</a> of the double dot product is examined
 </p>
 
 \begin{equation}
@@ -198,7 +198,7 @@ Introducing the fourth-rank tensor \(\tilde{\tensiv A}\) defined component-wise 
 \end{equation*}
 
 <p>
-which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In other words, if <a href="#org7020e57">definition 1</a> is adopted for the double dot product, then the components of the transpose of any fourth-rank tensor \(\tensiv A\) read
+which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In other words, if <a href="#org3504e01">definition 1</a> is adopted for the double dot product, then the components of the transpose of any fourth-rank tensor \(\tensiv A\) read
 </p>
 
 \begin{equation}
@@ -208,11 +208,11 @@ which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In ot
 </div>
 </div>
 
-<div id="outline-container-org78ffc57" class="outline-2">
-<h2 id="org78ffc57">Definition 2</h2>
-<div class="outline-text-2" id="text-org78ffc57">
+<div id="outline-container-org858e804" class="outline-2">
+<h2 id="org858e804">Definition 2</h2>
+<div class="outline-text-2" id="text-org858e804">
 <p>
-We now examine the <a href="#org0139e2b">second definition</a> of the double dot product
+We now examine the <a href="#orgab15283">second definition</a> of the double dot product
 </p>
 
 \begin{equation}
@@ -237,7 +237,7 @@ Introducing the fourth-rank tensor \(\tilde{\tensiv A}\) defined component-wise 
 \end{equation*}
 
 <p>
-which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In other words, if <a href="#org0139e2b">definition 2</a> is adopted for the double dot product, then the components of the transpose of a fourth-rank tensor \(\tensiv A\) read
+which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In other words, if <a href="#orgab15283">definition 2</a> is adopted for the double dot product, then the components of the transpose of a fourth-rank tensor \(\tensiv A\) read
 </p>
 
 \begin{equation}
@@ -247,11 +247,11 @@ which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In ot
 </div>
 </div>
 
-<div id="outline-container-org4f63abe" class="outline-2">
-<h2 id="org4f63abe">Which definition to adopt?</h2>
-<div class="outline-text-2" id="text-org4f63abe">
+<div id="outline-container-org3dec8e0" class="outline-2">
+<h2 id="org3dec8e0">Which definition to adopt?</h2>
+<div class="outline-text-2" id="text-org3dec8e0">
 <p>
-&#x2026; is a pure matter of taste. For aesthetic reasons, I tend to prefer Eq. \eqref{eq:6} over Eq. \eqref{eq:4}. Besides, <a href="#org0139e2b">definition 2</a> of the double dot product directly defines a scalar product over the space of second-rank tensors. Therefore, <a href="#org0139e2b">definition 2</a> [see Eq. \eqref{eq:5}] <i>will be adopted in this blog</i>. In other words, given two tensors \(\tens T\) and \(\tens U\) of arbitrary rank (≥ 2), the product \(\tens T:\tens U\) is defined as follows
+&#x2026; is a pure matter of taste. For aesthetic reasons, I tend to prefer Eq. \eqref{eq:6} over Eq. \eqref{eq:4}. Besides, <a href="#orgab15283">definition 2</a> of the double dot product directly defines a scalar product over the space of second-rank tensors. Therefore, <a href="#orgab15283">definition 2</a> [see Eq. \eqref{eq:5}] <i>will be adopted in this blog</i>. In other words, given two tensors \(\tens T\) and \(\tens U\) of arbitrary rank (≥ 2), the product \(\tens T:\tens U\) is defined as follows
 </p>
 
 \begin{equation}

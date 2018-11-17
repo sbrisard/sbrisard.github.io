@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:57 -->
+<!-- 2018-11-17 Sat 06:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way</title>
@@ -174,8 +174,8 @@ be proposed and <a href="#testing">tested</a>. Improved implementations will be 
 <a href="./20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07.html">next instalment</a> of this series.
 </p>
 
-<div id="outline-container-orgcf1d0ec" class="outline-2">
-<h2 id="algorithm"><a id="orgcf1d0ec"></a>Moisan&rsquo;s algorithm</h2>
+<div id="outline-container-org00f4348" class="outline-2">
+<h2 id="algorithm"><a id="org00f4348"></a>Moisan&rsquo;s algorithm</h2>
 <div class="outline-text-2" id="text-algorithm">
 <p>
 It is recalled (see <a href="./20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html">previous post</a>) that the smooth component \(s\) of a \(m\times
@@ -271,8 +271,8 @@ Of course, the <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">fa
 </div>
 </div>
 
-<div id="outline-container-org8a1bdcd" class="outline-2">
-<h2 id="implementation"><a id="org8a1bdcd"></a>A first implementation of Moisan&rsquo;s algorithm</h2>
+<div id="outline-container-orged3884f" class="outline-2">
+<h2 id="implementation"><a id="orged3884f"></a>A first implementation of Moisan&rsquo;s algorithm</h2>
 <div class="outline-text-2" id="text-implementation">
 <p>
 Reference implementation of Moisan&rsquo;s algorithm results directly from the above
@@ -404,8 +404,8 @@ We can then readily set \(p\) and \(s\) to their real parts
 </div>
 </div>
 
-<div id="outline-container-orgb287e15" class="outline-2">
-<h2 id="testing"><a id="orgb287e15"></a>Testing our implementation</h2>
+<div id="outline-container-org3bcb5b7" class="outline-2">
+<h2 id="testing"><a id="org3bcb5b7"></a>Testing our implementation</h2>
 <div class="outline-text-2" id="text-testing">
 <p>
 In the <a href="./20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html">previous instalment</a> of this series, we computed a reference
@@ -482,9 +482,9 @@ periodic-plus-smooth decomposition!
 </div>
 </div>
 
-<div id="outline-container-org6115855" class="outline-2">
-<h2 id="org6115855">Conclusion</h2>
-<div class="outline-text-2" id="text-org6115855">
+<div id="outline-container-org26157ee" class="outline-2">
+<h2 id="org26157ee">Conclusion</h2>
+<div class="outline-text-2" id="text-org26157ee">
 <p>
 In the present post, we have implemented Moisans&rsquo;s algorithm (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) for
 computing the periodic-plus-smooth decomposition of an image. This algorithm is

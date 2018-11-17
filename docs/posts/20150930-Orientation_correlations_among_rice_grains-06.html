@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:57 -->
+<!-- 2018-11-17 Sat 06:24 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation correlations among rice grains, part 6: segmentation</title>
@@ -102,7 +102,7 @@ Stress: '\\stensii{\\Sigma}',
 <div id="content">
 <h1 class="title">Orientation correlations among rice grains, part 6: segmentation</h1>
 <p>
-In the <a href="20150709-Orientation_correlations_among_rice_grains-05.html">previous instalment</a> of this series, I showed that a convincing binary image could be produced from the gray level 3D reconstruction of the assembly of rice grains, using Otsu's threshold. However, I intend to carry out statistical analyses of the <i>grains</i> themselves in the subsequent instalments. Therefore, instead of a binary image of the rice grains, what is really needed is a <i>labelled</i> image, where all voxels which are thought to belong to the same rice grain are tagged with the same label. This is called <i>segmentation</i>, which is the topic of the present post. I will first show that the most basic segmentation technique (namely, <a href="#orgb947e49">detecting connected components</a> in the image) fails in the present case. This calls for a more elaborate strategy, based on the widely popular <a href="https://en.wikipedia.org/wiki/Watershed_(image_processing)">watershed</a> method. However, <a href="#orge7b3fd4">blind application</a> of the standard watershed strategy leads to over-segmentation. This post will therefore close on a <a href="#org756278d">problem-dependent strategy</a> better suited to the present case.
+In the <a href="20150709-Orientation_correlations_among_rice_grains-05.html">previous instalment</a> of this series, I showed that a convincing binary image could be produced from the gray level 3D reconstruction of the assembly of rice grains, using Otsu's threshold. However, I intend to carry out statistical analyses of the <i>grains</i> themselves in the subsequent instalments. Therefore, instead of a binary image of the rice grains, what is really needed is a <i>labelled</i> image, where all voxels which are thought to belong to the same rice grain are tagged with the same label. This is called <i>segmentation</i>, which is the topic of the present post. I will first show that the most basic segmentation technique (namely, <a href="#org8559034">detecting connected components</a> in the image) fails in the present case. This calls for a more elaborate strategy, based on the widely popular <a href="https://en.wikipedia.org/wiki/Watershed_(image_processing)">watershed</a> method. However, <a href="#orga78feb1">blind application</a> of the standard watershed strategy leads to over-segmentation. This post will therefore close on a <a href="#orgd470c6d">problem-dependent strategy</a> better suited to the present case.
 </p>
 
 <p>
@@ -152,15 +152,15 @@ The following code snippet (<a href="./20150930-Orientation_correlations_among_r
 Now, on to segmentation!
 </p>
 
-<div id="outline-container-org63646b4" class="outline-2">
-<h2 id="org63646b4">Detecting connected components <a id="orgb947e49"></a></h2>
-<div class="outline-text-2" id="text-org63646b4">
+<div id="outline-container-orgcb2cc96" class="outline-2">
+<h2 id="orgcb2cc96">Detecting connected components <a id="org8559034"></a></h2>
+<div class="outline-text-2" id="text-orgcb2cc96">
 <p>
-This is probably the most simple segmentation technique. In this approach, a <i>feature</i> is defined as a connected component of the image. Let's be honnest: it rarely works on real-life images, because most of the times, distinct objects usually touch, and therefore appear as connected. Fig. <a href="#orgf5b5754">1</a> shows that our 3D image is no exception to this rule!
+This is probably the most simple segmentation technique. In this approach, a <i>feature</i> is defined as a connected component of the image. Let's be honnest: it rarely works on real-life images, because most of the times, distinct objects usually touch, and therefore appear as connected. Fig. <a href="#orga5617e1">1</a> shows that our 3D image is no exception to this rule!
 </p>
 
 
-<div id="orgf5b5754" class="figure">
+<div id="orga5617e1" class="figure">
 <p><img src="./20150930-Orientation_correlations_among_rice_grains-06/binary.png" alt="binary.png" width="50%">
 </p>
 <p><span class="figure-number">Figure 1: </span>A slice of the binary image. Clearly, some rice grains are connected. In other words, detecting connected components is not a suitable strategy for the segmentation of rice grains.</p>
@@ -200,14 +200,14 @@ So, we should expect no miracle from this approach. However, it is interesting t
 </div>
 
 <p>
-The above code snippet (<a href="./20150930-Orientation_correlations_among_rice_grains-06/connected_components.py">download</a>) detects 117 connected components, and produces the following colored image (one color per label), see Fig. <a href="#orgc542320">2</a>. Unsurprisingly, all grains are connected on this slice, and we have produced a very poor segmentation indeed!
+The above code snippet (<a href="./20150930-Orientation_correlations_among_rice_grains-06/connected_components.py">download</a>) detects 117 connected components, and produces the following colored image (one color per label), see Fig. <a href="#orgf4ec7ba">2</a>. Unsurprisingly, all grains are connected on this slice, and we have produced a very poor segmentation indeed!
 </p>
 
 
-<div id="orgc542320" class="figure">
+<div id="orgf4ec7ba" class="figure">
 <p><img src="./20150930-Orientation_correlations_among_rice_grains-06/connected_components.png" alt="connected_components.png" width="50%">
 </p>
-<p><span class="figure-number">Figure 2: </span>All rice grains of the slice shown on Fig. <a href="#orgf5b5754">1</a> are connected!</p>
+<p><span class="figure-number">Figure 2: </span>All rice grains of the slice shown on Fig. <a href="#orga5617e1">1</a> are connected!</p>
 </div>
 
 <p>
@@ -220,9 +220,9 @@ Also note the use of <a href="http://docs.scipy.org/doc/numpy/reference/arrays.i
 </div>
 </div>
 
-<div id="outline-container-orgb6fa841" class="outline-2">
-<h2 id="orgb6fa841">Watershed segmentation, blind application <a id="orge7b3fd4"></a></h2>
-<div class="outline-text-2" id="text-orgb6fa841">
+<div id="outline-container-orgdbb6817" class="outline-2">
+<h2 id="orgdbb6817">Watershed segmentation, blind application <a id="orga78feb1"></a></h2>
+<div class="outline-text-2" id="text-orgdbb6817">
 <p>
 The watershed segmentation is a very popular technique to segment overlapping objects. Describing this technique is out of the scope of this post. Suffice it to say that watershed segmentation is a three-step process
 </p>
@@ -294,18 +294,18 @@ The standard unsupervised seeding technique consists in selecting the local maxi
 </div>
 
 <p>
-The result of this operation is shown on Fig. <a href="#org9b0b15c">3</a>, where over-segmentation is observed. The reason for this is very simple, and typical of elongated objects: there are several local maxima of the distance map in each grain (see Fig. <a href="#org850c384">4</a>), resulting in too many seeds.
+The result of this operation is shown on Fig. <a href="#org52b8eff">3</a>, where over-segmentation is observed. The reason for this is very simple, and typical of elongated objects: there are several local maxima of the distance map in each grain (see Fig. <a href="#org4f03258">4</a>), resulting in too many seeds.
 </p>
 
 
-<div id="org9b0b15c" class="figure">
+<div id="org52b8eff" class="figure">
 <p><img src="./20150930-Orientation_correlations_among_rice_grains-06/watershed-distance_local_max.png" alt="watershed-distance_local_max.png" width="50%">
 </p>
 <p><span class="figure-number">Figure 3: </span>The result of watershed segmentation using local maxima of the map of the distance to the background as seeds. Clearly, over-segmentation occurs, which is typical with elongated objects.</p>
 </div>
 
 
-<div id="org850c384" class="figure">
+<div id="org4f03258" class="figure">
 <p><img src="./20150930-Orientation_correlations_among_rice_grains-06/distance.png" alt="distance.png" width="50%">
 </p>
 <p><span class="figure-number">Figure 4: </span>The map of the distance to the background. There are several local maxima in each grain.</p>
@@ -321,11 +321,11 @@ In the next section, we will see how a problem dependent solution can be propose
 </div>
 </div>
 
-<div id="outline-container-org0ea690f" class="outline-2">
-<h2 id="org0ea690f">Watershed segmentation with directional erosion <a id="org756278d"></a></h2>
-<div class="outline-text-2" id="text-org0ea690f">
+<div id="outline-container-orgeeb437f" class="outline-2">
+<h2 id="orgeeb437f">Watershed segmentation with directional erosion <a id="orgd470c6d"></a></h2>
+<div class="outline-text-2" id="text-orgeeb437f">
 <p>
-In the <a href="#orge7b3fd4">previous section</a>, over-segmentation occured because of the anisotropy of the objects. In other words, had the grains been nearly spherical, then we would have produced a very convincing segmentation with the above method.
+In the <a href="#orga78feb1">previous section</a>, over-segmentation occured because of the anisotropy of the objects. In other words, had the grains been nearly spherical, then we would have produced a very convincing segmentation with the above method.
 </p>
 
 <p>
@@ -433,11 +433,11 @@ The resulting script is very simple (<a href="./20150930-Orientation_correlation
 </div>
 
 <p>
-It identifies 2362 seeds (instead of 2672 in the previous approach). The resulting segmentation is shown in Fig. <a href="#org4812990">5</a>. It can be seen that we almost got rid of over-segmentation.
+It identifies 2362 seeds (instead of 2672 in the previous approach). The resulting segmentation is shown in Fig. <a href="#org1d54121">5</a>. It can be seen that we almost got rid of over-segmentation.
 </p>
 
 
-<div id="org4812990" class="figure">
+<div id="org1d54121" class="figure">
 <p><img src="./20150930-Orientation_correlations_among_rice_grains-06/watershed-directional_erosion.png" alt="watershed-directional_erosion.png" width="50%">
 </p>
 <p><span class="figure-number">Figure 5: </span>The result of watershed segmentation using directional erosions of the map of the distance to the background as seeds. Very little over-segmentation is observed.</p>
@@ -445,9 +445,9 @@ It identifies 2362 seeds (instead of 2672 in the previous approach). The resulti
 </div>
 </div>
 
-<div id="outline-container-orgc5a994d" class="outline-2">
-<h2 id="orgc5a994d">Conclusion</h2>
-<div class="outline-text-2" id="text-orgc5a994d">
+<div id="outline-container-org212c614" class="outline-2">
+<h2 id="org212c614">Conclusion</h2>
+<div class="outline-text-2" id="text-org212c614">
 <p>
 In an image analysis pipeline, segmentation is notoriously the critical step of the process. <a href="https://en.wikipedia.org/wiki/Watershed_(image_processing)">Watershed</a> is a very efficient technique, which requires careful seeding. For anisotropic object, ad-hoc techniques have to be adopted. In the present blog, I showed how some simple <a href="https://en.wikipedia.org/wiki/Mathematical_morphology">mathematical morphology</a> operations could be used to produce a satisfactory set of seeds. It should be noted however that the reason why the proposed approach works so well is that rice grains are nearly spheroidal. In other words, correctly seeding the watershed process is highly problem dependent!
 </p>

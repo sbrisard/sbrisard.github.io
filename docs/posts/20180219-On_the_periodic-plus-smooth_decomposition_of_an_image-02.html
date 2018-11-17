@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:57 -->
+<!-- 2018-11-17 Sat 06:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition</title>
@@ -151,7 +151,7 @@ The code discussed in this series is available as a Python module on <a href="ht
 </p>
 
 <p>
-As an appetizer, Figure <a href="#orge7e906d">1</a> shows the original image (left) and its periodic
+As an appetizer, Figure <a href="#org09d3803">1</a> shows the original image (left) and its periodic
 (middle) and smooth components (right). Gray levels of the smooth component have
 been rescaled so as to fit between 0 and 255. Most of this image is grayish,
 meaning it is zero almost everywhere, except at the boundaries, where it
@@ -159,15 +159,15 @@ corrects the jumps induced by the lack of periodicity of the initial image.
 </p>
 
 
-<div id="orge7e906d" class="figure">
+<div id="org09d3803" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-periodic-plus-smooth.png" alt="hut-648x364-periodic-plus-smooth.png" width="100%">
 </p>
 <p><span class="figure-number">Figure 1: </span>Illustration of the periodic-plus-smooth decomposition of an image. The original image (left), its periodic component (middle) and its smooth (rescaled) component (right).</p>
 </div>
 
-<div id="outline-container-org90f7681" class="outline-2">
-<h2 id="org90f7681">The decomposition as a minimization problem</h2>
-<div class="outline-text-2" id="text-org90f7681">
+<div id="outline-container-org4377628" class="outline-2">
+<h2 id="org4377628">The decomposition as a minimization problem</h2>
+<div class="outline-text-2" id="text-org4377628">
 <p>
 Let \(u\) be a \(m\times n\) image. We want to find two images \(p\) (&ldquo;periodic&rdquo;
 component) and \(s\) (&ldquo;smooth&rdquo; component), such that \(u=p+s\) and
@@ -191,7 +191,7 @@ normally fall outside the image.</li>
 </ul>
 
 <p>
-Figure <a href="#org3120cf8">2</a> illustrates direct and indirect
+Figure <a href="#org9dc7286">2</a> illustrates direct and indirect
 neighbors. It shows that
 </p>
 
@@ -202,7 +202,7 @@ neighbors. It shows that
 </ul>
 
 
-<div id="org3120cf8" class="figure">
+<div id="org9dc7286" class="figure">
 <p><object type="image/svg+xml" data="./On_the_periodic-plus-smooth_decomposition_of_an_image/direct_and_indirect_neighbors.svg" class="org-svg" width="90%">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -223,9 +223,9 @@ the energies \(E_\mathrm p\) and \(E_\mathrm s\).
 </div>
 </div>
 
-<div id="outline-container-orgb58e58e" class="outline-2">
-<h2 id="orgb58e58e">How to penalize lack of periodicity?</h2>
-<div class="outline-text-2" id="text-orgb58e58e">
+<div id="outline-container-org721c33c" class="outline-2">
+<h2 id="org721c33c">How to penalize lack of periodicity?</h2>
+<div class="outline-text-2" id="text-org721c33c">
 <p>
 For each pixel located at the boundary of an image, we compute the sum of
 squared differences (SSD) with <i>indirect</i> neighbors. The sum of all these SSDs
@@ -259,9 +259,9 @@ E_\mathrm p(p)=2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
 </div>
 </div>
 
-<div id="outline-container-org67019f8" class="outline-2">
-<h2 id="org67019f8">How to penalize lack of smoothness?</h2>
-<div class="outline-text-2" id="text-org67019f8">
+<div id="outline-container-orgdaa2295" class="outline-2">
+<h2 id="orgdaa2295">How to penalize lack of smoothness?</h2>
+<div class="outline-text-2" id="text-orgdaa2295">
 <p>
 At this point, you might have guessed that smoothness is measured through the
 sum of squared differences between <i>direct</i> neighbors
@@ -294,8 +294,8 @@ E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
 </div>
 </div>
 
-<div id="outline-container-org5f36715" class="outline-2">
-<h2 id="implementation"><a id="org5f36715"></a>Python implementation</h2>
+<div id="outline-container-org4b72e01" class="outline-2">
+<h2 id="implementation"><a id="org4b72e01"></a>Python implementation</h2>
 <div class="outline-text-2" id="text-implementation">
 <p>
 Implementation of the total energy \(E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)\) is
@@ -347,9 +347,9 @@ fairly trivial (note the use of the <code>broadcast_arrays</code> function).
 </div>
 </div>
 
-<div id="outline-container-org38779b8" class="outline-2">
-<h2 id="org38779b8">An equivalent, unconstrained minimization problem</h2>
-<div class="outline-text-2" id="text-org38779b8">
+<div id="outline-container-orge1359f9" class="outline-2">
+<h2 id="orge1359f9">An equivalent, unconstrained minimization problem</h2>
+<div class="outline-text-2" id="text-orge1359f9">
 <p>
 The periodic-plus-smooth decomposition \((p, s)\) of an image \(u\) is defined as
 the minimizer of the above defined energy \(E(p, s)\), under the constraints:
@@ -371,9 +371,9 @@ that we will eventually solve.
 </div>
 </div>
 
-<div id="outline-container-org079a569" class="outline-2">
-<h2 id="org079a569">Conclusion</h2>
-<div class="outline-text-2" id="text-org079a569">
+<div id="outline-container-org8863d27" class="outline-2">
+<h2 id="org8863d27">Conclusion</h2>
+<div class="outline-text-2" id="text-org8863d27">
 <p>
 In the present post, we have defined the periodic-plus-smooth decomposition as
 the minimizer of Moisan&rsquo;s energy, under the constraint that the average gray

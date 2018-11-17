@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:57 -->
+<!-- 2018-11-17 Sat 06:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 1: introduction</title>
@@ -84,9 +84,9 @@ That&rsquo;s a lot of work! So, without further ado, let&rsquo;s start introduci
 decomposition!
 </p>
 
-<div id="outline-container-org521bd5a" class="outline-2">
-<h2 id="org521bd5a">The need for periodic images</h2>
-<div class="outline-text-2" id="text-org521bd5a">
+<div id="outline-container-org909b11a" class="outline-2">
+<h2 id="org909b11a">The need for periodic images</h2>
+<div class="outline-text-2" id="text-org909b11a">
 <p>
 Let us start by briefly discussing what <i>is</i> a periodic image, and why we would
 ever need one. Loosely speaking, an image is periodic if placing copies of the
@@ -99,11 +99,11 @@ precisely.
 
 <p>
 It is actually easier to verify that an image is <i>not</i> periodic. Let us consider
-the following image as an example (see Figure <a href="#org0ed626c">1</a>).
+the following image as an example (see Figure <a href="#orgcad011e">1</a>).
 </p>
 
 
-<div id="org0ed626c" class="figure">
+<div id="orgcad011e" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364.png" alt="hut-648x364.png" width="80%">
 </p>
 <p><span class="figure-number">Figure 1: </span>The original image.</p>
@@ -111,21 +111,21 @@ the following image as an example (see Figure <a href="#org0ed626c">1</a>).
 
 <p>
 Instead of putting aside 4 copies of the same image, we can simply swap the
-quadrants, as shown in Figure <a href="#org41140a5">2</a>. Alternatively, you could also ask my
-three-year old daughter if her hut is periodic ;-). In Figure <a href="#org41140a5">2</a>, the four
+quadrants, as shown in Figure <a href="#orgb24167e">2</a>. Alternatively, you could also ask my
+three-year old daughter if her hut is periodic ;-). In Figure <a href="#orgb24167e">2</a>, the four
 corners certainly do <i>not</i> join seamlessly at the center, which is a sure
 indication that the image is not periodic.
 </p>
 
 
-<div id="org41140a5" class="figure">
+<div id="orgb24167e" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-fftshift.png" alt="hut-648x364-fftshift.png" width="80%">
 </p>
-<p><span class="figure-number">Figure 2: </span>The original image shown in Figure <a href="#org0ed626c">1</a>, with swapped quadrants.</p>
+<p><span class="figure-number">Figure 2: </span>The original image shown in Figure <a href="#orgcad011e">1</a>, with swapped quadrants.</p>
 </div>
 
 <p>
-It should be noted that the image shown in Figure <a href="#org41140a5">2</a> is readily produced with
+It should be noted that the image shown in Figure <a href="#orgb24167e">2</a> is readily produced with
 the <a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift">numpy.fft.fftshift</a> function, as illustrated by the following code
 snippet<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 </p>
@@ -146,7 +146,7 @@ techniques rely on the <a href="https://en.wikipedia.org/wiki/Fast_Fourier_trans
 discrete Fourier transform implicitely assumes that the data is periodic;
 otherwise, artifacts can result. An archetypal example is the power spectrum of
 an image (we shall come back to this specific issue in a dedicated series). The
-power spectrum of Figure <a href="#org0ed626c">1</a> is displayed in Figure <a href="#org4eb8348">3</a> below; the following
+power spectrum of Figure <a href="#orgcad011e">1</a> is displayed in Figure <a href="#orgd2eb1b0">3</a> below; the following
 code snippet was executed to produce this image.
 </p>
 
@@ -162,14 +162,14 @@ imsave(DATA_DIR+<span class="org-string">'hut-648x364-power_spectrum.png'</span>
 </div>
 
 
-<div id="org4eb8348" class="figure">
+<div id="orgd2eb1b0" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-power_spectrum.png" alt="hut-648x364-power_spectrum.png" width="80%">
 </p>
-<p><span class="figure-number">Figure 3: </span>The power spectrum of the image shown in Figure <a href="#org0ed626c">1</a>.</p>
+<p><span class="figure-number">Figure 3: </span>The power spectrum of the image shown in Figure <a href="#orgcad011e">1</a>.</p>
 </div>
 
 <p>
-In Figure <a href="#org4eb8348">3</a>, the bright cross at the center is the signature of the jumps
+In Figure <a href="#orgd2eb1b0">3</a>, the bright cross at the center is the signature of the jumps
 across the boundaries of the image. Indeed, remember that discontinuities at
 large correlation lengths translate to oscillations at low frequencies (the
 center of the power spectrum image).
@@ -177,12 +177,12 @@ center of the power spectrum image).
 </div>
 </div>
 
-<div id="outline-container-org392ce2d" class="outline-2">
-<h2 id="org392ce2d">Periodization by symmetrization</h2>
-<div class="outline-text-2" id="text-org392ce2d">
+<div id="outline-container-orgc79e37c" class="outline-2">
+<h2 id="orgc79e37c">Periodization by symmetrization</h2>
+<div class="outline-text-2" id="text-orgc79e37c">
 <p>
 Of course, it is possible to enforce periodicity by tiling together 4 mirror
-images of the same initial image as follows (see figure <a href="#org3c3a338">4</a>)
+images of the same initial image as follows (see figure <a href="#orgee1c25a">4</a>)
 </p>
 
 <div class="org-src-container">
@@ -199,15 +199,15 @@ imsave(DATA_DIR+<span class="org-string">'hut-648x364-mirrored.png'</span>, u_mi
 </div>
 
 
-<div id="org3c3a338" class="figure">
+<div id="orgee1c25a" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-mirrored.png" alt="hut-648x364-mirrored.png" width="80%">
 </p>
-<p><span class="figure-number">Figure 4: </span>Periodization by symmetrization of the image shown in Figure <a href="#org0ed626c">1</a>.</p>
+<p><span class="figure-number">Figure 4: </span>Periodization by symmetrization of the image shown in Figure <a href="#orgcad011e">1</a>.</p>
 </div>
 
 <p>
 The resulting power spectrum (computed with the code snippet below) is shown in
-figure <a href="#org4606aee">5</a>. It is observed that symmetrization does not remove entirely the
+figure <a href="#org7a0b841">5</a>. It is observed that symmetrization does not remove entirely the
 cross at the center of the power spectrum. Worse, “it makes the DFT symmetric
 and real-valued, which can be dramatic if the phase component of the Fourier
 transform has to be analyzed, or if orientation issues are concerned”
@@ -227,17 +227,17 @@ imsave(DATA_DIR+<span class="org-string">'hut-648x364-mirrored-power_spectrum.pn
 </div>
 
 
-<div id="org4606aee" class="figure">
+<div id="org7a0b841" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-mirrored-power_spectrum.png" alt="hut-648x364-mirrored-power_spectrum.png" width="80%">
 </p>
-<p><span class="figure-number">Figure 5: </span>The power spectrum of the image shown in Figure <a href="#org3c3a338">4</a>.</p>
+<p><span class="figure-number">Figure 5: </span>The power spectrum of the image shown in Figure <a href="#orgee1c25a">4</a>.</p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org68ff0d7" class="outline-2">
-<h2 id="org68ff0d7">Conclusion</h2>
-<div class="outline-text-2" id="text-org68ff0d7">
+<div id="outline-container-org886ffb2" class="outline-2">
+<h2 id="org886ffb2">Conclusion</h2>
+<div class="outline-text-2" id="text-org886ffb2">
 <p>
 In this post, we set the stage for the subsequent instalments of this series,
 arguing that it is sometimes desirable that an image should be periodic. In the

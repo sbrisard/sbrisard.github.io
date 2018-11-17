@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-07-13 Fri 08:57 -->
+<!-- 2018-11-17 Sat 06:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way</title>
@@ -169,7 +169,7 @@ below.
 
 <p>
 Let us start by loading up some modules and the input image to be periodized
-(see Fig. <a href="#org63bb4a6">1</a>).
+(see Fig. <a href="#org12691e7">1</a>).
 </p>
 
 <div class="org-src-container">
@@ -184,7 +184,7 @@ Let us start by loading up some modules and the input image to be periodized
 </div>
 
 
-<div id="org63bb4a6" class="figure">
+<div id="org12691e7" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364.png" alt="hut-648x364.png" width="80%">
 </p>
 <p><span class="figure-number">Figure 1: </span>The initial image to be periodized.</p>
@@ -254,14 +254,14 @@ imsave(DATA_DIR+<span class="org-string">'hut-648x364-periodic-cg-fftshift.png'<
 
 <p>
 Again, periodization is best observed by swapping the quadrants (see
-Fig. <a href="#org0fc1941">2</a>).
+Fig. <a href="#org087d831">2</a>).
 </p>
 
 
-<div id="org0fc1941" class="figure">
+<div id="org087d831" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-periodic-cg-fftshift.png" alt="hut-648x364-periodic-cg-fftshift.png" width="80%">
 </p>
-<p><span class="figure-number">Figure 2: </span>The periodic component of the initial image shown in Fig. <a href="#org63bb4a6">1</a>, resulting from conjugate gradient minimization of <a href="https://doi.org/10.1007/s10851-010-0227-1">Moisan</a>&rsquo;s energy.</p>
+<p><span class="figure-number">Figure 2: </span>The periodic component of the initial image shown in Fig. <a href="#org12691e7">1</a>, resulting from conjugate gradient minimization of <a href="https://doi.org/10.1007/s10851-010-0227-1">Moisan</a>&rsquo;s energy.</p>
 </div>
 
 <p>
