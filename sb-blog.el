@@ -87,7 +87,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
 ;; Creative commons license
 ;; ------------------------
-(defvar sb-blog-license "<a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-nc/4.0/88x31.png\" /></a><br /><span xmlns:dct=\"https://purl.org/dc/terms/\" property=\"dct:title\">Except where otherwise noted, this blog</span> by <a xmlns:cc=\"https://creativecommons.org/ns#\" href=\"https://sbrisard.github.io/\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Sébastien Brisard</a> is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+(defvar sb-blog-license "<a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-nc/4.0/88x31.png\" /></a><br /><span xmlns:dct=\"https://purl.org/dc/terms/\" property=\"dct:title\">Except where otherwise noted, this blog</span> by <a xmlns:cc=\"https://creativecommons.org/ns#\" href=\"https://sbrisard.github.io/blog/\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Sébastien Brisard</a> is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 ")
 
 ;; Functions for generation of HTML tags
