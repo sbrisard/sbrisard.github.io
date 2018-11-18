@@ -10,7 +10,7 @@
 ;; Get path to file being loaded.
 (defvar sb-blog-root (file-name-directory load-file-name))
 (defvar sb-blog-base-directory (concat sb-blog-root "org/"))
-(defvar sb-blog-publishing-directory (concat sb-blog-root "docs/"))
+(defvar sb-blog-publishing-directory (concat sb-blog-root "../"))
 
 (defgroup sb-blog nil "Customizations for my blog")
 (defcustom sb-blog-comments t
