@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2018-11-18 Sun 20:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scrapy-ing the NIST X-ray Attenuation Databases</title>
@@ -48,9 +48,9 @@ In this post, I set out to extract this data as a HDF5 table. Of
 course, this looks like a job for <a href="https://scrapy.org/">Scrapy</a>!
 </p>
 
-<div id="outline-container-orgd034b80" class="outline-2">
-<h2 id="orgd034b80">First steps with Scrapy</h2>
-<div class="outline-text-2" id="text-orgd034b80">
+<div id="outline-container-orgb52f5a9" class="outline-2">
+<h2 id="orgb52f5a9">First steps with Scrapy</h2>
+<div class="outline-text-2" id="text-orgb52f5a9">
 <p>
  I am brand new to Scrapy, but found the excellent <a href="https://docs.scrapy.org/en/latest/">tutorial</a> extremely
 useful. If you use Miniconda from <a href="https://www.continuum.io/">Continuum Analytics</a>, then
@@ -68,9 +68,9 @@ which installs Scrapy in a new environment (called <code>scrapy</code>).
 </div>
 </div>
 
-<div id="outline-container-org8ab21f2" class="outline-2">
-<h2 id="org8ab21f2">Downloading the table for one single element</h2>
-<div class="outline-text-2" id="text-org8ab21f2">
+<div id="outline-container-orga23632b" class="outline-2">
+<h2 id="orga23632b">Downloading the table for one single element</h2>
+<div class="outline-text-2" id="text-orga23632b">
 <p>
 In this section, we retrieve the data for the mass attenuation
 coefficient of one single element. We start with the data for
@@ -181,9 +181,9 @@ a float (see function <code>is_float</code> below).
 </div>
 </div>
 
-<div id="outline-container-org923ffd3" class="outline-2">
-<h2 id="org923ffd3">Downloading tables for all elements</h2>
-<div class="outline-text-2" id="text-org923ffd3">
+<div id="outline-container-org9ab5ff6" class="outline-2">
+<h2 id="org9ab5ff6">Downloading tables for all elements</h2>
+<div class="outline-text-2" id="text-org9ab5ff6">
 <p>
 All links follow the same pattern
 <code>http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/zZZ.html</code>,
@@ -248,9 +248,9 @@ scrapy crawl table3 -o table3.json
 </div>
 </div>
 
-<div id="outline-container-orge44ec04" class="outline-2">
-<h2 id="orge44ec04">Retrieving the material constants of all elements</h2>
-<div class="outline-text-2" id="text-orge44ec04">
+<div id="outline-container-orge7c2f0c" class="outline-2">
+<h2 id="orge7c2f0c">Retrieving the material constants of all elements</h2>
+<div class="outline-text-2" id="text-orge7c2f0c">
 <p>
 We will also need the data from <a href="http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html">Table 1</a>. The spider is quite simple.
 </p>
@@ -297,9 +297,9 @@ It returns a <code>dict</code> which maps the element's atomic number Z to a
 </div>
 </div>
 
-<div id="outline-container-orgee14bf9" class="outline-2">
-<h2 id="orgee14bf9">Putting it all together in a HDF5 file</h2>
-<div class="outline-text-2" id="text-orgee14bf9">
+<div id="outline-container-orgbb1d1d5" class="outline-2">
+<h2 id="orgbb1d1d5">Putting it all together in a HDF5 file</h2>
+<div class="outline-text-2" id="text-orgbb1d1d5">
 <p>
 We are now ready to run our two spiders
 </p>
@@ -370,9 +370,9 @@ dataset
 </div>
 </div>
 
-<div id="outline-container-org61b940b" class="outline-2">
-<h2 id="org61b940b">X-ray mass attenuation coefficients of concrete</h2>
-<div class="outline-text-2" id="text-org61b940b">
+<div id="outline-container-org6a40520" class="outline-2">
+<h2 id="org6a40520">X-ray mass attenuation coefficients of concrete</h2>
+<div class="outline-text-2" id="text-org6a40520">
 <p>
 In order to check that everythin went fine, we will use the above
 table to compute the X-ray mass attenuation coefficients of a typical
@@ -591,9 +591,9 @@ cleverly). This validates our Scrapy procedure!
 </div>
 </div>
 
-<div id="outline-container-orgfa36ced" class="outline-2">
-<h2 id="orgfa36ced">Closing words</h2>
-<div class="outline-text-2" id="text-orgfa36ced">
+<div id="outline-container-orge7af11b" class="outline-2">
+<h2 id="orge7af11b">Closing words</h2>
+<div class="outline-text-2" id="text-orge7af11b">
 <p>
 In this blog, we learned how to use <a href="https://scrapy.org/">Scrapy</a> to retrieve some tabulated
 data that is not available as downloaded files. This is probably the
@@ -607,13 +607,13 @@ The whole <code>scrapymu</code> project is available on <a href="https://github.
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases';
 var disqus_title = 'Scrapy-ing the NIST X-ray Attenuation Databases';
-var disqus_url = 'http://sbrisard.github.io/posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';
