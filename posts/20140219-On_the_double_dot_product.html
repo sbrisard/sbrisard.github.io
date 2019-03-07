@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2019-03-07 Thu 08:51 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the double dot product</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -134,17 +135,17 @@ The double dot product of two tensors is the contraction of these tensors with r
 Let \(\tensii a\) and \(\tensii b\) be two second-rank tensors. The following two alternative definitions might be adopted for the double dot product \(\tensii a:\tensii b\)
 </p>
 <dl class="org-dl">
-<dt><a id="org3504e01"></a> Definition 1</dt><dd>\(\tensii a:\tensii b=a_{ij}b_{ji}\) (contraction on the closest indices),</dd>
-<dt><a id="orgab15283"></a> Definition 2</dt><dd>\(\tensii a:\tensii b=a_{ij}b_{ij}\).</dd>
+<dt><a id="org960b9d1"></a> Definition 1</dt><dd>\(\tensii a:\tensii b=a_{ij}b_{ji}\) (contraction on the closest indices),</dd>
+<dt><a id="orgf5917f2"></a> Definition 2</dt><dd>\(\tensii a:\tensii b=a_{ij}b_{ij}\).</dd>
 </dl>
 
 <p>
 In continuum mechanics, most second-rank tensors (strain, stress) are symmetric, so that both definitions coincide. In the general case of asymmetric tensors however, it is important to check which convention is adopted by the author. In the present post, we examine both definitions in turn, and how they affect the expression of the transpose of fourth-rank tensors, the definition of which is first recalled.
 </p>
 
-<div id="outline-container-orgb827818" class="outline-2">
-<h2 id="orgb827818">Transpose of a fourth-rank tensor</h2>
-<div class="outline-text-2" id="text-orgb827818">
+<div id="outline-container-org35c2468" class="outline-2">
+<h2 id="org35c2468">Transpose of a fourth-rank tensor</h2>
+<div class="outline-text-2" id="text-org35c2468">
 <p>
 Let \(\tensiv A\) be a fourth-rank tensor. Then the linear mapping \(\tensii x\mapsto\tensiv A:\tensii x\) (\(\tensii x\): second-rank tensor) is an endomorphism over the space of second-rank tensors. As such, it is possible to define its transpose \(\transp{\tensiv A}\), provided that the space of second-rank tensors is equipped with a scalar product \(\langle\cdot,\cdot\rangle\). Then, by definition
 </p>
@@ -169,11 +170,11 @@ so that the scalar product of two second-rank tensors is closely related to eith
 </div>
 </div>
 
-<div id="outline-container-orge35497a" class="outline-2">
-<h2 id="orge35497a">Definition 1</h2>
-<div class="outline-text-2" id="text-orge35497a">
+<div id="outline-container-orgff12f2f" class="outline-2">
+<h2 id="orgff12f2f">Definition 1</h2>
+<div class="outline-text-2" id="text-orgff12f2f">
 <p>
-In this section, the <a href="#org3504e01">first definition</a> of the double dot product is examined
+In this section, the <a href="#org960b9d1">first definition</a> of the double dot product is examined
 </p>
 
 \begin{equation}
@@ -198,7 +199,7 @@ Introducing the fourth-rank tensor \(\tilde{\tensiv A}\) defined component-wise 
 \end{equation*}
 
 <p>
-which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In other words, if <a href="#org3504e01">definition 1</a> is adopted for the double dot product, then the components of the transpose of any fourth-rank tensor \(\tensiv A\) read
+which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In other words, if <a href="#org960b9d1">definition 1</a> is adopted for the double dot product, then the components of the transpose of any fourth-rank tensor \(\tensiv A\) read
 </p>
 
 \begin{equation}
@@ -208,11 +209,11 @@ which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In ot
 </div>
 </div>
 
-<div id="outline-container-org858e804" class="outline-2">
-<h2 id="org858e804">Definition 2</h2>
-<div class="outline-text-2" id="text-org858e804">
+<div id="outline-container-orged597de" class="outline-2">
+<h2 id="orged597de">Definition 2</h2>
+<div class="outline-text-2" id="text-orged597de">
 <p>
-We now examine the <a href="#orgab15283">second definition</a> of the double dot product
+We now examine the <a href="#orgf5917f2">second definition</a> of the double dot product
 </p>
 
 \begin{equation}
@@ -237,7 +238,7 @@ Introducing the fourth-rank tensor \(\tilde{\tensiv A}\) defined component-wise 
 \end{equation*}
 
 <p>
-which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In other words, if <a href="#orgab15283">definition 2</a> is adopted for the double dot product, then the components of the transpose of a fourth-rank tensor \(\tensiv A\) read
+which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In other words, if <a href="#orgf5917f2">definition 2</a> is adopted for the double dot product, then the components of the transpose of a fourth-rank tensor \(\tensiv A\) read
 </p>
 
 \begin{equation}
@@ -247,11 +248,11 @@ which proves that \(\tilde{\tensiv A}\) is the transpose of \(\tensiv A\). In ot
 </div>
 </div>
 
-<div id="outline-container-org3dec8e0" class="outline-2">
-<h2 id="org3dec8e0">Which definition to adopt?</h2>
-<div class="outline-text-2" id="text-org3dec8e0">
+<div id="outline-container-org141f5d3" class="outline-2">
+<h2 id="org141f5d3">Which definition to adopt?</h2>
+<div class="outline-text-2" id="text-org141f5d3">
 <p>
-&#x2026; is a pure matter of taste. For aesthetic reasons, I tend to prefer Eq. \eqref{eq:6} over Eq. \eqref{eq:4}. Besides, <a href="#orgab15283">definition 2</a> of the double dot product directly defines a scalar product over the space of second-rank tensors. Therefore, <a href="#orgab15283">definition 2</a> [see Eq. \eqref{eq:5}] <i>will be adopted in this blog</i>. In other words, given two tensors \(\tens T\) and \(\tens U\) of arbitrary rank (≥ 2), the product \(\tens T:\tens U\) is defined as follows
+&#x2026; is a pure matter of taste. For aesthetic reasons, I tend to prefer Eq. \eqref{eq:6} over Eq. \eqref{eq:4}. Besides, <a href="#orgf5917f2">definition 2</a> of the double dot product directly defines a scalar product over the space of second-rank tensors. Therefore, <a href="#orgf5917f2">definition 2</a> [see Eq. \eqref{eq:5}] <i>will be adopted in this blog</i>. In other words, given two tensors \(\tens T\) and \(\tens U\) of arbitrary rank (≥ 2), the product \(\tens T:\tens U\) is defined as follows
 </p>
 
 \begin{equation}
@@ -283,13 +284,13 @@ To conclude, two definitions of the double dot product are possible, and one sho
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20140219-On_the_double_dot_product';
 var disqus_title = 'On the double dot product';
-var disqus_url = 'http://sbrisard.github.io/posts/20140219-On_the_double_dot_product.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20140219-On_the_double_dot_product.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';

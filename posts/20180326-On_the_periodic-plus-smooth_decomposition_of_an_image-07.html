@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2019-03-07 Thu 08:52 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan&rsquo;s algorithm</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -147,9 +148,9 @@ the seventh in a series in seven parts:
 The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.
 </p>
 
-<div id="outline-container-orgb74c592" class="outline-2">
-<h2 id="orgb74c592">Computing the DFT of the intensity gaps</h2>
-<div class="outline-text-2" id="text-orgb74c592">
+<div id="outline-container-org7acf204" class="outline-2">
+<h2 id="org7acf204">Computing the DFT of the intensity gaps</h2>
+<div class="outline-text-2" id="text-org7acf204">
 <p>
 In the <a href="./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.html#algorithm">previous instalment</a> of this series, we showed that the DFT \(\hat s\) of
 the smooth component \(s\) of a \(m\times n\) image \(u\) can be deduced from the DFT
@@ -335,9 +336,9 @@ we can do better? Wait and see!
 </div>
 </div>
 
-<div id="outline-container-org0b4cb37" class="outline-2">
-<h2 id="org0b4cb37">Moisans&rsquo;s algorithm for <i>real</i> images</h2>
-<div class="outline-text-2" id="text-org0b4cb37">
+<div id="outline-container-org1f89dcf" class="outline-2">
+<h2 id="org1f89dcf">Moisans&rsquo;s algorithm for <i>real</i> images</h2>
+<div class="outline-text-2" id="text-org1f89dcf">
 <p>
 In our previous implementation, we have overlooked an important fact: \(u\) is
 (often) a <i>real</i> image. Its DFT ought to be computed through the
@@ -467,9 +468,9 @@ Ratios:
 </div>
 </div>
 
-<div id="outline-container-orgd3e2335" class="outline-2">
-<h2 id="orgd3e2335">Conclusion</h2>
-<div class="outline-text-2" id="text-orgd3e2335">
+<div id="outline-container-orga0cf22a" class="outline-2">
+<h2 id="orga0cf22a">Conclusion</h2>
+<div class="outline-text-2" id="text-orga0cf22a">
 <p>
 This is the end of the story. We now have a good implementation of Moisan&rsquo;s
 algorithm. We have optimized its implementation, but the code did not lose in
@@ -484,13 +485,13 @@ If you are interested by my implementation of Moisan&rsquo;s algorithm, go to th
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07';
 var disqus_title = 'On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan&amp;rsquo;s algorithm';
-var disqus_url = 'http://sbrisard.github.io/posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';

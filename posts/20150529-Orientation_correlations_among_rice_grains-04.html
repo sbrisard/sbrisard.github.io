@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2019-03-07 Thu 08:51 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation correlations among rice grains, part 4: defining the ROI</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">
@@ -55,19 +56,19 @@
 <div id="content">
 <h1 class="title">Orientation correlations among rice grains, part 4: defining the ROI</h1>
 <p>
-In the <a href="./20150330-Orientation_correlations_among_rice_grains-03.html">previous instalment</a> of this series, we obtained binned slices of the sample. Fig. <a href="#orgb88a0fb">1</a> is a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within the Region Of Interest (ROI) thus defined.
+In the <a href="./20150330-Orientation_correlations_among_rice_grains-03.html">previous instalment</a> of this series, we obtained binned slices of the sample. Fig. <a href="#orga8329ad">1</a> is a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within the Region Of Interest (ROI) thus defined.
 </p>
 
 
-<div id="orgb88a0fb" class="figure">
+<div id="orga8329ad" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-099.png" alt="rice-bin_4x4x4-099.png" width="50%">
 </p>
 <p><span class="figure-number">Figure 1: </span>A typical slice of the 3D reconstruction of the sample. The original image has been reduced by 4×4×4 binning; the size of each binned slice is 436×437.</p>
 </div>
 
-<div id="outline-container-orgb559e4e" class="outline-2">
-<h2 id="orgb559e4e">The circle Hough Transform</h2>
-<div class="outline-text-2" id="text-orgb559e4e">
+<div id="outline-container-orgfa5c996" class="outline-2">
+<h2 id="orgfa5c996">The circle Hough Transform</h2>
+<div class="outline-text-2" id="text-orgfa5c996">
 <p>
 The sample container is cylindrical; since it was nearly vertical during the tomography experiment, its trace is a circular ring on each slice. We are going to use the <a href="http://en.wikipedia.org/wiki/Circle_Hough_Transform">Circle Hough Transform</a> in order to locate the inner and outer circular boundaries which define this ring. To do so, we will use <a href="https://www.python.org/">python</a>, <a href="http://www.numpy.org/">numpy</a> and <a href="http://scikit-image.org/docs/dev/api/skimage.html">scikit-image</a>. We first import these modules, and load the image
 </p>
@@ -110,14 +111,14 @@ imsave(os.path.join(root, <span class="org-string">'rice-bin_4x4x4-edges-099.png
 </div>
 
 <p>
-The resulting image is shown in Fig. <a href="#orgc981a24">2</a>. It should be noted that due to the preliminary binning (which is nothing but a mean filter), the input image exhibits very little noise. Therefore, <code>sigma=0.0</code> in the above call to <code>skimage.feature.canny</code>.
+The resulting image is shown in Fig. <a href="#orga75b2b9">2</a>. It should be noted that due to the preliminary binning (which is nothing but a mean filter), the input image exhibits very little noise. Therefore, <code>sigma=0.0</code> in the above call to <code>skimage.feature.canny</code>.
 </p>
 
 
-<div id="orgc981a24" class="figure">
+<div id="orga75b2b9" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-edges-099.png" alt="rice-bin_4x4x4-edges-099.png" width="50%">
 </p>
-<p><span class="figure-number">Figure 2: </span>Canny edge detection performed on the initial image shown in Fig. <a href="#orgb88a0fb">1</a>.</p>
+<p><span class="figure-number">Figure 2: </span>Canny edge detection performed on the initial image shown in Fig. <a href="#orga8329ad">1</a>.</p>
 </div>
 
 <p>
@@ -163,11 +164,11 @@ How is this representation in parameter space to be used? We consider a binary (
 </div>
 
 <p>
-The above code snippet saves a series of images, which is displayed below in 3D as an animated GIF (see Fig. <a href="#org189bc21">3</a>). The two bright spots indicate the location of the inner and outer boundaries in the parameter space. We will use a very crude procedure to locate these two peaks (a more elaborate method is not required as we do not seek sub-pixel accuracy).
+The above code snippet saves a series of images, which is displayed below in 3D as an animated GIF (see Fig. <a href="#org818a8b3">3</a>). The two bright spots indicate the location of the inner and outer boundaries in the parameter space. We will use a very crude procedure to locate these two peaks (a more elaborate method is not required as we do not seek sub-pixel accuracy).
 </p>
 
 
-<div id="org189bc21" class="figure">
+<div id="org818a8b3" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-hough-3D_rot-099.gif" alt="rice-bin_4x4x4-hough-3D_rot-099.gif" width="50%">
 </p>
 <p><span class="figure-number">Figure 3: </span>3D view of the Hough transform. The two bright spots correspond to the inner and outer boundaries of the sample container.</p>
@@ -183,7 +184,7 @@ The code snippet below finds the two highest values of the Hough transform. The 
 <span class="org-variable-name">radius</span> = radii[k]
 <span class="org-variable-name">h</span> = h[k, ...]
 <span class="org-variable-name">row</span>, <span class="org-variable-name">col</span> = np.unravel_index(np.argmax(h), h.shape)
-<span class="org-doc">'The inner boundary is centered at ({} px, {} px); its radius is {} px.'</span>.<span class="org-builtin">format</span>(<span class="org-whitespace-line">row, col, radius)</span>
+<span class="org-doc">'The inner boundary is centered at ({} px, {} px); its radius is {} px.'</span>.<span class="org-builtin">format</span>(row, col, radius)
 </pre>
 </div>
 
@@ -205,32 +206,32 @@ imsave(os.path.join(root, <span class="org-string">'rice-bin_4x4x4-boundary-099.
 </div>
 
 <p>
-Which produces the following image (see Fig. <a href="#org2af3610">4</a>).
+Which produces the following image (see Fig. <a href="#org7ee61d6">4</a>).
 </p>
 
 
-<div id="org2af3610" class="figure">
+<div id="org7ee61d6" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-boundary-099.png" alt="rice-bin_4x4x4-boundary-099.png" width="50%">
 </p>
 <p><span class="figure-number">Figure 4: </span>The original image overlaid with the identified boundary.</p>
 </div>
 
 <p>
-A closer look (see Fig. <a href="#org7a7972b">5</a>) shows that we roughly achieved pixel accuracy, which will be sufficient for the analysis to come.
+A closer look (see Fig. <a href="#org84ab666">5</a>) shows that we roughly achieved pixel accuracy, which will be sufficient for the analysis to come.
 </p>
 
 
-<div id="org7a7972b" class="figure">
+<div id="org84ab666" class="figure">
 <p><img src="./20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-roi_64x64+10+110-boundary-resized-099.png" alt="rice-bin_4x4x4-roi_64x64+10+110-boundary-resized-099.png" width="50%">
 </p>
-<p><span class="figure-number">Figure 5: </span>Close-up of Fig. <a href="#org2af3610">4</a>; pixel accuracy was approximately achieved.</p>
+<p><span class="figure-number">Figure 5: </span>Close-up of Fig. <a href="#org7ee61d6">4</a>; pixel accuracy was approximately achieved.</p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org68ea83b" class="outline-2">
-<h2 id="org68ea83b">Analysis of the whole stack</h2>
-<div class="outline-text-2" id="text-org68ea83b">
+<div id="outline-container-orgd35dba6" class="outline-2">
+<h2 id="orgd35dba6">Analysis of the whole stack</h2>
+<div class="outline-text-2" id="text-orgd35dba6">
 <p>
 We are now ready to carry out the above analysis on all 172 images of the stack. This is what the script below does (<a href="./20150529-Orientation_correlations_among_rice_grains-04/find_boundary.py">download</a>); in order to check that nothing went wrong, each image with overlaid boundary is saved for visual inspection.
 </p>
@@ -308,20 +309,20 @@ Which shows that there is very little variation of the circle parameters across 
 </div>
 </div>
 
-<div id="outline-container-orgc4f4003" class="outline-2">
-<h2 id="orgc4f4003">Closing words</h2>
-<div class="outline-text-2" id="text-orgc4f4003">
+<div id="outline-container-org54a29b2" class="outline-2">
+<h2 id="org54a29b2">Closing words</h2>
+<div class="outline-text-2" id="text-org54a29b2">
 <p>
 In this post, we saw how to define the (cylindrical) ROI on our stack of images. To do so, we used the Circle Hough Transform to find circular edges in the slices. In the <a href="./20150709-Orientation_correlations_among_rice_grains-05.html">next</a> instalment of this series, I will start discussing segmentation <i>per se</i>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org0b474f5" class="outline-2">
-<h2 id="org0b474f5">Side-note: how to produce animated GIFs</h2>
-<div class="outline-text-2" id="text-org0b474f5">
+<div id="outline-container-org9a34a0d" class="outline-2">
+<h2 id="org9a34a0d">Side-note: how to produce animated GIFs</h2>
+<div class="outline-text-2" id="text-org9a34a0d">
 <p>
-The animated GIF in Fig. <a href="#org189bc21">3</a> was produced with <a href="http://imagej.nih.gov/ij/">ImageJ</a>. The procedure is
+The animated GIF in Fig. <a href="#org818a8b3">3</a> was produced with <a href="http://imagej.nih.gov/ij/">ImageJ</a>. The procedure is
 </p>
 
 <ol class="org-ol">
@@ -338,13 +339,13 @@ To change the frame rate, use Image → Stacks → Tools → Animation Options&#
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20150529-Orientation_correlations_among_rice_grains-04';
 var disqus_title = 'Orientation correlations among rice grains, part 4: defining the ROI';
-var disqus_url = 'http://sbrisard.github.io/posts/20150529-Orientation_correlations_among_rice_grains-04.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20150529-Orientation_correlations_among_rice_grains-04.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';

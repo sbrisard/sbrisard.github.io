@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2019-03-07 Thu 08:51 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>When a thin shell is not so thin, part&nbsp;1: Koiter's linear theory</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -131,9 +132,9 @@ In structural analysis, thick beams (resp. plates) usually refer to shear deform
 In the first part of this series, Koiter's thin shell theory (<a href="../pages/references.html#KOIT1970">Koiter, 1970</a>) is used to analyse the equilibrium of the spherical pressure vessel. In particular, it is shown that the results deviate slightly from what is expected from the membrane theory.
 </p>
 
-<div id="outline-container-orgcd0ed50" class="outline-2">
-<h2 id="orgcd0ed50">Description of the problem</h2>
-<div class="outline-text-2" id="text-orgcd0ed50">
+<div id="outline-container-orgc4b1a31" class="outline-2">
+<h2 id="orgc4b1a31">Description of the problem</h2>
+<div class="outline-text-2" id="text-orgc4b1a31">
 <p>
 We consider a spherical vessel, subjected to an internal pressure \(p\). \(R\) denotes the radius of the midsurface, \(h\) the thickness of the shell, so that the inner and outer radii of the shell are
 </p>
@@ -159,9 +160,9 @@ where \(\epsilon\), \(\kappa\), \(N\) and \(M\) are four scalar constants, which
 </div>
 </div>
 
-<div id="outline-container-orgb984559" class="outline-2">
-<h2 id="orgb984559">The thin shell solution</h2>
-<div class="outline-text-2" id="text-orgb984559">
+<div id="outline-container-org2994d88" class="outline-2">
+<h2 id="org2994d88">The thin shell solution</h2>
+<div class="outline-text-2" id="text-org2994d88">
 <p>
 Up to terms which are quadratic in the displacement, the trace of the tensor of membrane strains is equal to the relative variation of surface area of the shell. Therefore
 </p>
@@ -236,7 +237,7 @@ and similarly for the stress couples
 \end{equation}
 
 <p>
-<a id="org79fea3c"></a>Substituting Eqs.\eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} in Eqs. \eqref{eq:4} and \eqref{eq:5} finally leads to the following expansions
+<a id="orgc5a92d2"></a>Substituting Eqs.\eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} in Eqs. \eqref{eq:4} and \eqref{eq:5} finally leads to the following expansions
 </p>
 
 \begin{align}
@@ -254,9 +255,9 @@ Nota: the above-mentioned formula \(N=pR/2\) is called "formule des chaudronnier
 </div>
 </div>
 
-<div id="outline-container-orgaffd1a0" class="outline-2">
-<h2 id="orgaffd1a0">Conclusion</h2>
-<div class="outline-text-2" id="text-orgaffd1a0">
+<div id="outline-container-orga20be84" class="outline-2">
+<h2 id="orga20be84">Conclusion</h2>
+<div class="outline-text-2" id="text-orga20be84">
 <p>
 We started with a very simple shell, which we expected to be in a state of membrane equilibrium. However, using Koiter's linear theory of thin shells, we found that the stress couples, though small, are not null!
 </p>
@@ -268,13 +269,13 @@ So what's wrong with the above analysis? To dig deeper into this problem, we wil
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20150608-When_a_thin_shell_is_not_so_thin-01';
 var disqus_title = 'When a thin shell is not so thin, part&amp;nbsp;1: Koiter\'s linear theory';
-var disqus_url = 'http://sbrisard.github.io/posts/20150608-When_a_thin_shell_is_not_so_thin-01.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20150608-When_a_thin_shell_is_not_so_thin-01.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';

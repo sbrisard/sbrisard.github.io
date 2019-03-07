@@ -77,7 +77,7 @@ or, in intrinsic form ($\tensii x$: second-rank tensor)
 
 \begin{equation}
 \label{eq:5}
-\left(\tensii a\boxtimessym\tensii b\right):\tensii x=\frac12\left(\tensii a\boxtimes\tensii b\right):\left(\tensii x+\transp{\tensii x}\right)=\frac12\tensii a:\left(\tensii x+\transp{\tensii x}\right):\transp{\tensii b}.
+\left(\tensii a\boxtimessym\tensii b\right):\tensii x=\frac12\left(\tensii a\boxtimes\tensii b\right):\left(\tensii x+\transp{\tensii x}\right)=\frac12\tensii a\cdot\left(\tensii x+\transp{\tensii x}\right)\cdot\transp{\tensii b}.
 \end{equation}
 
 An identity similar to Eq. \eqref{eq:4} can then be derived with $\boxtimessym$

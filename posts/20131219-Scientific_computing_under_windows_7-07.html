@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2019-03-07 Thu 08:51 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scientific computing under Windows 7, part 7: ITK (proper)</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -36,9 +37,9 @@
 In the <a href="./20131218-Scientific_computing_under_windows_7-06.html">previous installment</a> of this series, we installed all prerequisites for the ITK library. We are now ready to install the library itself, using CMake.<!-- more -->
 </p>
 
-<div id="outline-container-orgf67bf52" class="outline-2">
-<h2 id="orgf67bf52">Retrieving the sources</h2>
-<div class="outline-text-2" id="text-orgf67bf52">
+<div id="outline-container-org8640db3" class="outline-2">
+<h2 id="org8640db3">Retrieving the sources</h2>
+<div class="outline-text-2" id="text-org8640db3">
 <p>
 Download the latest development version of ITK
 </p>
@@ -70,9 +71,9 @@ This directory MUST NOT be inside the directory where you cloned the repository.
 </div>
 </div>
 
-<div id="outline-container-org85c648e" class="outline-2">
-<h2 id="org85c648e">Generating the <code>Makefile</code> with CMake</h2>
-<div class="outline-text-2" id="text-org85c648e">
+<div id="outline-container-org0317c3b" class="outline-2">
+<h2 id="org0317c3b">Generating the <code>Makefile</code> with CMake</h2>
+<div class="outline-text-2" id="text-org0317c3b">
 <p>
 First, make sure that the following directories sit in your <code>PATH</code> environment variable (might need to be adapted)
 </p>
@@ -152,9 +153,9 @@ Once your are satisfied with all options, click "Generate" to produce the <code>
 </div>
 </div>
 
-<div id="outline-container-org6a56a21" class="outline-2">
-<h2 id="org6a56a21">Compiling the library</h2>
-<div class="outline-text-2" id="text-org6a56a21">
+<div id="outline-container-org38d05bd" class="outline-2">
+<h2 id="org38d05bd">Compiling the library</h2>
+<div class="outline-text-2" id="text-org38d05bd">
 <p>
 In the MSYS console
 </p>
@@ -339,13 +340,13 @@ Now, <code>make</code> and <code>make install</code> should work like a charm!
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20131219-Scientific_computing_under_windows_7-07';
 var disqus_title = 'Scientific computing under Windows 7, part 7: ITK (proper)';
-var disqus_url = 'http://sbrisard.github.io/posts/20131219-Scientific_computing_under_windows_7-07.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20131219-Scientific_computing_under_windows_7-07.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';

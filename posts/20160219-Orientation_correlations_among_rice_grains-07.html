@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2019-03-07 Thu 08:51 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation correlations among rice grains, part 7: analysis of the shape of the grains</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -225,13 +226,13 @@ plt.style.use(<span class="org-string">'../include/zenburn-light.mplstyle'</span
 </pre>
 </div>
 
-<div id="outline-container-org7b2fa0e" class="outline-2">
-<h2 id="morphological_description"><a id="org7b2fa0e"></a>Morphological description of the grains</h2>
+<div id="outline-container-orgddd87dc" class="outline-2">
+<h2 id="morphological_description"><a id="orgddd87dc"></a>Morphological description of the grains</h2>
 <div class="outline-text-2" id="text-morphological_description">
 </div>
 
-<div id="outline-container-org21d163e" class="outline-3">
-<h3 id="direct_computation"><a id="org21d163e"></a>Direct computation of the morphological parameters of grain 42</h3>
+<div id="outline-container-orgd0ac7c8" class="outline-3">
+<h3 id="direct_computation"><a id="orgd0ac7c8"></a>Direct computation of the morphological parameters of grain 42</h3>
 <div class="outline-text-3" id="text-direct_computation">
 <p>
 The direct (naive) approach presented in this section will serve as a reference for a <a href="#using_sum">better approach</a> presented in the next section. It will be illustrated on one grain only (namely grain <a href="https://en.wikipedia.org/wiki/42_%28number%29#The_Hitchhiker.27s_Guide_to_the_Galaxy">42</a>), which we first locate. The remainder of the analysis is then restricted to a ROI surrounding the selected grain.
@@ -343,8 +344,8 @@ This is a bit tedious, isn't it? Besides, we should normally loop over the grain
 </div>
 </div>
 
-<div id="outline-container-org2f6afc2" class="outline-3">
-<h3 id="using_sum"><a id="org2f6afc2"></a>Using the <code>scipy.ndimage.sum</code> function</h3>
+<div id="outline-container-org9e9f665" class="outline-3">
+<h3 id="using_sum"><a id="org9e9f665"></a>Using the <code>scipy.ndimage.sum</code> function</h3>
 <div class="outline-text-3" id="text-using_sum">
 <p>
 This function will allow us to carry out the analysis over all grains simultaneously. We start with the volume, which is seen as
@@ -414,7 +415,7 @@ where the last identity is known as the <a href="https://en.wikipedia.org/wiki/P
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ipython" id="org0c2b461"><span class="org-variable-name">coords</span> = np.mgrid[[<span class="org-builtin">slice</span>(n) <span class="org-keyword">for</span> n <span class="org-keyword">in</span> labels.shape]]
+<pre class="src src-ipython" id="orgb020f38"><span class="org-variable-name">coords</span> = np.mgrid[[<span class="org-builtin">slice</span>(n) <span class="org-keyword">for</span> n <span class="org-keyword">in</span> labels.shape]]
 <span class="org-variable-name">moments2</span> = np.empty((indices.size, 3, 3), dtype=np.float64)
 
 <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(3):
@@ -538,19 +539,19 @@ We can now proceed with the analysis of the results. This will be done more thor
 </div>
 </div>
 
-<div id="outline-container-org284914d" class="outline-2">
-<h2 id="org284914d">Analysis of the results</h2>
-<div class="outline-text-2" id="text-org284914d">
+<div id="outline-container-org1532af5" class="outline-2">
+<h2 id="org1532af5">Analysis of the results</h2>
+<div class="outline-text-2" id="text-org1532af5">
 </div>
-<div id="outline-container-orgeb24f6c" class="outline-3">
-<h3 id="orgeb24f6c">Volume of grains</h3>
-<div class="outline-text-3" id="text-orgeb24f6c">
+<div id="outline-container-orgc24fcba" class="outline-3">
+<h3 id="orgc24fcba">Volume of grains</h3>
+<div class="outline-text-3" id="text-orgc24fcba">
 <div class="org-src-container">
 <pre class="src src-ipython"><span class="org-variable-name">fig</span>, <span class="org-variable-name">ax</span> = plt.subplots()
 ax.set_xlabel(u<span class="org-string">'V (vox&#179;)'</span>)
 ax.set_ylabel(<span class="org-string">'Number'</span>)
 ax.hist(vol, <span class="org-builtin">range</span>=(0, 12000), bins=30, linewidth=0)
-fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/volume_his</span><span class="org-string"><span class="org-whitespace-line">togram.png'</span></span><span class="org-whitespace-line">, transparent=</span><span class="org-constant"><span class="org-whitespace-line">True</span></span><span class="org-whitespace-line">)</span>
+fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/volume_histogram.png'</span>, transparent=<span class="org-constant">True</span>)
 </pre>
 </div>
 
@@ -575,9 +576,9 @@ My guess is that it is in fact a little bit of both. One possible remedy would b
 </div>
 </div>
 
-<div id="outline-container-orgd6e937d" class="outline-3">
-<h3 id="orgd6e937d">Size of the grains</h3>
-<div class="outline-text-3" id="text-orgd6e937d">
+<div id="outline-container-orgf27d712" class="outline-3">
+<h3 id="orgf27d712">Size of the grains</h3>
+<div class="outline-text-3" id="text-orgf27d712">
 <p>
 In this section we visualize the radii of the equivalent ellipsoids
 </p>
@@ -587,13 +588,13 @@ In this section we visualize the radii of the equivalent ellipsoids
 ax.hist(radius[:, -1], <span class="org-builtin">range</span>=(0, 40), bins=40, linewidth=0)
 ax.set_xlabel(<span class="org-string">'a (vox)'</span>)
 ax.set_ylabel(<span class="org-string">'Number'</span>)
-fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/radius_a_h</span><span class="org-string"><span class="org-whitespace-line">istogram.png'</span></span><span class="org-whitespace-line">, transparent=</span><span class="org-constant"><span class="org-whitespace-line">True</span></span><span class="org-whitespace-line">)</span>
+fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/radius_a_histogram.png'</span>, transparent=<span class="org-constant">True</span>)
 
 <span class="org-variable-name">fig</span>, <span class="org-variable-name">ax</span> = plt.subplots()
 ax.hist((radius[:, -2], radius[:-1]), <span class="org-builtin">range</span>=(0, 20), bins=20, linewidth=0)
 ax.set_xlabel(<span class="org-string">'b, c (vox)'</span>)
 ax.set_ylabel(<span class="org-string">'Number'</span>)
-fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/radii_b_c_</span><span class="org-string"><span class="org-whitespace-line">histogram.png'</span></span><span class="org-whitespace-line">, transparent=</span><span class="org-constant"><span class="org-whitespace-line">True</span></span><span class="org-whitespace-line">)</span>
+fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/radii_b_c_histogram.png'</span>, transparent=<span class="org-constant">True</span>)
 </pre>
 </div>
 
@@ -615,9 +616,9 @@ The length of most grains is about 2×27=54 pixels (about 6.5 mm). Also, the gra
 </div>
 </div>
 
-<div id="outline-container-org02679b7" class="outline-3">
-<h3 id="org02679b7">Orientation of grains</h3>
-<div class="outline-text-3" id="text-org02679b7">
+<div id="outline-container-org8a27e1e" class="outline-3">
+<h3 id="org8a27e1e">Orientation of grains</h3>
+<div class="outline-text-3" id="text-org8a27e1e">
 <p>
 This will be the topic of the next instalment of this series. We will only check for possible anisotropy by analysing the following second-order orientation tensor: \(\langle\vec n\otimes\vec n\rangle\), where angle brackets stand for ensemble average. It can readily be verified that for isotropic distributions, this tensor is diagonal
 </p>
@@ -657,9 +658,9 @@ Which shows that the distribution of grains is <i>not</i> isotropic. Analysis of
 </div>
 </div>
 
-<div id="outline-container-orgdae4ff9" class="outline-2">
-<h2 id="orgdae4ff9">Conclusion</h2>
-<div class="outline-text-2" id="text-orgdae4ff9">
+<div id="outline-container-org553a897" class="outline-2">
+<h2 id="org553a897">Conclusion</h2>
+<div class="outline-text-2" id="text-org553a897">
 <p>
 In this post, we have analysed the orientation of each grain. The orientation was defined as the orientation of the major axis of the equivalent ellipsoid. We are now ready to analyse orientation correlations among rice grains, which will be the topic of the <a href="./20160627-Orientation_correlations_among_rice_grains-08.html">next instalment</a>.
 </p>
@@ -667,13 +668,13 @@ In this post, we have analysed the orientation of each grain. The orientation wa
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20160219-Orientation_correlations_among_rice_grains-07';
 var disqus_title = 'Orientation correlations among rice grains, part 7: analysis of the shape of the grains';
-var disqus_url = 'http://sbrisard.github.io/posts/20160219-Orientation_correlations_among_rice_grains-07.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20160219-Orientation_correlations_among_rice_grains-07.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';

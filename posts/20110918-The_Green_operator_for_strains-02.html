@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2019-03-07 Thu 08:51 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Green operator for strains, part 2: elementary properties</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -127,9 +128,9 @@ Stress: '\\stensii{\\Sigma}',
 In <a href="./20110911-The_Green_operator_for_strains-01.html">part 1</a> of this series, we have seen how the Green operator for strains (\(\greeniv_0\)) was defined as the operator providing the solution to the problem of elastic equilibrium of a <i>prestressed</i> homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.<!-- more --> We again consider the bounded domain \(\domain\subset\reals^d\), occupied by a homogeneous, linearly elastic material with stiffness \(\stiffness_0\). \(\greeniv_0\) denotes the Green operator for strains for the material \(\stiffness_0\), over the domain \(\domain\). The first property is a direct consequence of the definition of \(\greeniv_0\), given in <a href="./20110911-The_Green_operator_for_strains-01.html">part 1</a>.
 </p>
 
-<div id="outline-container-org71c526f" class="outline-2">
-<h2 id="org71c526f">Application to self-equilibrated prestresses</h2>
-<div class="outline-text-2" id="text-org71c526f">
+<div id="outline-container-orga833656" class="outline-2">
+<h2 id="orga833656">Application to self-equilibrated prestresses</h2>
+<div class="outline-text-2" id="text-orga833656">
 <p>
 We consider a <i>self-equilibrated</i> prestress \(\prestress\) (that is, \(\nabla\cdot\prestress=\tensii0\)). We will prove that \(\greeniv_0\circledast\prestress=\tensii0\). By definition of the Green operator, \(\greeniv_0\circledast\prestress=-\strain\), where \(\strain\) is the strain which solves the following problem
 </p>
@@ -165,9 +166,9 @@ For any self-equilibrated prestress \(\prestress\)
 </div>
 </div>
 
-<div id="outline-container-org7bf364d" class="outline-2">
-<h2 id="org7bf364d">"Square" of the Green operator</h2>
-<div class="outline-text-2" id="text-org7bf364d">
+<div id="outline-container-org805d363" class="outline-2">
+<h2 id="org805d363">"Square" of the Green operator</h2>
+<div class="outline-text-2" id="text-org805d363">
 <p>
 Application of the previous result leads to a useful property, which can be found in e.g. <a href="../pages/references.html#WILL2001">Willis (2001)</a>, where it is written somewhat abusively (but quite efficiently!) \(\greeniv_0\stiffness_0\greeniv_0=\greeniv_0\).
 </p>
@@ -194,9 +195,9 @@ For any prestress \(\prestress\),
 </div>
 </div>
 
-<div id="outline-container-org4a490c8" class="outline-2">
-<h2 id="org4a490c8">Volume average</h2>
-<div class="outline-text-2" id="text-org4a490c8">
+<div id="outline-container-org6424d45" class="outline-2">
+<h2 id="org6424d45">Volume average</h2>
+<div class="outline-text-2" id="text-org6424d45">
 <p>
 To close this instalment, we again consider a prestress \(\prestress\), and the associated strain \(\strain=-\greeniv_0\circledast\prestress\). We seek the value of \(\volavg\strain\), where overlined quantities denote <i>volume averages</i>
 </p>
@@ -227,13 +228,13 @@ For any prestress \(\prestress\),
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20110918-The_Green_operator_for_strains-02';
 var disqus_title = 'The Green operator for strains, part 2: elementary properties';
-var disqus_url = 'http://sbrisard.github.io/posts/20110918-The_Green_operator_for_strains-02.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20110918-The_Green_operator_for_strains-02.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';

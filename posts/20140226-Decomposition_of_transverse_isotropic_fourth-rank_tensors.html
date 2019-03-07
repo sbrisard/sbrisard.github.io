@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2019-03-07 Thu 08:51 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Decomposition of transverse isotropic, fourth-rank tensors</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -134,9 +135,9 @@ In <a href="./20140112-Elastic_constants_of_an_isotropic_material-03.html">a pre
 \(\newcommand{\kronecker}{\circledast}\)
 </p>
 
-<div id="outline-container-orgac75d2e" class="outline-2">
-<h2 id="orgac75d2e">Two second-rank projection tensors</h2>
-<div class="outline-text-2" id="text-orgac75d2e">
+<div id="outline-container-org2390028" class="outline-2">
+<h2 id="org2390028">Two second-rank projection tensors</h2>
+<div class="outline-text-2" id="text-org2390028">
 <p>
 It is recalled that transverse isotropy is defined by one single preferred direction. In the present post, \(\vec n\) denotes the unit vector which indicates this preferred direction. Then, \(\tensii p\) and \(\tensii q\) are the following projectors
 </p>
@@ -159,9 +160,9 @@ It is recalled that transverse isotropy is defined by one single preferred direc
 </div>
 </div>
 
-<div id="outline-container-orgcfe7b8a" class="outline-2">
-<h2 id="orgcfe7b8a">Tensor product of linear transformations</h2>
-<div class="outline-text-2" id="text-orgcfe7b8a">
+<div id="outline-container-org5ad4877" class="outline-2">
+<h2 id="org5ad4877">Tensor product of linear transformations</h2>
+<div class="outline-text-2" id="text-org5ad4877">
 <p>
 It will be convenient to introduce a new, Kronecker-like product of two second-rank tensors, which Del Piero (<a href="../pages/references.html#PIER1979">1979</a>) named <i>tensor product of linear transformations</i>, and which will be denoted \(\boxtimes{}\).
 </p>
@@ -225,7 +226,7 @@ or, in intrinsic form (\(\tensii x\): second-rank tensor)
 
 \begin{equation}
 \label{eq:5}
-\left(\tensii a\boxtimessym\tensii b\right):\tensii x=\frac12\left(\tensii a\boxtimes\tensii b\right):\left(\tensii x+\transp{\tensii x}\right)=\frac12\tensii a:\left(\tensii x+\transp{\tensii x}\right):\transp{\tensii b}.
+\left(\tensii a\boxtimessym\tensii b\right):\tensii x=\frac12\left(\tensii a\boxtimes\tensii b\right):\left(\tensii x+\transp{\tensii x}\right)=\frac12\tensii a\cdot\left(\tensii x+\transp{\tensii x}\right)\cdot\transp{\tensii b}.
 \end{equation}
 
 <p>
@@ -255,7 +256,7 @@ and
 Besides, the following multiplication table results from Eq. \eqref{eq:6} \(\newcommand{\x}{\boxtimessym}\)
 </p>
 
-<table id="org5f97da6" class="center" width="80%">
+<table id="orgf77953f" class="center" width="80%">
 <caption class="t-above"><span class="table-number">Table 1:</span> Multiplication table for the tensors \(\p\x\p\), \(\p\x\q\), \(\q\x\p\) and \(\q\x\q\).</caption>
 
 <colgroup>
@@ -321,9 +322,9 @@ To conclude, it is observed that the fourth-rank tensor \(\identiv=\identii\boxt
 </div>
 </div>
 
-<div id="outline-container-orgfa02bf8" class="outline-2">
-<h2 id="orgfa02bf8">Walpole's basis for transverse isotropic tensors</h2>
-<div class="outline-text-2" id="text-orgfa02bf8">
+<div id="outline-container-org9069244" class="outline-2">
+<h2 id="org9069244">Walpole's basis for transverse isotropic tensors</h2>
+<div class="outline-text-2" id="text-org9069244">
 <p>
 Walpole (<a href="../pages/references.html#WALP1984">1984</a>) shows that any transverse isotropic tensor is a linear combination of the six fourth-rank tensors \(\tensiv E_1,\tensiv E_2,\tensiv E_3,\tensiv E_4,\tensiv F,\tensiv G\) defined as follows
 </p>
@@ -334,10 +335,10 @@ Walpole (<a href="../pages/references.html#WALP1984">1984</a>) shows that any tr
 \end{gather*}
 
 <p>
-Multiplication (in the sense of the double product) of these tensors is fairly easy, as shown by Table <a href="#org3aaf92f">2</a> below.
+Multiplication (in the sense of the double product) of these tensors is fairly easy, as shown by Table <a href="#orge950f26">2</a> below.
 </p>
 
-<table id="org3aaf92f" class="center" width="50%">
+<table id="orge950f26" class="center" width="50%">
 <caption class="t-above"><span class="table-number">Table 2:</span> Multiplication table for the tensors \(\tensiv E_i\), \(\tensiv F\) and \(\tensiv G\) (\(i=1,\ldots,4\)).\(\newcommand{\t}{\tensiv}\)</caption>
 
 <colgroup>
@@ -437,9 +438,9 @@ The above table must be read as: "row double dot column equals cell". For exampl
 </div>
 </div>
 
-<div id="outline-container-orgf4d3b57" class="outline-2">
-<h2 id="orgf4d3b57">A convenient representation of transverse isotropic, fourth-rank tensors</h2>
-<div class="outline-text-2" id="text-orgf4d3b57">
+<div id="outline-container-org0b9aef5" class="outline-2">
+<h2 id="org0b9aef5">A convenient representation of transverse isotropic, fourth-rank tensors</h2>
+<div class="outline-text-2" id="text-org0b9aef5">
 <p>
 Walpole (<a href="../pages/references.html#WALP1984">1984</a>) proposes a convenient representation of any transverse isotropic tensor \(\tensiv T\), as the triplet \((A, f, g)\) where \(A\) is a 2 × 2 matrix and \(f\) and \(g\) are two scalars. This representation should be understood as
 </p>
@@ -449,7 +450,7 @@ Walpole (<a href="../pages/references.html#WALP1984">1984</a>) proposes a conven
 \end{equation*}
 
 <p>
-where \(a_{ij}\) are the coefficients of \(A\). The condensed notation \(\tensiv T=(A, f, g)\) shall be adopted. Using the multiplication table <a href="#org3aaf92f">2</a>, it can readily be verified that if \(\tensiv T=(A, f, g)\) and \(\tensiv T'=(A', f', g')\), then
+where \(a_{ij}\) are the coefficients of \(A\). The condensed notation \(\tensiv T=(A, f, g)\) shall be adopted. Using the multiplication table <a href="#orge950f26">2</a>, it can readily be verified that if \(\tensiv T=(A, f, g)\) and \(\tensiv T'=(A', f', g')\), then
 </p>
 
 \begin{equation*}
@@ -474,9 +475,9 @@ Transposition is also straightforward
 </div>
 </div>
 
-<div id="outline-container-org5a4ed87" class="outline-2">
-<h2 id="org5a4ed87">Decomposition of fourth-rank, isotropic tensors in Walpole's basis</h2>
-<div class="outline-text-2" id="text-org5a4ed87">
+<div id="outline-container-org6cc0255" class="outline-2">
+<h2 id="org6cc0255">Decomposition of fourth-rank, isotropic tensors in Walpole's basis</h2>
+<div class="outline-text-2" id="text-org6cc0255">
 <p>
 The isotropic tensors \(\identiv\), \(\sphprojiv\) and \(\devprojiv\) introduced <a href="./20140112-Elastic_constants_of_an_isotropic_material-03.html">previously</a> can be considered as transverse isotropic tensors. As such, they can be decomposed in Walpole's basis. First, the identity tensor \(\identiv\) decomposes as follows
 </p>
@@ -509,23 +510,23 @@ Finally, the decomposition of the deviatoric projection tensor \(\devprojiv\) is
 </div>
 </div>
 
-<div id="outline-container-org28065c3" class="outline-2">
-<h2 id="org28065c3">Conclusion</h2>
-<div class="outline-text-2" id="text-org28065c3">
+<div id="outline-container-org752c408" class="outline-2">
+<h2 id="org752c408">Conclusion</h2>
+<div class="outline-text-2" id="text-org752c408">
 <p>
-In the present post, a convenient decomposition of three-dimensional, fourth-rank, transverse isotropic tensors as a linear combination of six basis tensors has been proposed. Multiplication (in the sense of the <a href="./20140219-On_the_double_dot_product.html">double dot product</a>) of these basis tensors is straightforward (see Table <a href="#org3aaf92f">2</a>). Besides, representing transverse isotropic tensors as a (matrix, scalar, scalar) triplet eases their multiplication and inversion. Walpole's basis turns out to be very handy in many situations (including the derivation of the Green operator for strains).
+In the present post, a convenient decomposition of three-dimensional, fourth-rank, transverse isotropic tensors as a linear combination of six basis tensors has been proposed. Multiplication (in the sense of the <a href="./20140219-On_the_double_dot_product.html">double dot product</a>) of these basis tensors is straightforward (see Table <a href="#orge950f26">2</a>). Besides, representing transverse isotropic tensors as a (matrix, scalar, scalar) triplet eases their multiplication and inversion. Walpole's basis turns out to be very handy in many situations (including the derivation of the Green operator for strains).
 </p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors';
 var disqus_title = 'Decomposition of transverse isotropic, fourth-rank tensors';
-var disqus_url = 'http://sbrisard.github.io/posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';

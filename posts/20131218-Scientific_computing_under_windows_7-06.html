@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-11-17 Sat 06:54 -->
+<!-- 2019-03-07 Thu 08:51 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scientific computing under Windows 7, part 6: ITK (prerequisites)</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -46,9 +47,9 @@ ITK is an open-source, cross-platform system that provides developers with an ex
 Building ITK under Windows 7 is quite a trip, and will actually require several posts. We start with all prerequisites for this project.<!-- more -->
 </p>
 
-<div id="outline-container-org25aa38d" class="outline-2">
-<h2 id="org25aa38d">libjpeg</h2>
-<div class="outline-text-2" id="text-org25aa38d">
+<div id="outline-container-orgc7e5d21" class="outline-2">
+<h2 id="orgc7e5d21">libjpeg</h2>
+<div class="outline-text-2" id="text-orgc7e5d21">
 <p>
 From the <a href="http://www.ijg.org/">official website</a>
 </p>
@@ -71,9 +72,9 @@ $ make install
 </div>
 </div>
 
-<div id="outline-container-org0a36590" class="outline-2">
-<h2 id="org0a36590">libpng</h2>
-<div class="outline-text-2" id="text-org0a36590">
+<div id="outline-container-org7443387" class="outline-2">
+<h2 id="org7443387">libpng</h2>
+<div class="outline-text-2" id="text-org7443387">
 <p>
 From the <a href="http://www.libpng.org/pub/png/libpng.html">official website</a>
 </p>
@@ -96,9 +97,9 @@ $ make install
 </div>
 </div>
 
-<div id="outline-container-orga2e3e4a" class="outline-2">
-<h2 id="orga2e3e4a">libtiff</h2>
-<div class="outline-text-2" id="text-orga2e3e4a">
+<div id="outline-container-org27ac327" class="outline-2">
+<h2 id="org27ac327">libtiff</h2>
+<div class="outline-text-2" id="text-org27ac327">
 <p>
 From the <a href="http://www.libtiff.org/">official website</a>
 </p>
@@ -121,9 +122,9 @@ make install
 </div>
 </div>
 
-<div id="outline-container-org1ce2019" class="outline-2">
-<h2 id="org1ce2019">HDF5</h2>
-<div class="outline-text-2" id="text-org1ce2019">
+<div id="outline-container-org539b7bc" class="outline-2">
+<h2 id="org539b7bc">HDF5</h2>
+<div class="outline-text-2" id="text-org539b7bc">
 <p>
 From the <a href="http://www.hdfgroup.org/HDF5/">official website</a>
 </p>
@@ -200,9 +201,9 @@ Unfortunately, the fix proposed in the above mailing list does <i>not</i> solve 
 </div>
 </div>
 
-<div id="outline-container-org8c77943" class="outline-2">
-<h2 id="org8c77943">SWIG (Simplified Wrapper and Interface Generator)</h2>
-<div class="outline-text-2" id="text-org8c77943">
+<div id="outline-container-orged2ee2e" class="outline-2">
+<h2 id="orged2ee2e">SWIG (Simplified Wrapper and Interface Generator)</h2>
+<div class="outline-text-2" id="text-orged2ee2e">
 <p>
 From the <a href="http://www.swig.org/">official website</a>
 </p>
@@ -223,9 +224,9 @@ As I would like to use ITK with Python, I need to build the Python bindings, whi
 </div>
 </div>
 
-<div id="outline-container-orgc8d2eb4" class="outline-2">
-<h2 id="orgc8d2eb4">Doxygen</h2>
-<div class="outline-text-2" id="text-orgc8d2eb4">
+<div id="outline-container-org39cea40" class="outline-2">
+<h2 id="org39cea40">Doxygen</h2>
+<div class="outline-text-2" id="text-org39cea40">
 <p>
 From the <a href="http://www.stack.nl/=dimitri/doxygen/index.html">official website</a>
 </p>
@@ -243,9 +244,9 @@ Doxygen is required only if you plan to build the documentation of ITK. Use the 
 </div>
 
 
-<div id="outline-container-orgc89b9f9" class="outline-2">
-<h2 id="orgc89b9f9">GCC-XML</h2>
-<div class="outline-text-2" id="text-orgc89b9f9">
+<div id="outline-container-orgca39694" class="outline-2">
+<h2 id="orgca39694">GCC-XML</h2>
+<div class="outline-text-2" id="text-orgca39694">
 <p>
 From the <a href="http://gccxml.github.io/HTML/Index.html">official website</a>
 </p>
@@ -289,9 +290,9 @@ Unfortunately, the <code>Makefile</code> does not provide an <code>uninstall</co
 </div>
 </div>
 
-<div id="outline-container-org4b9e447" class="outline-2">
-<h2 id="org4b9e447">Conclusion</h2>
-<div class="outline-text-2" id="text-org4b9e447">
+<div id="outline-container-org630bc4c" class="outline-2">
+<h2 id="org630bc4c">Conclusion</h2>
+<div class="outline-text-2" id="text-org630bc4c">
 <p>
 We are now ready to compile ITK itself&#x2026; to be continued in the <a href="./20131219-Scientific_computing_under_windows_7-07.html">next installment</a> of this series.
 </p>
@@ -299,13 +300,13 @@ We are now ready to compile ITK itself&#x2026; to be continued in the <a href=".
 </div>
 </div>
 <div id="postamble" class="status">
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sbrisard.github.io/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Except where otherwise noted, this blog</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://sbrisard.github.io/blog/" property="cc:attributionName" rel="cc:attributionURL">Sébastien Brisard</a> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 This blog was generated with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://orgmode.org/">Org mode</a>. The theme is inspired from <a href="http://orgmode.org/worg/">Worg</a>. Icons come from the <a href="http://fontawesome.io/">Font Awesome</a> icon set.</p><div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'sbrisard';
 var disqus_identifier = 'posts/20131218-Scientific_computing_under_windows_7-06';
 var disqus_title = 'Scientific computing under Windows 7, part 6: ITK (prerequisites)';
-var disqus_url = 'http://sbrisard.github.io/posts/20131218-Scientific_computing_under_windows_7-06.html';
+var disqus_url = 'https://sbrisard.github.io/posts/20131218-Scientific_computing_under_windows_7-06.html';
 (function() {
 var dsq = document.createElement('script');
 dsq.type = 'text/javascript';
