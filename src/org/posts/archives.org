@@ -11,6 +11,7 @@
    + [[file:20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01.org][2018-02-12 – On the periodic-plus-smooth decomposition of an image, part 1: introduction]]
    + [[file:./20171117-Announcing_the_defense_of_my_habilitation.org][2017-11-17 – Announcing the defense of my “Habilitation à Diriger des Recherches”]]
    + [[file:./20170807-New_conference_paper_on_variational_estimates_of_poroelastic_coefficients.org][2017-08-07 -- New conference paper on variational estimates of poroelastic coefficients]]
+   + [[./20170531-Scrapy-ing_the_NIST_X-ray_Attenuation_Databases.org][2017-05-31 – Scrapy-ing the NIST X-ray Attenuation Databases]]
    + [[file:./20170428-New_paper_on_one-dimensional_compression_of_granular_materials.org][2017-04-28 -- New paper on one-dimensional compression of granular materials]]
    + [[file:./20170426-New_paper_on_Discrete_Digital_Projections_Correlation.org][2017-04-26 -- New paper on Discrete Digital Projections Correlation]]
    + [[./20170223-New_paper_out.org][2017-02-23 -- New paper out!]]
