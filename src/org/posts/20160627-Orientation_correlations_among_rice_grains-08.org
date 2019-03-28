@@ -12,7 +12,7 @@ In the [[file:./20160219-Orientation_correlations_among_rice_grains-07.org][prev
   :CUSTOM_ID: S1
   :END:
 
-Various order parameters have been introduced in order to identify preferred orientations in assemblies of anisotropic particles. In the present post, we will use the so-called nematic order parameter, which is used to monitor isotropic-nematic phase transitions ([[file:../pages/references.org::#EPPE1984][Eppenga and Frenkel, 1984]])
+Various order parameters have been introduced in order to identify preferred orientations in assemblies of anisotropic particles. In the present post, we will use the so-called nematic order parameter, which is used to monitor isotropic-nematic phase transitions ([[https://doi.org/10.1080/00268978400101951][Eppenga and Frenkel, 1984]])
 
 \begin{equation}
 \label{eq:1}
@@ -76,7 +76,7 @@ It is observed that $S_1$ is non-zero, which indicates a slight anisotropy. $S_1
 
 The initial motivation of this series was the quantification of orientation correlation between anisotropic particles. The basic idea is this: anisotropic, hard particles tend to be locally well ordered (in terms of orientation). In other words, the closer the particles, the higher the probability that they are (nearly) parallel. This is definitely true of flat particles (platelets), but it is less obvious for elongated particles.
 
-To measure orientation correlations between particles, Frenkel and Mulder ([[file:../pages/references.org::#FREN2002][2002]]) introduce $S_2(r)$, which is defined from the above order parameter as follows. A “central particle”, $i$, is first selected. The reference direction is the orientation $\vec n_i$ of this central particle. Then, $S_2(r)$ is computed from Eq. \eqref{eq:1}, for all particles $j$ located at a distance $r$ from the central particle $i$. In this context, we have $\cos\theta_j=\vec n_i\cdot\vec n_j$. The empirical estimation of this two-point order parameter therefore reads
+To measure orientation correlations between particles, Frenkel and Mulder ([[https://doi.org/10.1080/00268978500101971][2002]]) introduce $S_2(r)$, which is defined from the above order parameter as follows. A “central particle”, $i$, is first selected. The reference direction is the orientation $\vec n_i$ of this central particle. Then, $S_2(r)$ is computed from Eq. \eqref{eq:1}, for all particles $j$ located at a distance $r$ from the central particle $i$. In this context, we have $\cos\theta_j=\vec n_i\cdot\vec n_j$. The empirical estimation of this two-point order parameter therefore reads
 
 \begin{equation}
 \label{eq:2}

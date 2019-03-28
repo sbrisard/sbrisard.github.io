@@ -21,7 +21,6 @@ projections of the deformed sample, thus allowing for time-resolved
 experiments.
 #+END_QUOTE
 
-The exact references to this paper can be found in my [[file:../pages/about.org::#KHAL2017][list of publications]].
 The preprint is available on [[https://hal-enpc.archives-ouvertes.fr/hal-01474701][HAL]] (see also below) and the published
 version is available [[https://doi.org/10.1007/s11340-017-0263-5][here]].
 
