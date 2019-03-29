@@ -44,7 +44,12 @@ with an equivalent, /homogeneous/ mesostructure.
 
 The /microstructure/ denotes both the geometry and physical properties of the
 microscopic features. In the present case, the microstructure is defined by the
-size and spacing of the dots, as well as the color of dots and background.
+size and spacing of the dots (geometry), as well as the color of dots and
+background (physical properties).
 
 The /mesostructure/ is a patch with homogeneous, equivalent properties (in the
-present case: uniform grey color).
+present case: uniform grey color). In homogenization language, the equivalent properties are called /effective properties/.
+
+Two strategies can be adopted to carry out homogenization. In the so-called /top-down/ approach, the effective properties are /measured/ (in a broad sense). In the example above, we could provide the observer with a set of cards uniformly coloured with various shades of gray, and ask him to pick the card which is closest to how Hobbes' nose looks from far off.
+
+The alternate, /bottom-up/ approach is often referred to as /up-scaling/. In this approach, the effective properties are /inferred/ (through a mathematical model) from the microstructure. In the example above, we could /predict/ the effective gray shade of Hobbe's nose by some kind of weighted average of the gray shade of the dots, and the white background.
