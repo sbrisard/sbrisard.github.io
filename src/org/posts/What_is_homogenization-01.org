@@ -11,45 +11,71 @@ homogenization? This series explores this question; it is largely based on the
 introduction to my [[file:./20171117-Announcing_the_defense_of_my_habilitation.org][Habilitation defense]].
 
 In order to introduce homogenization, we will draw inspiration from the
-publishing industry. Meet Calvin and Hobbes
+publishing industry. Meet Calvin and Hobbes:
 
 #+ATTR_HTML: :width 50%
 [[./What_is_homogenization/Calvin_and_Hobbes.png]]
 
-From where you seat, Hobbes' nose looks perfectly smooth, uniformly gray.
-However, let us take a closer look.
+From where you sit, Hobbes' nose looks perfectly smooth, uniformly gray.
+However, let us take a closer look:
 
 #+ATTR_HTML: :width 50%
 [[./What_is_homogenization/Calvin_and_Hobbes-Close-up.png]]
 
 It turns out that the nose has a /dotted/ structure, which is inherent to the
-printing technique itself. The reason why the resulting picture looks fine is
-because you are looking at it from far off. We speak about /separation of
-scales/. In this example, three length-scales can be identified
+so-called [[https://en.wikipedia.org/wiki/Halftone][halftoning]] technique itself. The reason why the resulting picture
+looks fine is because you are looking at it from far off. We speak about
+/separation of scales/. In this example, three length-scales can be identified
 
-  - the /microscopic/ length-scale $L_\mu$ is the size of the dots
+  - the /microscopic/ length-scale $L_\mu$ is the size of the dots,
   - the /mesoscopic/ length-scale $L_\mathrm{m}$ is the size of the gray patch
-    (the nose)
+    (the nose),
   - the /macroscopic/ length-scale $L_\mathrm{M}$ is the distance from your
     screen to your eye.
 
-These three scales are well separated, which means that the macro scale is much larger than the meso scale, which in turn is much larger than the micro scale
-\begin{equation}
-L_\mu\ll L_\mathrm{m}\ll L_\mathrm{M}.
-\end{equation}
+These three scales are well separated, which means that the macro scale is much
+larger than the meso scale, which in turn is much larger than the micro scale:
+\(L_\mu\ll L_\mathrm{m}\ll L_\mathrm{M}\).
 
 Provided that separation of scales prevails, homogenization can take
 place. Homogenization is the process of replacing the complex microstructure
-with an equivalent, /homogeneous/ mesostructure.
+with an equivalent, /homogeneous/ mesostructure. By /microstructure/, we mean
+both the geometry and physical properties of the microscopic features. In the
+above example, the microstructure is defined by the size and spacing of the
+dots (geometry), as well as the color of dots and background (physical
+properties). The /mesostructure/ on the other hand is a patch with homogeneous,
+equivalent (in homogenization language, we say /effective/) properties. In the
+above example, the effective property is the uniform gray color as perceived by
+the observer.
 
-The /microstructure/ denotes both the geometry and physical properties of the
-microscopic features. In the present case, the microstructure is defined by the
-size and spacing of the dots (geometry), as well as the color of dots and
-background (physical properties).
+Two strategies can be adopted to carry out homogenization. In the so-called
+/top-down/ approach, the effective properties are /measured/ (in a broad
+sense). In the example above, we could provide the observer with a set of cards
+uniformly coloured with various shades of gray, and ask him to pick the card
+which is closest to how Hobbes' nose looks from far off. The alternate,
+/bottom-up/ approach is often referred to as /upscaling/. In this approach,
+the effective properties are /inferred/ (through a mathematical model) from the
+microstructure. In the example above, we could /predict/ the effective gray
+shade of Hobbe's nose by some kind of weighted average of the gray shade of the
+dots, and the white background.
 
-The /mesostructure/ is a patch with homogeneous, equivalent properties (in the
-present case: uniform grey color). In homogenization language, the equivalent properties are called /effective properties/.
+These two strategies should not be seen as competing, but rather as
+complementary approaches to the same problem. While the top-down approach
+always delivers the “correct” answer (provided that the experiments are
+performed correctly), efficient bottom-up approaches have the ability to be
+/predictive/: given the microstructure, the effective properties can be
+computed with no need to actually /build/ the microstructure. This is
+particularly desirable in an industrial context, where numerical modelling is
+gradually supplanting physical testing.
 
-Two strategies can be adopted to carry out homogenization. In the so-called /top-down/ approach, the effective properties are /measured/ (in a broad sense). In the example above, we could provide the observer with a set of cards uniformly coloured with various shades of gray, and ask him to pick the card which is closest to how Hobbes' nose looks from far off.
+In my research, I preferably resort to bottom-up approaches. The remainder of
+this series will therefore be devoted to homogenization through upscaling.
 
-The alternate, /bottom-up/ approach is often referred to as /up-scaling/. In this approach, the effective properties are /inferred/ (through a mathematical model) from the microstructure. In the example above, we could /predict/ the effective gray shade of Hobbe's nose by some kind of weighted average of the gray shade of the dots, and the white background.
+* Conclusion
+
+In this post, we introduced the homogenization concept through a graphical
+analogy. We explained that the key ingredient for homogenization to be valid is
+separation of scales.
+
+In the next instalment of this series, we will discuss homogenization in the
+context of the mechanical properties of heterogeneous materials.
