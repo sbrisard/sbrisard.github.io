@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-03-07 Thu 08:51 -->
+<!-- 2019-08-08 Thu 07:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation correlations among rice grains, part 6: segmentation</title>
@@ -313,7 +313,7 @@ The result of this operation is shown on Fig. <a href="#org739e457">3</a>, where
 </div>
 
 <p>
-One possible response would be to use so-called <i>vertical filters</i> (<a href="../pages/references.html#TARI2008">Tariel et al., 2008</a>). I used here a more intuitive approach by providing a <code>min_distance</code> parameter to the <a href="http://scikit-image.org/">scikit-image</a> <code>peak_local_max</code> (<a href="http://scikit-image.org/docs/stable/api/skimage.feature.html#peak-local-max">documentation</a>) function. The selected value (namely, 10 px) corresponds to the typical equatorial radius of the rice grains (as manually measured on the binary images). This indeed reduces over-segmentation, but does not solve the problem completely.
+One possible response would be to use so-called <i>vertical filters</i> (<a href="https://doi.org/10.5566/ias.v27.p23-28">Tariel et al., 2008</a>). I used here a more intuitive approach by providing a <code>min_distance</code> parameter to the <a href="http://scikit-image.org/">scikit-image</a> <code>peak_local_max</code> (<a href="http://scikit-image.org/docs/stable/api/skimage.feature.html#peak-local-max">documentation</a>) function. The selected value (namely, 10 px) corresponds to the typical equatorial radius of the rice grains (as manually measured on the binary images). This indeed reduces over-segmentation, but does not solve the problem completely.
 </p>
 
 <p>
