@@ -13,4 +13,4 @@ In this paper, we show how the numerical solution to the periodic Lippmann--Schw
 Two applications are proposed, in two and three dimensions. In the first application, the reconstructed displacement field is used to compute a rigorous upper bound on the effective shear modulus. In the second application, the quality of the reconstruction is assessed quantitatively.
 #+END_QUOTE
 
-The exact references to this paper can be found in my [[file:../pages/about.org::#BRIS2017][list of publications]]. The submitted version (preprint) is available on [[https://hal-enpc.archives-ouvertes.fr/hal-01304603][HAL ENPC]], and the published version is available [[http://dx.doi.org/10.1002/nme.5263][here]].
+This paper is available as a preprint on [[https://hal-enpc.archives-ouvertes.fr/hal-01304603][HAL ENPC]]. The published version is available [[http://dx.doi.org/10.1002/nme.5263][here]].
