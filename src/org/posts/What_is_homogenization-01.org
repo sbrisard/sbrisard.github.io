@@ -11,19 +11,19 @@ homogenization? This series explores this question; it is largely based on the
 introduction to my [[file:./20171117-Announcing_the_defense_of_my_habilitation.org][Habilitation defense]].
 
 In order to introduce homogenization, we will draw inspiration from the
-publishing industry. The 1964 lithograph below by [[https://en.wikipedia.org/wiki/Roy_Lichtenstein][Roy Lichtenstein]] is called
-/Temple/ and currently owned by [[https://www.mouginsmusee.com/][Musée d'Art Classique de Mougins]], France:
+publishing industry. The following photograph was published in “Le Journal” (a
+french daily newspaper) from Thursday, may 30^th, 1935 (num. 15565). It
+illustrates the first cruise of the ocean liner /Normandie/.
 
-#+ATTR_HTML: :width 20%
-[[./What_is_homogenization/MMoCA_36_MA_1024x0.jpg]]
+#+ATTR_HTML: :width 33%
+[[./What_is_homogenization/Normandie.jpg]]
 
-From where you sit, the sky probably looks perfectly smooth, uniformly blue.
-However, let us take a closer look:
+From where you sit, water exhibits nice shades of gray. However, let us take a closer look:
 
-#+ATTR_HTML: :width 80%
-[[./What_is_homogenization/MMoCA_36_MA_1024x0.jpg]]
+#+ATTR_HTML: :width 100%
+[[./What_is_homogenization/Normandie.jpg]]
 
-It turns out that the sky has a /dotted/ structure, which is inherent to the
+It turns out that the sea has a /dotted/ structure, which is inherent to the
 so-called [[https://en.wikipedia.org/wiki/Halftone][halftoning]] technique itself. The reason why the resulting picture
 looks fine is because you are looking at it from far off. We speak about
 /separation of scales/. In this example, three length-scales can be identified
