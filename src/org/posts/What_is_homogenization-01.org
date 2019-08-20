@@ -4,6 +4,7 @@
 #+OPTIONS: ':t
 #+TITLE: What is homogenization? Part 1: on the separation of scales
 #+DATE: [2019-03-28 Thu]
+#+LINK: next file:./What_is_homogenization-02.org
 
 Most of my research activities deal with upscaling the mechanical properties of
 heterogeneous materials. This is also known as homogenization. So what /is/
@@ -11,32 +12,37 @@ homogenization? This series explores this question; it is largely based on the
 introduction to my [[file:./20171117-Announcing_the_defense_of_my_habilitation.org][Habilitation defense]].
 
 In order to introduce homogenization, we will draw inspiration from the
-publishing industry. The following photograph was published in “Le Journal” (a
-french daily newspaper) from Thursday, may 30^th, 1935 (num. 15565). It
-illustrates the first cruise of the ocean liner /Normandie/.
+publishing industry. The following photograph[fn:1] was published in /Le
+Journal/ (a french daily newspaper) from thursday, may 30^th, 1935. It
+illustrates the first cruise of the ocean liner [[https://en.wikipedia.org/wiki/SS_Normandie][Normandie]].
 
 #+ATTR_HTML: :width 33%
 [[./What_is_homogenization/Normandie.jpg]]
 
-From where you sit, water exhibits nice shades of gray. However, let us take a closer look:
+From where you sit, water exhibits nice shades of gray. However, let us take a closer look at the prow:
 
-#+ATTR_HTML: :width 100%
-[[./What_is_homogenization/Normandie.jpg]]
+#+ATTR_HTML: :width 33%
+[[./What_is_homogenization/Normandie-400x300.png]]
 
 It turns out that the sea has a /dotted/ structure, which is inherent to the
-so-called [[https://en.wikipedia.org/wiki/Halftone][halftoning]] technique itself. The reason why the resulting picture
-looks fine is because you are looking at it from far off. We speak about
-/separation of scales/. In this example, three length-scales can be identified
+so-called [[https://en.wikipedia.org/wiki/Halftone][halftoning]] technique itself. Of course, the reason why the resulting
+picture looks fine is because you are looking at it from far off. Also, the
+size of the “gray” patches must be large enough for you to get the illusion
+that it is smoothly shaded. Indeed, if the patch contains only a few dots, the
+illusion will not take place.
+
+We have therefore identified three length-scales
 
   - the /microscopic/ length-scale L_μ is the size of the dots,
-  - the /mesoscopic/ length-scale L_m is the typical size of the blue patches
-    (the column spacing),
+  - the /mesoscopic/ length-scale L_m is the typical size of the patches,
   - the /macroscopic/ length-scale L_M is the distance from your screen to your
     eye.
 
-These three scales are well separated, which means that the macro scale is much
-larger than the meso scale, which in turn is much larger than the micro scale:
-L_μ \thinsp\ll\thinsp L_m \thinsp\ll\thinsp L_M.
+These three scales must be well separated for the photograph to appear smoothly
+shaded. I other words, the macro scale is much larger than the meso scale,
+which in turn is much larger than the micro scale: L_μ \thinsp\ll\thinsp L_m
+\thinsp\ll\thinsp L_M. This is the so-called assumption of /separation of
+scales/.
 
 Provided that separation of scales prevails, homogenization can take
 place. Homogenization is the process of replacing the complex microstructure
@@ -46,31 +52,8 @@ above example, the microstructure is defined by the size and spacing of the
 dots (geometry), as well as the color of dots and background (physical
 properties). The /mesostructure/ on the other hand is a patch with homogeneous,
 equivalent (in homogenization language, we say /effective/) properties. In the
-above example, the effective property is the uniform blue color as perceived by
-the observer.
-
-Two strategies can be adopted to carry out homogenization. In the so-called
-/top-down/ approach, the effective properties are /measured/ (in a broad
-sense). In the example above, we could provide the observer with a set of cards
-uniformly coloured with various shades of blue, and ask him to pick the card
-which is closest to how the blue sky looks from far off. The alternate,
-/bottom-up/ approach is often referred to as /upscaling/. In this approach, the
-effective properties are /inferred/ (through a mathematical model) from the
-microstructure. In the example above, we could /predict/ the effective blue
-shade of the lithograph's sky by some kind of weighted average of the blue
-shade of the dots, and the white background.
-
-These two strategies should not be seen as competing, but rather as
-complementary approaches to the same problem. While the top-down approach
-always delivers the “correct” answer (provided that the experiments are
-performed correctly), efficient bottom-up approaches have the ability to be
-/predictive/: given the microstructure, the effective properties can be
-computed with no need to actually /build/ the microstructure. This is
-particularly desirable in an industrial context, where numerical modelling is
-gradually supplanting physical testing.
-
-In my research, I preferably resort to bottom-up approaches. The remainder of
-this series will therefore be devoted to homogenization through upscaling.
+above example, the effective property is the shade of gray as perceived by the
+observer.
 
 * Conclusion
 
@@ -78,5 +61,8 @@ In this post, we introduced the homogenization concept through a graphical
 analogy. We explained that the key ingredient for homogenization to be valid is
 separation of scales.
 
-In the next instalment of this series, we will discuss homogenization in the
-context of the mechanical properties of heterogeneous materials.
+In the [[next][next instalment]] of this series, we will discuss to strategies to carry
+out homogenization: the bottom-up and top-down approaches.
+
+[fn:1] Le Journal, num. 15565. Image downloaded from [[https://gallica.bnf.fr/ark:/12148/bpt6k7632229g][Gallica]], the digital
+library BnF (/Bibliothèque Nationale de France/).
