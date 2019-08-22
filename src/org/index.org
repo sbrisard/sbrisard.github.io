@@ -7,9 +7,7 @@
 You've reached the blog of Sébastien Brisard (follow the [[file:https:/cv.archives-ouvertes.fr/sbrisard][About me]] @@html:<span
 class="fa fa-user"></span>@@ link to read my CV). My most recent posts are
 listed below. A full list of posts can be found in the [[file:./posts/archives.org][Archives]] @@html:<span
-class="fa fa-archive"></span>@@ page. These posts frequently refer to work
-published by myself or others; the full bibliographic references are provided
-in the [[file:./pages/references.org][References]] @@html:<span class="fa fa-book"></span>@@ page.
+class="fa fa-archive"></span>@@ page.
 
 While you're at it, you can also visit my other pages
 

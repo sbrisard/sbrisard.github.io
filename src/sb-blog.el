@@ -120,10 +120,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                 "About me"
                 (sb-blog-fa "user")))
 
-(defun sb-blog-link-references (level)
-  (sb-blog-rel-link "pages/references.html" "References" (sb-blog-fa "book")
-                    level))
-
 (defun sb-blog-link-archives (level)
   (sb-blog-rel-link "posts/archives.html" "Archives" (sb-blog-fa "archive")
                     level))
@@ -177,7 +173,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             "</span>\n"
             (sb-blog-unordered-list `(,(sb-blog-link-home level)
                                       ,sb-blog-link-about
-                                      ,(sb-blog-link-references level)
                                       ,(sb-blog-link-archives level)
                                       ,sb-blog-link-github
                                       ,sb-blog-link-bitbucket
