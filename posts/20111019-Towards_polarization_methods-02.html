@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-03-07 Thu 08:51 -->
+<!-- 2019-08-22 Thu 07:09 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Towards polarization methods, part 2: the variational principle of Hashin and Shtrikman</title>
@@ -109,7 +109,6 @@ Stress: '\\stensii{\\Sigma}',
 <ul>
 <li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
 <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
-<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
 <li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
 <li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
 <li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
@@ -125,7 +124,7 @@ Stress: '\\stensii{\\Sigma}',
 <div id="content">
 <h1 class="title">Towards polarization methods, part 2: the variational principle of Hashin and Shtrikman</h1>
 <p>
-In <a href="./20111004-Towards_polarization_methods-01.html">part 1</a> of this series, we introduced the Lippmann&#x2013;Schwinger equation. Direct discretization of this equation can lead to efficient schemes for the numerical solution of the elementary problem of micromechanics. However, my experience shows that taking first the variational form of this equation, and following standard Garlerkin discretization approaches can lead to much more robust and efficient schemes. In this instalment, we will introduce the so-called variational "principle" of <a href="../pages/references.html#HASH1962">Hashin and Shtrikman (1962)</a>, <!-- more --> which is nothing but the variational form of the Lippmann-Schwinger equation. The present exposition follows quite closely the approach of <a href="../pages/references.html#WILL1977">Willis (1977)</a>.
+In <a href="./20111004-Towards_polarization_methods-01.html">part 1</a> of this series, we introduced the Lippmann&#x2013;Schwinger equation. Direct discretization of this equation can lead to efficient schemes for the numerical solution of the elementary problem of micromechanics. However, my experience shows that taking first the variational form of this equation, and following standard Garlerkin discretization approaches can lead to much more robust and efficient schemes. In this instalment, we will introduce the so-called variational "principle" of <a href="https://doi.org/10.1016/0022-5096(62)90004-2">Hashin and Shtrikman (1962)</a>, <!-- more --> which is nothing but the variational form of the Lippmann-Schwinger equation. The present exposition follows quite closely the approach of <a href="https://doi.org/10.1016/0022-5096(77)90022-9">Willis (1977)</a>.
 </p>
 
 <p>
@@ -201,11 +200,11 @@ Indeed, for \(\prestress\) small enough, we have
 \end{equation}
 
 <p>
-the right-hand side being zero if the polarization field \(\polarization\) is the solution to the Lippmann-Schwinger equation \eqref{eq:5}. Therefore, the first variation of \(\mathcal H\) at \(\polarization\) is null; in other words, \(\polarization\) is a <i>critical point</i> of \(\mathcal H\). This result is usually referred to as the variational principle of <a href="../pages/references.html#HASH1962">Hashin and Shtrikman (1962)</a>. It is the fundamental result at the basis of all numerical methods presented in this blog.
+the right-hand side being zero if the polarization field \(\polarization\) is the solution to the Lippmann-Schwinger equation \eqref{eq:5}. Therefore, the first variation of \(\mathcal H\) at \(\polarization\) is null; in other words, \(\polarization\) is a <i>critical point</i> of \(\mathcal H\). This result is usually referred to as the variational principle of <a href="https://doi.org/10.1016/0022-5096(62)90004-2">Hashin and Shtrikman (1962)</a>. It is the fundamental result at the basis of all numerical methods presented in this blog.
 </p>
 
 <p>
-So, it is time to sum up. We proved in this instalment that solving the boundary value problem \eqref{eq:1} &#x2013; \eqref{eq:4} is actually equivalent to finding the critical point of \(\mathcal H\) defined by Eq. \eqref{eq:8}. It can be proved that this critical point is indeed unique. In the <a href="./20111031-Towards_polarization_methods-03.html">next instalment</a> of this series, I will introduce the <i>energy principle</i> of <a href="../pages/references.html#HASH1962">Hashin and Shtrikman (1962)</a>. In other words, we will explore under which circumstances this critical point is an <i>extremum</i> of \(\mathcal H\).
+So, it is time to sum up. We proved in this instalment that solving the boundary value problem \eqref{eq:1} &#x2013; \eqref{eq:4} is actually equivalent to finding the critical point of \(\mathcal H\) defined by Eq. \eqref{eq:8}. It can be proved that this critical point is indeed unique. In the <a href="./20111031-Towards_polarization_methods-03.html">next instalment</a> of this series, I will introduce the <i>energy principle</i> of <a href="https://doi.org/10.1016/0022-5096(62)90004-2">Hashin and Shtrikman (1962)</a>. In other words, we will explore under which circumstances this critical point is an <i>extremum</i> of \(\mathcal H\).
 </p>
 </div>
 <div id="postamble" class="status">

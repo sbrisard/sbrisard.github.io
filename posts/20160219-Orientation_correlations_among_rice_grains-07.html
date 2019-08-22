@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-03-07 Thu 08:51 -->
+<!-- 2019-08-22 Thu 07:10 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation correlations among rice grains, part 7: analysis of the shape of the grains</title>
@@ -109,7 +109,6 @@ Stress: '\\stensii{\\Sigma}',
 <ul>
 <li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
 <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
-<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
 <li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
 <li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
 <li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
@@ -551,7 +550,7 @@ We can now proceed with the analysis of the results. This will be done more thor
 ax.set_xlabel(u<span class="org-string">'V (vox&#179;)'</span>)
 ax.set_ylabel(<span class="org-string">'Number'</span>)
 ax.hist(vol, <span class="org-builtin">range</span>=(0, 12000), bins=30, linewidth=0)
-fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/volume_histogram.png'</span>, transparent=<span class="org-constant">True</span>)
+fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/volume_his</span><span class="org-string"><span class="org-whitespace-line">togram.png'</span></span><span class="org-whitespace-line">, transparent=</span><span class="org-constant"><span class="org-whitespace-line">True</span></span><span class="org-whitespace-line">)</span>
 </pre>
 </div>
 
@@ -588,13 +587,13 @@ In this section we visualize the radii of the equivalent ellipsoids
 ax.hist(radius[:, -1], <span class="org-builtin">range</span>=(0, 40), bins=40, linewidth=0)
 ax.set_xlabel(<span class="org-string">'a (vox)'</span>)
 ax.set_ylabel(<span class="org-string">'Number'</span>)
-fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/radius_a_histogram.png'</span>, transparent=<span class="org-constant">True</span>)
+fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/radius_a_h</span><span class="org-string"><span class="org-whitespace-line">istogram.png'</span></span><span class="org-whitespace-line">, transparent=</span><span class="org-constant"><span class="org-whitespace-line">True</span></span><span class="org-whitespace-line">)</span>
 
 <span class="org-variable-name">fig</span>, <span class="org-variable-name">ax</span> = plt.subplots()
 ax.hist((radius[:, -2], radius[:-1]), <span class="org-builtin">range</span>=(0, 20), bins=20, linewidth=0)
 ax.set_xlabel(<span class="org-string">'b, c (vox)'</span>)
 ax.set_ylabel(<span class="org-string">'Number'</span>)
-fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/radii_b_c_histogram.png'</span>, transparent=<span class="org-constant">True</span>)
+fig.savefig(<span class="org-string">'./20160219-Orientation_correlations_among_rice_grains-07/radii_b_c_</span><span class="org-string"><span class="org-whitespace-line">histogram.png'</span></span><span class="org-whitespace-line">, transparent=</span><span class="org-constant"><span class="org-whitespace-line">True</span></span><span class="org-whitespace-line">)</span>
 </pre>
 </div>
 

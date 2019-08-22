@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-03-07 Thu 08:51 -->
+<!-- 2019-08-22 Thu 07:09 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation correlations among rice grains, part 4: defining the ROI</title>
@@ -40,7 +40,6 @@
 <ul>
 <li><a href="../index.html" title="Home"><span class="fa fa-home"></span></a></li>
 <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me"><span class="fa fa-user"></span></a></li>
-<li><a href="../pages/references.html" title="References"><span class="fa fa-book"></span></a></li>
 <li><a href="archives.html" title="Archives"><span class="fa fa-archive"></span></a></li>
 <li><a href="https://github.com/sbrisard" title="GitHub"><span class="fa fa-github"></span></a></li>
 <li><a href="https://bitbucket.org/sbrisard" title="Bitbucket"><span class="fa fa-bitbucket"></span></a></li>
@@ -122,7 +121,7 @@ The resulting image is shown in Fig. <a href="#orga75b2b9">2</a>. It should be n
 </div>
 
 <p>
-We are now ready to compute the Circle Hough Transform. This transform aims at finding circles within an image. It was proposed by Duda and Hart (<a href="../pages/references.html#DUDA1971">1971</a>) (see also <a href="http://en.wikipedia.org/wiki/Hough_transform">Wikipedia</a>). It should be understood as a histogram in parameter space. More precisely, a point \((x, y)\) belongs to the circle centered at \((c_x, c_y)\) and of radius \(r\) if, and only if
+We are now ready to compute the Circle Hough Transform. This transform aims at finding circles within an image. It was proposed by Duda and Hart (<a href="https://doi.org/10.1145/361237.361242">1971</a>) (see also <a href="http://en.wikipedia.org/wiki/Hough_transform">Wikipedia</a>). It should be understood as a histogram in parameter space. More precisely, a point \((x, y)\) belongs to the circle centered at \((c_x, c_y)\) and of radius \(r\) if, and only if
 </p>
 
 \begin{equation*}
@@ -184,7 +183,7 @@ The code snippet below finds the two highest values of the Hough transform. The 
 <span class="org-variable-name">radius</span> = radii[k]
 <span class="org-variable-name">h</span> = h[k, ...]
 <span class="org-variable-name">row</span>, <span class="org-variable-name">col</span> = np.unravel_index(np.argmax(h), h.shape)
-<span class="org-doc">'The inner boundary is centered at ({} px, {} px); its radius is {} px.'</span>.<span class="org-builtin">format</span>(row, col, radius)
+<span class="org-doc">'The inner boundary is centered at ({} px, {} px); its radius is {} px.'</span>.<span class="org-builtin">format</span>(<span class="org-whitespace-line">row, col, radius)</span>
 </pre>
 </div>
 
