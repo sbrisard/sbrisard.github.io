@@ -3,8 +3,9 @@
 #+SETUPFILE: "../include/mathjax.org"
 #+TITLE: Towards polarization methods, part 4: bounds on the macroscopic elastic properties
 #+DATE: <2011-12-10 Sat>
+#+LINK: hash1962 https://doi.org/10.1016/0022-5096(62)90004-2
 
-Back from a long silent period... In [[file:./20111019-Towards_polarization_methods-02.org][part 2]] of this series, I introduced the /variational/ principle of [[file:../pages/references.org::#HASH1962][Hashin and Shtrikman (1962)]]. Then, in [[file:./20111031-Towards_polarization_methods-03.org][part 3]], I showed how further assumptions on the reference material led to the /energy/ principle of Hashin and Shtrikman. Both principles are great tools to derive numerical methods for the computation of strain/stress fields in highly heterogeneous materials (where other methods -- eg finite elements -- would have a hard time doing the same calculation). But the energy principle also allows the derivation of theoretical results, such as rigorous bounds on the macroscopic properties. Why this is so is the topic of today's instalment.@@html:<!-- more -->@@
+Back from a long silent period... In [[file:./20111019-Towards_polarization_methods-02.org][part 2]] of this series, I introduced the /variational/ principle of [[hash1962][Hashin and Shtrikman (1962)]]. Then, in [[file:./20111031-Towards_polarization_methods-03.org][part 3]], I showed how further assumptions on the reference material led to the /energy/ principle of Hashin and Shtrikman. Both principles are great tools to derive numerical methods for the computation of strain/stress fields in highly heterogeneous materials (where other methods -- eg finite elements -- would have a hard time doing the same calculation). But the energy principle also allows the derivation of theoretical results, such as rigorous bounds on the macroscopic properties. Why this is so is the topic of today's instalment.@@html:<!-- more -->@@
 
 Let $\polarization$ be the solution of the Lippmann-Schwinger equation
 
