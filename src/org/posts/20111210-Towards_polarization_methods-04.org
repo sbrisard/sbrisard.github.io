@@ -42,11 +42,11 @@ Combining Eqs. \eqref{eq:3} and \eqref{eq:4} then leads to
 \mathcal H(\polarization)=\frac12\Strain:\volavg{\left(\stiffness-\stiffness_0\right):\strain}=\frac12\Strain:\volavg{\stiffness:\strain}-\frac12\Strain:\stiffness_0:\volavg{\strain},
 \end{equation}
 
-where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, $\volavg\strain=\Strain$ (this is the very definition of the macroscopic strain $\Strain$). Furthermore, $\volavg{\stiffness:\strain} = \volavg{\stress} = \Stress$, where $\Stress$ is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
+where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, $\volavg\strain=\Strain$ (this is the very definition of the macroscopic strain $\Strain$). Furthermore, $\volavg{\stiffness:\strain} = \volavg{\tens\sigma} = \tens\sigma$, where $\tens\sigma$ is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
 
 \begin{equation}
 \label{eq:6}
-\Stress=\stiffness^\eff:\Strain,
+\tens\sigma=\stiffness^\eff:\Strain,
 \end{equation}
 
 where $\stiffness^\eff$ is the macroscopic (or effective, or homogenized) stiffness of the composite. Eq. \eqref{eq:5} finally reduces to

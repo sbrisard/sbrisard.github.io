@@ -8,7 +8,7 @@ In the previous instalments of this series (see [[file:./20131205-Elastic_consta
 
 \begin{equation}
 \label{eq:1}
-\stresscomp_{ij}=\bulkmod\straincomp_{kk}\delta_{ij}+2\shearmod\left(\straincomp_{ij}-\frac{\straincomp_{kk}}d\delta_{ij}\right),
+\tens\sigma_{ij}=\bulkmod\varepsilon_{kk}\delta_{ij}+2\shearmod\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}d\delta_{ij}\right),
 \end{equation}
 
 where $d$ is the dimension of the physical space ($d=3$ for 3D elasticity, $d=2$ for plane strain elasticity), $\shearmod$ is the shear modulus, and $\bulkmod$ is the bulk modulus, whose expression depends on $d$
@@ -82,7 +82,7 @@ from which it results that
 Going back the constitutive law of the linearly elastic, isotropic material given by Eq. \eqref{eq:1}, it is found that
 
 \begin{equation*}
-\stress=d\bulkmod\sphprojiv:\strain+2\shearmod\devprojiv:\strain=\stiffness:\strain,
+\tens\sigma=d\bulkmod\sphprojiv:\strain+2\shearmod\devprojiv:\strain=\stiffness:\strain,
 \end{equation*}
 
 where $\stiffness$ is the fourth-rank stiffness tensor of the material

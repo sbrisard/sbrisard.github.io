@@ -11,9 +11,9 @@ In the [[file:./20111004-Towards_polarization_methods-01.org][previous instalmen
 
 \begin{align}
 \label{eq:1}
-\nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
+\nabla_\vec x\cdot\tens\sigma&=\vec0&&(\vec x\in\domain),\\
 \label{eq:2}
-\stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\domain),\\
+\tens\sigma(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\domain),\\
 \label{eq:3}
 \strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
 \label{eq:4}
