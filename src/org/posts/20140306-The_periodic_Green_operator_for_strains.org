@@ -15,9 +15,9 @@ Let $\stiffness$ be the stiffness of a homogeneous, linearly elastic material oc
 
 \begin{align}
 \label{eq:1}
-\nabla_\vec x\cdot\tens\sigma&=\vec0 & (\vec x\in\reals^d)\\
+\nabla_\vec x\cdot\stress&=\vec0 & (\vec x\in\reals^d)\\
 \label{eq:2}
-\tens\sigma(\vec x)&=\stiffness:\strain(\vec x)+\prestress(\vec x)&(\vec x\in\reals^d)\\
+\stress(\vec x)&=\stiffness:\strain(\vec x)+\prestress(\vec x)&(\vec x\in\reals^d)\\
 \label{eq:3}
 \strain(\vec x)&=\nabla_\vec x^\text s\displ&(\vec x\in\reals^d)\\
 \label{eq:4}
@@ -44,11 +44,11 @@ and
 \hat\displ_b=\frac1{\meas{\domain}}\int_\domain\displ(\vec x)\exp(-i\vec k_b\cdot\vec x)\dV{\vec x},
 \end{equation*}
 
-where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\domain=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\strain$, stress $\tens\sigma$ and prestress $\prestress$ are expanded in Fourier series
+where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\domain=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\strain$, stress $\stress$ and prestress $\prestress$ are expanded in Fourier series
 
 \begin{align*}
 \strain(\vec x)&=\sum_{b\in\integers^d}\hat\strain_b\exp(i\vec k_b\cdot\vec x),\\
-\tens\sigma(\vec x)&=\sum_{b\in\integers^d}\hat\tens\sigma_b\exp(i\vec k_b\cdot\vec x),\\
+\stress(\vec x)&=\sum_{b\in\integers^d}\hat\stress_b\exp(i\vec k_b\cdot\vec x),\\
 \prestress(\vec x)&=\sum_{b\in\integers^d}\hat\prestress_b\exp(i\vec k_b\cdot\vec x).
 \end{align*}
 
@@ -61,13 +61,13 @@ Eq. \eqref{eq:3} then reads
 and, from Eq. \eqref{eq:2} (keeping in mind that $\stiffness$ has minor symmetries)
 
 \begin{align*}
-\hat\tens\sigma_b&=i\left(\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\hat\prestress_b&(b\in\integers^d).
+\hat\stress_b&=i\left(\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\hat\prestress_b&(b\in\integers^d).
 \end{align*}
 
 The equilibrium equation \eqref{eq:1} finally gives
 
 \begin{align*}
-\vec 0&=\vec k_b\cdot\hat\tens\sigma_b=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\vec k_b\cdot\hat\prestress_b&(b\in\integers^d).
+\vec 0&=\vec k_b\cdot\hat\stress_b=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)\cdot\hat\displ_b+\vec k_b\cdot\hat\prestress_b&(b\in\integers^d).
 \end{align*}
 
 The term in brackets $\vec k\cdot\stiffness\cdot\vec k$ is the [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][acoustic tensor]] associated with the elastic material $\stiffness$, and the above equation is readily solved for the Fourier modes of the displacement

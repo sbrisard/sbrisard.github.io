@@ -36,7 +36,7 @@ For any self-equilibrated prestress $\prestress$
 
 Application of the previous result leads to a useful property, which can be found in e.g. [[https://doi.org/10.1007/978-3-7091-2780-3_5][Willis (2001)]], where it is written somewhat abusively (but quite efficiently!) $\greeniv_0\stiffness_0\greeniv_0=\greeniv_0$.
 
-Let $\strain=-\greeniv_0\circledast\prestress$, and $\tens\sigma=\stiffness_0:\strain+\prestress$. By definition of $\greeniv_0$, $\strain$ is geometrically compatible and $\tens\sigma$ is self-equilibrated: $\nabla\cdot\tens\sigma=\tensii 0$. From the previous property, we have $\greeniv_0\circledast\tens\sigma=\tensii0$. In other words
+Let $\strain=-\greeniv_0\circledast\prestress$, and $\stress=\stiffness_0:\strain+\prestress$. By definition of $\greeniv_0$, $\strain$ is geometrically compatible and $\stress$ is self-equilibrated: $\nabla\cdot\stress=\tensii 0$. From the previous property, we have $\greeniv_0\circledast\stress=\tensii0$. In other words
 \begin{equation*}
     \greeniv_0\circledast\left(\stiffness_0:\strain+\prestress\right)=\tensii0
 \end{equation*}
