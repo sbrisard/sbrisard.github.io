@@ -17,33 +17,33 @@ Each pair of constants is of course strictly equivalent to any other. I tend to 
 The constitutive equation of a linearly elastic and isotropic material reads
 \begin{equation}
     \label{eq:1}
-    \sigma_{ij} = \lambda\straincomp_{kk}\delta_{ij} + 2\shearmod\straincomp_{ij}
+    \sigma_{ij} = \lambda\varepsilon_{kk}\delta_{ij} + 2\shearmod\varepsilon_{ij}
 \end{equation}
 
-where $\sigma_{ij}$ (resp. $\straincomp_{ij}$) denotes the stress (resp. strain) tensor, while $\lambda$ (resp. $\shearmod$) is Lamé's first (resp. second) constant; $\shearmod$ is also called the /shear modulus/. Eq. \eqref{eq:1} is inverted so as to express the strain tensor as a function of the stress tensor. Taking $i = j$ and summing over repeated indices, we find
+where $\sigma_{ij}$ (resp. $\varepsilon_{ij}$) denotes the stress (resp. strain) tensor, while $\lambda$ (resp. $\shearmod$) is Lamé's first (resp. second) constant; $\shearmod$ is also called the /shear modulus/. Eq. \eqref{eq:1} is inverted so as to express the strain tensor as a function of the stress tensor. Taking $i = j$ and summing over repeated indices, we find
 \begin{equation*}
-    \sigma_{ii} = (3\lambda + 2\shearmod)\straincomp_{kk},
+    \sigma_{ii} = (3\lambda + 2\shearmod)\varepsilon_{kk},
 \end{equation*}
 
 where it is recalled that $\delta_{ii} = 3$ (the dimension of the physical space). Plugging into Eq. \eqref{eq:1}
 \begin{equation*}
-    \sigma_{ij} = \frac{\lambda}{3\lambda+2\shearmod}\sigma_{kk}\delta_{ij} + 2\shearmod\straincomp_{ij}
+    \sigma_{ij} = \frac{\lambda}{3\lambda+2\shearmod}\sigma_{kk}\delta_{ij} + 2\shearmod\varepsilon_{ij}
 \end{equation*}
 
 and finally
 \begin{equation}
     \label{eq:2}
-    \straincomp_{ij} = \frac{\sigma_{ij}}{2\shearmod} - \frac{\lambda}{2\shearmod(3\lambda+2\shearmod)}\sigma_{kk}\delta_{ij}.
+    \varepsilon_{ij} = \frac{\sigma_{ij}}{2\shearmod} - \frac{\lambda}{2\shearmod(3\lambda+2\shearmod)}\sigma_{kk}\delta_{ij}.
 \end{equation}
 
 * Young's modulus and Poisson ratio
 
 We consider a uniaxial traction experiment, where the stress tensor reduces to $\sigma\vec e_3\otimes\vec e_3$ ($\sigma$ is the imposed uniaxial stress). Substitution in Eq. \eqref{eq:2} leads to the following expression of the longitudinal strain
 \begin{equation*}
-    \straincomp_{33} = \frac{\lambda+\shearmod}{\shearmod(3\lambda+2\shearmod)}\sigma.
+    \varepsilon_{33} = \frac{\lambda+\shearmod}{\shearmod(3\lambda+2\shearmod)}\sigma.
 \end{equation*}
 
-By definition, Young's modulus is the longitudinal stress to longitudinal strain ratio: $E=\sigma/\straincomp_{33}$, so that
+By definition, Young's modulus is the longitudinal stress to longitudinal strain ratio: $E=\sigma/\varepsilon_{33}$, so that
 \begin{equation}
     \label{eq:3}
     E = \frac{\shearmod(3\lambda+2\shearmod)}{\lambda+\shearmod}.
@@ -51,19 +51,19 @@ By definition, Young's modulus is the longitudinal stress to longitudinal strain
 
 The expression of the transverse strains is again derived using Eq. \eqref{eq:2}
 \begin{equation*}
-    \straincomp_{11} = \straincomp_{22} = -\frac{\lambda}{2\shearmod(3\lambda+2\shearmod)}
+    \varepsilon_{11} = \varepsilon_{22} = -\frac{\lambda}{2\shearmod(3\lambda+2\shearmod)}
 \end{equation*}
 
 and by definition, Poisson's ratio is the oposite of the transverse to longitudinal strain ratio
 \begin{equation}
     \label{eq:4}
-    \nu = -\frac{\straincomp_{11}}{\straincomp_{33}} = -\frac{\straincomp_{22}}{\straincomp_{33}} = \frac{\lambda}{2(\lambda+\shearmod)}.
+    \nu = -\frac{\varepsilon_{11}}{\varepsilon_{33}} = -\frac{\varepsilon_{22}}{\varepsilon_{33}} = \frac{\lambda}{2(\lambda+\shearmod)}.
 \end{equation}
 
 Expressions \eqref{eq:3} and \eqref{eq:4} can be substituted in the constitutive equation \eqref{eq:2}, leading to
 \begin{equation}
     \label{eq:5}
-    \straincomp_{ij} = \frac{1+\nu}E\sigma_{ij} - \frac\nu E\sigma_{kk}\delta_{ij}.
+    \varepsilon_{ij} = \frac{1+\nu}E\sigma_{ij} - \frac\nu E\sigma_{kk}\delta_{ij}.
 \end{equation}
 
 * Bulk and shear moduli
@@ -71,12 +71,12 @@ Expressions \eqref{eq:3} and \eqref{eq:4} can be substituted in the constitutive
 We now consider an isotropic compression experiment, where the stress tensor reduces to a hydrostatic pressure $\sigma_{ij}=-p\delta_{ij}$. Using Eq. \eqref{eq:1}, we find that the strain tensor is also isotropic
 \begin{equation}
     \label{eq:6}
-    \straincomp_{ij} = -\frac{p\delta_{ij}}{3\lambda+2\shearmod}.
+    \varepsilon_{ij} = -\frac{p\delta_{ij}}{3\lambda+2\shearmod}.
 \end{equation}
 
-It is recalled that $\straincomp_\text v=\straincomp_{kk} / 3$ denotes the relative volume change of the material. Then, from Eq. \eqref{eq:6}
+It is recalled that $\varepsilon_\text v=\varepsilon_{kk} / 3$ denotes the relative volume change of the material. Then, from Eq. \eqref{eq:6}
 \begin{equation*}
-    \straincomp_\text v = -\frac p{\bulkmod_\text{3D}},
+    \varepsilon_\text v = -\frac p{\bulkmod_\text{3D}},
 \end{equation*}
 
 where $\bulkmod_\text{3D}$ denotes the bulk modulus, defined as follows
@@ -88,7 +88,7 @@ where $\bulkmod_\text{3D}$ denotes the bulk modulus, defined as follows
 As we shall see in the [[file:./20131229-Elastic_constants_of_an_isotropic_material-02.org][next instalment]] of this series, the definition of the bulk modulus /depends on the dimension of the physical space/, hence the '3D' subscript. Using $\bulkmod$ and $\shearmod$ as elastic constants, Eq. \eqref{eq:1} reads
 \begin{equation}
     \label{eq:8}
-    \sigma_{ij} = \bulkmod_\text{3D}\straincomp_{kk}\delta_{ij}+2\shearmod\left(\straincomp_{ij}-\frac{\straincomp_{kk}}3\delta_{ij}\right)
+    \sigma_{ij} = \bulkmod_\text{3D}\varepsilon_{kk}\delta_{ij}+2\shearmod\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}3\delta_{ij}\right)
 \end{equation}
 
 * Shear modulus and Poisson ratio

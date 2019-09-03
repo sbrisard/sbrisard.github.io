@@ -8,7 +8,7 @@ In the previous instalments of this series (see [[file:./20131205-Elastic_consta
 
 \begin{equation}
 \label{eq:1}
-\sigma_{ij}=\bulkmod\straincomp_{kk}\delta_{ij}+2\shearmod\left(\straincomp_{ij}-\frac{\straincomp_{kk}}d\delta_{ij}\right),
+\sigma_{ij}=\bulkmod\varepsilon_{kk}\delta_{ij}+2\shearmod\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}d\delta_{ij}\right),
 \end{equation}
 
 where $d$ is the dimension of the physical space ($d=3$ for 3D elasticity, $d=2$ for plane strain elasticity), $\shearmod$ is the shear modulus, and $\bulkmod$ is the bulk modulus, whose expression depends on $d$
