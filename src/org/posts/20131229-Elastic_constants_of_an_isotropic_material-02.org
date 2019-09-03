@@ -33,18 +33,18 @@ As in the previous instalment, the constitutive laws in isotropic, plane strain 
 We first recall the consitutive law in isotropic, 3D elasticity
 \begin{equation}
     \label{eq:2}
-    \straincomp_{ij}=\frac{1+\nu}E\stresscomp_{ij}-\frac\nu E\stresscomp_{kk}\delta_{ij}.
+    \straincomp_{ij}=\frac{1+\nu}E\sigma_{ij}-\frac\nu E\sigma_{kk}\delta_{ij}.
 \end{equation}
 
-Combination of Eqs. \eqref{eq:1} and \eqref{eq:2} for $(i, j)=(3, 1)$ and $(i, j)=(2, 3)$, first leads to $\stresscomp_{31}=\stresscomp_{23}=0$. Then, for $(i, j) = (3, 3)$, $\stresscomp_{33}=\nu\stresscomp_{\gamma\gamma}$. The 3D trace of $\stress$ can therefore be expressed as a function of its 2D trace
+Combination of Eqs. \eqref{eq:1} and \eqref{eq:2} for $(i, j)=(3, 1)$ and $(i, j)=(2, 3)$, first leads to $\sigma_{31}=\sigma_{23}=0$. Then, for $(i, j) = (3, 3)$, $\sigma_{33}=\nu\sigma_{\gamma\gamma}$. The 3D trace of $\stress$ can therefore be expressed as a function of its 2D trace
 \begin{equation*}
-    \stresscomp_{kk}=\left(1+\nu\right)\stresscomp_{\gamma\gamma}.
+    \sigma_{kk}=\left(1+\nu\right)\sigma_{\gamma\gamma}.
 \end{equation*}
 
 Substituting in Eq. \eqref{eq:2}
 \begin{equation}
     \label{eq:3}
-    \straincomp_{\alpha\beta}=\frac{1+\nu}E\left(\stresscomp_{\alpha\beta}-\nu\stresscomp_{\gamma\gamma}\delta_{\alpha\beta}\right),
+    \straincomp_{\alpha\beta}=\frac{1+\nu}E\left(\sigma_{\alpha\beta}-\nu\sigma_{\gamma\gamma}\delta_{\alpha\beta}\right),
 \end{equation}
 which is the plane strain constitutive low we were looking for.
 
@@ -53,12 +53,12 @@ which is the plane strain constitutive low we were looking for.
 Recalling (see [[file:./20131205-Elastic_constants_of_an_isotropic_material-01.org][previous instalment]]) that $E=2\shearmod\left(1+\nu\right)$, Eq. \eqref{eq:2} can also be cast as follows
 \begin{equation}
     \label{eq:4}
-    \straincomp_{\alpha\beta}=\frac1{2\shearmod}\left(\stresscomp_{\alpha\beta}-\nu\stresscomp_{\gamma\gamma}\delta_{\alpha\beta}\right).
+    \straincomp_{\alpha\beta}=\frac1{2\shearmod}\left(\sigma_{\alpha\beta}-\nu\sigma_{\gamma\gamma}\delta_{\alpha\beta}\right).
 \end{equation}
 
 * Bulk and shear moduli
 
-For (2D) isotropic stresses, $\stresscomp_{\alpha\beta}=-p\delta_{\alpha\beta}$, Eq. \eqref{eq:4} reads
+For (2D) isotropic stresses, $\sigma_{\alpha\beta}=-p\delta_{\alpha\beta}$, Eq. \eqref{eq:4} reads
 \begin{equation*}
     \straincomp_{\alpha\beta}=-\frac{1-2\nu}{2\shearmod}p\delta_{\alpha\beta},
 \end{equation*}
@@ -75,16 +75,16 @@ with
 $\bulkmod_\text{2D}$ thus defined is the 2D (plane strain) bulk modulus of the material. Attention should be paid to the fact that, unlike the shear modulus, the bulk modulus of a material /depends on the dimension of the physical space/. More generally, the (2D) trace of the strain tensor is related to the average stress
 \begin{equation}
     \label{eq:6}
-    \straincomp_{\gamma\gamma}=\frac{1-2\nu}{2\shearmod}\stresscomp_{\gamma\gamma}.
+    \straincomp_{\gamma\gamma}=\frac{1-2\nu}{2\shearmod}\sigma_{\gamma\gamma}.
 \end{equation}
 
 Combining Eqs. \eqref{eq:4} and \eqref{eq:6}
 \begin{equation*}
-    \stresscomp_{\alpha\beta}=2\shearmod\straincomp_{\alpha\beta}+\frac{2\shearmod\nu}{1-2\nu}\straincomp_{\gamma\gamma}\delta_{\alpha\beta}=\frac{\shearmod}{1-2\nu}\straincomp_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\straincomp_{\alpha\beta}-\frac{\straincomp_{\gamma\gamma}}2\delta_{\alpha\beta}\right),
+    \sigma_{\alpha\beta}=2\shearmod\straincomp_{\alpha\beta}+\frac{2\shearmod\nu}{1-2\nu}\straincomp_{\gamma\gamma}\delta_{\alpha\beta}=\frac{\shearmod}{1-2\nu}\straincomp_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\straincomp_{\alpha\beta}-\frac{\straincomp_{\gamma\gamma}}2\delta_{\alpha\beta}\right),
 \end{equation*}
 and the stress-strain relationship finally reads
 \begin{equation*}
-    \stresscomp_{\alpha\beta}=\bulkmod_\text{2D}\straincomp_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\straincomp_{\alpha\beta}-\frac{\straincomp_{\gamma\gamma}}2\delta_{\alpha\beta}\right).
+    \sigma_{\alpha\beta}=\bulkmod_\text{2D}\straincomp_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\straincomp_{\alpha\beta}-\frac{\straincomp_{\gamma\gamma}}2\delta_{\alpha\beta}\right).
 \end{equation*}
 
 * Conclusion
