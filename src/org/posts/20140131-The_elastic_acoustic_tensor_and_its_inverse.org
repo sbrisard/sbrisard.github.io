@@ -25,7 +25,7 @@ where $k$ is the amplitude of the wave-vector $\vec k$, $k=\sqrt{\vec k\cdot\vec
 To compute the elastic acoustic tensor, we therefore need to find the expressions of $\vec n\cdot\sphprojiv\cdot\vec n$ and $\vec n\cdot\devprojiv\cdot\vec n$, for any unit vector $\vec n$. We start with the computation of $\vec n\cdot\identiv\cdot\vec n$, where $\identiv$ denotes the fourth-rank identity tensor. We have
 
 \begin{equation*}
-\left(\vec n\cdot\identiv\cdot\vec n\right)_{jk}=n_i\identivcomp_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta_{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
+\left(\vec n\cdot\identiv\cdot\vec n\right)_{jk}=n_iI_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta_{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
 \end{equation*}
 
 Since $\vec n$ is a unit vector, we have $n_in_i=1$, and
