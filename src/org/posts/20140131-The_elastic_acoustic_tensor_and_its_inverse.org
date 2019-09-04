@@ -8,11 +8,11 @@
 In this post, I will introduce the acoustic tensor of linearly elastic materials. Closed-form expressions of the inverse of this tensor can be derived in the case of /isotropic/ materials. This will later come in handy to derive closed-form expressions of the periodic Green operator for strains.
 #+END_ABSTRACT
 
-We consider a linearly elastic material with stiffness $\stiffness$. For any wave-vector $\vec k$, the elastic acoustic tensor $\acoustic(\vec k)$ is defined as follows
+We consider a linearly elastic material with stiffness $\stiffness$. For any wave-vector $\vec k$, the elastic acoustic tensor $\tens A(\vec k)$ is defined as follows
 
 \begin{equation}
 \label{eq:1}
-\acoustic(\vec k)=\vec k\cdot\stiffness\cdot\vec k=k^2\vec n\cdot\stiffness\cdot\vec n,
+\tens A(\vec k)=\vec k\cdot\stiffness\cdot\vec k=k^2\vec n\cdot\stiffness\cdot\vec n,
 \end{equation}
 
 where $k$ is the amplitude of the wave-vector $\vec k$, $k=\sqrt{\vec k\cdot\vec k}$, and $\vec n$ is its direction ($\vec k=k\vec n$). The acoustic tensor is used to assess material stability (Bigoni and Zaccaria, /European Journal of Mechanics- A/Solids/ *13(5)*, pp. 621–638, 1994) and study the propagation of waves ([[https://doi.org/10.1016/j.ijengsci.2013.07.006][Gentile and Straughan, 2013]]). As far as we are concerned, the derivation of the periodic Green operator for strains will require the expressions of the inverse of the acoustic tensor@@html:<!-- TODO Insert hyperlink -->@@. This is the topic of the present post@@html:<!-- more -->@@, which is restricted to isotropic materials: the stiffness tensor $\stiffness$ of isotropic materials is therefore a linear combination of the [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][isotropic projection tensors]] $\sphprojiv,\devprojiv$
@@ -76,7 +76,7 @@ Finally, combining identity $\devprojiv=\identiv-\sphprojiv$ with Eqs. \eqref{eq
 The acoustic tensor of an elastic, linear, isotropic material is obtained from Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:5} and \eqref{eq:6}
 
 \begin{equation*}
-\acoustic(\vec n)=\left(\bulkmod+2\shearmod\frac{d-1}d\right)\tensii p+\shearmod\tensii q.
+\tens A(\vec n)=\left(\bulkmod+2\shearmod\frac{d-1}d\right)\tensii p+\shearmod\tensii q.
 \end{equation*}
 
 From [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][this post]], it can readily be verified that
@@ -88,11 +88,11 @@ From [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][this p
 this identity being true in both 3D and plane strain elasticity. The acoustic tensor therefore reads
 
 \begin{equation*}
-\acoustic(\vec k)=k^2\shearmod\left(\frac{2\left(1-\nu\right)}{1-2\nu}\tensii p+\tensii q\right).
+\tens A(\vec k)=k^2\shearmod\left(\frac{2\left(1-\nu\right)}{1-2\nu}\tensii p+\tensii q\right).
 \end{equation*}
 
 Finally, using the properties of the projectors $\tensii p$ and $\tensii q$ [see Eq. \eqref{eq:3}], the /inverse/ of the acoustic tensor can be derived
 
 \begin{equation*}
-\acoustic^{-1}(\vec k)=\frac1{k^2\shearmod}\left(\frac{1-2\nu}{2\left(1-\nu\right)}\tensii p+\tensii q\right).
+\tens A^{-1}(\vec k)=\frac1{k^2\shearmod}\left(\frac{1-2\nu}{2\left(1-\nu\right)}\tensii p+\tensii q\right).
 \end{equation*}
