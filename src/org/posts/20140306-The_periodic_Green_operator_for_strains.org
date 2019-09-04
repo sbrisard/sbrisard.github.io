@@ -146,7 +146,7 @@ The components of $\hat\greeniv$ are
 
 \begin{equation}
 \label{eq:8}
-\hat\greenivcomp_{ijkl}=\frac1{4\shearmod}\left(\delta_{ik}n_jn_l+\delta_{il}n_jn_k+\delta_{jk}n_in_l+\delta_{jl}n_in_k\right)-\frac1{2\shearmod\left(1-\nu\right)}n_in_jn_kn_l.
+\hat\gamma_{ijkl}=\frac1{4\shearmod}\left(\delta_{ik}n_jn_l+\delta_{il}n_jn_k+\delta_{jk}n_in_l+\delta_{jl}n_in_k\right)-\frac1{2\shearmod\left(1-\nu\right)}n_in_jn_kn_l.
 \end{equation}
 
 
