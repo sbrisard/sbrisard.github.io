@@ -11,13 +11,13 @@
 The Green operator for strains is defined as the linear operator which maps --in a homogeneous material-- the local prestress to the (opposite of the) local strain. Closed-form expressions of this operator can be derived in the case of periodic boundary conditions, as will be demonstrated in the present post.
 #+END_ABSTRACT
 
-Let $\stiffness$ be the stiffness of a homogeneous, linearly elastic material occupying the whole, $d$-dimensional, space $\reals^d$. This material is submitted to the local, $(L_1,\cdots,L_d)$-periodic prestress $\tens{\varpi}(\vec x)$. The elastic equilibrium of this medium is governed by the following equations over $\reals^d$
+Let $\tens{C}$ be the stiffness of a homogeneous, linearly elastic material occupying the whole, $d$-dimensional, space $\reals^d$. This material is submitted to the local, $(L_1,\cdots,L_d)$-periodic prestress $\tens{\varpi}(\vec x)$. The elastic equilibrium of this medium is governed by the following equations over $\reals^d$
 
 \begin{align}
 \label{eq:1}
 \nabla_\vec x\cdot\stress&=\vec0 & (\vec x\in\reals^d)\\
 \label{eq:2}
-\stress(\vec x)&=\stiffness:\strain(\vec x)+\tens{\varpi}(\vec x)&(\vec x\in\reals^d)\\
+\stress(\vec x)&=\tens{C}:\strain(\vec x)+\tens{\varpi}(\vec x)&(\vec x\in\reals^d)\\
 \label{eq:3}
 \strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&(\vec x\in\reals^d)\\
 \label{eq:4}
@@ -58,52 +58,52 @@ Eq. \eqref{eq:3} then reads
 \hat\strain_b&=\frac i2\left(\vec k_b\otimes\hat\vec{u}_b+\hat\vec{u}_b\otimes\vec k_b\right)&(b\in\integers^d),
 \end{align*}
 
-and, from Eq. \eqref{eq:2} (keeping in mind that $\stiffness$ has minor symmetries)
+and, from Eq. \eqref{eq:2} (keeping in mind that $\tens{C}$ has minor symmetries)
 
 \begin{align*}
-\hat\stress_b&=i\left(\stiffness\cdot\vec k_b\right)\cdot\hat\vec{u}_b+\hat\tens{\varpi}_b&(b\in\integers^d).
+\hat\stress_b&=i\left(\tens{C}\cdot\vec k_b\right)\cdot\hat\vec{u}_b+\hat\tens{\varpi}_b&(b\in\integers^d).
 \end{align*}
 
 The equilibrium equation \eqref{eq:1} finally gives
 
 \begin{align*}
-\vec 0&=\vec k_b\cdot\hat\stress_b=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)\cdot\hat\vec{u}_b+\vec k_b\cdot\hat\tens{\varpi}_b&(b\in\integers^d).
+\vec 0&=\vec k_b\cdot\hat\stress_b=i\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)\cdot\hat\vec{u}_b+\vec k_b\cdot\hat\tens{\varpi}_b&(b\in\integers^d).
 \end{align*}
 
-The term in brackets $\vec k\cdot\stiffness\cdot\vec k$ is the [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][acoustic tensor]] associated with the elastic material $\stiffness$, and the above equation is readily solved for the Fourier modes of the displacement
+The term in brackets $\vec k\cdot\tens{C}\cdot\vec k$ is the [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][acoustic tensor]] associated with the elastic material $\tens{C}$, and the above equation is readily solved for the Fourier modes of the displacement
 
 \begin{align*}
-\hat\vec{u}_b&=i\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\tens{\varpi}_b\right)&(b\in\integers^d).
+\hat\vec{u}_b&=i\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\tens{\varpi}_b\right)&(b\in\integers^d).
 \end{align*}
 
 As a consequence, the Fourier modes of the strain read
 
 \begin{align*}
-\hat\strain_b={}&-\frac12\vec k_b\otimes\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\tens{\varpi}_b\right)\right)\\
-&-\frac12\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\tens{\varpi}_b\right)\right)\otimes\vec k_b&(b\in\integers^d).
+\hat\strain_b={}&-\frac12\vec k_b\otimes\left(\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\tens{\varpi}_b\right)\right)\\
+&-\frac12\left(\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\tens{\varpi}_b\right)\right)\otimes\vec k_b&(b\in\integers^d).
 \end{align*}
 
 The above expression can be simplified; handling both terms separately, it is successively found
 
 \begin{align*}
-\vec k\otimes\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\tens{\varpi}\right)\right)&=\vec k\otimes\left(\vec k\cdot\hat\tens{\varpi}\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)}\right)\\
-&=\left(\vec k\otimes\vec k\right)\cdot\hat\tens{\varpi}\cdot\transpinv{\left(\vec k\cdot\stiffness\cdot\vec k\right)},\\
-\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\tens{\varpi}\right)\right)\otimes\vec k&=\left(\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\tens{\varpi}}\cdot\vec k\right)\otimes\vec k\\
-&=\left(\vec k\cdot\stiffness\cdot\vec k\right)^{-1}\cdot\transp{\hat\tens{\varpi}}\cdot\left(\vec k\otimes\vec k\right),
+\vec k\otimes\left(\left(\vec k\cdot\tens{C}\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\tens{\varpi}\right)\right)&=\vec k\otimes\left(\vec k\cdot\hat\tens{\varpi}\cdot\transpinv{\left(\vec k\cdot\tens{C}\cdot\vec k\right)}\right)\\
+&=\left(\vec k\otimes\vec k\right)\cdot\hat\tens{\varpi}\cdot\transpinv{\left(\vec k\cdot\tens{C}\cdot\vec k\right)},\\
+\left(\left(\vec k\cdot\tens{C}\cdot\vec k\right)^{-1}\cdot\left(\vec k\cdot\hat\tens{\varpi}\right)\right)\otimes\vec k&=\left(\left(\vec k\cdot\tens{C}\cdot\vec k\right)^{-1}\cdot\transp{\hat\tens{\varpi}}\cdot\vec k\right)\otimes\vec k\\
+&=\left(\vec k\cdot\tens{C}\cdot\vec k\right)^{-1}\cdot\transp{\hat\tens{\varpi}}\cdot\left(\vec k\otimes\vec k\right),
 \end{align*}
 
 and
 
 \begin{align*}
-\hat\strain_b={}&-\frac12\left(\vec k_b\otimes\vec k_b\right)\cdot\hat\tens{\varpi}\cdot\transpinv{\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)}\\
-&-\frac12\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\cdot\transp{\hat\tens{\varpi}}\cdot\left(\vec k_b\otimes\vec k_b\right)&(b\in\integers^d).
+\hat\strain_b={}&-\frac12\left(\vec k_b\otimes\vec k_b\right)\cdot\hat\tens{\varpi}\cdot\transpinv{\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)}\\
+&-\frac12\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\cdot\transp{\hat\tens{\varpi}}\cdot\left(\vec k_b\otimes\vec k_b\right)&(b\in\integers^d).
 \end{align*}
 
 Introducing the [[file:./20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][tensor product of linear transformations]] $\boxtimes$, and recalling that the prestress $\tens{\varpi}$ is symmetric, the following compact expression can be found
 
 \begin{align*}
-\hat\strain_b={}&-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\right):\hat\tens{\varpi}_b\\
-&-\frac12\left(\left(\vec k_b\cdot\stiffness\cdot\vec k_b\right)^{-1}\boxtimes\left(\vec k_b\otimes\vec k_b\right)\right):\hat\tens{\varpi}_b&(b\in\integers^d).
+\hat\strain_b={}&-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\right):\hat\tens{\varpi}_b\\
+&-\frac12\left(\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\boxtimes\left(\vec k_b\otimes\vec k_b\right)\right):\hat\tens{\varpi}_b&(b\in\integers^d).
 \end{align*}
 
 In other words, the Fourier modes of the strain are deduced from the Fourier modes of the prestress by application of a fourth-rank tensor, which can be symmetrized with respect to the last two indices (the prestress being symmetric). It is finally found that
@@ -112,11 +112,11 @@ In other words, the Fourier modes of the strain are deduced from the Fourier mod
 \hat\strain_b&=-\hat\tens{\Gamma}(\vec k_b):\hat\tens{\varpi}_b&(b\in\integers^d),
 \end{align*}
 
-where $\hat\tens{\Gamma}$ is the periodic Green operator for strains of the homogeneous material $\stiffness$, defined as follows
+where $\hat\tens{\Gamma}$ is the periodic Green operator for strains of the homogeneous material $\tens{C}$, defined as follows
 
 \begin{equation}
 \label{eq:6}
-\hat\tens{\Gamma}(\vec k)=\frac12\left(\left(\vec n\otimes\vec n\right)\boxtimessym\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}\boxtimessym\left(\vec n\otimes\vec n\right)\right),
+\hat\tens{\Gamma}(\vec k)=\frac12\left(\left(\vec n\otimes\vec n\right)\boxtimessym\left(\vec n\cdot\tens{C}\cdot\vec n\right)^{-1}+\left(\vec n\cdot\tens{C}\cdot\vec n\right)^{-1}\boxtimessym\left(\vec n\otimes\vec n\right)\right),
 \end{equation}
 
 where $\vec n$ is the direction of the wave-vector $\vec k$, $\vec n=\vec k/\lVert\vec k\rVert$ ($\vec n\otimes\vec n$ is the second-rank projector onto $\vec n$).
@@ -126,7 +126,7 @@ where $\vec n$ is the direction of the wave-vector $\vec k$, $\vec n=\vec k/\lVe
 I have shown in a [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][previous post]] that in this case, the inverse of the acoustic tensor reads
 
 \begin{equation*}
-\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}=\frac1\mu\left(\frac{1-2\nu}{2\left(1-\nu\right)}\left(\vec n\otimes\vec n\right)+\tens{\delta}-\left(\vec n\otimes\vec n\right)\right)=\frac1\mu\tens{\delta}-\frac1{2\mu\left(1-\nu\right)}\vec n\otimes\vec n,
+\left(\vec n\cdot\tens{C}\cdot\vec n\right)^{-1}=\frac1\mu\left(\frac{1-2\nu}{2\left(1-\nu\right)}\left(\vec n\otimes\vec n\right)+\tens{\delta}-\left(\vec n\otimes\vec n\right)\right)=\frac1\mu\tens{\delta}-\frac1{2\mu\left(1-\nu\right)}\vec n\otimes\vec n,
 \end{equation*}
 
 which leads to the following expression of the periodic Green operator for strains
@@ -152,7 +152,7 @@ The components of $\hat\tens{\Gamma}$ are
 
 * Summary
 
-In a homogeneous, linearly elastic material with stiffness $\stiffness$, the $(L_1,\cdot,L_d)$--periodic prestress $\tens{\varpi}$ given by
+In a homogeneous, linearly elastic material with stiffness $\tens{C}$, the $(L_1,\cdot,L_d)$--periodic prestress $\tens{\varpi}$ given by
 
 \begin{equation*}
 \tens{\varpi}(\vec x)=\sum_{b\in\integers^d}\hat\tens{\varpi}_b\exp(i\vec k_b\cdot\vec x)

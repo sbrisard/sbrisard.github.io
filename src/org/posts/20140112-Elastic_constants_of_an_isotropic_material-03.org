@@ -82,13 +82,13 @@ from which it results that
 Going back the constitutive law of the linearly elastic, isotropic material given by Eq. \eqref{eq:1}, it is found that
 
 \begin{equation*}
-\stress=d\kappa\tens{J}:\strain+2\mu\tens{K}:\strain=\stiffness:\strain,
+\stress=d\kappa\tens{J}:\strain+2\mu\tens{K}:\strain=\tens{C}:\strain,
 \end{equation*}
 
-where $\stiffness$ is the fourth-rank stiffness tensor of the material
+where $\tens{C}$ is the fourth-rank stiffness tensor of the material
 
 \begin{equation*}
-\stiffness=d\kappa\tens{J}+2\mu\tens{K}.
+\tens{C}=d\kappa\tens{J}+2\mu\tens{K}.
 \end{equation*}
 
 In isotropic elasticity, the stiffness tensor is a linear combination of the two tensors $\tens{J}$ and $\tens{K}$. This is in fact a general result, which is heavily used in materials science: any /isotropic/ fourth-rank tensor with minor and major symmetries is a linear combination of $\tens{J}$ and $\tens{K}$. In other words, $\left(\tens{J}, \tens{K}\right)$ forms a /basis/ of the fourth-rank isotropic tensors with minor and major symmetries. Why this is useful will become obvious in the next section, where I will show that algebra in this basis is dead simple.

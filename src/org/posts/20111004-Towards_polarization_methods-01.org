@@ -6,84 +6,84 @@
 
 In this series, we will enter the heart of the matter. We will look at non-standard ways of numerically solving the local problem of micromechanics, introducing first the Lippmann--Schwinger equation (in this instalment), then the energy principle of Hashin and Shtrikman (in the next instalment).@@html:<!-- more -->@@
 
-We again consider a heterogeneous material, with local stiffness $\stiffness$, located in domain $\Omega\subset\reals^d$. As will be discussed elsewhere, the local problem of micromechanics reads
+We again consider a heterogeneous material, with local stiffness $\tens{C}$, located in domain $\Omega\subset\reals^d$. As will be discussed elsewhere, the local problem of micromechanics reads
 
 \begin{align}
     \label{eq:1}
     \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
     \label{eq:2}
-    \stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\Omega),\\
+    \stress(\vec x)&=\tens{C}(\vec x):\strain(\vec x)&&(\vec x\in\Omega),\\
     \label{eq:3}
     \strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
     \label{eq:4}
     \vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align}
 
-where $\Strain$ is the macroscopic (imposed) strain. The solution to this problem defines the effective elastic properties $\stiffness^\text{eff}$, since, by definition
+where $\Strain$ is the macroscopic (imposed) strain. The solution to this problem defines the effective elastic properties $\tens{C}^\text{eff}$, since, by definition
 
 \begin{equation*}
-\Stress=\volavg{\stress}=\stiffness^\text{eff}:\Strain,
+\Stress=\volavg{\stress}=\tens{C}^\text{eff}:\Strain,
 \end{equation*}
 
 where $\Stress$ is the macroscopic stress.
 
-Eqs. \eqref{eq:1} -- \eqref{eq:4} would be trivial if we had $\stiffness(\vec x)=\stiffness_0$ for any $\vec x\in\Omega$ ($\stiffness_0$ is a /constant/ stiffness tensor). Indeed, the solution would then be
+Eqs. \eqref{eq:1} -- \eqref{eq:4} would be trivial if we had $\tens{C}(\vec x)=\tens{C}_0$ for any $\vec x\in\Omega$ ($\tens{C}_0$ is a /constant/ stiffness tensor). Indeed, the solution would then be
 
 \begin{equation*}
-\strain(\vec x)=\Strain,\qquad\stress(\vec x)=\stiffness_0:\Strain.
+\strain(\vec x)=\Strain,\qquad\stress(\vec x)=\tens{C}_0:\Strain.
 \end{equation*}
 
 In other words, our life would be easier if we were to homogenize materials which are /already/ homogeneous!
 
-So we see that the complexity of Eqs. \eqref{eq:1} -- \eqref{eq:4} comes from the heterogeneity of the material. We would like to /force/ a homogeneous material /into/ this problem. More precisely, we select a so-called /reference/ material, with /arbitrary/ stiffness $\stiffness_0$. Then the local stress-strain relationship \eqref{eq:2} can always be written as follows
+So we see that the complexity of Eqs. \eqref{eq:1} -- \eqref{eq:4} comes from the heterogeneity of the material. We would like to /force/ a homogeneous material /into/ this problem. More precisely, we select a so-called /reference/ material, with /arbitrary/ stiffness $\tens{C}_0$. Then the local stress-strain relationship \eqref{eq:2} can always be written as follows
 
 \begin{equation}
 \label{eq:5}
-\stress(\vec x)=\stiffness(\vec x):\strain(\vec x)=\stiffness_0:\strain(\vec x)+\left[\stiffness(\vec x)-\stiffness_0\right]:\strain(\vec x).
+\stress(\vec x)=\tens{C}(\vec x):\strain(\vec x)=\tens{C}_0:\strain(\vec x)+\left[\tens{C}(\vec x)-\tens{C}_0\right]:\strain(\vec x).
 \end{equation}
 
 Introducing the so-called /polarization/ $\tens{\tau}$
 
 \begin{equation}
 \label{eq:6}
-\tens{\tau}(\vec x)=\left[\stiffness(\vec x)-\stiffness_0\right]:\strain(\vec x),
+\tens{\tau}(\vec x)=\left[\tens{C}(\vec x)-\tens{C}_0\right]:\strain(\vec x),
 \end{equation}
 
 Eq. \eqref{eq:5} then takes the following compact form
 
 \begin{equation}
 \label{eq:7}
-\stress(\vec x)=\stiffness_0:\strain(\vec x)+\tens{\tau}(\vec x).
+\stress(\vec x)=\tens{C}_0:\strain(\vec x)+\tens{\tau}(\vec x).
 \end{equation}
 
 Determination of the polarization $\tens{\tau}$ requires the solution to Eqs. \eqref{eq:1} -- \eqref{eq:4}; therefore, it would seem that Eq. \eqref{eq:7} achieved nothing! However, let us assume for a moment that we /know/ $\tens{\tau}$ beforehand. Then Eqs. (1) -- (4) reduce to
 
 \begin{align*}
 \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
-\stress(\vec x)&=\stiffness_0:\strain(\vec x)+\tens{\tau}(\vec x)&&(\vec x\in\Omega),\\
+\stress(\vec x)&=\tens{C}_0:\strain(\vec x)+\tens{\tau}(\vec x)&&(\vec x\in\Omega),\\
 \strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
 \vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align*}
 
-which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ linear elastic material $\stiffness_0$. From [[file:./20110911-The_Green_operator_for_strains-01.org][this series]], the solution to the above problem is known (at least, formally)
+which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ linear elastic material $\tens{C}_0$. From [[file:./20110911-The_Green_operator_for_strains-01.org][this series]], the solution to the above problem is known (at least, formally)
 
 \begin{equation}
 \label{eq:8}
 \strain(\vec x)=\Strain-(\tens{\Gamma}_0\circledast\tens{\tau})(\vec x),
 \end{equation}
 
-where the Green operator for strains $\tens{\Gamma}_0$ associated with $\stiffness_0$ has been introduced. We now need to remember that the polarization $\tens{\tau}$ is /not/ known. Rather, it is given by Eq. \eqref{eq:6}. Upon introduction into Eq. \eqref{eq:8}, we get the so-called Lippmann--Schwinger equation
+where the Green operator for strains $\tens{\Gamma}_0$ associated with $\tens{C}_0$ has been introduced. We now need to remember that the polarization $\tens{\tau}$ is /not/ known. Rather, it is given by Eq. \eqref{eq:6}. Upon introduction into Eq. \eqref{eq:8}, we get the so-called Lippmann--Schwinger equation
 
 \begin{equation}
 \label{eq:9}
-\strain(\vec x)+\left\{\tens{\Gamma}_0\circledast\left[\left(\stiffness-\stiffness_0\right):\strain\right]\right\}(\vec x)=\Strain.
+\strain(\vec x)+\left\{\tens{\Gamma}_0\circledast\left[\left(\tens{C}-\tens{C}_0\right):\strain\right]\right\}(\vec x)=\Strain.
 \end{equation}
 
 This equation was first introduced by [[https://doi.org/10.1002/pssb.2220550241][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\tens{\tau}$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
 
 \begin{equation}
 \label{eq:10}
-\left[\stiffness(\vec x)-\stiffness_0\right]^{-1}:\tens{\tau}(\vec x)+\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)(\vec x)=\Strain.
+\left[\tens{C}(\vec x)-\tens{C}_0\right]^{-1}:\tens{\tau}(\vec x)+\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)(\vec x)=\Strain.
 \end{equation}
 
 To sum up, we started with the set of partial differential equations \eqref{eq:1} -- \eqref{eq:4}, and ended up with one /single/, /equivalent/, integral equation. Discretization of the Lippmann-Schwinger equation \eqref{eq:9} has already been considered in the past. This leads to some well-known numerical schemes ([[https://doi.org/10.1016/S0045-7825(97)00218-1][Moulinec & Suquet, 1998]]).
