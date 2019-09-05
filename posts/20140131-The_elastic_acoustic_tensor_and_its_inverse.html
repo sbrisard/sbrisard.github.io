@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The elastic acoustic tensor and its inverse</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -131,29 +98,29 @@ In this post, I will introduce the acoustic tensor of linearly elastic materials
 </div>
 
 <p>
-We consider a linearly elastic material with stiffness \(\stiffness\). For any wave-vector \(\vec k\), the elastic acoustic tensor \(\acoustic(\vec k)\) is defined as follows
+We consider a linearly elastic material with stiffness \(\tens{C}\). For any wave-vector \(\vec k\), the elastic acoustic tensor \(\tens A(\vec k)\) is defined as follows
 </p>
 
 \begin{equation}
 \label{eq:1}
-\acoustic(\vec k)=\vec k\cdot\stiffness\cdot\vec k=k^2\vec n\cdot\stiffness\cdot\vec n,
+\tens A(\vec k)=\vec k\cdot\tens{C}\cdot\vec k=k^2\vec n\cdot\tens{C}\cdot\vec n,
 \end{equation}
 
 <p>
-where \(k\) is the amplitude of the wave-vector \(\vec k\), \(k=\sqrt{\vec k\cdot\vec k}\), and \(\vec n\) is its direction (\(\vec k=k\vec n\)). The acoustic tensor is used to assess material stability (Bigoni and Zaccaria, <i>European Journal of Mechanics- A/Solids</i> <b>13(5)</b>, pp. 621–638, 1994) and study the propagation of waves (<a href="https://doi.org/10.1016/j.ijengsci.2013.07.006">Gentile and Straughan, 2013</a>). As far as we are concerned, the derivation of the periodic Green operator for strains will require the expressions of the inverse of the acoustic tensor<!-- TODO Insert hyperlink -->. This is the topic of the present post<!-- more -->, which is restricted to isotropic materials: the stiffness tensor \(\stiffness\) of isotropic materials is therefore a linear combination of the <a href="./20140112-Elastic_constants_of_an_isotropic_material-03.html">isotropic projection tensors</a> \(\sphprojiv,\devprojiv\)
+where \(k\) is the amplitude of the wave-vector \(\vec k\), \(k=\sqrt{\vec k\cdot\vec k}\), and \(\vec n\) is its direction (\(\vec k=k\vec n\)). The acoustic tensor is used to assess material stability (Bigoni and Zaccaria, <i>European Journal of Mechanics- A/Solids</i> <b>13(5)</b>, pp. 621–638, 1994) and study the propagation of waves (<a href="https://doi.org/10.1016/j.ijengsci.2013.07.006">Gentile and Straughan, 2013</a>). As far as we are concerned, the derivation of the periodic Green operator for strains will require the expressions of the inverse of the acoustic tensor<!-- TODO Insert hyperlink -->. This is the topic of the present post<!-- more -->, which is restricted to isotropic materials: the stiffness tensor \(\tens{C}\) of isotropic materials is therefore a linear combination of the <a href="./20140112-Elastic_constants_of_an_isotropic_material-03.html">isotropic projection tensors</a> \(\tens{J},\tens{K}\)
 </p>
 
 \begin{equation}
 \label{eq:2}
-\stiffness=d\bulkmod\sphprojiv+2\shearmod\devprojiv
+\tens{C}=d\kappa\tens{J}+2\mu\tens{K}
 \end{equation}
 
 <p>
-To compute the elastic acoustic tensor, we therefore need to find the expressions of \(\vec n\cdot\sphprojiv\cdot\vec n\) and \(\vec n\cdot\devprojiv\cdot\vec n\), for any unit vector \(\vec n\). We start with the computation of \(\vec n\cdot\identiv\cdot\vec n\), where \(\identiv\) denotes the fourth-rank identity tensor. We have
+To compute the elastic acoustic tensor, we therefore need to find the expressions of \(\vec n\cdot\tens{J}\cdot\vec n\) and \(\vec n\cdot\tens{K}\cdot\vec n\), for any unit vector \(\vec n\). We start with the computation of \(\vec n\cdot\tens{I}\cdot\vec n\), where \(\tens{I}\) denotes the fourth-rank identity tensor. We have
 </p>
 
 \begin{equation*}
-\left(\vec n\cdot\identiv\cdot\vec n\right)_{jk}=n_i\identivcomp_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta_{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
+\left(\vec n\cdot\tens{I}\cdot\vec n\right)_{jk}=n_iI_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta_{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
 \end{equation*}
 
 <p>
@@ -161,15 +128,15 @@ Since \(\vec n\) is a unit vector, we have \(n_in_i=1\), and
 </p>
 
 \begin{equation*}
-\vec n\cdot\identiv\cdot\vec n=\frac12\left(\identii+\vec n\otimes\vec n\right),
+\vec n\cdot\tens{I}\cdot\vec n=\frac12\left(\tens{\delta}+\vec n\otimes\vec n\right),
 \end{equation*}
 
 <p>
-where \(\identii\) denotes the second-rank identity tensor. It will be convenient to introduce the projectors \(\tensii p\) and \(\tensii q\), defined as follows
+where \(\tens{\delta}\) denotes the second-rank identity tensor. It will be convenient to introduce the projectors \(\tens p\) and \(\tens q\), defined as follows
 </p>
 
 \begin{equation*}
-\tensii p=\vec n\otimes\vec n\qquad\tensii q=\identii-\tensii p,
+\tens p=\vec n\otimes\vec n\qquad\tens q=\tens{\delta}-\tens p,
 \end{equation*}
 
 <p>
@@ -185,7 +152,7 @@ It can readily be verified that
 </p>
 \begin{equation}
 \label{eq:3}
-\tensii p\cdot\tensii p=\tensii p,\qquad\tensii q\cdot\tensii q=\tensii q,\qquad\tensii p\cdot\tensii q=\tensii q\cdot\tensii p=\tensii0,
+\tens p\cdot\tens p=\tens p,\qquad\tens q\cdot\tens q=\tens q,\qquad\tens p\cdot\tens q=\tens q\cdot\tens p=\tens0,
 \end{equation}
 
 <p>
@@ -194,7 +161,7 @@ and
 
 \begin{equation}
 \label{eq:4}
-\vec n\cdot\identiv\cdot\vec n=\tensii p+\frac12\tensii q.
+\vec n\cdot\tens{I}\cdot\vec n=\tens p+\frac12\tens q.
 \end{equation}
 
 <p>
@@ -203,16 +170,16 @@ Similarly
 
 \begin{equation}
 \label{eq:5}
-\vec n\cdot\sphprojiv\cdot\vec n=\frac1d\vec n\cdot\left(\identii\otimes\identii\right)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tensii p.
+\vec n\cdot\tens{J}\cdot\vec n=\frac1d\vec n\cdot\left(\tens{\delta}\otimes\tens{\delta}\right)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tens p.
 \end{equation}
 
 <p>
-Finally, combining identity \(\devprojiv=\identiv-\sphprojiv\) with Eqs. \eqref{eq:4} and \eqref{eq:5}
+Finally, combining identity \(\tens{K}=\tens{I}-\tens{J}\) with Eqs. \eqref{eq:4} and \eqref{eq:5}
 </p>
 
 \begin{equation}
 \label{eq:6}
-\vec n\cdot\devprojiv\cdot\vec n=\frac{d-1}d\tensii p+\frac12\tensii q.
+\vec n\cdot\tens{K}\cdot\vec n=\frac{d-1}d\tens p+\frac12\tens q.
 \end{equation}
 
 <p>
@@ -220,7 +187,7 @@ The acoustic tensor of an elastic, linear, isotropic material is obtained from E
 </p>
 
 \begin{equation*}
-\acoustic(\vec n)=\left(\bulkmod+2\shearmod\frac{d-1}d\right)\tensii p+\shearmod\tensii q.
+\tens A(\vec n)=\left(\kappa+2\mu\frac{d-1}d\right)\tens p+\mu\tens q.
 \end{equation*}
 
 <p>
@@ -228,7 +195,7 @@ From <a href="./20140112-Elastic_constants_of_an_isotropic_material-03.html">thi
 </p>
 
 \begin{equation*}
-\bulkmod+2\shearmod\frac{d-1}d=2\shearmod\frac{1-\nu}{1-2\nu},
+\kappa+2\mu\frac{d-1}d=2\mu\frac{1-\nu}{1-2\nu},
 \end{equation*}
 
 <p>
@@ -236,15 +203,15 @@ this identity being true in both 3D and plane strain elasticity. The acoustic te
 </p>
 
 \begin{equation*}
-\acoustic(\vec k)=k^2\shearmod\left(\frac{2\left(1-\nu\right)}{1-2\nu}\tensii p+\tensii q\right).
+\tens A(\vec k)=k^2\mu\left(\frac{2\left(1-\nu\right)}{1-2\nu}\tens p+\tens q\right).
 \end{equation*}
 
 <p>
-Finally, using the properties of the projectors \(\tensii p\) and \(\tensii q\) [see Eq. \eqref{eq:3}], the <i>inverse</i> of the acoustic tensor can be derived
+Finally, using the properties of the projectors \(\tens p\) and \(\tens q\) [see Eq. \eqref{eq:3}], the <i>inverse</i> of the acoustic tensor can be derived
 </p>
 
 \begin{equation*}
-\acoustic^{-1}(\vec k)=\frac1{k^2\shearmod}\left(\frac{1-2\nu}{2\left(1-\nu\right)}\tensii p+\tensii q\right).
+\tens A^{-1}(\vec k)=\frac1{k^2\mu}\left(\frac{1-2\nu}{2\left(1-\nu\right)}\tens p+\tens q\right).
 \end{equation*}
 </div>
 <div id="postamble" class="status">

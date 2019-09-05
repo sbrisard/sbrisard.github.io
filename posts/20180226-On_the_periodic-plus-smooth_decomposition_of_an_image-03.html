@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:10 -->
+<!-- 2019-09-05 Thu 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -213,8 +180,8 @@ The closed-form expression of \(Q_1\) is derived in the <a href="#Q1">first part
 post. Then, operator \(Q\) is derived in the <a href="#Q">second part</a> of this post.
 </p>
 
-<div id="outline-container-org28b03fd" class="outline-2">
-<h2 id="Q1"><a id="org28b03fd"></a>Derivation of the \(Q_1\) operator</h2>
+<div id="outline-container-orgd5b107c" class="outline-2">
+<h2 id="Q1"><a id="orgd5b107c"></a>Derivation of the \(Q_1\) operator</h2>
 <div class="outline-text-2" id="text-Q1">
 <p>
 The contribution to the total energy of the periodic component \(p\) is defined
@@ -295,8 +262,8 @@ Gathering the above results and introducing the symmetric operator
 </div>
 </div>
 
-<div id="outline-container-orgd2fbc3d" class="outline-2">
-<h2 id="Q"><a id="orgd2fbc3d"></a>Derivation of the \(Q\) operator</h2>
+<div id="outline-container-orgfbd96fd" class="outline-2">
+<h2 id="Q"><a id="orgfbd96fd"></a>Derivation of the \(Q\) operator</h2>
 <div class="outline-text-2" id="text-Q">
 <p>
 The contribution to the total energy of the smooth component \(s\) is defined by
@@ -428,9 +395,9 @@ Gathering the above results and introducing the symmetric, positive operator
 </div>
 </div>
 
-<div id="outline-container-orgc4f5a79" class="outline-2">
-<h2 id="orgc4f5a79">Conclusion</h2>
-<div class="outline-text-2" id="text-orgc4f5a79">
+<div id="outline-container-org9878232" class="outline-2">
+<h2 id="org9878232">Conclusion</h2>
+<div class="outline-text-2" id="text-org9878232">
 <p>
 In this post, we have defined two linear operators, namely \(Q_1\) and \(Q\), that
 operate on the space of \(m\times n\) images, and such that

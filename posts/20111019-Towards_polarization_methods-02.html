@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Towards polarization methods, part 2: the variational principle of Hashin and Shtrikman</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -128,36 +95,36 @@ In <a href="./20111004-Towards_polarization_methods-01.html">part 1</a> of this 
 </p>
 
 <p>
-In the <a href="./20111004-Towards_polarization_methods-01.html">previous instalment</a>, I proved that solving the following elasticity problem on \(\domain\)
+In the <a href="./20111004-Towards_polarization_methods-01.html">previous instalment</a>, I proved that solving the following elasticity problem on \(\Omega\)
 </p>
 
 \begin{align}
 \label{eq:1}
-\nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
+\nabla_\vec x\cdot\tens{\sigma}&=\vec0&&(\vec x\in\Omega),\\
 \label{eq:2}
-\stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\domain),\\
+\tens{\sigma}(\vec x)&=\tens{C}(\vec x):\tens{\varepsilon}(\vec x)&&(\vec x\in\Omega),\\
 \label{eq:3}
-\strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
+\tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
 \label{eq:4}
-\displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+\vec{u}(\vec x)&=\overline{\tens{\varepsilon}}\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align}
 
 <p>
-where \(\Strain\) is the macroscopic strain, was equivalent to finding the polarization field \(\polarization\) which solves the Lippmann-Schwinger equation
+where \(\overline{\tens{\varepsilon}}\) is the macroscopic strain, was equivalent to finding the polarization field \(\tens{\tau}\) which solves the Lippmann-Schwinger equation
 </p>
 
 \begin{equation}
 \label{eq:5}
-\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\left(\greeniv_0\circledast\polarization\right)=\Strain.
+\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}+\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)=\overline{\tens{\varepsilon}}.
 \end{equation}
 
 <p>
-In other words, the boundary value problem \eqref{eq:1} &#x2013; \eqref{eq:4} is replaced by a single integral equation \eqref{eq:5}. Classically, both sides of this equation are now multiplied by an arbitrary test field \(\prestress\). After integration over the domain \(\domain\) we find for all test fields \(\prestress\)
+In other words, the boundary value problem \eqref{eq:1} &#x2013; \eqref{eq:4} is replaced by a single integral equation \eqref{eq:5}. Classically, both sides of this equation are now multiplied by an arbitrary test field \(\tens{\varpi}\). After integration over the domain \(\Omega\) we find for all test fields \(\tens{\varpi}\)
 </p>
 
 \begin{equation}
 \label{eq:6}
-\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}+\volavg{\prestress:\left(\greeniv_0\circledast\polarization\right)}=\Strain:\volavg{\prestress}.
+\volavg{\tens{\varpi}:\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}}+\volavg{\tens{\varpi}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)}=\overline{\tens{\varepsilon}}:\volavg{\tens{\varpi}}.
 \end{equation}
 
 <p>
@@ -165,8 +132,8 @@ This is a standard variational problem. Indeed, introducing the bilinear form \(
 </p>
 
 \begin{align*}
-a(\polarization, \prestress)&=\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}+\volavg{\prestress:\left(\greeniv_0\circledast\polarization\right)},\\
-\ell(\prestress)&=\Strain:\volavg{\prestress},
+a(\tens{\tau}, \tens{\varpi})&=\volavg{\tens{\varpi}:\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}}+\volavg{\tens{\varpi}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)},\\
+\ell(\tens{\varpi})&=\overline{\tens{\varepsilon}}:\volavg{\tens{\varpi}},
 \end{align*}
 
 <p>
@@ -175,11 +142,11 @@ Eq. \eqref{eq:6} can be written
 
 \begin{equation}
 \label{eq:7}
-\text{Find }\polarization\,\text{such as }a(\polarization, \prestress)=\ell(\prestress)\,\text{for all }\prestress.
+\text{Find }\tens{\tau}\,\text{such as }a(\tens{\tau}, \tens{\varpi})=\ell(\tens{\varpi})\,\text{for all }\tens{\varpi}.
 \end{equation}
 
 <p>
-It should be noted that in order to be well-posed, the spaces to which \(\polarization\) and \(\prestress\) belong should be specified. This can be done, and is actually the topic of a publication being currently reviewed.
+It should be noted that in order to be well-posed, the spaces to which \(\tens{\tau}\) and \(\tens{\varpi}\) belong should be specified. This can be done, and is actually the topic of a publication being currently reviewed.
 </p>
 
 <p>
@@ -188,19 +155,19 @@ Quite interestingly, it can easily be verified that Eq. \eqref{eq:7} in fact cha
 
 \begin{equation}
 \label{eq:8}
-\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)}.
+\mathcal H(\tens{\tau})=\overline{\tens{\varepsilon}}:\volavg{\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)}.
 \end{equation}
 
 <p>
-Indeed, for \(\prestress\) small enough, we have
+Indeed, for \(\tens{\varpi}\) small enough, we have
 </p>
 
 \begin{equation}
-\mathcal H(\polarization+\prestress)-\mathcal H(\polarization)\simeq\ell(\prestress)-a(\polarization, \prestress),
+\mathcal H(\tens{\tau}+\tens{\varpi})-\mathcal H(\tens{\tau})\simeq\ell(\tens{\varpi})-a(\tens{\tau}, \tens{\varpi}),
 \end{equation}
 
 <p>
-the right-hand side being zero if the polarization field \(\polarization\) is the solution to the Lippmann-Schwinger equation \eqref{eq:5}. Therefore, the first variation of \(\mathcal H\) at \(\polarization\) is null; in other words, \(\polarization\) is a <i>critical point</i> of \(\mathcal H\). This result is usually referred to as the variational principle of <a href="https://doi.org/10.1016/0022-5096(62)90004-2">Hashin and Shtrikman (1962)</a>. It is the fundamental result at the basis of all numerical methods presented in this blog.
+the right-hand side being zero if the polarization field \(\tens{\tau}\) is the solution to the Lippmann-Schwinger equation \eqref{eq:5}. Therefore, the first variation of \(\mathcal H\) at \(\tens{\tau}\) is null; in other words, \(\tens{\tau}\) is a <i>critical point</i> of \(\mathcal H\). This result is usually referred to as the variational principle of <a href="https://doi.org/10.1016/0022-5096(62)90004-2">Hashin and Shtrikman (1962)</a>. It is the fundamental result at the basis of all numerical methods presented in this blog.
 </p>
 
 <p>

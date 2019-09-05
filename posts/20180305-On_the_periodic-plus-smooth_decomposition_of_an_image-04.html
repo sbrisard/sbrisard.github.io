@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:10 -->
+<!-- 2019-09-05 Thu 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -171,8 +138,8 @@ parts:
 The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.
 </p>
 
-<div id="outline-container-org43f1687" class="outline-2">
-<h2 id="operators"><a id="org43f1687"></a>Matrix-free linear operators</h2>
+<div id="outline-container-org1037363" class="outline-2">
+<h2 id="operators"><a id="org1037363"></a>Matrix-free linear operators</h2>
 <div class="outline-text-2" id="text-operators">
 <p>
 The \(Q_1\) and \(Q\) linear operators will be implemented as instances of
@@ -258,8 +225,8 @@ class. This class will be used below to implement the operators \(Q_1\) and \(Q\
 </div>
 </div>
 
-<div id="outline-container-orgffeeeb5" class="outline-2">
-<h2 id="Q1"><a id="orgffeeeb5"></a>Implementation of the \(Q_1\) operator</h2>
+<div id="outline-container-org973e8d3" class="outline-2">
+<h2 id="Q1"><a id="org973e8d3"></a>Implementation of the \(Q_1\) operator</h2>
 <div class="outline-text-2" id="text-Q1">
 <p>
 The \(Q_1\) operator was defined in the <a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html#Q1">previous post</a> as the following sum:
@@ -338,8 +305,8 @@ method simply returns <code>self</code>.
 </div>
 </div>
 
-<div id="outline-container-org749ac5e" class="outline-2">
-<h2 id="Q"><a id="org749ac5e"></a>Implementation of the \(Q\) operator</h2>
+<div id="outline-container-org795d7bd" class="outline-2">
+<h2 id="Q"><a id="org795d7bd"></a>Implementation of the \(Q\) operator</h2>
 <div class="outline-text-2" id="text-Q">
 <p>
 The \(Q\) operator was defined in the <a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html#Q">previous post</a> as the following sum:
@@ -430,8 +397,8 @@ is to be applied. This allows for <i>exact</i> computations on integer images.
 </div>
 </div>
 
-<div id="outline-container-orgf402ec0" class="outline-2">
-<h2 id="testing"><a id="orgf402ec0"></a>Testing the implementation</h2>
+<div id="outline-container-orgd3a2d4c" class="outline-2">
+<h2 id="testing"><a id="orgd3a2d4c"></a>Testing the implementation</h2>
 <div class="outline-text-2" id="text-testing">
 <p>
 For any image \(v\), we should have
@@ -495,9 +462,9 @@ errors, such as rows and columns swapping.</li>
 </div>
 </div>
 
-<div id="outline-container-org3d1530a" class="outline-2">
-<h2 id="org3d1530a">Conclusion</h2>
-<div class="outline-text-2" id="text-org3d1530a">
+<div id="outline-container-org181c330" class="outline-2">
+<h2 id="org181c330">Conclusion</h2>
+<div class="outline-text-2" id="text-org181c330">
 <p>
 In this post, we have implemented the linear operators \(Q_1\) and \(Q\). We are
 now in a position to (at last!) compute the periodic-plus-smooth decomposition

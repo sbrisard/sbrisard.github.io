@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Towards polarization methods, part 3: the energy principle of Hashin and Shtrikman</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -124,11 +91,11 @@ Stress: '\\stensii{\\Sigma}',
 <div id="content">
 <h1 class="title">Towards polarization methods, part 3: the energy principle of Hashin and Shtrikman</h1>
 <p>
-In the <a href="./20111019-Towards_polarization_methods-02.html">second part</a> of this series, I introduced the <i>variational</i> principle of <a href="https://doi.org/10.1016/0022-5096(62)90004-2">Hashin and Shtrikman (1962)</a>. It should be noted that this principle is valid, regardless of the reference material \(\stiffness_0\) (no restriction apply to the elastic moduli of the reference material). In the present instalment, we will see under which circumstances this principle is in fact an <i>energy</i> principle.<!-- more --> By energy principle, I mean that the functional of Hashin and Shtrikman \(\mathcal H\) (see <a href="./20111019-Towards_polarization_methods-02.html">part 2</a>)
+In the <a href="./20111019-Towards_polarization_methods-02.html">second part</a> of this series, I introduced the <i>variational</i> principle of <a href="https://doi.org/10.1016/0022-5096(62)90004-2">Hashin and Shtrikman (1962)</a>. It should be noted that this principle is valid, regardless of the reference material \(\tens{C}_0\) (no restriction apply to the elastic moduli of the reference material). In the present instalment, we will see under which circumstances this principle is in fact an <i>energy</i> principle.<!-- more --> By energy principle, I mean that the functional of Hashin and Shtrikman \(\mathcal H\) (see <a href="./20111019-Towards_polarization_methods-02.html">part 2</a>)
 </p>
 
 \begin{equation*}
-\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)},
+\mathcal H(\tens{\tau})=\overline{\tens{\varepsilon}}:\volavg{\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)},
 \end{equation*}
 
 <p>
@@ -141,41 +108,41 @@ This instalment will in fact be very short, as you will be spared the proof of t
 
 <div class="THEOREM">
 <p>
-Let \(\polarization\) be the unique solution of the Lippmann-Schwinger equation (see <a href="./20111004-Towards_polarization_methods-01.html">part 1</a>)
+Let \(\tens{\tau}\) be the unique solution of the Lippmann-Schwinger equation (see <a href="./20111004-Towards_polarization_methods-01.html">part 1</a>)
 </p>
 
 \begin{equation*}
-\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\greeniv_0\circledast\polarization=\Strain.
+\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}+\tens{\Gamma}_0\circledast\tens{\tau}=\overline{\tens{\varepsilon}}.
 \end{equation*}
 
 <p>
-If the reference material is stiffer (resp. softer) than the heterogeneous material, then \(\mathcal H\) is minimum (resp. maximum) at \(\polarization\). More precisely
+If the reference material is stiffer (resp. softer) than the heterogeneous material, then \(\mathcal H\) is minimum (resp. maximum) at \(\tens{\tau}\). More precisely
 </p>
 <ul class="org-ul">
-<li>if \(\stiffness(\vec x)-\stiffness_0\) is positive, semi-definite at every point \(\vec x\in\domain\), then</li>
+<li>if \(\tens{C}(\vec x)-\tens{C}_0\) is positive, semi-definite at every point \(\vec x\in\Omega\), then</li>
 </ul>
 \begin{equation*}
-\text{for all}\;\prestress(\vec x),\mathcal H(\prestress)\leq\mathcal H(\polarization),
+\text{for all}\;\tens{\varpi}(\vec x),\mathcal H(\tens{\varpi})\leq\mathcal H(\tens{\tau}),
 \end{equation*}
 <ul class="org-ul">
-<li>if \(\stiffness(\vec x)-\stiffness_0\) is negative, semi-definite at every point \(\vec x\in\domain\), then</li>
+<li>if \(\tens{C}(\vec x)-\tens{C}_0\) is negative, semi-definite at every point \(\vec x\in\Omega\), then</li>
 </ul>
 \begin{equation*}
-\text{for all}\;\prestress(\vec x),\mathcal H(\prestress)\geq\mathcal H(\polarization).
+\text{for all}\;\tens{\varpi}(\vec x),\mathcal H(\tens{\varpi})\geq\mathcal H(\tens{\tau}).
 \end{equation*}
 
 </div>
 
 <p>
-Maybe a quick reminder would be useful, here. \(\stiffness - \stiffness_0\) is said to be positive, semi-definite, if \(\prestress:\stiffness:\prestress\geq\prestress:\stiffness_0:\prestress\) for all \(\prestress\). For isotropic heterogeneous (resp. reference) materials with bulk modulus \(\bulkmod\) (resp. \(\bulkmod_0\)) and shear modulus \(\shearmod\) (resp. \(\shearmod_0\)), this is equivalent to
+Maybe a quick reminder would be useful, here. \(\tens{C} - \tens{C}_0\) is said to be positive, semi-definite, if \(\tens{\varpi}:\tens{C}:\tens{\varpi}\geq\tens{\varpi}:\tens{C}_0:\tens{\varpi}\) for all \(\tens{\varpi}\). For isotropic heterogeneous (resp. reference) materials with bulk modulus \(\kappa\) (resp. \(\kappa_0\)) and shear modulus \(\mu\) (resp. \(\mu_0\)), this is equivalent to
 </p>
 
 \begin{equation*}
-\bulkmod\geq\bulkmod_0\quad\text{and}\quad\shearmod\geq\shearmod_0.
+\kappa\geq\kappa_0\quad\text{and}\quad\mu\geq\mu_0.
 \end{equation*}
 
 <p>
-Note that it is not always possible to find a reference material which complies with the requirements of the above theorem. A typical example would be a heterogeneous material conaining both pores [\(\stiffness(\vec x) = \tensiv 0\)] and rigid inclusions [\(\stiffness(\vec x)\rightarrow+\infty\)]. We won't address this issue for the time being.
+Note that it is not always possible to find a reference material which complies with the requirements of the above theorem. A typical example would be a heterogeneous material conaining both pores [\(\tens{C}(\vec x) = \tens 0\)] and rigid inclusions [\(\tens{C}(\vec x)\rightarrow+\infty\)]. We won't address this issue for the time being.
 </p>
 
 <p>

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:10 -->
+<!-- 2019-09-05 Thu 21:05 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scrapy-ing the NIST X-ray Attenuation Databases</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -48,9 +47,9 @@ In this post, I set out to extract this data as a HDF5 table. Of
 course, this looks like a job for <a href="https://scrapy.org/">Scrapy</a>!
 </p>
 
-<div id="outline-container-org06cdaa0" class="outline-2">
-<h2 id="org06cdaa0">First steps with Scrapy</h2>
-<div class="outline-text-2" id="text-org06cdaa0">
+<div id="outline-container-org818d566" class="outline-2">
+<h2 id="org818d566">First steps with Scrapy</h2>
+<div class="outline-text-2" id="text-org818d566">
 <p>
  I am brand new to Scrapy, but found the excellent <a href="https://docs.scrapy.org/en/latest/">tutorial</a> extremely
 useful. If you use Miniconda from <a href="https://www.continuum.io/">Continuum Analytics</a>, then
@@ -68,9 +67,9 @@ which installs Scrapy in a new environment (called <code>scrapy</code>).
 </div>
 </div>
 
-<div id="outline-container-orgfbcdd7d" class="outline-2">
-<h2 id="orgfbcdd7d">Downloading the table for one single element</h2>
-<div class="outline-text-2" id="text-orgfbcdd7d">
+<div id="outline-container-orge77f839" class="outline-2">
+<h2 id="orge77f839">Downloading the table for one single element</h2>
+<div class="outline-text-2" id="text-orge77f839">
 <p>
 In this section, we retrieve the data for the mass attenuation
 coefficient of one single element. We start with the data for
@@ -181,9 +180,9 @@ a float (see function <code>is_float</code> below).
 </div>
 </div>
 
-<div id="outline-container-orgee0afb1" class="outline-2">
-<h2 id="orgee0afb1">Downloading tables for all elements</h2>
-<div class="outline-text-2" id="text-orgee0afb1">
+<div id="outline-container-org5b2f472" class="outline-2">
+<h2 id="org5b2f472">Downloading tables for all elements</h2>
+<div class="outline-text-2" id="text-org5b2f472">
 <p>
 All links follow the same pattern
 <code>http://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/zZZ.html</code>,
@@ -248,9 +247,9 @@ scrapy crawl table3 -o table3.json
 </div>
 </div>
 
-<div id="outline-container-org5d0d1eb" class="outline-2">
-<h2 id="org5d0d1eb">Retrieving the material constants of all elements</h2>
-<div class="outline-text-2" id="text-org5d0d1eb">
+<div id="outline-container-org709450c" class="outline-2">
+<h2 id="org709450c">Retrieving the material constants of all elements</h2>
+<div class="outline-text-2" id="text-org709450c">
 <p>
 We will also need the data from <a href="http://physics.nist.gov/PhysRefData/XrayMassCoef/tab1.html">Table 1</a>. The spider is quite simple.
 </p>
@@ -297,9 +296,9 @@ It returns a <code>dict</code> which maps the element's atomic number Z to a
 </div>
 </div>
 
-<div id="outline-container-org8205d66" class="outline-2">
-<h2 id="org8205d66">Putting it all together in a HDF5 file</h2>
-<div class="outline-text-2" id="text-org8205d66">
+<div id="outline-container-orgce7e2a7" class="outline-2">
+<h2 id="orgce7e2a7">Putting it all together in a HDF5 file</h2>
+<div class="outline-text-2" id="text-orgce7e2a7">
 <p>
 We are now ready to run our two spiders
 </p>
@@ -370,9 +369,9 @@ dataset
 </div>
 </div>
 
-<div id="outline-container-org2d4aca5" class="outline-2">
-<h2 id="org2d4aca5">X-ray mass attenuation coefficients of concrete</h2>
-<div class="outline-text-2" id="text-org2d4aca5">
+<div id="outline-container-org83e745e" class="outline-2">
+<h2 id="org83e745e">X-ray mass attenuation coefficients of concrete</h2>
+<div class="outline-text-2" id="text-org83e745e">
 <p>
 In order to check that everythin went fine, we will use the above
 table to compute the X-ray mass attenuation coefficients of a typical
@@ -591,9 +590,9 @@ cleverly). This validates our Scrapy procedure!
 </div>
 </div>
 
-<div id="outline-container-org3838294" class="outline-2">
-<h2 id="org3838294">Closing words</h2>
-<div class="outline-text-2" id="text-org3838294">
+<div id="outline-container-orgdae5c50" class="outline-2">
+<h2 id="orgdae5c50">Closing words</h2>
+<div class="outline-text-2" id="text-orgdae5c50">
 <p>
 In this blog, we learned how to use <a href="https://scrapy.org/">Scrapy</a> to retrieve some tabulated
 data that is not available as downloaded files. This is probably the

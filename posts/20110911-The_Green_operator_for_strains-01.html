@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:03 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Green operator for strains, part 1: definition</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -128,48 +95,48 @@ Micromechanics aims at computing the macroscopic properties of heterogeneous mat
 </p>
 
 <p>
-We consider a <i>homogeneous</i> material occupying the bounded domain \(\domain\subset\reals^d\) (\(d=2,3\)). \(\stiffness_0\) denotes the elastic moduli of this material. In order to be able to define a Green operator, we need to specify an elementary loading. If we were to define the standard Green operator for displacements, we would consider a <i>point load</i> as elementary load-case. For reasons that will become clearer later, it is more appropriate to consider here a point <i>prestress</i>. Keeping this in mind, we introduce a local prestress \(\prestress\), which can be heterogeneous. This prestress will define the <i>loading</i>. Finally, in order to ensure well-posedness, <i>boundary conditions</i> must be specified; we consider here fixed boundary conditions. The elasticity problem at hand then reads
+We consider a <i>homogeneous</i> material occupying the bounded domain \(\Omega\subset\reals^d\) (\(d=2,3\)). \(\tens{C}_0\) denotes the elastic moduli of this material. In order to be able to define a Green operator, we need to specify an elementary loading. If we were to define the standard Green operator for displacements, we would consider a <i>point load</i> as elementary load-case. For reasons that will become clearer later, it is more appropriate to consider here a point <i>prestress</i>. Keeping this in mind, we introduce a local prestress \(\tens{\varpi}\), which can be heterogeneous. This prestress will define the <i>loading</i>. Finally, in order to ensure well-posedness, <i>boundary conditions</i> must be specified; we consider here fixed boundary conditions. The elasticity problem at hand then reads
 </p>
 
 \begin{align}
     \label{eq:1}
-    \nabla_\vec x\cdot\stress&=\vec{0} && (\vec x\in\domain),\\
+    \nabla_\vec x\cdot\tens{\sigma}&=\vec{0} && (\vec x\in\Omega),\\
     \label{eq:2}
-    \stress(\vec x)&=\stiffness_0:\strain(\vec x)+\prestress(\vec x) && (\vec x\in\domain),\\
+    \tens{\sigma}(\vec x)&=\tens{C}_0:\tens{\varepsilon}(\vec x)+\tens{\varpi}(\vec x) && (\vec x\in\Omega),\\
     \label{eq:3}
-    \strain(\vec x)&=\nabla_\vec x^\text{s}\displ && (\vec x\in\domain),\\
+    \tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text{s}\vec{u} && (\vec x\in\Omega),\\
     \label{eq:4}
-    \displ(\vec x)&=\vec 0 && (\vec x\in\partial\domain).
+    \vec{u}(\vec x)&=\vec 0 && (\vec x\in\partial\Omega).
 \end{align}
 
 <p>
-Eq. \eqref{eq:1} expresses static equilibrium (\(\stress\): local stress tensor); Eq. \eqref{eq:2} is the constitutive law of the homogeneous, prestressed material (\(\strain\): local strain tensor). Eq. \eqref{eq:3} expresses the fact that \(\strain\) is <i>geometrically compatible</i>: it is the symmetric part of the gradient of the displacement \(\displ\). Finally, Eq. \eqref{eq:4} specifies the boundary conditions.
+Eq. \eqref{eq:1} expresses static equilibrium (\(\tens{\sigma}\): local stress tensor); Eq. \eqref{eq:2} is the constitutive law of the homogeneous, prestressed material (\(\tens{\varepsilon}\): local strain tensor). Eq. \eqref{eq:3} expresses the fact that \(\tens{\varepsilon}\) is <i>geometrically compatible</i>: it is the symmetric part of the gradient of the displacement \(\vec{u}\). Finally, Eq. \eqref{eq:4} specifies the boundary conditions.
 </p>
 
 <p>
-So, this is the problem we would like to solve. From the mathematical theory of elasticity, we <i>know</i> that it has a <i>unique</i> solution \(\displ\). Again, displacements are not that interesting from the perspective of micromechanics; what we really want to determine is the local strain \(\strain\). In order to express the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} in a convenient form, it is essential to note that it is linear. The superposition theorem will therefore be invoked. As a first step, we assume that the prestress \(\prestress\) has the simple following form
+So, this is the problem we would like to solve. From the mathematical theory of elasticity, we <i>know</i> that it has a <i>unique</i> solution \(\vec{u}\). Again, displacements are not that interesting from the perspective of micromechanics; what we really want to determine is the local strain \(\tens{\varepsilon}\). In order to express the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} in a convenient form, it is essential to note that it is linear. The superposition theorem will therefore be invoked. As a first step, we assume that the prestress \(\tens{\varpi}\) has the simple following form
 </p>
 
 \begin{equation}
 \label{eq:5}
-\prestress(\vec x) = \delta(\vec x-\vec y)\Prestress,
+\tens{\varpi}(\vec x) = \delta(\vec x-\vec y)\tens{\Pi},
 \end{equation}
 
 <p>
-where \(\vec y\in\domain\) is a fixed point, \(\delta\) is the Dirac function, and \(\Prestress\) is a constant tensor. Because of linearity of Eqs. \eqref{eq:1} – \eqref{eq:4}, the strain \(\strain(\vec x)\) at point \(\vec x\in\domain\) depends linearly on the only loading parameter, \(\Prestress\). By definition, the linear operator mapping \(\Prestress\) onto \(\strain(\vec x)\) will be called the <i>Green operator for strains</i>, and denoted \(\greeniv_0\). Of course, this operator depends on the <i>observation</i> point \(\vec x\); it also depends on the <i>source</i> point \(\vec y\) [where the point prestress \eqref{eq:5} is actually applied]. In other words
+where \(\vec y\in\Omega\) is a fixed point, \(\delta\) is the Dirac function, and \(\tens{\Pi}\) is a constant tensor. Because of linearity of Eqs. \eqref{eq:1} – \eqref{eq:4}, the strain \(\tens{\varepsilon}(\vec x)\) at point \(\vec x\in\Omega\) depends linearly on the only loading parameter, \(\tens{\Pi}\). By definition, the linear operator mapping \(\tens{\Pi}\) onto \(\tens{\varepsilon}(\vec x)\) will be called the <i>Green operator for strains</i>, and denoted \(\tens{\Gamma}_0\). Of course, this operator depends on the <i>observation</i> point \(\vec x\); it also depends on the <i>source</i> point \(\vec y\) [where the point prestress \eqref{eq:5} is actually applied]. In other words
 </p>
 
 \begin{equation}
 \label{eq:6}
-\strain(\vec x)=-\greeniv_0(\vec x, \vec y):\Prestress,
+\tens{\varepsilon}(\vec x)=-\tens{\Gamma}_0(\vec x, \vec y):\tens{\Pi},
 \end{equation}
 
 <p>
-where it should be noted that there is a minus '\(-\)' sign in the above equation. This definition (including the '\(-\)') is actually more convenient. In the more general case, the now arbitrary local prestress \(\prestress\) can always be seen as the superposition of elementary loadcases of type \eqref{eq:5}, since
+where it should be noted that there is a minus '\(-\)' sign in the above equation. This definition (including the '\(-\)') is actually more convenient. In the more general case, the now arbitrary local prestress \(\tens{\varpi}\) can always be seen as the superposition of elementary loadcases of type \eqref{eq:5}, since
 </p>
 
 \begin{equation*}
-\prestress(\vec x)=\int_{\vec y\in\domain}\delta(\vec x-\vec y)\prestress(\vec y)\dV{\vec y}.
+\tens{\varpi}(\vec x)=\int_{\vec y\in\Omega}\delta(\vec x-\vec y)\tens{\varpi}(\vec y)\dV{\vec y}.
 \end{equation*}
 
 <p>
@@ -177,7 +144,7 @@ Application of the superposition theorem allows us to recover the general expres
 </p>
 
 \begin{equation*}
-\strain(\vec x) = -\int_{\vec y\in\domain}\greeniv_0(\vec x, \vec y):\prestress(\vec y)\dV{\vec y}.
+\tens{\varepsilon}(\vec x) = -\int_{\vec y\in\Omega}\tens{\Gamma}_0(\vec x, \vec y):\tens{\varpi}(\vec y)\dV{\vec y}.
 \end{equation*}
 
 <p>
@@ -185,7 +152,7 @@ The integral in the right-hand side is a kind of modified convolution product, w
 </p>
 
 \begin{equation*}
-\left(\greeniv_0\circledast\prestress\right)(\vec x) = \int_{\vec y\in\domain}\greeniv_0(\vec x, \vec y):\prestress(\vec y)\dV{\vec y},
+\left(\tens{\Gamma}_0\circledast\tens{\varpi}\right)(\vec x) = \int_{\vec y\in\Omega}\tens{\Gamma}_0(\vec x, \vec y):\tens{\varpi}(\vec y)\dV{\vec y},
 \end{equation*}
 
 <p>
@@ -193,7 +160,7 @@ and the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} reads
 </p>
 
 \begin{equation*}
-\strain(\vec x) = -\left(\greeniv_0\circledast\prestress\right)(\vec x).
+\tens{\varepsilon}(\vec x) = -\left(\tens{\Gamma}_0\circledast\tens{\varpi}\right)(\vec x).
 \end{equation*}
 
 <p>
@@ -202,16 +169,16 @@ To close this post, let us consider more general boundary conditions. Instead of
 
 \begin{align}
 \label{eq:7}
-\displ(\vec x)&=\Strain\cdot\vec x && (\vec x\in\partial\domain),
+\vec{u}(\vec x)&=\overline{\tens{\varepsilon}}\cdot\vec x && (\vec x\in\partial\Omega),
 \end{align}
 
 <p>
-where \(\Strain\) is the imposed macroscopic strain (more on this in posts to come). Quite obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:3} and \eqref{eq:7} reads
+where \(\overline{\tens{\varepsilon}}\) is the imposed macroscopic strain (more on this in posts to come). Quite obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:3} and \eqref{eq:7} reads
 </p>
 
 \begin{equation}
 \label{eq:8}
-\strain(\vec x) = \Strain-\left(\greeniv_0\circledast\prestress\right)(\vec x).
+\tens{\varepsilon}(\vec x) = \overline{\tens{\varepsilon}}-\left(\tens{\Gamma}_0\circledast\tens{\varpi}\right)(\vec x).
 \end{equation}
 
 <p>

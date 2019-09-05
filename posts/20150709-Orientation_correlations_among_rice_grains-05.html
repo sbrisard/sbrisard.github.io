@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orientation correlations among rice grains, part 5: thresholding</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -124,11 +91,11 @@ Stress: '\\stensii{\\Sigma}',
 <div id="content">
 <h1 class="title">Orientation correlations among rice grains, part 5: thresholding</h1>
 <p>
-In the <a href="./20150529-Orientation_correlations_among_rice_grains-04.html">previous instalment</a> of this series, we used the circle Hough transform to find the boundary of the sample and define the circular ROI. Within this ROI, we now need to segment the rice grains. In other words, starting from a gray-level image (Fig. <a href="#org25717bf">1</a>, left), we want to produce a binary image, where all pixels that we believe belong to rice grains are white, and all background pixels are black (Fig. <a href="#org25717bf">1</a>, right). This is the topic of the present post, where we will use Otsu's automated threshold selection. I will first discuss Otsu's method, and propose what I believe is a new interpretation of this rather old technique. Then, I will apply this method to the 3D image of rice grains, using <a href="http://scikit-image.org/">scikit-image</a>.
+In the <a href="./20150529-Orientation_correlations_among_rice_grains-04.html">previous instalment</a> of this series, we used the circle Hough transform to find the boundary of the sample and define the circular ROI. Within this ROI, we now need to segment the rice grains. In other words, starting from a gray-level image (Fig. <a href="#org51b2f67">1</a>, left), we want to produce a binary image, where all pixels that we believe belong to rice grains are white, and all background pixels are black (Fig. <a href="#org51b2f67">1</a>, right). This is the topic of the present post, where we will use Otsu's automated threshold selection. I will first discuss Otsu's method, and propose what I believe is a new interpretation of this rather old technique. Then, I will apply this method to the 3D image of rice grains, using <a href="http://scikit-image.org/">scikit-image</a>.
 </p>
 
 
-<div id="org25717bf" class="figure">
+<div id="org51b2f67" class="figure">
 <p><img src="./20150709-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-initial_vs_thresholded-099.png" alt="rice-bin_4x4x4-initial_vs_thresholded-099.png" width="90%">
 </p>
 <p><span class="figure-number">Figure 1: </span>The original (left) and thresholded (right) images.</p>
@@ -138,25 +105,25 @@ In the <a href="./20150529-Orientation_correlations_among_rice_grains-04.html">p
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4d27238">Plotting the image's histogram</a></li>
-<li><a href="#org3e70cec">Otsu's method</a></li>
-<li><a href="#org833e545">Thresholding the whole stack of images</a></li>
-<li><a href="#org5cee23a">Closing words</a></li>
-<li><a href="#orgfc372e7">Appendix</a>
+<li><a href="#org4e52186">Plotting the image's histogram</a></li>
+<li><a href="#org2d13b6e">Otsu's method</a></li>
+<li><a href="#org0cfcdc9">Thresholding the whole stack of images</a></li>
+<li><a href="#orga845db7">Closing words</a></li>
+<li><a href="#org7fed0af">Appendix</a>
 <ul>
-<li><a href="#org07341ca">Proof of assertion \eqref{eq:2} </a></li>
-<li><a href="#org8829eed">Proof of assertion \eqref{eq:8} </a></li>
+<li><a href="#org73cef7d">Proof of assertion \eqref{eq:2} </a></li>
+<li><a href="#org88af5db">Proof of assertion \eqref{eq:8} </a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4d27238" class="outline-2">
-<h2 id="org4d27238">Plotting the image's histogram</h2>
-<div class="outline-text-2" id="text-org4d27238">
+<div id="outline-container-org4e52186" class="outline-2">
+<h2 id="org4e52186">Plotting the image's histogram</h2>
+<div class="outline-text-2" id="text-org4e52186">
 <p>
-Before we dig into Otsu's method, we will first draw the histogram of the original image shown in Fig. <a href="#org25717bf">1</a> (left), remembering that the boundary was found in the <a href="./20150529-Orientation_correlations_among_rice_grains-04.html">previous instalment</a> to be a circle centered at <code>(219, 217)</code>, with radius <code>208</code>. The following Python code computes and saves the histogram as a SVG file, which is displayed in Fig. <a href="#orgbd90ff0">2</a>.
+Before we dig into Otsu's method, we will first draw the histogram of the original image shown in Fig. <a href="#org51b2f67">1</a> (left), remembering that the boundary was found in the <a href="./20150529-Orientation_correlations_among_rice_grains-04.html">previous instalment</a> to be a circle centered at <code>(219, 217)</code>, with radius <code>208</code>. The following Python code computes and saves the histogram as a SVG file, which is displayed in Fig. <a href="#org92f3a7b">2</a>.
 </p>
 
 <div class="org-src-container">
@@ -192,11 +159,11 @@ plt.savefig(os.path.join(root, <span class="org-string">'rice-bin_4x4x4-hist-099
 </div>
 
 
-<div id="orgbd90ff0" class="figure">
+<div id="org92f3a7b" class="figure">
 <p><object type="image/svg+xml" data="./20150709-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-hist-099.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
-<p><span class="figure-number">Figure 2: </span>Histogram of the original image shown in Fig. <a href="#org25717bf">1</a> (left).</p>
+<p><span class="figure-number">Figure 2: </span>Histogram of the original image shown in Fig. <a href="#org51b2f67">1</a> (left).</p>
 </div>
 
 <p>
@@ -205,9 +172,9 @@ It is observed that this histogram is relatively well suited to thresholding. In
 </div>
 </div>
 
-<div id="outline-container-org3e70cec" class="outline-2">
-<h2 id="org3e70cec">Otsu's method</h2>
-<div class="outline-text-2" id="text-org3e70cec">
+<div id="outline-container-org2d13b6e" class="outline-2">
+<h2 id="org2d13b6e">Otsu's method</h2>
+<div class="outline-text-2" id="text-org2d13b6e">
 <p>
 Otsu's method (<a href="https://doi.org/10.1109/TSMC.1979.4310076">Otsu, 1979</a>) is a popular thresholding technique. It is quite effective on simple images, when the histogram has two well separated peaks. Otsu's optimum threshold is often presented as (quoted from <a href="https://en.wikipedia.org/wiki/Otsu's_method">Wikipedia</a>)
 </p>
@@ -231,14 +198,14 @@ We want to find the "best" binary approximation of \(f\), in the sense of Proble
 </p>
 
 <dl class="org-dl">
-<dt><a id="orga8551c9"></a>Problem 1</dt><dd>Find two gray levels \(g_0\) and \(g_1\), and the map \(g\colon E\to\{g_0, g_1\}\) that minimizes the distance</dd>
+<dt><a id="orge67944e"></a>Problem 1</dt><dd>Find two gray levels \(g_0\) and \(g_1\), and the map \(g\colon E\to\{g_0, g_1\}\) that minimizes the distance</dd>
 </dl>
 \begin{equation}
 d(f, g)^2=\label{eq:1}\sum_{x\in E}\left[f(x)-g(x)\right]^{2}.
 \end{equation}
 
 <p>
-At this point, it should be noted that the above choice of distance will result in \(g\) being the maximum likelihood estimator of \(f\) in the presence of Gaussian noise (a common assumption in image analysis &#x2013; even if noise rather follows a Poisson distribution on real detectors). It can readily be verified that <a href="#orga8551c9">Problem 1</a> in fact reduces to Otsu's method! To prove this assertion, we need to rewrite this problem. Let \(g\) denote its solution. Then, for all \(x, y\in E\)
+At this point, it should be noted that the above choice of distance will result in \(g\) being the maximum likelihood estimator of \(f\) in the presence of Gaussian noise (a common assumption in image analysis &#x2013; even if noise rather follows a Poisson distribution on real detectors). It can readily be verified that <a href="#orge67944e">Problem 1</a> in fact reduces to Otsu's method! To prove this assertion, we need to rewrite this problem. Let \(g\) denote its solution. Then, for all \(x, y\in E\)
 </p>
 
 \begin{align}
@@ -247,7 +214,7 @@ At this point, it should be noted that the above choice of distance will result 
 \end{align}
 
 <p>
-The proof of the above assertions can be found in the appendices [see <a href="#org3b1b7c0">proof</a> of assertion \eqref{eq:2} and <a href="#org92baa93">proof</a> of assertion \eqref{eq:8}]. Assertion \eqref{eq:2} proves that \(g(x)\) depends on the gray value of \(x\) in image \(f\), not on the pixel \(x\) itself. Therefore, <a href="#orga8551c9">Problem 1</a> leads to a histogram based segmentation method. Assuming \(g_0 < g_1\), we then define \(k\) as follows
+The proof of the above assertions can be found in the appendices [see <a href="#orgb1c6e9e">proof</a> of assertion \eqref{eq:2} and <a href="#orgf147d78">proof</a> of assertion \eqref{eq:8}]. Assertion \eqref{eq:2} proves that \(g(x)\) depends on the gray value of \(x\) in image \(f\), not on the pixel \(x\) itself. Therefore, <a href="#orge67944e">Problem 1</a> leads to a histogram based segmentation method. Assuming \(g_0 < g_1\), we then define \(k\) as follows
 </p>
 
 \begin{equation}
@@ -283,11 +250,11 @@ g_1 & \text{if }f(x) > k,
 \end{equation}
 
 <p>
-and \(k\) appears as a threshold. Therefore, <a href="#orga8551c9">Problem 1</a> effectively reduces to a thresholding problem, and an equivalent formulation is given below.
+and \(k\) appears as a threshold. Therefore, <a href="#orge67944e">Problem 1</a> effectively reduces to a thresholding problem, and an equivalent formulation is given below.
 </p>
 
 <dl class="org-dl">
-<dt><a id="org3c5f75f"></a>Problem 2</dt><dd>Find the threshold \(k\) and two gray levels \(g_0\) and \(g_1\) that minimize</dd>
+<dt><a id="org827d829"></a>Problem 2</dt><dd>Find the threshold \(k\) and two gray levels \(g_0\) and \(g_1\) that minimize</dd>
 </dl>
 \begin{equation}
 \label{eq:13}J_3(k, g_0, g_1)=\sum_{\alpha=0,1}\sum_{x\in C_\alpha(k)}\left[f(x)-g_\alpha)\right]^{2},
@@ -301,7 +268,7 @@ where
 \end{align}
 
 <p>
-The solution to <a href="#orga8551c9">Problem 1</a> is retrieved from the solution to <a href="#org3c5f75f">Problem 2</a> by means of Eq. \eqref{eq:14}. It should be noted that optimization of \(J_3\) with respect to \(g_0\) and \(g_1\) is trivial, and we find that \(g_\alpha=\mu_\alpha(k)\), where \(\mu_\alpha(k)\) is the average gray level in class \(C_\alpha(k)\)
+The solution to <a href="#orge67944e">Problem 1</a> is retrieved from the solution to <a href="#org827d829">Problem 2</a> by means of Eq. \eqref{eq:14}. It should be noted that optimization of \(J_3\) with respect to \(g_0\) and \(g_1\) is trivial, and we find that \(g_\alpha=\mu_\alpha(k)\), where \(\mu_\alpha(k)\) is the average gray level in class \(C_\alpha(k)\)
 </p>
 
 \begin{equation}
@@ -313,7 +280,7 @@ where \(N_\alpha(k)\) is the number of pixels in class \(C_\alpha(k)\). We are t
 </p>
 
 <dl class="org-dl">
-<dt><a id="org357726b"></a>Problem 3</dt><dd>Find \(k\) that minimizes</dd>
+<dt><a id="org3c5a155"></a>Problem 3</dt><dd>Find \(k\) that minimizes</dd>
 </dl>
 \begin{equation}
 \label{eq:21}J(k)=\sum_{\alpha=0,1}\sum_{x\in C_\alpha(k)}\left[f(x)-\mu_\alpha(k)\right]^{2}.
@@ -362,7 +329,7 @@ In the above expression, the sum over all pixels of the image is constant. There
 \end{equation}
 
 <p>
-This is exactly how Otsu's threshold is defined! [see <a href="https://doi.org/10.1109/TSMC.1979.4310076">Otsu, 1979</a>, Eq. (14)] To sum up, we started with <a href="#orga8551c9">Problem 1</a>: find the best binary approximation of a specified image. We showed that the best binary approximation was to be found amongst the class of thresholded images (see Problems <a href="#org3c5f75f">2</a> and <a href="#org357726b">3</a>). Then, the optimum threshold was found to coincide with Otsu's. In that sense, Otsu's method is equivalent to <a href="#orga8551c9">Problem 1</a>.
+This is exactly how Otsu's threshold is defined! [see <a href="https://doi.org/10.1109/TSMC.1979.4310076">Otsu, 1979</a>, Eq. (14)] To sum up, we started with <a href="#orge67944e">Problem 1</a>: find the best binary approximation of a specified image. We showed that the best binary approximation was to be found amongst the class of thresholded images (see Problems <a href="#org827d829">2</a> and <a href="#org3c5a155">3</a>). Then, the optimum threshold was found to coincide with Otsu's. In that sense, Otsu's method is equivalent to <a href="#orge67944e">Problem 1</a>.
 </p>
 
 <p>
@@ -371,9 +338,9 @@ It is interesting to realize that there is a connection between Otsu's method an
 </div>
 </div>
 
-<div id="outline-container-org833e545" class="outline-2">
-<h2 id="org833e545">Thresholding the whole stack of images</h2>
-<div class="outline-text-2" id="text-org833e545">
+<div id="outline-container-org0cfcdc9" class="outline-2">
+<h2 id="org0cfcdc9">Thresholding the whole stack of images</h2>
+<div class="outline-text-2" id="text-org0cfcdc9">
 <p>
 In the present section, we will first compute the threshold based on the histogram of the whole stack. <a href="http://scikit-image.org/">skimage</a> does implement <a href="http://scikit-image.org/docs/dev/api/skimage.filters.html#threshold-otsu"><code>threshold_otsu</code></a>, and we will make use of this function. Attention must be paid to the fact that for each slice, the analysis must be restricted to a circular ROI.
 </p>
@@ -466,14 +433,14 @@ Finally, the images are thresholded and saved
 </div>
 
 <p>
-The above script produces a series of binary images called <code>rice-bin_4x4x4-otsu_XXX-YYY.tif</code>, where <code>XXX</code> denotes the threshold, and <code>YYY</code> is the slice number. An example of such thresholded image is given in Fig. <a href="#org25717bf">1</a> (right).
+The above script produces a series of binary images called <code>rice-bin_4x4x4-otsu_XXX-YYY.tif</code>, where <code>XXX</code> denotes the threshold, and <code>YYY</code> is the slice number. An example of such thresholded image is given in Fig. <a href="#org51b2f67">1</a> (right).
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5cee23a" class="outline-2">
-<h2 id="org5cee23a">Closing words</h2>
-<div class="outline-text-2" id="text-org5cee23a">
+<div id="outline-container-orga845db7" class="outline-2">
+<h2 id="orga845db7">Closing words</h2>
+<div class="outline-text-2" id="text-orga845db7">
 <p>
 In this post, we have used Otsu's method to threshold the 3D image of the rice grains. This is only the first step towards segmentation of this image, though, as we would like to label all rice grains. This will be the topic of the <a href="./20150930-Orientation_correlations_among_rice_grains-06.html">next post</a>.
 </p>
@@ -484,13 +451,13 @@ In the present post, I also presented an alternative derivation of Otsu's method
 </div>
 </div>
 
-<div id="outline-container-orgfc372e7" class="outline-2">
-<h2 id="orgfc372e7">Appendix</h2>
-<div class="outline-text-2" id="text-orgfc372e7">
+<div id="outline-container-org7fed0af" class="outline-2">
+<h2 id="org7fed0af">Appendix</h2>
+<div class="outline-text-2" id="text-org7fed0af">
 </div>
-<div id="outline-container-org07341ca" class="outline-3">
-<h3 id="org07341ca">Proof of assertion \eqref{eq:2} <a id="org3b1b7c0"></a></h3>
-<div class="outline-text-3" id="text-org07341ca">
+<div id="outline-container-org73cef7d" class="outline-3">
+<h3 id="org73cef7d">Proof of assertion \eqref{eq:2} <a id="orgb1c6e9e"></a></h3>
+<div class="outline-text-3" id="text-org73cef7d">
 <p>
 This assertion is proved by contradiction. Let us assume that there exists two pixels \(x\) and \(y\) (\(x\neq y\)) with same value in the original image [\(f(x)=f(y)\)] and different values in the binary approximation [\(g(x)\neq g(y)\)]. We select \(g_2\in\{g(x),g(y)\}=\{g_0, g_1\}\) so that
 </p>
@@ -534,9 +501,9 @@ From Eq. \eqref{eq:4}, we then find \(d(f,\tilde g)^2 < d(f,g)^2\), which leads 
 </div>
 </div>
 
-<div id="outline-container-org8829eed" class="outline-3">
-<h3 id="org8829eed">Proof of assertion \eqref{eq:8} <a id="org92baa93"></a></h3>
-<div class="outline-text-3" id="text-org8829eed">
+<div id="outline-container-org88af5db" class="outline-3">
+<h3 id="org88af5db">Proof of assertion \eqref{eq:8} <a id="orgf147d78"></a></h3>
+<div class="outline-text-3" id="text-org88af5db">
 <p>
 This assertion is again proved by contradiction. Let us assume that there exists \(x, y\in E\) such that \(f(x) < f(y)\) and \(g(x) > g(y)\). Then, simple algebra shows that
 </p>

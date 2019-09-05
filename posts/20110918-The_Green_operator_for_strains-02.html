@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:05 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Green operator for strains, part 2: elementary properties</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -124,102 +91,102 @@ Stress: '\\stensii{\\Sigma}',
 <div id="content">
 <h1 class="title">The Green operator for strains, part 2: elementary properties</h1>
 <p>
-In <a href="./20110911-The_Green_operator_for_strains-01.html">part 1</a> of this series, we have seen how the Green operator for strains (\(\greeniv_0\)) was defined as the operator providing the solution to the problem of elastic equilibrium of a <i>prestressed</i> homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.<!-- more --> We again consider the bounded domain \(\domain\subset\reals^d\), occupied by a homogeneous, linearly elastic material with stiffness \(\stiffness_0\). \(\greeniv_0\) denotes the Green operator for strains for the material \(\stiffness_0\), over the domain \(\domain\). The first property is a direct consequence of the definition of \(\greeniv_0\), given in <a href="./20110911-The_Green_operator_for_strains-01.html">part 1</a>.
+In <a href="./20110911-The_Green_operator_for_strains-01.html">part 1</a> of this series, we have seen how the Green operator for strains (\(\tens{\Gamma}_0\)) was defined as the operator providing the solution to the problem of elastic equilibrium of a <i>prestressed</i> homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.<!-- more --> We again consider the bounded domain \(\Omega\subset\reals^d\), occupied by a homogeneous, linearly elastic material with stiffness \(\tens{C}_0\). \(\tens{\Gamma}_0\) denotes the Green operator for strains for the material \(\tens{C}_0\), over the domain \(\Omega\). The first property is a direct consequence of the definition of \(\tens{\Gamma}_0\), given in <a href="./20110911-The_Green_operator_for_strains-01.html">part 1</a>.
 </p>
 
-<div id="outline-container-orga833656" class="outline-2">
-<h2 id="orga833656">Application to self-equilibrated prestresses</h2>
-<div class="outline-text-2" id="text-orga833656">
+<div id="outline-container-org619d3c7" class="outline-2">
+<h2 id="org619d3c7">Application to self-equilibrated prestresses</h2>
+<div class="outline-text-2" id="text-org619d3c7">
 <p>
-We consider a <i>self-equilibrated</i> prestress \(\prestress\) (that is, \(\nabla\cdot\prestress=\tensii0\)). We will prove that \(\greeniv_0\circledast\prestress=\tensii0\). By definition of the Green operator, \(\greeniv_0\circledast\prestress=-\strain\), where \(\strain\) is the strain which solves the following problem
+We consider a <i>self-equilibrated</i> prestress \(\tens{\varpi}\) (that is, \(\nabla\cdot\tens{\varpi}=\tens0\)). We will prove that \(\tens{\Gamma}_0\circledast\tens{\varpi}=\tens0\). By definition of the Green operator, \(\tens{\Gamma}_0\circledast\tens{\varpi}=-\tens{\varepsilon}\), where \(\tens{\varepsilon}\) is the strain which solves the following problem
 </p>
 \begin{align}
 \label{eq:1}
-\nabla_{\vec x}\cdot\left(\stiffness_0:\strain+\prestress\right)&=\vec{0}&&(\vec x\in\domain),\\
+\nabla_{\vec x}\cdot\left(\tens{C}_0:\tens{\varepsilon}+\tens{\varpi}\right)&=\vec{0}&&(\vec x\in\Omega),\\
 \label{eq:2}
-\strain(\vec x)&=\nabla_\vec x^\text{s}\displ&&(\vec x\in\domain),\\
+\tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text{s}\vec{u}&&(\vec x\in\Omega),\\
 \label{eq:3}
-\displ(\vec x)&=\vec 0&&(\vec x\in\partial\domain).
+\vec{u}(\vec x)&=\vec 0&&(\vec x\in\partial\Omega).
 \end{align}
 
 <p>
-Since \(\nabla\cdot\prestress=\vec 0\), it is found that Eq. \eqref{eq:1} reduces to
+Since \(\nabla\cdot\tens{\varpi}=\vec 0\), it is found that Eq. \eqref{eq:1} reduces to
 </p>
 \begin{align*}
-    \nabla_{\vec x}\cdot\left(\stiffness_0:\strain\right)&=\vec{0}&&(\vec x\in\domain).
+    \nabla_{\vec x}\cdot\left(\tens{C}_0:\tens{\varepsilon}\right)&=\vec{0}&&(\vec x\in\Omega).
 \end{align*}
 
 <p>
-Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is \(\displ=\vec 0\) (and \(\strain=\nabla^\text{s}\displ=\tensii0\)). Since \(\greeniv_0\circledast\prestress=-\strain\), it is finally found that \(\greeniv_0\circledast\prestress=\tensiv 0\). To sum up, we have proved the following property
+Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is \(\vec{u}=\vec 0\) (and \(\tens{\varepsilon}=\nabla^\text{s}\vec{u}=\tens0\)). Since \(\tens{\Gamma}_0\circledast\tens{\varpi}=-\tens{\varepsilon}\), it is finally found that \(\tens{\Gamma}_0\circledast\tens{\varpi}=\tens 0\). To sum up, we have proved the following property
 </p>
 
 <div class="THEOREM">
 <p>
-For any self-equilibrated prestress \(\prestress\)
+For any self-equilibrated prestress \(\tens{\varpi}\)
 </p>
 \begin{equation*}
-    \greeniv_0\circledast\prestress=\tensii 0.
+    \tens{\Gamma}_0\circledast\tens{\varpi}=\tens 0.
 \end{equation*}
 
 </div>
 </div>
 </div>
 
-<div id="outline-container-org805d363" class="outline-2">
-<h2 id="org805d363">"Square" of the Green operator</h2>
-<div class="outline-text-2" id="text-org805d363">
+<div id="outline-container-org6cedfec" class="outline-2">
+<h2 id="org6cedfec">"Square" of the Green operator</h2>
+<div class="outline-text-2" id="text-org6cedfec">
 <p>
-Application of the previous result leads to a useful property, which can be found in e.g. <a href="https://doi.org/10.1007/978-3-7091-2780-3_5">Willis (2001)</a>, where it is written somewhat abusively (but quite efficiently!) \(\greeniv_0\stiffness_0\greeniv_0=\greeniv_0\).
+Application of the previous result leads to a useful property, which can be found in e.g. <a href="https://doi.org/10.1007/978-3-7091-2780-3_5">Willis (2001)</a>, where it is written somewhat abusively (but quite efficiently!) \(\tens{\Gamma}_0\tens{C}_0\tens{\Gamma}_0=\tens{\Gamma}_0\).
 </p>
 
 <p>
-Let \(\strain=-\greeniv_0\circledast\prestress\), and \(\stress=\stiffness_0:\strain+\prestress\). By definition of \(\greeniv_0\), \(\strain\) is geometrically compatible and \(\stress\) is self-equilibrated: \(\nabla\cdot\stress=\tensii 0\). From the previous property, we have \(\greeniv_0\circledast\stress=\tensii0\). In other words
+Let \(\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}\), and \(\tens{\sigma}=\tens{C}_0:\tens{\varepsilon}+\tens{\varpi}\). By definition of \(\tens{\Gamma}_0\), \(\tens{\varepsilon}\) is geometrically compatible and \(\tens{\sigma}\) is self-equilibrated: \(\nabla\cdot\tens{\sigma}=\tens 0\). From the previous property, we have \(\tens{\Gamma}_0\circledast\tens{\sigma}=\tens0\). In other words
 </p>
 \begin{equation*}
-    \greeniv_0\circledast\left(\stiffness_0:\strain+\prestress\right)=\tensii0
+    \tens{\Gamma}_0\circledast\left(\tens{C}_0:\tens{\varepsilon}+\tens{\varpi}\right)=\tens0
 \end{equation*}
 <p>
-and, since \(\strain=-\greeniv_0\circledast\prestress\), we find the following property:
+and, since \(\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}\), we find the following property:
 </p>
 
 <div class="THEOREM">
 <p>
-For any prestress \(\prestress\),
+For any prestress \(\tens{\varpi}\),
 </p>
 \begin{equation*}
-    \greeniv_0\circledast\left[\stiffness_0:\left(\greeniv_0\circledast\prestress\right)\right]=\greeniv_0\circledast\prestress.
+    \tens{\Gamma}_0\circledast\left[\tens{C}_0:\left(\tens{\Gamma}_0\circledast\tens{\varpi}\right)\right]=\tens{\Gamma}_0\circledast\tens{\varpi}.
 \end{equation*}
 
 </div>
 </div>
 </div>
 
-<div id="outline-container-org6424d45" class="outline-2">
-<h2 id="org6424d45">Volume average</h2>
-<div class="outline-text-2" id="text-org6424d45">
+<div id="outline-container-org02fad83" class="outline-2">
+<h2 id="org02fad83">Volume average</h2>
+<div class="outline-text-2" id="text-org02fad83">
 <p>
-To close this instalment, we again consider a prestress \(\prestress\), and the associated strain \(\strain=-\greeniv_0\circledast\prestress\). We seek the value of \(\volavg\strain\), where overlined quantities denote <i>volume averages</i>
+To close this instalment, we again consider a prestress \(\tens{\varpi}\), and the associated strain \(\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}\). We seek the value of \(\volavg{\tens{\varepsilon}}\), where overlined quantities denote <i>volume averages</i>
 </p>
 \begin{equation*}
-    \volavg{\strain} = \frac 1{\meas{\domain}}\int_\domain\strain(\vec x)\dV{\vec x}.
+    \volavg{\tens{\varepsilon}} = \frac 1{\meas{\Omega}}\int_\Omega\tens{\varepsilon}(\vec x)\dV{\vec x}.
 \end{equation*}
 
 <p>
-Using Stokes' theorem, and the definition of \(\displ\)
+Using Stokes' theorem, and the definition of \(\vec{u}\)
 </p>
 \begin{equation*}
-    \volavg\strain=\frac1{\meas{\domain}}\int_\domain\nabla_\vec x^\text s\displ\dV{\vec x}=\frac1{2\meas{\domain}}\int_{\partial\domain}\left[\displ(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\displ(\vec x)\right]\dS{\vec x},
+    \volavg\tens{\varepsilon}=\frac1{\meas{\Omega}}\int_\Omega\nabla_\vec x^\text s\vec{u}\dV{\vec x}=\frac1{2\meas{\Omega}}\int_{\partial\Omega}\left[\vec{u}(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\vec{u}(\vec x)\right]\dS{\vec x},
 \end{equation*}
 <p>
-where \(\displ\) is the displacement associated to the strain \(\strain\), and \(\vec n\) is the outward normal to the boundary \(\partial\domain\) of the domain \(\domain\). From the boundary condition \eqref{eq:3}, we finally find \(\volavg\strain=\tensii0\). Finally
+where \(\vec{u}\) is the displacement associated to the strain \(\tens{\varepsilon}\), and \(\vec n\) is the outward normal to the boundary \(\partial\Omega\) of the domain \(\Omega\). From the boundary condition \eqref{eq:3}, we finally find \(\volavg\tens{\varepsilon}=\tens0\). Finally
 </p>
 
 <div class="THEOREM">
 <p>
-For any prestress \(\prestress\),
+For any prestress \(\tens{\varpi}\),
 </p>
 \begin{equation*}
-    \volavg{\greeniv_0\circledast\prestress}=\tensii 0.
+    \volavg{\tens{\Gamma}_0\circledast\tens{\varpi}}=\tens 0.
 \end{equation*}
 
 </div>

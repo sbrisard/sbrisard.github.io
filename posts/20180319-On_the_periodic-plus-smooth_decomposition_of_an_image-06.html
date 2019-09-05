@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:10 -->
+<!-- 2019-09-05 Thu 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -174,8 +141,8 @@ be proposed and <a href="#testing">tested</a>. Improved implementations will be 
 <a href="./20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07.html">next instalment</a> of this series.
 </p>
 
-<div id="outline-container-org9103c92" class="outline-2">
-<h2 id="algorithm"><a id="org9103c92"></a>Moisan&rsquo;s algorithm</h2>
+<div id="outline-container-orgb9db463" class="outline-2">
+<h2 id="algorithm"><a id="orgb9db463"></a>Moisan&rsquo;s algorithm</h2>
 <div class="outline-text-2" id="text-algorithm">
 <p>
 It is recalled (see <a href="./20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html">previous post</a>) that the smooth component \(s\) of a \(m\times
@@ -271,8 +238,8 @@ Of course, the <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">fa
 </div>
 </div>
 
-<div id="outline-container-org37fb15a" class="outline-2">
-<h2 id="implementation"><a id="org37fb15a"></a>A first implementation of Moisan&rsquo;s algorithm</h2>
+<div id="outline-container-orge1f4c7b" class="outline-2">
+<h2 id="implementation"><a id="orge1f4c7b"></a>A first implementation of Moisan&rsquo;s algorithm</h2>
 <div class="outline-text-2" id="text-implementation">
 <p>
 Reference implementation of Moisan&rsquo;s algorithm results directly from the above
@@ -404,8 +371,8 @@ We can then readily set \(p\) and \(s\) to their real parts
 </div>
 </div>
 
-<div id="outline-container-orgd85a179" class="outline-2">
-<h2 id="testing"><a id="orgd85a179"></a>Testing our implementation</h2>
+<div id="outline-container-orga5d9c9e" class="outline-2">
+<h2 id="testing"><a id="orga5d9c9e"></a>Testing our implementation</h2>
 <div class="outline-text-2" id="text-testing">
 <p>
 In the <a href="./20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05.html">previous instalment</a> of this series, we computed a reference
@@ -482,9 +449,9 @@ periodic-plus-smooth decomposition!
 </div>
 </div>
 
-<div id="outline-container-org22e6622" class="outline-2">
-<h2 id="org22e6622">Conclusion</h2>
-<div class="outline-text-2" id="text-org22e6622">
+<div id="outline-container-org1795497" class="outline-2">
+<h2 id="org1795497">Conclusion</h2>
+<div class="outline-text-2" id="text-org1795497">
 <p>
 In the present post, we have implemented Moisans&rsquo;s algorithm (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) for
 computing the periodic-plus-smooth decomposition of an image. This algorithm is

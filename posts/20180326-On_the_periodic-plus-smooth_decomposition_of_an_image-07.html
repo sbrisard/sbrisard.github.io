@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:10 -->
+<!-- 2019-09-05 Thu 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan&rsquo;s algorithm</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -147,9 +114,9 @@ the seventh in a series in seven parts:
 The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.
 </p>
 
-<div id="outline-container-org7acf204" class="outline-2">
-<h2 id="org7acf204">Computing the DFT of the intensity gaps</h2>
-<div class="outline-text-2" id="text-org7acf204">
+<div id="outline-container-org3b0fe40" class="outline-2">
+<h2 id="org3b0fe40">Computing the DFT of the intensity gaps</h2>
+<div class="outline-text-2" id="text-org3b0fe40">
 <p>
 In the <a href="./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.html#algorithm">previous instalment</a> of this series, we showed that the DFT \(\hat s\) of
 the smooth component \(s\) of a \(m\times n\) image \(u\) can be deduced from the DFT
@@ -335,9 +302,9 @@ we can do better? Wait and see!
 </div>
 </div>
 
-<div id="outline-container-org1f89dcf" class="outline-2">
-<h2 id="org1f89dcf">Moisans&rsquo;s algorithm for <i>real</i> images</h2>
-<div class="outline-text-2" id="text-org1f89dcf">
+<div id="outline-container-orga8d0d50" class="outline-2">
+<h2 id="orga8d0d50">Moisans&rsquo;s algorithm for <i>real</i> images</h2>
+<div class="outline-text-2" id="text-orga8d0d50">
 <p>
 In our previous implementation, we have overlooked an important fact: \(u\) is
 (often) a <i>real</i> image. Its DFT ought to be computed through the
@@ -467,9 +434,9 @@ Ratios:
 </div>
 </div>
 
-<div id="outline-container-orga0cf22a" class="outline-2">
-<h2 id="orga0cf22a">Conclusion</h2>
-<div class="outline-text-2" id="text-orga0cf22a">
+<div id="outline-container-org2a6a069" class="outline-2">
+<h2 id="org2a6a069">Conclusion</h2>
+<div class="outline-text-2" id="text-org2a6a069">
 <p>
 This is the end of the story. We now have a good implementation of Moisan&rsquo;s
 algorithm. We have optimized its implementation, but the code did not lose in

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:10 -->
+<!-- 2019-09-05 Thu 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -169,7 +136,7 @@ below.
 
 <p>
 Let us start by loading up some modules and the input image to be periodized
-(see Fig. <a href="#org1525f42">1</a>).
+(see Fig. <a href="#org6190d97">1</a>).
 </p>
 
 <div class="org-src-container">
@@ -184,7 +151,7 @@ Let us start by loading up some modules and the input image to be periodized
 </div>
 
 
-<div id="org1525f42" class="figure">
+<div id="org6190d97" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364.png" alt="hut-648x364.png" width="80%">
 </p>
 <p><span class="figure-number">Figure 1: </span>The initial image to be periodized.</p>
@@ -254,14 +221,14 @@ imsave(DATA_DIR+<span class="org-string">'hut-648x364-periodic-cg-fftshift.png'<
 
 <p>
 Again, periodization is best observed by swapping the quadrants (see
-Fig. <a href="#orgf9bd656">2</a>).
+Fig. <a href="#org77fd3a8">2</a>).
 </p>
 
 
-<div id="orgf9bd656" class="figure">
+<div id="org77fd3a8" class="figure">
 <p><img src="./On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-periodic-cg-fftshift.png" alt="hut-648x364-periodic-cg-fftshift.png" width="80%">
 </p>
-<p><span class="figure-number">Figure 2: </span>The periodic component of the initial image shown in Fig. <a href="#org1525f42">1</a>, resulting from conjugate gradient minimization of <a href="https://doi.org/10.1007/s10851-010-0227-1">Moisan</a>&rsquo;s energy.</p>
+<p><span class="figure-number">Figure 2: </span>The periodic component of the initial image shown in Fig. <a href="#org6190d97">1</a>, resulting from conjugate gradient minimization of <a href="https://doi.org/10.1007/s10851-010-0227-1">Moisan</a>&rsquo;s energy.</p>
 </div>
 
 <p>

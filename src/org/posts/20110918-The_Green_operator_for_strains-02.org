@@ -51,7 +51,7 @@ For any prestress $\tens{\varpi}$,
 
 * Volume average
 
-To close this instalment, we again consider a prestress $\tens{\varpi}$, and the associated strain $\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}$. We seek the value of $\volavg\tens{\varepsilon}$, where overlined quantities denote /volume averages/
+To close this instalment, we again consider a prestress $\tens{\varpi}$, and the associated strain $\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}$. We seek the value of $\volavg{\tens{\varepsilon}}$, where overlined quantities denote /volume averages/
 \begin{equation*}
     \volavg{\tens{\varepsilon}} = \frac 1{\meas{\Omega}}\int_\Omega\tens{\varepsilon}(\vec x)\dV{\vec x}.
 \end{equation*}

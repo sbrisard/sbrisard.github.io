@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elastic constants of an isotropic material, part 3: putting it all together</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -129,20 +96,20 @@ In the previous instalments of this series (see <a href="./20131205-Elastic_cons
 
 \begin{equation}
 \label{eq:1}
-\stresscomp_{ij}=\bulkmod\straincomp_{kk}\delta_{ij}+2\shearmod\left(\straincomp_{ij}-\frac{\straincomp_{kk}}d\delta_{ij}\right),
+\sigma_{ij}=\kappa\varepsilon_{kk}\delta_{ij}+2\mu\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}d\delta_{ij}\right),
 \end{equation}
 
 <p>
-where \(d\) is the dimension of the physical space (\(d=3\) for 3D elasticity, \(d=2\) for plane strain elasticity), \(\shearmod\) is the shear modulus, and \(\bulkmod\) is the bulk modulus, whose expression depends on \(d\)
+where \(d\) is the dimension of the physical space (\(d=3\) for 3D elasticity, \(d=2\) for plane strain elasticity), \(\mu\) is the shear modulus, and \(\kappa\) is the bulk modulus, whose expression depends on \(d\)
 </p>
 
 \begin{align}
-\label{eq:2}\bulkmod&=\frac23\frac{1+\nu}{1-2\nu}\shearmod&&(d=3),\\
-\label{eq:3}\bulkmod&=\frac\shearmod{1-2\nu}&&(d=2).
+\label{eq:2}\kappa&=\frac23\frac{1+\nu}{1-2\nu}\mu&&(d=3),\\
+\label{eq:3}\kappa&=\frac\mu{1-2\nu}&&(d=2).
 \end{align}
 
 <p>
-In this instalment, I am going to introduce some classical isotropic, fourth-rank tensors which will prove extremely useful and will allow us to cast Eq. \eqref{eq:1} in an intrinsic (component-free) form.<!-- more --> It should be noted that the following developments are restricted to fourth-rank tensors \(\tensiv T\) with both <i>minor</i> and <i>major</i> symmetries
+In this instalment, I am going to introduce some classical isotropic, fourth-rank tensors which will prove extremely useful and will allow us to cast Eq. \eqref{eq:1} in an intrinsic (component-free) form.<!-- more --> It should be noted that the following developments are restricted to fourth-rank tensors \(\tens T\) with both <i>minor</i> and <i>major</i> symmetries
 </p>
 
 \begin{align*}
@@ -150,27 +117,27 @@ T_{ijkl}&=T_{jikl}=T_{ijlk}&&\text{(minor symmetries)},\\
 T_{ijkl}&=T_{klij}&&\text{(major symmetries)}.
 \end{align*}
 
-<div id="outline-container-orgccb2103" class="outline-2">
-<h2 id="orgccb2103">Spherical and deviatoric projection tensors</h2>
-<div class="outline-text-2" id="text-orgccb2103">
+<div id="outline-container-orgf31e0de" class="outline-2">
+<h2 id="orgf31e0de">Spherical and deviatoric projection tensors</h2>
+<div class="outline-text-2" id="text-orgf31e0de">
 <p>
 In the present section, I am going to introduce the fourth-rank identity, spherical and deviatoric projection tensors.
 </p>
 </div>
 
-<div id="outline-container-orgc16f7eb" class="outline-3">
-<h3 id="orgc16f7eb">Fourth-rank identity tensor</h3>
-<div class="outline-text-3" id="text-orgc16f7eb">
+<div id="outline-container-orgebc48c5" class="outline-3">
+<h3 id="orgebc48c5">Fourth-rank identity tensor</h3>
+<div class="outline-text-3" id="text-orgebc48c5">
 <p>
-The fourth-rank identity tensor \(\identiv\) maps any second-rank, symmetric tensor \(\tensii u\) to itself
+The fourth-rank identity tensor \(\tens{I}\) maps any second-rank, symmetric tensor \(\tens u\) to itself
 </p>
 
 \begin{equation*}
-\identiv:\tensii u=\tensii u.
+\tens{I}:\tens u=\tens u.
 \end{equation*}
 
 <p>
-It is straightforward to work out the components of \(\identiv\) (accounting for both minor and major symmetries)
+It is straightforward to work out the components of \(\tens{I}\) (accounting for both minor and major symmetries)
 </p>
 
 \begin{equation*}
@@ -179,27 +146,27 @@ I_{ijkl}=\frac12\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right).
 </div>
 </div>
 
-<div id="outline-container-org590af73" class="outline-3">
-<h3 id="org590af73">Fourth-rank spherical projection tensor</h3>
-<div class="outline-text-3" id="text-org590af73">
+<div id="outline-container-orgacf7b6b" class="outline-3">
+<h3 id="orgacf7b6b">Fourth-rank spherical projection tensor</h3>
+<div class="outline-text-3" id="text-orgacf7b6b">
 <p>
-The fourth-rank spherical projection tensor \(\sphprojiv\) extracts the spherical part of any symmetric, second-rank tensor \(\tensii u\)
+The fourth-rank spherical projection tensor \(\tens{J}\) extracts the spherical part of any symmetric, second-rank tensor \(\tens u\)
 </p>
 
 \begin{equation*}
-\sphprojiv:\tensii u=\frac1d\tr(\tensii u)\identii,
+\tens{J}:\tens u=\frac1d\tr(\tens u)\tens{\delta},
 \end{equation*}
 
 <p>
-where \(\identii\) is the second-rank identity tensor (with components \(\delta_{ij}\)). In particular, \(\sphprojiv:\identii=\identii\). In intrinsic form, \(\sphprojiv\) reads
+where \(\tens{\delta}\) is the second-rank identity tensor (with components \(\delta_{ij}\)). In particular, \(\tens{J}:\tens{\delta}=\tens{\delta}\). In intrinsic form, \(\tens{J}\) reads
 </p>
 
 \begin{equation*}
-\sphprojiv=\frac1d\identii\otimes\identii,
+\tens{J}=\frac1d\tens{\delta}\otimes\tens{\delta},
 \end{equation*}
 
 <p>
-where \(\otimes\) denotes the <a href="http://en.wikipedia.org/wiki/Tensor_product">tensor product</a>. The components of \(\sphprojiv\) are
+where \(\otimes\) denotes the <a href="http://en.wikipedia.org/wiki/Tensor_product">tensor product</a>. The components of \(\tens{J}\) are
 </p>
 
 \begin{equation*}
@@ -208,15 +175,15 @@ J_{ijkl} = \frac1d\delta_{ij}\delta_{kl}.
 </div>
 </div>
 
-<div id="outline-container-orga2ea84f" class="outline-3">
-<h3 id="orga2ea84f">Fourth-rank deviatoric projection tensor</h3>
-<div class="outline-text-3" id="text-orga2ea84f">
+<div id="outline-container-org2fd1be3" class="outline-3">
+<h3 id="org2fd1be3">Fourth-rank deviatoric projection tensor</h3>
+<div class="outline-text-3" id="text-org2fd1be3">
 <p>
-The fourth-rank deviatoric projection tensor \(\devprojiv\) extracts the deviatoric part of any symmetric, second-rank tensor \(\tensii u\)
+The fourth-rank deviatoric projection tensor \(\tens{K}\) extracts the deviatoric part of any symmetric, second-rank tensor \(\tens u\)
 </p>
 
 \begin{equation*}
-\devprojiv:\tensii u=\tensii u-\frac1d\tr(\tensii u)\identii=\tensii u-\sphprojiv:\tensii u,
+\tens{K}:\tens u=\tens u-\frac1d\tr(\tens u)\tens{\delta}=\tens u-\tens{J}:\tens u,
 \end{equation*}
 
 <p>
@@ -224,64 +191,64 @@ from which it results that
 </p>
 
 \begin{equation*}
-\devprojiv=\identiv-\sphprojiv.
+\tens{K}=\tens{I}-\tens{J}.
 \end{equation*}
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge607f4c" class="outline-2">
-<h2 id="orge607f4c">Stiffness tensor</h2>
-<div class="outline-text-2" id="text-orge607f4c">
+<div id="outline-container-org467c591" class="outline-2">
+<h2 id="org467c591">Stiffness tensor</h2>
+<div class="outline-text-2" id="text-org467c591">
 <p>
 Going back the constitutive law of the linearly elastic, isotropic material given by Eq. \eqref{eq:1}, it is found that
 </p>
 
 \begin{equation*}
-\stress=d\bulkmod\sphprojiv:\strain+2\shearmod\devprojiv:\strain=\stiffness:\strain,
+\tens{\sigma}=d\kappa\tens{J}:\tens{\varepsilon}+2\mu\tens{K}:\tens{\varepsilon}=\tens{C}:\tens{\varepsilon},
 \end{equation*}
 
 <p>
-where \(\stiffness\) is the fourth-rank stiffness tensor of the material
+where \(\tens{C}\) is the fourth-rank stiffness tensor of the material
 </p>
 
 \begin{equation*}
-\stiffness=d\bulkmod\sphprojiv+2\shearmod\devprojiv.
+\tens{C}=d\kappa\tens{J}+2\mu\tens{K}.
 \end{equation*}
 
 <p>
-In isotropic elasticity, the stiffness tensor is a linear combination of the two tensors \(\sphprojiv\) and \(\devprojiv\). This is in fact a general result, which is heavily used in materials science: any <i>isotropic</i> fourth-rank tensor with minor and major symmetries is a linear combination of \(\sphprojiv\) and \(\devprojiv\). In other words, \(\left(\sphprojiv, \devprojiv\right)\) forms a <i>basis</i> of the fourth-rank isotropic tensors with minor and major symmetries. Why this is useful will become obvious in the next section, where I will show that algebra in this basis is dead simple.
+In isotropic elasticity, the stiffness tensor is a linear combination of the two tensors \(\tens{J}\) and \(\tens{K}\). This is in fact a general result, which is heavily used in materials science: any <i>isotropic</i> fourth-rank tensor with minor and major symmetries is a linear combination of \(\tens{J}\) and \(\tens{K}\). In other words, \(\left(\tens{J}, \tens{K}\right)\) forms a <i>basis</i> of the fourth-rank isotropic tensors with minor and major symmetries. Why this is useful will become obvious in the next section, where I will show that algebra in this basis is dead simple.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org96a1ae3" class="outline-2">
-<h2 id="org96a1ae3">Algebra of the \(\sphprojiv\) and \(\devprojiv\) tensors</h2>
-<div class="outline-text-2" id="text-org96a1ae3">
+<div id="outline-container-orge14a799" class="outline-2">
+<h2 id="orge14a799">Algebra of the \(\tens{J}\) and \(\tens{K}\) tensors</h2>
+<div class="outline-text-2" id="text-orge14a799">
 <p>
 It can readily be verified that
 </p>
 
 \begin{gather*}
-\sphprojiv:\sphprojiv=\sphprojiv,\\
-\devprojiv:\devprojiv=\devprojiv,\\
-\devprojiv:\sphprojiv=\sphprojiv:\devprojiv=\tensii0.
+\tens{J}:\tens{J}=\tens{J},\\
+\tens{K}:\tens{K}=\tens{K},\\
+\tens{K}:\tens{J}=\tens{J}:\tens{K}=\tens0.
 \end{gather*}
 
 <p>
-Therefore, multiplication of two isotropic tensors \(\tensiv T_i=a_i\sphprojiv+b_i\devprojiv\) (\(i=1,2\)) is trivial
+Therefore, multiplication of two isotropic tensors \(\tens T_i=a_i\tens{J}+b_i\tens{K}\) (\(i=1,2\)) is trivial
 </p>
 
 \begin{equation*}
-\tensiv T_1:\tensiv T_2=a_1a_2\sphprojiv+b_1b_2\devprojiv.
+\tens T_1:\tens T_2=a_1a_2\tens{J}+b_1b_2\tens{K}.
 \end{equation*}
 
 <p>
-Also, inversion of an isotropic tensor \(\tensiv T=a\sphprojiv+b\devprojiv\) is straightforward
+Also, inversion of an isotropic tensor \(\tens T=a\tens{J}+b\tens{K}\) is straightforward
 </p>
 
 \begin{equation*}
-\tensiv T^{-1}=\frac1a\sphprojiv+\frac1b\devprojiv.
+\tens T^{-1}=\frac1a\tens{J}+\frac1b\tens{K}.
 \end{equation*}
 
 <p>
@@ -290,15 +257,15 @@ All these expressions will prove extremely useful in due time.
 </div>
 </div>
 
-<div id="outline-container-orgd65aabc" class="outline-2">
-<h2 id="orgd65aabc">Conclusion</h2>
-<div class="outline-text-2" id="text-orgd65aabc">
+<div id="outline-container-org2372fdf" class="outline-2">
+<h2 id="org2372fdf">Conclusion</h2>
+<div class="outline-text-2" id="text-org2372fdf">
 <p>
-This is the end of this series on the elastic constants of isotropic materials. I have shown that (regardless of the dimension \(d\) of the physical space), such materials are characterized by two constants. The shear modulus \(\shearmod\), the Poisson ratio \(\nu\) and Young's modulus \(E\) do not depend on \(d\), while the plane strains expression of the bulk modulus \(\bulkmod\) differs from its 3D expression (see Eqs. \eqref{eq:2} and \eqref{eq:3}).
+This is the end of this series on the elastic constants of isotropic materials. I have shown that (regardless of the dimension \(d\) of the physical space), such materials are characterized by two constants. The shear modulus \(\mu\), the Poisson ratio \(\nu\) and Young's modulus \(E\) do not depend on \(d\), while the plane strains expression of the bulk modulus \(\kappa\) differs from its 3D expression (see Eqs. \eqref{eq:2} and \eqref{eq:3}).
 </p>
 
 <p>
-This series was also a good opportunity to introduce the tensors \(\sphprojiv\) and \(\devprojiv\), which form a basis for the isotropic, fourth-rank tensors. Using this basis is very convenient, as algebra within this basis is extremely simple.
+This series was also a good opportunity to introduce the tensors \(\tens{J}\) and \(\tens{K}\), which form a basis for the isotropic, fourth-rank tensors. Using this basis is very convenient, as algebra within this basis is extremely simple.
 </p>
 </div>
 </div>

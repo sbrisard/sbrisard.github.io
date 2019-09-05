@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>When a thin shell is not so thin, part&nbsp;2: the 3D, exact solution</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -127,9 +94,9 @@ Stress: '\\stensii{\\Sigma}',
 In the <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html">previous instalment</a> of this series, we analysed a spherical pressure vessel by means of Koiter's linear theory of thin shells. We found the somewhat unexpected result that the stress couple was not null. Besides, we also found that the stress resultant was slightly different from the well-known value \(N=pR/2\). So what was wrong with the previous analysis? To explore this question, we will make use of the exact solution in 3D elasticity.
 </p>
 
-<div id="outline-container-org51d0b1f" class="outline-2">
-<h2 id="org51d0b1f">The spherical pressure vessel, exact solution</h2>
-<div class="outline-text-2" id="text-org51d0b1f">
+<div id="outline-container-org7ab9661" class="outline-2">
+<h2 id="org7ab9661">The spherical pressure vessel, exact solution</h2>
+<div class="outline-text-2" id="text-org7ab9661">
 <p>
 Finding the stresses and displacements in a pressure vessel is a classical exercise in 3D linear elasticity. In this post, I will spare you the details of the derivation (which can be found in e.g. Timoshenko and Goodier, <i>Theory of Elasticity</i>, 2nd edition, McGraw-Hill, 1951 art. 121). Instead, I will come straight to the point, and provide you with the exact expression of the stress tensor in spherical coordinates (\(r\): distance to the center of the spherical pressure vessel)
 </p>
@@ -174,7 +141,7 @@ From Eq. \eqref{eq:2}, we readily find the following expressions of the stress r
 \end{align}
 
 <p>
-Comparing with <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html#orgc5a92d2">Koiter's solution</a>, it is found that the dominant terms of the stress resultant coincide. This is not true of the stress couple, though. Even worse, the signs differ! While in Koiter's solution, the stress couple is negative (as expected), integration of the 3D solution leads to a <i>positive</i> stress couple, which is unphysical. Something nasty is definitely taking place, here!
+Comparing with <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html#orgc3d9fdc">Koiter's solution</a>, it is found that the dominant terms of the stress resultant coincide. This is not true of the stress couple, though. Even worse, the signs differ! While in Koiter's solution, the stress couple is negative (as expected), integration of the 3D solution leads to a <i>positive</i> stress couple, which is unphysical. Something nasty is definitely taking place, here!
 </p>
 
 <p>
@@ -183,9 +150,9 @@ In the next section, I will show that Eqs. \eqref{eq:7} and \eqref{eq:8} are in 
 </div>
 </div>
 
-<div id="outline-container-orgb2ef42d" class="outline-2">
-<h2 id="orgb2ef42d">Stress resultants and stress couples: the correct definition</h2>
-<div class="outline-text-2" id="text-orgb2ef42d">
+<div id="outline-container-org64556dc" class="outline-2">
+<h2 id="org64556dc">Stress resultants and stress couples: the correct definition</h2>
+<div class="outline-text-2" id="text-org64556dc">
 <p>
 Stress resultants and stress couples are defined from the internal resultant forces and moments exerted on subdomains of the shell. In this section, I will show how such subsystems are constructed from a closed path drawn on the midsurface.
 </p>
@@ -280,9 +247,9 @@ This definition will be used in the next section to compute the stress resultant
 </div>
 </div>
 
-<div id="outline-container-org09cad0d" class="outline-2">
-<h2 id="org09cad0d">Stress resultant and couple in the spherical pressure vessel</h2>
-<div class="outline-text-2" id="text-org09cad0d">
+<div id="outline-container-org155e1a4" class="outline-2">
+<h2 id="org155e1a4">Stress resultant and couple in the spherical pressure vessel</h2>
+<div class="outline-text-2" id="text-org155e1a4">
 
 <div class="figure">
 <p><object type="image/svg+xml" data="./20150701-When_a_thin_shell_is_not_so_thin-02/fig07.svg" class="org-svg">
@@ -353,9 +320,9 @@ Comparing Eqs. \eqref{eq:18} and \eqref{eq:19} with Eqs. \eqref{eq:7} and \eqref
 </div>
 </div>
 
-<div id="outline-container-orgeb5944a" class="outline-2">
-<h2 id="orgeb5944a">Conclusion</h2>
-<div class="outline-text-2" id="text-orgeb5944a">
+<div id="outline-container-org78ef6ab" class="outline-2">
+<h2 id="org78ef6ab">Conclusion</h2>
+<div class="outline-text-2" id="text-org78ef6ab">
 <p>
 In this post, we used the exact stress distribution within the spherical vessel to compute the stress resultant and stress couple. We showed that the thin shell approximation, which amounts to neglecting the jacobian in a surface integral, results in poor estimates in this case. Exact integration delivers much more convincing results. However, we still have not completely solved the problem. Indeed, comparing Eqs. \eqref{eq:18} and \eqref{eq:19} with Eqs. (17) and (18) in the <a href="./20150608-When_a_thin_shell_is_not_so_thin-01.html">previous instalment</a> of this series, we still observe major differences: the two values of the stress couple have the same sign, but they differ by two orders of magnitude (with respect to the thickness of the shell).
 </p>

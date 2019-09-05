@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Towards polarization methods, part 4: bounds on the macroscopic elastic properties</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: {equationNumbers: {autoNumber: "AMS"}}});</script>
@@ -24,55 +23,23 @@ TeX: {
 TagSide: 'left',
 Macros: {
 abs: ['\\left\|#1\\right\|', 1],
-acoustic: '\\tensii A',
 boxtimessym : '\\boxtimes^\\text s',
-bulkmod: '\\kappa',
 complexes: '\\mathbb C',
-devprojiv: '\\tensiv{K}',
-diff: '\\mathrm{d}',
-displ: '\\vec{u}',
-domain: '\\Omega',
+D: '\\mathrm{d}',
 dS: ['\\operatorname{dS}_{#1}', 1],
 dV: ['\\operatorname{dV}_{#1}', 1],
 eff: '\\text{eff}',
-eshelby: '\\tensiv{S}',
-greeniv: '\\stensiv{\\Gamma}',
-greenivcomp: '\\Gamma',
-hill: '\\tensiv{P}',
-identii: '\\stensii{\\delta}',
-identiv: '\\tensiv{I}',
-identivcomp: 'I',
-indicator: '\\boldsymbol{1}',
 integers: '\\mathbb Z',
 meas: ['\\left\|#1\\right\|', 1],
 naturals: '\\mathbb N',
-polarization: '\\stensii{\\tau}',
-polarizationcomp: '\\tau',
-prestress: '\\stensii{\\varpi}',
-prestresscomp: '\\varpi',
 rationals: '\\mathbb Q',
 reals: '\\mathbb R',
-shearmod: '\\mu',
-sphprojiv: '\\tensiv{J}',
-stensii: ['\\svec{#1}', 1],
-stensiv: ['\\svec{#1}', 1],
-stiffness: '\\tensiv{C}',
-strain: '\\stensii{\\varepsilon}',
-straincomp: '\\varepsilon',
-stress: '\\stensii{\\sigma}',
-stresscomp: '\\sigma',
-svec: ['{\\boldsymbol{#1}}', 1],
 tens: ['\\vec{#1}', 1],
-tensii: ['\\vec{#1}', 1],
-tensiv: ['\\vec{#1}', 1],
 tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
 volavg: ['\\overline{#1}', 1],
-Prestress: '\\stensii{\\Pi}',
-Strain: '\\tensii{E}',
-Stress: '\\stensii{\\Sigma}',
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -128,21 +95,21 @@ Back from a long silent period&#x2026; In <a href="./20111019-Towards_polarizati
 </p>
 
 <p>
-Let \(\polarization\) be the solution of the Lippmann-Schwinger equation
+Let \(\tens{\tau}\) be the solution of the Lippmann-Schwinger equation
 </p>
 
 \begin{equation}
 \label{eq:1}
-\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\greeniv_0\circledast\polarization=\Strain,
+\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}+\tens{\Gamma}_0\circledast\tens{\tau}=\overline{\tens{\varepsilon}},
 \end{equation}
 
 <p>
-where \(\Strain\) is the (imposed) macroscopic strain. We seek the value \(\mathcal H(\polarization)\) of the functional of Hashin and Shtrikman \(\mathcal H\) (defined in <a href="./20111019-Towards_polarization_methods-02.html">part 2</a> of this series), at point \(\polarization\)
+where \(\overline{\tens{\varepsilon}}\) is the (imposed) macroscopic strain. We seek the value \(\mathcal H(\tens{\tau})\) of the functional of Hashin and Shtrikman \(\mathcal H\) (defined in <a href="./20111019-Towards_polarization_methods-02.html">part 2</a> of this series), at point \(\tens{\tau}\)
 </p>
 
 \begin{equation}
 \label{eq:2}
-\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)}.
+\mathcal H(\tens{\tau})=\overline{\tens{\varepsilon}}:\volavg{\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)}.
 \end{equation}
 
 <p>
@@ -151,16 +118,16 @@ Substituting Eq. \eqref{eq:1} in Eq. \eqref{eq:2}, we find
 
 \begin{equation}
 \label{eq:3}
-\mathcal H(\polarization)=\frac12\Strain:\volavg{\polarization}.
+\mathcal H(\tens{\tau})=\frac12\overline{\tens{\varepsilon}}:\volavg{\tens{\tau}}.
 \end{equation}
 
 <p>
-Now is a good time to remember that the polarization \(\polarization\) is related to the strain \(\strain\) by the following equation
+Now is a good time to remember that the polarization \(\tens{\tau}\) is related to the strain \(\tens{\varepsilon}\) by the following equation
 </p>
 
 \begin{equation}
 \label{eq:4}
-\polarization=\left(\stiffness-\stiffness_0\right):\strain,
+\tens{\tau}=\left(\tens{C}-\tens{C}_0\right):\tens{\varepsilon},
 \end{equation}
 
 <p>
@@ -169,25 +136,25 @@ Combining Eqs. \eqref{eq:3} and \eqref{eq:4} then leads to
 
 \begin{equation}
 \label{eq:5}
-\mathcal H(\polarization)=\frac12\Strain:\volavg{\left(\stiffness-\stiffness_0\right):\strain}=\frac12\Strain:\volavg{\stiffness:\strain}-\frac12\Strain:\stiffness_0:\volavg{\strain},
+\mathcal H(\tens{\tau})=\frac12\overline{\tens{\varepsilon}}:\volavg{\left(\tens{C}-\tens{C}_0\right):\tens{\varepsilon}}=\frac12\overline{\tens{\varepsilon}}:\volavg{\tens{C}:\tens{\varepsilon}}-\frac12\overline{\tens{\varepsilon}}:\tens{C}_0:\volavg{\tens{\varepsilon}},
 \end{equation}
 
 <p>
-where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, \(\volavg\strain=\Strain\) (this is the very definition of the macroscopic strain \(\Strain\)). Furthermore, \(\volavg{\stiffness:\strain} = \volavg{\stress} = \Stress\), where \(\Stress\) is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
+where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, \(\volavg\tens{\varepsilon}=\overline{\tens{\varepsilon}}\) (this is the very definition of the macroscopic strain \(\overline{\tens{\varepsilon}}\)). Furthermore, \(\volavg{\tens{C}:\tens{\varepsilon}} = \volavg{\tens{\sigma}} = \overline{\tens{\sigma}}\), where \(\overline{\tens{\sigma}}\) is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
 </p>
 
 \begin{equation}
 \label{eq:6}
-\Stress=\stiffness^\eff:\Strain,
+\overline{\tens{\sigma}}=\tens{C}^\eff:\overline{\tens{\varepsilon}},
 \end{equation}
 
 <p>
-where \(\stiffness^\eff\) is the macroscopic (or effective, or homogenized) stiffness of the composite. Eq. \eqref{eq:5} finally reduces to
+where \(\tens{C}^\eff\) is the macroscopic (or effective, or homogenized) stiffness of the composite. Eq. \eqref{eq:5} finally reduces to
 </p>
 
 \begin{equation}
 \label{eq:7}
-\mathcal H(\polarization)=\frac12\Strain:\stiffness^\eff:\Strain-\frac12\Strain:\stiffness_0:\Strain.
+\mathcal H(\tens{\tau})=\frac12\overline{\tens{\varepsilon}}:\tens{C}^\eff:\overline{\tens{\varepsilon}}-\frac12\overline{\tens{\varepsilon}}:\tens{C}_0:\overline{\tens{\varepsilon}}.
 \end{equation}
 
 <p>
@@ -195,30 +162,30 @@ In other words, the value of the functional of Hashin and Shtrikman at the solut
 </p>
 
 <p>
-While the above result is fully general, we now assume that the reference material is <i>stiffer</i> than the composite. In other words, \(\stiffness(\vec x)\leq\stiffness_0\) at any point \(\vec x\in\domain\). We then saw in <a href="./20111031-Towards_polarization_methods-03.html">part 3</a> of this series that the following inequality holds for <i>any</i> polarization field \(\prestress\)
+While the above result is fully general, we now assume that the reference material is <i>stiffer</i> than the composite. In other words, \(\tens{C}(\vec x)\leq\tens{C}_0\) at any point \(\vec x\in\Omega\). We then saw in <a href="./20111031-Towards_polarization_methods-03.html">part 3</a> of this series that the following inequality holds for <i>any</i> polarization field \(\tens{\varpi}\)
 </p>
 
 \begin{equation}
 \label{eq:8}
-\mathcal H(\polarization)\leq\mathcal H(\prestress).
+\mathcal H(\tens{\tau})\leq\mathcal H(\tens{\varpi}).
 \end{equation}
 
 <p>
-Inserting Eq. \eqref{eq:7} in Eq. \eqref{eq:8} leads for any polarization field \(\prestress\) to the following bound on the macroscopic potential energy of the composite
+Inserting Eq. \eqref{eq:7} in Eq. \eqref{eq:8} leads for any polarization field \(\tens{\varpi}\) to the following bound on the macroscopic potential energy of the composite
 </p>
 
 \begin{equation}
 \label{eq:9}
-\frac12\Strain:\stiffness^\eff:\Strain\leq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\prestress).
+\frac12\overline{\tens{\varepsilon}}:\tens{C}^\eff:\overline{\tens{\varepsilon}}\leq\frac12\overline{\tens{\varepsilon}}:\tens{C}_0:\overline{\tens{\varepsilon}}+\mathcal H(\tens{\varpi}).
 \end{equation}
 
 <p>
-Similarly, if the reference material is <i>softer</i> than the composite, that is \(\stiffness(\vec x)\geq\stiffness_0\) for any \(\vec x\in\domain\), then Eq. \eqref{eq:9} should be replaced with
+Similarly, if the reference material is <i>softer</i> than the composite, that is \(\tens{C}(\vec x)\geq\tens{C}_0\) for any \(\vec x\in\Omega\), then Eq. \eqref{eq:9} should be replaced with
 </p>
 
 \begin{equation}
 \label{eq:10}
-\frac12\Strain:\stiffness^\eff:\Strain\geq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\prestress).
+\frac12\overline{\tens{\varepsilon}}:\tens{C}^\eff:\overline{\tens{\varepsilon}}\geq\frac12\overline{\tens{\varepsilon}}:\tens{C}_0:\overline{\tens{\varepsilon}}+\mathcal H(\tens{\varpi}).
 \end{equation}
 
 <p>

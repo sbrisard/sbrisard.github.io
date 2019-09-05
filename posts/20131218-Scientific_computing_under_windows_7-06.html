@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-08-22 Thu 07:09 -->
+<!-- 2019-09-05 Thu 21:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scientific computing under Windows 7, part 6: ITK (prerequisites)</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Sébastien Brisard">
 <link rel="stylesheet" href="../theme.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -46,9 +45,9 @@ ITK is an open-source, cross-platform system that provides developers with an ex
 Building ITK under Windows 7 is quite a trip, and will actually require several posts. We start with all prerequisites for this project.<!-- more -->
 </p>
 
-<div id="outline-container-orgc7e5d21" class="outline-2">
-<h2 id="orgc7e5d21">libjpeg</h2>
-<div class="outline-text-2" id="text-orgc7e5d21">
+<div id="outline-container-orgece8a9f" class="outline-2">
+<h2 id="orgece8a9f">libjpeg</h2>
+<div class="outline-text-2" id="text-orgece8a9f">
 <p>
 From the <a href="http://www.ijg.org/">official website</a>
 </p>
@@ -71,9 +70,9 @@ $ make install
 </div>
 </div>
 
-<div id="outline-container-org7443387" class="outline-2">
-<h2 id="org7443387">libpng</h2>
-<div class="outline-text-2" id="text-org7443387">
+<div id="outline-container-org80170f1" class="outline-2">
+<h2 id="org80170f1">libpng</h2>
+<div class="outline-text-2" id="text-org80170f1">
 <p>
 From the <a href="http://www.libpng.org/pub/png/libpng.html">official website</a>
 </p>
@@ -96,9 +95,9 @@ $ make install
 </div>
 </div>
 
-<div id="outline-container-org27ac327" class="outline-2">
-<h2 id="org27ac327">libtiff</h2>
-<div class="outline-text-2" id="text-org27ac327">
+<div id="outline-container-org9fc4657" class="outline-2">
+<h2 id="org9fc4657">libtiff</h2>
+<div class="outline-text-2" id="text-org9fc4657">
 <p>
 From the <a href="http://www.libtiff.org/">official website</a>
 </p>
@@ -121,9 +120,9 @@ make install
 </div>
 </div>
 
-<div id="outline-container-org539b7bc" class="outline-2">
-<h2 id="org539b7bc">HDF5</h2>
-<div class="outline-text-2" id="text-org539b7bc">
+<div id="outline-container-org3f64874" class="outline-2">
+<h2 id="org3f64874">HDF5</h2>
+<div class="outline-text-2" id="text-org3f64874">
 <p>
 From the <a href="http://www.hdfgroup.org/HDF5/">official website</a>
 </p>
@@ -200,9 +199,9 @@ Unfortunately, the fix proposed in the above mailing list does <i>not</i> solve 
 </div>
 </div>
 
-<div id="outline-container-orged2ee2e" class="outline-2">
-<h2 id="orged2ee2e">SWIG (Simplified Wrapper and Interface Generator)</h2>
-<div class="outline-text-2" id="text-orged2ee2e">
+<div id="outline-container-orge5e16ac" class="outline-2">
+<h2 id="orge5e16ac">SWIG (Simplified Wrapper and Interface Generator)</h2>
+<div class="outline-text-2" id="text-orge5e16ac">
 <p>
 From the <a href="http://www.swig.org/">official website</a>
 </p>
@@ -223,9 +222,9 @@ As I would like to use ITK with Python, I need to build the Python bindings, whi
 </div>
 </div>
 
-<div id="outline-container-org39cea40" class="outline-2">
-<h2 id="org39cea40">Doxygen</h2>
-<div class="outline-text-2" id="text-org39cea40">
+<div id="outline-container-org70bebe5" class="outline-2">
+<h2 id="org70bebe5">Doxygen</h2>
+<div class="outline-text-2" id="text-org70bebe5">
 <p>
 From the <a href="http://www.stack.nl/=dimitri/doxygen/index.html">official website</a>
 </p>
@@ -243,9 +242,9 @@ Doxygen is required only if you plan to build the documentation of ITK. Use the 
 </div>
 
 
-<div id="outline-container-orgca39694" class="outline-2">
-<h2 id="orgca39694">GCC-XML</h2>
-<div class="outline-text-2" id="text-orgca39694">
+<div id="outline-container-orgc33d75f" class="outline-2">
+<h2 id="orgc33d75f">GCC-XML</h2>
+<div class="outline-text-2" id="text-orgc33d75f">
 <p>
 From the <a href="http://gccxml.github.io/HTML/Index.html">official website</a>
 </p>
@@ -289,9 +288,9 @@ Unfortunately, the <code>Makefile</code> does not provide an <code>uninstall</co
 </div>
 </div>
 
-<div id="outline-container-org630bc4c" class="outline-2">
-<h2 id="org630bc4c">Conclusion</h2>
-<div class="outline-text-2" id="text-org630bc4c">
+<div id="outline-container-org5e57ea4" class="outline-2">
+<h2 id="org5e57ea4">Conclusion</h2>
+<div class="outline-text-2" id="text-org5e57ea4">
 <p>
 We are now ready to compile ITK itself&#x2026; to be continued in the <a href="./20131219-Scientific_computing_under_windows_7-07.html">next installment</a> of this series.
 </p>
