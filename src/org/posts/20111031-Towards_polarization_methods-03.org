@@ -34,10 +34,10 @@ If the reference material is stiffer (resp. softer) than the heterogeneous mater
 \end{equation*}
 #+END_THEOREM
 
-Maybe a quick reminder would be useful, here. $\stiffness - \stiffness_0$ is said to be positive, semi-definite, if $\tens{\varpi}:\stiffness:\tens{\varpi}\geq\tens{\varpi}:\stiffness_0:\tens{\varpi}$ for all $\tens{\varpi}$. For isotropic heterogeneous (resp. reference) materials with bulk modulus $\kappa$ (resp. $\kappa_0$) and shear modulus $\shearmod$ (resp. $\shearmod_0$), this is equivalent to
+Maybe a quick reminder would be useful, here. $\stiffness - \stiffness_0$ is said to be positive, semi-definite, if $\tens{\varpi}:\stiffness:\tens{\varpi}\geq\tens{\varpi}:\stiffness_0:\tens{\varpi}$ for all $\tens{\varpi}$. For isotropic heterogeneous (resp. reference) materials with bulk modulus $\kappa$ (resp. $\kappa_0$) and shear modulus $\mu$ (resp. $\mu_0$), this is equivalent to
 
 \begin{equation*}
-\kappa\geq\kappa_0\quad\text{and}\quad\shearmod\geq\shearmod_0.
+\kappa\geq\kappa_0\quad\text{and}\quad\mu\geq\mu_0.
 \end{equation*}
 
 Note that it is not always possible to find a reference material which complies with the requirements of the above theorem. A typical example would be a heterogeneous material conaining both pores [$\stiffness(\vec x) = \tensiv 0$] and rigid inclusions [$\stiffness(\vec x)\rightarrow+\infty$]. We won't address this issue for the time being.

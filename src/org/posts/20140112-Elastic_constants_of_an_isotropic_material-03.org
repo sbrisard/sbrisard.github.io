@@ -8,14 +8,14 @@ In the previous instalments of this series (see [[file:./20131205-Elastic_consta
 
 \begin{equation}
 \label{eq:1}
-\sigma_{ij}=\kappa\varepsilon_{kk}\delta_{ij}+2\shearmod\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}d\delta_{ij}\right),
+\sigma_{ij}=\kappa\varepsilon_{kk}\delta_{ij}+2\mu\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}d\delta_{ij}\right),
 \end{equation}
 
-where $d$ is the dimension of the physical space ($d=3$ for 3D elasticity, $d=2$ for plane strain elasticity), $\shearmod$ is the shear modulus, and $\kappa$ is the bulk modulus, whose expression depends on $d$
+where $d$ is the dimension of the physical space ($d=3$ for 3D elasticity, $d=2$ for plane strain elasticity), $\mu$ is the shear modulus, and $\kappa$ is the bulk modulus, whose expression depends on $d$
 
 \begin{align}
-\label{eq:2}\kappa&=\frac23\frac{1+\nu}{1-2\nu}\shearmod&&(d=3),\\
-\label{eq:3}\kappa&=\frac\shearmod{1-2\nu}&&(d=2).
+\label{eq:2}\kappa&=\frac23\frac{1+\nu}{1-2\nu}\mu&&(d=3),\\
+\label{eq:3}\kappa&=\frac\mu{1-2\nu}&&(d=2).
 \end{align}
 
 In this instalment, I am going to introduce some classical isotropic, fourth-rank tensors which will prove extremely useful and will allow us to cast Eq. \eqref{eq:1} in an intrinsic (component-free) form.@@html:<!-- more -->@@ It should be noted that the following developments are restricted to fourth-rank tensors $\tensiv T$ with both /minor/ and /major/ symmetries
@@ -82,13 +82,13 @@ from which it results that
 Going back the constitutive law of the linearly elastic, isotropic material given by Eq. \eqref{eq:1}, it is found that
 
 \begin{equation*}
-\stress=d\kappa\sphprojiv:\strain+2\shearmod\tens{K}:\strain=\stiffness:\strain,
+\stress=d\kappa\sphprojiv:\strain+2\mu\tens{K}:\strain=\stiffness:\strain,
 \end{equation*}
 
 where $\stiffness$ is the fourth-rank stiffness tensor of the material
 
 \begin{equation*}
-\stiffness=d\kappa\sphprojiv+2\shearmod\tens{K}.
+\stiffness=d\kappa\sphprojiv+2\mu\tens{K}.
 \end{equation*}
 
 In isotropic elasticity, the stiffness tensor is a linear combination of the two tensors $\sphprojiv$ and $\tens{K}$. This is in fact a general result, which is heavily used in materials science: any /isotropic/ fourth-rank tensor with minor and major symmetries is a linear combination of $\sphprojiv$ and $\tens{K}$. In other words, $\left(\sphprojiv, \tens{K}\right)$ forms a /basis/ of the fourth-rank isotropic tensors with minor and major symmetries. Why this is useful will become obvious in the next section, where I will show that algebra in this basis is dead simple.
@@ -119,6 +119,6 @@ All these expressions will prove extremely useful in due time.
 
 * Conclusion
 
-This is the end of this series on the elastic constants of isotropic materials. I have shown that (regardless of the dimension $d$ of the physical space), such materials are characterized by two constants. The shear modulus $\shearmod$, the Poisson ratio $\nu$ and Young's modulus $E$ do not depend on $d$, while the plane strains expression of the bulk modulus $\kappa$ differs from its 3D expression (see Eqs. \eqref{eq:2} and \eqref{eq:3}).
+This is the end of this series on the elastic constants of isotropic materials. I have shown that (regardless of the dimension $d$ of the physical space), such materials are characterized by two constants. The shear modulus $\mu$, the Poisson ratio $\nu$ and Young's modulus $E$ do not depend on $d$, while the plane strains expression of the bulk modulus $\kappa$ differs from its 3D expression (see Eqs. \eqref{eq:2} and \eqref{eq:3}).
 
 This series was also a good opportunity to introduce the tensors $\sphprojiv$ and $\tens{K}$, which form a basis for the isotropic, fourth-rank tensors. Using this basis is very convenient, as algebra within this basis is extremely simple.

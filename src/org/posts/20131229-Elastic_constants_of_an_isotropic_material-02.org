@@ -50,17 +50,17 @@ which is the plane strain constitutive low we were looking for.
 
 * Shear modulus and Poisson ratio
 
-Recalling (see [[file:./20131205-Elastic_constants_of_an_isotropic_material-01.org][previous instalment]]) that $E=2\shearmod\left(1+\nu\right)$, Eq. \eqref{eq:2} can also be cast as follows
+Recalling (see [[file:./20131205-Elastic_constants_of_an_isotropic_material-01.org][previous instalment]]) that $E=2\mu\left(1+\nu\right)$, Eq. \eqref{eq:2} can also be cast as follows
 \begin{equation}
     \label{eq:4}
-    \varepsilon_{\alpha\beta}=\frac1{2\shearmod}\left(\sigma_{\alpha\beta}-\nu\sigma_{\gamma\gamma}\delta_{\alpha\beta}\right).
+    \varepsilon_{\alpha\beta}=\frac1{2\mu}\left(\sigma_{\alpha\beta}-\nu\sigma_{\gamma\gamma}\delta_{\alpha\beta}\right).
 \end{equation}
 
 * Bulk and shear moduli
 
 For (2D) isotropic stresses, $\sigma_{\alpha\beta}=-p\delta_{\alpha\beta}$, Eq. \eqref{eq:4} reads
 \begin{equation*}
-    \varepsilon_{\alpha\beta}=-\frac{1-2\nu}{2\shearmod}p\delta_{\alpha\beta},
+    \varepsilon_{\alpha\beta}=-\frac{1-2\nu}{2\mu}p\delta_{\alpha\beta},
 \end{equation*}
 and the relative surface change $\varepsilon_\text s$, defined as $\varepsilon_\text s=\varepsilon_{\gamma\gamma}$, reads
 \begin{equation*}
@@ -69,22 +69,22 @@ and the relative surface change $\varepsilon_\text s$, defined as $\varepsilon_\
 with
 \begin{equation}
     \label{eq:5}
-    \kappa_\text{2D}=\frac\shearmod{1-2\nu}.
+    \kappa_\text{2D}=\frac\mu{1-2\nu}.
 \end{equation}
 
 $\kappa_\text{2D}$ thus defined is the 2D (plane strain) bulk modulus of the material. Attention should be paid to the fact that, unlike the shear modulus, the bulk modulus of a material /depends on the dimension of the physical space/. More generally, the (2D) trace of the strain tensor is related to the average stress
 \begin{equation}
     \label{eq:6}
-    \varepsilon_{\gamma\gamma}=\frac{1-2\nu}{2\shearmod}\sigma_{\gamma\gamma}.
+    \varepsilon_{\gamma\gamma}=\frac{1-2\nu}{2\mu}\sigma_{\gamma\gamma}.
 \end{equation}
 
 Combining Eqs. \eqref{eq:4} and \eqref{eq:6}
 \begin{equation*}
-    \sigma_{\alpha\beta}=2\shearmod\varepsilon_{\alpha\beta}+\frac{2\shearmod\nu}{1-2\nu}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}=\frac{\shearmod}{1-2\nu}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\varepsilon_{\alpha\beta}-\frac{\varepsilon_{\gamma\gamma}}2\delta_{\alpha\beta}\right),
+    \sigma_{\alpha\beta}=2\mu\varepsilon_{\alpha\beta}+\frac{2\mu\nu}{1-2\nu}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}=\frac{\mu}{1-2\nu}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}+2\mu\left(\varepsilon_{\alpha\beta}-\frac{\varepsilon_{\gamma\gamma}}2\delta_{\alpha\beta}\right),
 \end{equation*}
 and the stress-strain relationship finally reads
 \begin{equation*}
-    \sigma_{\alpha\beta}=\kappa_\text{2D}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\varepsilon_{\alpha\beta}-\frac{\varepsilon_{\gamma\gamma}}2\delta_{\alpha\beta}\right).
+    \sigma_{\alpha\beta}=\kappa_\text{2D}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}+2\mu\left(\varepsilon_{\alpha\beta}-\frac{\varepsilon_{\gamma\gamma}}2\delta_{\alpha\beta}\right).
 \end{equation*}
 
 * Conclusion

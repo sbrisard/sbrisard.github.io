@@ -6,58 +6,58 @@
 
 Among all classes of materials, the class of linearly elastic and isotropic materials is probably the simplest. Such materials are defined by two elastic constants: for example, Young's modulus $E$ and Poisson's ratio $\nu$. However, depending on the situation, this pair of constants might not be the most appropriate@@html:<!-- more -->@@ (meaning that they may not lead to the most compact expressions). Alternative sets of elastic constants are
 
-- Lamé's constants $\lambda$ and $\shearmod$,
-- bulk and shear moduli $\kappa$ and $\shearmod$,
-- shear modulus and Poisson ratio $\shearmod$ and $\nu$.
+- Lamé's constants $\lambda$ and $\mu$,
+- bulk and shear moduli $\kappa$ and $\mu$,
+- shear modulus and Poisson ratio $\mu$ and $\nu$.
 
-Each pair of constants is of course strictly equivalent to any other. I tend to work primarily with $\shearmod$ and $\nu$, and always find myself looking for the expression of E, $\lambda$ and $\kappa$ as a function of $\shearmod$ and $\nu$. In this series, we will derive these expressions, starting with 3D elasticity.
+Each pair of constants is of course strictly equivalent to any other. I tend to work primarily with $\mu$ and $\nu$, and always find myself looking for the expression of E, $\lambda$ and $\kappa$ as a function of $\mu$ and $\nu$. In this series, we will derive these expressions, starting with 3D elasticity.
 
 * Lamé's constants
 
 The constitutive equation of a linearly elastic and isotropic material reads
 \begin{equation}
     \label{eq:1}
-    \sigma_{ij} = \lambda\varepsilon_{kk}\delta_{ij} + 2\shearmod\varepsilon_{ij}
+    \sigma_{ij} = \lambda\varepsilon_{kk}\delta_{ij} + 2\mu\varepsilon_{ij}
 \end{equation}
 
-where $\sigma_{ij}$ (resp. $\varepsilon_{ij}$) denotes the stress (resp. strain) tensor, while $\lambda$ (resp. $\shearmod$) is Lamé's first (resp. second) constant; $\shearmod$ is also called the /shear modulus/. Eq. \eqref{eq:1} is inverted so as to express the strain tensor as a function of the stress tensor. Taking $i = j$ and summing over repeated indices, we find
+where $\sigma_{ij}$ (resp. $\varepsilon_{ij}$) denotes the stress (resp. strain) tensor, while $\lambda$ (resp. $\mu$) is Lamé's first (resp. second) constant; $\mu$ is also called the /shear modulus/. Eq. \eqref{eq:1} is inverted so as to express the strain tensor as a function of the stress tensor. Taking $i = j$ and summing over repeated indices, we find
 \begin{equation*}
-    \sigma_{ii} = (3\lambda + 2\shearmod)\varepsilon_{kk},
+    \sigma_{ii} = (3\lambda + 2\mu)\varepsilon_{kk},
 \end{equation*}
 
 where it is recalled that $\delta_{ii} = 3$ (the dimension of the physical space). Plugging into Eq. \eqref{eq:1}
 \begin{equation*}
-    \sigma_{ij} = \frac{\lambda}{3\lambda+2\shearmod}\sigma_{kk}\delta_{ij} + 2\shearmod\varepsilon_{ij}
+    \sigma_{ij} = \frac{\lambda}{3\lambda+2\mu}\sigma_{kk}\delta_{ij} + 2\mu\varepsilon_{ij}
 \end{equation*}
 
 and finally
 \begin{equation}
     \label{eq:2}
-    \varepsilon_{ij} = \frac{\sigma_{ij}}{2\shearmod} - \frac{\lambda}{2\shearmod(3\lambda+2\shearmod)}\sigma_{kk}\delta_{ij}.
+    \varepsilon_{ij} = \frac{\sigma_{ij}}{2\mu} - \frac{\lambda}{2\mu(3\lambda+2\mu)}\sigma_{kk}\delta_{ij}.
 \end{equation}
 
 * Young's modulus and Poisson ratio
 
 We consider a uniaxial traction experiment, where the stress tensor reduces to $\sigma\vec e_3\otimes\vec e_3$ ($\sigma$ is the imposed uniaxial stress). Substitution in Eq. \eqref{eq:2} leads to the following expression of the longitudinal strain
 \begin{equation*}
-    \varepsilon_{33} = \frac{\lambda+\shearmod}{\shearmod(3\lambda+2\shearmod)}\sigma.
+    \varepsilon_{33} = \frac{\lambda+\mu}{\mu(3\lambda+2\mu)}\sigma.
 \end{equation*}
 
 By definition, Young's modulus is the longitudinal stress to longitudinal strain ratio: $E=\sigma/\varepsilon_{33}$, so that
 \begin{equation}
     \label{eq:3}
-    E = \frac{\shearmod(3\lambda+2\shearmod)}{\lambda+\shearmod}.
+    E = \frac{\mu(3\lambda+2\mu)}{\lambda+\mu}.
 \end{equation}
 
 The expression of the transverse strains is again derived using Eq. \eqref{eq:2}
 \begin{equation*}
-    \varepsilon_{11} = \varepsilon_{22} = -\frac{\lambda}{2\shearmod(3\lambda+2\shearmod)}
+    \varepsilon_{11} = \varepsilon_{22} = -\frac{\lambda}{2\mu(3\lambda+2\mu)}
 \end{equation*}
 
 and by definition, Poisson's ratio is the oposite of the transverse to longitudinal strain ratio
 \begin{equation}
     \label{eq:4}
-    \nu = -\frac{\varepsilon_{11}}{\varepsilon_{33}} = -\frac{\varepsilon_{22}}{\varepsilon_{33}} = \frac{\lambda}{2(\lambda+\shearmod)}.
+    \nu = -\frac{\varepsilon_{11}}{\varepsilon_{33}} = -\frac{\varepsilon_{22}}{\varepsilon_{33}} = \frac{\lambda}{2(\lambda+\mu)}.
 \end{equation}
 
 Expressions \eqref{eq:3} and \eqref{eq:4} can be substituted in the constitutive equation \eqref{eq:2}, leading to
@@ -71,7 +71,7 @@ Expressions \eqref{eq:3} and \eqref{eq:4} can be substituted in the constitutive
 We now consider an isotropic compression experiment, where the stress tensor reduces to a hydrostatic pressure $\sigma_{ij}=-p\delta_{ij}$. Using Eq. \eqref{eq:1}, we find that the strain tensor is also isotropic
 \begin{equation}
     \label{eq:6}
-    \varepsilon_{ij} = -\frac{p\delta_{ij}}{3\lambda+2\shearmod}.
+    \varepsilon_{ij} = -\frac{p\delta_{ij}}{3\lambda+2\mu}.
 \end{equation}
 
 It is recalled that $\varepsilon_\text v=\varepsilon_{kk} / 3$ denotes the relative volume change of the material. Then, from Eq. \eqref{eq:6}
@@ -82,33 +82,33 @@ It is recalled that $\varepsilon_\text v=\varepsilon_{kk} / 3$ denotes the relat
 where $\kappa_\text{3D}$ denotes the bulk modulus, defined as follows
 \begin{equation}
     \label{eq:7}
-    \kappa_\text{3D} = \lambda + \frac 23\shearmod.
+    \kappa_\text{3D} = \lambda + \frac 23\mu.
 \end{equation}
 
-As we shall see in the [[file:./20131229-Elastic_constants_of_an_isotropic_material-02.org][next instalment]] of this series, the definition of the bulk modulus /depends on the dimension of the physical space/, hence the '3D' subscript. Using $\kappa$ and $\shearmod$ as elastic constants, Eq. \eqref{eq:1} reads
+As we shall see in the [[file:./20131229-Elastic_constants_of_an_isotropic_material-02.org][next instalment]] of this series, the definition of the bulk modulus /depends on the dimension of the physical space/, hence the '3D' subscript. Using $\kappa$ and $\mu$ as elastic constants, Eq. \eqref{eq:1} reads
 \begin{equation}
     \label{eq:8}
-    \sigma_{ij} = \kappa_\text{3D}\varepsilon_{kk}\delta_{ij}+2\shearmod\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}3\delta_{ij}\right)
+    \sigma_{ij} = \kappa_\text{3D}\varepsilon_{kk}\delta_{ij}+2\mu\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}3\delta_{ij}\right)
 \end{equation}
 
 * Shear modulus and Poisson ratio
 
-I quite often use the shear modulus $\shearmod$ and Poisson ratio $\nu$ as the constants defining the elastic material. One of the reasons for this is the fact that the components of the fourth-rank Green operator for strains have the same expression in 3D and 2D (plane strain) elasticity when expressed as a function of $\shearmod$ and $\nu$.
+I quite often use the shear modulus $\mu$ and Poisson ratio $\nu$ as the constants defining the elastic material. One of the reasons for this is the fact that the components of the fourth-rank Green operator for strains have the same expression in 3D and 2D (plane strain) elasticity when expressed as a function of $\mu$ and $\nu$.
 
 In the present section, all other elastic constants are expressed as functions of these two constants. First, from Eq. \eqref{eq:4}, it is readily found that
 \begin{equation}
     \label{eq:9}
-    \lambda = \frac{2\shearmod\nu}{1-2\nu}.
+    \lambda = \frac{2\mu\nu}{1-2\nu}.
 \end{equation}
 
 Then, combining Eqs. \eqref{eq:3} and \eqref{eq:4}
 \begin{equation*}
-    E = 2\shearmod(1+\nu).
+    E = 2\mu(1+\nu).
 \end{equation*}
 
 Finally, from Eqs. \eqref{eq:7} and \eqref{eq:9}
 \begin{equation*}
-    \kappa_\text{3D} = \frac23\frac{1+\nu}{1-2\nu}\shearmod.
+    \kappa_\text{3D} = \frac23\frac{1+\nu}{1-2\nu}\mu.
 \end{equation*}
 
 * Conclusion
