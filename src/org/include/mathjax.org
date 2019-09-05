@@ -32,7 +32,6 @@
 #+HTML_HEAD_EXTRA:           transpinv: ['{#1}^{-\\text T}', 1],
 #+HTML_HEAD_EXTRA:           vec: ['{\\mathbf{#1}}', 1],
 #+HTML_HEAD_EXTRA:           volavg: ['\\overline{#1}', 1],
-#+HTML_HEAD_EXTRA:           Prestress: '\\tens{\\Pi}',
 #+HTML_HEAD_EXTRA:           Strain: '\\tens{E}',
 #+HTML_HEAD_EXTRA:           Stress: '\\tens{\\Sigma}',
 #+HTML_HEAD_EXTRA:       }
