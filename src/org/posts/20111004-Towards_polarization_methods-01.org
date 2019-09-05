@@ -12,9 +12,9 @@ We again consider a heterogeneous material, with local stiffness $\tens{C}$, loc
     \label{eq:1}
     \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
     \label{eq:2}
-    \stress(\vec x)&=\tens{C}(\vec x):\strain(\vec x)&&(\vec x\in\Omega),\\
+    \stress(\vec x)&=\tens{C}(\vec x):\tens{\varepsilon}(\vec x)&&(\vec x\in\Omega),\\
     \label{eq:3}
-    \strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
+    \tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
     \label{eq:4}
     \vec{u}(\vec x)&=\overline{\tens{\varepsilon}}\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align}
@@ -30,7 +30,7 @@ where $\overline{\tens{\sigma}}$ is the macroscopic stress.
 Eqs. \eqref{eq:1} -- \eqref{eq:4} would be trivial if we had $\tens{C}(\vec x)=\tens{C}_0$ for any $\vec x\in\Omega$ ($\tens{C}_0$ is a /constant/ stiffness tensor). Indeed, the solution would then be
 
 \begin{equation*}
-\strain(\vec x)=\overline{\tens{\varepsilon}},\qquad\stress(\vec x)=\tens{C}_0:\overline{\tens{\varepsilon}}.
+\tens{\varepsilon}(\vec x)=\overline{\tens{\varepsilon}},\qquad\stress(\vec x)=\tens{C}_0:\overline{\tens{\varepsilon}}.
 \end{equation*}
 
 In other words, our life would be easier if we were to homogenize materials which are /already/ homogeneous!
@@ -39,29 +39,29 @@ So we see that the complexity of Eqs. \eqref{eq:1} -- \eqref{eq:4} comes from th
 
 \begin{equation}
 \label{eq:5}
-\stress(\vec x)=\tens{C}(\vec x):\strain(\vec x)=\tens{C}_0:\strain(\vec x)+\left[\tens{C}(\vec x)-\tens{C}_0\right]:\strain(\vec x).
+\stress(\vec x)=\tens{C}(\vec x):\tens{\varepsilon}(\vec x)=\tens{C}_0:\tens{\varepsilon}(\vec x)+\left[\tens{C}(\vec x)-\tens{C}_0\right]:\tens{\varepsilon}(\vec x).
 \end{equation}
 
 Introducing the so-called /polarization/ $\tens{\tau}$
 
 \begin{equation}
 \label{eq:6}
-\tens{\tau}(\vec x)=\left[\tens{C}(\vec x)-\tens{C}_0\right]:\strain(\vec x),
+\tens{\tau}(\vec x)=\left[\tens{C}(\vec x)-\tens{C}_0\right]:\tens{\varepsilon}(\vec x),
 \end{equation}
 
 Eq. \eqref{eq:5} then takes the following compact form
 
 \begin{equation}
 \label{eq:7}
-\stress(\vec x)=\tens{C}_0:\strain(\vec x)+\tens{\tau}(\vec x).
+\stress(\vec x)=\tens{C}_0:\tens{\varepsilon}(\vec x)+\tens{\tau}(\vec x).
 \end{equation}
 
 Determination of the polarization $\tens{\tau}$ requires the solution to Eqs. \eqref{eq:1} -- \eqref{eq:4}; therefore, it would seem that Eq. \eqref{eq:7} achieved nothing! However, let us assume for a moment that we /know/ $\tens{\tau}$ beforehand. Then Eqs. (1) -- (4) reduce to
 
 \begin{align*}
 \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
-\stress(\vec x)&=\tens{C}_0:\strain(\vec x)+\tens{\tau}(\vec x)&&(\vec x\in\Omega),\\
-\strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
+\stress(\vec x)&=\tens{C}_0:\tens{\varepsilon}(\vec x)+\tens{\tau}(\vec x)&&(\vec x\in\Omega),\\
+\tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
 \vec{u}(\vec x)&=\overline{\tens{\varepsilon}}\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align*}
 
@@ -69,17 +69,17 @@ which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ lin
 
 \begin{equation}
 \label{eq:8}
-\strain(\vec x)=\overline{\tens{\varepsilon}}-(\tens{\Gamma}_0\circledast\tens{\tau})(\vec x),
+\tens{\varepsilon}(\vec x)=\overline{\tens{\varepsilon}}-(\tens{\Gamma}_0\circledast\tens{\tau})(\vec x),
 \end{equation}
 
 where the Green operator for strains $\tens{\Gamma}_0$ associated with $\tens{C}_0$ has been introduced. We now need to remember that the polarization $\tens{\tau}$ is /not/ known. Rather, it is given by Eq. \eqref{eq:6}. Upon introduction into Eq. \eqref{eq:8}, we get the so-called Lippmann--Schwinger equation
 
 \begin{equation}
 \label{eq:9}
-\strain(\vec x)+\left\{\tens{\Gamma}_0\circledast\left[\left(\tens{C}-\tens{C}_0\right):\strain\right]\right\}(\vec x)=\overline{\tens{\varepsilon}}.
+\tens{\varepsilon}(\vec x)+\left\{\tens{\Gamma}_0\circledast\left[\left(\tens{C}-\tens{C}_0\right):\tens{\varepsilon}\right]\right\}(\vec x)=\overline{\tens{\varepsilon}}.
 \end{equation}
 
-This equation was first introduced by [[https://doi.org/10.1002/pssb.2220550241][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\tens{\tau}$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
+This equation was first introduced by [[https://doi.org/10.1002/pssb.2220550241][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\tens{\tau}$, rather that the strain $\tens{\varepsilon}$ as principal unknown. This leads to the equivalent integral equation
 
 \begin{equation}
 \label{eq:10}

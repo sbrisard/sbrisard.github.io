@@ -13,9 +13,9 @@ In the [[file:./20111004-Towards_polarization_methods-01.org][previous instalmen
 \label{eq:1}
 \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
 \label{eq:2}
-\stress(\vec x)&=\tens{C}(\vec x):\strain(\vec x)&&(\vec x\in\Omega),\\
+\stress(\vec x)&=\tens{C}(\vec x):\tens{\varepsilon}(\vec x)&&(\vec x\in\Omega),\\
 \label{eq:3}
-\strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
+\tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
 \label{eq:4}
 \vec{u}(\vec x)&=\overline{\tens{\varepsilon}}\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align}

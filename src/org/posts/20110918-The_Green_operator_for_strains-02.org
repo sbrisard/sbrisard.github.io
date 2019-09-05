@@ -8,22 +8,22 @@ In [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]] of this ser
 
 * Application to self-equilibrated prestresses
 
-We consider a /self-equilibrated/ prestress $\tens{\varpi}$ (that is, $\nabla\cdot\tens{\varpi}=\tens0$). We will prove that $\tens{\Gamma}_0\circledast\tens{\varpi}=\tens0$. By definition of the Green operator, $\tens{\Gamma}_0\circledast\tens{\varpi}=-\strain$, where $\strain$ is the strain which solves the following problem
+We consider a /self-equilibrated/ prestress $\tens{\varpi}$ (that is, $\nabla\cdot\tens{\varpi}=\tens0$). We will prove that $\tens{\Gamma}_0\circledast\tens{\varpi}=\tens0$. By definition of the Green operator, $\tens{\Gamma}_0\circledast\tens{\varpi}=-\tens{\varepsilon}$, where $\tens{\varepsilon}$ is the strain which solves the following problem
 \begin{align}
 \label{eq:1}
-\nabla_{\vec x}\cdot\left(\tens{C}_0:\strain+\tens{\varpi}\right)&=\vec{0}&&(\vec x\in\Omega),\\
+\nabla_{\vec x}\cdot\left(\tens{C}_0:\tens{\varepsilon}+\tens{\varpi}\right)&=\vec{0}&&(\vec x\in\Omega),\\
 \label{eq:2}
-\strain(\vec x)&=\nabla_\vec x^\text{s}\vec{u}&&(\vec x\in\Omega),\\
+\tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text{s}\vec{u}&&(\vec x\in\Omega),\\
 \label{eq:3}
 \vec{u}(\vec x)&=\vec 0&&(\vec x\in\partial\Omega).
 \end{align}
 
 Since $\nabla\cdot\tens{\varpi}=\vec 0$, it is found that Eq. \eqref{eq:1} reduces to
 \begin{align*}
-    \nabla_{\vec x}\cdot\left(\tens{C}_0:\strain\right)&=\vec{0}&&(\vec x\in\Omega).
+    \nabla_{\vec x}\cdot\left(\tens{C}_0:\tens{\varepsilon}\right)&=\vec{0}&&(\vec x\in\Omega).
 \end{align*}
 
-Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\vec{u}=\vec 0$ (and $\strain=\nabla^\text{s}\vec{u}=\tens0$). Since $\tens{\Gamma}_0\circledast\tens{\varpi}=-\strain$, it is finally found that $\tens{\Gamma}_0\circledast\tens{\varpi}=\tens 0$. To sum up, we have proved the following property
+Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\vec{u}=\vec 0$ (and $\tens{\varepsilon}=\nabla^\text{s}\vec{u}=\tens0$). Since $\tens{\Gamma}_0\circledast\tens{\varpi}=-\tens{\varepsilon}$, it is finally found that $\tens{\Gamma}_0\circledast\tens{\varpi}=\tens 0$. To sum up, we have proved the following property
 
 #+BEGIN_THEOREM
 For any self-equilibrated prestress $\tens{\varpi}$
@@ -36,11 +36,11 @@ For any self-equilibrated prestress $\tens{\varpi}$
 
 Application of the previous result leads to a useful property, which can be found in e.g. [[https://doi.org/10.1007/978-3-7091-2780-3_5][Willis (2001)]], where it is written somewhat abusively (but quite efficiently!) $\tens{\Gamma}_0\tens{C}_0\tens{\Gamma}_0=\tens{\Gamma}_0$.
 
-Let $\strain=-\tens{\Gamma}_0\circledast\tens{\varpi}$, and $\stress=\tens{C}_0:\strain+\tens{\varpi}$. By definition of $\tens{\Gamma}_0$, $\strain$ is geometrically compatible and $\stress$ is self-equilibrated: $\nabla\cdot\stress=\tens 0$. From the previous property, we have $\tens{\Gamma}_0\circledast\stress=\tens0$. In other words
+Let $\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}$, and $\stress=\tens{C}_0:\tens{\varepsilon}+\tens{\varpi}$. By definition of $\tens{\Gamma}_0$, $\tens{\varepsilon}$ is geometrically compatible and $\stress$ is self-equilibrated: $\nabla\cdot\stress=\tens 0$. From the previous property, we have $\tens{\Gamma}_0\circledast\stress=\tens0$. In other words
 \begin{equation*}
-    \tens{\Gamma}_0\circledast\left(\tens{C}_0:\strain+\tens{\varpi}\right)=\tens0
+    \tens{\Gamma}_0\circledast\left(\tens{C}_0:\tens{\varepsilon}+\tens{\varpi}\right)=\tens0
 \end{equation*}
-and, since $\strain=-\tens{\Gamma}_0\circledast\tens{\varpi}$, we find the following property:
+and, since $\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}$, we find the following property:
 
 #+BEGIN_THEOREM
 For any prestress $\tens{\varpi}$,
@@ -51,16 +51,16 @@ For any prestress $\tens{\varpi}$,
 
 * Volume average
 
-To close this instalment, we again consider a prestress $\tens{\varpi}$, and the associated strain $\strain=-\tens{\Gamma}_0\circledast\tens{\varpi}$. We seek the value of $\volavg\strain$, where overlined quantities denote /volume averages/
+To close this instalment, we again consider a prestress $\tens{\varpi}$, and the associated strain $\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}$. We seek the value of $\volavg\tens{\varepsilon}$, where overlined quantities denote /volume averages/
 \begin{equation*}
-    \volavg{\strain} = \frac 1{\meas{\Omega}}\int_\Omega\strain(\vec x)\dV{\vec x}.
+    \volavg{\tens{\varepsilon}} = \frac 1{\meas{\Omega}}\int_\Omega\tens{\varepsilon}(\vec x)\dV{\vec x}.
 \end{equation*}
 
 Using Stokes' theorem, and the definition of $\vec{u}$
 \begin{equation*}
-    \volavg\strain=\frac1{\meas{\Omega}}\int_\Omega\nabla_\vec x^\text s\vec{u}\dV{\vec x}=\frac1{2\meas{\Omega}}\int_{\partial\Omega}\left[\vec{u}(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\vec{u}(\vec x)\right]\dS{\vec x},
+    \volavg\tens{\varepsilon}=\frac1{\meas{\Omega}}\int_\Omega\nabla_\vec x^\text s\vec{u}\dV{\vec x}=\frac1{2\meas{\Omega}}\int_{\partial\Omega}\left[\vec{u}(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\vec{u}(\vec x)\right]\dS{\vec x},
 \end{equation*}
-where $\vec{u}$ is the displacement associated to the strain $\strain$, and $\vec n$ is the outward normal to the boundary $\partial\Omega$ of the domain $\Omega$. From the boundary condition \eqref{eq:3}, we finally find $\volavg\strain=\tens0$. Finally
+where $\vec{u}$ is the displacement associated to the strain $\tens{\varepsilon}$, and $\vec n$ is the outward normal to the boundary $\partial\Omega$ of the domain $\Omega$. From the boundary condition \eqref{eq:3}, we finally find $\volavg\tens{\varepsilon}=\tens0$. Finally
 
 #+BEGIN_THEOREM
 For any prestress $\tens{\varpi}$,

@@ -82,7 +82,7 @@ from which it results that
 Going back the constitutive law of the linearly elastic, isotropic material given by Eq. \eqref{eq:1}, it is found that
 
 \begin{equation*}
-\stress=d\kappa\tens{J}:\strain+2\mu\tens{K}:\strain=\tens{C}:\strain,
+\stress=d\kappa\tens{J}:\tens{\varepsilon}+2\mu\tens{K}:\tens{\varepsilon}=\tens{C}:\tens{\varepsilon},
 \end{equation*}
 
 where $\tens{C}$ is the fourth-rank stiffness tensor of the material

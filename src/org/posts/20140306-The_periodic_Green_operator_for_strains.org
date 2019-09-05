@@ -17,9 +17,9 @@ Let $\tens{C}$ be the stiffness of a homogeneous, linearly elastic material occu
 \label{eq:1}
 \nabla_\vec x\cdot\stress&=\vec0 & (\vec x\in\reals^d)\\
 \label{eq:2}
-\stress(\vec x)&=\tens{C}:\strain(\vec x)+\tens{\varpi}(\vec x)&(\vec x\in\reals^d)\\
+\stress(\vec x)&=\tens{C}:\tens{\varepsilon}(\vec x)+\tens{\varpi}(\vec x)&(\vec x\in\reals^d)\\
 \label{eq:3}
-\strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&(\vec x\in\reals^d)\\
+\tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text s\vec{u}&(\vec x\in\reals^d)\\
 \label{eq:4}
 \vec{u}(\vec x+L_i\vec e_i)&=\vec{u}(\vec x)&(\vec x\in\reals^d)\\
 \end{align}
@@ -44,10 +44,10 @@ and
 \hat\vec{u}_b=\frac1{\meas{\Omega}}\int_\Omega\vec{u}(\vec x)\exp(-i\vec k_b\cdot\vec x)\dV{\vec x},
 \end{equation*}
 
-where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\Omega=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\strain$, stress $\stress$ and prestress $\tens{\varpi}$ are expanded in Fourier series
+where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\Omega=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\tens{\varepsilon}$, stress $\stress$ and prestress $\tens{\varpi}$ are expanded in Fourier series
 
 \begin{align*}
-\strain(\vec x)&=\sum_{b\in\integers^d}\hat\strain_b\exp(i\vec k_b\cdot\vec x),\\
+\tens{\varepsilon}(\vec x)&=\sum_{b\in\integers^d}\hat\tens{\varepsilon}_b\exp(i\vec k_b\cdot\vec x),\\
 \stress(\vec x)&=\sum_{b\in\integers^d}\hat\stress_b\exp(i\vec k_b\cdot\vec x),\\
 \tens{\varpi}(\vec x)&=\sum_{b\in\integers^d}\hat\tens{\varpi}_b\exp(i\vec k_b\cdot\vec x).
 \end{align*}
@@ -55,7 +55,7 @@ where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\Omega=(0,L_1)\t
 Eq. \eqref{eq:3} then reads
 
 \begin{align*}
-\hat\strain_b&=\frac i2\left(\vec k_b\otimes\hat\vec{u}_b+\hat\vec{u}_b\otimes\vec k_b\right)&(b\in\integers^d),
+\hat\tens{\varepsilon}_b&=\frac i2\left(\vec k_b\otimes\hat\vec{u}_b+\hat\vec{u}_b\otimes\vec k_b\right)&(b\in\integers^d),
 \end{align*}
 
 and, from Eq. \eqref{eq:2} (keeping in mind that $\tens{C}$ has minor symmetries)
@@ -79,7 +79,7 @@ The term in brackets $\vec k\cdot\tens{C}\cdot\vec k$ is the [[file:./20140131-T
 As a consequence, the Fourier modes of the strain read
 
 \begin{align*}
-\hat\strain_b={}&-\frac12\vec k_b\otimes\left(\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\tens{\varpi}_b\right)\right)\\
+\hat\tens{\varepsilon}_b={}&-\frac12\vec k_b\otimes\left(\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\tens{\varpi}_b\right)\right)\\
 &-\frac12\left(\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\cdot\left(\vec k_b\cdot\hat\tens{\varpi}_b\right)\right)\otimes\vec k_b&(b\in\integers^d).
 \end{align*}
 
@@ -95,21 +95,21 @@ The above expression can be simplified; handling both terms separately, it is su
 and
 
 \begin{align*}
-\hat\strain_b={}&-\frac12\left(\vec k_b\otimes\vec k_b\right)\cdot\hat\tens{\varpi}\cdot\transpinv{\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)}\\
+\hat\tens{\varepsilon}_b={}&-\frac12\left(\vec k_b\otimes\vec k_b\right)\cdot\hat\tens{\varpi}\cdot\transpinv{\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)}\\
 &-\frac12\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\cdot\transp{\hat\tens{\varpi}}\cdot\left(\vec k_b\otimes\vec k_b\right)&(b\in\integers^d).
 \end{align*}
 
 Introducing the [[file:./20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors.org][tensor product of linear transformations]] $\boxtimes$, and recalling that the prestress $\tens{\varpi}$ is symmetric, the following compact expression can be found
 
 \begin{align*}
-\hat\strain_b={}&-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\right):\hat\tens{\varpi}_b\\
+\hat\tens{\varepsilon}_b={}&-\frac12\left(\left(\vec k_b\otimes\vec k_b\right)\boxtimes\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\right):\hat\tens{\varpi}_b\\
 &-\frac12\left(\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)^{-1}\boxtimes\left(\vec k_b\otimes\vec k_b\right)\right):\hat\tens{\varpi}_b&(b\in\integers^d).
 \end{align*}
 
 In other words, the Fourier modes of the strain are deduced from the Fourier modes of the prestress by application of a fourth-rank tensor, which can be symmetrized with respect to the last two indices (the prestress being symmetric). It is finally found that
 
 \begin{align*}
-\hat\strain_b&=-\hat\tens{\Gamma}(\vec k_b):\hat\tens{\varpi}_b&(b\in\integers^d),
+\hat\tens{\varepsilon}_b&=-\hat\tens{\Gamma}(\vec k_b):\hat\tens{\varpi}_b&(b\in\integers^d),
 \end{align*}
 
 where $\hat\tens{\Gamma}$ is the periodic Green operator for strains of the homogeneous material $\tens{C}$, defined as follows
@@ -162,9 +162,9 @@ In a homogeneous, linearly elastic material with stiffness $\tens{C}$, the $(L_1
 
 \begin{equation}
 \label{eq:9}
-\strain(\vec x)=-\sum_{b\in\integers^d}\hat\tens{\Gamma}(\vec k_b):\hat\tens{\varpi}_b\exp(i\vec k_b\cdot\vec x),
+\tens{\varepsilon}(\vec x)=-\sum_{b\in\integers^d}\hat\tens{\Gamma}(\vec k_b):\hat\tens{\varpi}_b\exp(i\vec k_b\cdot\vec x),
 \end{equation}
 
 where $\hat\tens{\Gamma}$ is the periodic Green operator for strains, defined in Fourier space by Eq. \eqref{eq:6}. It should be noted that this expression is valid regardless of the dimension of the physical space, and the material symmetries. If the material is isotropic, the Fourier modes of the Green operator for strains are given by Eqs. \eqref{eq:7} and \eqref{eq:8}, which are valid in both plane strain and 3D elasticity (since the expression of the inverse of the [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][acoustic tensor]] is).
 
-Finally, it is worth noting that Eq. \eqref{eq:9} is a direct product in Fourier space. Therefore, it is a /convolution product/ in the real space, and we shall write $\strain=-\tens{\Gamma}\ast\tens{\varpi}$. To the best of my knowledge, though, there is no closed-form expression of $\tens{\Gamma}$ in the real space, and this convenient notation is purely formal.
+Finally, it is worth noting that Eq. \eqref{eq:9} is a direct product in Fourier space. Therefore, it is a /convolution product/ in the real space, and we shall write $\tens{\varepsilon}=-\tens{\Gamma}\ast\tens{\varpi}$. To the best of my knowledge, though, there is no closed-form expression of $\tens{\Gamma}$ in the real space, and this convenient notation is purely formal.
