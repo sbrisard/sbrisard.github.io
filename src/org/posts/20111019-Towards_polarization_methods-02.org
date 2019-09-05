@@ -24,20 +24,20 @@ where $\Strain$ is the macroscopic strain, was equivalent to finding the polariz
 
 \begin{equation}
 \label{eq:5}
-\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\left(\greeniv_0\circledast\polarization\right)=\Strain.
+\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\left(\tens{\Gamma}_0\circledast\polarization\right)=\Strain.
 \end{equation}
 
 In other words, the boundary value problem \eqref{eq:1} -- \eqref{eq:4} is replaced by a single integral equation \eqref{eq:5}. Classically, both sides of this equation are now multiplied by an arbitrary test field $\prestress$. After integration over the domain $\Omega$ we find for all test fields $\prestress$
 
 \begin{equation}
 \label{eq:6}
-\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}+\volavg{\prestress:\left(\greeniv_0\circledast\polarization\right)}=\Strain:\volavg{\prestress}.
+\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}+\volavg{\prestress:\left(\tens{\Gamma}_0\circledast\polarization\right)}=\Strain:\volavg{\prestress}.
 \end{equation}
 
 This is a standard variational problem. Indeed, introducing the bilinear form $a$ and the linear form $\ell$
 
 \begin{align*}
-a(\polarization, \prestress)&=\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}+\volavg{\prestress:\left(\greeniv_0\circledast\polarization\right)},\\
+a(\polarization, \prestress)&=\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}+\volavg{\prestress:\left(\tens{\Gamma}_0\circledast\polarization\right)},\\
 \ell(\prestress)&=\Strain:\volavg{\prestress},
 \end{align*}
 
@@ -54,7 +54,7 @@ Quite interestingly, it can easily be verified that Eq. \eqref{eq:7} in fact cha
 
 \begin{equation}
 \label{eq:8}
-\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)}.
+\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\tens{\Gamma}_0\circledast\polarization\right)}.
 \end{equation}
 
 Indeed, for $\prestress$ small enough, we have

@@ -11,14 +11,14 @@ Let $\polarization$ be the solution of the Lippmann-Schwinger equation
 
 \begin{equation}
 \label{eq:1}
-\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\greeniv_0\circledast\polarization=\Strain,
+\left(\stiffness-\stiffness_0\right)^{-1}:\polarization+\tens{\Gamma}_0\circledast\polarization=\Strain,
 \end{equation}
 
 where $\Strain$ is the (imposed) macroscopic strain. We seek the value $\mathcal H(\polarization)$ of the functional of Hashin and Shtrikman $\mathcal H$ (defined in [[file:./20111019-Towards_polarization_methods-02.org][part 2]] of this series), at point $\polarization$
 
 \begin{equation}
 \label{eq:2}
-\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\greeniv_0\circledast\polarization\right)}.
+\mathcal H(\polarization)=\Strain:\volavg{\polarization}-\frac12\volavg{\polarization:\left(\stiffness-\stiffness_0\right)^{-1}:\polarization}-\frac12\volavg{\polarization:\left(\tens{\Gamma}_0\circledast\polarization\right)}.
 \end{equation}
 
 Substituting Eq. \eqref{eq:1} in Eq. \eqref{eq:2}, we find

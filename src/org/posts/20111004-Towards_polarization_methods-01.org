@@ -69,21 +69,21 @@ which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ lin
 
 \begin{equation}
 \label{eq:8}
-\strain(\vec x)=\Strain-(\greeniv_0\circledast\polarization)(\vec x),
+\strain(\vec x)=\Strain-(\tens{\Gamma}_0\circledast\polarization)(\vec x),
 \end{equation}
 
-where the Green operator for strains $\greeniv_0$ associated with $\stiffness_0$ has been introduced. We now need to remember that the polarization $\polarization$ is /not/ known. Rather, it is given by Eq. \eqref{eq:6}. Upon introduction into Eq. \eqref{eq:8}, we get the so-called Lippmann--Schwinger equation
+where the Green operator for strains $\tens{\Gamma}_0$ associated with $\stiffness_0$ has been introduced. We now need to remember that the polarization $\polarization$ is /not/ known. Rather, it is given by Eq. \eqref{eq:6}. Upon introduction into Eq. \eqref{eq:8}, we get the so-called Lippmann--Schwinger equation
 
 \begin{equation}
 \label{eq:9}
-\strain(\vec x)+\left\{\greeniv_0\circledast\left[\left(\stiffness-\stiffness_0\right):\strain\right]\right\}(\vec x)=\Strain.
+\strain(\vec x)+\left\{\tens{\Gamma}_0\circledast\left[\left(\stiffness-\stiffness_0\right):\strain\right]\right\}(\vec x)=\Strain.
 \end{equation}
 
 This equation was first introduced by [[https://doi.org/10.1002/pssb.2220550241][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\polarization$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
 
 \begin{equation}
 \label{eq:10}
-\left[\stiffness(\vec x)-\stiffness_0\right]^{-1}:\polarization(\vec x)+\left(\greeniv_0\circledast\polarization\right)(\vec x)=\Strain.
+\left[\stiffness(\vec x)-\stiffness_0\right]^{-1}:\polarization(\vec x)+\left(\tens{\Gamma}_0\circledast\polarization\right)(\vec x)=\Strain.
 \end{equation}
 
 To sum up, we started with the set of partial differential equations \eqref{eq:1} -- \eqref{eq:4}, and ended up with one /single/, /equivalent/, integral equation. Discretization of the Lippmann-Schwinger equation \eqref{eq:9} has already been considered in the past. This leads to some well-known numerical schemes ([[https://doi.org/10.1016/S0045-7825(97)00218-1][Moulinec & Suquet, 1998]]).

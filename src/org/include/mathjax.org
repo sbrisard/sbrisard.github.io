@@ -19,7 +19,6 @@
 #+HTML_HEAD_EXTRA:           dS: ['\\operatorname{dS}_{#1}', 1],
 #+HTML_HEAD_EXTRA:           dV: ['\\operatorname{dV}_{#1}', 1],
 #+HTML_HEAD_EXTRA:           eff: '\\text{eff}',
-#+HTML_HEAD_EXTRA:           greeniv: '\\stensiv{\\Gamma}',
 #+HTML_HEAD_EXTRA:           hill: '\\tensiv{P}',
 #+HTML_HEAD_EXTRA:           identii: '\\stensii{\\delta}',
 #+HTML_HEAD_EXTRA:           identiv: '\\tensiv{I}',

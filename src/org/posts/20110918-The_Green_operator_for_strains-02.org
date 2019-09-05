@@ -4,11 +4,11 @@
 #+TITLE: The Green operator for strains, part 2: elementary properties
 #+DATE: <2011-09-18 Sun>
 
-In [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]] of this series, we have seen how the Green operator for strains ($\greeniv_0$) was defined as the operator providing the solution to the problem of elastic equilibrium of a /prestressed/ homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.@@html:<!-- more -->@@ We again consider the bounded domain $\Omega\subset\reals^d$, occupied by a homogeneous, linearly elastic material with stiffness $\stiffness_0$. $\greeniv_0$ denotes the Green operator for strains for the material $\stiffness_0$, over the domain $\Omega$. The first property is a direct consequence of the definition of $\greeniv_0$, given in [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]].
+In [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]] of this series, we have seen how the Green operator for strains ($\tens{\Gamma}_0$) was defined as the operator providing the solution to the problem of elastic equilibrium of a /prestressed/ homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.@@html:<!-- more -->@@ We again consider the bounded domain $\Omega\subset\reals^d$, occupied by a homogeneous, linearly elastic material with stiffness $\stiffness_0$. $\tens{\Gamma}_0$ denotes the Green operator for strains for the material $\stiffness_0$, over the domain $\Omega$. The first property is a direct consequence of the definition of $\tens{\Gamma}_0$, given in [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]].
 
 * Application to self-equilibrated prestresses
 
-We consider a /self-equilibrated/ prestress $\prestress$ (that is, $\nabla\cdot\prestress=\tensii0$). We will prove that $\greeniv_0\circledast\prestress=\tensii0$. By definition of the Green operator, $\greeniv_0\circledast\prestress=-\strain$, where $\strain$ is the strain which solves the following problem
+We consider a /self-equilibrated/ prestress $\prestress$ (that is, $\nabla\cdot\prestress=\tensii0$). We will prove that $\tens{\Gamma}_0\circledast\prestress=\tensii0$. By definition of the Green operator, $\tens{\Gamma}_0\circledast\prestress=-\strain$, where $\strain$ is the strain which solves the following problem
 \begin{align}
 \label{eq:1}
 \nabla_{\vec x}\cdot\left(\stiffness_0:\strain+\prestress\right)&=\vec{0}&&(\vec x\in\Omega),\\
@@ -23,35 +23,35 @@ Since $\nabla\cdot\prestress=\vec 0$, it is found that Eq. \eqref{eq:1} reduces 
     \nabla_{\vec x}\cdot\left(\stiffness_0:\strain\right)&=\vec{0}&&(\vec x\in\Omega).
 \end{align*}
 
-Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\vec{u}=\vec 0$ (and $\strain=\nabla^\text{s}\vec{u}=\tensii0$). Since $\greeniv_0\circledast\prestress=-\strain$, it is finally found that $\greeniv_0\circledast\prestress=\tensiv 0$. To sum up, we have proved the following property
+Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\vec{u}=\vec 0$ (and $\strain=\nabla^\text{s}\vec{u}=\tensii0$). Since $\tens{\Gamma}_0\circledast\prestress=-\strain$, it is finally found that $\tens{\Gamma}_0\circledast\prestress=\tensiv 0$. To sum up, we have proved the following property
 
 #+BEGIN_THEOREM
 For any self-equilibrated prestress $\prestress$
 \begin{equation*}
-    \greeniv_0\circledast\prestress=\tensii 0.
+    \tens{\Gamma}_0\circledast\prestress=\tensii 0.
 \end{equation*}
 #+END_THEOREM
 
 * "Square" of the Green operator
 
-Application of the previous result leads to a useful property, which can be found in e.g. [[https://doi.org/10.1007/978-3-7091-2780-3_5][Willis (2001)]], where it is written somewhat abusively (but quite efficiently!) $\greeniv_0\stiffness_0\greeniv_0=\greeniv_0$.
+Application of the previous result leads to a useful property, which can be found in e.g. [[https://doi.org/10.1007/978-3-7091-2780-3_5][Willis (2001)]], where it is written somewhat abusively (but quite efficiently!) $\tens{\Gamma}_0\stiffness_0\tens{\Gamma}_0=\tens{\Gamma}_0$.
 
-Let $\strain=-\greeniv_0\circledast\prestress$, and $\stress=\stiffness_0:\strain+\prestress$. By definition of $\greeniv_0$, $\strain$ is geometrically compatible and $\stress$ is self-equilibrated: $\nabla\cdot\stress=\tensii 0$. From the previous property, we have $\greeniv_0\circledast\stress=\tensii0$. In other words
+Let $\strain=-\tens{\Gamma}_0\circledast\prestress$, and $\stress=\stiffness_0:\strain+\prestress$. By definition of $\tens{\Gamma}_0$, $\strain$ is geometrically compatible and $\stress$ is self-equilibrated: $\nabla\cdot\stress=\tensii 0$. From the previous property, we have $\tens{\Gamma}_0\circledast\stress=\tensii0$. In other words
 \begin{equation*}
-    \greeniv_0\circledast\left(\stiffness_0:\strain+\prestress\right)=\tensii0
+    \tens{\Gamma}_0\circledast\left(\stiffness_0:\strain+\prestress\right)=\tensii0
 \end{equation*}
-and, since $\strain=-\greeniv_0\circledast\prestress$, we find the following property:
+and, since $\strain=-\tens{\Gamma}_0\circledast\prestress$, we find the following property:
 
 #+BEGIN_THEOREM
 For any prestress $\prestress$,
 \begin{equation*}
-    \greeniv_0\circledast\left[\stiffness_0:\left(\greeniv_0\circledast\prestress\right)\right]=\greeniv_0\circledast\prestress.
+    \tens{\Gamma}_0\circledast\left[\stiffness_0:\left(\tens{\Gamma}_0\circledast\prestress\right)\right]=\tens{\Gamma}_0\circledast\prestress.
 \end{equation*}
 #+END_THEOREM
 
 * Volume average
 
-To close this instalment, we again consider a prestress $\prestress$, and the associated strain $\strain=-\greeniv_0\circledast\prestress$. We seek the value of $\volavg\strain$, where overlined quantities denote /volume averages/
+To close this instalment, we again consider a prestress $\prestress$, and the associated strain $\strain=-\tens{\Gamma}_0\circledast\prestress$. We seek the value of $\volavg\strain$, where overlined quantities denote /volume averages/
 \begin{equation*}
     \volavg{\strain} = \frac 1{\meas{\Omega}}\int_\Omega\strain(\vec x)\dV{\vec x}.
 \end{equation*}
@@ -65,6 +65,6 @@ where $\vec{u}$ is the displacement associated to the strain $\strain$, and $\ve
 #+BEGIN_THEOREM
 For any prestress $\prestress$,
 \begin{equation*}
-    \volavg{\greeniv_0\circledast\prestress}=\tensii 0.
+    \volavg{\tens{\Gamma}_0\circledast\prestress}=\tensii 0.
 \end{equation*}
 #+END_THEOREM

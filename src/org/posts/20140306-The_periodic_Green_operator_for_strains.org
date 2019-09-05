@@ -109,14 +109,14 @@ Introducing the [[file:./20140226-Decomposition_of_transverse_isotropic_fourth-r
 In other words, the Fourier modes of the strain are deduced from the Fourier modes of the prestress by application of a fourth-rank tensor, which can be symmetrized with respect to the last two indices (the prestress being symmetric). It is finally found that
 
 \begin{align*}
-\hat\strain_b&=-\hat\greeniv(\vec k_b):\hat\prestress_b&(b\in\integers^d),
+\hat\strain_b&=-\hat\tens{\Gamma}(\vec k_b):\hat\prestress_b&(b\in\integers^d),
 \end{align*}
 
-where $\hat\greeniv$ is the periodic Green operator for strains of the homogeneous material $\stiffness$, defined as follows
+where $\hat\tens{\Gamma}$ is the periodic Green operator for strains of the homogeneous material $\stiffness$, defined as follows
 
 \begin{equation}
 \label{eq:6}
-\hat\greeniv(\vec k)=\frac12\left(\left(\vec n\otimes\vec n\right)\boxtimessym\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}\boxtimessym\left(\vec n\otimes\vec n\right)\right),
+\hat\tens{\Gamma}(\vec k)=\frac12\left(\left(\vec n\otimes\vec n\right)\boxtimessym\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}\boxtimessym\left(\vec n\otimes\vec n\right)\right),
 \end{equation}
 
 where $\vec n$ is the direction of the wave-vector $\vec k$, $\vec n=\vec k/\lVert\vec k\rVert$ ($\vec n\otimes\vec n$ is the second-rank projector onto $\vec n$).
@@ -133,7 +133,7 @@ which leads to the following expression of the periodic Green operator for strai
 
 \begin{equation}
 \label{eq:7}
-\hat\greeniv(\vec k)=\frac1{2\shearmod}\left(\left(\vec n\otimes\vec n\right)\boxtimessym\identii+\identii\boxtimessym\left(\vec n\otimes\vec n\right)\right)-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n\otimes\vec n\otimes\vec n,
+\hat\tens{\Gamma}(\vec k)=\frac1{2\shearmod}\left(\left(\vec n\otimes\vec n\right)\boxtimessym\identii+\identii\boxtimessym\left(\vec n\otimes\vec n\right)\right)-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n\otimes\vec n\otimes\vec n,
 \end{equation}
 
 where the following identity has been used
@@ -142,7 +142,7 @@ where the following identity has been used
 \left(\vec n\otimes\vec n\right)\boxtimessym\left(\vec n\otimes\vec n\right)=\vec n\otimes\vec n\otimes\vec n\otimes\vec n.
 \end{equation*}
 
-The components of $\hat\greeniv$ are
+The components of $\hat\tens{\Gamma}$ are
 
 \begin{equation}
 \label{eq:8}
@@ -162,9 +162,9 @@ In a homogeneous, linearly elastic material with stiffness $\stiffness$, the $(L
 
 \begin{equation}
 \label{eq:9}
-\strain(\vec x)=-\sum_{b\in\integers^d}\hat\greeniv(\vec k_b):\hat\prestress_b\exp(i\vec k_b\cdot\vec x),
+\strain(\vec x)=-\sum_{b\in\integers^d}\hat\tens{\Gamma}(\vec k_b):\hat\prestress_b\exp(i\vec k_b\cdot\vec x),
 \end{equation}
 
-where $\hat\greeniv$ is the periodic Green operator for strains, defined in Fourier space by Eq. \eqref{eq:6}. It should be noted that this expression is valid regardless of the dimension of the physical space, and the material symmetries. If the material is isotropic, the Fourier modes of the Green operator for strains are given by Eqs. \eqref{eq:7} and \eqref{eq:8}, which are valid in both plane strain and 3D elasticity (since the expression of the inverse of the [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][acoustic tensor]] is).
+where $\hat\tens{\Gamma}$ is the periodic Green operator for strains, defined in Fourier space by Eq. \eqref{eq:6}. It should be noted that this expression is valid regardless of the dimension of the physical space, and the material symmetries. If the material is isotropic, the Fourier modes of the Green operator for strains are given by Eqs. \eqref{eq:7} and \eqref{eq:8}, which are valid in both plane strain and 3D elasticity (since the expression of the inverse of the [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][acoustic tensor]] is).
 
-Finally, it is worth noting that Eq. \eqref{eq:9} is a direct product in Fourier space. Therefore, it is a /convolution product/ in the real space, and we shall write $\strain=-\greeniv\ast\prestress$. To the best of my knowledge, though, there is no closed-form expression of $\greeniv$ in the real space, and this convenient notation is purely formal.
+Finally, it is worth noting that Eq. \eqref{eq:9} is a direct product in Fourier space. Therefore, it is a /convolution product/ in the real space, and we shall write $\strain=-\tens{\Gamma}\ast\prestress$. To the best of my knowledge, though, there is no closed-form expression of $\tens{\Gamma}$ in the real space, and this convenient notation is purely formal.

@@ -28,11 +28,11 @@ So, this is the problem we would like to solve. From the mathematical theory of 
 \prestress(\vec x) = \delta(\vec x-\vec y)\Prestress,
 \end{equation}
 
-where $\vec y\in\Omega$ is a fixed point, $\delta$ is the Dirac function, and $\Prestress$ is a constant tensor. Because of linearity of Eqs. \eqref{eq:1} – \eqref{eq:4}, the strain $\strain(\vec x)$ at point $\vec x\in\Omega$ depends linearly on the only loading parameter, $\Prestress$. By definition, the linear operator mapping $\Prestress$ onto $\strain(\vec x)$ will be called the /Green operator for strains/, and denoted $\greeniv_0$. Of course, this operator depends on the /observation/ point $\vec x$; it also depends on the /source/ point $\vec y$ [where the point prestress \eqref{eq:5} is actually applied]. In other words
+where $\vec y\in\Omega$ is a fixed point, $\delta$ is the Dirac function, and $\Prestress$ is a constant tensor. Because of linearity of Eqs. \eqref{eq:1} – \eqref{eq:4}, the strain $\strain(\vec x)$ at point $\vec x\in\Omega$ depends linearly on the only loading parameter, $\Prestress$. By definition, the linear operator mapping $\Prestress$ onto $\strain(\vec x)$ will be called the /Green operator for strains/, and denoted $\tens{\Gamma}_0$. Of course, this operator depends on the /observation/ point $\vec x$; it also depends on the /source/ point $\vec y$ [where the point prestress \eqref{eq:5} is actually applied]. In other words
 
 \begin{equation}
 \label{eq:6}
-\strain(\vec x)=-\greeniv_0(\vec x, \vec y):\Prestress,
+\strain(\vec x)=-\tens{\Gamma}_0(\vec x, \vec y):\Prestress,
 \end{equation}
 
 where it should be noted that there is a minus '$-$' sign in the above equation. This definition (including the '$-$') is actually more convenient. In the more general case, the now arbitrary local prestress $\prestress$ can always be seen as the superposition of elementary loadcases of type \eqref{eq:5}, since
@@ -44,19 +44,19 @@ where it should be noted that there is a minus '$-$' sign in the above equation.
 Application of the superposition theorem allows us to recover the general expression of the solution from Eq. \eqref{eq:6}
 
 \begin{equation*}
-\strain(\vec x) = -\int_{\vec y\in\Omega}\greeniv_0(\vec x, \vec y):\prestress(\vec y)\dV{\vec y}.
+\strain(\vec x) = -\int_{\vec y\in\Omega}\tens{\Gamma}_0(\vec x, \vec y):\prestress(\vec y)\dV{\vec y}.
 \end{equation*}
 
 The integral in the right-hand side is a kind of modified convolution product, which will be denoted '$\circledast$'
 
 \begin{equation*}
-\left(\greeniv_0\circledast\prestress\right)(\vec x) = \int_{\vec y\in\Omega}\greeniv_0(\vec x, \vec y):\prestress(\vec y)\dV{\vec y},
+\left(\tens{\Gamma}_0\circledast\prestress\right)(\vec x) = \int_{\vec y\in\Omega}\tens{\Gamma}_0(\vec x, \vec y):\prestress(\vec y)\dV{\vec y},
 \end{equation*}
 
 and the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} reads
 
 \begin{equation*}
-\strain(\vec x) = -\left(\greeniv_0\circledast\prestress\right)(\vec x).
+\strain(\vec x) = -\left(\tens{\Gamma}_0\circledast\prestress\right)(\vec x).
 \end{equation*}
 
 To close this post, let us consider more general boundary conditions. Instead of Eq. \eqref{eq:4}, we now consider Eq. \eqref{eq:7}
@@ -70,7 +70,7 @@ where $\Strain$ is the imposed macroscopic strain (more on this in posts to come
 
 \begin{equation}
 \label{eq:8}
-\strain(\vec x) = \Strain-\left(\greeniv_0\circledast\prestress\right)(\vec x).
+\strain(\vec x) = \Strain-\left(\tens{\Gamma}_0\circledast\prestress\right)(\vec x).
 \end{equation}
 
 Formula \eqref{eq:8} will be extensively used in subsequent posts, since it leads to the /Lippmann-Schwinger/ equation.
