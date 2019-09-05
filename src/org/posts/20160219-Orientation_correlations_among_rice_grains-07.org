@@ -21,22 +21,22 @@ where the integral is carried out over the grain, and $X_i$ denotes the $i$-th c
 ($V$: volume of the grain). In coordinate-free form, Eq. \eqref{eq:1} reads
 
 \begin{equation}
-\label{eq:3}\tensii J=\int_\text{Grain}\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\diff x_1\,\diff x_2\,\diff x_3.
+\label{eq:3}\tens J=\int_\text{Grain}\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\diff x_1\,\diff x_2\,\diff x_3.
 \end{equation}
 
-The above defined tensor of second moments is related to the [[https://en.wikipedia.org/wiki/Moment_of_inertia#The_inertia_tensor][inertia tensor]] $\tensii I$
+The above defined tensor of second moments is related to the [[https://en.wikipedia.org/wiki/Moment_of_inertia#The_inertia_tensor][inertia tensor]] $\tens I$
 \begin{equation}
-\label{eq:4}\tensii I=\tr\tensii J\,\tensii\delta-\tensii J,
+\label{eq:4}\tens I=\tr\tens J\,\tens\delta-\tens J,
 \end{equation}
-where $\tensii I$ is defined as follows
+where $\tens I$ is defined as follows
 \begin{equation}
-\label{eq:5}\tensii I=\int_\text{Grain}\left[\left(\vec x-\vec X\right)\cdot\left(\vec x-\vec X\right)\tensii\delta-\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\right]\diff x_1\,\diff x_2\,\diff x_3.
+\label{eq:5}\tens I=\int_\text{Grain}\left[\left(\vec x-\vec X\right)\cdot\left(\vec x-\vec X\right)\tens\delta-\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\right]\diff x_1\,\diff x_2\,\diff x_3.
 \end{equation}
 
-Being symmetric, the tensor $\tensii J$ of second moments is diagonalizable, and we compute its eigenvalues $J_a$, $J_b$ and $J_c$, and the associated eigenvectors $\vec v_a$, $\vec v_b$ and $\vec v_c$
+Being symmetric, the tensor $\tens J$ of second moments is diagonalizable, and we compute its eigenvalues $J_a$, $J_b$ and $J_c$, and the associated eigenvectors $\vec v_a$, $\vec v_b$ and $\vec v_c$
 
 \begin{equation}
-\tensii J\cdot\vec v_\alpha=J_\alpha\vec v_\alpha,
+\tens J\cdot\vec v_\alpha=J_\alpha\vec v_\alpha,
 \end{equation}
 
 where $\alpha=a, b, c$. In the present post, we define the orientation of the grain as the eigenvector associated to the /largest/ eigenvalue. We can further define the equivalent ellipsoid as the ellipsoid with same volume and principal second moments. It can readily be verified that the volume and principal second moments of an ellipsoid are

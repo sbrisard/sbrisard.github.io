@@ -31,10 +31,10 @@ In the present section, I am going to introduce the fourth-rank identity, spheri
 
 ** Fourth-rank identity tensor
 
-The fourth-rank identity tensor $\tens{I}$ maps any second-rank, symmetric tensor $\tensii u$ to itself
+The fourth-rank identity tensor $\tens{I}$ maps any second-rank, symmetric tensor $\tens u$ to itself
 
 \begin{equation*}
-\tens{I}:\tensii u=\tensii u.
+\tens{I}:\tens u=\tens u.
 \end{equation*}
 
 It is straightforward to work out the components of $\tens{I}$ (accounting for both minor and major symmetries)
@@ -45,10 +45,10 @@ I_{ijkl}=\frac12\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right).
 
 ** Fourth-rank spherical projection tensor
 
-The fourth-rank spherical projection tensor $\tens{J}$ extracts the spherical part of any symmetric, second-rank tensor $\tensii u$
+The fourth-rank spherical projection tensor $\tens{J}$ extracts the spherical part of any symmetric, second-rank tensor $\tens u$
 
 \begin{equation*}
-\tens{J}:\tensii u=\frac1d\tr(\tensii u)\tens{\delta},
+\tens{J}:\tens u=\frac1d\tr(\tens u)\tens{\delta},
 \end{equation*}
 
 where $\tens{\delta}$ is the second-rank identity tensor (with components $\delta_{ij}$). In particular, $\tens{J}:\tens{\delta}=\tens{\delta}$. In intrinsic form, $\tens{J}$ reads
@@ -65,10 +65,10 @@ J_{ijkl} = \frac1d\delta_{ij}\delta_{kl}.
 
 ** Fourth-rank deviatoric projection tensor
 
-The fourth-rank deviatoric projection tensor $\tens{K}$ extracts the deviatoric part of any symmetric, second-rank tensor $\tensii u$
+The fourth-rank deviatoric projection tensor $\tens{K}$ extracts the deviatoric part of any symmetric, second-rank tensor $\tens u$
 
 \begin{equation*}
-\tens{K}:\tensii u=\tensii u-\frac1d\tr(\tensii u)\tens{\delta}=\tensii u-\tens{J}:\tensii u,
+\tens{K}:\tens u=\tens u-\frac1d\tr(\tens u)\tens{\delta}=\tens u-\tens{J}:\tens u,
 \end{equation*}
 
 from which it results that
@@ -100,7 +100,7 @@ It can readily be verified that
 \begin{gather*}
 \tens{J}:\tens{J}=\tens{J},\\
 \tens{K}:\tens{K}=\tens{K},\\
-\tens{K}:\tens{J}=\tens{J}:\tens{K}=\tensii0.
+\tens{K}:\tens{J}=\tens{J}:\tens{K}=\tens0.
 \end{gather*}
 
 Therefore, multiplication of two isotropic tensors $\tensiv T_i=a_i\tens{J}+b_i\tens{K}$ ($i=1,2$) is trivial

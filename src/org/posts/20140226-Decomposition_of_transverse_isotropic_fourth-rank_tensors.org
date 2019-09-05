@@ -13,11 +13,11 @@ $\newcommand{\kronecker}{\circledast}$
 
 * Two second-rank projection tensors
 
-It is recalled that transverse isotropy is defined by one single preferred direction. In the present post, $\vec n$ denotes the unit vector which indicates this preferred direction. Then, $\tensii p$ and $\tensii q$ are the following projectors
+It is recalled that transverse isotropy is defined by one single preferred direction. In the present post, $\vec n$ denotes the unit vector which indicates this preferred direction. Then, $\tens p$ and $\tens q$ are the following projectors
 
 \begin{equation}
-\newcommand{\p}{\tensii p}
-\newcommand{\q}{\tensii q}
+\newcommand{\p}{\tens p}
+\newcommand{\q}{\tens q}
 \label{eq:1}
 \p=\vec n\otimes\vec n,\quad\q=\tens{\delta}-\p.
 \end{equation}
@@ -25,7 +25,7 @@ It is recalled that transverse isotropy is defined by one single preferred direc
 $\p$ is the projector onto the direction of anisotropy $\vec n$, while $\q$ is the projection onto the plane of isotropy (orthogonal to $\vec n$). It can readily be verified that
 
 \begin{align*}
-\p\cdot\p&=\p,&\q\cdot\q&=\q,&\p\cdot\q&=\q\cdot\p=\tensii 0,\\
+\p\cdot\p&=\p,&\q\cdot\q&=\q,&\p\cdot\q&=\q\cdot\p=\tens 0,\\
 \p:\p&=1,&\q:\q&=2,&\p:\q&=\q:\p=0.
 \end{align*}
 
@@ -33,69 +33,69 @@ $\p$ is the projector onto the direction of anisotropy $\vec n$, while $\q$ is t
 
 It will be convenient to introduce a new, Kronecker-like product of two second-rank tensors, which Del Piero ([[https://doi.org/10.1007/BF00041097][1979]]) named /tensor product of linear transformations/, and which will be denoted $\boxtimes{}$.
 
-As a preliminary note, it should be observed that any fourth-rank tensor $\tensiv A$ can be viewed as a endomorphism over the space of second-rank tensors, since $\tensii x\mapsto\tensiv A:\tensii x$ is a linear mapping (the convention adopted in this blog for the double dot product has been specified in a [[file:./20140219-On_the_double_dot_product.org][previous post]]). Therefore, the fourth-rank tensor $\tensii a\boxtimes\tensii b$ ($\tensii a, \tensii b$: second-rank tensors) can be defined by how it operates on second-rank tensors $\tensii x$
+As a preliminary note, it should be observed that any fourth-rank tensor $\tensiv A$ can be viewed as a endomorphism over the space of second-rank tensors, since $\tens x\mapsto\tensiv A:\tens x$ is a linear mapping (the convention adopted in this blog for the double dot product has been specified in a [[file:./20140219-On_the_double_dot_product.org][previous post]]). Therefore, the fourth-rank tensor $\tens a\boxtimes\tens b$ ($\tens a, \tens b$: second-rank tensors) can be defined by how it operates on second-rank tensors $\tens x$
 
 \begin{equation}
 \label{eq:2}
-\left(\tensii a\boxtimes\tensii b\right):\tensii x=\tensii a\cdot\tensii x\cdot\transp{\tensii b}.
+\left(\tens a\boxtimes\tens b\right):\tens x=\tens a\cdot\tens x\cdot\transp{\tens b}.
 \end{equation}
 
-Writing the above definition in terms of the components of $\tensii a$, $\tensii b$ and $\tensii x$, it is found that $\left(\tensii a\boxtimes\tensii b\right):\tensii x=a_{ik}x_{kl}b_{jl}\vec e_i\otimes\vec e_j$, which shows that the components of $\tensii a\boxtimes\tensii b$ are
+Writing the above definition in terms of the components of $\tens a$, $\tens b$ and $\tens x$, it is found that $\left(\tens a\boxtimes\tens b\right):\tens x=a_{ik}x_{kl}b_{jl}\vec e_i\otimes\vec e_j$, which shows that the components of $\tens a\boxtimes\tens b$ are
 
 \begin{equation}
 \label{eq:3}
-\left(\tensii a\boxtimes\tensii b\right)_{ijkl}=a_{ik}b_{jl},
+\left(\tens a\boxtimes\tens b\right)_{ijkl}=a_{ik}b_{jl},
 \end{equation}
 
 from which it results
 
 \begin{equation*}
-\transp{\left(\tensii a\boxtimes\tensii b\right)}=\transp{\tensii a}\boxtimes\transp{\tensii b}.
+\transp{\left(\tens a\boxtimes\tens b\right)}=\transp{\tens a}\boxtimes\transp{\tens b}.
 \end{equation*}
 
-Given four second-rank tensors $\tensii a$, $\tensii b$, $\tensii c$ and $\tensii d$, the following identity holds
+Given four second-rank tensors $\tens a$, $\tens b$, $\tens c$ and $\tens d$, the following identity holds
 
 \begin{equation}
 \label{eq:4}
-\left(\tensii a\boxtimes\tensii b\right):\left(\tensii c\boxtimes\tensii d\right)=\left(\tensii a\cdot\tensii c\right)\boxtimes\left(\tensii b\cdot\tensii d\right).
+\left(\tens a\boxtimes\tens b\right):\left(\tens c\boxtimes\tens d\right)=\left(\tens a\cdot\tens c\right)\boxtimes\left(\tens b\cdot\tens d\right).
 \end{equation}
 
-Indeed, let $\tensii x$ be a second-rank tensor. Then, from Eq. \eqref{eq:2}
+Indeed, let $\tens x$ be a second-rank tensor. Then, from Eq. \eqref{eq:2}
 
 \begin{align*}
-\left(\tensii a\boxtimes\tensii b\right):\left(\tensii c\boxtimes\tensii d\right):\tensii x&=\left(\tensii a\boxtimes\tensii b\right):\left(\tensii c\cdot\tensii x\cdot\transp{\tensii d}\right)=\tensii a\cdot\left(\tensii c\cdot\tensii x\cdot\transp{\tensii d}\right)\cdot\transp{\tensii b}\\
-&=\left(\tensii a\cdot\tensii c\right)\cdot\tensii x\cdot\left(\transp{\tensii d}\cdot\transp{\tensii b}\right)=\left(\tensii a\cdot\tensii c\right)\cdot\tensii x\cdot\transp{\left(\tensii b\cdot\tensii d\right)}\\
-&=\left(\left(\tensii a\cdot\tensii c\right)\boxtimes\left(\tensii b\cdot\tensii d\right)\right):\tensii x.
+\left(\tens a\boxtimes\tens b\right):\left(\tens c\boxtimes\tens d\right):\tens x&=\left(\tens a\boxtimes\tens b\right):\left(\tens c\cdot\tens x\cdot\transp{\tens d}\right)=\tens a\cdot\left(\tens c\cdot\tens x\cdot\transp{\tens d}\right)\cdot\transp{\tens b}\\
+&=\left(\tens a\cdot\tens c\right)\cdot\tens x\cdot\left(\transp{\tens d}\cdot\transp{\tens b}\right)=\left(\tens a\cdot\tens c\right)\cdot\tens x\cdot\transp{\left(\tens b\cdot\tens d\right)}\\
+&=\left(\left(\tens a\cdot\tens c\right)\boxtimes\left(\tens b\cdot\tens d\right)\right):\tens x.
 \end{align*}
 
-Eq. \eqref{eq:3} shows that even if $\tensii a$ and $\tensii b$ are symmetric, the tensor product $\tensii a\boxtimes\tensii b$ does not necessarily have the minor symmetries. It will therefore be convenient to define $\tensii a\boxtimessym\tensii b$, as the tensor $\tensii a\boxtimes\tensii b$, /symmetrized with respect to the last two indices/
+Eq. \eqref{eq:3} shows that even if $\tens a$ and $\tens b$ are symmetric, the tensor product $\tens a\boxtimes\tens b$ does not necessarily have the minor symmetries. It will therefore be convenient to define $\tens a\boxtimessym\tens b$, as the tensor $\tens a\boxtimes\tens b$, /symmetrized with respect to the last two indices/
 
 \begin{equation*}
-\left(\tensii a\boxtimessym\tensii b\right)_{ijkl}=\frac12\left(a_{ik}b_{jl}+a_{il}b_{jk}\right),
+\left(\tens a\boxtimessym\tens b\right)_{ijkl}=\frac12\left(a_{ik}b_{jl}+a_{il}b_{jk}\right),
 \end{equation*}
 
-or, in intrinsic form ($\tensii x$: second-rank tensor)
+or, in intrinsic form ($\tens x$: second-rank tensor)
 
 \begin{equation}
 \label{eq:5}
-\left(\tensii a\boxtimessym\tensii b\right):\tensii x=\frac12\left(\tensii a\boxtimes\tensii b\right):\left(\tensii x+\transp{\tensii x}\right)=\frac12\tensii a\cdot\left(\tensii x+\transp{\tensii x}\right)\cdot\transp{\tensii b}.
+\left(\tens a\boxtimessym\tens b\right):\tens x=\frac12\left(\tens a\boxtimes\tens b\right):\left(\tens x+\transp{\tens x}\right)=\frac12\tens a\cdot\left(\tens x+\transp{\tens x}\right)\cdot\transp{\tens b}.
 \end{equation}
 
 An identity similar to Eq. \eqref{eq:4} can then be derived with $\boxtimessym$
 
 \begin{equation}
 \label{eq:6}
-\left(\tensii a\boxtimessym\tensii b\right):\left(\tensii c\boxtimessym\tensii d\right)=\frac12\left(\left(\tensii a\cdot\tensii c\right)\boxtimessym\left(\tensii b\cdot\tensii d\right)+\left(\tensii a\cdot\tensii d\right)\boxtimessym\left(\tensii b\cdot\tensii c\right)\right).
+\left(\tens a\boxtimessym\tens b\right):\left(\tens c\boxtimessym\tens d\right)=\frac12\left(\left(\tens a\cdot\tens c\right)\boxtimessym\left(\tens b\cdot\tens d\right)+\left(\tens a\cdot\tens d\right)\boxtimessym\left(\tens b\cdot\tens c\right)\right).
 \end{equation}
 
 The following identities, involving the second-rank projectors $\p$ and $\q$ [see Eq. \eqref{eq:1}], readily follow from Eq. \eqref{eq:3}
 \begin{align*}
-\left(\p\boxtimessym\p\right):\p&=\p, & \left(\p\boxtimessym\p\right):\q&=\tensii 0,\\
-\left(\q\boxtimessym\q\right):\p&=\tensii 0, & \left(\q\boxtimessym\q\right):\q&=\q,
+\left(\p\boxtimessym\p\right):\p&=\p, & \left(\p\boxtimessym\p\right):\q&=\tens 0,\\
+\left(\q\boxtimessym\q\right):\p&=\tens 0, & \left(\q\boxtimessym\q\right):\q&=\q,
 \end{align*}
 and
 \begin{equation*}
-\left(\p\boxtimessym\q\right):\p=\left(\p\boxtimessym\q\right):\q=\left(\q\boxtimessym\p\right):\p=\left(\q\boxtimessym\p\right):\q=\tensii 0.
+\left(\p\boxtimessym\q\right):\p=\left(\p\boxtimessym\q\right):\q=\left(\q\boxtimessym\p\right):\p=\left(\q\boxtimessym\p\right):\q=\tens 0.
 \end{equation*}
 
 Besides, the following multiplication table results from Eq. \eqref{eq:6} $\newcommand{\x}{\boxtimessym}$
@@ -107,10 +107,10 @@ Besides, the following multiplication table results from Eq. \eqref{eq:6} $\newc
 | <c>      | <c>         | <c>         | <c>         | <c>         |
 | $:$      | $\p\x\p$    | $\p\x\q$    | $\q\x\p$    | $\q\x\q$    |
 |----------+-------------+-------------+-------------+-------------|
-| $\p\x\p$ | $\p\x\p$    | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ |
-| $\p\x\q$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ |
-| $\q\x\p$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ |
-| $\q\x\q$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ | $\q\x\q$    |
+| $\p\x\p$ | $\p\x\p$    | $\tens 0$ | $\tens 0$ | $\tens 0$ |
+| $\p\x\q$ | $\tens 0$ | $\tens 0$ | $\tens 0$ | $\tens 0$ |
+| $\q\x\p$ | $\tens 0$ | $\tens 0$ | $\tens 0$ | $\tens 0$ |
+| $\q\x\q$ | $\tens 0$ | $\tens 0$ | $\tens 0$ | $\q\x\q$    |
 |----------+-------------+-------------+-------------+-------------|
 
 To conclude, it is observed that the fourth-rank tensor $\tens{I}=\tens{\delta}\boxtimessym\tens{\delta}$ maps any second-rank tensor to its symmetric part: it reduces to the identity tensor over the space of second-rank, symmetric tensors.

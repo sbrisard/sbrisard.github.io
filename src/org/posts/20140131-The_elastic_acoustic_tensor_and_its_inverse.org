@@ -34,10 +34,10 @@ Since $\vec n$ is a unit vector, we have $n_in_i=1$, and
 \vec n\cdot\tens{I}\cdot\vec n=\frac12\left(\tens{\delta}+\vec n\otimes\vec n\right),
 \end{equation*}
 
-where $\tens{\delta}$ denotes the second-rank identity tensor. It will be convenient to introduce the projectors $\tensii p$ and $\tensii q$, defined as follows
+where $\tens{\delta}$ denotes the second-rank identity tensor. It will be convenient to introduce the projectors $\tens p$ and $\tens q$, defined as follows
 
 \begin{equation*}
-\tensii p=\vec n\otimes\vec n\qquad\tensii q=\tens{\delta}-\tensii p,
+\tens p=\vec n\otimes\vec n\qquad\tens q=\tens{\delta}-\tens p,
 \end{equation*}
 
 or, using indices
@@ -49,34 +49,34 @@ p_{ij}=n_in_j\qquad q_{ij}=\delta_{ij}-n_in_j.
 It can readily be verified that
 \begin{equation}
 \label{eq:3}
-\tensii p\cdot\tensii p=\tensii p,\qquad\tensii q\cdot\tensii q=\tensii q,\qquad\tensii p\cdot\tensii q=\tensii q\cdot\tensii p=\tensii0,
+\tens p\cdot\tens p=\tens p,\qquad\tens q\cdot\tens q=\tens q,\qquad\tens p\cdot\tens q=\tens q\cdot\tens p=\tens0,
 \end{equation}
 
 and
 
 \begin{equation}
 \label{eq:4}
-\vec n\cdot\tens{I}\cdot\vec n=\tensii p+\frac12\tensii q.
+\vec n\cdot\tens{I}\cdot\vec n=\tens p+\frac12\tens q.
 \end{equation}
 
 Similarly
 
 \begin{equation}
 \label{eq:5}
-\vec n\cdot\tens{J}\cdot\vec n=\frac1d\vec n\cdot\left(\tens{\delta}\otimes\tens{\delta}\right)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tensii p.
+\vec n\cdot\tens{J}\cdot\vec n=\frac1d\vec n\cdot\left(\tens{\delta}\otimes\tens{\delta}\right)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tens p.
 \end{equation}
 
 Finally, combining identity $\tens{K}=\tens{I}-\tens{J}$ with Eqs. \eqref{eq:4} and \eqref{eq:5}
 
 \begin{equation}
 \label{eq:6}
-\vec n\cdot\tens{K}\cdot\vec n=\frac{d-1}d\tensii p+\frac12\tensii q.
+\vec n\cdot\tens{K}\cdot\vec n=\frac{d-1}d\tens p+\frac12\tens q.
 \end{equation}
 
 The acoustic tensor of an elastic, linear, isotropic material is obtained from Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:5} and \eqref{eq:6}
 
 \begin{equation*}
-\tens A(\vec n)=\left(\kappa+2\mu\frac{d-1}d\right)\tensii p+\mu\tensii q.
+\tens A(\vec n)=\left(\kappa+2\mu\frac{d-1}d\right)\tens p+\mu\tens q.
 \end{equation*}
 
 From [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][this post]], it can readily be verified that
@@ -88,11 +88,11 @@ From [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][this p
 this identity being true in both 3D and plane strain elasticity. The acoustic tensor therefore reads
 
 \begin{equation*}
-\tens A(\vec k)=k^2\mu\left(\frac{2\left(1-\nu\right)}{1-2\nu}\tensii p+\tensii q\right).
+\tens A(\vec k)=k^2\mu\left(\frac{2\left(1-\nu\right)}{1-2\nu}\tens p+\tens q\right).
 \end{equation*}
 
-Finally, using the properties of the projectors $\tensii p$ and $\tensii q$ [see Eq. \eqref{eq:3}], the /inverse/ of the acoustic tensor can be derived
+Finally, using the properties of the projectors $\tens p$ and $\tens q$ [see Eq. \eqref{eq:3}], the /inverse/ of the acoustic tensor can be derived
 
 \begin{equation*}
-\tens A^{-1}(\vec k)=\frac1{k^2\mu}\left(\frac{1-2\nu}{2\left(1-\nu\right)}\tensii p+\tensii q\right).
+\tens A^{-1}(\vec k)=\frac1{k^2\mu}\left(\frac{1-2\nu}{2\left(1-\nu\right)}\tens p+\tens q\right).
 \end{equation*}
