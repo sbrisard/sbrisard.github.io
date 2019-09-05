@@ -65,16 +65,16 @@ J_{ijkl} = \frac1d\delta_{ij}\delta_{kl}.
 
 ** Fourth-rank deviatoric projection tensor
 
-The fourth-rank deviatoric projection tensor $\devprojiv$ extracts the deviatoric part of any symmetric, second-rank tensor $\tensii u$
+The fourth-rank deviatoric projection tensor $\tens{K}$ extracts the deviatoric part of any symmetric, second-rank tensor $\tensii u$
 
 \begin{equation*}
-\devprojiv:\tensii u=\tensii u-\frac1d\tr(\tensii u)\identii=\tensii u-\sphprojiv:\tensii u,
+\tens{K}:\tensii u=\tensii u-\frac1d\tr(\tensii u)\identii=\tensii u-\sphprojiv:\tensii u,
 \end{equation*}
 
 from which it results that
 
 \begin{equation*}
-\devprojiv=\identiv-\sphprojiv.
+\tens{K}=\identiv-\sphprojiv.
 \end{equation*}
 
 * Stiffness tensor
@@ -82,37 +82,37 @@ from which it results that
 Going back the constitutive law of the linearly elastic, isotropic material given by Eq. \eqref{eq:1}, it is found that
 
 \begin{equation*}
-\stress=d\kappa\sphprojiv:\strain+2\shearmod\devprojiv:\strain=\stiffness:\strain,
+\stress=d\kappa\sphprojiv:\strain+2\shearmod\tens{K}:\strain=\stiffness:\strain,
 \end{equation*}
 
 where $\stiffness$ is the fourth-rank stiffness tensor of the material
 
 \begin{equation*}
-\stiffness=d\kappa\sphprojiv+2\shearmod\devprojiv.
+\stiffness=d\kappa\sphprojiv+2\shearmod\tens{K}.
 \end{equation*}
 
-In isotropic elasticity, the stiffness tensor is a linear combination of the two tensors $\sphprojiv$ and $\devprojiv$. This is in fact a general result, which is heavily used in materials science: any /isotropic/ fourth-rank tensor with minor and major symmetries is a linear combination of $\sphprojiv$ and $\devprojiv$. In other words, $\left(\sphprojiv, \devprojiv\right)$ forms a /basis/ of the fourth-rank isotropic tensors with minor and major symmetries. Why this is useful will become obvious in the next section, where I will show that algebra in this basis is dead simple.
+In isotropic elasticity, the stiffness tensor is a linear combination of the two tensors $\sphprojiv$ and $\tens{K}$. This is in fact a general result, which is heavily used in materials science: any /isotropic/ fourth-rank tensor with minor and major symmetries is a linear combination of $\sphprojiv$ and $\tens{K}$. In other words, $\left(\sphprojiv, \tens{K}\right)$ forms a /basis/ of the fourth-rank isotropic tensors with minor and major symmetries. Why this is useful will become obvious in the next section, where I will show that algebra in this basis is dead simple.
 
-* Algebra of the $\sphprojiv$ and $\devprojiv$ tensors
+* Algebra of the $\sphprojiv$ and $\tens{K}$ tensors
 
 It can readily be verified that
 
 \begin{gather*}
 \sphprojiv:\sphprojiv=\sphprojiv,\\
-\devprojiv:\devprojiv=\devprojiv,\\
-\devprojiv:\sphprojiv=\sphprojiv:\devprojiv=\tensii0.
+\tens{K}:\tens{K}=\tens{K},\\
+\tens{K}:\sphprojiv=\sphprojiv:\tens{K}=\tensii0.
 \end{gather*}
 
-Therefore, multiplication of two isotropic tensors $\tensiv T_i=a_i\sphprojiv+b_i\devprojiv$ ($i=1,2$) is trivial
+Therefore, multiplication of two isotropic tensors $\tensiv T_i=a_i\sphprojiv+b_i\tens{K}$ ($i=1,2$) is trivial
 
 \begin{equation*}
-\tensiv T_1:\tensiv T_2=a_1a_2\sphprojiv+b_1b_2\devprojiv.
+\tensiv T_1:\tensiv T_2=a_1a_2\sphprojiv+b_1b_2\tens{K}.
 \end{equation*}
 
-Also, inversion of an isotropic tensor $\tensiv T=a\sphprojiv+b\devprojiv$ is straightforward
+Also, inversion of an isotropic tensor $\tensiv T=a\sphprojiv+b\tens{K}$ is straightforward
 
 \begin{equation*}
-\tensiv T^{-1}=\frac1a\sphprojiv+\frac1b\devprojiv.
+\tensiv T^{-1}=\frac1a\sphprojiv+\frac1b\tens{K}.
 \end{equation*}
 
 All these expressions will prove extremely useful in due time.
@@ -121,4 +121,4 @@ All these expressions will prove extremely useful in due time.
 
 This is the end of this series on the elastic constants of isotropic materials. I have shown that (regardless of the dimension $d$ of the physical space), such materials are characterized by two constants. The shear modulus $\shearmod$, the Poisson ratio $\nu$ and Young's modulus $E$ do not depend on $d$, while the plane strains expression of the bulk modulus $\kappa$ differs from its 3D expression (see Eqs. \eqref{eq:2} and \eqref{eq:3}).
 
-This series was also a good opportunity to introduce the tensors $\sphprojiv$ and $\devprojiv$, which form a basis for the isotropic, fourth-rank tensors. Using this basis is very convenient, as algebra within this basis is extremely simple.
+This series was also a good opportunity to introduce the tensors $\sphprojiv$ and $\tens{K}$, which form a basis for the isotropic, fourth-rank tensors. Using this basis is very convenient, as algebra within this basis is extremely simple.
