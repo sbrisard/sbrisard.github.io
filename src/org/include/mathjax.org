@@ -16,7 +16,6 @@
 #+HTML_HEAD_EXTRA:           boxtimessym : '\\boxtimes^\\text s',
 #+HTML_HEAD_EXTRA:           complexes: '\\mathbb C',
 #+HTML_HEAD_EXTRA:           diff: '\\mathrm{d}',
-#+HTML_HEAD_EXTRA:           domain: '\\Omega',
 #+HTML_HEAD_EXTRA:           dS: ['\\operatorname{dS}_{#1}', 1],
 #+HTML_HEAD_EXTRA:           dV: ['\\operatorname{dV}_{#1}', 1],
 #+HTML_HEAD_EXTRA:           eff: '\\text{eff}',

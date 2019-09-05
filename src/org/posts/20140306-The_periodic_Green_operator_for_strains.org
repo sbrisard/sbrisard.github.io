@@ -41,10 +41,10 @@ with
 and
 
 \begin{equation*}
-\hat\vec{u}_b=\frac1{\meas{\domain}}\int_\domain\vec{u}(\vec x)\exp(-i\vec k_b\cdot\vec x)\dV{\vec x},
+\hat\vec{u}_b=\frac1{\meas{\Omega}}\int_\Omega\vec{u}(\vec x)\exp(-i\vec k_b\cdot\vec x)\dV{\vec x},
 \end{equation*}
 
-where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\domain=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\strain$, stress $\stress$ and prestress $\prestress$ are expanded in Fourier series
+where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\Omega=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\strain$, stress $\stress$ and prestress $\prestress$ are expanded in Fourier series
 
 \begin{align*}
 \strain(\vec x)&=\sum_{b\in\integers^d}\hat\strain_b\exp(i\vec k_b\cdot\vec x),\\

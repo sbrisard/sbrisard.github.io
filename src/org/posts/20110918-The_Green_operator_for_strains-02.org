@@ -4,23 +4,23 @@
 #+TITLE: The Green operator for strains, part 2: elementary properties
 #+DATE: <2011-09-18 Sun>
 
-In [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]] of this series, we have seen how the Green operator for strains ($\greeniv_0$) was defined as the operator providing the solution to the problem of elastic equilibrium of a /prestressed/ homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.@@html:<!-- more -->@@ We again consider the bounded domain $\domain\subset\reals^d$, occupied by a homogeneous, linearly elastic material with stiffness $\stiffness_0$. $\greeniv_0$ denotes the Green operator for strains for the material $\stiffness_0$, over the domain $\domain$. The first property is a direct consequence of the definition of $\greeniv_0$, given in [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]].
+In [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]] of this series, we have seen how the Green operator for strains ($\greeniv_0$) was defined as the operator providing the solution to the problem of elastic equilibrium of a /prestressed/ homogeneous domain. In this instalment, some simple, but useful properties of this operator will be proved.@@html:<!-- more -->@@ We again consider the bounded domain $\Omega\subset\reals^d$, occupied by a homogeneous, linearly elastic material with stiffness $\stiffness_0$. $\greeniv_0$ denotes the Green operator for strains for the material $\stiffness_0$, over the domain $\Omega$. The first property is a direct consequence of the definition of $\greeniv_0$, given in [[file:./20110911-The_Green_operator_for_strains-01.org][part 1]].
 
 * Application to self-equilibrated prestresses
 
 We consider a /self-equilibrated/ prestress $\prestress$ (that is, $\nabla\cdot\prestress=\tensii0$). We will prove that $\greeniv_0\circledast\prestress=\tensii0$. By definition of the Green operator, $\greeniv_0\circledast\prestress=-\strain$, where $\strain$ is the strain which solves the following problem
 \begin{align}
 \label{eq:1}
-\nabla_{\vec x}\cdot\left(\stiffness_0:\strain+\prestress\right)&=\vec{0}&&(\vec x\in\domain),\\
+\nabla_{\vec x}\cdot\left(\stiffness_0:\strain+\prestress\right)&=\vec{0}&&(\vec x\in\Omega),\\
 \label{eq:2}
-\strain(\vec x)&=\nabla_\vec x^\text{s}\vec{u}&&(\vec x\in\domain),\\
+\strain(\vec x)&=\nabla_\vec x^\text{s}\vec{u}&&(\vec x\in\Omega),\\
 \label{eq:3}
-\vec{u}(\vec x)&=\vec 0&&(\vec x\in\partial\domain).
+\vec{u}(\vec x)&=\vec 0&&(\vec x\in\partial\Omega).
 \end{align}
 
 Since $\nabla\cdot\prestress=\vec 0$, it is found that Eq. \eqref{eq:1} reduces to
 \begin{align*}
-    \nabla_{\vec x}\cdot\left(\stiffness_0:\strain\right)&=\vec{0}&&(\vec x\in\domain).
+    \nabla_{\vec x}\cdot\left(\stiffness_0:\strain\right)&=\vec{0}&&(\vec x\in\Omega).
 \end{align*}
 
 Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\vec{u}=\vec 0$ (and $\strain=\nabla^\text{s}\vec{u}=\tensii0$). Since $\greeniv_0\circledast\prestress=-\strain$, it is finally found that $\greeniv_0\circledast\prestress=\tensiv 0$. To sum up, we have proved the following property
@@ -53,14 +53,14 @@ For any prestress $\prestress$,
 
 To close this instalment, we again consider a prestress $\prestress$, and the associated strain $\strain=-\greeniv_0\circledast\prestress$. We seek the value of $\volavg\strain$, where overlined quantities denote /volume averages/
 \begin{equation*}
-    \volavg{\strain} = \frac 1{\meas{\domain}}\int_\domain\strain(\vec x)\dV{\vec x}.
+    \volavg{\strain} = \frac 1{\meas{\Omega}}\int_\Omega\strain(\vec x)\dV{\vec x}.
 \end{equation*}
 
 Using Stokes' theorem, and the definition of $\vec{u}$
 \begin{equation*}
-    \volavg\strain=\frac1{\meas{\domain}}\int_\domain\nabla_\vec x^\text s\vec{u}\dV{\vec x}=\frac1{2\meas{\domain}}\int_{\partial\domain}\left[\vec{u}(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\vec{u}(\vec x)\right]\dS{\vec x},
+    \volavg\strain=\frac1{\meas{\Omega}}\int_\Omega\nabla_\vec x^\text s\vec{u}\dV{\vec x}=\frac1{2\meas{\Omega}}\int_{\partial\Omega}\left[\vec{u}(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\vec{u}(\vec x)\right]\dS{\vec x},
 \end{equation*}
-where $\vec{u}$ is the displacement associated to the strain $\strain$, and $\vec n$ is the outward normal to the boundary $\partial\domain$ of the domain $\domain$. From the boundary condition \eqref{eq:3}, we finally find $\volavg\strain=\tensii0$. Finally
+where $\vec{u}$ is the displacement associated to the strain $\strain$, and $\vec n$ is the outward normal to the boundary $\partial\Omega$ of the domain $\Omega$. From the boundary condition \eqref{eq:3}, we finally find $\volavg\strain=\tensii0$. Finally
 
 #+BEGIN_THEOREM
 For any prestress $\prestress$,

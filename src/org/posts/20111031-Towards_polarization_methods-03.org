@@ -24,11 +24,11 @@ Let $\polarization$ be the unique solution of the Lippmann-Schwinger equation (s
 \end{equation*}
 
 If the reference material is stiffer (resp. softer) than the heterogeneous material, then $\mathcal H$ is minimum (resp. maximum) at $\polarization$. More precisely
-  - if $\stiffness(\vec x)-\stiffness_0$ is positive, semi-definite at every point $\vec x\in\domain$, then
+  - if $\stiffness(\vec x)-\stiffness_0$ is positive, semi-definite at every point $\vec x\in\Omega$, then
 \begin{equation*}
 \text{for all}\;\prestress(\vec x),\mathcal H(\prestress)\leq\mathcal H(\polarization),
 \end{equation*}
-  - if $\stiffness(\vec x)-\stiffness_0$ is negative, semi-definite at every point $\vec x\in\domain$, then
+  - if $\stiffness(\vec x)-\stiffness_0$ is negative, semi-definite at every point $\vec x\in\Omega$, then
 \begin{equation*}
 \text{for all}\;\prestress(\vec x),\mathcal H(\prestress)\geq\mathcal H(\polarization).
 \end{equation*}

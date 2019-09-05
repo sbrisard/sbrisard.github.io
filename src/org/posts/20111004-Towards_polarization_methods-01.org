@@ -6,17 +6,17 @@
 
 In this series, we will enter the heart of the matter. We will look at non-standard ways of numerically solving the local problem of micromechanics, introducing first the Lippmann--Schwinger equation (in this instalment), then the energy principle of Hashin and Shtrikman (in the next instalment).@@html:<!-- more -->@@
 
-We again consider a heterogeneous material, with local stiffness $\stiffness$, located in domain $\domain\subset\reals^d$. As will be discussed elsewhere, the local problem of micromechanics reads
+We again consider a heterogeneous material, with local stiffness $\stiffness$, located in domain $\Omega\subset\reals^d$. As will be discussed elsewhere, the local problem of micromechanics reads
 
 \begin{align}
     \label{eq:1}
-    \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
+    \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
     \label{eq:2}
-    \stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\domain),\\
+    \stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\Omega),\\
     \label{eq:3}
-    \strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\domain),\\
+    \strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
     \label{eq:4}
-    \vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+    \vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align}
 
 where $\Strain$ is the macroscopic (imposed) strain. The solution to this problem defines the effective elastic properties $\stiffness^\text{eff}$, since, by definition
@@ -27,7 +27,7 @@ where $\Strain$ is the macroscopic (imposed) strain. The solution to this proble
 
 where $\Stress$ is the macroscopic stress.
 
-Eqs. \eqref{eq:1} -- \eqref{eq:4} would be trivial if we had $\stiffness(\vec x)=\stiffness_0$ for any $\vec x\in\domain$ ($\stiffness_0$ is a /constant/ stiffness tensor). Indeed, the solution would then be
+Eqs. \eqref{eq:1} -- \eqref{eq:4} would be trivial if we had $\stiffness(\vec x)=\stiffness_0$ for any $\vec x\in\Omega$ ($\stiffness_0$ is a /constant/ stiffness tensor). Indeed, the solution would then be
 
 \begin{equation*}
 \strain(\vec x)=\Strain,\qquad\stress(\vec x)=\stiffness_0:\Strain.
@@ -59,10 +59,10 @@ Eq. \eqref{eq:5} then takes the following compact form
 Determination of the polarization $\polarization$ requires the solution to Eqs. \eqref{eq:1} -- \eqref{eq:4}; therefore, it would seem that Eq. \eqref{eq:7} achieved nothing! However, let us assume for a moment that we /know/ $\polarization$ beforehand. Then Eqs. (1) -- (4) reduce to
 
 \begin{align*}
-\nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
-\stress(\vec x)&=\stiffness_0:\strain(\vec x)+\polarization(\vec x)&&(\vec x\in\domain),\\
-\strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\domain),\\
-\vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+\nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
+\stress(\vec x)&=\stiffness_0:\strain(\vec x)+\polarization(\vec x)&&(\vec x\in\Omega),\\
+\strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
+\vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align*}
 
 which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ linear elastic material $\stiffness_0$. From [[file:./20110911-The_Green_operator_for_strains-01.org][this series]], the solution to the above problem is known (at least, formally)
