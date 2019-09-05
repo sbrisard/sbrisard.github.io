@@ -26,7 +26,6 @@
 #+HTML_HEAD_EXTRA:           reals: '\\mathbb R',
 #+HTML_HEAD_EXTRA:           strain: '\\tens{\\varepsilon}',
 #+HTML_HEAD_EXTRA:           stress: '\\tens{\\sigma}',
-#+HTML_HEAD_EXTRA:           svec: ['{\\boldsymbol{#1}}', 1],
 #+HTML_HEAD_EXTRA:           tens: ['\\vec{#1}', 1],
 #+HTML_HEAD_EXTRA:           tensii: ['\\vec{#1}', 1],
 #+HTML_HEAD_EXTRA:           tensiv: ['\\vec{#1}', 1],
