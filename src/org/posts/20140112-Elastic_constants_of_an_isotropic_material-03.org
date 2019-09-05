@@ -48,13 +48,13 @@ I_{ijkl}=\frac12\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right).
 The fourth-rank spherical projection tensor $\sphprojiv$ extracts the spherical part of any symmetric, second-rank tensor $\tensii u$
 
 \begin{equation*}
-\sphprojiv:\tensii u=\frac1d\tr(\tensii u)\identii,
+\sphprojiv:\tensii u=\frac1d\tr(\tensii u)\tens{\delta},
 \end{equation*}
 
-where $\identii$ is the second-rank identity tensor (with components $\delta_{ij}$). In particular, $\sphprojiv:\identii=\identii$. In intrinsic form, $\sphprojiv$ reads
+where $\tens{\delta}$ is the second-rank identity tensor (with components $\delta_{ij}$). In particular, $\sphprojiv:\tens{\delta}=\tens{\delta}$. In intrinsic form, $\sphprojiv$ reads
 
 \begin{equation*}
-\sphprojiv=\frac1d\identii\otimes\identii,
+\sphprojiv=\frac1d\tens{\delta}\otimes\tens{\delta},
 \end{equation*}
 
 where $\otimes$ denotes the [[http://en.wikipedia.org/wiki/Tensor_product][tensor product]]. The components of $\sphprojiv$ are
@@ -68,7 +68,7 @@ J_{ijkl} = \frac1d\delta_{ij}\delta_{kl}.
 The fourth-rank deviatoric projection tensor $\tens{K}$ extracts the deviatoric part of any symmetric, second-rank tensor $\tensii u$
 
 \begin{equation*}
-\tens{K}:\tensii u=\tensii u-\frac1d\tr(\tensii u)\identii=\tensii u-\sphprojiv:\tensii u,
+\tens{K}:\tensii u=\tensii u-\frac1d\tr(\tensii u)\tens{\delta}=\tensii u-\sphprojiv:\tensii u,
 \end{equation*}
 
 from which it results that

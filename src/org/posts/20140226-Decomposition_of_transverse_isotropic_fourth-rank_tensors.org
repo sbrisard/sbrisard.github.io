@@ -19,7 +19,7 @@ It is recalled that transverse isotropy is defined by one single preferred direc
 \newcommand{\p}{\tensii p}
 \newcommand{\q}{\tensii q}
 \label{eq:1}
-\p=\vec n\otimes\vec n,\quad\q=\identii-\p.
+\p=\vec n\otimes\vec n,\quad\q=\tens{\delta}-\p.
 \end{equation}
 
 $\p$ is the projector onto the direction of anisotropy $\vec n$, while $\q$ is the projection onto the plane of isotropy (orthogonal to $\vec n$). It can readily be verified that
@@ -113,7 +113,7 @@ Besides, the following multiplication table results from Eq. \eqref{eq:6} $\newc
 | $\q\x\q$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ | $\q\x\q$    |
 |----------+-------------+-------------+-------------+-------------|
 
-To conclude, it is observed that the fourth-rank tensor $\identiv=\identii\boxtimessym\identii$ maps any second-rank tensor to its symmetric part: it reduces to the identity tensor over the space of second-rank, symmetric tensors.
+To conclude, it is observed that the fourth-rank tensor $\identiv=\tens{\delta}\boxtimessym\tens{\delta}$ maps any second-rank tensor to its symmetric part: it reduces to the identity tensor over the space of second-rank, symmetric tensors.
 
 * Walpole's basis for transverse isotropic tensors
 
@@ -173,7 +173,7 @@ Transposition is also straightforward
 The isotropic tensors $\identiv$, $\sphprojiv$ and $\tens{K}$ introduced [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][previously]] can be considered as transverse isotropic tensors. As such, they can be decomposed in Walpole's basis. First, the identity tensor $\identiv$ decomposes as follows
 
 \begin{align*}
-\identiv&=\identii\boxtimessym\identii=\left(\p+\q\right)\boxtimessym\left(\p+\q\right)\\
+\identiv&=\tens{\delta}\boxtimessym\tens{\delta}=\left(\p+\q\right)\boxtimessym\left(\p+\q\right)\\
 &=\p\boxtimessym\p+\p\boxtimessym\q+\q\boxtimessym\p+\q\boxtimessym\q\\
 &=\tensiv E_1+\tensiv G+\tensiv F+\tensiv E_2.
 \end{align*}
@@ -181,7 +181,7 @@ The isotropic tensors $\identiv$, $\sphprojiv$ and $\tens{K}$ introduced [[file:
 where the identity $\p\boxtimessym\p=\p\otimes\p=\tensiv E_1$ has been used. Now, the decomposition of $\sphprojiv$ is readily derived from its definition
 
 \begin{align*}
-3\sphprojiv&=\identii\otimes\identii=\left(\p+\q\right)\otimes\left(\p+\q\right)\\
+3\sphprojiv&=\tens{\delta}\otimes\tens{\delta}=\left(\p+\q\right)\otimes\left(\p+\q\right)\\
 &=\p\otimes\p+\p\otimes\q+\q\otimes\p+\q\otimes\q\\
 &=\tensiv E_1+\sqrt2\tensiv E_3+\sqrt2\tensiv E_4+2\tensiv E_2.
 \end{align*}

@@ -31,13 +31,13 @@ To compute the elastic acoustic tensor, we therefore need to find the expression
 Since $\vec n$ is a unit vector, we have $n_in_i=1$, and
 
 \begin{equation*}
-\vec n\cdot\identiv\cdot\vec n=\frac12\left(\identii+\vec n\otimes\vec n\right),
+\vec n\cdot\identiv\cdot\vec n=\frac12\left(\tens{\delta}+\vec n\otimes\vec n\right),
 \end{equation*}
 
-where $\identii$ denotes the second-rank identity tensor. It will be convenient to introduce the projectors $\tensii p$ and $\tensii q$, defined as follows
+where $\tens{\delta}$ denotes the second-rank identity tensor. It will be convenient to introduce the projectors $\tensii p$ and $\tensii q$, defined as follows
 
 \begin{equation*}
-\tensii p=\vec n\otimes\vec n\qquad\tensii q=\identii-\tensii p,
+\tensii p=\vec n\otimes\vec n\qquad\tensii q=\tens{\delta}-\tensii p,
 \end{equation*}
 
 or, using indices
@@ -63,7 +63,7 @@ Similarly
 
 \begin{equation}
 \label{eq:5}
-\vec n\cdot\sphprojiv\cdot\vec n=\frac1d\vec n\cdot\left(\identii\otimes\identii\right)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tensii p.
+\vec n\cdot\sphprojiv\cdot\vec n=\frac1d\vec n\cdot\left(\tens{\delta}\otimes\tens{\delta}\right)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tensii p.
 \end{equation}
 
 Finally, combining identity $\tens{K}=\identiv-\sphprojiv$ with Eqs. \eqref{eq:4} and \eqref{eq:5}

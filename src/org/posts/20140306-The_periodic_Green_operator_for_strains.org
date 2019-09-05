@@ -126,14 +126,14 @@ where $\vec n$ is the direction of the wave-vector $\vec k$, $\vec n=\vec k/\lVe
 I have shown in a [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][previous post]] that in this case, the inverse of the acoustic tensor reads
 
 \begin{equation*}
-\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}=\frac1\shearmod\left(\frac{1-2\nu}{2\left(1-\nu\right)}\left(\vec n\otimes\vec n\right)+\identii-\left(\vec n\otimes\vec n\right)\right)=\frac1\shearmod\identii-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n,
+\left(\vec n\cdot\stiffness\cdot\vec n\right)^{-1}=\frac1\shearmod\left(\frac{1-2\nu}{2\left(1-\nu\right)}\left(\vec n\otimes\vec n\right)+\tens{\delta}-\left(\vec n\otimes\vec n\right)\right)=\frac1\shearmod\tens{\delta}-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n,
 \end{equation*}
 
 which leads to the following expression of the periodic Green operator for strains
 
 \begin{equation}
 \label{eq:7}
-\hat\tens{\Gamma}(\vec k)=\frac1{2\shearmod}\left(\left(\vec n\otimes\vec n\right)\boxtimessym\identii+\identii\boxtimessym\left(\vec n\otimes\vec n\right)\right)-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n\otimes\vec n\otimes\vec n,
+\hat\tens{\Gamma}(\vec k)=\frac1{2\shearmod}\left(\left(\vec n\otimes\vec n\right)\boxtimessym\tens{\delta}+\tens{\delta}\boxtimessym\left(\vec n\otimes\vec n\right)\right)-\frac1{2\shearmod\left(1-\nu\right)}\vec n\otimes\vec n\otimes\vec n\otimes\vec n,
 \end{equation}
 
 where the following identity has been used
