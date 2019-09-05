@@ -58,25 +58,25 @@ where $\stiffness^\eff$ is the macroscopic (or effective, or homogenized) stiffn
 
 In other words, the value of the functional of Hashin and Shtrikman at the solution of the Lippmann-Schwinger equation is the difference between the strain energy of the composite and the strain energy of the reference material.
 
-While the above result is fully general, we now assume that the reference material is /stiffer/ than the composite. In other words, $\stiffness(\vec x)\leq\stiffness_0$ at any point $\vec x\in\Omega$. We then saw in [[file:./20111031-Towards_polarization_methods-03.org][part 3]] of this series that the following inequality holds for /any/ polarization field $\prestress$
+While the above result is fully general, we now assume that the reference material is /stiffer/ than the composite. In other words, $\stiffness(\vec x)\leq\stiffness_0$ at any point $\vec x\in\Omega$. We then saw in [[file:./20111031-Towards_polarization_methods-03.org][part 3]] of this series that the following inequality holds for /any/ polarization field $\tens{\varpi}$
 
 \begin{equation}
 \label{eq:8}
-\mathcal H(\tens{\tau})\leq\mathcal H(\prestress).
+\mathcal H(\tens{\tau})\leq\mathcal H(\tens{\varpi}).
 \end{equation}
 
-Inserting Eq. \eqref{eq:7} in Eq. \eqref{eq:8} leads for any polarization field $\prestress$ to the following bound on the macroscopic potential energy of the composite
+Inserting Eq. \eqref{eq:7} in Eq. \eqref{eq:8} leads for any polarization field $\tens{\varpi}$ to the following bound on the macroscopic potential energy of the composite
 
 \begin{equation}
 \label{eq:9}
-\frac12\Strain:\stiffness^\eff:\Strain\leq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\prestress).
+\frac12\Strain:\stiffness^\eff:\Strain\leq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\tens{\varpi}).
 \end{equation}
 
 Similarly, if the reference material is /softer/ than the composite, that is $\stiffness(\vec x)\geq\stiffness_0$ for any $\vec x\in\Omega$, then Eq. \eqref{eq:9} should be replaced with
 
 \begin{equation}
 \label{eq:10}
-\frac12\Strain:\stiffness^\eff:\Strain\geq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\prestress).
+\frac12\Strain:\stiffness^\eff:\Strain\geq\frac12\Strain:\stiffness_0:\Strain+\mathcal H(\tens{\varpi}).
 \end{equation}
 
 Eqs. \eqref{eq:9} and \eqref{eq:10} have deep (deep, deep) implications, which will be explored in the next instalment of this series.

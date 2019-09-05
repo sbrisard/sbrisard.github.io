@@ -6,13 +6,13 @@
 
 Micromechanics aims at computing the macroscopic properties of heterogeneous materials. In other words, we are looking for a /stress-strain/ relationship, and displacements are of but little use to us. We therefore tend to prefer Green operators for /strains/ to Green operators for /displacements/, which are commonly used in the mathematical theory of elasticity.  The Green operator for strain is the essential ingredient for my main research topic, namely polarization techniques. In the first instalment of this series, I'm going to define the Green operator for strains.@@html:<!-- more -->@@
 
-We consider a /homogeneous/ material occupying the bounded domain $\Omega\subset\reals^d$ ($d=2,3$). $\stiffness_0$ denotes the elastic moduli of this material. In order to be able to define a Green operator, we need to specify an elementary loading. If we were to define the standard Green operator for displacements, we would consider a /point load/ as elementary load-case. For reasons that will become clearer later, it is more appropriate to consider here a point /prestress/. Keeping this in mind, we introduce a local prestress $\prestress$, which can be heterogeneous. This prestress will define the /loading/. Finally, in order to ensure well-posedness, /boundary conditions/ must be specified; we consider here fixed boundary conditions. The elasticity problem at hand then reads
+We consider a /homogeneous/ material occupying the bounded domain $\Omega\subset\reals^d$ ($d=2,3$). $\stiffness_0$ denotes the elastic moduli of this material. In order to be able to define a Green operator, we need to specify an elementary loading. If we were to define the standard Green operator for displacements, we would consider a /point load/ as elementary load-case. For reasons that will become clearer later, it is more appropriate to consider here a point /prestress/. Keeping this in mind, we introduce a local prestress $\tens{\varpi}$, which can be heterogeneous. This prestress will define the /loading/. Finally, in order to ensure well-posedness, /boundary conditions/ must be specified; we consider here fixed boundary conditions. The elasticity problem at hand then reads
 
 \begin{align}
     \label{eq:1}
     \nabla_\vec x\cdot\stress&=\vec{0} && (\vec x\in\Omega),\\
     \label{eq:2}
-    \stress(\vec x)&=\stiffness_0:\strain(\vec x)+\prestress(\vec x) && (\vec x\in\Omega),\\
+    \stress(\vec x)&=\stiffness_0:\strain(\vec x)+\tens{\varpi}(\vec x) && (\vec x\in\Omega),\\
     \label{eq:3}
     \strain(\vec x)&=\nabla_\vec x^\text{s}\vec{u} && (\vec x\in\Omega),\\
     \label{eq:4}
@@ -21,42 +21,42 @@ We consider a /homogeneous/ material occupying the bounded domain $\Omega\subset
 
 Eq. \eqref{eq:1} expresses static equilibrium ($\stress$: local stress tensor); Eq. \eqref{eq:2} is the constitutive law of the homogeneous, prestressed material ($\strain$: local strain tensor). Eq. \eqref{eq:3} expresses the fact that $\strain$ is /geometrically compatible/: it is the symmetric part of the gradient of the displacement $\vec{u}$. Finally, Eq. \eqref{eq:4} specifies the boundary conditions.
 
-So, this is the problem we would like to solve. From the mathematical theory of elasticity, we /know/ that it has a /unique/ solution $\vec{u}$. Again, displacements are not that interesting from the perspective of micromechanics; what we really want to determine is the local strain $\strain$. In order to express the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} in a convenient form, it is essential to note that it is linear. The superposition theorem will therefore be invoked. As a first step, we assume that the prestress $\prestress$ has the simple following form
+So, this is the problem we would like to solve. From the mathematical theory of elasticity, we /know/ that it has a /unique/ solution $\vec{u}$. Again, displacements are not that interesting from the perspective of micromechanics; what we really want to determine is the local strain $\strain$. In order to express the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} in a convenient form, it is essential to note that it is linear. The superposition theorem will therefore be invoked. As a first step, we assume that the prestress $\tens{\varpi}$ has the simple following form
 
 \begin{equation}
 \label{eq:5}
-\prestress(\vec x) = \delta(\vec x-\vec y)\Prestress,
+\tens{\varpi}(\vec x) = \delta(\vec x-\vec y)\tens{\varpi},
 \end{equation}
 
-where $\vec y\in\Omega$ is a fixed point, $\delta$ is the Dirac function, and $\Prestress$ is a constant tensor. Because of linearity of Eqs. \eqref{eq:1} – \eqref{eq:4}, the strain $\strain(\vec x)$ at point $\vec x\in\Omega$ depends linearly on the only loading parameter, $\Prestress$. By definition, the linear operator mapping $\Prestress$ onto $\strain(\vec x)$ will be called the /Green operator for strains/, and denoted $\tens{\Gamma}_0$. Of course, this operator depends on the /observation/ point $\vec x$; it also depends on the /source/ point $\vec y$ [where the point prestress \eqref{eq:5} is actually applied]. In other words
+where $\vec y\in\Omega$ is a fixed point, $\delta$ is the Dirac function, and $\tens{\varpi}$ is a constant tensor. Because of linearity of Eqs. \eqref{eq:1} – \eqref{eq:4}, the strain $\strain(\vec x)$ at point $\vec x\in\Omega$ depends linearly on the only loading parameter, $\tens{\varpi}$. By definition, the linear operator mapping $\tens{\varpi}$ onto $\strain(\vec x)$ will be called the /Green operator for strains/, and denoted $\tens{\Gamma}_0$. Of course, this operator depends on the /observation/ point $\vec x$; it also depends on the /source/ point $\vec y$ [where the point prestress \eqref{eq:5} is actually applied]. In other words
 
 \begin{equation}
 \label{eq:6}
-\strain(\vec x)=-\tens{\Gamma}_0(\vec x, \vec y):\Prestress,
+\strain(\vec x)=-\tens{\Gamma}_0(\vec x, \vec y):\tens{\varpi},
 \end{equation}
 
-where it should be noted that there is a minus '$-$' sign in the above equation. This definition (including the '$-$') is actually more convenient. In the more general case, the now arbitrary local prestress $\prestress$ can always be seen as the superposition of elementary loadcases of type \eqref{eq:5}, since
+where it should be noted that there is a minus '$-$' sign in the above equation. This definition (including the '$-$') is actually more convenient. In the more general case, the now arbitrary local prestress $\tens{\varpi}$ can always be seen as the superposition of elementary loadcases of type \eqref{eq:5}, since
 
 \begin{equation*}
-\prestress(\vec x)=\int_{\vec y\in\Omega}\delta(\vec x-\vec y)\prestress(\vec y)\dV{\vec y}.
+\tens{\varpi}(\vec x)=\int_{\vec y\in\Omega}\delta(\vec x-\vec y)\tens{\varpi}(\vec y)\dV{\vec y}.
 \end{equation*}
 
 Application of the superposition theorem allows us to recover the general expression of the solution from Eq. \eqref{eq:6}
 
 \begin{equation*}
-\strain(\vec x) = -\int_{\vec y\in\Omega}\tens{\Gamma}_0(\vec x, \vec y):\prestress(\vec y)\dV{\vec y}.
+\strain(\vec x) = -\int_{\vec y\in\Omega}\tens{\Gamma}_0(\vec x, \vec y):\tens{\varpi}(\vec y)\dV{\vec y}.
 \end{equation*}
 
 The integral in the right-hand side is a kind of modified convolution product, which will be denoted '$\circledast$'
 
 \begin{equation*}
-\left(\tens{\Gamma}_0\circledast\prestress\right)(\vec x) = \int_{\vec y\in\Omega}\tens{\Gamma}_0(\vec x, \vec y):\prestress(\vec y)\dV{\vec y},
+\left(\tens{\Gamma}_0\circledast\tens{\varpi}\right)(\vec x) = \int_{\vec y\in\Omega}\tens{\Gamma}_0(\vec x, \vec y):\tens{\varpi}(\vec y)\dV{\vec y},
 \end{equation*}
 
 and the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} reads
 
 \begin{equation*}
-\strain(\vec x) = -\left(\tens{\Gamma}_0\circledast\prestress\right)(\vec x).
+\strain(\vec x) = -\left(\tens{\Gamma}_0\circledast\tens{\varpi}\right)(\vec x).
 \end{equation*}
 
 To close this post, let us consider more general boundary conditions. Instead of Eq. \eqref{eq:4}, we now consider Eq. \eqref{eq:7}
@@ -70,7 +70,7 @@ where $\Strain$ is the imposed macroscopic strain (more on this in posts to come
 
 \begin{equation}
 \label{eq:8}
-\strain(\vec x) = \Strain-\left(\tens{\Gamma}_0\circledast\prestress\right)(\vec x).
+\strain(\vec x) = \Strain-\left(\tens{\Gamma}_0\circledast\tens{\varpi}\right)(\vec x).
 \end{equation}
 
 Formula \eqref{eq:8} will be extensively used in subsequent posts, since it leads to the /Lippmann-Schwinger/ equation.

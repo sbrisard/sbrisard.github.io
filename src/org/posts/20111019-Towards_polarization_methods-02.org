@@ -27,28 +27,28 @@ where $\Strain$ is the macroscopic strain, was equivalent to finding the polariz
 \left(\stiffness-\stiffness_0\right)^{-1}:\tens{\tau}+\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)=\Strain.
 \end{equation}
 
-In other words, the boundary value problem \eqref{eq:1} -- \eqref{eq:4} is replaced by a single integral equation \eqref{eq:5}. Classically, both sides of this equation are now multiplied by an arbitrary test field $\prestress$. After integration over the domain $\Omega$ we find for all test fields $\prestress$
+In other words, the boundary value problem \eqref{eq:1} -- \eqref{eq:4} is replaced by a single integral equation \eqref{eq:5}. Classically, both sides of this equation are now multiplied by an arbitrary test field $\tens{\varpi}$. After integration over the domain $\Omega$ we find for all test fields $\tens{\varpi}$
 
 \begin{equation}
 \label{eq:6}
-\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\tens{\tau}}+\volavg{\prestress:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)}=\Strain:\volavg{\prestress}.
+\volavg{\tens{\varpi}:\left(\stiffness-\stiffness_0\right)^{-1}:\tens{\tau}}+\volavg{\tens{\varpi}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)}=\Strain:\volavg{\tens{\varpi}}.
 \end{equation}
 
 This is a standard variational problem. Indeed, introducing the bilinear form $a$ and the linear form $\ell$
 
 \begin{align*}
-a(\tens{\tau}, \prestress)&=\volavg{\prestress:\left(\stiffness-\stiffness_0\right)^{-1}:\tens{\tau}}+\volavg{\prestress:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)},\\
-\ell(\prestress)&=\Strain:\volavg{\prestress},
+a(\tens{\tau}, \tens{\varpi})&=\volavg{\tens{\varpi}:\left(\stiffness-\stiffness_0\right)^{-1}:\tens{\tau}}+\volavg{\tens{\varpi}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)},\\
+\ell(\tens{\varpi})&=\Strain:\volavg{\tens{\varpi}},
 \end{align*}
 
 Eq. \eqref{eq:6} can be written
 
 \begin{equation}
 \label{eq:7}
-\text{Find }\tens{\tau}\,\text{such as }a(\tens{\tau}, \prestress)=\ell(\prestress)\,\text{for all }\prestress.
+\text{Find }\tens{\tau}\,\text{such as }a(\tens{\tau}, \tens{\varpi})=\ell(\tens{\varpi})\,\text{for all }\tens{\varpi}.
 \end{equation}
 
-It should be noted that in order to be well-posed, the spaces to which $\tens{\tau}$ and $\prestress$ belong should be specified. This can be done, and is actually the topic of a publication being currently reviewed.
+It should be noted that in order to be well-posed, the spaces to which $\tens{\tau}$ and $\tens{\varpi}$ belong should be specified. This can be done, and is actually the topic of a publication being currently reviewed.
 
 Quite interestingly, it can easily be verified that Eq. \eqref{eq:7} in fact characterizes the critical point of the so-called functional of Hashin and Shtrikman, denoted here $\mathcal H$, and defined as
 
@@ -57,10 +57,10 @@ Quite interestingly, it can easily be verified that Eq. \eqref{eq:7} in fact cha
 \mathcal H(\tens{\tau})=\Strain:\volavg{\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\stiffness-\stiffness_0\right)^{-1}:\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)}.
 \end{equation}
 
-Indeed, for $\prestress$ small enough, we have
+Indeed, for $\tens{\varpi}$ small enough, we have
 
 \begin{equation}
-\mathcal H(\tens{\tau}+\prestress)-\mathcal H(\tens{\tau})\simeq\ell(\prestress)-a(\tens{\tau}, \prestress),
+\mathcal H(\tens{\tau}+\tens{\varpi})-\mathcal H(\tens{\tau})\simeq\ell(\tens{\varpi})-a(\tens{\tau}, \tens{\varpi}),
 \end{equation}
 
 the right-hand side being zero if the polarization field $\tens{\tau}$ is the solution to the Lippmann-Schwinger equation \eqref{eq:5}. Therefore, the first variation of $\mathcal H$ at $\tens{\tau}$ is null; in other words, $\tens{\tau}$ is a /critical point/ of $\mathcal H$. This result is usually referred to as the variational principle of [[hash1962][Hashin and Shtrikman (1962)]]. It is the fundamental result at the basis of all numerical methods presented in this blog.

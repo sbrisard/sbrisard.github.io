@@ -26,15 +26,15 @@ Let $\tens{\tau}$ be the unique solution of the Lippmann-Schwinger equation (see
 If the reference material is stiffer (resp. softer) than the heterogeneous material, then $\mathcal H$ is minimum (resp. maximum) at $\tens{\tau}$. More precisely
   - if $\stiffness(\vec x)-\stiffness_0$ is positive, semi-definite at every point $\vec x\in\Omega$, then
 \begin{equation*}
-\text{for all}\;\prestress(\vec x),\mathcal H(\prestress)\leq\mathcal H(\tens{\tau}),
+\text{for all}\;\tens{\varpi}(\vec x),\mathcal H(\tens{\varpi})\leq\mathcal H(\tens{\tau}),
 \end{equation*}
   - if $\stiffness(\vec x)-\stiffness_0$ is negative, semi-definite at every point $\vec x\in\Omega$, then
 \begin{equation*}
-\text{for all}\;\prestress(\vec x),\mathcal H(\prestress)\geq\mathcal H(\tens{\tau}).
+\text{for all}\;\tens{\varpi}(\vec x),\mathcal H(\tens{\varpi})\geq\mathcal H(\tens{\tau}).
 \end{equation*}
 #+END_THEOREM
 
-Maybe a quick reminder would be useful, here. $\stiffness - \stiffness_0$ is said to be positive, semi-definite, if $\prestress:\stiffness:\prestress\geq\prestress:\stiffness_0:\prestress$ for all $\prestress$. For isotropic heterogeneous (resp. reference) materials with bulk modulus $\kappa$ (resp. $\kappa_0$) and shear modulus $\shearmod$ (resp. $\shearmod_0$), this is equivalent to
+Maybe a quick reminder would be useful, here. $\stiffness - \stiffness_0$ is said to be positive, semi-definite, if $\tens{\varpi}:\stiffness:\tens{\varpi}\geq\tens{\varpi}:\stiffness_0:\tens{\varpi}$ for all $\tens{\varpi}$. For isotropic heterogeneous (resp. reference) materials with bulk modulus $\kappa$ (resp. $\kappa_0$) and shear modulus $\shearmod$ (resp. $\shearmod_0$), this is equivalent to
 
 \begin{equation*}
 \kappa\geq\kappa_0\quad\text{and}\quad\shearmod\geq\shearmod_0.
