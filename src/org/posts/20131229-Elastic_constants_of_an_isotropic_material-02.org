@@ -64,15 +64,15 @@ For (2D) isotropic stresses, $\sigma_{\alpha\beta}=-p\delta_{\alpha\beta}$, Eq. 
 \end{equation*}
 and the relative surface change $\varepsilon_\text s$, defined as $\varepsilon_\text s=\varepsilon_{\gamma\gamma}$, reads
 \begin{equation*}
-    \varepsilon_\text s=-\frac p{\bulkmod_\text{2D}},
+    \varepsilon_\text s=-\frac p{\kappa_\text{2D}},
 \end{equation*}
 with
 \begin{equation}
     \label{eq:5}
-    \bulkmod_\text{2D}=\frac\shearmod{1-2\nu}.
+    \kappa_\text{2D}=\frac\shearmod{1-2\nu}.
 \end{equation}
 
-$\bulkmod_\text{2D}$ thus defined is the 2D (plane strain) bulk modulus of the material. Attention should be paid to the fact that, unlike the shear modulus, the bulk modulus of a material /depends on the dimension of the physical space/. More generally, the (2D) trace of the strain tensor is related to the average stress
+$\kappa_\text{2D}$ thus defined is the 2D (plane strain) bulk modulus of the material. Attention should be paid to the fact that, unlike the shear modulus, the bulk modulus of a material /depends on the dimension of the physical space/. More generally, the (2D) trace of the strain tensor is related to the average stress
 \begin{equation}
     \label{eq:6}
     \varepsilon_{\gamma\gamma}=\frac{1-2\nu}{2\shearmod}\sigma_{\gamma\gamma}.
@@ -84,7 +84,7 @@ Combining Eqs. \eqref{eq:4} and \eqref{eq:6}
 \end{equation*}
 and the stress-strain relationship finally reads
 \begin{equation*}
-    \sigma_{\alpha\beta}=\bulkmod_\text{2D}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\varepsilon_{\alpha\beta}-\frac{\varepsilon_{\gamma\gamma}}2\delta_{\alpha\beta}\right).
+    \sigma_{\alpha\beta}=\kappa_\text{2D}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}+2\shearmod\left(\varepsilon_{\alpha\beta}-\frac{\varepsilon_{\gamma\gamma}}2\delta_{\alpha\beta}\right).
 \end{equation*}
 
 * Conclusion

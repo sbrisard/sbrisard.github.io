@@ -19,7 +19,7 @@ where $k$ is the amplitude of the wave-vector $\vec k$, $k=\sqrt{\vec k\cdot\vec
 
 \begin{equation}
 \label{eq:2}
-\stiffness=d\bulkmod\sphprojiv+2\shearmod\devprojiv
+\stiffness=d\kappa\sphprojiv+2\shearmod\devprojiv
 \end{equation}
 
 To compute the elastic acoustic tensor, we therefore need to find the expressions of $\vec n\cdot\sphprojiv\cdot\vec n$ and $\vec n\cdot\devprojiv\cdot\vec n$, for any unit vector $\vec n$. We start with the computation of $\vec n\cdot\identiv\cdot\vec n$, where $\identiv$ denotes the fourth-rank identity tensor. We have
@@ -76,13 +76,13 @@ Finally, combining identity $\devprojiv=\identiv-\sphprojiv$ with Eqs. \eqref{eq
 The acoustic tensor of an elastic, linear, isotropic material is obtained from Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:5} and \eqref{eq:6}
 
 \begin{equation*}
-\tens A(\vec n)=\left(\bulkmod+2\shearmod\frac{d-1}d\right)\tensii p+\shearmod\tensii q.
+\tens A(\vec n)=\left(\kappa+2\shearmod\frac{d-1}d\right)\tensii p+\shearmod\tensii q.
 \end{equation*}
 
 From [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][this post]], it can readily be verified that
 
 \begin{equation*}
-\bulkmod+2\shearmod\frac{d-1}d=2\shearmod\frac{1-\nu}{1-2\nu},
+\kappa+2\shearmod\frac{d-1}d=2\shearmod\frac{1-\nu}{1-2\nu},
 \end{equation*}
 
 this identity being true in both 3D and plane strain elasticity. The acoustic tensor therefore reads

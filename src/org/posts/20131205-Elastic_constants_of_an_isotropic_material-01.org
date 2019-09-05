@@ -7,10 +7,10 @@
 Among all classes of materials, the class of linearly elastic and isotropic materials is probably the simplest. Such materials are defined by two elastic constants: for example, Young's modulus $E$ and Poisson's ratio $\nu$. However, depending on the situation, this pair of constants might not be the most appropriate@@html:<!-- more -->@@ (meaning that they may not lead to the most compact expressions). Alternative sets of elastic constants are
 
 - Lamé's constants $\lambda$ and $\shearmod$,
-- bulk and shear moduli $\bulkmod$ and $\shearmod$,
+- bulk and shear moduli $\kappa$ and $\shearmod$,
 - shear modulus and Poisson ratio $\shearmod$ and $\nu$.
 
-Each pair of constants is of course strictly equivalent to any other. I tend to work primarily with $\shearmod$ and $\nu$, and always find myself looking for the expression of E, $\lambda$ and $\bulkmod$ as a function of $\shearmod$ and $\nu$. In this series, we will derive these expressions, starting with 3D elasticity.
+Each pair of constants is of course strictly equivalent to any other. I tend to work primarily with $\shearmod$ and $\nu$, and always find myself looking for the expression of E, $\lambda$ and $\kappa$ as a function of $\shearmod$ and $\nu$. In this series, we will derive these expressions, starting with 3D elasticity.
 
 * Lamé's constants
 
@@ -76,19 +76,19 @@ We now consider an isotropic compression experiment, where the stress tensor red
 
 It is recalled that $\varepsilon_\text v=\varepsilon_{kk} / 3$ denotes the relative volume change of the material. Then, from Eq. \eqref{eq:6}
 \begin{equation*}
-    \varepsilon_\text v = -\frac p{\bulkmod_\text{3D}},
+    \varepsilon_\text v = -\frac p{\kappa_\text{3D}},
 \end{equation*}
 
-where $\bulkmod_\text{3D}$ denotes the bulk modulus, defined as follows
+where $\kappa_\text{3D}$ denotes the bulk modulus, defined as follows
 \begin{equation}
     \label{eq:7}
-    \bulkmod_\text{3D} = \lambda + \frac 23\shearmod.
+    \kappa_\text{3D} = \lambda + \frac 23\shearmod.
 \end{equation}
 
-As we shall see in the [[file:./20131229-Elastic_constants_of_an_isotropic_material-02.org][next instalment]] of this series, the definition of the bulk modulus /depends on the dimension of the physical space/, hence the '3D' subscript. Using $\bulkmod$ and $\shearmod$ as elastic constants, Eq. \eqref{eq:1} reads
+As we shall see in the [[file:./20131229-Elastic_constants_of_an_isotropic_material-02.org][next instalment]] of this series, the definition of the bulk modulus /depends on the dimension of the physical space/, hence the '3D' subscript. Using $\kappa$ and $\shearmod$ as elastic constants, Eq. \eqref{eq:1} reads
 \begin{equation}
     \label{eq:8}
-    \sigma_{ij} = \bulkmod_\text{3D}\varepsilon_{kk}\delta_{ij}+2\shearmod\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}3\delta_{ij}\right)
+    \sigma_{ij} = \kappa_\text{3D}\varepsilon_{kk}\delta_{ij}+2\shearmod\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}3\delta_{ij}\right)
 \end{equation}
 
 * Shear modulus and Poisson ratio
@@ -108,7 +108,7 @@ Then, combining Eqs. \eqref{eq:3} and \eqref{eq:4}
 
 Finally, from Eqs. \eqref{eq:7} and \eqref{eq:9}
 \begin{equation*}
-    \bulkmod_\text{3D} = \frac23\frac{1+\nu}{1-2\nu}\shearmod.
+    \kappa_\text{3D} = \frac23\frac{1+\nu}{1-2\nu}\shearmod.
 \end{equation*}
 
 * Conclusion

@@ -14,7 +14,6 @@
 #+HTML_HEAD_EXTRA:       Macros: {
 #+HTML_HEAD_EXTRA:           abs: ['\\left\|#1\\right\|', 1],
 #+HTML_HEAD_EXTRA:           boxtimessym : '\\boxtimes^\\text s',
-#+HTML_HEAD_EXTRA:           bulkmod: '\\kappa',
 #+HTML_HEAD_EXTRA:           complexes: '\\mathbb C',
 #+HTML_HEAD_EXTRA:           devprojiv: '\\tensiv{K}',
 #+HTML_HEAD_EXTRA:           diff: '\\mathrm{d}',
