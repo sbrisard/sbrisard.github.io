@@ -14,9 +14,9 @@ We again consider a heterogeneous material, with local stiffness $\stiffness$, l
     \label{eq:2}
     \stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\domain),\\
     \label{eq:3}
-    \strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
+    \strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\domain),\\
     \label{eq:4}
-    \displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+    \vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
 \end{align}
 
 where $\Strain$ is the macroscopic (imposed) strain. The solution to this problem defines the effective elastic properties $\stiffness^\text{eff}$, since, by definition
@@ -61,8 +61,8 @@ Determination of the polarization $\polarization$ requires the solution to Eqs. 
 \begin{align*}
 \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\domain),\\
 \stress(\vec x)&=\stiffness_0:\strain(\vec x)+\polarization(\vec x)&&(\vec x\in\domain),\\
-\strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
-\displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+\strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\domain),\\
+\vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
 \end{align*}
 
 which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ linear elastic material $\stiffness_0$. From [[file:./20110911-The_Green_operator_for_strains-01.org][this series]], the solution to the above problem is known (at least, formally)

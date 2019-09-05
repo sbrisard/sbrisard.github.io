@@ -14,14 +14,14 @@ We consider a /homogeneous/ material occupying the bounded domain $\domain\subse
     \label{eq:2}
     \stress(\vec x)&=\stiffness_0:\strain(\vec x)+\prestress(\vec x) && (\vec x\in\domain),\\
     \label{eq:3}
-    \strain(\vec x)&=\nabla_\vec x^\text{s}\displ && (\vec x\in\domain),\\
+    \strain(\vec x)&=\nabla_\vec x^\text{s}\vec{u} && (\vec x\in\domain),\\
     \label{eq:4}
-    \displ(\vec x)&=\vec 0 && (\vec x\in\partial\domain).
+    \vec{u}(\vec x)&=\vec 0 && (\vec x\in\partial\domain).
 \end{align}
 
-Eq. \eqref{eq:1} expresses static equilibrium ($\stress$: local stress tensor); Eq. \eqref{eq:2} is the constitutive law of the homogeneous, prestressed material ($\strain$: local strain tensor). Eq. \eqref{eq:3} expresses the fact that $\strain$ is /geometrically compatible/: it is the symmetric part of the gradient of the displacement $\displ$. Finally, Eq. \eqref{eq:4} specifies the boundary conditions.
+Eq. \eqref{eq:1} expresses static equilibrium ($\stress$: local stress tensor); Eq. \eqref{eq:2} is the constitutive law of the homogeneous, prestressed material ($\strain$: local strain tensor). Eq. \eqref{eq:3} expresses the fact that $\strain$ is /geometrically compatible/: it is the symmetric part of the gradient of the displacement $\vec{u}$. Finally, Eq. \eqref{eq:4} specifies the boundary conditions.
 
-So, this is the problem we would like to solve. From the mathematical theory of elasticity, we /know/ that it has a /unique/ solution $\displ$. Again, displacements are not that interesting from the perspective of micromechanics; what we really want to determine is the local strain $\strain$. In order to express the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} in a convenient form, it is essential to note that it is linear. The superposition theorem will therefore be invoked. As a first step, we assume that the prestress $\prestress$ has the simple following form
+So, this is the problem we would like to solve. From the mathematical theory of elasticity, we /know/ that it has a /unique/ solution $\vec{u}$. Again, displacements are not that interesting from the perspective of micromechanics; what we really want to determine is the local strain $\strain$. In order to express the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} in a convenient form, it is essential to note that it is linear. The superposition theorem will therefore be invoked. As a first step, we assume that the prestress $\prestress$ has the simple following form
 
 \begin{equation}
 \label{eq:5}
@@ -63,7 +63,7 @@ To close this post, let us consider more general boundary conditions. Instead of
 
 \begin{align}
 \label{eq:7}
-\displ(\vec x)&=\Strain\cdot\vec x && (\vec x\in\partial\domain),
+\vec{u}(\vec x)&=\Strain\cdot\vec x && (\vec x\in\partial\domain),
 \end{align}
 
 where $\Strain$ is the imposed macroscopic strain (more on this in posts to come). Quite obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:3} and \eqref{eq:7} reads

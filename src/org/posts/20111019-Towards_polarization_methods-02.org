@@ -15,9 +15,9 @@ In the [[file:./20111004-Towards_polarization_methods-01.org][previous instalmen
 \label{eq:2}
 \stress(\vec x)&=\stiffness(\vec x):\strain(\vec x)&&(\vec x\in\domain),\\
 \label{eq:3}
-\strain(\vec x)&=\nabla_\vec x^\text s\displ&&(\vec x\in\domain),\\
+\strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\domain),\\
 \label{eq:4}
-\displ(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
+\vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\domain),
 \end{align}
 
 where $\Strain$ is the macroscopic strain, was equivalent to finding the polarization field $\polarization$ which solves the Lippmann-Schwinger equation

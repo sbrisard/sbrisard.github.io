@@ -13,9 +13,9 @@ We consider a /self-equilibrated/ prestress $\prestress$ (that is, $\nabla\cdot\
 \label{eq:1}
 \nabla_{\vec x}\cdot\left(\stiffness_0:\strain+\prestress\right)&=\vec{0}&&(\vec x\in\domain),\\
 \label{eq:2}
-\strain(\vec x)&=\nabla_\vec x^\text{s}\displ&&(\vec x\in\domain),\\
+\strain(\vec x)&=\nabla_\vec x^\text{s}\vec{u}&&(\vec x\in\domain),\\
 \label{eq:3}
-\displ(\vec x)&=\vec 0&&(\vec x\in\partial\domain).
+\vec{u}(\vec x)&=\vec 0&&(\vec x\in\partial\domain).
 \end{align}
 
 Since $\nabla\cdot\prestress=\vec 0$, it is found that Eq. \eqref{eq:1} reduces to
@@ -23,7 +23,7 @@ Since $\nabla\cdot\prestress=\vec 0$, it is found that Eq. \eqref{eq:1} reduces 
     \nabla_{\vec x}\cdot\left(\stiffness_0:\strain\right)&=\vec{0}&&(\vec x\in\domain).
 \end{align*}
 
-Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\displ=\vec 0$ (and $\strain=\nabla^\text{s}\displ=\tensii0$). Since $\greeniv_0\circledast\prestress=-\strain$, it is finally found that $\greeniv_0\circledast\prestress=\tensiv 0$. To sum up, we have proved the following property
+Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\vec{u}=\vec 0$ (and $\strain=\nabla^\text{s}\vec{u}=\tensii0$). Since $\greeniv_0\circledast\prestress=-\strain$, it is finally found that $\greeniv_0\circledast\prestress=\tensiv 0$. To sum up, we have proved the following property
 
 #+BEGIN_THEOREM
 For any self-equilibrated prestress $\prestress$
@@ -56,11 +56,11 @@ To close this instalment, we again consider a prestress $\prestress$, and the as
     \volavg{\strain} = \frac 1{\meas{\domain}}\int_\domain\strain(\vec x)\dV{\vec x}.
 \end{equation*}
 
-Using Stokes' theorem, and the definition of $\displ$
+Using Stokes' theorem, and the definition of $\vec{u}$
 \begin{equation*}
-    \volavg\strain=\frac1{\meas{\domain}}\int_\domain\nabla_\vec x^\text s\displ\dV{\vec x}=\frac1{2\meas{\domain}}\int_{\partial\domain}\left[\displ(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\displ(\vec x)\right]\dS{\vec x},
+    \volavg\strain=\frac1{\meas{\domain}}\int_\domain\nabla_\vec x^\text s\vec{u}\dV{\vec x}=\frac1{2\meas{\domain}}\int_{\partial\domain}\left[\vec{u}(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\vec{u}(\vec x)\right]\dS{\vec x},
 \end{equation*}
-where $\displ$ is the displacement associated to the strain $\strain$, and $\vec n$ is the outward normal to the boundary $\partial\domain$ of the domain $\domain$. From the boundary condition \eqref{eq:3}, we finally find $\volavg\strain=\tensii0$. Finally
+where $\vec{u}$ is the displacement associated to the strain $\strain$, and $\vec n$ is the outward normal to the boundary $\partial\domain$ of the domain $\domain$. From the boundary condition \eqref{eq:3}, we finally find $\volavg\strain=\tensii0$. Finally
 
 #+BEGIN_THEOREM
 For any prestress $\prestress$,
