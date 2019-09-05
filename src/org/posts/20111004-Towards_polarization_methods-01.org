@@ -22,10 +22,10 @@ We again consider a heterogeneous material, with local stiffness $\tens{C}$, loc
 where $\overline{\tens{\varepsilon}}$ is the macroscopic (imposed) strain. The solution to this problem defines the effective elastic properties $\tens{C}^\text{eff}$, since, by definition
 
 \begin{equation*}
-\Stress=\volavg{\stress}=\tens{C}^\text{eff}:\overline{\tens{\varepsilon}},
+\overline{\tens{\sigma}}=\volavg{\stress}=\tens{C}^\text{eff}:\overline{\tens{\varepsilon}},
 \end{equation*}
 
-where $\Stress$ is the macroscopic stress.
+where $\overline{\tens{\sigma}}$ is the macroscopic stress.
 
 Eqs. \eqref{eq:1} -- \eqref{eq:4} would be trivial if we had $\tens{C}(\vec x)=\tens{C}_0$ for any $\vec x\in\Omega$ ($\tens{C}_0$ is a /constant/ stiffness tensor). Indeed, the solution would then be
 
