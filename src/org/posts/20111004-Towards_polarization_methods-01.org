@@ -42,25 +42,25 @@ So we see that the complexity of Eqs. \eqref{eq:1} -- \eqref{eq:4} comes from th
 \stress(\vec x)=\stiffness(\vec x):\strain(\vec x)=\stiffness_0:\strain(\vec x)+\left[\stiffness(\vec x)-\stiffness_0\right]:\strain(\vec x).
 \end{equation}
 
-Introducing the so-called /polarization/ $\polarization$
+Introducing the so-called /polarization/ $\tens{\tau}$
 
 \begin{equation}
 \label{eq:6}
-\polarization(\vec x)=\left[\stiffness(\vec x)-\stiffness_0\right]:\strain(\vec x),
+\tens{\tau}(\vec x)=\left[\stiffness(\vec x)-\stiffness_0\right]:\strain(\vec x),
 \end{equation}
 
 Eq. \eqref{eq:5} then takes the following compact form
 
 \begin{equation}
 \label{eq:7}
-\stress(\vec x)=\stiffness_0:\strain(\vec x)+\polarization(\vec x).
+\stress(\vec x)=\stiffness_0:\strain(\vec x)+\tens{\tau}(\vec x).
 \end{equation}
 
-Determination of the polarization $\polarization$ requires the solution to Eqs. \eqref{eq:1} -- \eqref{eq:4}; therefore, it would seem that Eq. \eqref{eq:7} achieved nothing! However, let us assume for a moment that we /know/ $\polarization$ beforehand. Then Eqs. (1) -- (4) reduce to
+Determination of the polarization $\tens{\tau}$ requires the solution to Eqs. \eqref{eq:1} -- \eqref{eq:4}; therefore, it would seem that Eq. \eqref{eq:7} achieved nothing! However, let us assume for a moment that we /know/ $\tens{\tau}$ beforehand. Then Eqs. (1) -- (4) reduce to
 
 \begin{align*}
 \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
-\stress(\vec x)&=\stiffness_0:\strain(\vec x)+\polarization(\vec x)&&(\vec x\in\Omega),\\
+\stress(\vec x)&=\stiffness_0:\strain(\vec x)+\tens{\tau}(\vec x)&&(\vec x\in\Omega),\\
 \strain(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
 \vec{u}(\vec x)&=\Strain\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align*}
@@ -69,21 +69,21 @@ which characterize the elastic equilibrium of a /homogeneous/, /prestressed/ lin
 
 \begin{equation}
 \label{eq:8}
-\strain(\vec x)=\Strain-(\tens{\Gamma}_0\circledast\polarization)(\vec x),
+\strain(\vec x)=\Strain-(\tens{\Gamma}_0\circledast\tens{\tau})(\vec x),
 \end{equation}
 
-where the Green operator for strains $\tens{\Gamma}_0$ associated with $\stiffness_0$ has been introduced. We now need to remember that the polarization $\polarization$ is /not/ known. Rather, it is given by Eq. \eqref{eq:6}. Upon introduction into Eq. \eqref{eq:8}, we get the so-called Lippmann--Schwinger equation
+where the Green operator for strains $\tens{\Gamma}_0$ associated with $\stiffness_0$ has been introduced. We now need to remember that the polarization $\tens{\tau}$ is /not/ known. Rather, it is given by Eq. \eqref{eq:6}. Upon introduction into Eq. \eqref{eq:8}, we get the so-called Lippmann--Schwinger equation
 
 \begin{equation}
 \label{eq:9}
 \strain(\vec x)+\left\{\tens{\Gamma}_0\circledast\left[\left(\stiffness-\stiffness_0\right):\strain\right]\right\}(\vec x)=\Strain.
 \end{equation}
 
-This equation was first introduced by [[https://doi.org/10.1002/pssb.2220550241][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\polarization$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
+This equation was first introduced by [[https://doi.org/10.1002/pssb.2220550241][Zeller and Dederichs (1973)]]. In the next instalments of this series, it will be more convenient to chose the polarization $\tens{\tau}$, rather that the strain $\strain$ as principal unknown. This leads to the equivalent integral equation
 
 \begin{equation}
 \label{eq:10}
-\left[\stiffness(\vec x)-\stiffness_0\right]^{-1}:\polarization(\vec x)+\left(\tens{\Gamma}_0\circledast\polarization\right)(\vec x)=\Strain.
+\left[\stiffness(\vec x)-\stiffness_0\right]^{-1}:\tens{\tau}(\vec x)+\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)(\vec x)=\Strain.
 \end{equation}
 
 To sum up, we started with the set of partial differential equations \eqref{eq:1} -- \eqref{eq:4}, and ended up with one /single/, /equivalent/, integral equation. Discretization of the Lippmann-Schwinger equation \eqref{eq:9} has already been considered in the past. This leads to some well-known numerical schemes ([[https://doi.org/10.1016/S0045-7825(97)00218-1][Moulinec & Suquet, 1998]]).

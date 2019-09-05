@@ -22,7 +22,6 @@
 #+HTML_HEAD_EXTRA:           integers: '\\mathbb Z',
 #+HTML_HEAD_EXTRA:           meas: ['\\left\|#1\\right\|', 1],
 #+HTML_HEAD_EXTRA:           naturals: '\\mathbb N',
-#+HTML_HEAD_EXTRA:           polarization: '\\stensii{\\tau}',
 #+HTML_HEAD_EXTRA:           prestress: '\\stensii{\\varpi}',
 #+HTML_HEAD_EXTRA:           rationals: '\\mathbb Q',
 #+HTML_HEAD_EXTRA:           reals: '\\mathbb R',
