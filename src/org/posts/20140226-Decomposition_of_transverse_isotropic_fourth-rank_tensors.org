@@ -33,7 +33,7 @@ $\p$ is the projector onto the direction of anisotropy $\vec n$, while $\q$ is t
 
 It will be convenient to introduce a new, Kronecker-like product of two second-rank tensors, which Del Piero ([[https://doi.org/10.1007/BF00041097][1979]]) named /tensor product of linear transformations/, and which will be denoted $\boxtimes{}$.
 
-As a preliminary note, it should be observed that any fourth-rank tensor $\tensiv A$ can be viewed as a endomorphism over the space of second-rank tensors, since $\tens x\mapsto\tensiv A:\tens x$ is a linear mapping (the convention adopted in this blog for the double dot product has been specified in a [[file:./20140219-On_the_double_dot_product.org][previous post]]). Therefore, the fourth-rank tensor $\tens a\boxtimes\tens b$ ($\tens a, \tens b$: second-rank tensors) can be defined by how it operates on second-rank tensors $\tens x$
+As a preliminary note, it should be observed that any fourth-rank tensor $\tens A$ can be viewed as a endomorphism over the space of second-rank tensors, since $\tens x\mapsto\tens A:\tens x$ is a linear mapping (the convention adopted in this blog for the double dot product has been specified in a [[file:./20140219-On_the_double_dot_product.org][previous post]]). Therefore, the fourth-rank tensor $\tens a\boxtimes\tens b$ ($\tens a, \tens b$: second-rank tensors) can be defined by how it operates on second-rank tensors $\tens x$
 
 \begin{equation}
 \label{eq:2}
@@ -117,16 +117,16 @@ To conclude, it is observed that the fourth-rank tensor $\tens{I}=\tens{\delta}\
 
 * Walpole's basis for transverse isotropic tensors
 
-Walpole ([[walp1984][1984]]) shows that any transverse isotropic tensor is a linear combination of the six fourth-rank tensors $\tensiv E_1,\tensiv E_2,\tensiv E_3,\tensiv E_4,\tensiv F,\tensiv G$ defined as follows
+Walpole ([[walp1984][1984]]) shows that any transverse isotropic tensor is a linear combination of the six fourth-rank tensors $\tens E_1,\tens E_2,\tens E_3,\tens E_4,\tens F,\tens G$ defined as follows
 
 \begin{gather*}
-\tensiv E_1=\p\otimes\p,\quad\tensiv E_2=\frac12\q\otimes\q,\quad\tensiv E_3=\frac1{\sqrt2}\p\otimes\q,\quad\tensiv E_4=\frac1{\sqrt2}\q\otimes\p\\
-\tensiv F=\q\boxtimessym\q-\frac12\q\otimes\q,\quad\tensiv G=\p\boxtimessym\q+\q\boxtimessym\p.
+\tens E_1=\p\otimes\p,\quad\tens E_2=\frac12\q\otimes\q,\quad\tens E_3=\frac1{\sqrt2}\p\otimes\q,\quad\tens E_4=\frac1{\sqrt2}\q\otimes\p\\
+\tens F=\q\boxtimessym\q-\frac12\q\otimes\q,\quad\tens G=\p\boxtimessym\q+\q\boxtimessym\p.
 \end{gather*}
 
 Multiplication (in the sense of the double product) of these tensors is fairly easy, as shown by Table [[tab:2]] below.
 
-#+CAPTION: Multiplication table for the tensors $\tensiv E_i$, $\tensiv F$ and $\tensiv G$ ($i=1,\ldots,4$).$\newcommand{\t}{\tensiv}$
+#+CAPTION: Multiplication table for the tensors $\tens E_i$, $\tens F$ and $\tens G$ ($i=1,\ldots,4$).$\newcommand{\t}{\tens}$
 #+NAME: tab:2
 #+ATTR_HTML: :class center :width 50%
 | /        | <        |          |          |          |        | >      |
@@ -140,32 +140,32 @@ Multiplication (in the sense of the double product) of these tensors is fairly e
 | $\t F$   | $\t 0$   | $\t 0$   | $\t 0$   | $\t 0$   | $\t F$ | $\t 0$ |
 | $\t G$   | $\t 0$   | $\t 0$   | $\t 0$   | $\t 0$   | $\t 0$ | $\t G$ |
 
- The above table must be read as: "row double dot column equals cell". For example, $\tensiv E_1:\tensiv E_3=\tensiv E_3$ and $\tensiv E_3:\tensiv E_1=\tensiv 0$.
+ The above table must be read as: "row double dot column equals cell". For example, $\tens E_1:\tens E_3=\tens E_3$ and $\tens E_3:\tens E_1=\tens 0$.
 
 * A convenient representation of transverse isotropic, fourth-rank tensors
 
-Walpole ([[walp1984][1984]]) proposes a convenient representation of any transverse isotropic tensor $\tensiv T$, as the triplet $(A, f, g)$ where $A$ is a 2 × 2 matrix and $f$ and $g$ are two scalars. This representation should be understood as
+Walpole ([[walp1984][1984]]) proposes a convenient representation of any transverse isotropic tensor $\tens T$, as the triplet $(A, f, g)$ where $A$ is a 2 × 2 matrix and $f$ and $g$ are two scalars. This representation should be understood as
 
 \begin{equation*}
-\tensiv T=a_{11}\tensiv E_1+a_{22}\tensiv E_2+a_{12}\tensiv E_3+a_{21}\tensiv E_4+f\tensiv F+g\tensiv G,
+\tens T=a_{11}\tens E_1+a_{22}\tens E_2+a_{12}\tens E_3+a_{21}\tens E_4+f\tens F+g\tens G,
 \end{equation*}
 
-where $a_{ij}$ are the coefficients of $A$. The condensed notation $\tensiv T=(A, f, g)$ shall be adopted. Using the multiplication table [[tab:2]], it can readily be verified that if $\tensiv T=(A, f, g)$ and $\tensiv T'=(A', f', g')$, then
+where $a_{ij}$ are the coefficients of $A$. The condensed notation $\tens T=(A, f, g)$ shall be adopted. Using the multiplication table [[tab:2]], it can readily be verified that if $\tens T=(A, f, g)$ and $\tens T'=(A', f', g')$, then
 
 \begin{equation*}
-\tensiv T:\tensiv T'=(A\cdot A', ff', gg').
+\tens T:\tens T'=(A\cdot A', ff', gg').
 \end{equation*}
 
 This representation is particularly convenient when it comes to inverting transverse isotropic tensors. Indeed,
 
 \begin{equation*}
-\tensiv T^{-1}=(A^{-1}, 1/f, 1/g).
+\tens T^{-1}=(A^{-1}, 1/f, 1/g).
 \end{equation*}
 
 Transposition is also straightforward
 
 \begin{equation*}
-\transp{\tensiv T}=(\transp{A}, f, g).
+\transp{\tens T}=(\transp{A}, f, g).
 \end{equation*}
 
 * Decomposition of fourth-rank, isotropic tensors in Walpole's basis
@@ -175,15 +175,15 @@ The isotropic tensors $\tens{I}$, $\tens{J}$ and $\tens{K}$ introduced [[file:./
 \begin{align*}
 \tens{I}&=\tens{\delta}\boxtimessym\tens{\delta}=\left(\p+\q\right)\boxtimessym\left(\p+\q\right)\\
 &=\p\boxtimessym\p+\p\boxtimessym\q+\q\boxtimessym\p+\q\boxtimessym\q\\
-&=\tensiv E_1+\tensiv G+\tensiv F+\tensiv E_2.
+&=\tens E_1+\tens G+\tens F+\tens E_2.
 \end{align*}
 
-where the identity $\p\boxtimessym\p=\p\otimes\p=\tensiv E_1$ has been used. Now, the decomposition of $\tens{J}$ is readily derived from its definition
+where the identity $\p\boxtimessym\p=\p\otimes\p=\tens E_1$ has been used. Now, the decomposition of $\tens{J}$ is readily derived from its definition
 
 \begin{align*}
 3\tens{J}&=\tens{\delta}\otimes\tens{\delta}=\left(\p+\q\right)\otimes\left(\p+\q\right)\\
 &=\p\otimes\p+\p\otimes\q+\q\otimes\p+\q\otimes\q\\
-&=\tensiv E_1+\sqrt2\tensiv E_3+\sqrt2\tensiv E_4+2\tensiv E_2.
+&=\tens E_1+\sqrt2\tens E_3+\sqrt2\tens E_4+2\tens E_2.
 \end{align*}
 
 Finally, the decomposition of the deviatoric projection tensor $\tens{K}$ is found from the definition $\tens{K}=\tens{I}-\tens{J}$. To sum up

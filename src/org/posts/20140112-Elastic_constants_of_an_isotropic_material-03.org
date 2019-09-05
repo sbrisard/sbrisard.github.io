@@ -18,7 +18,7 @@ where $d$ is the dimension of the physical space ($d=3$ for 3D elasticity, $d=2$
 \label{eq:3}\kappa&=\frac\mu{1-2\nu}&&(d=2).
 \end{align}
 
-In this instalment, I am going to introduce some classical isotropic, fourth-rank tensors which will prove extremely useful and will allow us to cast Eq. \eqref{eq:1} in an intrinsic (component-free) form.@@html:<!-- more -->@@ It should be noted that the following developments are restricted to fourth-rank tensors $\tensiv T$ with both /minor/ and /major/ symmetries
+In this instalment, I am going to introduce some classical isotropic, fourth-rank tensors which will prove extremely useful and will allow us to cast Eq. \eqref{eq:1} in an intrinsic (component-free) form.@@html:<!-- more -->@@ It should be noted that the following developments are restricted to fourth-rank tensors $\tens T$ with both /minor/ and /major/ symmetries
 
 \begin{align*}
 T_{ijkl}&=T_{jikl}=T_{ijlk}&&\text{(minor symmetries)},\\
@@ -103,16 +103,16 @@ It can readily be verified that
 \tens{K}:\tens{J}=\tens{J}:\tens{K}=\tens0.
 \end{gather*}
 
-Therefore, multiplication of two isotropic tensors $\tensiv T_i=a_i\tens{J}+b_i\tens{K}$ ($i=1,2$) is trivial
+Therefore, multiplication of two isotropic tensors $\tens T_i=a_i\tens{J}+b_i\tens{K}$ ($i=1,2$) is trivial
 
 \begin{equation*}
-\tensiv T_1:\tensiv T_2=a_1a_2\tens{J}+b_1b_2\tens{K}.
+\tens T_1:\tens T_2=a_1a_2\tens{J}+b_1b_2\tens{K}.
 \end{equation*}
 
-Also, inversion of an isotropic tensor $\tensiv T=a\tens{J}+b\tens{K}$ is straightforward
+Also, inversion of an isotropic tensor $\tens T=a\tens{J}+b\tens{K}$ is straightforward
 
 \begin{equation*}
-\tensiv T^{-1}=\frac1a\tens{J}+\frac1b\tens{K}.
+\tens T^{-1}=\frac1a\tens{J}+\frac1b\tens{K}.
 \end{equation*}
 
 All these expressions will prove extremely useful in due time.

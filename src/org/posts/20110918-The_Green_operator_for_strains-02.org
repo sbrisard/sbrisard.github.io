@@ -23,7 +23,7 @@ Since $\nabla\cdot\tens{\varpi}=\vec 0$, it is found that Eq. \eqref{eq:1} reduc
     \nabla_{\vec x}\cdot\left(\tens{C}_0:\strain\right)&=\vec{0}&&(\vec x\in\Omega).
 \end{align*}
 
-Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\vec{u}=\vec 0$ (and $\strain=\nabla^\text{s}\vec{u}=\tens0$). Since $\tens{\Gamma}_0\circledast\tens{\varpi}=-\strain$, it is finally found that $\tens{\Gamma}_0\circledast\tens{\varpi}=\tensiv 0$. To sum up, we have proved the following property
+Obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2} and \eqref{eq:3} is $\vec{u}=\vec 0$ (and $\strain=\nabla^\text{s}\vec{u}=\tens0$). Since $\tens{\Gamma}_0\circledast\tens{\varpi}=-\strain$, it is finally found that $\tens{\Gamma}_0\circledast\tens{\varpi}=\tens 0$. To sum up, we have proved the following property
 
 #+BEGIN_THEOREM
 For any self-equilibrated prestress $\tens{\varpi}$

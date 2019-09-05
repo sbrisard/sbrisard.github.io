@@ -40,6 +40,6 @@ Maybe a quick reminder would be useful, here. $\tens{C} - \tens{C}_0$ is said to
 \kappa\geq\kappa_0\quad\text{and}\quad\mu\geq\mu_0.
 \end{equation*}
 
-Note that it is not always possible to find a reference material which complies with the requirements of the above theorem. A typical example would be a heterogeneous material conaining both pores [$\tens{C}(\vec x) = \tensiv 0$] and rigid inclusions [$\tens{C}(\vec x)\rightarrow+\infty$]. We won't address this issue for the time being.
+Note that it is not always possible to find a reference material which complies with the requirements of the above theorem. A typical example would be a heterogeneous material conaining both pores [$\tens{C}(\vec x) = \tens 0$] and rigid inclusions [$\tens{C}(\vec x)\rightarrow+\infty$]. We won't address this issue for the time being.
 
 Extremum principles are very useful in practice, as they usually lead to well-behaved numerical schemes. The energy principle of Hashin and Shtrikman also has deep theoretical consequences, as will be seen in the [[file:./20111210-Towards_polarization_methods-04.org][next instalment]] of this series.
