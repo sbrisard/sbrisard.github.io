@@ -22,16 +22,16 @@ where $k$ is the amplitude of the wave-vector $\vec k$, $k=\sqrt{\vec k\cdot\vec
 \stiffness=d\kappa\sphprojiv+2\shearmod\tens{K}
 \end{equation}
 
-To compute the elastic acoustic tensor, we therefore need to find the expressions of $\vec n\cdot\sphprojiv\cdot\vec n$ and $\vec n\cdot\tens{K}\cdot\vec n$, for any unit vector $\vec n$. We start with the computation of $\vec n\cdot\identiv\cdot\vec n$, where $\identiv$ denotes the fourth-rank identity tensor. We have
+To compute the elastic acoustic tensor, we therefore need to find the expressions of $\vec n\cdot\sphprojiv\cdot\vec n$ and $\vec n\cdot\tens{K}\cdot\vec n$, for any unit vector $\vec n$. We start with the computation of $\vec n\cdot\tens{I}\cdot\vec n$, where $\tens{I}$ denotes the fourth-rank identity tensor. We have
 
 \begin{equation*}
-\left(\vec n\cdot\identiv\cdot\vec n\right)_{jk}=n_iI_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta_{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
+\left(\vec n\cdot\tens{I}\cdot\vec n\right)_{jk}=n_iI_{ijkl}n_l=n_in_l\frac12\left(\delta_{il}\delta_{jk}+\delta_{jl}\delta_{ik}\right)=\frac12\left(n_in_i\delta_{jk}+n_jn_k\right).
 \end{equation*}
 
 Since $\vec n$ is a unit vector, we have $n_in_i=1$, and
 
 \begin{equation*}
-\vec n\cdot\identiv\cdot\vec n=\frac12\left(\tens{\delta}+\vec n\otimes\vec n\right),
+\vec n\cdot\tens{I}\cdot\vec n=\frac12\left(\tens{\delta}+\vec n\otimes\vec n\right),
 \end{equation*}
 
 where $\tens{\delta}$ denotes the second-rank identity tensor. It will be convenient to introduce the projectors $\tensii p$ and $\tensii q$, defined as follows
@@ -56,7 +56,7 @@ and
 
 \begin{equation}
 \label{eq:4}
-\vec n\cdot\identiv\cdot\vec n=\tensii p+\frac12\tensii q.
+\vec n\cdot\tens{I}\cdot\vec n=\tensii p+\frac12\tensii q.
 \end{equation}
 
 Similarly
@@ -66,7 +66,7 @@ Similarly
 \vec n\cdot\sphprojiv\cdot\vec n=\frac1d\vec n\cdot\left(\tens{\delta}\otimes\tens{\delta}\right)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tensii p.
 \end{equation}
 
-Finally, combining identity $\tens{K}=\identiv-\sphprojiv$ with Eqs. \eqref{eq:4} and \eqref{eq:5}
+Finally, combining identity $\tens{K}=\tens{I}-\sphprojiv$ with Eqs. \eqref{eq:4} and \eqref{eq:5}
 
 \begin{equation}
 \label{eq:6}

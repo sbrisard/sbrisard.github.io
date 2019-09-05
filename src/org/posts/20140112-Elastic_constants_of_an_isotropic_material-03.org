@@ -31,13 +31,13 @@ In the present section, I am going to introduce the fourth-rank identity, spheri
 
 ** Fourth-rank identity tensor
 
-The fourth-rank identity tensor $\identiv$ maps any second-rank, symmetric tensor $\tensii u$ to itself
+The fourth-rank identity tensor $\tens{I}$ maps any second-rank, symmetric tensor $\tensii u$ to itself
 
 \begin{equation*}
-\identiv:\tensii u=\tensii u.
+\tens{I}:\tensii u=\tensii u.
 \end{equation*}
 
-It is straightforward to work out the components of $\identiv$ (accounting for both minor and major symmetries)
+It is straightforward to work out the components of $\tens{I}$ (accounting for both minor and major symmetries)
 
 \begin{equation*}
 I_{ijkl}=\frac12\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right).
@@ -74,7 +74,7 @@ The fourth-rank deviatoric projection tensor $\tens{K}$ extracts the deviatoric 
 from which it results that
 
 \begin{equation*}
-\tens{K}=\identiv-\sphprojiv.
+\tens{K}=\tens{I}-\sphprojiv.
 \end{equation*}
 
 * Stiffness tensor

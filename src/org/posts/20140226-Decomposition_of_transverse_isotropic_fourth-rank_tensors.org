@@ -113,7 +113,7 @@ Besides, the following multiplication table results from Eq. \eqref{eq:6} $\newc
 | $\q\x\q$ | $\tensii 0$ | $\tensii 0$ | $\tensii 0$ | $\q\x\q$    |
 |----------+-------------+-------------+-------------+-------------|
 
-To conclude, it is observed that the fourth-rank tensor $\identiv=\tens{\delta}\boxtimessym\tens{\delta}$ maps any second-rank tensor to its symmetric part: it reduces to the identity tensor over the space of second-rank, symmetric tensors.
+To conclude, it is observed that the fourth-rank tensor $\tens{I}=\tens{\delta}\boxtimessym\tens{\delta}$ maps any second-rank tensor to its symmetric part: it reduces to the identity tensor over the space of second-rank, symmetric tensors.
 
 * Walpole's basis for transverse isotropic tensors
 
@@ -170,10 +170,10 @@ Transposition is also straightforward
 
 * Decomposition of fourth-rank, isotropic tensors in Walpole's basis
 
-The isotropic tensors $\identiv$, $\sphprojiv$ and $\tens{K}$ introduced [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][previously]] can be considered as transverse isotropic tensors. As such, they can be decomposed in Walpole's basis. First, the identity tensor $\identiv$ decomposes as follows
+The isotropic tensors $\tens{I}$, $\sphprojiv$ and $\tens{K}$ introduced [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][previously]] can be considered as transverse isotropic tensors. As such, they can be decomposed in Walpole's basis. First, the identity tensor $\tens{I}$ decomposes as follows
 
 \begin{align*}
-\identiv&=\tens{\delta}\boxtimessym\tens{\delta}=\left(\p+\q\right)\boxtimessym\left(\p+\q\right)\\
+\tens{I}&=\tens{\delta}\boxtimessym\tens{\delta}=\left(\p+\q\right)\boxtimessym\left(\p+\q\right)\\
 &=\p\boxtimessym\p+\p\boxtimessym\q+\q\boxtimessym\p+\q\boxtimessym\q\\
 &=\tensiv E_1+\tensiv G+\tensiv F+\tensiv E_2.
 \end{align*}
@@ -186,10 +186,10 @@ where the identity $\p\boxtimessym\p=\p\otimes\p=\tensiv E_1$ has been used. Now
 &=\tensiv E_1+\sqrt2\tensiv E_3+\sqrt2\tensiv E_4+2\tensiv E_2.
 \end{align*}
 
-Finally, the decomposition of the deviatoric projection tensor $\tens{K}$ is found from the definition $\tens{K}=\identiv-\sphprojiv$. To sum up
+Finally, the decomposition of the deviatoric projection tensor $\tens{K}$ is found from the definition $\tens{K}=\tens{I}-\sphprojiv$. To sum up
 
 \begin{gather*}
-\identiv=\left(\begin{bmatrix}1&0\\0&1\end{bmatrix}, 1, 1\right),\\
+\tens{I}=\left(\begin{bmatrix}1&0\\0&1\end{bmatrix}, 1, 1\right),\\
 \sphprojiv=\left(\frac13\begin{bmatrix}1&\sqrt2\\\sqrt2&2\end{bmatrix}, 0, 0\right),\\
 \tens{K}=\left(\frac13\begin{bmatrix}2&-\sqrt2\\-\sqrt2&1\end{bmatrix}, 1, 1\right).
 \end{gather*}
