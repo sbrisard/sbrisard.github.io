@@ -29,7 +29,7 @@
 #+HTML_HEAD_EXTRA:           transp: ['{#1}^{\\text T}', 1],
 #+HTML_HEAD_EXTRA:           transpinv: ['{#1}^{-\\text T}', 1],
 #+HTML_HEAD_EXTRA:           vec: ['{\\mathbf{#1}}', 1],
-#+HTML_HEAD_EXTRA:           volavg: ['\\overline{#1}', 1],
+#+HTML_HEAD_EXTRA:           volavg: ['\\langle #1\\rangle', 1],
 #+HTML_HEAD_EXTRA:       }
 #+HTML_HEAD_EXTRA:   },
 #+HTML_HEAD_EXTRA:   'HTML-CSS': { availableFonts: ['TeX'] }
