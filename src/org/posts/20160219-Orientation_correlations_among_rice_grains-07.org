@@ -10,18 +10,18 @@ In the [[file:20150930-Orientation_correlations_among_rice_grains-06.org][previo
 It is customary to define the orientation of an elongated object by means of the eigenvectors of the tensor of second moments, defined as follows
 
 \begin{equation}
-\label{eq:1}J_{ij} = \int_\text{Grain}\left(x_i-X_i\right)\left(x_j-X_j\right)\D x_1\,\D x_2\,\D x_3,
+\label{eq:1}J_{ij} = \int_\text{Grain}\left(x_i-X_i\right)\left(x_j-X_j\right)\diff x_1\,\diff x_2\,\diff x_3,
 \end{equation}
 where the integral is carried out over the grain, and $X_i$ denotes the $i$-th coordinate of the grain's center of mass
 
 \begin{equation}
-\label{eq:2}X_i = \frac1V\int_\text{Grain}x_i\,\D x_1\,\D x_2\,\D x_3
+\label{eq:2}X_i = \frac1V\int_\text{Grain}x_i\,\diff x_1\,\diff x_2\,\diff x_3
 \end{equation}
 
 ($V$: volume of the grain). In coordinate-free form, Eq. \eqref{eq:1} reads
 
 \begin{equation}
-\label{eq:3}\tens J=\int_\text{Grain}\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\D x_1\,\D x_2\,\D x_3.
+\label{eq:3}\tens J=\int_\text{Grain}\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\diff x_1\,\diff x_2\,\diff x_3.
 \end{equation}
 
 The above defined tensor of second moments is related to the [[https://en.wikipedia.org/wiki/Moment_of_inertia#The_inertia_tensor][inertia tensor]] $\tens I$
@@ -30,7 +30,7 @@ The above defined tensor of second moments is related to the [[https://en.wikipe
 \end{equation}
 where $\tens I$ is defined as follows
 \begin{equation}
-\label{eq:5}\tens I=\int_\text{Grain}\left[\left(\vec x-\vec X\right)\cdot\left(\vec x-\vec X\right)\tens\delta-\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\right]\D x_1\,\D x_2\,\D x_3.
+\label{eq:5}\tens I=\int_\text{Grain}\left[\left(\vec x-\vec X\right)\cdot\left(\vec x-\vec X\right)\tens\delta-\left(\vec x-\vec X\right)\otimes\left(\vec x-\vec X\right)\right]\diff x_1\,\diff x_2\,\diff x_3.
 \end{equation}
 
 Being symmetric, the tensor $\tens J$ of second moments is diagonalizable, and we compute its eigenvalues $J_a$, $J_b$ and $J_c$, and the associated eigenvectors $\vec v_a$, $\vec v_b$ and $\vec v_c$
