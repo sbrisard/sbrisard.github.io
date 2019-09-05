@@ -42,7 +42,7 @@ Combining Eqs. \eqref{eq:3} and \eqref{eq:4} then leads to
 \mathcal H(\tens{\tau})=\frac12\overline{\tens{\varepsilon}}:\volavg{\left(\tens{C}-\tens{C}_0\right):\tens{\varepsilon}}=\frac12\overline{\tens{\varepsilon}}:\volavg{\tens{C}:\tens{\varepsilon}}-\frac12\overline{\tens{\varepsilon}}:\tens{C}_0:\volavg{\tens{\varepsilon}},
 \end{equation}
 
-where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, $\volavg\tens{\varepsilon}=\overline{\tens{\varepsilon}}$ (this is the very definition of the macroscopic strain $\overline{\tens{\varepsilon}}$). Furthermore, $\volavg{\tens{C}:\tens{\varepsilon}} = \volavg{\tens{\sigma}} = \overline{\tens{\sigma}}$, where $\overline{\tens{\sigma}}$ is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
+where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, $\volavg{\tens{\varepsilon}}=\overline{\tens{\varepsilon}}$ (this is the very definition of the macroscopic strain $\overline{\tens{\varepsilon}}$). Furthermore, $\volavg{\tens{C}:\tens{\varepsilon}} = \volavg{\tens{\sigma}} = \overline{\tens{\sigma}}$, where $\overline{\tens{\sigma}}$ is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
 
 \begin{equation}
 \label{eq:6}

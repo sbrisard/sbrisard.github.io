@@ -58,9 +58,9 @@ To close this instalment, we again consider a prestress $\tens{\varpi}$, and the
 
 Using Stokes' theorem, and the definition of $\vec{u}$
 \begin{equation*}
-    \volavg\tens{\varepsilon}=\frac1{\meas{\Omega}}\int_\Omega\nabla_\vec x^\text s\vec{u}\dV{\vec x}=\frac1{2\meas{\Omega}}\int_{\partial\Omega}\left[\vec{u}(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\vec{u}(\vec x)\right]\dS{\vec x},
+    \volavg{\tens{\varepsilon}}=\frac1{\meas{\Omega}}\int_\Omega\nabla_\vec x^\text s\vec{u}\dV{\vec x}=\frac1{2\meas{\Omega}}\int_{\partial\Omega}\left[\vec{u}(\vec x)\otimes\vec n(\vec x)+\vec n(\vec x)\otimes\vec{u}(\vec x)\right]\dS{\vec x},
 \end{equation*}
-where $\vec{u}$ is the displacement associated to the strain $\tens{\varepsilon}$, and $\vec n$ is the outward normal to the boundary $\partial\Omega$ of the domain $\Omega$. From the boundary condition \eqref{eq:3}, we finally find $\volavg\tens{\varepsilon}=\tens0$. Finally
+where $\vec{u}$ is the displacement associated to the strain $\tens{\varepsilon}$, and $\vec n$ is the outward normal to the boundary $\partial\Omega$ of the domain $\Omega$. From the boundary condition \eqref{eq:3}, we finally find $\volavg{\tens{\varepsilon}}=\tens0$. Finally
 
 #+BEGIN_THEOREM
 For any prestress $\tens{\varpi}$,
