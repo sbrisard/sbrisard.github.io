@@ -15,9 +15,9 @@ Let $\tens{C}$ be the stiffness of a homogeneous, linearly elastic material occu
 
 \begin{align}
 \label{eq:1}
-\nabla_\vec x\cdot\stress&=\vec0 & (\vec x\in\reals^d)\\
+\nabla_\vec x\cdot\tens{\sigma}&=\vec0 & (\vec x\in\reals^d)\\
 \label{eq:2}
-\stress(\vec x)&=\tens{C}:\tens{\varepsilon}(\vec x)+\tens{\varpi}(\vec x)&(\vec x\in\reals^d)\\
+\tens{\sigma}(\vec x)&=\tens{C}:\tens{\varepsilon}(\vec x)+\tens{\varpi}(\vec x)&(\vec x\in\reals^d)\\
 \label{eq:3}
 \tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text s\vec{u}&(\vec x\in\reals^d)\\
 \label{eq:4}
@@ -44,11 +44,11 @@ and
 \hat\vec{u}_b=\frac1{\meas{\Omega}}\int_\Omega\vec{u}(\vec x)\exp(-i\vec k_b\cdot\vec x)\dV{\vec x},
 \end{equation*}
 
-where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\Omega=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\tens{\varepsilon}$, stress $\stress$ and prestress $\tens{\varpi}$ are expanded in Fourier series
+where $b=(b_1,\ldots,b_d)\in\integers^d$ is a multi-index, and $\Omega=(0,L_1)\times\cdots\times(0,L_d)$ denotes the unit-cell. Similarly, the strain $\tens{\varepsilon}$, stress $\tens{\sigma}$ and prestress $\tens{\varpi}$ are expanded in Fourier series
 
 \begin{align*}
 \tens{\varepsilon}(\vec x)&=\sum_{b\in\integers^d}\hat\tens{\varepsilon}_b\exp(i\vec k_b\cdot\vec x),\\
-\stress(\vec x)&=\sum_{b\in\integers^d}\hat\stress_b\exp(i\vec k_b\cdot\vec x),\\
+\tens{\sigma}(\vec x)&=\sum_{b\in\integers^d}\hat\tens{\sigma}_b\exp(i\vec k_b\cdot\vec x),\\
 \tens{\varpi}(\vec x)&=\sum_{b\in\integers^d}\hat\tens{\varpi}_b\exp(i\vec k_b\cdot\vec x).
 \end{align*}
 
@@ -61,13 +61,13 @@ Eq. \eqref{eq:3} then reads
 and, from Eq. \eqref{eq:2} (keeping in mind that $\tens{C}$ has minor symmetries)
 
 \begin{align*}
-\hat\stress_b&=i\left(\tens{C}\cdot\vec k_b\right)\cdot\hat\vec{u}_b+\hat\tens{\varpi}_b&(b\in\integers^d).
+\hat\tens{\sigma}_b&=i\left(\tens{C}\cdot\vec k_b\right)\cdot\hat\vec{u}_b+\hat\tens{\varpi}_b&(b\in\integers^d).
 \end{align*}
 
 The equilibrium equation \eqref{eq:1} finally gives
 
 \begin{align*}
-\vec 0&=\vec k_b\cdot\hat\stress_b=i\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)\cdot\hat\vec{u}_b+\vec k_b\cdot\hat\tens{\varpi}_b&(b\in\integers^d).
+\vec 0&=\vec k_b\cdot\hat\tens{\sigma}_b=i\left(\vec k_b\cdot\tens{C}\cdot\vec k_b\right)\cdot\hat\vec{u}_b+\vec k_b\cdot\hat\tens{\varpi}_b&(b\in\integers^d).
 \end{align*}
 
 The term in brackets $\vec k\cdot\tens{C}\cdot\vec k$ is the [[file:./20140131-The_elastic_acoustic_tensor_and_its_inverse.org][acoustic tensor]] associated with the elastic material $\tens{C}$, and the above equation is readily solved for the Fourier modes of the displacement

@@ -10,9 +10,9 @@ We again consider a heterogeneous material, with local stiffness $\tens{C}$, loc
 
 \begin{align}
     \label{eq:1}
-    \nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
+    \nabla_\vec x\cdot\tens{\sigma}&=\vec0&&(\vec x\in\Omega),\\
     \label{eq:2}
-    \stress(\vec x)&=\tens{C}(\vec x):\tens{\varepsilon}(\vec x)&&(\vec x\in\Omega),\\
+    \tens{\sigma}(\vec x)&=\tens{C}(\vec x):\tens{\varepsilon}(\vec x)&&(\vec x\in\Omega),\\
     \label{eq:3}
     \tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
     \label{eq:4}
@@ -22,7 +22,7 @@ We again consider a heterogeneous material, with local stiffness $\tens{C}$, loc
 where $\overline{\tens{\varepsilon}}$ is the macroscopic (imposed) strain. The solution to this problem defines the effective elastic properties $\tens{C}^\text{eff}$, since, by definition
 
 \begin{equation*}
-\overline{\tens{\sigma}}=\volavg{\stress}=\tens{C}^\text{eff}:\overline{\tens{\varepsilon}},
+\overline{\tens{\sigma}}=\volavg{\tens{\sigma}}=\tens{C}^\text{eff}:\overline{\tens{\varepsilon}},
 \end{equation*}
 
 where $\overline{\tens{\sigma}}$ is the macroscopic stress.
@@ -30,7 +30,7 @@ where $\overline{\tens{\sigma}}$ is the macroscopic stress.
 Eqs. \eqref{eq:1} -- \eqref{eq:4} would be trivial if we had $\tens{C}(\vec x)=\tens{C}_0$ for any $\vec x\in\Omega$ ($\tens{C}_0$ is a /constant/ stiffness tensor). Indeed, the solution would then be
 
 \begin{equation*}
-\tens{\varepsilon}(\vec x)=\overline{\tens{\varepsilon}},\qquad\stress(\vec x)=\tens{C}_0:\overline{\tens{\varepsilon}}.
+\tens{\varepsilon}(\vec x)=\overline{\tens{\varepsilon}},\qquad\tens{\sigma}(\vec x)=\tens{C}_0:\overline{\tens{\varepsilon}}.
 \end{equation*}
 
 In other words, our life would be easier if we were to homogenize materials which are /already/ homogeneous!
@@ -39,7 +39,7 @@ So we see that the complexity of Eqs. \eqref{eq:1} -- \eqref{eq:4} comes from th
 
 \begin{equation}
 \label{eq:5}
-\stress(\vec x)=\tens{C}(\vec x):\tens{\varepsilon}(\vec x)=\tens{C}_0:\tens{\varepsilon}(\vec x)+\left[\tens{C}(\vec x)-\tens{C}_0\right]:\tens{\varepsilon}(\vec x).
+\tens{\sigma}(\vec x)=\tens{C}(\vec x):\tens{\varepsilon}(\vec x)=\tens{C}_0:\tens{\varepsilon}(\vec x)+\left[\tens{C}(\vec x)-\tens{C}_0\right]:\tens{\varepsilon}(\vec x).
 \end{equation}
 
 Introducing the so-called /polarization/ $\tens{\tau}$
@@ -53,14 +53,14 @@ Eq. \eqref{eq:5} then takes the following compact form
 
 \begin{equation}
 \label{eq:7}
-\stress(\vec x)=\tens{C}_0:\tens{\varepsilon}(\vec x)+\tens{\tau}(\vec x).
+\tens{\sigma}(\vec x)=\tens{C}_0:\tens{\varepsilon}(\vec x)+\tens{\tau}(\vec x).
 \end{equation}
 
 Determination of the polarization $\tens{\tau}$ requires the solution to Eqs. \eqref{eq:1} -- \eqref{eq:4}; therefore, it would seem that Eq. \eqref{eq:7} achieved nothing! However, let us assume for a moment that we /know/ $\tens{\tau}$ beforehand. Then Eqs. (1) -- (4) reduce to
 
 \begin{align*}
-\nabla_\vec x\cdot\stress&=\vec0&&(\vec x\in\Omega),\\
-\stress(\vec x)&=\tens{C}_0:\tens{\varepsilon}(\vec x)+\tens{\tau}(\vec x)&&(\vec x\in\Omega),\\
+\nabla_\vec x\cdot\tens{\sigma}&=\vec0&&(\vec x\in\Omega),\\
+\tens{\sigma}(\vec x)&=\tens{C}_0:\tens{\varepsilon}(\vec x)+\tens{\tau}(\vec x)&&(\vec x\in\Omega),\\
 \tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text s\vec{u}&&(\vec x\in\Omega),\\
 \vec{u}(\vec x)&=\overline{\tens{\varepsilon}}\cdot\vec x&&(\vec x\in\partial\Omega),
 \end{align*}

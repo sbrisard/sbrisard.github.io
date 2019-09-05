@@ -36,7 +36,7 @@ We first recall the consitutive law in isotropic, 3D elasticity
     \varepsilon_{ij}=\frac{1+\nu}E\sigma_{ij}-\frac\nu E\sigma_{kk}\delta_{ij}.
 \end{equation}
 
-Combination of Eqs. \eqref{eq:1} and \eqref{eq:2} for $(i, j)=(3, 1)$ and $(i, j)=(2, 3)$, first leads to $\sigma_{31}=\sigma_{23}=0$. Then, for $(i, j) = (3, 3)$, $\sigma_{33}=\nu\sigma_{\gamma\gamma}$. The 3D trace of $\stress$ can therefore be expressed as a function of its 2D trace
+Combination of Eqs. \eqref{eq:1} and \eqref{eq:2} for $(i, j)=(3, 1)$ and $(i, j)=(2, 3)$, first leads to $\sigma_{31}=\sigma_{23}=0$. Then, for $(i, j) = (3, 3)$, $\sigma_{33}=\nu\sigma_{\gamma\gamma}$. The 3D trace of $\tens{\sigma}$ can therefore be expressed as a function of its 2D trace
 \begin{equation*}
     \sigma_{kk}=\left(1+\nu\right)\sigma_{\gamma\gamma}.
 \end{equation*}

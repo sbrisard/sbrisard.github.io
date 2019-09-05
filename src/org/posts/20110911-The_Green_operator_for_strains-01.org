@@ -10,16 +10,16 @@ We consider a /homogeneous/ material occupying the bounded domain $\Omega\subset
 
 \begin{align}
     \label{eq:1}
-    \nabla_\vec x\cdot\stress&=\vec{0} && (\vec x\in\Omega),\\
+    \nabla_\vec x\cdot\tens{\sigma}&=\vec{0} && (\vec x\in\Omega),\\
     \label{eq:2}
-    \stress(\vec x)&=\tens{C}_0:\tens{\varepsilon}(\vec x)+\tens{\varpi}(\vec x) && (\vec x\in\Omega),\\
+    \tens{\sigma}(\vec x)&=\tens{C}_0:\tens{\varepsilon}(\vec x)+\tens{\varpi}(\vec x) && (\vec x\in\Omega),\\
     \label{eq:3}
     \tens{\varepsilon}(\vec x)&=\nabla_\vec x^\text{s}\vec{u} && (\vec x\in\Omega),\\
     \label{eq:4}
     \vec{u}(\vec x)&=\vec 0 && (\vec x\in\partial\Omega).
 \end{align}
 
-Eq. \eqref{eq:1} expresses static equilibrium ($\stress$: local stress tensor); Eq. \eqref{eq:2} is the constitutive law of the homogeneous, prestressed material ($\tens{\varepsilon}$: local strain tensor). Eq. \eqref{eq:3} expresses the fact that $\tens{\varepsilon}$ is /geometrically compatible/: it is the symmetric part of the gradient of the displacement $\vec{u}$. Finally, Eq. \eqref{eq:4} specifies the boundary conditions.
+Eq. \eqref{eq:1} expresses static equilibrium ($\tens{\sigma}$: local stress tensor); Eq. \eqref{eq:2} is the constitutive law of the homogeneous, prestressed material ($\tens{\varepsilon}$: local strain tensor). Eq. \eqref{eq:3} expresses the fact that $\tens{\varepsilon}$ is /geometrically compatible/: it is the symmetric part of the gradient of the displacement $\vec{u}$. Finally, Eq. \eqref{eq:4} specifies the boundary conditions.
 
 So, this is the problem we would like to solve. From the mathematical theory of elasticity, we /know/ that it has a /unique/ solution $\vec{u}$. Again, displacements are not that interesting from the perspective of micromechanics; what we really want to determine is the local strain $\tens{\varepsilon}$. In order to express the solution to Eqs. \eqref{eq:1} – \eqref{eq:4} in a convenient form, it is essential to note that it is linear. The superposition theorem will therefore be invoked. As a first step, we assume that the prestress $\tens{\varpi}$ has the simple following form
 

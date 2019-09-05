@@ -36,7 +36,7 @@ For any self-equilibrated prestress $\tens{\varpi}$
 
 Application of the previous result leads to a useful property, which can be found in e.g. [[https://doi.org/10.1007/978-3-7091-2780-3_5][Willis (2001)]], where it is written somewhat abusively (but quite efficiently!) $\tens{\Gamma}_0\tens{C}_0\tens{\Gamma}_0=\tens{\Gamma}_0$.
 
-Let $\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}$, and $\stress=\tens{C}_0:\tens{\varepsilon}+\tens{\varpi}$. By definition of $\tens{\Gamma}_0$, $\tens{\varepsilon}$ is geometrically compatible and $\stress$ is self-equilibrated: $\nabla\cdot\stress=\tens 0$. From the previous property, we have $\tens{\Gamma}_0\circledast\stress=\tens0$. In other words
+Let $\tens{\varepsilon}=-\tens{\Gamma}_0\circledast\tens{\varpi}$, and $\tens{\sigma}=\tens{C}_0:\tens{\varepsilon}+\tens{\varpi}$. By definition of $\tens{\Gamma}_0$, $\tens{\varepsilon}$ is geometrically compatible and $\tens{\sigma}$ is self-equilibrated: $\nabla\cdot\tens{\sigma}=\tens 0$. From the previous property, we have $\tens{\Gamma}_0\circledast\tens{\sigma}=\tens0$. In other words
 \begin{equation*}
     \tens{\Gamma}_0\circledast\left(\tens{C}_0:\tens{\varepsilon}+\tens{\varpi}\right)=\tens0
 \end{equation*}
