@@ -63,14 +63,14 @@ To close this post, let us consider more general boundary conditions. Instead of
 
 \begin{align}
 \label{eq:7}
-\vec{u}(\vec x)&=\Strain\cdot\vec x && (\vec x\in\partial\Omega),
+\vec{u}(\vec x)&=\overline{\tens{\varepsilon}}\cdot\vec x && (\vec x\in\partial\Omega),
 \end{align}
 
-where $\Strain$ is the imposed macroscopic strain (more on this in posts to come). Quite obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:3} and \eqref{eq:7} reads
+where $\overline{\tens{\varepsilon}}$ is the imposed macroscopic strain (more on this in posts to come). Quite obviously, the solution to Eqs. \eqref{eq:1}, \eqref{eq:2}, \eqref{eq:3} and \eqref{eq:7} reads
 
 \begin{equation}
 \label{eq:8}
-\strain(\vec x) = \Strain-\left(\tens{\Gamma}_0\circledast\tens{\varpi}\right)(\vec x).
+\strain(\vec x) = \overline{\tens{\varepsilon}}-\left(\tens{\Gamma}_0\circledast\tens{\varpi}\right)(\vec x).
 \end{equation}
 
 Formula \eqref{eq:8} will be extensively used in subsequent posts, since it leads to the /Lippmann-Schwinger/ equation.

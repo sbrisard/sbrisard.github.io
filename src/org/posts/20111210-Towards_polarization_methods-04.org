@@ -11,21 +11,21 @@ Let $\tens{\tau}$ be the solution of the Lippmann-Schwinger equation
 
 \begin{equation}
 \label{eq:1}
-\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}+\tens{\Gamma}_0\circledast\tens{\tau}=\Strain,
+\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}+\tens{\Gamma}_0\circledast\tens{\tau}=\overline{\tens{\varepsilon}},
 \end{equation}
 
-where $\Strain$ is the (imposed) macroscopic strain. We seek the value $\mathcal H(\tens{\tau})$ of the functional of Hashin and Shtrikman $\mathcal H$ (defined in [[file:./20111019-Towards_polarization_methods-02.org][part 2]] of this series), at point $\tens{\tau}$
+where $\overline{\tens{\varepsilon}}$ is the (imposed) macroscopic strain. We seek the value $\mathcal H(\tens{\tau})$ of the functional of Hashin and Shtrikman $\mathcal H$ (defined in [[file:./20111019-Towards_polarization_methods-02.org][part 2]] of this series), at point $\tens{\tau}$
 
 \begin{equation}
 \label{eq:2}
-\mathcal H(\tens{\tau})=\Strain:\volavg{\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)}.
+\mathcal H(\tens{\tau})=\overline{\tens{\varepsilon}}:\volavg{\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{C}-\tens{C}_0\right)^{-1}:\tens{\tau}}-\frac12\volavg{\tens{\tau}:\left(\tens{\Gamma}_0\circledast\tens{\tau}\right)}.
 \end{equation}
 
 Substituting Eq. \eqref{eq:1} in Eq. \eqref{eq:2}, we find
 
 \begin{equation}
 \label{eq:3}
-\mathcal H(\tens{\tau})=\frac12\Strain:\volavg{\tens{\tau}}.
+\mathcal H(\tens{\tau})=\frac12\overline{\tens{\varepsilon}}:\volavg{\tens{\tau}}.
 \end{equation}
 
 Now is a good time to remember that the polarization $\tens{\tau}$ is related to the strain $\strain$ by the following equation
@@ -39,21 +39,21 @@ Combining Eqs. \eqref{eq:3} and \eqref{eq:4} then leads to
 
 \begin{equation}
 \label{eq:5}
-\mathcal H(\tens{\tau})=\frac12\Strain:\volavg{\left(\tens{C}-\tens{C}_0\right):\strain}=\frac12\Strain:\volavg{\tens{C}:\strain}-\frac12\Strain:\tens{C}_0:\volavg{\strain},
+\mathcal H(\tens{\tau})=\frac12\overline{\tens{\varepsilon}}:\volavg{\left(\tens{C}-\tens{C}_0\right):\strain}=\frac12\overline{\tens{\varepsilon}}:\volavg{\tens{C}:\strain}-\frac12\overline{\tens{\varepsilon}}:\tens{C}_0:\volavg{\strain},
 \end{equation}
 
-where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, $\volavg\strain=\Strain$ (this is the very definition of the macroscopic strain $\Strain$). Furthermore, $\volavg{\tens{C}:\strain} = \volavg{\stress} = \Stress$, where $\Stress$ is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
+where the second term accounts for the fact that the reference material is homogeneous. The above expression can be further simplified. Indeed, $\volavg\strain=\overline{\tens{\varepsilon}}$ (this is the very definition of the macroscopic strain $\overline{\tens{\varepsilon}}$). Furthermore, $\volavg{\tens{C}:\strain} = \volavg{\stress} = \Stress$, where $\Stress$ is the macroscopic stress in the composite. This macroscopic stress is in turn related to the macroscopic strain through the homogenized constitutive law, which reads in linear elasticity
 
 \begin{equation}
 \label{eq:6}
-\Stress=\tens{C}^\eff:\Strain,
+\Stress=\tens{C}^\eff:\overline{\tens{\varepsilon}},
 \end{equation}
 
 where $\tens{C}^\eff$ is the macroscopic (or effective, or homogenized) stiffness of the composite. Eq. \eqref{eq:5} finally reduces to
 
 \begin{equation}
 \label{eq:7}
-\mathcal H(\tens{\tau})=\frac12\Strain:\tens{C}^\eff:\Strain-\frac12\Strain:\tens{C}_0:\Strain.
+\mathcal H(\tens{\tau})=\frac12\overline{\tens{\varepsilon}}:\tens{C}^\eff:\overline{\tens{\varepsilon}}-\frac12\overline{\tens{\varepsilon}}:\tens{C}_0:\overline{\tens{\varepsilon}}.
 \end{equation}
 
 In other words, the value of the functional of Hashin and Shtrikman at the solution of the Lippmann-Schwinger equation is the difference between the strain energy of the composite and the strain energy of the reference material.
@@ -69,14 +69,14 @@ Inserting Eq. \eqref{eq:7} in Eq. \eqref{eq:8} leads for any polarization field 
 
 \begin{equation}
 \label{eq:9}
-\frac12\Strain:\tens{C}^\eff:\Strain\leq\frac12\Strain:\tens{C}_0:\Strain+\mathcal H(\tens{\varpi}).
+\frac12\overline{\tens{\varepsilon}}:\tens{C}^\eff:\overline{\tens{\varepsilon}}\leq\frac12\overline{\tens{\varepsilon}}:\tens{C}_0:\overline{\tens{\varepsilon}}+\mathcal H(\tens{\varpi}).
 \end{equation}
 
 Similarly, if the reference material is /softer/ than the composite, that is $\tens{C}(\vec x)\geq\tens{C}_0$ for any $\vec x\in\Omega$, then Eq. \eqref{eq:9} should be replaced with
 
 \begin{equation}
 \label{eq:10}
-\frac12\Strain:\tens{C}^\eff:\Strain\geq\frac12\Strain:\tens{C}_0:\Strain+\mathcal H(\tens{\varpi}).
+\frac12\overline{\tens{\varepsilon}}:\tens{C}^\eff:\overline{\tens{\varepsilon}}\geq\frac12\overline{\tens{\varepsilon}}:\tens{C}_0:\overline{\tens{\varepsilon}}+\mathcal H(\tens{\varpi}).
 \end{equation}
 
 Eqs. \eqref{eq:9} and \eqref{eq:10} have deep (deep, deep) implications, which will be explored in the next instalment of this series.
