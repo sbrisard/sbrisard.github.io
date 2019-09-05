@@ -24,7 +24,6 @@
 #+HTML_HEAD_EXTRA:           naturals: '\\mathbb N',
 #+HTML_HEAD_EXTRA:           rationals: '\\mathbb Q',
 #+HTML_HEAD_EXTRA:           reals: '\\mathbb R',
-#+HTML_HEAD_EXTRA:           sphprojiv: '\\tensiv{J}',
 #+HTML_HEAD_EXTRA:           stensii: ['\\svec{#1}', 1],
 #+HTML_HEAD_EXTRA:           stensiv: ['\\svec{#1}', 1],
 #+HTML_HEAD_EXTRA:           stiffness: '\\tensiv{C}',

@@ -170,7 +170,7 @@ Transposition is also straightforward
 
 * Decomposition of fourth-rank, isotropic tensors in Walpole's basis
 
-The isotropic tensors $\tens{I}$, $\sphprojiv$ and $\tens{K}$ introduced [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][previously]] can be considered as transverse isotropic tensors. As such, they can be decomposed in Walpole's basis. First, the identity tensor $\tens{I}$ decomposes as follows
+The isotropic tensors $\tens{I}$, $\tens{J}$ and $\tens{K}$ introduced [[file:./20140112-Elastic_constants_of_an_isotropic_material-03.org][previously]] can be considered as transverse isotropic tensors. As such, they can be decomposed in Walpole's basis. First, the identity tensor $\tens{I}$ decomposes as follows
 
 \begin{align*}
 \tens{I}&=\tens{\delta}\boxtimessym\tens{\delta}=\left(\p+\q\right)\boxtimessym\left(\p+\q\right)\\
@@ -178,19 +178,19 @@ The isotropic tensors $\tens{I}$, $\sphprojiv$ and $\tens{K}$ introduced [[file:
 &=\tensiv E_1+\tensiv G+\tensiv F+\tensiv E_2.
 \end{align*}
 
-where the identity $\p\boxtimessym\p=\p\otimes\p=\tensiv E_1$ has been used. Now, the decomposition of $\sphprojiv$ is readily derived from its definition
+where the identity $\p\boxtimessym\p=\p\otimes\p=\tensiv E_1$ has been used. Now, the decomposition of $\tens{J}$ is readily derived from its definition
 
 \begin{align*}
-3\sphprojiv&=\tens{\delta}\otimes\tens{\delta}=\left(\p+\q\right)\otimes\left(\p+\q\right)\\
+3\tens{J}&=\tens{\delta}\otimes\tens{\delta}=\left(\p+\q\right)\otimes\left(\p+\q\right)\\
 &=\p\otimes\p+\p\otimes\q+\q\otimes\p+\q\otimes\q\\
 &=\tensiv E_1+\sqrt2\tensiv E_3+\sqrt2\tensiv E_4+2\tensiv E_2.
 \end{align*}
 
-Finally, the decomposition of the deviatoric projection tensor $\tens{K}$ is found from the definition $\tens{K}=\tens{I}-\sphprojiv$. To sum up
+Finally, the decomposition of the deviatoric projection tensor $\tens{K}$ is found from the definition $\tens{K}=\tens{I}-\tens{J}$. To sum up
 
 \begin{gather*}
 \tens{I}=\left(\begin{bmatrix}1&0\\0&1\end{bmatrix}, 1, 1\right),\\
-\sphprojiv=\left(\frac13\begin{bmatrix}1&\sqrt2\\\sqrt2&2\end{bmatrix}, 0, 0\right),\\
+\tens{J}=\left(\frac13\begin{bmatrix}1&\sqrt2\\\sqrt2&2\end{bmatrix}, 0, 0\right),\\
 \tens{K}=\left(\frac13\begin{bmatrix}2&-\sqrt2\\-\sqrt2&1\end{bmatrix}, 1, 1\right).
 \end{gather*}
 
