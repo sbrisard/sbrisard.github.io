@@ -19,9 +19,9 @@ the seventh in a series in {{{sb-blog-num-posts}}} parts:
 
 * Computing the DFT of the intensity gaps
 
-In the [[sb-blog-06a:#algorithm][previous instalment]] of this series, we showed that the DFT $\hat s$ of
+In the [[sb-blog-06a:#algorithm][previous instalment]] of this series, we showed that the DFT $\hat{s}$ of
 the smooth component $s$ of a $m\times n$ image $u$ can be deduced from the DFT
-$\hat v$ of the image $v$ which, according to Moisan ([[moisan2011:][2011]]) "captures the
+$\hat{v}$ of the image $v$ which, according to Moisan ([[moisan2011:][2011]]) "captures the
 intensity gaps of $u$ across its borders": $v=v^\mathrm h+v^\mathrm v$, with
 
 \begin{equation*}
@@ -40,13 +40,13 @@ u_{0, j}-u_{m-1, j} & \text{if }i=m-1,\\
 \end{cases}
 \end{equation*}
 
-In our first implementation of Moisan's algorigthm, we computed $\hat v$ as a
+In our first implementation of Moisan's algorigthm, we computed $\hat{v}$ as a
 /two-dimensional/ DFT. While correct and simple to implement, this is
 unnecessarily expensive. Indeed, we readily find that
 
 \begin{equation*}
 \begin{aligned}[b]
-\hat v_{\alpha\beta}^\mathrm h&=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}v_{ij}
+\hat{v}_{\alpha\beta}^\mathrm h&=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}v_{ij}
 \exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta j}n\Bigr)\Bigr]\\
 &=\sum_{i=0}^{m-1}\bigl(u_{i, n-1}-u_{i, 0}\bigr)\Bigl\{
 \exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m\Bigr)\Bigr]
