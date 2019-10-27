@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-09-05 Thu 21:01 -->
+<!-- 2019-10-27 Sun 11:18 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan&rsquo;s algorithm</title>
@@ -39,7 +39,7 @@ tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
-volavg: ['\\overline{#1}', 1],
+volavg: ['\\langle #1\\rangle', 1],
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -118,9 +118,9 @@ The code discussed in this series is available as a Python module on <a href="ht
 <h2 id="org3b0fe40">Computing the DFT of the intensity gaps</h2>
 <div class="outline-text-2" id="text-org3b0fe40">
 <p>
-In the <a href="./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.html#algorithm">previous instalment</a> of this series, we showed that the DFT \(\hat s\) of
+In the <a href="./20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06.html#algorithm">previous instalment</a> of this series, we showed that the DFT \(\hat{s}\) of
 the smooth component \(s\) of a \(m\times n\) image \(u\) can be deduced from the DFT
-\(\hat v\) of the image \(v\) which, according to Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) &ldquo;captures the
+\(\hat{v}\) of the image \(v\) which, according to Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) &ldquo;captures the
 intensity gaps of \(u\) across its borders&rdquo;: \(v=v^\mathrm h+v^\mathrm v\), with
 </p>
 
@@ -141,14 +141,14 @@ u_{0, j}-u_{m-1, j} & \text{if }i=m-1,\\
 \end{equation*}
 
 <p>
-In our first implementation of Moisan&rsquo;s algorigthm, we computed \(\hat v\) as a
+In our first implementation of Moisan&rsquo;s algorigthm, we computed \(\hat{v}\) as a
 <i>two-dimensional</i> DFT. While correct and simple to implement, this is
 unnecessarily expensive. Indeed, we readily find that
 </p>
 
 \begin{equation*}
 \begin{aligned}[b]
-\hat v_{\alpha\beta}^\mathrm h&=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}v_{ij}
+\hat{v}_{\alpha\beta}^\mathrm h&=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}v_{ij}
 \exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta j}n\Bigr)\Bigr]\\
 &=\sum_{i=0}^{m-1}\bigl(u_{i, n-1}-u_{i, 0}\bigr)\Bigl\{
 \exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m\Bigr)\Bigr]

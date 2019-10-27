@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2019-09-05 Thu 21:01 -->
+<!-- 2019-10-27 Sun 11:18 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way</title>
@@ -39,7 +39,7 @@ tr: '\\operatorname{tr}',
 transp: ['{#1}^{\\text T}', 1],
 transpinv: ['{#1}^{-\\text T}', 1],
 vec: ['{\\mathbf{#1}}', 1],
-volavg: ['\\overline{#1}', 1],
+volavg: ['\\langle #1\\rangle', 1],
 }
 },
 'HTML-CSS': { availableFonts: ['TeX'] }
@@ -115,12 +115,12 @@ The code discussed in this series is available as a Python module on <a href="ht
 </p>
 
 <p>
-Before we proceed, let us recall how the <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">discrete Fourier transform</a> \(\hat u\) of
+Before we proceed, let us recall how the <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">discrete Fourier transform</a> \(\hat{u}\) of
 the \(m\times n\) image \(u\) is defined
 </p>
 
 \begin{equation*}
-\hat u_{\alpha\beta}=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{ij}
+\hat{u}_{\alpha\beta}=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{ij}
 \exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta j}n\Bigr)\Bigr],
 \end{equation*}
 
@@ -130,7 +130,7 @@ inversion formula
 </p>
 
 \begin{equation*}
-u_{ij}=\frac1{mn}\sum_{\alpha=0}^{m-1}\sum_{\beta=0}^{n-1}\hat u_{\alpha\beta}
+u_{ij}=\frac1{mn}\sum_{\alpha=0}^{m-1}\sum_{\beta=0}^{n-1}\hat{u}_{\alpha\beta}
 \exp\Bigl[2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta j}n\Bigr)\Bigr].
 \end{equation*}
 
@@ -178,9 +178,9 @@ and the operator that maps any image \(u\) onto the constant image equal to
 \begin{equation}
 (\widehat{Q\cdot s})_{\alpha\beta}=
 \begin{cases}
-m^{-2}n^{-2}\hat s_{00} & \text{if }(\alpha, \beta) = (0, 0),\\
+m^{-2}n^{-2}\hat{s}_{00} & \text{if }(\alpha, \beta) = (0, 0),\\
 \bigl(8-4\cos\frac{2\pi\alpha}m-4\cos\frac{2\pi\beta}n\bigr)
-\hat s_{\alpha\beta} & \text{otherwise}.
+\hat{s}_{\alpha\beta} & \text{otherwise}.
 \end{cases}
 \label{eq:2}
 \end{equation}
@@ -190,7 +190,7 @@ Combining Eqs. \eqref{eq:1} and \eqref{eq:2}, we find the following expression
 of the discrete Fourier transform of the smooth component \(s\)
 </p>
 \begin{equation}
-\hat s_{\alpha\beta}=\frac{\hat v_{\alpha\beta}}
+\hat{s}_{\alpha\beta}=\frac{\hat{v}_{\alpha\beta}}
 {2\cos\frac{2\pi\alpha}m+2\cos\frac{2\pi\beta}n-4}
 \quad\text{for}\quad
 (\alpha, \beta)\neq(0, 0),
@@ -199,7 +199,7 @@ of the discrete Fourier transform of the smooth component \(s\)
 
 <p>
 where we have introduced \(v=-\frac12Q_1\cdot u\). Since \(\operatorname{mean}s=0\),
-we also have \(\hat s_{00}=0\). From the definition of \(Q_1\) (see <a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html#Q1">part 3</a> of this
+we also have \(\hat{s}_{00}=0\). From the definition of \(Q_1\) (see <a href="./20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.html#Q1">part 3</a> of this
 series), we have \(v=v^\mathrm h+v^\mathrm v\), with
 </p>
 
@@ -226,8 +226,8 @@ Moisan&rsquo;s algorithm (<a href="https://doi.org/10.1007/s10851-010-0227-1">20
 
 <ol class="org-ol">
 <li>compute \(v\) [use Eq. \eqref{eq:4}],</li>
-<li>compute its discrete Fourier transform \(\hat v\),</li>
-<li>compute \(\hat s\) [use Eq. \eqref{eq:3}],</li>
+<li>compute its discrete Fourier transform \(\hat{v}\),</li>
+<li>compute \(\hat{s}\) [use Eq. \eqref{eq:3}],</li>
 <li>compute its inverse discrete Fourier transform \(s\),</li>
 <li>compute \(p=u-s\).</li>
 </ol>
