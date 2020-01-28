@@ -1,0 +1,62 @@
+Title: Orientation correlations among rice grains, part 1: introduction
+Date: 2015-02-23
+Category: Image analysis
+
+In this series, I will explore the notion of orientational order in random
+packings of anisotropic (flat or elongated), hard particles. By orientational
+order, I mean that particles which are close to each other tend to adopt the
+same orientation. This leads to strong *local* anisotropy, while the packing may
+well be *globally* isotropic; in particular, all orientations of single grains
+are equiprobable. Local orientational order is stronger when the volume fraction
+of particles, or their aspect ratio increases.
+
+Local orientational order will be illustrated on a “real” packing, and I chose
+rice grains for this demo. Analysis of orientation correlations requires to go
+through the following steps
+
+1. acquisition of a 3D image of the packing through X-ray microtomography,
+2. segmentation of the 3D image (each grain must be labelled individually) by
+   means of the [Population](http://www.population-image.fr/) C++ library,
+3. computation of the orientation of each rice grain, using the `scipy.ndimage`
+   Python module,
+4. computation of the orientation correlations.
+
+Before we proceed, I would like to clarify the notion of local orientational
+order through images of synthetic packings of 10000 hard (flat) spheroids. The
+aspect ratio (ratio of polar to equatorial radii) of the (flat) spheroids is
+0.125. The images below (click to enlarge) are three realizations of random
+packing of spheroids, at 40% (left), 50% (middle) and 60% (right) volume
+fraction. The color of each particle is chosen according to its orientation, so
+that particles with similar colors have similar orientations.
+
+|   |   |   |
+|---|---|---|
+| ![40%]({static}20150223-Orientation_correlations_among_rice_grains-01/spheroids_40p100.png){.figure} | ![50%]({static}20150223-Orientation_correlations_among_rice_grains-01/spheroids_50p100.png){.figure} | ![60%]({static}20150223-Orientation_correlations_among_rice_grains-01/spheroids_60p100.png){.figure} |
+
+It should be mentioned that generating such compact assemblies is no trivial
+task. The event-driven molecular dynamics algorithm proposed by Donev, Torquato
+and Stillinger ([2005](https://doi.org/10.1016/j.jcp.2004.08.014),
+[2005a](https://doi.org/10.1016/j.jcp.2004.08.025)) is an attractive option: it
+is both very general and versatile. It is however a bit complex, and I adopted a
+different approach, which we published a while ago with Pierre Levitz ([Brisard
+and Levitz, 2013](https://doi.org/10.1103/PhysRevE.87.013305)). In a nutshell,
+the microstructures presented above are the result of a kind of [Reverse
+Monte-Carlo](http://en.wikipedia.org/wiki/Reverse_Monte_Carlo) simulation with a
+non-physical pairwise potential. The interaction potential is zero when the
+spheroids do not intersect, and repulsive when they do.
+
+It is observed that, as the volume fraction of particles increases, so does the
+size of the color patches. In other words, to pack the particles closely, you
+need to stack them! Mathematically speaking, the orientations of particles
+exhibit long-range correlations. In the next instalments of this series, I will
+show how these correlations can be quantified, both on synthetic and
+\"real-life\" samples.
+
+See [part
+2]({filename}20150310-Orientation_correlations_among_rice_grains-02.md) of this
+series.
+
+<!-- Local Variables: -->
+<!-- mode: markdown -->
+<!-- fill-column: 80 -->
+<!-- End: -->

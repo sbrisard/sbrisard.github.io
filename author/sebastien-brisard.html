@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sébastien Brisard's blog - Articles by Sébastien Brisard</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content">
+<h1>Articles by Sébastien Brisard</h1>
+
+<div id="post-list">
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180326-on_the_periodic-plus-smooth_decomposition_of_an_image-07.html"
+	 rel="bookmark"
+	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan's algorithm"
+	 datetime="2018-03-26T00:00:00+02:00">
+	26 March 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan's algorithm
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20180319-on_the_periodic-plus-smooth_decomposition_of_an_image-06.html">previous
+instalment</a>
+of this series, we implemented Moisan's
+(<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) efficient
+algorithm to compute the periodic-plus-smooth decomposition of an
+image. This algorithm relies heavily on the discrete Fourier
+transform, and already improves quite a lot over our previous
+conjugate gradient-based implementation. In the present post, we will
+show that …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180319-on_the_periodic-plus-smooth_decomposition_of_an_image-06.html"
+	 rel="bookmark"
+	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way"
+	 datetime="2018-03-19T00:00:00+01:00">
+	19 March 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20180312-on_the_periodic-plus-smooth_decomposition_of_an_image-05.html">previous
+instalment</a>
+of this series, we computed Moisan's
+(<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>)
+periodic-plus-smooth decomposition of an image by means of the
+<a href="https://en.wikipedia.org/wiki/Conjugate_gradient_method">conjugate gradient
+method</a>. This
+worked like a charm, but was fairly inefficient, owing to the
+iterative nature of the method. Moisan actually showed that the whole
+decomposition could be computed …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180312-on_the_periodic-plus-smooth_decomposition_of_an_image-05.html"
+	 rel="bookmark"
+	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way"
+	 datetime="2018-03-12T00:00:00+01:00">
+	12 March 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In this post, we will compute Moisan's
+(<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) periodic-plus-smooth
+decomposition of an image by direct minimization of the energy introduced in the
+<a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">second
+instalment</a>
+of this series. More precisely, $u$ being a $m\times n$ image, we will minimize
+the function $F(v, u)$ over the space of $m\times …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180305-on_the_periodic-plus-smooth_decomposition_of_an_image-04.html"
+	 rel="bookmark"
+	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators"
+	 datetime="2018-03-05T00:00:00+01:00">
+	05 March 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html">previous
+instalment</a>
+of this series, we introduced the linear operators $Q_1$ and $Q$ that allow to
+define Moisan's (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>)
+periodic-plus-smooth decomposition $(p, s)$ of an image $u$ as follows</p>
+<p>$$s=\operatorname*{arg\,min}_v F(v, u)\quad\text{and}\quad p=u-s,$$</p>
+<p>with</p>
+<p>$$F(v, u)=\langle …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html"
+	 rel="bookmark"
+	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form"
+	 datetime="2018-02-26T00:00:00+01:00">
+	26 February 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">previous
+instalment</a>
+of this series, we introduced the periodic-plus-smooth decomposition of an image
+as a pair of images which minimizes an energy functional. Observing that this
+energy is a quadratic form, the purpose of this post is to derive closed form
+expressions of the underlying linear operators. These …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html"
+	 rel="bookmark"
+	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition"
+	 datetime="2018-02-19T00:00:00+01:00">
+	19 February 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20180212-on_the_periodic-plus-smooth_decomposition_of_an_image-01.html">previous
+instalment</a>
+of this series, we discussed the need for periodic images. Although not all
+images are periodic, some image analysis techniques are best performed in
+Fourier space (using the fast Fourier transform). Applying Fourier-based
+techniques to images that are <em>not</em> periodic (as is often the case) generates …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180212-on_the_periodic-plus-smooth_decomposition_of_an_image-01.html"
+	 rel="bookmark"
+	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 1: introduction"
+	 datetime="2018-02-12T00:00:00+01:00">
+	12 February 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 1: introduction
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In this new series, we will explore the so-called <em>periodic-plus-smooth</em>
+decomposition of an image, introduced by Moisan in 2011. This series is largely
+based on Moisan's paper, called <a href="https://doi.org/10.1007/s10851-010-0227-1">Periodic plus Smooth Image
+Decomposition</a> (the author's version
+can be found on <a href="https://hal.archives-ouvertes.fr/hal-00388020">HAL</a>). Besides
+introducing a quite smart technique (that I do …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20171117-announcing_the_defense_of_my_habilitation.html"
+	 rel="bookmark"
+	 title="Permalink to Announcing the defense of my “Habilitation à Diriger des Recherches”"
+	 datetime="2017-11-17T00:00:00+01:00">
+	17 November 2017&nbsp;&mdash;&nbsp;Announcing the defense of my “Habilitation à Diriger des Recherches”
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>On monday 20th, november 2017 (at 13:30), I will be defending my
+<a href="https://en.wikipedia.org/wiki/Habilitation#France">"Habilitation à Diriger des Recherches"</a> at
+<a href="http://www.enpc.fr/">École des Ponts ParisTech</a> in front of the
+following jury</p>
+<ul>
+<li><a href="http://www.dalembert.upmc.fr/home/brenner/">Renald Brenner</a>
+    (Sorbonne Universités, UPMC Univ Paris 06, CNRS, UMR 7190, <a href="http://www.dalembert.upmc.fr/">Institut
+    Jean le Rond d\'Alembert</a>, F-75005,
+    Paris, France),</li>
+<li><a href="http://matperso.mines-paristech.fr/People/samuel.forest/">Samuel …</a></li></ul>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20170807-new_conference_paper_on_variational_estimates_of_poroelastic_coefficients.html"
+	 rel="bookmark"
+	 title="Permalink to New conference paper on variational estimates of poroelastic coefficients"
+	 datetime="2017-08-07T00:00:00+02:00">
+	07 August 2017&nbsp;&mdash;&nbsp;New conference paper on variational estimates of poroelastic coefficients
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>I recently had the pleasure to give a talk on “Variational estimates
+of the poroelastic coefficients” at the 6th Biot Conference on
+Poromechanics that took place at École des Ponts ParisTech on July
+9-13, 2017. This is joint work with my colleague <a href="http://navier.enpc.fr/GHABEZLOO-Siavash">Siavash
+GHABEZLOO</a>. It has been
+ongoing for years …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20170531-scrapy-ing_the_nist_x-ray_attenuation_databases.html"
+	 rel="bookmark"
+	 title="Permalink to Scrapy-ing the NIST X-ray Attenuation Databases"
+	 datetime="2017-05-31T00:00:00+02:00">
+	31 May 2017&nbsp;&mdash;&nbsp;Scrapy-ing the NIST X-ray Attenuation Databases
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>I am currently preparing with two other colleagues a review paper on X-ray
+tomography of cementitious materials, for which I need to retrieve tabulated
+values of the <a href="https://en.wikipedia.org/wiki/Mass_attenuation_coefficient#Mass_attenuation_coefficients_for_X-rays">X-ray mass attenuation
+coefficients</a>
+of all elements. NIST provides such data (see <a href="https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients">X-Ray Mass Attenuation
+Coefficients</a> by
+J. H. Hubbell and S. M …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20170428-new_paper_on_one-dimensional_compression_of_granular_materials.html"
+	 rel="bookmark"
+	 title="Permalink to New paper on one-dimensional compression of granular materials"
+	 datetime="2017-04-28T00:00:00+02:00">
+	28 April 2017&nbsp;&mdash;&nbsp;New paper on one-dimensional compression of granular materials
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>My student Mohamed Hassan Khalili has recently had one of his papers
+published in <em>Physical Review E</em>. The paper is called “A numerical study
+of one-dimensional compression of granular materials”. I have only been
+very marginally involved in this DEM study, which is divided in two
+parts.</p>
+<p>Part I is …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20170426-new_paper_on_discrete_digital_projections_correlation.html"
+	 rel="bookmark"
+	 title="Permalink to New paper on Discrete Digital Projections Correlation"
+	 datetime="2017-04-26T00:00:00+02:00">
+	26 April 2017&nbsp;&mdash;&nbsp;New paper on Discrete Digital Projections Correlation
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Our paper “Discrete Digital Projections Correlation: a
+reconstruction-free method to quantify local kinematics in granular
+media by X-ray tomography” has recently been published in <em>Experimental
+Mechanics</em>. The abstract is reproduced below</p>
+<blockquote>
+<p>We propose a new method to measure the translations and rotations of
+each individual grain in a granular material …</p></blockquote>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20170223-new_paper_out.html"
+	 rel="bookmark"
+	 title="Permalink to New paper out!"
+	 datetime="2017-02-23T00:00:00+01:00">
+	23 February 2017&nbsp;&mdash;&nbsp;New paper out!
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>My paper “Towards improved Hashin--Shtrikman bounds on the effective
+moduli of random composites” has recently been published in <em>Mechanics &amp;
+Industry</em>. The abstract is reproduced below</p>
+<blockquote>
+<p>The celebrated bounds of Hashin and Shtrikman on the effective
+properties of composites are valid for a very wide class of materials.
+However, they incorporate …</p></blockquote>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20160627-orientation_correlations_among_rice_grains-08.html"
+	 rel="bookmark"
+	 title="Permalink to Orientation correlations among rice grains, part 8: estimating the correlations"
+	 datetime="2016-06-27T00:00:00+02:00">
+	27 June 2016&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 8: estimating the correlations
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20160219-orientation_correlations_among_rice_grains-07.html">previous
+instalment</a>
+of this series, we have analyzed the morphology of the rice grains. In
+particular, we have defined their <em>orientation</em> as that of the major axis of
+inertia. We are now in a position to quantify the statistics of the
+orientations. We will first discuss <a href="#S1">one-point statistics …</a></p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20160613-new_paper.html"
+	 rel="bookmark"
+	 title="Permalink to New paper"
+	 datetime="2016-06-13T00:00:00+02:00">
+	13 June 2016&nbsp;&mdash;&nbsp;New paper
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>My paper “Reconstructing displacements from the solution to the periodic
+Lippmann--Schwinger equation discretized on a uniform grid” has recently
+been published in <em>International Journal of Numerical Methods in
+Engineering</em>. The abstract is reproduced below</p>
+<blockquote>
+<p>Uniform grid solvers of the periodic Lippmann--Schwinger equation have
+been introduced by Moulinec and Suquet for …</p></blockquote>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20160219-orientation_correlations_among_rice_grains-07.html"
+	 rel="bookmark"
+	 title="Permalink to Orientation correlations among rice grains, part 7: analysis of the shape of the grains"
+	 datetime="2016-02-19T00:00:00+01:00">
+	19 February 2016&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 7: analysis of the shape of the grains
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>$\newcommand{\tens}{\mathbf}\newcommand{\D}{\mathrm{d}}$</p>
+<p>In the <a href="https://sbrisard.github.io/posts/20150930-orientation_correlations_among_rice_grains-06.html">previous
+instalment</a>
+of this series, we have segmented the 3D image of the assembly of rice
+grains. In other words, each voxel of the image is attributed the label of the
+grain to which it belongs. Remember the <a href="https://sbrisard.github.io/posts/20150223-orientation_correlations_among_rice_grains-01.html">initial
+goal</a> of …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20151208-new_paper_published.html"
+	 rel="bookmark"
+	 title="Permalink to New paper published"
+	 datetime="2015-12-08T00:00:00+01:00">
+	08 December 2015&nbsp;&mdash;&nbsp;New paper published
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>My student Vinh Phuc Tran has recently had one of his papers published
+in <em>Mechanics of Materials</em>. The paper is called <em>Stochastic modeling of
+mesoscopic elasticity random field</em>. The abstract is reproduced below</p>
+<blockquote>
+<p>In the homogenization setting, the effective properties of a
+heterogeneous material can be retrieved from the solution …</p></blockquote>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150930-orientation_correlations_among_rice_grains-06.html"
+	 rel="bookmark"
+	 title="Permalink to Orientation correlations among rice grains, part 6: segmentation"
+	 datetime="2015-09-30T00:00:00+02:00">
+	30 September 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 6: segmentation
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20150709-orientation_correlations_among_rice_grains-05.html">previous
+instalment</a>
+of this series, I showed that a convincing binary image could be produced from
+the gray level 3D reconstruction of the assembly of rice grains, using Otsu's
+threshold. However, I intend to carry out statistical analyses of the <em>grains</em>
+themselves in the subsequent instalments. Therefore, instead …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150709-orientation_correlations_among_rice_grains-05.html"
+	 rel="bookmark"
+	 title="Permalink to Orientation correlations among rice grains, part 5: thresholding"
+	 datetime="2015-07-09T00:00:00+02:00">
+	09 July 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 5: thresholding
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20150529-orientation_correlations_among_rice_grains-04.html">previous
+instalment</a>
+of this series, we used the circle Hough transform to find the boundary of the
+sample and define the circular ROI. Within this ROI, we now need to segment the
+rice grains. In other words, starting from a gray-level image (<a href="#fig01">Fig. 1</a>,
+left), we want to …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150706-when_a_thin_shell_is_not_so_thin-03.html"
+	 rel="bookmark"
+	 title="Permalink to When a thin shell is not so thin, part 3: the thick shell solution"
+	 datetime="2015-07-06T00:00:00+02:00">
+	06 July 2015&nbsp;&mdash;&nbsp;When a thin shell is not so thin, part 3: the thick shell solution
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Finding the stress resultant and stress couple in a spherical pressure vessel
+seems easy enough. Well, this apparently simple problem allows us to highlight
+subtle thickness effects within shells. It should be emphasized again that these
+thickness effects have nothing to do with shear corrections. Indeed, shear
+stresses are null …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150701-when_a_thin_shell_is_not_so_thin-02.html"
+	 rel="bookmark"
+	 title="Permalink to When a thin shell is not so thin, part 2: the 3D, exact solution"
+	 datetime="2015-07-01T00:00:00+02:00">
+	01 July 2015&nbsp;&mdash;&nbsp;When a thin shell is not so thin, part 2: the 3D, exact solution
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20150608-when_a_thin_shell_is_not_so_thin-01.html">previous
+instalment</a> of this
+series, we analysed a spherical pressure vessel by means of Koiter's linear
+theory of thin shells. We found the somewhat unexpected result that the stress
+couple was not null. Besides, we also found that the stress resultant was
+slightly different from the well-known value …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150608-when_a_thin_shell_is_not_so_thin-01.html"
+	 rel="bookmark"
+	 title="Permalink to When a thin shell is not so thin, part 1: Koiter's linear theory"
+	 datetime="2015-06-08T00:00:00+02:00">
+	08 June 2015&nbsp;&mdash;&nbsp;When a thin shell is not so thin, part 1: Koiter's linear theory
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In structural analysis, thick beams (resp. plates) usually refer to shear
+deformability, and the <a href="http://en.wikipedia.org/wiki/Timoshenko_beam_theory">Timoshenko beam
+theory</a> (resp.
+<a href="http://en.wikipedia.org/wiki/Mindlin%E2%80%93Reissner_plate_theory">Mindlin–Reissner plate
+theory</a>).
+With curved elements however (e.g. curved beams or shells), the situation is
+more subtle, as thickness corrections may be necessary even in shells <em>where the
+shear stress …</em></p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150529-orientation_correlations_among_rice_grains-04.html"
+	 rel="bookmark"
+	 title="Permalink to Orientation correlations among rice grains, part 4: defining the ROI"
+	 datetime="2015-05-29T00:00:00+02:00">
+	29 May 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 4: defining the ROI
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20150330-orientation_correlations_among_rice_grains-03.html">previous instalment</a> of this series, we obtained binned slices of the sample. <a href="#fig01">Fig.&nbsp;1</a> below displays a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150330-orientation_correlations_among_rice_grains-03.html"
+	 rel="bookmark"
+	 title="Permalink to Orientation correlations among rice grains, part 3: intermezzo – Binning images"
+	 datetime="2015-03-30T00:00:00+02:00">
+	30 March 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 3: intermezzo – Binning images
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>The full reconstructed image resulting from the tomography experiment described in the <a href="https://sbrisard.github.io/posts/20150310-orientation_correlations_among_rice_grains-02.html">second</a> instalment of this series is a 1747×1751×688 stack. The voxel size is about 0.030 mm. This is far too much for the purpose of the present study, since all we are interested in is …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150310-orientation_correlations_among_rice_grains-02.html"
+	 rel="bookmark"
+	 title="Permalink to Orientation correlations among rice grains, part 2: acquisition of tomography images"
+	 datetime="2015-03-10T00:00:00+01:00">
+	10 March 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 2: acquisition of tomography images
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the
+<a href="https://sbrisard.github.io/posts/20150223-orientation_correlations_among_rice_grains-01.html">first</a>
+instalment of this series, I briefly introduced orientational order in
+assemblies of anisotropic particles, and proposed an illustration based on
+synthetic microstructures. But what I really intend to do in this series is to
+show how orientational order can be quantified in a “real-life” sample, namely a …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150223-orientation_correlations_among_rice_grains-01.html"
+	 rel="bookmark"
+	 title="Permalink to Orientation correlations among rice grains, part 1: introduction"
+	 datetime="2015-02-23T00:00:00+01:00">
+	23 February 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 1: introduction
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In this series, I will explore the notion of orientational order in random
+packings of anisotropic (flat or elongated), hard particles. By orientational
+order, I mean that particles which are close to each other tend to adopt the
+same orientation. This leads to strong <em>local</em> anisotropy, while the packing may …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20140226-decomposition_of_transverse_isotropic_fourth-rank_tensors.html"
+	 rel="bookmark"
+	 title="Permalink to Decomposition of transverse isotropic, fourth-rank tensors"
+	 datetime="2014-02-26T00:00:00+01:00">
+	26 February 2014&nbsp;&mdash;&nbsp;Decomposition of transverse isotropic, fourth-rank tensors
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In <a href="https://sbrisard.github.io/posts/20140112-elastic_constants_of_an_isotropic_material-03.html">a previous
+post</a>, I
+introduced the fourth-rank spherical and deviatoric projection tensors. Any
+isotropic fourth-rank tensor is a linear combination of these two tensors; in
+other words, the space of isotropic fourth-rank tensors (with minor and major
+symmetries) is of dimension 2. Similarly, it can be shown (<a href="https://doi.org/10.1098/rspa.1984.0008">Walpole,
+1984 …</a></p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20140219-on_the_double_dot_product.html"
+	 rel="bookmark"
+	 title="Permalink to On the double dot product"
+	 datetime="2014-02-19T00:00:00+01:00">
+	19 February 2014&nbsp;&mdash;&nbsp;On the double dot product
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>The double dot product of two tensors is the contraction of these tensors with
+respect to the last two indices of the first one, and the first two indices of
+the second one. Whether or not this contraction is performed on the <em>closest</em>
+indices is a matter of convention. In …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20140131-the_elastic_acoustic_tensor_and_its_inverse.html"
+	 rel="bookmark"
+	 title="Permalink to The elastic acoustic tensor and its inverse"
+	 datetime="2014-01-31T00:00:00+01:00">
+	31 January 2014&nbsp;&mdash;&nbsp;The elastic acoustic tensor and its inverse
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In this post, I will introduce the acoustic tensor of linearly elastic
+materials. Closed-form expressions of the inverse of this tensor can be derived
+in the case of <em>isotropic</em> materials. This will later come in handy to derive
+closed-form expressions of the periodic Green operator for strains.</p>
+<p>We consider a …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20140112-elastic_constants_of_an_isotropic_material-03.html"
+	 rel="bookmark"
+	 title="Permalink to Elastic constants of an isotropic material, part 3: putting it all together"
+	 datetime="2014-01-12T00:00:00+01:00">
+	12 January 2014&nbsp;&mdash;&nbsp;Elastic constants of an isotropic material, part 3: putting it all together
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the previous instalments of this series (see <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html">Part
+1</a> and
+<a href="https://sbrisard.github.io/posts/20131229-elastic_constants_of_an_isotropic_material-02.html">Part 2</a>),
+I have shown that regardless of the dimensionality (3D or plane strain
+elasticity), the constitutive law of an isotropically elastic material reads</p>
+<p><a name="eq01"></a>
+$$\sigma_{ij}=\kappa\varepsilon_{kk}\delta_{ij}+2\mu\left(\varepsilon_{ij}-\frac{\varepsilon_{kk …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20140102-extract_images_from_pdf_files.html"
+	 rel="bookmark"
+	 title="Permalink to Extract images from PDF files"
+	 datetime="2014-01-02T00:00:00+01:00">
+	02 January 2014&nbsp;&mdash;&nbsp;Extract images from PDF files
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>I recently scanned a document as a PDF file, and I wanted to retrieve
+the embedded images. I really mean <em>extract</em> the images, and not
+convert the pages of the document to images (which would entail loss
+of data). There is a nice command-line tool to do that: <code>pdfimages</code>,
+which …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20131229-elastic_constants_of_an_isotropic_material-02.html"
+	 rel="bookmark"
+	 title="Permalink to Elastic constants of an isotropic material, part 2: plane strain elasticity"
+	 datetime="2013-12-29T00:00:00+01:00">
+	29 December 2013&nbsp;&mdash;&nbsp;Elastic constants of an isotropic material, part 2: plane strain elasticity
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html">previous
+instalment</a>
+of this series, I introduced the constitutive law of an isotropically elastic
+material, and the related material constants, within the framework of 3D
+elasticity. I will now address the case of plane strain elasticity.</p>
+<p>Problems of plane strain elasticity are defined as problems where the following …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html"
+	 rel="bookmark"
+	 title="Permalink to Elastic constants of an isotropic material, part 1: 3D elasticity"
+	 datetime="2013-12-05T00:00:00+01:00">
+	05 December 2013&nbsp;&mdash;&nbsp;Elastic constants of an isotropic material, part 1: 3D elasticity
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Among all classes of materials, the class of linearly elastic and isotropic
+materials is probably the simplest. Such materials are defined by two elastic
+constants: for example, Young\'s modulus $E$ and Poisson\'s ratio
+$\nu$. However, depending on the situation, this pair of constants might not be
+the most …</p>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20131105-new_accepted_manuscript.html"
+	 rel="bookmark"
+	 title="Permalink to New accepted manuscript"
+	 datetime="2013-11-05T00:00:00+01:00">
+	05 November 2013&nbsp;&mdash;&nbsp;New accepted manuscript
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>One of my manuscripts has just been accepted for publication in the
+International Journal of Solids and Structures. It is called <em>A
+variational form of the equivalent inclusion method for numerical
+homogenization</em>. The abstract is reproduced below</p>
+<blockquote>
+<p>Due to its relatively low computational cost, the equivalent inclusion
+method is an …</p></blockquote>
+  </div><!-- /.entry-content -->
+</article>
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20130831-new_accepted_manuscript.html"
+	 rel="bookmark"
+	 title="Permalink to New accepted manuscript"
+	 datetime="2013-08-31T00:00:00+02:00">
+	31 August 2013&nbsp;&mdash;&nbsp;New accepted manuscript
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>It is my pleasure to announce that one of my papers has recently been
+accepted for publication in the Journal of the Mechanics and Physics of
+Solids. It's called <em>New boundary conditions for the computation of the
+apparent stiffness of statistical volume elements</em>.</p>
+<p>It introduces a new set of boundary …</p>
+  </div><!-- /.entry-content -->
+</article>
+</div><!-- /#posts-list -->
+</section><!-- /#content -->
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>

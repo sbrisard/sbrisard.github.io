@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - The elastic acoustic tensor and its inverse</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/katex/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"/>
+    <script defer src="https://sbrisard.github.io/theme/katex/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://sbrisard.github.io/theme/katex/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {macros: {'\\D': '\\mathrm{d}', '\\dbldot': '\\mathbin{\\mathord{:}}', '\\tens': '\\bm', '\\tr': '\\operatorname{tr}', '\\vec': '\\bm'}, delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20140131-the_elastic_acoustic_tensor_and_its_inverse.html" rel="bookmark"
+         title="Permalink to The elastic acoustic tensor and its inverse">The elastic acoustic tensor and its inverse</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2014-01-31T00:00:00+01:00">
+      Published 31 January 2014
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/continuum-mechanics.html">Continuum Mechanics</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>In this post, I will introduce the acoustic tensor of linearly elastic
+materials. Closed-form expressions of the inverse of this tensor can be derived
+in the case of <em>isotropic</em> materials. This will later come in handy to derive
+closed-form expressions of the periodic Green operator for strains.</p>
+<p>We consider a linearly elastic material with stiffness $\tens C$. For any
+wave-vector $\vec k$, the elastic acoustic tensor $\tens A(\vec k)$ is defined
+as follows</p>
+<p><a name="eq01"></a>
+$$\tens A(\vec k)=\vec k\cdot\tens C\cdot\vec k=k^2\vec n\cdot\tens C\cdot\vec n,\tag{1}$$</p>
+<p>where $k$ is the amplitude of the wave-vector $\vec k$, $k=\sqrt{\vec k\cdot\vec
+k}$, and $\vec n$ is its direction ($\vec k=k\vec n$). The acoustic tensor is
+used to assess material stability (Bigoni and Zaccaria, <em>European Journal of
+Mechanics- A/Solids</em> <strong>13(5)</strong>, pp. 621–638, 1994) and study the propagation of
+waves (<a href="https://doi.org/10.1016/j.ijengsci.2013.07.006">Gentile and Straughan,
+2013</a>). As far as we are
+concerned, the derivation of the periodic Green operator for strains will
+require the expressions of the inverse of the acoustic tensor. This is the topic
+of the present post, which is restricted to isotropic materials: the stiffness
+tensor $\tens C$ of isotropic materials is therefore a linear combination of the
+<a href="https://sbrisard.github.io/posts/20140112-elastic_constants_of_an_isotropic_material-03.html">isotropic projection
+tensors</a>
+$\tens J$, and $\tens K$</p>
+<p><a name="eq02"></a>
+$$\tens C=d\kappa\tens J+2\mu\tens K.\tag{2}$$</p>
+<p>To compute the elastic acoustic tensor, we therefore need to find the
+expressions of $\vec n\cdot\tens J\cdot\vec n$ and $\vec n\cdot\tens K\cdot\vec
+n$, for any unit vector $\vec n$. We start with the computation of $\vec
+n\cdot\tens I\cdot\vec n$, where $\tens I$ denotes the fourth-rank identity
+tensor. We have</p>
+<p>$$\bigl(\vec n\cdot\tens I\cdot\vec n\bigr)_{jk}=n_iI_{ijkl}n_l=n_in_l\frac12\bigl(\delta_{il}\delta_{jk}+\delta_{jl}\delta_{ik}\bigr)=\frac12\bigl(n_in_i\delta_{jk}+n_jn_k\bigr).$$</p>
+<p>Since $\vec n$ is a unit vector, we have $n_in_i=1$, and</p>
+<p>$$\vec n\cdot\tens I\cdot\vec n=\frac12\bigl(\tens\delta+\vec n\otimes\vec n\bigr),$$</p>
+<p>where $\tens\delta$ denotes the second-rank identity tensor. It will be
+convenient to introduce the projectors $\tens p$ and $\tens q$, defined as
+follows</p>
+<p>$$\tens p=\vec n\otimes\vec n\quad\text{and}\quad\tens q=\tens\delta-\tens p,$$</p>
+<p>or, using indices</p>
+<p>$$p_{ij}=n_in_j\quad\text{and}\quad q_{ij}=\delta_{ij}-n_in_j.$$</p>
+<p>It can readily be verified that</p>
+<p><a name="eq03"></a>
+$$\tens p\cdot\tens p=\tens p,\quad\tens q\cdot\tens q=\tens q\quad\text{and}\quad\tens p\cdot\tens q=\tens q\cdot\tens p=\tens0,\tag{3}$$</p>
+<p>and</p>
+<p><a name="eq04"></a>
+$$\vec n\cdot\tens I\cdot\vec n=\tens p+\frac12\tens q.\tag{4}$$</p>
+<p>Similarly</p>
+<p><a name="eq05"></a>
+$$\vec n\cdot\tens J\cdot\vec n=\frac1d\vec n\cdot\bigl(\tens\delta\otimes\tens\delta\bigr)\cdot\vec n=\frac1d\vec n\otimes\vec n=\frac1d\tens p.\tag{5}$$</p>
+<p>Finally, combining identity $\tens K=\tens I-\tens J$ with Eqs. <a href="#eq04">(4)</a> and
+<a href="#eq05">(5)</a></p>
+<p><a name="eq06"></a>
+$$\vec n\cdot\tens K\cdot\vec n=\frac{d-1}d\tens p+\frac12\tens q.\tag{6}$$</p>
+<p>The acoustic tensor of an elastic, linear, isotropic material is obtained from
+Eqs. <a href="#eq01">(1)</a>, <a href="#eq02">(2)</a>, <a href="#eq05">(5)</a> and <a href="#eq06">(6)</a></p>
+<p>$$\tens A(\vec n)=\Bigl(\kappa+2\mu\frac{d-1}d\Bigr)\tens p+\mu\tens q.$$</p>
+<p>From <a href="https://sbrisard.github.io/posts/20140112-elastic_constants_of_an_isotropic_material-03.html">this
+post</a>, it can
+readily be verified that</p>
+<p>$$\kappa+2\mu\frac{d-1}d=2\mu\frac{1-\nu}{1-2\nu},$$</p>
+<p>this identity being true in both 3D and plane strain elasticity. The acoustic
+tensor therefore reads</p>
+<p>$$\tens A(\vec k)=k^2\mu\Bigl[\frac{2\bigl(1-\nu\bigr)}{1-2\nu}\tens p+\tens q\Bigr].$$</p>
+<p>Finally, using the properties of the projectors $\tens p$ and $\tens q$ [see
+Eq. <a href="#eq03">(3)</a>], the <em>inverse</em> of the acoustic tensor can be derived</p>
+<p>$$\tens A^{-1}(\vec k)=\frac1{k^2\mu}\Bigl[\frac{1-2\nu}{2\bigl(1-\nu\bigr)}\tens p+\tens q\Bigr].$$</p>
+<!-- Local Variables: -->
+
+<!-- mode: markdown -->
+
+<!-- fill-column: 80 -->
+
+<!-- End: -->
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>

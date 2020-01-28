@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/katex/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"/>
+    <script defer src="https://sbrisard.github.io/theme/katex/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://sbrisard.github.io/theme/katex/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {macros: {'\\D': '\\mathrm{d}', '\\dbldot': '\\mathbin{\\mathord{:}}', '\\tens': '\\bm', '\\tr': '\\operatorname{tr}', '\\vec': '\\bm'}, delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html" rel="bookmark"
+         title="Permalink to On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form">On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2018-02-26T00:00:00+01:00">
+      Published 26 February 2018
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/image-analysis.html">Image analysis</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">previous
+instalment</a>
+of this series, we introduced the periodic-plus-smooth decomposition of an image
+as a pair of images which minimizes an energy functional. Observing that this
+energy is a quadratic form, the purpose of this post is to derive closed form
+expressions of the underlying linear operators. These expressions will then be
+combined in the next instalments to a conjugate gradient algorithm in order to
+minimize the energy of the periodic-plus-smooth decomposition.</p>
+<p>This post is the third instalment of a series in seven parts:</p>
+<ol>
+<li><a href="https://sbrisard.github.io/posts/20180212-on_the_periodic-plus-smooth_decomposition_of_an_image-01.html">Introduction</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">Defining the decomposition</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html">The energy as a quadratic form</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180305-on_the_periodic-plus-smooth_decomposition_of_an_image-04.html">Implementing the linear operators</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180312-on_the_periodic-plus-smooth_decomposition_of_an_image-05.html">Minimizing the energy, the clumsy way</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180319-on_the_periodic-plus-smooth_decomposition_of_an_image-06.html">Minimizing the energy, the clever way</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180326-on_the_periodic-plus-smooth_decomposition_of_an_image-07.html">Improved implementation of Moisan's algorithm</a></li>
+</ol>
+<p>The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.</p>
+<p>In this post, it will be convenient to regard images as vectors. Given two
+$m\times n$ images $u$ and $v$, the scalar product $\langle u, v\rangle$ is then
+defined as</p>
+<p>$$\langle u, v\rangle=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{ij}v_{ij}.$$</p>
+<p>Likewise, a linear operator $A$ over the space of $m\times n$ images is defined
+as follows</p>
+<p>$$v=A\cdot u,\quad\text{with}\quad v_{ij}=\sum_{k=0}^{m-1}\sum_{l=0}^{n-1}A_{ij,kl}u_{kl}.$$</p>
+<p>According to Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>), the
+total energy $E(p, s)$ of the periodic-plus-smooth decomposition of an image
+$u=p+s$ is defined as the sum $E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ (see
+<a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">previous
+instalment</a>),
+and the smooth component $s$ is the solution to the following minimization
+problem</p>
+<p>$$s=\operatorname*{arg\,min}_v F(v, u),$$</p>
+<p>with</p>
+<p>$$F(v, u)=E_\mathrm p(u-v)+E_\mathrm s(v)+(\operatorname{mean}v)^2.$$</p>
+<p>Introducing the linear operators $Q_1$ and $Q$ such that</p>
+<p>$$\langle v, Q_1\cdot v\rangle=E_\mathrm p(v)
+\quad\text{and}\quad
+\langle v, Q\cdot v\rangle
+=E_\mathrm p(v)+E_\mathrm s(v)+(\operatorname{mean}v)^2,$$</p>
+<p>it is readily found that</p>
+<p>$$F(v, u)=\langle v, Q\cdot v\rangle-2\langle v, Q_1\cdot u\rangle
++\langle u, Q_1\cdot u\rangle.$$</p>
+<p>The closed-form expression of $Q_1$ is derived in the <a href="#Q1">first part</a>
+of this post. Then, operator $Q$ is derived in the <a href="#Q">second part</a> of
+this post.</p>
+<p><a name="Q1"></a></p>
+<h2>Derivation of the Q<sub>1</sub> operator</h2>
+<p>The contribution to the total energy of the periodic component $p$ is defined by
+Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) as follows (see also <a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">previous post</a>)</p>
+<p><a name="eq01"></a>
+$$E_\mathrm p(p)=2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2
++2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2.\tag{1}$$</p>
+<p>In order to transform the first term, we observe that, $u$ and $v$ being two
+$m\times n$ images</p>
+<p><a name="eq02"></a>
+$$\sum_{i=0}^{m-1}(u_{i, n-1}-u_{i, 0})(v_{i, n-1}-v_{i, 0})$$
+$$=\sum_{i=0}^{m-1}u_{i, 0}(v_{i, 0}-v_{i, n-1})
++\sum_{i=0}^{m-1}u_{i, n-1}(v_{i, n-1}-v_{i, 0})$$
+$$=\tfrac12\langle u, Q_1^\mathrm h\cdot v\rangle,\tag{2}$$</p>
+<p>where we have introduced the linear operator $Q_1^\mathrm h$ defined as follows</p>
+<p><a name="eq03"></a>
+$$\tfrac12(Q_1^\mathrm h\cdot u)_{ij}=
+\left\{
+\begin{array}{ll}
+u_{i, 0}-u_{i, n-1} &amp; \text{if }j=0,\\
+u_{i, n-1}-u_{i, 0} &amp; \text{if }j=n-1,\\
+0                   &amp; \text{otherwise}.
+\end{array}
+\right.
+\tag{3}$$</p>
+<p>From the left-hand side of Eq. <a href="#eq02">(2)</a>, the linear operator $Q_1^\mathrm h$
+thus defined is obviously symmetric and positive. Besides, the first term in
+Eq. <a href="#eq01">(1)</a> reads</p>
+<p>$$2\sum_{i=0}^{m-1}(p_{i, n-1}-p_{i, 0})^2=\langle p, Q_1^\mathrm h\cdot p\rangle.$$</p>
+<p>Turning now to the second term in Eq. <a href="#eq01">(1)</a>, we introduce the symmetric,
+positive linear operator $Q_1^\mathrm v$ defined by</p>
+<p><a name="eq04"></a>
+$$\tfrac12(Q_1^\mathrm v\cdot u)_{ij}=\left\{\begin{array}{ll}
+u_{0, j}-u_{m-1, j} &amp; \text{if }i=0,\\
+u_{m-1, j}-u_{0, j} &amp; \text{if }i=m-1,\\
+0                   &amp; \text{otherwise},
+\end{array}\right.\tag{4}$$</p>
+<p>so that</p>
+<p>$$2\sum_{j=0}^{n-1}(p_{m-1, j}-p_{0, j})^2=\langle p, Q_1^\mathrm v\cdot p\rangle.$$</p>
+<p>Gathering the above results and introducing the symmetric operator
+$Q_1=Q_1^\mathrm h+Q_1^\mathrm v$, we finally find that $E_\mathrm p(p)=\langle
+p, Q_1\cdot p\rangle$.</p>
+<p><a name="Q"></a></p>
+<h2>Derivation of the Q operator</h2>
+<p>The contribution to the total energy of the smooth component $s$ is defined by
+Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) as follows (see also
+<a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">previous
+post</a>)</p>
+<p><a name="eq05"></a>
+$$E_\mathrm s(s)=2\sum_{i=0}^{m-2}\sum_{j=0}^{n-1}(s_{i+1, j}-s_{i, j})^2
++2\sum_{i=0}^{m-1}\sum_{j=0}^{n-2}(s_{i, j+1}-s_{i, j})^2.\tag{5}$$</p>
+<p>In the present section, all $m\times n$ images $v$ will be extended by
+periodicity as follows</p>
+<p><a name="eq06"></a>
+$$v_{i, -1}=v_{i, n-1}, \quad
+v_{i, n}=v_{0, n}, \quad
+v_{-1, j}=v_{m-1, j}\quad\text{and}\quad
+v_{m, j}=v_{0, j}.\tag{6}$$</p>
+<p>Combining Eqs. <a href="#eq01">(1)</a> and <a href="#eq05">(5)</a>, it is found that</p>
+<p><a name="eq07"></a>
+$$E_\mathrm p(v)+E_\mathrm s(v)
+=2\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}(v_{i+1, j}-v_{i, j})^2
++2\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}(v_{i, j+1}-v_{i, j})^2,
+\tag{7}$$</p>
+<p>In order to transform the first term in Eq. <a href="#eq07">(7)</a>, we observe that, $u$
+and $v$ being two $m\times n$ images that are both extended according to
+Eq. <a href="#eq06">(6)</a></p>
+<p><a name="eq08"></a>
+$$\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}(u_{i+1, j}-u_{i, j})(v_{i+1, j}-v_{i, j})$$
+$$=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i+1, j}(v_{i+1, j}-v_{i, j})
+-\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i, j}(v_{i+1, j}-v_{i, j})$$
+$$=\sum_{i=1}^m\sum_{j=0}^{n-1}u_{i, j}(v_{i, j}-v_{i-1, j})
+-\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i, j}(v_{i+1, j}-v_{i, j})$$
+$$=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i, j}(v_{i, j}-v_{i-1, j})-\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i, j}(v_{i+1, j}-v_{i, j})$$
+$$=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i, j}(2v_{i, j}-v_{i-1, j}-v_{i+1,j})$$
+$$=\tfrac12\langle u, Q^\mathrm h\cdot v\rangle,\tag{8}$$</p>
+<p>where we have introduced the linear operator $Q^\mathrm h$ defined as
+follows [see Eq. <a href="#eq06">(6)</a>]</p>
+<p><a name="eq09"></a>
+$$\tfrac12(Q^\mathrm h\cdot u)_{i,j}=2u_{i, j}-u_{i-1, j}-u_{i+1,j}.\tag{9}$$</p>
+<p>From the left-hand side of Eq. <a href="#eq07">(7)</a>, the linear operator $Q^\mathrm h$
+thus defined is obviously symmetric and positive. Besides, the first term in
+Eq. <a href="#eq07">(7)</a> reads</p>
+<p>$$2\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}(v_{i+1, j}-v_{i, j})^2
+=\langle v, Q^\mathrm h\cdot v\rangle.$$</p>
+<p>Turning now to the second term in Eq. <a href="#eq05">(5)</a>, we introduce the symmetric,
+positive linear operator $Q^\mathrm v$ defined by</p>
+<p><a name="eq10"></a>
+$$\tfrac12(Q^\mathrm v\cdot u)_{i,j}=2u_{i, j}-u_{i, j-1}-u_{i,j+1},\tag{10}$$</p>
+<p>so that</p>
+<p>$$2\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}(v_{i, j+1}-v_{i, j})^2=\langle v, Q^\mathrm v\cdot v\rangle.$$</p>
+<p>Finally</p>
+<p><a name="eq11"></a>
+$$(\operatorname{mean}u)(\operatorname{mean}v)=\frac{\operatorname{mean}v}{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i,j}$$
+$$=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{i,j}\times\frac{\operatorname{mean}v}{mn}=\langle u, Q^\mathrm m\cdot v\rangle,\tag{11}$$</p>
+<p>where we have introduced the symmetric, positive operator $Q^\mathrm m$
+defined as follows</p>
+<p><a name="eq12"></a>
+$$(Q^\mathrm m\cdot v)_{i,j}=\frac{\operatorname{mean} v}{mn}=\frac1{m^2n^2}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}v_{i,j}.\tag{12}$$</p>
+<p>Gathering the above results and introducing the symmetric, positive operator
+$Q=Q^\mathrm h+Q^\mathrm v+Q^\mathrm m$, we finally find that $E_\mathrm
+p(v)+E_\mathrm s(v)+(\operatorname{mean} v)^2 =\langle s, Q\cdot s\rangle$.</p>
+<h2>Conclusion</h2>
+<p>In this post, we have defined two linear operators, namely $Q_1$ and $Q$, that
+operate on the space of $m\times n$ images, and such that</p>
+<p>$$F(v, u)=\langle v, Q\cdot v\rangle-2\langle v, Q_1\cdot u\rangle+\langle u, Q_1\cdot u\rangle,$$</p>
+<p>where the minimizer of $F$ with respect to its first argument $v$ is the smooth
+component $s$ of $u$ (the periodic component $p$ is then obtained from
+$p=u-s$). In the <a href="https://sbrisard.github.io/posts/20180305-on_the_periodic-plus-smooth_decomposition_of_an_image-04.html">next
+instalment</a>
+of this series, we will proceed to implement $Q_1$ and $Q$ in Python. To do so,
+we will adopt a <a href="https://en.wikipedia.org/wiki/Matrix-free_methods">matrix-free</a>
+approach.</p>
+<!-- Local Variables: -->
+
+<!-- fill-column: 80 -->
+
+<!-- End: -->
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>

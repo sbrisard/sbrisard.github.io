@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - Orientation correlations among rice grains, part 1: introduction</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20150223-orientation_correlations_among_rice_grains-01.html" rel="bookmark"
+         title="Permalink to Orientation correlations among rice grains, part 1: introduction">Orientation correlations among rice grains, part 1: introduction</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2015-02-23T00:00:00+01:00">
+      Published 23 February 2015
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/image-analysis.html">Image analysis</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>In this series, I will explore the notion of orientational order in random
+packings of anisotropic (flat or elongated), hard particles. By orientational
+order, I mean that particles which are close to each other tend to adopt the
+same orientation. This leads to strong <em>local</em> anisotropy, while the packing may
+well be <em>globally</em> isotropic; in particular, all orientations of single grains
+are equiprobable. Local orientational order is stronger when the volume fraction
+of particles, or their aspect ratio increases.</p>
+<p>Local orientational order will be illustrated on a “real” packing, and I chose
+rice grains for this demo. Analysis of orientation correlations requires to go
+through the following steps</p>
+<ol>
+<li>acquisition of a 3D image of the packing through X-ray microtomography,</li>
+<li>segmentation of the 3D image (each grain must be labelled individually) by
+   means of the <a href="http://www.population-image.fr/">Population</a> C++ library,</li>
+<li>computation of the orientation of each rice grain, using the <code>scipy.ndimage</code>
+   Python module,</li>
+<li>computation of the orientation correlations.</li>
+</ol>
+<p>Before we proceed, I would like to clarify the notion of local orientational
+order through images of synthetic packings of 10000 hard (flat) spheroids. The
+aspect ratio (ratio of polar to equatorial radii) of the (flat) spheroids is
+0.125. The images below (click to enlarge) are three realizations of random
+packing of spheroids, at 40% (left), 50% (middle) and 60% (right) volume
+fraction. The color of each particle is chosen according to its orientation, so
+that particles with similar colors have similar orientations.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="40%" class="figure" src="https://sbrisard.github.io/posts/20150223-Orientation_correlations_among_rice_grains-01/spheroids_40p100.png"></td>
+<td><img alt="50%" class="figure" src="https://sbrisard.github.io/posts/20150223-Orientation_correlations_among_rice_grains-01/spheroids_50p100.png"></td>
+<td><img alt="60%" class="figure" src="https://sbrisard.github.io/posts/20150223-Orientation_correlations_among_rice_grains-01/spheroids_60p100.png"></td>
+</tr>
+</tbody>
+</table>
+<p>It should be mentioned that generating such compact assemblies is no trivial
+task. The event-driven molecular dynamics algorithm proposed by Donev, Torquato
+and Stillinger (<a href="https://doi.org/10.1016/j.jcp.2004.08.014">2005</a>,
+<a href="https://doi.org/10.1016/j.jcp.2004.08.025">2005a</a>) is an attractive option: it
+is both very general and versatile. It is however a bit complex, and I adopted a
+different approach, which we published a while ago with Pierre Levitz (<a href="https://doi.org/10.1103/PhysRevE.87.013305">Brisard
+and Levitz, 2013</a>). In a nutshell,
+the microstructures presented above are the result of a kind of <a href="http://en.wikipedia.org/wiki/Reverse_Monte_Carlo">Reverse
+Monte-Carlo</a> simulation with a
+non-physical pairwise potential. The interaction potential is zero when the
+spheroids do not intersect, and repulsive when they do.</p>
+<p>It is observed that, as the volume fraction of particles increases, so does the
+size of the color patches. In other words, to pack the particles closely, you
+need to stack them! Mathematically speaking, the orientations of particles
+exhibit long-range correlations. In the next instalments of this series, I will
+show how these correlations can be quantified, both on synthetic and
+\"real-life\" samples.</p>
+<p>See <a href="https://sbrisard.github.io/posts/20150310-orientation_correlations_among_rice_grains-02.html">part
+2</a> of this
+series.</p>
+<!-- Local Variables: -->
+
+<!-- mode: markdown -->
+
+<!-- fill-column: 80 -->
+
+<!-- End: -->
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>

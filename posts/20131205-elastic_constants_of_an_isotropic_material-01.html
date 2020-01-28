@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - Elastic constants of an isotropic material, part 1: 3D elasticity</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/katex/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"/>
+    <script defer src="https://sbrisard.github.io/theme/katex/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://sbrisard.github.io/theme/katex/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {macros: {'\\D': '\\mathrm{d}', '\\dbldot': '\\mathbin{\\mathord{:}}', '\\tens': '\\bm', '\\tr': '\\operatorname{tr}', '\\vec': '\\bm'}, delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html" rel="bookmark"
+         title="Permalink to Elastic constants of an isotropic material, part 1: 3D elasticity">Elastic constants of an isotropic material, part 1: 3D elasticity</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2013-12-05T00:00:00+01:00">
+      Published 05 December 2013
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/continuum-mechanics.html">Continuum Mechanics</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>Among all classes of materials, the class of linearly elastic and isotropic
+materials is probably the simplest. Such materials are defined by two elastic
+constants: for example, Young\'s modulus $E$ and Poisson\'s ratio
+$\nu$. However, depending on the situation, this pair of constants might not be
+the most appropriate (meaning that they may not lead to the most compact
+expressions). Alternative sets of elastic constants are</p>
+<ul>
+<li>Lamé's constants $\lambda$ and $\mu$,</li>
+<li>bulk and shear moduli $\kappa$ and $\mu$,</li>
+<li>shear modulus and Poisson ratio $\mu$ and $\nu$.</li>
+</ul>
+<p>Each pair of constants is of course strictly equivalent to any other. I tend to
+work primarily with $\mu$ and $\nu$, and always find myself looking for the
+expression of E, $\lambda$ and $\kappa$ as a function of $\mu$ and $\nu$. In
+this series, we will derive these expressions, starting with 3D elasticity.</p>
+<h2>Lamé's constants</h2>
+<p>The constitutive equation of a linearly elastic and isotropic material reads</p>
+<p><a name="eq01"></a>
+$$\sigma_{ij} = \lambda\varepsilon_{kk}\delta_{ij} + 2\mu\varepsilon_{ij},\tag{1}$$</p>
+<p>where $\sigma_{ij}$ (resp. $\varepsilon_{ij}$) denotes the stress (resp.
+strain) tensor, while $\lambda$ (resp. $\mu$) is Lamé\'s first (resp.  second)
+constant; $\mu$ is also called the <em>shear modulus</em>. Eq.  <a href="#eq01">(1)</a> is
+inverted so as to express the strain tensor as a function of the stress
+tensor. Taking $i = j$ and summing over repeated indices, we find</p>
+<p>$$\sigma_{ii} = (3\lambda + 2\mu)\varepsilon_{kk},$$</p>
+<p>where it is recalled that $\delta_{ii} = 3$ (the dimension of the physical
+space). Plugging into Eq. <a href="#eq01">(1)</a></p>
+<p>$$\sigma_{ij} = \frac{\lambda}{3\lambda+2\mu}\sigma_{kk}\delta_{ij} + 2\mu\varepsilon_{ij}$$</p>
+<p>and finally</p>
+<p><a name="eq02"></a>
+$$\varepsilon_{ij} = \frac{\sigma_{ij}}{2\mu} - \frac{\lambda}{2\mu(3\lambda+2\mu)}\sigma_{kk}\delta_{ij}.\tag{2}$$</p>
+<h2>Young's modulus and Poisson ratio</h2>
+<p>We consider a uniaxial traction experiment, where the stress tensor reduces to
+$\sigma\vec e_3\otimes\vec e_3$ ($\sigma$ is the imposed uniaxial
+stress). Substitution in Eq. <a href="#eq02">(2)</a> leads to the following expression of
+the longitudinal strain</p>
+<p>$$\varepsilon_{33} = \frac{\lambda+\mu}{\mu(3\lambda+2\mu)}\sigma.$$</p>
+<p>By definition, Young's modulus is the longitudinal stress to longitudinal strain
+ratio: $E=\sigma/\varepsilon_{33}$, so that</p>
+<p><a name="eq03"></a>
+$$E = \frac{\mu(3\lambda+2\mu)}{\lambda+\mu}.\tag{3}$$</p>
+<p>The expression of the transverse strains is again derived using Eq. <a href="#eq02">(2)</a></p>
+<p>$$\varepsilon_{11} = \varepsilon_{22} = -\frac{\lambda}{2\mu(3\lambda+2\mu)}$$</p>
+<p>and by definition, Poisson's ratio is the oposite of the transverse to
+longitudinal strain ratio</p>
+<p><a name="eq04"></a>
+$$\nu = -\frac{\varepsilon_{11}}{\varepsilon_{33}} = -\frac{\varepsilon_{22}}{\varepsilon_{33}} = \frac{\lambda}{2(\lambda+\mu)}.\tag{4}$$</p>
+<p>Expressions <a href="#eq03">(3)</a> and <a href="#eq04">(4)</a> can be substituted in the constitutive
+equation <a href="#eq02">(2)</a>, leading to</p>
+<p><a name="eq05"></a>
+$$\varepsilon_{ij} = \frac{1+\nu}E\sigma_{ij} - \frac\nu E\sigma_{kk}\delta_{ij}.\tag{5}$$</p>
+<h2>Bulk and shear moduli</h2>
+<p>We now consider an isotropic compression experiment, where the stress tensor
+reduces to a hydrostatic pressure $\sigma_{ij}=-p\delta_{ij}$. Using
+Eq. <a href="#eq01">(1)</a>, we find that the strain tensor is also isotropic</p>
+<p><a name="eq06"></a>
+$$\varepsilon_{ij} = -\frac{p\delta_{ij}}{3\lambda+2\mu}.\tag{6}$$</p>
+<p>It is recalled that $\varepsilon_\text v=\varepsilon_{kk} / 3$ denotes the
+relative volume change of the material. Then, from Eq. <a href="#eq06">(6)</a></p>
+<p>$$\varepsilon_\text v = -\frac p{\kappa_\text{3D}},$$</p>
+<p>where $\kappa_\text{3D}$ denotes the bulk modulus, defined as follows</p>
+<p><a name="eq07"></a>
+$$\kappa_\text{3D} = \lambda + \frac 23\mu.\tag{7}$$</p>
+<p>As we shall see in the <a href="https://sbrisard.github.io/posts/20131229-elastic_constants_of_an_isotropic_material-02.html">next
+instalment</a>
+of this series, the definition of the bulk modulus <em>depends on the dimension of
+the physical space</em>, hence the \'3D\' subscript. Using $\kappa$ and $\mu$ as
+elastic constants, Eq. <a href="#eq01">(1)</a> reads</p>
+<p><a name="eq08"></a>
+$$\sigma_{ij} = \kappa_\text{3D}\varepsilon_{kk}\delta_{ij}+2\mu\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}3\delta_{ij}\right)\tag{8}$$</p>
+<h2>Shear modulus and Poisson ratio</h2>
+<p>I quite often use the shear modulus $\mu$ and Poisson ratio $\nu$ as the
+constants defining the elastic material. One of the reasons for this is the fact
+that the components of the fourth-rank Green operator for strains have the same
+expression in 3D and 2D (plane strain) elasticity when expressed as a function
+of $\mu$ and $\nu$.</p>
+<p>In the present section, all other elastic constants are expressed as functions
+of these two constants. First, from Eq. <a href="#eq04">(4)</a>, it is readily found that</p>
+<p><a name="eq09"></a>
+$$\lambda = \frac{2\mu\nu}{1-2\nu}.\tag{9}$$</p>
+<p>Then, combining Eqs. <a href="#eq03">(3)</a> and <a href="#eq04">(4)</a></p>
+<p>$$E = 2\mu(1+\nu).$$</p>
+<p>Finally, from Eqs. <a href="#eq07">(7)</a> and <a href="#eq09">(9)</a></p>
+<p>$$\kappa_\text{3D} = \frac23\frac{1+\nu}{1-2\nu}\mu.$$</p>
+<h2>Conclusion</h2>
+<p>In this instalment, we have defined Lamé's first and second constants, Young's
+modulus, Poisson's ratio, as well as the (3D) bulk modulus.  Expressions
+relating these various constants have also been derived. In the <a href="https://sbrisard.github.io/posts/20131229-elastic_constants_of_an_isotropic_material-02.html">next
+instalment</a>
+of this series, we will discuss the case of 2D (plane strain elasticity).</p>
+<!-- Local Variables: -->
+
+<!-- mode: markdown -->
+
+<!-- fill-column: 80 -->
+
+<!-- End: -->
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>

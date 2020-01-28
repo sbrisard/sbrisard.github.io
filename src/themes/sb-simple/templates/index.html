@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content">
+{% block content_title %}
+{% for page in pages %}
+{% if page.homepage %}
+<h1>{{page.title}}</h1>
+{{page.content}}
+{% endif %}
+{% endfor %}
+{% endblock %}
+
+<div id="post-list">
+{% for article in articles_page.object_list %}
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      <a href="{{ SITEURL }}/{{ article.url }}"
+	 rel="bookmark"
+	 title="Permalink to {{ article.title|striptags }}"
+	 datetime="{{ article.date.isoformat() }}">
+	{{article.locale_date}}&nbsp;&mdash;&nbsp;{{article.title}}
+      </a>
+    </h2>
+  </header>
+  <div class="entry-content">
+    {{ article.summary }}
+  </div><!-- /.entry-content -->
+</article>
+{% endfor %}
+</div><!-- /#posts-list -->
+{% if articles_page.has_other_pages() %}
+    {% include 'pagination.html' %}
+{% endif %}
+</section><!-- /#content -->
+{% endblock content %}

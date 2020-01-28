@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - On the periodic-plus-smooth decomposition of an image, part 1: introduction</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180212-on_the_periodic-plus-smooth_decomposition_of_an_image-01.html" rel="bookmark"
+         title="Permalink to On the periodic-plus-smooth decomposition of an image, part 1: introduction">On the periodic-plus-smooth decomposition of an image, part 1: introduction</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2018-02-12T00:00:00+01:00">
+      Published 12 February 2018
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/image-analysis.html">Image analysis</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>In this new series, we will explore the so-called <em>periodic-plus-smooth</em>
+decomposition of an image, introduced by Moisan in 2011. This series is largely
+based on Moisan's paper, called <a href="https://doi.org/10.1007/s10851-010-0227-1">Periodic plus Smooth Image
+Decomposition</a> (the author's version
+can be found on <a href="https://hal.archives-ouvertes.fr/hal-00388020">HAL</a>). Besides
+introducing a quite smart technique (that I do use for real materials science
+applications), this series will be an opportunity to discuss an important topic:
+how to test the implementation of an algorithm, and be confident that the test
+actually validates the implementation.</p>
+<p>To do so, we will first define the periodic-plus-smooth decomposition as a
+minimization problem. This will lead to a first implementation of this
+decomposition: the objective function is quadratic, and the minimization problem
+therefore merely reduces to a linear system. However, this system is large (the
+number of unknowns is the number of pixels!). We will therefore use matrix-free
+techniques.</p>
+<p>This first – quite inefficient – implementation will then serve as a reference
+implementation of the decomposition, for testing purposes.  Indeed, Moisan
+showed that the minimization problem he introduced could in fact be explicitely
+solved in Fourier space. He proposed two efficient algorithms to compute the
+decomposition. Both rely, of course, on the FFT. We will implement one of these
+and test it against the reference implementation.</p>
+<p>This is a series in seven parts, organized as follows:</p>
+<ol>
+<li><a href="https://sbrisard.github.io/posts/20180212-on_the_periodic-plus-smooth_decomposition_of_an_image-01.html">Introduction</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">Defining the decomposition</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html">The energy as a quadratic form</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180305-on_the_periodic-plus-smooth_decomposition_of_an_image-04.html">Implementing the linear operators</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180312-on_the_periodic-plus-smooth_decomposition_of_an_image-05.html">Minimizing the energy, the clumsy way</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180319-on_the_periodic-plus-smooth_decomposition_of_an_image-06.html">Minimizing the energy, the clever way</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180326-on_the_periodic-plus-smooth_decomposition_of_an_image-07.html">Improved implementation of Moisan's algorithm</a></li>
+</ol>
+<p>The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.</p>
+<p>That's a lot of work! So, without further ado, let's start introducing this
+decomposition!</p>
+<h2>The need for periodic images</h2>
+<p>Let us start by briefly discussing what <em>is</em> a periodic image, and why we would
+ever need one. Loosely speaking, an image is periodic if placing copies of the
+same image on a 2×2 grid can be done (almost) seamlessly. Remember that an image
+is defined for a <em>discrete</em> set of pixels, and that the pixel values themselves
+are also <em>discrete</em>.  Therefore, it is not possible to refer to the
+<a href="https://en.wikipedia.org/wiki/Continuous_function">continuity</a> of an image,
+which explains why it is difficult to define periodic images more precisely.</p>
+<p>It is actually easier to verify that an image is <em>not</em> periodic. Let us consider
+the following image as an example (see <a href="#fig01">Fig. 1</a>).
+<a name="fig01"></a>
+<img alt="The original image" class="figure" src="https://sbrisard.github.io/posts/On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364.png"></p>
+<figcaption>Figure&nbsp;1:&nbsp;The original image.</figcaption>
+
+<p>Instead of putting aside 4 copies of the same image, we can simply swap the
+quadrants, as shown in <a href="#fig02">Fig. 2</a>. Alternatively, you could also ask my
+three-year old daughter if her hut is periodic ;-). In <a href="#fig02">Fig. 2</a>, the
+four corners certainly do <em>not</em> join seamlessly at the center, which is a sure
+indication that the image is not periodic.
+<a name="fig02"></a>
+<img alt="The original image with swapped quadrants." class="figure" src="https://sbrisard.github.io/posts/On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-fftshift.png"></p>
+<figcaption>Figure&nbsp;2:&nbsp;The original image shown in <a
+href="#fig01">Fig.&nbsp;1</a>, with swapped quadrants.</figcaption>
+
+<p>It should be noted that the image shown in <a href="#fig02">Fig. 2</a> is readily produced
+with the
+<a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.fft.fftshift.html#numpy-fft-fftshift">numpy.fft.fftshift</a>
+function, as illustrated by the following code snippet</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span><span class="p">,</span> <span class="n">imsave</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="o">+</span><span class="s1">&#39;hut-648x364.png&#39;</span><span class="p">)</span>
+<span class="n">imsave</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="o">+</span><span class="s1">&#39;hut-648x364-fftshift.png&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+</pre></div>
+
+
+<p>Why would this lack of periodicity be a problem? Well, many image analysis
+techniques rely on the <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">fast Fourier
+transform</a> (FFT) for
+efficiency. In turn, the discrete Fourier transform implicitely assumes that the
+data is periodic; otherwise, artifacts can result. An archetypal example is the
+power spectrum of an image (we shall come back to this specific issue in a
+dedicated series). The power spectrum of <a href="#fig01">Fig. 1</a> is displayed in
+<a href="#fig03">Fig. 3</a> below; the following code snippet was executed to produce this
+image.</p>
+<div class="highlight"><pre><span></span><span class="n">u_dft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="n">u_ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">u_dft</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">u_ps</span><span class="p">)</span>
+<span class="n">a_min</span><span class="p">,</span> <span class="n">a_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">a_min</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">a_max</span><span class="o">-</span><span class="n">a_min</span><span class="p">)</span>
+
+<span class="n">imsave</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="o">+</span><span class="s1">&#39;hut-648x364-power_spectrum.png&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
+</pre></div>
+
+
+<p><a name="fig03"></a>
+<img alt="Power spectrum" class="figure" src="https://sbrisard.github.io/posts/On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-power_spectrum.png"></p>
+<figcaption>Figure&nbsp;3:&nbsp;The power spectrum of the image shown in <a href="#fig01">Fig.&nbsp;1</a>.</figcaption>
+
+<p>In <a href="#fig03">Fig. 3</a>, the bright cross at the center is the signature of the
+jumps across the boundaries of the image. Indeed, remember that discontinuities
+at large correlation lengths translate to oscillations at low frequencies (the
+center of the power spectrum image).</p>
+<h2>Periodization by symmetrization</h2>
+<p>Of course, it is possible to enforce periodicity by tiling together 4 mirror
+images of the same initial image as follows (see figure <a href="#fig04">Fig. 4</a>)</p>
+<div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">top</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">u_mirrored</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">u_mirrored</span><span class="p">[</span><span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+<span class="n">u_mirrored</span><span class="p">[</span><span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+<span class="n">u_mirrored</span><span class="p">[</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+<span class="n">u_mirrored</span><span class="p">[</span><span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+<span class="n">imsave</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="o">+</span><span class="s1">&#39;hut-648x364-mirrored.png&#39;</span><span class="p">,</span> <span class="n">u_mirrored</span><span class="p">)</span>
+</pre></div>
+
+
+<p><a name="fig04"></a>
+<img alt="Periodization by symmetrization" class="figure" src="https://sbrisard.github.io/posts/On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-mirrored.png"></p>
+<figcaption>Figure&nbsp;4:&nbsp;Periodization by symmetrization of the image shown in <a href="#fig01">Fig.&nbsp;1</a>.</figcaption>
+
+<p>The resulting power spectrum (computed with the code snippet below) is shown in
+<a href="#fig05">Fig. 5</a>. It is observed that symmetrization does not remove entirely
+the cross at the center of the power spectrum.  Worse, “it makes the DFT
+symmetric and real-valued, which can be dramatic if the phase component of the
+Fourier transform has to be analyzed, or if orientation issues are concerned”
+(<a href="https://doi.org/10.1007/s10851-010-0227-1">Moisan, 2011</a>). This led Moisan to
+introduce the <em>periodic-plus-smooth</em> decomposition.</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">u_mirrored</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">a</span><span class="p">[</span><span class="n">a</span><span class="o">==</span><span class="mf">0.0</span><span class="p">]</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a_min</span><span class="p">,</span> <span class="n">a_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">a_min</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">a_max</span><span class="o">-</span><span class="n">a_min</span><span class="p">)</span>
+
+<span class="n">imsave</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="o">+</span><span class="s1">&#39;hut-648x364-mirrored-power_spectrum.png&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
+</pre></div>
+
+
+<p><a name="fig05"></a>
+<img alt="Power spectrum" class="figure" src="https://sbrisard.github.io/posts/On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364-mirrored-power_spectrum.png"></p>
+<figcaption>Figure&nbsp;5:&nbsp;The power spectrum of the image shown in <a href="#fig04">Fig.&nbsp;4</a>.</figcaption>
+
+<h2>Conclusion</h2>
+<p>In this post, we set the stage for the subsequent instalments of this series,
+arguing that it is sometimes desirable that an image should be periodic. In the
+<a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">next
+instalment</a>
+of this series, we will define the <em>periodic-plus-smooth</em> decomposition of
+Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>). We will then turn to
+the implementation of this decomposition.</p>
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>

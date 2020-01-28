@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - Elastic constants of an isotropic material, part 3: putting it all together</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/katex/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"/>
+    <script defer src="https://sbrisard.github.io/theme/katex/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://sbrisard.github.io/theme/katex/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {macros: {'\\D': '\\mathrm{d}', '\\dbldot': '\\mathbin{\\mathord{:}}', '\\tens': '\\bm', '\\tr': '\\operatorname{tr}', '\\vec': '\\bm'}, delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20140112-elastic_constants_of_an_isotropic_material-03.html" rel="bookmark"
+         title="Permalink to Elastic constants of an isotropic material, part 3: putting it all together">Elastic constants of an isotropic material, part 3: putting it all together</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2014-01-12T00:00:00+01:00">
+      Published 12 January 2014
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/continuum-mechanics.html">Continuum mechanics</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>In the previous instalments of this series (see <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html">Part
+1</a> and
+<a href="https://sbrisard.github.io/posts/20131229-elastic_constants_of_an_isotropic_material-02.html">Part 2</a>),
+I have shown that regardless of the dimensionality (3D or plane strain
+elasticity), the constitutive law of an isotropically elastic material reads</p>
+<p><a name="eq01"></a>
+$$\sigma_{ij}=\kappa\varepsilon_{kk}\delta_{ij}+2\mu\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}d\delta_{ij}\right),\tag{1}$$</p>
+<p>where $d$ is the dimension of the physical space ($d=3$ for 3D elasticity, $d=2$
+for plane strain elasticity), $\mu$ is the shear modulus, and $\kappa$ is the
+bulk modulus, whose expression depends on $d$</p>
+<p><a name="eq02"></a>
+$$\kappa=\frac23\frac{1+\nu}{1-2\nu}\mu\qquad(d=3),\tag{2}$$</p>
+<p><a name="eq03"></a>
+$$\kappa=\frac\mu{1-2\nu}\qquad(d=2).\tag{3}$$</p>
+<p>In this instalment, I am going to introduce some classical isotropic,
+fourth-rank tensors which will prove extremely useful and will allow us to cast
+Eq. <a href="#eq01">(1)</a> in an intrinsic (component-free) form. It should be noted that
+the following developments are restricted to fourth-rank tensors $\tens T$ with
+both <em>minor symmetries</em></p>
+<p>$$T_{ijkl}=T_{jikl}=T_{ijlk},$$</p>
+<p>and <em>major symmetry</em></p>
+<p>$$T_{ijkl}=T_{klij}.$$</p>
+<h2>Spherical and deviatoric projection tensors</h2>
+<p>In the present section, I am going to introduce the fourth-rank identity,
+spherical and deviatoric projection tensors.</p>
+<h3>Fourth-rank identity tensor</h3>
+<p>The fourth-rank identity tensor $\tens{I}$ maps any second-rank, symmetric
+tensor $\tens u$ onto itself</p>
+<p>$$\tens I\dbldot\tens u=\tens u.$$</p>
+<p>It is straightforward to work out the components of $\tens I$ (accounting for
+minor symmetries)</p>
+<p>$$I_{ijkl}=\frac12\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right).$$</p>
+<h3>Fourth-rank spherical projection tensor</h3>
+<p>The fourth-rank spherical projection tensor $\tens J$ extracts the spherical
+part of any symmetric, second-rank tensor $\tens u$</p>
+<p>$$\tens J\dbldot\tens u=\frac1d\tr(\tens u)\tens\delta,$$</p>
+<p>where $\tens\delta$ is the second-rank identity tensor (with components
+$\delta_{ij}$). In particular, $\tens J\dbldot\tens\delta=\tens\delta$. In
+intrinsic form, $\tens J$ reads</p>
+<p>$$\tens J=\frac1d\tens\delta\otimes\tens\delta,$$</p>
+<p>where $\otimes$ denotes the <a href="http://en.wikipedia.org/wiki/Tensor_product">tensor
+product</a>. The components of
+$\tens J$ are</p>
+<p>$$J_{ijkl} = \frac1d\delta_{ij}\delta_{kl}.$$</p>
+<h3>Fourth-rank deviatoric projection tensor</h3>
+<p>The fourth-rank deviatoric projection tensor $\tens K$ extracts the deviatoric
+part of any symmetric, second-rank tensor $\tens u$</p>
+<p>$$\tens K\dbldot\tens u=\tens u-\frac1d\tr(\tens u)\tens{\delta}=\tens u-\tens J\dbldot\tens u,$$</p>
+<p>from which it results that</p>
+<p>$$\tens K=\tens I-\tens J.$$</p>
+<h2>Stiffness tensor</h2>
+<p>Going back the constitutive law of the linearly elastic, isotropic material
+given by Eq. <a href="#eq01">(1)</a>, it is found that</p>
+<p>$$\tens\sigma=d\kappa\tens J\dbldot\tens\varepsilon+2\mu\tens K\dbldot\tens\varepsilon=\tens C\dbldot\tens\varepsilon,$$</p>
+<p>where $\tens C$ is the fourth-rank stiffness tensor of the material</p>
+<p>$$\tens C=d\kappa\tens J+2\mu\tens K.$$</p>
+<p>In isotropic elasticity, the stiffness tensor is a linear combination of the two
+tensors $\tens J$ and $\tens K$. This is in fact a general result, which is
+heavily used in materials science: any <em>isotropic</em> fourth-rank tensor with minor
+and major symmetries is a linear combination of $\tens J$ and $\tens K$. In
+other words, $\tens J$ and $\tens K$ form a <em>basis</em> of the space of fourth-rank
+isotropic tensors with minor and major symmetries. Why this is useful will
+become obvious in the next section, where I will show that algebra in this basis
+is dead simple.</p>
+<h2>Algebra of the $\tens{J}$ and $\tens{K}$ tensors</h2>
+<p>It can readily be verified that</p>
+<p>$$\tens J\dbldot\tens J=\tens J,\quad\tens K\dbldot\tens K=\tens K\quad\text{and}\quad\tens K\dbldot\tens J=\tens J\dbldot\tens K=\tens0.$$</p>
+<p>Therefore, multiplication of two isotropic tensors
+$\tens T_i=a_i\tens{J}+b_i\tens{K}$ ($i=1,2$) is trivial</p>
+<p>$$\tens T_1\dbldot\tens T_2=a_1a_2\tens J+b_1b_2\tens K.$$</p>
+<p>Also, inversion of an isotropic tensor $\tens T=a\tens{J}+b\tens{K}$ is
+straightforward</p>
+<p>$$\tens T^{-1}=\frac1a\tens J+\frac1b\tens K.$$</p>
+<p>All these expressions will prove extremely useful in due time.</p>
+<h2>Conclusion</h2>
+<p>This is the end of this series on the elastic constants of isotropic
+materials. I have shown that (regardless of the dimension $d$ of the physical
+space), such materials are characterized by two constants. The shear modulus
+$\mu$, the Poisson ratio $\nu$ and Young's modulus $E$ do not depend on $d$,
+while the plane strains expression of the bulk modulus $\kappa$ differs from its
+3D expression (see Eqs. <a href="#eq02">(2)</a> and <a href="#eq03">(3)</a>).</p>
+<p>This series was also a good opportunity to introduce the tensors $\tens J$ and
+$\tens K$, which form a basis for the isotropic, fourth-rank tensors. Using this
+basis is very convenient, as algebra within this basis is extremely simple.</p>
+<!-- Local Variables: -->
+
+<!-- mode: markdown -->
+
+<!-- fill-column: 80 -->
+
+<!-- End: -->
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>

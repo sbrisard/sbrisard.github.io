@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/katex/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"/>
+    <script defer src="https://sbrisard.github.io/theme/katex/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://sbrisard.github.io/theme/katex/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {macros: {'\\D': '\\mathrm{d}', '\\dbldot': '\\mathbin{\\mathord{:}}', '\\tens': '\\bm', '\\tr': '\\operatorname{tr}', '\\vec': '\\bm'}, delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20180305-on_the_periodic-plus-smooth_decomposition_of_an_image-04.html" rel="bookmark"
+         title="Permalink to On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators">On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2018-03-05T00:00:00+01:00">
+      Published 05 March 2018
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/image-analysis.html">Image analysis</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html">previous
+instalment</a>
+of this series, we introduced the linear operators $Q_1$ and $Q$ that allow to
+define Moisan's (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>)
+periodic-plus-smooth decomposition $(p, s)$ of an image $u$ as follows</p>
+<p>$$s=\operatorname*{arg\,min}_v F(v, u)\quad\text{and}\quad p=u-s,$$</p>
+<p>with</p>
+<p>$$F(v, u)=\langle v, Q\cdot v\rangle-2\langle v, Q_1\cdot u\rangle+\langle u, Q_1\cdot u\rangle.$$</p>
+<p>In theory, the linear operators $Q_1$ and $Q$ are matrices. However, for
+$m\times n$ images, these matrices would be unnecessarily large: $mn\times mn$!
+We will therefore adopt here a <a href="https://en.wikipedia.org/wiki/Matrix-free_methods">matrix-free
+approach</a> for the Python
+implementation of these operators. The remainder of this post is organized as
+follows. We will first discuss <a href="#operators">linear operators</a> in the
+<code>scipy.sparse.linalg</code> sense. Then, we will implement <a href="#Q1">the $Q_1$ operator</a>
+and <a href="#Q">the $Q$ operator</a>. Finally, we will <a href="#testing">test our
+implementation</a>.</p>
+<p>This post is the fourth instalment of a series in seven parts:</p>
+<ol>
+<li><a href="https://sbrisard.github.io/posts/20180212-on_the_periodic-plus-smooth_decomposition_of_an_image-01.html">Introduction</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">Defining the decomposition</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html">The energy as a quadratic form</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180305-on_the_periodic-plus-smooth_decomposition_of_an_image-04.html">Implementing the linear operators</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180312-on_the_periodic-plus-smooth_decomposition_of_an_image-05.html">Minimizing the energy, the clumsy way</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180319-on_the_periodic-plus-smooth_decomposition_of_an_image-06.html">Minimizing the energy, the clever way</a></li>
+<li><a href="https://sbrisard.github.io/posts/20180326-on_the_periodic-plus-smooth_decomposition_of_an_image-07.html">Improved implementation of Moisan's algorithm</a></li>
+</ol>
+<p>The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.</p>
+<p><a name="operators"></a></p>
+<h2>Matrix-free linear operators</h2>
+<p>The $Q_1$ and $Q$ linear operators will be implemented as instances of
+<code>LinearOperator</code> from the <code>scipy.sparse.linalg</code> module (see
+<a href="https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.sparse.linalg.LinearOperator.html#scipy.sparse.linalg.LinearOperator">documentation</a>).
+Essentially, what this means is that $Q_1$ and $Q$ are seen as <em>functions</em>
+(linear maps) that perform the matrix-vector product. Often times, this is
+enough to perform fairly complex linear algebra operations. In particular,
+solving linear systems that involve $Q_1$ and $Q$ can then be done by means of
+<a href="https://en.wikipedia.org/wiki/Iterative_method#Linear_systems">iterative linear
+solvers</a>, such as
+the <a href="https://en.wikipedia.org/wiki/Conjugate_gradient_method">conjugate gradient
+method</a>.  Interesting
+references on this topic are the book by Y. Saad: <a href="https://doi.org/10.1137/1.9780898718003">Iterative Methods for Sparse
+Linear Systems</a> and the book by Barrett
+<em>et al.</em>: <a href="http://epubs.siam.org/doi/book/10.1137/1.9781611971538">Templates for the Solution of Linear Systems: Building Blocks for
+Iterative Methods</a> (also
+freely available <a href="http://www.netlib.org/templates/">here</a>).</p>
+<p>It should be noted that instances of <code>LinearOperator</code> (in the Scipy sense)
+operate on 1D vectors. Therefore, 2D images must be converted to 1D vectors each
+time linear operators are to be invoked. We will assume C-ordering in the
+implementation below. We first create the base class <code>ImageLinearOperator</code>, that
+defines linear operators for images, the shape of which is stored in the
+class. This class will be used below to implement the operators $Q_1$ and $Q$.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageLinearOperator</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinearOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Linear operator that operate on images.</span>
+
+<span class="sd">    This class defines a linear operator (in the SciPy sense) that</span>
+<span class="sd">    operates on n-dimensional images, the shape of which is passed to</span>
+<span class="sd">    the initializer</span>
+
+<span class="sd">    &gt;&gt;&gt; a = ImageLinearOperator((10, 5))</span>
+<span class="sd">    &gt;&gt;&gt; a.img_shape</span>
+<span class="sd">    (10, 5)</span>
+<span class="sd">    &gt;&gt;&gt; a.shape</span>
+<span class="sd">    (50, 50)</span>
+
+<span class="sd">    SciPy linear operators operate on one-dimensional vectors: the</span>
+<span class="sd">    methods _matvec and _adjoint implemented by each subclass must</span>
+<span class="sd">    therefore first reshape the input array to a n-dimensional</span>
+<span class="sd">    image. By convention, C-ordering will always be assumed.</span>
+
+<span class="sd">        y = numpy.zeros_like(x)</span>
+<span class="sd">        x2 = x.reshape(self.img_shape)</span>
+<span class="sd">        y2 = y.reshape(self.img_shape)</span>
+<span class="sd">        ......................</span>
+<span class="sd">        # Operate on x2 and y2</span>
+<span class="sd">        ......................</span>
+<span class="sd">        return y</span>
+
+<span class="sd">    Alternatively, developers may implement the method _apply that</span>
+<span class="sd">    operates on n-dimensional images: the default implementation of</span>
+<span class="sd">    _matvec calls this method on the input vector, suitably reshaped to</span>
+<span class="sd">    a n-dimensional image.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">img_shape</span> <span class="o">=</span> <span class="n">img_shape</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_shape</span><span class="p">)</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ImageLinearOperator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_matvec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_shape</span><span class="p">)</span>
+        <span class="n">y2</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img_shape</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_apply</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply this operator on the input image x.</span>
+
+<span class="sd">        The shape of x must be self.img_shape. The returned array has</span>
+<span class="sd">        same shape as x.</span>
+
+<span class="sd">        If specified, the optional argument y must be an array of same</span>
+<span class="sd">        shape as x. It is modified in-place, and a reference to y is</span>
+<span class="sd">        returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+
+<p><a name="Q1"></a></p>
+<h2>Implementation of the $Q_1$ operator</h2>
+<p>The $Q_1$ operator was defined in the <a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html#Q1">previous
+post</a>
+as the following sum: $Q_1=Q_1^\mathrm h+Q_1^\mathrm v$, with</p>
+<p>$$\tfrac12(Q_1^\mathrm h\cdot u)_{ij}=\left\{\begin{array}{ll}u_{i, 0}-u_{i, n-1} &amp; \text{if }j=0,\\ u_{i, n-1}-u_{i, 0} &amp; \text{if }j=n-1,\\ 0 &amp; \text{otherwise}\end{array}\right.$$</p>
+<p>and</p>
+<p>$$\tfrac12(Q_1^\mathrm v\cdot u)_{ij}=\left\{\begin{array}{ll}u_{0, j}-u_{m-1, j} &amp; \text{if }i=0,\\u_{m-1, j}-u_{0, j} &amp; \text{if }i=m-1,\\0 &amp; \text{otherwise}\end{array}\right.$$</p>
+<p>Implementation is fairly simple; note that $Q_1$ is symmetric: the <code>_adjoint()</code>
+method simply returns <code>self</code>.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OperatorQ1</span><span class="p">(</span><span class="n">ImageLinearOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Implementation of Q1 as a ImageLinearOperator.</span>
+
+<span class="sd">    Q1 is defined by Eq. (9) of Moisan (2011)</span>
+
+<span class="sd">        F(s) = &lt;u-s, Q1.(u-s)&gt; + &lt;s, Q2.s&gt;,</span>
+
+<span class="sd">    where F(s) is the function to be minimized with respect to the</span>
+<span class="sd">    smooth component s. F is defined by Eq. (8)</span>
+
+<span class="sd">        F(s) = E(u-s, s) + mean(s)**2,</span>
+
+<span class="sd">    so that</span>
+
+<span class="sd">        &lt;v, Q1.v&gt; = E(v, 0) and &lt;v, Q2.v&gt; = E(0, v) + mean(v)**2.</span>
+
+<span class="sd">    Image p = u-s must be passed as a 1-dimensional vector. Internally,</span>
+<span class="sd">    it is reshaped to a two-dimensional image (the shape of which is</span>
+<span class="sd">    passed to the initializer), assuming C-ordering.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OperatorQ1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">img_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">dx</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">y</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dx</span>
+        <span class="n">y</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">dx</span>
+
+        <span class="n">dx</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">dx</span>
+        <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-=</span> <span class="n">dx</span>
+
+        <span class="k">return</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+
+
+<p><a name="Q"></a></p>
+<h2 id="Q">Implementation of the $Q$ operator</h2>
+<p>The $Q$ operator was defined in the <a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html#Q">previous
+post</a>
+as the following sum: $Q=Q^\mathrm h+Q^\mathrm v+Q^\mathrm m$, with</p>
+<p>$$\tfrac12(Q^\mathrm h\cdot u)_{ij}=2v_{ij}-u_{i-1, j}-u_{i+1,j},$$
+$$\tfrac12(Q^\mathrm v\cdot u)_{ij}=2v_{i, j}-u_{i, j-1}-u_{i,j+1},$$
+$$(Q^\mathrm m\cdot u)_{ij}=\frac1{m^2n^2}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}u_{ij},$$</p>
+<p>where the following ghost cells have been defined</p>
+<p>$$u_{i, -1}=u_{i, n-1}, \quad u_{i, n}=u_{0, n}, \quad u_{-1, j}=u_{m-1, j}\quad\text{and}\quad u_{m, j}=u_{0, j}.$$</p>
+<p>It is readily seen that $(Q^\mathrm h+Q^\mathrm v)\cdot u$ is the
+periodic convolution of $u$ with the following kernel</p>
+<p>$$\begin{bmatrix}
+0 &amp; -2 &amp; 0\\
+-2 &amp; 8 &amp; -2\\
+0 &amp; -2 &amp; 0
+\end{bmatrix}.$$</p>
+<p>Operator $Q$ is then readily implemented. Observe again that $Q$ being
+symmetric, <code>_adjoint()</code> returns <code>self</code>.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OperatorQ</span><span class="p">(</span><span class="n">ImageLinearOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Implementation of Q = Q1+Q2 as a ImageLinearOperator.</span>
+
+<span class="sd">    Q1 and Q2 are defined by Eq. (9) of Moisan (2011)</span>
+
+<span class="sd">        F(s) = &lt;u-s, Q1.(u-s)&gt; + &lt;s, Q2.s&gt;,</span>
+
+<span class="sd">    where F(s) is the function to be minimized with respect to the</span>
+<span class="sd">    smooth component s. F is defined by Eq. (8)</span>
+
+<span class="sd">        F(s) = E(u-s, s) + mean(s)**2,</span>
+
+<span class="sd">    so that</span>
+
+<span class="sd">        &lt;v, Q1.v&gt; = E(v, 0) and &lt;v, Q2.v&gt; = E(0, v) + mean(v)**2.</span>
+
+<span class="sd">    Image s must be passed as a 1-dimensional vector. Internally, it is</span>
+<span class="sd">    reshaped to a two-dimensional image (the shape of which is passed</span>
+<span class="sd">    to the initializer), assuming C-ordering.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OperatorQ</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">img_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                                <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+                                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wrap&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">y</span><span class="o">+</span><span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+
+
+<p>Note that in the above implementation, attention is paid to the definition of
+the kernel, which is of the same <code>dtype</code> as the images to which the operator is
+to be applied. This allows for <em>exact</em> computations on integer images.</p>
+<p><a name="testing"></a></p>
+<h2>Testing the implementation</h2>
+<p>For any image $v$, we should have</p>
+<p>$$\langle v, Q_1\cdot v\rangle=E(v, 0)\quad\text{and}\quad\langle v, Q\cdot v\rangle=E(v, 0)+E(0, v)+(\operatorname{mean} v)^2,$$</p>
+<p>where the energy $E$ was implemented in <a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html#implementation">part
+2</a>
+of this series.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">img_shapes</span><span class="p">():</span>
+    <span class="n">sizes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)</span>
+
+
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;shape&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">img_shapes</span><span class="p">()))</span>
+<span class="k">def</span> <span class="nf">test_OperatorQ</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">20180125</span><span class="p">)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">moisan2011</span><span class="o">.</span><span class="n">OperatorQ</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="c1"># Force non-zero mean</span>
+    <span class="n">u1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+          <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">))</span>
+    <span class="n">u1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u1</span><span class="p">)</span> <span class="o">%</span> <span class="n">u1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">u2</span> <span class="o">=</span> <span class="n">u1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">moisan2011</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">u2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="n">moisan2011</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">u2</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">matvec</span><span class="p">(</span><span class="n">u1</span><span class="p">),</span> <span class="n">u1</span><span class="p">)</span>
+    <span class="n">assert_array_equal</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;shape&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">img_shapes</span><span class="p">()))</span>
+<span class="k">def</span> <span class="nf">test_OperatorQ1</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">20180125</span><span class="p">)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">moisan2011</span><span class="o">.</span><span class="n">OperatorQ1</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">moisan2011</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">matvec</span><span class="p">(</span><span class="n">p1</span><span class="p">),</span> <span class="n">p1</span><span class="p">)</span>
+    <span class="n">assert_array_equal</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The above code snippet calls for several remarks</p>
+<ol>
+<li>We used the great <a href="https://pytest.org/">pytest</a> library to write the unit
+    tests: this allows for parameterized tests.</li>
+<li>The seed of the random generator is fixed: this ensures reproducibility.</li>
+<li>Non-square images were used: this allows for the detection of some silly
+    errors, such as rows and columns swapping.</li>
+<li>Integer images were used: <em>exact</em> equality can then be asserted.</li>
+</ol>
+<h2>Conclusion</h2>
+<p>In this post, we have implemented the linear operators $Q_1$ and $Q$. We are now
+in a position to (at last!) compute the periodic-plus-smooth decomposition of an
+image. This will be done in the <a href="https://sbrisard.github.io/posts/20180312-on_the_periodic-plus-smooth_decomposition_of_an_image-05.html">next
+instalment</a>
+of this series</p>
+<!-- Local Variables: -->
+
+<!-- fill-column: 80 -->
+
+<!-- End: -->
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>

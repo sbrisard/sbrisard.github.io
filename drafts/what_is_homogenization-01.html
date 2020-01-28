@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - What is homogenization? Part 1: on the separation of scales</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/drafts/what_is_homogenization-01.html" rel="bookmark"
+         title="Permalink to What is homogenization? Part 1: on the separation of scales">What is homogenization? Part 1: on the separation of scales</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2019-03-28T00:00:00+01:00">
+      Published 28 March 2019
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/homogenization.html">Homogenization</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>Most of my research activities deal with upscaling the mechanical
+properties of heterogeneous materials. This is also known as
+homogenization. So what <em>is</em> homogenization? This series explores this
+question; it is largely based on the introduction to my <a href="file:./20171117-Announcing_the_defense_of_my_habilitation.org">Habilitation
+defense</a>.</p>
+<p>In order to introduce homogenization, we will draw inspiration from
+the publishing industry. The following photograph<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> was published
+in <em>Le Journal</em> (a french daily newspaper) from thursday, may
+30<sup>th</sup>, 1935. It illustrates the first cruise of the ocean
+liner <a href="https://en.wikipedia.org/wiki/SS_Normandie">Normandie</a>.</p>
+<p><img alt="The first cruise of the ocean liner Normandie." class="figure" src="https://sbrisard.github.io/posts/What_is_homogenization-01/Normandie.jpg"></p>
+<p>From where you sit, water exhibits nice shades of gray. However, let
+us take a closer look at the prow:</p>
+<p><img alt="Close-up of the prow" class="figure" src="https://sbrisard.github.io/posts/What_is_homogenization-01/Normandie-400x300.png"></p>
+<p>It turns out that the sea has a <em>dotted</em> structure, which is inherent
+to the so-called <a href="https://en.wikipedia.org/wiki/Halftone">halftoning</a>
+technique itself. Of course, the reason why the resulting picture
+looks fine is because you are looking at it from far off. Also, the
+size of the “gray” patches must be large enough for you to get the
+illusion that it is smoothly shaded. Indeed, if the patch contains
+only a few dots, the illusion will not take place.</p>
+<p>We have therefore identified three length-scales</p>
+<ul>
+<li>the <em>microscopic</em> length-scale L<sub>μ</sub> is the size of the
+  dots,</li>
+<li>the <em>mesoscopic</em> length-scale L<sub>m</sub> is the typical size of
+  the patches,</li>
+<li>the <em>macroscopic</em> length-scale L<sub>M</sub> is the distance from
+  your screen to your eye.</li>
+</ul>
+<p>These three scales must be well separated for the photograph to appear
+smoothly shaded. I other words, the macro scale is much larger than
+the meso scale, which in turn is much larger than the micro scale:
+L<sub>μ</sub>&thinsp;≪&thinsp;L<sub>m</sub>&thinsp;≪&thinsp;
+L<sub>M</sub>. This is the so-called assumption of <em>separation of
+scales</em>.</p>
+<p>Provided that separation of scales prevails, homogenization can take
+place. Homogenization is the process of replacing the complex
+microstructure with an equivalent, <em>homogeneous</em> mesostructure. By
+<em>microstructure</em>, we mean both the geometry and physical properties of
+the microscopic features. In the above example, the microstructure is
+defined by the size and spacing of the dots (geometry), as well as the
+color of dots and background (physical properties). The
+<em>mesostructure</em> on the other hand is a patch with homogeneous,
+equivalent (in homogenization language, we say <em>effective</em>)
+properties. In the above example, the effective property is the shade
+of gray as perceived by the observer.</p>
+<h2>Conclusion</h2>
+<p>In this post, we introduced the homogenization concept through a
+graphical analogy. We explained that the key ingredient for
+homogenization to be valid is separation of scales.</p>
+<p>In the <a href="https://sbrisard.github.io/drafts/what_is_homogenization-02.html">next</a> instalment of
+this series, we will discuss two strategies to carry out
+homogenization: the bottom-up and top-down approaches.</p>
+<!-- -*- coding: utf-8; fill-column: 80 -*- -->
+
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Le Journal, num. 15565. Image downloaded from <a href="https://gallica.bnf.fr/ark:/12148/bpt6k7632229g">Gallica</a>, the digital library BnF (<em>Bibliothèque Nationale de France</em>).&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>

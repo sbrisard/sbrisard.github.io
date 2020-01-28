@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - Elastic constants of an isotropic material, part 2: plane strain elasticity</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/katex/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"/>
+    <script defer src="https://sbrisard.github.io/theme/katex/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://sbrisard.github.io/theme/katex/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {macros: {'\\D': '\\mathrm{d}', '\\dbldot': '\\mathbin{\\mathord{:}}', '\\tens': '\\bm', '\\tr': '\\operatorname{tr}', '\\vec': '\\bm'}, delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20131229-elastic_constants_of_an_isotropic_material-02.html" rel="bookmark"
+         title="Permalink to Elastic constants of an isotropic material, part 2: plane strain elasticity">Elastic constants of an isotropic material, part 2: plane strain elasticity</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2013-12-29T00:00:00+01:00">
+      Published 29 December 2013
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/continuum-mechanics.html">Continuum mechanics</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html">previous
+instalment</a>
+of this series, I introduced the constitutive law of an isotropically elastic
+material, and the related material constants, within the framework of 3D
+elasticity. I will now address the case of plane strain elasticity.</p>
+<p>Problems of plane strain elasticity are defined as problems where the following
+components of the strain tensor are null</p>
+<p><a name="eq1"></a>
+$$\varepsilon_{31} = \varepsilon_{23} = \varepsilon_{33} = 0.\tag{1}$$</p>
+<p>This is typically true of problems for which the geometry <em>and the loading</em> are
+invariant along the third direction $\vec e_3$. In what follows, it will be
+covenient to adopt the following classical notation</p>
+<ul>
+<li>latin indices (e.g. $i, j, k$) can take values in ${1, 2, 3}$,</li>
+<li>greek indices (e.g. $\alpha, \beta, \gamma$) can take values in ${1,
+  2}$.</li>
+</ul>
+<p>In both cases, Einstein's convention applies; in other words,
+$\varepsilon_{kk}$ stands for</p>
+<p>$$\sum_{k=1}^3\varepsilon_{kk},$$</p>
+<p>while $\varepsilon_{\gamma\gamma}$ stands for</p>
+<p>$$\sum_{\gamma=1}^2\varepsilon_{\gamma\gamma}.$$</p>
+<p>As in the previous instalment, the constitutive laws in isotropic, plane strain
+elasticity will be derived using various sets of material constants, starting
+with the bulk modulus $E$ and the Poisso ratio $\nu$.</p>
+<h2>Young's modulus and Poisson ratio</h2>
+<p>We first recall the consitutive law in isotropic, 3D elasticity</p>
+<p><a name="eq2"></a>
+$$\varepsilon_{ij}=\frac{1+\nu}E\sigma_{ij}-\frac\nu E\sigma_{kk}\delta_{ij}.\tag{2}$$</p>
+<p>Combination of Eqs. <a href="#eq1">(1)</a> and <a href="#eq2">(2)</a> for $(i, j)=(3, 1)$ and $(i,
+j)=(2, 3)$, first leads to $\sigma_{31}=\sigma_{23}=0$. Then, for $(i, j) = (3,
+3)$, $\sigma_{33}=\nu\sigma_{\gamma\gamma}$. The 3D trace of $\tens{\sigma}$ can
+therefore be expressed as a function of its 2D trace</p>
+<p>$$\sigma_{kk}=\left(1+\nu\right)\sigma_{\gamma\gamma}.$$</p>
+<p>Substituting in Eq. <a href="#eq2">(2)</a></p>
+<p>$$\varepsilon_{\alpha\beta}=\frac{1+\nu}E\left(\sigma_{\alpha\beta}-\nu\sigma_{\gamma\gamma}\delta_{\alpha\beta}\right),$$</p>
+<p>which is the plane strain constitutive low we were looking for.</p>
+<h2>Shear modulus and Poisson ratio</h2>
+<p>Recalling (see <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html">previous
+instalment</a>)
+that $E=2\mu\left(1+\nu\right)$, Eq. <a href="#eq2">(2)</a> can also be cast as follows</p>
+<p><a name="eq3"></a>
+$$\varepsilon_{\alpha\beta}=\frac1{2\mu}\left(\sigma_{\alpha\beta}-\nu\sigma_{\gamma\gamma}\delta_{\alpha\beta}\right).\tag{3}$$</p>
+<h2>Bulk and shear moduli</h2>
+<p>For (2D) isotropic stresses, $\sigma_{\alpha\beta}=-p\delta_{\alpha\beta}$,
+Eq. <a href="#eq3">(3)</a> reads</p>
+<p>$$\varepsilon_{\alpha\beta}=-\frac{1-2\nu}{2\mu}p\delta_{\alpha\beta},$$</p>
+<p>and the relative surface change $\varepsilon_\text s$, defined as
+$\varepsilon_\text s=\varepsilon_{\gamma\gamma}$, reads</p>
+<p>$$\varepsilon_\text s=-\frac p{\kappa_\text{2D}},$$</p>
+<p>with</p>
+<p>$$\kappa_\text{2D}=\frac\mu{1-2\nu}.$$</p>
+<p>$\kappa_\text{2D}$ thus defined is the 2D (plane strain) bulk modulus of the
+material. Attention should be paid to the fact that, unlike the shear modulus,
+the bulk modulus of a material <em>depends on the dimension of the physical
+space</em>. More generally, the (2D) trace of the strain tensor is related to the
+average stress</p>
+<p><a name="eq4"></a>
+$$\varepsilon_{\gamma\gamma}=\frac{1-2\nu}{2\mu}\sigma_{\gamma\gamma}.\tag{4}$$</p>
+<p>Combining Eqs. <a href="#eq3">(3)</a> and <a href="#eq4">(4)</a></p>
+<p>$$\sigma_{\alpha\beta}=2\mu\varepsilon_{\alpha\beta}+\frac{2\mu\nu}{1-2\nu}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}=\frac{\mu}{1-2\nu}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}+2\mu\left(\varepsilon_{\alpha\beta}-\frac{\varepsilon_{\gamma\gamma}}2\delta_{\alpha\beta}\right),$$</p>
+<p>and the stress-strain relationship finally reads</p>
+<p>$$\sigma_{\alpha\beta}=\kappa_\text{2D}\varepsilon_{\gamma\gamma}\delta_{\alpha\beta}+2\mu\left(\varepsilon_{\alpha\beta}-\frac{\varepsilon_{\gamma\gamma}}2\delta_{\alpha\beta}\right).$$</p>
+<h2>Conclusion</h2>
+<p>In this instalment, we have seen how the plane strain asumption affects the
+constitutive law of isotropic, linear and elastic materials. In particular, the
+bulk modulus which is the ratio of the average stress to the relative surface
+change appears to be dimension dependent. In the <a href="https://sbrisard.github.io/posts/20140112-elastic_constants_of_an_isotropic_material-03.html">next
+instalment</a>,
+we will reconcile the 3D and 2D points of view.</p>
+<!-- Local Variables: -->
+
+<!-- mode: markdown -->
+
+<!-- fill-column: 80 -->
+
+<!-- End: -->
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>
