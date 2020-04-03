@@ -1,7 +1,41 @@
 Title: What is homogenization? Part 2: top-down and bottom-up strategies
-Date: 2019-08-20
+Date: 2020-04-03
 Category: Homogenization
-Status: draft
+UseKaTeX: True
+
+In the [previous
+instalment]({filename}20200402-What_is_homogenization-01.md) of this
+series, we introduced homogenization and the separation of scales. In
+the present post, we will discuss two possible strategies that can be
+adopted to carry out homogenization: the *top-down* and the
+*bottom-up* approaches. To do so, we will again use the analogy with
+the halftoning technique.
+
+Remember that we considered the following picture, reproduced from *Le
+Journal* (thursday, may 30<sup>th</sup>, 1935).
+
+![The first cruise of the ocean liner Normandie.]({static}What_is_homogenization-01/Normandie.jpg){.figure}
+
+Taking a closer look at the prow:
+
+![Close-up of the prow]({static}What_is_homogenization-01/Normandie-400x300.png){.figure}
+
+we realized that what *looked like* shades of gray in the photograph
+was actually a *dotted* structure. This dotted structure will be
+called the *microstructure*; its typical length-scale is the
+*microscopic* length-scale $L\_\mu$ that was introduced before.
+
+Now, let us imagine that the printer is handed out the original
+photograph (which is indeed made of shades of grays, *not black dots*)
+alongside the article about the launch of the ocean liner
+*Normandie*. He needs to decide on the pattern(s) that will result in
+the best reproduction of the photograph as a distribution of dots. To
+do so, he needs a rule that relates the size and spacing of dots to
+the resulting shade of gray. This is what homogenization is really
+about.
+
+More generally, homogenization provides a mapping from the
+*microstructure* to the *effective properties*.
 
 Two strategies can be adopted to carry out homogenization. In the
 so-called *top-down* approach, the effective properties are *measured*
@@ -28,46 +62,5 @@ testing.
 In my research, I preferably resort to bottom-up approaches. The
 remainder of this series will therefore be devoted to homogenization
 through upscaling.
-
-## Conclusion
-
-In this post, we introduced the homogenization concept through a
-graphical analogy. We explained that the key ingredient for
-homogenization to be valid is separation of scales.
-
-In the next instalment of this series, we will discuss homogenization
-in the context of the mechanical properties of heterogeneous
-materials.
-
-## Code example
-
-    :::python
-    import functools
-
-    from functools import lru_cache
-
-
-    @lru_cache(None)
-    def func(x, y):
-        """This is a docstring"""
-        if x < 0:
-            raise ValueError()
-        return x + 2.0 * y
-
-
-    class A:
-        def __init__(self, x, y):
-            self.x = x  # This is a useless comment
-            self.y = y
-
-        def say_hello(self):
-            print(f"Hello, world\nx = {self.x}\ny = {self.y}")
-
-
-    if __name__ == "__main__":
-        a = A(1.0, 2.0)
-        a.say_hello()
-
-
 
 <!-- -*- coding: utf-8; fill-column: 80 -*- -->
