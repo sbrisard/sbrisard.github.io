@@ -13,11 +13,11 @@ so, we will again use the analogy with the halftoning technique.
 Remember that we considered the following picture, reproduced from *Le
 Journal* (thursday, may 30<sup>th</sup>, 1935).
 
-![The first cruise of the ocean liner Normandie.]({static}What_is_homogenization-01/Normandie.jpg){.figure}
+![The first cruise of the ocean liner Normandie.]({static}What_is_homogenization/Normandie.jpg){.figure}
 
 Taking a closer look at the prow:
 
-![Close-up of the prow]({static}What_is_homogenization-01/Normandie-400x300.png){.figure}
+![Close-up of the prow]({static}What_is_homogenization/Normandie-400x300.png){.figure}
 
 we realized that what *looked like* shades of gray in the photograph
 was actually a *dotted* structure. This dotted structure will be
@@ -35,7 +35,7 @@ pattern to the resulting shade of gray.
 This is what homogenization is really about: **homogenization provides a
 mapping from the _microstructure_ to the _effective properties_**.
 
-![Experimental homogenization]({static}What_is_homogenization-01/experimental_homogenization.png){.fig30p100}
+![Experimental homogenization]({static}What_is_homogenization/experimental_homogenization.png){.fig30p100}
 
 Our friend the printer first performed the required homogenization
 step *experimentally*. As the problem at hand is about human
@@ -62,8 +62,7 @@ dot pattern is *periodic*: it is the result of paving the plane with a
 single *unit-cell*, a hexagon in the present case (see figure below,
 where the unit-cell is shown in gray).
 
-![The unit-cell]({static}What_is_homogenization-01/unit-cell.png){.figure}
-
+![The unit-cell]({static}What_is_homogenization/unit-cell.png){.fig30p100}
 
 The total surface area of the unit-cell is $A$, and the surface area
 covered by the black dot(s) is $A_{\mathrm{b}}$. The surface area

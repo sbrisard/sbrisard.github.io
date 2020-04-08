@@ -15,12 +15,12 @@ in *Le Journal* (a french daily newspaper) from thursday, may
 30<sup>th</sup>, 1935. It illustrates the first cruise of the ocean
 liner [Normandie](https://en.wikipedia.org/wiki/SS_Normandie).
 
-![The first cruise of the ocean liner Normandie.]({static}What_is_homogenization-01/Normandie.jpg){.figure}
+![The first cruise of the ocean liner Normandie.]({static}What_is_homogenization/Normandie.jpg){.figure}
 
 From where you sit, water exhibits nice shades of gray. However, let
 us take a closer look at the prow:
 
-![Close-up of the prow]({static}What_is_homogenization-01/Normandie-400x300.png){.figure}
+![Close-up of the prow]({static}What_is_homogenization/Normandie-400x300.png){.figure}
 
 It turns out that the sea has a *dotted* structure, which is inherent
 to the so-called [halftoning](https://en.wikipedia.org/wiki/Halftone)
@@ -62,8 +62,10 @@ In this post, we introduced the homogenization concept through a
 graphical analogy. We explained that the key ingredient for
 homogenization to be valid is separation of scales.
 
-In the next instalment of this series, we will discuss two strategies
-to carry out homogenization: the bottom-up and top-down approaches.
+In the [next
+instalment]({filename}20200408-What_is_homogenization-02.md) of this
+series, we will discuss two strategies to carry out homogenization:
+the bottom-up and top-down approaches.
 
 [^1]: Le Journal, num. 15565. Image downloaded from [Gallica](https://gallica.bnf.fr/ark:/12148/bpt6k7632229g), the digital library BnF (*Bibliothèque Nationale de France*).
 
