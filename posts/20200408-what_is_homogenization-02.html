@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - What is homogenization? Part 2: experimental vs. theoretical homogenization</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/katex/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"/>
+    <script defer src="https://sbrisard.github.io/theme/katex/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://sbrisard.github.io/theme/katex/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {macros: {'\\D': '\\mathrm{d}', '\\dbldot': '\\mathbin{\\mathord{:}}', '\\tens': '\\bm', '\\tr': '\\operatorname{tr}', '\\vec': '\\bm'}, delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20200408-what_is_homogenization-02.html" rel="bookmark"
+         title="Permalink to What is homogenization? Part 2: experimental vs. theoretical homogenization">What is homogenization? Part 2: experimental vs. theoretical homogenization</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2020-04-08T00:00:00+02:00">
+      Published 08 April 2020
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/homogenization.html">Homogenization</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>In the <a href="https://sbrisard.github.io/posts/20200402-what_is_homogenization-01.html">previous
+instalment</a> of this
+series, we introduced homogenization and the separation of scales. In
+the present post, we will discuss two strategies to carry out
+homogenization: the experimental and the theoretical approaches. To do
+so, we will again use the analogy with the halftoning technique.</p>
+<p>Remember that we considered the following picture, reproduced from <em>Le
+Journal</em> (thursday, may 30<sup>th</sup>, 1935).</p>
+<p><img alt="The first cruise of the ocean liner Normandie." class="figure" src="https://sbrisard.github.io/posts/What_is_homogenization/Normandie.jpg"></p>
+<p>Taking a closer look at the prow:</p>
+<p><img alt="Close-up of the prow" class="figure" src="https://sbrisard.github.io/posts/What_is_homogenization/Normandie-400x300.png"></p>
+<p>we realized that what <em>looked like</em> shades of gray in the photograph
+was actually a <em>dotted</em> structure. This dotted structure will be
+called the <em>microstructure</em>; its typical length-scale is the
+<em>microscopic</em> length-scale $L_\mu$ that was introduced before.</p>
+<p>Now, let us imagine what happened when this photograph was actually
+printed alongside the article about the launch of the ocean liner
+<em>Normandie</em>. The printer was handed out the original photograph (which
+is indeed made of shades of grays, <em>not black dots</em>) and had to pick
+the dot pattern(s) that would result in the best halftone reproduction
+of the photograph. To do so, he needed a rule that relates the dot
+pattern to the resulting shade of gray.</p>
+<p>This is what homogenization is really about: <strong>homogenization provides a
+mapping from the <em>microstructure</em> to the <em>effective properties</em></strong>.</p>
+<p><img alt="Experimental homogenization" class="fig30p100" src="https://sbrisard.github.io/posts/What_is_homogenization/experimental_homogenization.png"></p>
+<p>Our friend the printer first performed the required homogenization
+step <em>experimentally</em>. As the problem at hand is about human
+perception, he asked his apprentice to be the subject of his
+experiment. He handed out a set of cards, uniformly coloured with
+various shades of gray, to the apprentice. Then, he presented him with
+various dot patterns. For each of these patterns, the printer asked
+the apprentice to pick the card that was closest to how he perceived
+the pattern. The printer was then able to build a chart that related
+pattern to shade of gray (and vice-versa).</p>
+<p>But then, the printer realized that this experiment is fundamentally
+subjective. In order to be <em>statistically representative</em>, he needed
+to repeat this experiment with many subjects, and compute some kind of
+average. He thought that this was quite tedious, and maybe there was
+another strategy.</p>
+<p>In fact, there <em>is</em> another strategy, which is called <em>upscaling</em>. In
+this approach, the effective properties are <em>inferred</em> (through a
+mathematical model) from the microstructure. In the case of
+halftoning, the mathematical model is rather simple, as it boils down
+to a simple average. More precisely, we first need to realize that the
+dot pattern is <em>periodic</em>: it is the result of paving the plane with a
+single <em>unit-cell</em>, a hexagon in the present case (see figure below,
+where the unit-cell is shown in gray).</p>
+<p><img alt="The unit-cell" class="fig30p100" src="https://sbrisard.github.io/posts/What_is_homogenization/unit-cell.png"></p>
+<p>The total surface area of the unit-cell is $A$, and the surface area
+covered by the black dot(s) is $A_{\mathrm{b}}$. The surface area
+$A_{\mathrm{w}}=A-A_{\mathrm{b}}$ remains white. Then, the upscaling
+rule reads</p>
+<p>$$G^{\mathrm{eff}} = \frac{A_{\mathrm{w}}}{A},$$</p>
+<p>where $0\leq G^{\mathrm{eff}}\leq 1$ denotes the <em>effective</em> gray
+level ($G^{\mathrm{eff}}=0$: black; $G^{\mathrm{eff}}=1$: white). The
+above upscaling rule can be seen as a form of <a href="https://en.wikipedia.org/wiki/Rule_of_mixtures">rule of
+mixtures</a>. Indeed, let
+$G_{\mathrm{b}}=0$ and $G_{\mathrm{w}}=1$ denote the gray levels of
+black and white, respectively. Then, the effective gray level is
+expressed as the following weighted average of the local gray levels</p>
+<p>$$G = \frac{A_{\mathrm{b}}}{A} G_{\mathrm{b}}+\frac{A_{\mathrm{w}}}{A} G_{\mathrm{w}},$$</p>
+<p>where the weights are the surface fractions. This is in fact a rare
+example where the rule of mixtures gives the correct answer! It is
+time to wrap up.</p>
+<h2>Conclusion</h2>
+<p>Homogenization is the process that relates the microstructure to the
+macroscopic properties. This relationship can be established
+experimentally or theoretically. These two strategies should not be
+seen as competing, but rather as complementary approaches to the same
+problem.</p>
+<p>On the one hand, provided that the experiments are performed
+correctly, the experimental approach always delivers the “correct”
+answer. However, a new experiment is required for each new
+microstructure.</p>
+<p>On the other hand, theoretical (upscaling) approaches have the ability
+to be <em>predictive</em>: given the microstructure, the effective properties
+can be computed with no need to actually <em>build</em> the
+microstructure. This is particularly desirable in an industrial
+context, where numerical modelling is gradually supplanting physical
+testing. The downside is that all the relevant physics must be
+accounted for <em>at the scale of the microstructure</em>. While this is
+relatively easy in the case of e.g. linear elasticity of composites,
+it is a much more difficult task in the case of e.g. linear elasticity
+of unsaturated porous media, where we need to account for all menisci.</p>
+<p>In my research, I preferably resort to theoretical homogenization, to
+which the remainder of this series will be devoted. In the next
+instalment, we will discuss periodic vs. random homogenization.</p>
+<!-- -*- coding: utf-8; fill-column: 80 -*- -->
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] ifsttar [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>
