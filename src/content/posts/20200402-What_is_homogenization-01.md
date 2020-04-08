@@ -39,7 +39,7 @@ We have therefore identified three length-scales
   from your screen to your eye.
 
 These three scales must be well separated for the photograph to appear
-smoothly shaded. I other words, the macro scale is much larger than
+smoothly shaded. In other words, the macro scale is much larger than
 the meso scale, which in turn is much larger than the micro scale:
 $L\_{\mu} \ll L\_{\mathrm{m}} \ll L\_{\mathrm{M}}$. This is the
 so-called assumption of *separation of scales*.
