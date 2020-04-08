@@ -1,5 +1,5 @@
 Title: What is homogenization? Part 2: experimental vs. theoretical homogenization
-Date: 2020-04-03
+Date: 2020-04-08
 Category: Homogenization
 UseKaTeX: True
 
@@ -35,13 +35,15 @@ pattern to the resulting shade of gray.
 This is what homogenization is really about: **homogenization provides a
 mapping from the _microstructure_ to the _effective properties_**.
 
+![Experimental homogenization]({static}What_is_homogenization-01/experimental_homogenization.png){.fig30p100}
+
 Our friend the printer first performed the required homogenization
 step *experimentally*. As the problem at hand is about human
 perception, he asked his apprentice to be the subject of his
 experiment. He handed out a set of cards, uniformly coloured with
 various shades of gray, to the apprentice. Then, he presented him with
 various dot patterns. For each of these patterns, the printer asked
-the apprentice to pick the card that was closest to how he percieved
+the apprentice to pick the card that was closest to how he perceived
 the pattern. The printer was then able to build a chart that related
 pattern to shade of gray (and vice-versa).
 
@@ -51,27 +53,32 @@ to repeat this experiment with many subjects, and compute some kind of
 average. He thought that this was quite tedious, and maybe there was
 another strategy.
 
-In fact, there *is* another strategy, which is called *up-scaling*. In
+In fact, there *is* another strategy, which is called *upscaling*. In
 this approach, the effective properties are *inferred* (through a
 mathematical model) from the microstructure. In the case of
 halftoning, the mathematical model is rather simple, as it boils down
 to a simple average. More precisely, we first need to realize that the
 dot pattern is *periodic*: it is the result of paving the plane with a
-single *unit-cell*, a hexagon in the present case (see figure
-below). The total surface area of the unit-cell is $A$, and the
-surface area covered by the black dot(s) is $A_{\mathrm{b}}$. The
-surface area $A\_{\mathrm{w}}=A-A\_{\mathrm{b}}$ remains white. Then,
-the upscaling rule reads
+single *unit-cell*, a hexagon in the present case (see figure below,
+where the unit-cell is shown in gray).
+
+![The unit-cell]({static}What_is_homogenization-01/unit-cell.png){.figure}
+
+
+The total surface area of the unit-cell is $A$, and the surface area
+covered by the black dot(s) is $A_{\mathrm{b}}$. The surface area
+$A\_{\mathrm{w}}=A-A\_{\mathrm{b}}$ remains white. Then, the upscaling
+rule reads
 
 $$G^{\mathrm{eff}} = \frac{A\_{\mathrm{w}}}{A},$$
 
 where $0\leq G^{\mathrm{eff}}\leq 1$ denotes the *effective* gray
 level ($G^{\mathrm{eff}}=0$: black; $G^{\mathrm{eff}}=1$: white). The
-above up-scaling rule can be seen as a form of [rule of
+above upscaling rule can be seen as a form of [rule of
 mixtures](https://en.wikipedia.org/wiki/Rule_of_mixtures). Indeed, let
 $G\_{\mathrm{b}}=0$ and $G\_{\mathrm{w}}=1$ denote the gray levels of
 black and white, respectively. Then, the effective gray level is
-expressed as the following average of the local gray levels
+expressed as the following weighted average of the local gray levels
 
 $$G = \frac{A\_{\mathrm{b}}}{A} G\_{\mathrm{b}}+\frac{A\_{\mathrm{w}}}{A} G\_{\mathrm{w}},$$
 
@@ -83,21 +90,28 @@ time to wrap up.
 
 Homogenization is the process that relates the microstructure to the
 macroscopic properties. This relationship can be established
-experimentally, in a top-down approach, or theoretically, in a
-bottom-up approach. These two strategies should not be
+experimentally or theoretically. These two strategies should not be
 seen as competing, but rather as complementary approaches to the same
 problem.
 
-While the top-down approach always delivers the “correct” answer
-(provided that the experiments are performed correctly), efficient
-bottom-up approaches have the ability to be *predictive*: given the
-microstructure, the effective properties can be computed with no need
-to actually *build* the microstructure. This is particularly desirable
-in an industrial context, where numerical modelling is gradually
-supplanting physical testing.
+On the one hand, provided that the experiments are performed
+correctly, the experimental approach always delivers the “correct”
+answer. However, a new experiment is required for each new
+microstructure.
 
-In my research, I preferably resort to bottom-up approaches. The
-remainder of this series will therefore be devoted to homogenization
-through upscaling.
+On the other hand, theoretical (upscaling) approaches have the ability
+to be *predictive*: given the microstructure, the effective properties
+can be computed with no need to actually *build* the
+microstructure. This is particularly desirable in an industrial
+context, where numerical modelling is gradually supplanting physical
+testing. The downside is that all the relevant physics must be
+accounted for *at the scale of the microstructure*. While this is
+relatively easy in the case of e.g. linear elasticity of composites,
+it is a much more difficult task in the case of e.g. linear elasticity
+of unsaturated porous media, where we need to account for all menisci.
+
+In my research, I preferably resort to theoretical homogenization, to
+which the remainder of this series will be devoted. In the next
+instalment, we will discuss periodic vs. random homogenization.
 
 <!-- -*- coding: utf-8; fill-column: 80 -*- -->
