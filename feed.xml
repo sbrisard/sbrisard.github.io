@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Sébastien Brisard's blog</title><link>https://sbrisard.github.io/</link><description></description><lastBuildDate>Wed, 08 Apr 2020 00:00:00 +0200</lastBuildDate><item><title>What is homogenization? Part 2: experimental vs. theoretical homogenization</title><link>https://sbrisard.github.io/posts/20200408-what_is_homogenization-02.html</link><description>&lt;p&gt;In the &lt;a href="https://sbrisard.github.io/posts/20200402-what_is_homogenization-01.html"&gt;previous
+<rss version="2.0"><channel><title>Sébastien Brisard's blog</title><link>https://sbrisard.github.io/</link><description></description><lastBuildDate>Tue, 21 Apr 2020 00:00:00 +0200</lastBuildDate><item><title>What is homogenization? Part 3: ensemble averages vs. volume averages</title><link>https://sbrisard.github.io/posts/20200421-what_is_homogenization-03.html</link><description>&lt;p&gt;In the &lt;a href="https://sbrisard.github.io/posts/20200408-what_is_homogenization-02.html"&gt;previous instalment&lt;/a&gt; of
+this series on homogenization, we discussed homogenization of a distribution of
+black dots on a white background to a uniform shade of gray. In that example,
+homogenization boils down to evaluating the fraction of the total area occupied
+by the dots: this is the so-called …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sébastien Brisard</dc:creator><pubDate>Tue, 21 Apr 2020 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:sbrisard.github.io,2020-04-21:/posts/20200421-what_is_homogenization-03.html</guid></item><item><title>What is homogenization? Part 2: experimental vs. theoretical homogenization</title><link>https://sbrisard.github.io/posts/20200408-what_is_homogenization-02.html</link><description>&lt;p&gt;In the &lt;a href="https://sbrisard.github.io/posts/20200402-what_is_homogenization-01.html"&gt;previous
 instalment&lt;/a&gt; of this
 series, we introduced homogenization and the separation of scales. In
 the present post, we will discuss two strategies to carry out
