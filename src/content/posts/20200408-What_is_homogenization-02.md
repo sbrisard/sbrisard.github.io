@@ -110,7 +110,8 @@ it is a much more difficult task in the case of e.g. linear elasticity
 of unsaturated porous media, where we need to account for all menisci.
 
 In my research, I preferably resort to theoretical homogenization, to
-which the remainder of this series will be devoted. In the next
-instalment, we will discuss periodic vs. random homogenization.
+which the remainder of this series will be devoted. In the [next
+instalment]({filename}20200421-What_is_homogenization-03.md), we will
+discuss periodic vs. random homogenization.
 
 <!-- -*- coding: utf-8; fill-column: 80 -*- -->
