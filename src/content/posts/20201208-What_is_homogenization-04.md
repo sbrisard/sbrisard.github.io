@@ -7,9 +7,9 @@ In the [previous instalment]({filename}20200421-What_is_homogenization-03.md) of
 this series on homogenization, we discussed volume and ensemble averages for
 random heterogeneous materials. In view of introducing *statistical* and
 *representative* volume elements, we will introduce in this post our first
-homogenization example, namely a two-dimensional, square mesh of springs that is
-loaded in its plane only. We will show that this system can be homogenized as a
-plate, the [extensional
+homogenization example, namely a two-dimensional, rectangular mesh of springs
+that is loaded in its plane only. We will show that this system can be
+homogenized as a plate, the [extensional
 stiffnesses](https://en.wikipedia.org/wiki/Plate_theory#Stress–strain_relations)
 of which we will derive in closed-form.
 
