@@ -159,9 +159,8 @@ statistically homogeneous materials, the ensemble average does not depend on the
 observation point. Furthermore, for ergodic materials, the volume average over a
 large domain coincides with the ensemble average.
 
-In the next post, we will continue our exploration of ensemble and volume
-averages, and will introduce *statistical volume elements* and *representative
-volume elements*.
+In the [next post]({filename}20201208-What_is_homogenization-04.md), we will
+consider our first homogenization example.
 
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
