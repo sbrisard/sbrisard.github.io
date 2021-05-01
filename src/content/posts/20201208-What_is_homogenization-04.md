@@ -145,7 +145,8 @@ with
 
 $$A\_x=k\operatorname{cotan}\theta\bigl(1+\cos2\theta+\chi\_x\bigr),$$
 $$A\_y=k\tan\theta\bigl(1-\cos2\theta+\chi\_y\bigr),$$
-$$A\_{xy}=\nu\_{xy}\,A\_y=\nu\_{yx}\,A\_x=k\sin2\theta.$$
+$$\nu\_{xy}\,A\_y=\nu\_{yx}\,A\_x=k\sin2\theta,$$
+$$A\_{xy}=2k\sin2\theta.$$
 
 The Poisson ratios can be expressed as follows
 $$\nu\_{xy}=\frac{1+\cos2\theta}{1-\cos2\theta+\chi\_y}
@@ -155,12 +156,12 @@ $$\nu\_{xy}=\frac{1+\cos2\theta}{1-\cos2\theta+\chi\_y}
 It is interesting to find the conditions under which the above equivalent
 membrane is isotropic. We must have
 
-$$A=A\_x=A\_y,\quad\nu=\nu\_{xy}=\nu\_{yx}\quad\text{and}\quad A\_{xy}=2\bigl(1-\nu\bigr)A,$$
+$$A=A\_x=A\_y,\quad\nu=\nu\_{xy}=\nu\_{yx}\quad\text{and}\quad A\_{xy}=\bigl(1-\nu\bigr)A,$$
 
 where $\nu$ is the unique Poisson ratio and $A=Eh/(1-\nu^2)$ is the classical
-membrane stiffness. Since we have already observed that
-$A\_{xy}=\nu\_{xy}\,A\_y=\nu\_{yx}\,A\_x$, the third identity leads to
-$\nu=1/3$. From the expressions of the Poisson ratios, we deduce that
+membrane stiffness. Since $A\_{xy}=2\nu\_{xy}\,A\_y=2\nu\_{yx}\,A\_x$, the third
+identity leads to $\nu=1/3$. From the expressions of the Poisson ratios, we
+deduce that
 
 $$\chi\_x=2-4\cos2\theta\quad\text{and}\quad\chi\_y=2+4\cos2\theta.$$
 
