@@ -181,8 +181,8 @@ springs can be homogenized as a continuous plate loaded in its plane only. We
 saw the conditions on the geometry of the mesh and the stiffnesses of the
 springs for the homogenized plate to behave isotropically.
 
-In the next instalment of this series, we will discuss size effects in a
-deterministic setting.
+In the [next instalment]({filename}20210509-What_is_homogenization-05.md) of
+this series, we will discuss size effects in a deterministic setting.
 
 <a id="appendix"></a>
 ## Appendix: derivation of the effective elastic energy

@@ -1,5 +1,5 @@
 Title: What is homogenization? Part 5: introducing the representative volume element
-Date: 2021-04-10
+Date: 2021-05-09
 Category: Homogenization
 UseKaTeX: True
 
@@ -106,7 +106,7 @@ $$\frac{\tilde{A}\_x^\text{eff}}{k}=\frac{χ\bigl(χ+2\bigr)}{χ+1}.$$
 ## Apparent stiffness of a small system
 
 For small systems, the apparent stiffness can be computed analytically. More
-details can be found in XXX. We find, for a 1×1 system:
+details can be found in **TODO: add link to post**. We find, for a 1×1 system:
 
 $$\frac{\tilde{A}\_x^\text{app}}k=\frac{4χ\bigl(χ+1\bigr)}{2χ+1},$$
 
@@ -139,7 +139,7 @@ conclude about convergence. This means that we need to explore larger systems.
 
 For larger systems, it is no longer practical to establish closed-form
 expressions of the apparent stiffness. We must resort to numerical simulations,
-that are presented in a companion post XXXX.
+that are presented in a companion post **TODO: : add link to post**.
 
 The simulations are carried out for the set of parameters for which an isotropic
 effective behavior is expected, namely $χ\_x=χ\_y=2$ and $θ=π/4$. Then
@@ -177,8 +177,7 @@ al.*, 2003](https://doi.org/10.1016/S0020-7683(03)00143-4)).
 From the above definition, it should be clear that there is no such thing as
 **the** RVE. At best, it is possible to define **a** RVE, for a specific
 quantity of interest (in the present case, the homogenized stiffness) and a
-user-specified tolerance. This should always be kept in mind (but is in fact too
-often overlooked).
+user-specified tolerance.
 
 In the next instalment of this series, we will introduce a little bit of
 randomness.
