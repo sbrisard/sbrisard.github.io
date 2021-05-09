@@ -152,18 +152,19 @@ orthotropic plate that is loaded in its plane only, namely</p>
 <p>with</p>
 <p>$$A_x=k\operatorname{cotan}\theta\bigl(1+\cos2\theta+\chi_x\bigr),$$
 $$A_y=k\tan\theta\bigl(1-\cos2\theta+\chi_y\bigr),$$
-$$A_{xy}=\nu_{xy}\,A_y=\nu_{yx}\,A_x=k\sin2\theta.$$</p>
+$$\nu_{xy}\,A_y=\nu_{yx}\,A_x=k\sin2\theta,$$
+$$A_{xy}=2k\sin2\theta.$$</p>
 <p>The Poisson ratios can be expressed as follows
 $$\nu_{xy}=\frac{1+\cos2\theta}{1-\cos2\theta+\chi_y}
 \quad\text{and}\quad
 \nu_{yx}=\frac{1-\cos2\theta}{1+\cos2\theta+\chi_x}.$$</p>
 <p>It is interesting to find the conditions under which the above equivalent
 membrane is isotropic. We must have</p>
-<p>$$A=A_x=A_y,\quad\nu=\nu_{xy}=\nu_{yx}\quad\text{and}\quad A_{xy}=2\bigl(1-\nu\bigr)A,$$</p>
+<p>$$A=A_x=A_y,\quad\nu=\nu_{xy}=\nu_{yx}\quad\text{and}\quad A_{xy}=\bigl(1-\nu\bigr)A,$$</p>
 <p>where $\nu$ is the unique Poisson ratio and $A=Eh/(1-\nu^2)$ is the classical
-membrane stiffness. Since we have already observed that
-$A_{xy}=\nu_{xy}\,A_y=\nu_{yx}\,A_x$, the third identity leads to
-$\nu=1/3$. From the expressions of the Poisson ratios, we deduce that</p>
+membrane stiffness. Since $A_{xy}=2\nu_{xy}\,A_y=2\nu_{yx}\,A_x$, the third
+identity leads to $\nu=1/3$. From the expressions of the Poisson ratios, we
+deduce that</p>
 <p>$$\chi_x=2-4\cos2\theta\quad\text{and}\quad\chi_y=2+4\cos2\theta.$$</p>
 <p>Plugging into the expressions of $A_x$ and $A_y$, we find</p>
 <p>$$A=A_x=A_y=3k\sin2\theta.$$</p>
@@ -176,8 +177,8 @@ plane membrane, with membrane stiffness $A=3k$ and Poisson ratio $\nu=1/3$.</p>
 springs can be homogenized as a continuous plate loaded in its plane only. We
 saw the conditions on the geometry of the mesh and the stiffnesses of the
 springs for the homogenized plate to behave isotropically.</p>
-<p>In the next instalment of this series, we will discuss size effects in a
-deterministic setting.</p>
+<p>In the <a href="https://sbrisard.github.io/posts/20210509-what_is_homogenization-05.html">next instalment</a> of
+this series, we will discuss size effects in a deterministic setting.</p>
 <p><a id="appendix"></a></p>
 <h2>Appendix: derivation of the effective elastic energy</h2>
 <p>In this appendix, we derive the expression of the effective elastic energy of
