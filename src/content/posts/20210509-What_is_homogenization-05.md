@@ -107,7 +107,9 @@ $$\frac{\tilde{A}\_x^\text{eff}}{k}=\frac{χ\bigl(χ+2\bigr)}{χ+1}.$$
 ## Apparent stiffness of a small system
 
 For small systems, the apparent stiffness can be computed analytically. More
-details can be found in **TODO: add link to post**. We find, for a 1×1 system:
+details can be found in a companion post on the [symbolic analysis of a spring
+mesh]({filename}20210512-Symbolic_analysis_of_a_spring_mesh.md). We find, for a
+1×1 system:
 
 $$\frac{\tilde{A}\_x^\text{app}}k=\frac{4χ\bigl(χ+1\bigr)}{2χ+1},$$
 
