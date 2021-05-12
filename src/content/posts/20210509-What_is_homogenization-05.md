@@ -78,12 +78,13 @@ where $\vec n$ denotes the outer normal to $∂Ω$. In the present case, $\vec
 e\_x⋅\vec n=0$ on the top and bottom boundaries. On the left and right
 boundaries, the integrals are discretized as follows
 
-$$⟨ε\_{xx}⟩\simeq\frac1{\mathcal N\_x\mathcal N\_yΔxΔy}
-\sum\_{j=0}^{N\_y}w\_j\vec e\_x⋅\bigl(\vec u\_{N\_x,j}-\vec u\_{0, j}\bigr),$$
+$$⟨ε\_{xx}⟩\simeq\frac1{\mathcal N\_x\mathcal N\_yΔx}
+\sum\_{j=0}^{\mathcal N\_y}w\_j\vec e\_x
+⋅\bigl(\vec u\_{\mathcal N\_x,j}-\vec u\_{0, j}\bigr),$$
 
 where $\vec u\_{i,j}$ denotes the displacement of the $(i, j)$ node, located at
-$x=iΔx$, $y=jΔy$. In the above formula, the weights $w\_j$ are $w\_j=Δy$ for
-off-corner nodes and $w\_j=\frac12Δy$ for corner nodes.
+$x=iΔx$, $y=jΔy$. In the above formula, the weights $w\_j$ are $w\_j=1$ for
+off-corner nodes and $w\_j=\frac12$ for corner nodes.
 
 The average strain $⟨ε\_{xx}⟩$ being defined, we introduce the *apparent*
 uniaxial stiffness $\tilde{A}\_{x}^{\text{app}}=q/⟨ε\_{xx}⟩$ and check that

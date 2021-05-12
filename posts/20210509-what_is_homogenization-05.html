@@ -106,11 +106,12 @@ $\vec u$</p>
 <p>where $\vec n$ denotes the outer normal to $∂Ω$. In the present case, $\vec
 e_x⋅\vec n=0$ on the top and bottom boundaries. On the left and right
 boundaries, the integrals are discretized as follows</p>
-<p>$$⟨ε_{xx}⟩\simeq\frac1{\mathcal N_x\mathcal N_yΔxΔy}
-\sum_{j=0}^{N_y}w_j\vec e_x⋅\bigl(\vec u_{N_x,j}-\vec u_{0, j}\bigr),$$</p>
+<p>$$⟨ε_{xx}⟩\simeq\frac1{\mathcal N_x\mathcal N_yΔx}
+\sum_{j=0}^{\mathcal N_y}w_j\vec e_x
+⋅\bigl(\vec u_{\mathcal N_x,j}-\vec u_{0, j}\bigr),$$</p>
 <p>where $\vec u_{i,j}$ denotes the displacement of the $(i, j)$ node, located at
-$x=iΔx$, $y=jΔy$. In the above formula, the weights $w_j$ are $w_j=Δy$ for
-off-corner nodes and $w_j=\frac12Δy$ for corner nodes.</p>
+$x=iΔx$, $y=jΔy$. In the above formula, the weights $w_j$ are $w_j=1$ for
+off-corner nodes and $w_j=\frac12$ for corner nodes.</p>
 <p>The average strain $⟨ε_{xx}⟩$ being defined, we introduce the <em>apparent</em>
 uniaxial stiffness $\tilde{A}_{x}^{\text{app}}=q/⟨ε_{xx}⟩$ and check that
 $\tilde{A}_{x}^{\text{app}}→\tilde{A}_x^{\text{eff}}$ as the size of the
