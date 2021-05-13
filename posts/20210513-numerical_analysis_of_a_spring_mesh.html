@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - Numerical analysis of a spring mesh</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/katex/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"/>
+    <script defer src="https://sbrisard.github.io/theme/katex/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://sbrisard.github.io/theme/katex/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {macros: {'\\D': '\\mathrm{d}', '\\dbldot': '\\mathbin{\\mathord{:}}', '\\sym': '\\operatorname{\\mathbf{sym}}', '\\tgrad': '\\operatorname{\\mathbf{grad}}', '\\tens': '\\bm', '\\tr': '\\operatorname{tr}', '\\vec': '\\bm'}, delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20210513-numerical_analysis_of_a_spring_mesh.html" rel="bookmark"
+         title="Permalink to Numerical analysis of a spring mesh">Numerical analysis of a spring mesh</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2021-05-13T00:00:00+02:00">
+      Published 13 May 2021
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/homogenization.html">Homogenization</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>In this post, we compute numeric values of the apparent stiffness introduced in <a href="https://sbrisard.github.io/posts/20210509-what_is_homogenization-05.html">this post</a>. Our goal is to find the solution to the general problem depicted below.</p>
+<p><img alt="The problem considered here" class="fig60p100" src="https://sbrisard.github.io/posts/What_is_homogenization/uniaxial_tension.png"></p>
+<p>We use a numeric approach that is akin to the finite element method. More precisely, we minimize the total potential energy of the spring with respect to the nodal displacements.</p>
+<p>This time, we will use the <a href="https://julialang.org/">Julia programming language</a>.</p>
+<div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">DelimitedFiles</span>
+<span class="k">using</span> <span class="n">LinearAlgebra</span>
+<span class="k">using</span> <span class="n">Plots</span>
+<span class="k">using</span> <span class="n">Test</span>
+</pre></div>
+
+
+<p>We first define a function that returns the stiffness matrix ox a single spring, according to <a href="https://sbrisard.github.io/posts/20201125-on_the_stiffness_matrix_of_a_linear_spring.html">this post</a>.</p>
+<div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;spring_stiffness_matrix(k, nx, ny)</span>
+
+<span class="s">Return the stiffness matrix of the spring with stiffness `k` and direction `(nx, ny)`.</span>
+
+<span class="s">The direction must be a unit vector (`nx² + ny² == 1`).</span>
+
+<span class="s">The degrees of freedom of the spring are ordered as follows:</span>
+
+<span class="s">1. horizontal displacement of node 1,</span>
+<span class="s">2. vertical displacement of node 1,</span>
+<span class="s">3. horizontal displacement of node 2,</span>
+<span class="s">4. vertical displacement of node 2.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">spring_stiffness_matrix</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+    <span class="n">kxx</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">nx</span> <span class="o">*</span> <span class="n">nx</span>
+    <span class="n">kyy</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">ny</span> <span class="o">*</span> <span class="n">ny</span>
+    <span class="n">kxy</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">nx</span> <span class="o">*</span> <span class="n">ny</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">kxx</span> <span class="n">kxy</span> <span class="o">-</span><span class="n">kxx</span> <span class="o">-</span><span class="n">kxy</span><span class="p">;</span>
+        <span class="n">kxy</span> <span class="n">kyy</span> <span class="o">-</span><span class="n">kxy</span> <span class="o">-</span><span class="n">kyy</span><span class="p">;</span>
+        <span class="o">-</span><span class="n">kxx</span> <span class="o">-</span><span class="n">kxy</span> <span class="n">kxx</span> <span class="n">kxy</span><span class="p">;</span>
+        <span class="o">-</span><span class="n">kxy</span> <span class="o">-</span><span class="n">kyy</span> <span class="n">kxy</span> <span class="n">kyy</span><span class="p">]</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>spring_stiffness_matrix
+</pre></div>
+
+
+<p>We then define a structure that holds the description of the mesh. See <a href="https://sbrisard.github.io/posts/20210509-what_is_homogenization-05.html">this post</a> for a description of the various symbols. Note that for the sake of simplicity, it is assumed that the number of cells is identical in both directions.</p>
+<div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">SpringMesh</span>
+    <span class="n">χx</span><span class="o">::</span><span class="kt">Float64</span>
+    <span class="n">χy</span><span class="o">::</span><span class="kt">Float64</span>
+    <span class="n">θ</span><span class="o">::</span><span class="kt">Float64</span>
+    <span class="n">ncells</span><span class="o">::</span><span class="kt">Int</span>
+    <span class="n">ndofs</span><span class="o">::</span><span class="kt">Int</span>
+    <span class="n">SpringMesh</span><span class="p">(</span><span class="n">χx</span><span class="p">,</span> <span class="n">χy</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">ncells</span><span class="p">)</span> <span class="o">=</span> <span class="n">new</span><span class="p">(</span><span class="n">χx</span><span class="p">,</span> <span class="n">χy</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">ncells</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">ncells</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>We define a function that computes the linear index of the node located at <code>(i⋅Δx, j⋅Δy)</code>. It would probably have been better to use <a href="https://julialang.org/blog/2016/02/iteration/">CartesianIndices</a> for this purpose.</p>
+<div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;node_at(i, j, mesh)</span>
+
+<span class="s">Return the linear indnex of the node located at `(i, j)` in the mesh.</span>
+
+<span class="s">Note that `i` and `j` are zero-based, while the returned index in one-based.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">node_at</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>node_at
+</pre></div>
+
+
+<p>To assemble the global stiffness matrix, we add block-wise the element stiffness matrix of each spring.</p>
+<div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">add_spring_stiffness_matrix!(K, i1, j1, i2, j2, mesh, Ke)</span>
+
+<span class="s">Add to the global stiffness matrix `K` the element stiffness matrix `Ke`.</span>
+
+<span class="s">The spring connects nodes `(i1, j1)` and `(i2, j2)` (0-based indices).</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">add_spring_stiffness_matrix!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">i1</span><span class="p">,</span> <span class="n">j1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">Ke</span><span class="p">)</span>
+    <span class="n">n1</span> <span class="o">=</span> <span class="n">node_at</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">j1</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="n">node_at</span><span class="p">(</span><span class="n">i2</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="n">n1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="n">n1</span><span class="p">,</span> <span class="mi">2</span><span class="n">n2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="n">n2</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="mi">4</span>
+            <span class="n">K</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">index</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">+=</span> <span class="n">Ke</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>add_spring_stiffness_matrix!
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;Return the stiffness matrix&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">global_stiffness_matrix</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">ndofs</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ndofs</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">θ</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">θ</span><span class="p">)</span>
+    <span class="n">K_h</span> <span class="o">=</span> <span class="n">spring_stiffness_matrix</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">χx</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+    <span class="n">K_v</span> <span class="o">=</span> <span class="n">spring_stiffness_matrix</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">χy</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+    <span class="n">K_d1</span> <span class="o">=</span> <span class="n">spring_stiffness_matrix</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">K_d2</span> <span class="o">=</span> <span class="n">spring_stiffness_matrix</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">:</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">:</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span>
+                <span class="n">add_spring_stiffness_matrix!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">K_h</span><span class="p">)</span>
+            <span class="k">end</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span>
+                <span class="n">add_spring_stiffness_matrix!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">K_v</span><span class="p">)</span>
+            <span class="k">end</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">)</span>
+                <span class="n">add_spring_stiffness_matrix!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">K_d1</span><span class="p">)</span>
+                <span class="n">add_spring_stiffness_matrix!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">K_d2</span><span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">K</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>global_stiffness_matrix
+</pre></div>
+
+
+<p>The forces are applied only on the left and right boundaries. Assembly of the vector of nodal forces is done below.</p>
+<div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;nodal_forces(mesh)</span>
+
+<span class="s">Return the vector of nodal forces.</span>
+
+<span class="s">The total force applied on each side is 1.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">nodal_forces</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">ndofs</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span>
+    <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">F</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">node_at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">f</span>
+        <span class="n">F</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">node_at</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
+    <span class="k">end</span>
+    <span class="n">F</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">node_at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">f</span>
+    <span class="n">F</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">node_at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">f</span>
+    <span class="n">F</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">node_at</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">f</span>
+    <span class="n">F</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">node_at</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">f</span>
+    <span class="k">return</span> <span class="n">F</span>        
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>nodal_forces
+</pre></div>
+
+
+<p>We need to account for the boundary conditions that will prevent rigid body motion. We first define a general function that modifies the linear system to account for a <em>fixed</em> dof.</p>
+<div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;apply_bc!(K, F, fixed_dof, mesh)</span>
+
+<span class="s">Modify the stiffness matrix and vector of nodal forces to account for a fixed dof.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">apply_bc!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">fixed_dof</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">dof</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">mesh</span><span class="o">.</span><span class="n">ndofs</span>
+        <span class="n">K</span><span class="p">[</span><span class="n">fixed_dof</span><span class="p">,</span> <span class="n">dof</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">K</span><span class="p">[</span><span class="n">dof</span><span class="p">,</span> <span class="n">fixed_dof</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">end</span>
+    <span class="n">K</span><span class="p">[</span><span class="n">fixed_dof</span><span class="p">,</span> <span class="n">fixed_dof</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">F</span><span class="p">[</span><span class="n">fixed_dof</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>apply_bc!
+</pre></div>
+
+
+<p>The above function is then used to pin the lower-left corner and prevent vertical displacements of the lower-right corner as well as horizontal displacements of the upper-left corner.</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">apply_bcs!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="n">n0</span> <span class="o">=</span> <span class="n">node_at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="n">apply_bc!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mi">2</span><span class="n">n0</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="n">apply_bc!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mi">2</span><span class="n">n0</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+
+    <span class="n">n1</span> <span class="o">=</span> <span class="n">node_at</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="n">apply_bc!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mi">2</span><span class="n">n1</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+
+    <span class="n">n2</span> <span class="o">=</span> <span class="n">node_at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="n">apply_bc!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mi">2</span><span class="n">n2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>apply_bcs! (generic function with 1 method)
+</pre></div>
+
+
+<p>Finally, the apparent stiffness is computed according to <a href="https://sbrisard.github.io/posts/20210509-what_is_homogenization-05.html">this post</a>.</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">apparent_stiffness</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">global_stiffness_matrix</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">nodal_forces</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+    <span class="n">apply_bcs!</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">K</span><span class="o">\</span><span class="n">F</span>
+    <span class="n">elongation</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">:</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">node_at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">node_at</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span><span class="p">)</span> <span class="o">?</span> <span class="mf">0.5</span> <span class="o">:</span> <span class="mf">1.0</span>
+        <span class="n">elongation</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">right</span><span class="p">]</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="n">left</span><span class="p">])</span>
+    <span class="k">end</span>
+    <span class="n">elongation</span> <span class="o">/=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">ncells</span>
+    <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">elongation</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>apparent_stiffness (generic function with 1 method)
+</pre></div>
+
+
+<p>We use the symbolic expressions derived in <a href="https://sbrisard.github.io/posts/20210512-symbolic_analysis_of_a_spring_mesh.html">this post</a> to test our implementation.</p>
+<div class="highlight"><pre><span></span><span class="n">actual_stiffness</span><span class="p">(</span><span class="n">χ</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">apparent_stiffness</span><span class="p">(</span><span class="n">SpringMesh</span><span class="p">(</span><span class="n">χ</span><span class="p">,</span> <span class="n">χ</span><span class="p">,</span> <span class="nb">π</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+<span class="n">effective_stiffness</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span> <span class="o">=</span> <span class="n">χ</span><span class="o">*</span><span class="p">(</span><span class="n">χ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">χ</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">expected_stiffness_1x1</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span><span class="n">χ</span><span class="o">*</span><span class="p">(</span><span class="n">χ</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="n">χ</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">expected_stiffness_2x2</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span> <span class="o">=</span> <span class="mi">8</span><span class="n">χ</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">χ</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">χ</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="n">χ</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="n">χ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">expected_stiffness_3x3</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span> <span class="o">=</span> <span class="mi">144</span><span class="n">χ</span><span class="o">*</span><span class="p">(</span><span class="n">χ</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">χ</span><span class="o">^</span><span class="mi">4</span><span class="o">+</span><span class="mi">24</span><span class="n">χ</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="mi">41</span><span class="n">χ</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="mi">24</span><span class="n">χ</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">480</span><span class="n">χ</span><span class="o">^</span><span class="mi">5</span><span class="o">+</span><span class="mi">2888</span><span class="n">χ</span><span class="o">^</span><span class="mi">4</span><span class="o">+</span><span class="mi">5616</span><span class="n">χ</span><span class="o">^</span><span class="mi">3</span><span class="o">+</span><span class="mi">4771</span><span class="n">χ</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="mi">1800</span><span class="n">χ</span><span class="o">+</span><span class="mi">236</span><span class="p">)</span>
+
+<span class="nd">@testset</span> <span class="s">&quot;Apparent stiffness&quot;</span> <span class="k">begin</span>
+    <span class="n">χ</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">.^</span> <span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+
+    <span class="nd">@test</span> <span class="n">actual_stiffness</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">≈</span> <span class="n">expected_stiffness_1x1</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span>
+    <span class="nd">@test</span> <span class="n">actual_stiffness</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="n">≈</span> <span class="n">expected_stiffness_2x2</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span>
+    <span class="nd">@test</span> <span class="n">actual_stiffness</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="n">≈</span> <span class="n">expected_stiffness_3x3</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>[37m[1mTest Summary:      | [22m[39m[32m[1mPass  [22m[39m[36m[1mTotal[22m[39m
+Apparent stiffness | [32m   3  [39m[36m    3[39m
+</pre></div>
+
+
+<p>We then are ready to produce the figures that were used in <a href="https://sbrisard.github.io/posts/20210509-what_is_homogenization-05.html">this post</a>.</p>
+<div class="highlight"><pre><span></span><span class="n">χ</span> <span class="o">=</span> <span class="mf">2.</span>
+<span class="n">χx</span> <span class="o">=</span> <span class="n">χ</span>
+<span class="n">χy</span> <span class="o">=</span> <span class="n">χ</span>
+<span class="n">θ</span> <span class="o">=</span> <span class="nb">π</span> <span class="o">/</span> <span class="mf">4.</span>
+<span class="n">npoints</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">ncells</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">.&lt;&lt;</span> <span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="p">(</span><span class="n">npoints</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">A_app</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">npoints</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">npoints</span>
+    <span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$</span><span class="p">(</span><span class="n">ncells</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="s">, &quot;</span><span class="p">)</span>
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">SpringMesh</span><span class="p">(</span><span class="n">χx</span><span class="p">,</span> <span class="n">χy</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">ncells</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">A_app</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">apparent_stiffness</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">A_app</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>1, 4.8
+2, 3.4285714285714284
+4, 3.0300228871509
+8, 2.8619379280855037
+16, 2.7748131542266377
+32, 2.72562591606945
+64, 2.698019760598084
+128, 2.6829903494073495
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">Ax</span> <span class="o">=</span> <span class="n">cot</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="n">θ</span><span class="p">)</span><span class="o">+</span><span class="n">χx</span><span class="p">)</span>
+<span class="n">Ay</span> <span class="o">=</span> <span class="n">tan</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="n">θ</span><span class="p">)</span><span class="o">+</span><span class="n">χy</span><span class="p">)</span>
+<span class="n">Axy</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="n">θ</span><span class="p">)</span>
+
+<span class="n">A_eff</span> <span class="o">=</span> <span class="n">Ax</span> <span class="o">-</span> <span class="n">Axy</span><span class="o">^</span><span class="mi">2</span> <span class="o">/</span> <span class="n">Ay</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>2.6666666666666674
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">err</span> <span class="o">=</span> <span class="p">(</span><span class="n">A_app</span><span class="p">[</span><span class="o">:</span><span class="p">]</span> <span class="o">.-</span> <span class="n">A_eff</span><span class="p">)</span> <span class="o">/</span> <span class="n">A_eff</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">ncells</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="n">err</span><span class="p">,</span> 
+     <span class="n">axis</span><span class="o">=:</span><span class="n">log</span><span class="p">,</span>
+     <span class="n">marker</span><span class="o">=:</span><span class="n">circle</span><span class="p">,</span> 
+     <span class="n">label</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> 
+     <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Number of cells&quot;</span><span class="p">,</span> 
+     <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;Relative error [%]&quot;</span><span class="p">,</span> 
+     <span class="n">title</span><span class="o">=</span><span class="s">&quot;Relative error on effective stiffness&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">basename</span> <span class="o">=</span> <span class="s">&quot;apparent_stiffness_vs_number_of_cells&quot;</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">basename</span> <span class="o">*</span> <span class="s">&quot;.png&quot;</span><span class="p">)</span>
+<span class="c"># savefig(basename * &quot;.pdf&quot;)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">open</span><span class="p">(</span><span class="n">basename</span> <span class="o">*</span> <span class="s">&quot;.csv&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="n">io</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s">&quot;# Apparent, uniaxial stiffness vs. number of cells</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s">&quot;# chi_x = </span><span class="si">$χx</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s">&quot;# chi_y = </span><span class="si">$χy</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s">&quot;# theta = </span><span class="si">$θ</span><span class="s"> rad</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="n">writedlm</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="p">[</span><span class="n">ncells</span> <span class="n">A_app</span><span class="p">],</span> <span class="s">&quot;,&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">χ</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">.^</span> <span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>
+<span class="n">eff</span> <span class="o">=</span> <span class="n">effective_stiffness</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">χ</span><span class="p">,</span> <span class="p">(</span><span class="n">expected_stiffness_1x1</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span><span class="o">.-</span><span class="n">eff</span><span class="p">)</span><span class="o">./</span><span class="n">eff</span><span class="p">,</span> 
+     <span class="n">label</span><span class="o">=</span><span class="s">&quot;1×1&quot;</span><span class="p">,</span> 
+     <span class="n">xaxis</span><span class="o">=:</span><span class="n">log</span><span class="p">,</span>
+     <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Stiffness ratio, χ&quot;</span><span class="p">,</span>
+     <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;Relative error&quot;</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">χ</span><span class="p">,</span> <span class="p">(</span><span class="n">expected_stiffness_2x2</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span><span class="o">.-</span><span class="n">eff</span><span class="p">)</span><span class="o">./</span><span class="n">eff</span><span class="p">,</span> 
+    <span class="n">label</span><span class="o">=</span><span class="s">&quot;2×2&quot;</span><span class="p">,</span>
+    <span class="n">xaxis</span><span class="o">=:</span><span class="n">log</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">χ</span><span class="p">,</span> <span class="p">(</span><span class="n">expected_stiffness_3x3</span><span class="o">.</span><span class="p">(</span><span class="n">χ</span><span class="p">)</span><span class="o">.-</span><span class="n">eff</span><span class="p">)</span><span class="o">./</span><span class="n">eff</span><span class="p">,</span> 
+    <span class="n">label</span><span class="o">=</span><span class="s">&quot;3×3&quot;</span><span class="p">,</span> 
+    <span class="n">xaxis</span><span class="o">=:</span><span class="n">log</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">basename</span> <span class="o">=</span> <span class="s">&quot;apparent_stiffness_vs_chi&quot;</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">basename</span> <span class="o">*</span> <span class="s">&quot;.png&quot;</span><span class="p">)</span>
+<span class="c"># savefig(basename * &quot;.pdf&quot;)</span>
+</pre></div>
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] univ [dash] eiffel [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>
