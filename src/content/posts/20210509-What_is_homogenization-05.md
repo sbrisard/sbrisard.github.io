@@ -142,7 +142,8 @@ conclude about convergence. This means that we need to explore larger systems.
 
 For larger systems, it is no longer practical to establish closed-form
 expressions of the apparent stiffness. We must resort to numerical simulations,
-that are presented in a companion post **TODO: : add link to post**.
+that are presented in a 
+[companion post]({filename}20210513-Numerical_analysis_of_a_spring_mesh.md).
 
 The simulations are carried out for the set of parameters for which an isotropic
 effective behavior is expected, namely $χ\_x=χ\_y=2$ and $θ=π/4$. Then
