@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Sébastien Brisard's blog - New Year Resolutions!</title>
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://sbrisard.github.io/theme/katex/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"/>
+    <script defer src="https://sbrisard.github.io/theme/katex/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://sbrisard.github.io/theme/katex/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {macros: {'\\D': '\\mathrm{d}', '\\dbldot': '\\mathbin{\\mathord{:}}', '\\sym': '\\operatorname{\\mathbf{sym}}', '\\tgrad': '\\operatorname{\\mathbf{grad}}', '\\tens': '\\bm', '\\tr': '\\operatorname{tr}', '\\vec': '\\bm'}, delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
+
+
+
+
+
+  </head>
+
+  <body id="index" class="home">
+    <header id="siteheader">
+      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
+      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
+      <nav id="sitemenu">
+	<ul>
+          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
+          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
+          <li><a href="/archives.html" title="Archives">Archives</a></li>
+          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
+          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
+          <li><a href="feed.xml" title="RSS">RSS</a></li>
+	</ul>
+      </nav>
+    </header>
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">
+      <a href="https://sbrisard.github.io/posts/20230122-new_year_resolutions.html" rel="bookmark"
+         title="Permalink to New Year Resolutions!">New Year Resolutions!</a></h1>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2023-01-22T00:00:00+01:00">
+      Published 22 January 2023
+    </time>
+    <address class="vcard author">
+      by           <a class="url fn" href="https://sbrisard.github.io/author/sebastien-brisard.html">Sébastien Brisard</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://sbrisard.github.io/category/misc.html">Misc.</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>So it is again this time of year where you make a few pledges that you soon
+forget about. I am no exception to this rule, and formed three New Year
+Resolutions to date.</p>
+<h1>New Year Resolution #1: make more of my work public</h1>
+<p>This blog is of course a very nice medium to publicize some of my work. It has
+lately been, erhhh, dormant… to say the least! That does not mean that I've been
+idle, but I am currently working on larger projects, that are more akin to open
+books. There are three of them.</p>
+<p>The first open book I am working on is <a href="https://github.com/sbrisard/LS-intro">An introduction to Lippmann–Schwinger
+solvers</a>, that discusses the so-called
+“FFT-based numerical solvers for homogenization” first introduced by Moulinec
+and Suquet (1994, <a href="https://doi.org/10.1016/S0045-7825(97)00218-1">1998</a>). I
+started to write these notes in September 2021 as a LaTeX document. They are
+meant to deliver the theoretical background that using my own implementation of
+these solvers requires (see <a href="https://github.com/sbrisard/Scapin.jl">Scapin.jl</a> –
+still work in progress!).</p>
+<p>In march 2022, my colleagues <a href="https://www.researchgate.net/profile/Matti-Schneider">Matti
+Schneider</a>, <a href="https://www.researchgate.net/profile/Francois-Willot">François
+Willot</a> and I organized a
+week-long workshop on this topic: <a href="https://fft-workshop-22.sciencesconf.org/">Introduction to FFT-based numerical methods
+for the homogenization of random
+materials</a>. The
+<a href="https://hal-enpc.archives-ouvertes.fr/hal-03631887">slides</a> and videos are
+available on HAL. I was quite happy with some pedagogical choices I made for
+this workshop and will start from this notes to update my open book.</p>
+<p>I am working very actively on the second open book, <a href="https://sbrisard.github.io/LSK">Notes on the
+Lyapunov–Schmidt–Koiter asymptotic method</a>. I
+have always been intrigued by Koiter's work but never took the time to dig into
+it. In october 2021, as a side project, I decided I would regularly devote some
+time to deeply understanding this framework. This turned out to be an extremely
+enjoyable journey, but also a painful one at times. More than one year later, I
+have started to develop my own understanding of the LSK framework. Although
+there are some points that are still unclear to me, I thought I would share
+these notes.</p>
+<p>Finally, I started work on my <em>Lecture notes on the plates and shells theory</em> in
+august 2017. I have since been working on it actively, although not
+publicly. This is a very demanding work (1750h so far!) and you will have to be
+patient, as I will release no preview until I am happy with the whole thing.</p>
+<p>Note that since the beginning of this year, I have started to use a great
+publishing tool called <a href="https://quarto.org/">Quarto</a>. It's really well thought,
+powerful and easy to use. I intend to convert all my open books to the Quarto
+format.</p>
+<h1>New Year Resolution #2: publish in overlay journals…</h1>
+<p>…at least when students (or other collaborators that might be negatively
+affected by such a choice) are not involved.</p>
+<p>The <em>Journal of Theoretical, Computational and Applied Mechanics</em> is a rather
+new overlay journal (first papers published in 2021). The whole thing is very
+nicely done: the review process is public, the template is good-looking, and the
+“JTCAM LaTeX template for preprints” and related “Instructions for Paper
+Submission” are a model of useful information very nicely put together.</p>
+<p>With my colleagues <a href="https://www.researchgate.net/profile/Kais-Ammar">Kaïs Ammar</a>
+and <a href="https://www.researchgate.net/profile/Samuel-Forest">Samuel Forest</a>, we
+intend to soon submit a paper to this journal. I can't wait!</p>
+<h1>New Year Resolution #3: revive this blog!</h1>
+<p>This one will be difficult to keep. In fact, I was recently contacted by Antonio
+Rodriguez-Ferran (UPC-BarcelonaTech), who kindly sent these words</p>
+<blockquote>
+<p>I found your blog in a google search for “bulk modulus in two
+dimensions”. Your three-part post on “Elastic constants of an isotropic
+material” was extremely helpful: it contains the level of detail I was looking
+for, and it is remarkably clear. Thanks a lot for making this nice material
+available to the community!</p>
+</blockquote>
+<p>Antonio also mentioned a couple of typos, which I am grateful for!</p>
+<p>Anyway, I took this message as an encouragement to write more. I was actually
+quite happy with my last (unfinished) series on “What is Homogenization?” and
+should probably pick it up where I left it a year and a half ago.</p>
+<p>Note that I would also like to change this blog into a proper website, were my
+various series would be gathered into proper pages (rather than span multiple
+posts). That would probably make them easier to discover. The <em>blog</em> section
+would be devoted to more informal news (like this post).</p>
+<p>Revamping this blog however represents a decent amount of work and I am not sure
+I can really find the time for that. Also, I would be reluctant to break
+previously existing links to my posts, since some of them are apparently already
+indexed by Google (with no permalink, unfortunately). If I decide to take on
+this challenge, I will of course use this great <a href="https://quarto.org/">Quarto</a>
+tool I already mentioned.</p>
+<h1>Closing words</h1>
+<p>Jacques Chirac once said “les promesses n'engagent que ceux qui les reçoivent”…
+I am sure that even if you do not speak french, you get the spirit!</p>
+<!-- Local Variables: -->
+<!-- mode: markdown -->
+<!-- fill-column: 80 -->
+<!-- End: -->
+  </div><!-- /.entry-content -->
+</section>
+<section>
+  <h2>Comments</h2>
+  <p>Please send your comments to <strong><code>sebastien [dot]
+  brisard [at] univ [dash] eiffel [dot] fr</code></strong>. Your comments will be
+  inserted below. Your email address will <em>not</em> appear.</p>
+</section>
+    <footer id="contentinfo" class="body">
+      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
+    </footer>
+  </body>
+</html>
