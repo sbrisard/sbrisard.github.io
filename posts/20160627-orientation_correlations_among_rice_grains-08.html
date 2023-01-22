@@ -85,10 +85,10 @@ and $S_1=1$.</p>
 instalment</a>
 of this series, we have computed the orientation (unit vector) of each grain. We
 first retrieve this data.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">h5py</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">matplotlib.figure</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy.ndimage</span>
 <span class="kn">import</span> <span class="nn">scipy.spatial</span>
 
@@ -97,8 +97,7 @@ first retrieve this data.</p>
 <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;center_of_mass&#39;</span><span class="p">])</span>
     <span class="n">orientation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;orientation&#39;</span><span class="p">])</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Now, <code>center[i, :]</code> denotes the coordinates of the center of grain <code>i</code>, while
 <code>orientation[i, :]</code> denotes the orientation of grain <code>i</code>. In what follows, we
@@ -106,15 +105,13 @@ will compute $S_1$, taking the vertical as reference direction. At this point,
 it should be recalled that the $z$ coordinate (along the vertical) is the first
 index in the 3D image (slice number).  Therefore, $\cos\theta_i$ is given by
 <code>orientation[i, 0]</code> in this context.</p>
-<div class="highlight"><pre><span></span><span class="n">cos_theta</span> <span class="o">=</span> <span class="n">orientation</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">cos_theta</span> <span class="o">=</span> <span class="n">orientation</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">p2_cos_theta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">cos_theta</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;S1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p2_cos_theta</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;S1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p2_cos_theta</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>S1 = -0.09376398099836955
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>S1 = -0.09376398099836955
+</code></pre></div>
 
 <p>It is observed that $S_1$ is non-zero, which indicates a slight
 anisotropy. $S_1$ is a one-point descriptor of the microsctructure. In other
@@ -147,19 +144,17 @@ $r_1\leq r\leq r_2$</p>
 Python (using <code>numpy</code> and <code>scipy</code>). We first compute the distance matrix, and
 round it to the nearest integer, which then defines <code>labels[i, j]</code> (to be passed
 to <code>scipy.ndimage.mean</code>).</p>
-<div class="highlight"><pre><span></span><span class="n">distance</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">spatial</span><span class="o">.</span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">distance</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">spatial</span><span class="o">.</span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We then compute, for each pair <code>(i, j)</code>, the cosine <code>cos_theta[i, j]</code> of the
 angle between particles <code>i</code> and <code>j</code>. We also evaluate the second Legendre
 polynomial $P_2$ for each value of $\cos\theta$</p>
 <p>$$P_2(x)=(3x^2-1)/2.$$</p>
-<div class="highlight"><pre><span></span><span class="n">cos_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">orientation</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="n">orientation</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">cos_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">orientation</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="n">orientation</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">p2_cos_theta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">cos_theta</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Now comes the tricky part: the double sum over <em>all</em> grains $i$, and only grains
 $j$ belonging to $\mathcal C_i(r, r+\Delta r)$ (where $\Delta
@@ -174,46 +169,40 @@ function that was used in the <a href="https://sbrisard.github.io/posts/20160219
 instalment</a>
 of this series). In the following snippet, we apply this function to each row of
 <code>p2_cos_theta</code> in turn (I could not find a way to get rid of this loop!).</p>
-<div class="highlight"><pre><span></span><span class="n">num_grains</span> <span class="o">=</span> <span class="n">center</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">num_grains</span> <span class="o">=</span> <span class="n">center</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
 <span class="n">inner_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">num_grains</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)),</span>
                      <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_grains</span><span class="p">):</span>
     <span class="n">inner_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">p2_cos_theta</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">r</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>/usr/lib/python3/dist-packages/scipy/ndimage/measurements.py:639: RuntimeWarning: invalid value encountered in true_divide
+<div class="highlight"><pre><span></span><code>/usr/lib/python3/dist-packages/scipy/ndimage/measurements.py:639: RuntimeWarning: invalid value encountered in true_divide
   return sum / numpy.asanyarray(count).astype(numpy.float)
-</pre></div>
-
+</code></pre></div>
 
 <p>Then, the outer sum in Eq. <a href="#eq02">(2)</a> is a simple mean (ignoring NaNs).</p>
-<div class="highlight"><pre><span></span><span class="n">S2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">inner_sum</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">S2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">inner_sum</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
 
 <p>The resulting correlation function is plotted on <a href="#fig01">Fig. 1</a>.</p>
-<div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r\;[\mathrm{pix}]$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r\;[\mathrm</span><span class="si">{pix}</span><span class="s1">]$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$S_2(r)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">S2</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;S2.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;S2.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
+<div class="highlight"><pre><span></span><code>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
   warnings.warn(&quot;tight_layout : falling back to Agg renderer&quot;)
-</pre></div>
-
+</code></pre></div>
 
 <p><a name="fig01"></a>
 <img alt="Plot of S2" class="figure" src="https://sbrisard.github.io/posts/20160627-Orientation_correlations_among_rice_grains-08/S2.png"></p>
 <figcaption>Figure&nbsp;1:&nbsp;The orientational correlation function $S_2(r)$.</figcaption>
-
 <p>For small values of $r$, the curve is not relevant, since very little grains are
 close enough (remember that rice grains are non-overlapping
 particles!). Similarly, the increase at large values of the center-to-center
@@ -235,58 +224,53 @@ this preferred orientation.</p>
 corresponding normal vector. We first recall the location of the axis of the
 container, and its radius (see <a href="https://sbrisard.github.io/posts/20150529-orientation_correlations_among_rice_grains-04.html">this
 post</a>).</p>
-<div class="highlight"><pre><span></span><span class="n">x_center</span> <span class="o">=</span> <span class="mi">219</span>
+<div class="highlight"><pre><span></span><code><span class="n">x_center</span> <span class="o">=</span> <span class="mi">219</span>
 <span class="n">y_center</span> <span class="o">=</span> <span class="mi">217</span>
 <span class="n">radius</span> <span class="o">=</span> <span class="mi">208</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We then compute the radius-vector (we discard the $z$-coordinate, which
 is the first index), from which we deduce the normal to the boundary,
 $\vec e_r$.</p>
-<div class="highlight"><pre><span></span><span class="n">radius_vector</span> <span class="o">=</span> <span class="n">center</span><span class="o">-</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_center</span><span class="p">,</span> <span class="n">y_center</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">radius_vector</span> <span class="o">=</span> <span class="n">center</span><span class="o">-</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_center</span><span class="p">,</span> <span class="n">y_center</span><span class="p">]</span>
 <span class="c1"># Discard first (z) coordinate!</span>
 <span class="n">distance_to_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">radius_vector</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">distance_to_boundary</span> <span class="o">=</span> <span class="n">radius</span><span class="o">-</span><span class="n">distance_to_axis</span>
-<span class="n">e_r</span> <span class="o">=</span> <span class="n">radius_vector</span><span class="o">/</span><span class="n">distance_to_axis</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span>
+<span class="n">e_r</span> <span class="o">=</span> <span class="n">radius_vector</span><span class="o">/</span><span class="n">distance_to_axis</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
 <span class="n">e_r</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We now compute the orthoradial vector $\vec e_\theta$,</p>
-<div class="highlight"><pre><span></span><span class="n">e_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">e_r</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">e_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">e_r</span><span class="p">)</span>
 <span class="n">e_theta</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">e_r</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">e_theta</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_r</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>For each grain, the direction $\vec n_i$ is decomposed in the local basis $(\vec
 e_r, \vec e_\theta, \vec e_z)$.</p>
-<div class="highlight"><pre><span></span><span class="n">orientation_local</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">orientation_local</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span>
 <span class="n">orientation_local</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e_r</span><span class="o">*</span><span class="n">orientation</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">orientation_local</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e_theta</span><span class="o">*</span><span class="n">orientation</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">orientation_local</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">orientation</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We then compute the matrix representation of the tensor
 $\vec n_i\otimes\vec n_i$ in the local basis.</p>
-<div class="highlight"><pre><span></span><span class="n">nxn</span> <span class="o">=</span> <span class="n">orientation_local</span><span class="p">[:,</span> <span class="p">:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="n">orientation_local</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
+<div class="highlight"><pre><span></span><code><span class="n">nxn</span> <span class="o">=</span> <span class="n">orientation_local</span><span class="p">[:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">orientation_local</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">distance_to_boundary</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="mi">4</span>
 <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
 <span class="n">nxn_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">nxn</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="n">labels</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
                       <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The resulting statistical descriptors are plotted in <a href="#fig02">Fig. 2</a>. Honestly,
 the results are not very conclusive. Both $\langle n_r\otimes n_r\rangle$ and
 $\langle n_\theta\otimes n_\theta\rangle$ seem to decrease rapidly over a
 distance of (roughly) 30 voxels. However, they both converge to a value which is
 non-zero.</p>
-<div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r\;[\mathrm{vox}]$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r\;[\mathrm</span><span class="si">{vox}</span><span class="s1">]$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\langle n_i\otimes n_i\rangle$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 
@@ -299,19 +283,16 @@ non-zero.</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;boundary_effects.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;boundary_effects.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
+<div class="highlight"><pre><span></span><code>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
   warnings.warn(&quot;tight_layout : falling back to Agg renderer&quot;)
-</pre></div>
-
+</code></pre></div>
 
 <p><a name="fig02"></a>
 <img alt="Boundary effects" class="figure" src="https://sbrisard.github.io/posts/20160627-Orientation_correlations_among_rice_grains-08/boundary_effects.png"></p>
 <figcaption>Figure&nbsp;2:&nbsp;Angular correlations with the orientation of the wall.</figcaption>
-
 <h2>Conclusion</h2>
 <p>This was the last post of this series on <em>Orientation correlations among rice
 grains</em>. This post was dedicated to the <em>quantification</em> of orientation

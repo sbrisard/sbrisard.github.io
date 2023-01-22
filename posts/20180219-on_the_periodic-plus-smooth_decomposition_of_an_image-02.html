@@ -151,7 +151,7 @@ appears exactly twice. In other words,</p>
 <h2>Python implementation</h2>
 <p>Implementation of the total energy $E(p, s)=E_\mathrm p(p)+E_\mathrm s(s)$ is
 fairly trivial (note the use of the <code>broadcast_arrays</code> function).</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ssd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">ssd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Sum of squared differences.&quot;&quot;&quot;</span>
     <span class="n">delta2</span> <span class="o">=</span> <span class="n">b</span><span class="o">-</span><span class="n">a</span>
     <span class="n">delta2</span> <span class="o">*=</span> <span class="n">delta2</span>
@@ -189,8 +189,7 @@ fairly trivial (note the use of the <code>broadcast_arrays</code> function).</p>
               <span class="n">ssd</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span> <span class="o">+</span>
               <span class="n">ssd</span><span class="p">(</span><span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:])</span> <span class="o">+</span>
               <span class="n">ssd</span><span class="p">(</span><span class="n">s</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]))</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2>An equivalent, unconstrained minimization problem</h2>
 <p>The periodic-plus-smooth decomposition $(p, s)$ of an image $u$ is defined as
@@ -217,9 +216,7 @@ total energy in the real space, using standard iterative techniques. This will
 allow us to generate reference decompositions that will eventually be used to
 set up unit tests in order to check our implementation of Moisan's method.</p>
 <!-- Local Variables: -->
-
 <!-- fill-column: 80 -->
-
 <!-- End: -->
   </div><!-- /.entry-content -->
 </section>

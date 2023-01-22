@@ -103,12 +103,12 @@ will then perform rudimentary analysis of these morphological parameters.</p>
 <a href="#direct_computation">very naive approach</a> and present a nearly <a href="#using_sum">loop-free
 approach</a> using the clever <code>scipy.ndimage.sum</code> function. We start
 with loading the segmented images.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os.path</span>
 
 <span class="kn">import</span> <span class="nn">h5py</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">matplotlib.figure</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy.ndimage</span>
 
 <span class="c1">#plt.style.use(&#39;../include/zenburn-light.mplstyle&#39;)</span>
@@ -121,8 +121,7 @@ with loading the segmented images.</p>
 <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
 <span class="c1"># Discard index 0, which is the background</span>
 <span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><a name="morphological_description"></a></p>
 <h2>Morphological description of the grains</h2>
@@ -134,79 +133,67 @@ illustrated on one grain only (namely grain
 <a href="https://en.wikipedia.org/wiki/42_%2528number%2529#The_Hitchhiker.27s_Guide_to_the_Galaxy">42</a>),
 which we first locate. The remainder of the analysis is then restricted to a ROI
 surrounding the selected grain.</p>
-<div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="mi">42</span>
+<div class="highlight"><pre><span></span><code><span class="n">index</span> <span class="o">=</span> <span class="mi">42</span>
 <span class="n">slices</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">find_objects</span><span class="p">(</span><span class="n">labels</span><span class="p">)[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">roi</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">slices</span><span class="p">]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The grain shape is then defined by <code>mask</code>, an array of booleans, where all
 voxels of the ROI that belong to the grain are set to <code>True</code>.</p>
-<div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">roi</span> <span class="o">==</span> <span class="n">index</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">mask</span> <span class="o">=</span> <span class="n">roi</span> <span class="o">==</span> <span class="n">index</span>
+</code></pre></div>
 
 <p>The volume (in voxels) of the grain is the sum of the above array</p>
-<div class="highlight"><pre><span></span><span class="n">vol_ref</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Volume of grain {} = {} vox^3.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">vol_ref</span><span class="p">))</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">vol_ref</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Volume of grain </span><span class="si">{}</span><span class="s1"> = </span><span class="si">{}</span><span class="s1"> vox^3.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">vol_ref</span><span class="p">))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Volume of grain 42 = 7087 vox^3.
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>Volume of grain 42 = 7087 vox^3.
+</code></pre></div>
 
 <p>To compute the center of mass and inertia of the grain, we must define the
 coordinates of each voxel of the grain. To do so, we use the
 <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.mgrid.html">mgrid</a>
 function</p>
-<div class="highlight"><pre><span></span><span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="n">slices</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="n">slices</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+</code></pre></div>
 
 <p>The center of mass of the grain is the sum of these coordinates divided by the
 total volume</p>
-<div class="highlight"><pre><span></span><span class="n">com_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="o">*</span><span class="n">coords</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">))</span><span class="o">/</span><span class="n">vol_ref</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Center of mass of grain {} = {} vox&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">com_ref</span><span class="p">))</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">com_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="o">*</span><span class="n">coords</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">))</span><span class="o">/</span><span class="n">vol_ref</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Center of mass of grain </span><span class="si">{}</span><span class="s1"> = </span><span class="si">{}</span><span class="s1"> vox&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">com_ref</span><span class="p">))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Center of mass of grain 42 = [  4.92069987 191.41597291 103.69183011] vox
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>Center of mass of grain 42 = [  4.92069987 191.41597291 103.69183011] vox
+</code></pre></div>
 
 <p>Note that we pre-multiplied <code>coords</code> by <code>mask</code> in order to keep only those
 voxels that belong to the grain. To compute the inertia of the grain, we first
 subtract the coordinates of the center of mass from the voxel coordinates.</p>
-<div class="highlight"><pre><span></span><span class="n">coords</span> <span class="o">-=</span> <span class="n">com_ref</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">coords</span> <span class="o">-=</span> <span class="n">com_ref</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+</code></pre></div>
 
 <p>We then compute the array of coordinates cross-products <code>coords_xprod</code> defined
 as follows</p>
-<div class="highlight"><pre><span></span><span class="n">coords_xprod</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">coords</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">coords_xprod</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">coords</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+</code></pre></div>
 
 <p>(<code>i, j, k</code>: voxel indices; <code>m, n</code>: coordinates indices). The <code>coords_xprod</code>
 array is produced by the following line of code</p>
-<div class="highlight"><pre><span></span><span class="n">coords_xprod</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">*</span><span class="n">coords</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">coords_xprod</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">*</span><span class="n">coords</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</code></pre></div>
 
 <p>and we find</p>
-<div class="highlight"><pre><span></span><span class="n">moments2_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="o">*</span><span class="n">coords_xprod</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Moments of inertia of grain {} (vox^5)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">moments2_ref</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">moments2_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="o">*</span><span class="n">coords_xprod</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Moments of inertia of grain </span><span class="si">{}</span><span class="s1"> (vox^5)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moments2_ref</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Moments of inertia of grain 42 (vox^5)
+<div class="highlight"><pre><span></span><code>Moments of inertia of grain 42 (vox^5)
 [[ 71603.43332863 -45107.22322562 -71060.19147735]
  [-45107.22322562 426435.7118668  181708.48483138]
  [-71060.19147735 181708.48483138 880736.95696345]]
-</pre></div>
-
+</code></pre></div>
 
 <p>This is a bit tedious, isn't it? Besides, we should normally loop over the
 grains in order to carry out the analysis for all grains. Comes the wonderful
@@ -218,41 +205,36 @@ function to the rescue!</p>
 simultaneously. We start with the volume, which is seen as</p>
 <p>$$V=\sum_\text{Grain} 1,$$</p>
 <p>where the sum is carried over all voxels of each grain.</p>
-<div class="highlight"><pre><span></span><span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 <span class="n">vol</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ones</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>And we can check that the value we found for grain 42 is correct</p>
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Volume of grain {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    expected   = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vol_ref</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    actual     = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vol</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Volume of grain </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    expected   = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vol_ref</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    actual     = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vol</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Volume of grain 42
+<div class="highlight"><pre><span></span><code>Volume of grain 42
     expected   = 7087
     actual     = 7087.0
-</pre></div>
-
+</code></pre></div>
 
 <p>For the center of mass, we will use the
 <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.center_of_mass.html">center_of_mass</a>
 function rather than the
 <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html">sum</a>
 function.</p>
-<div class="highlight"><pre><span></span><span class="n">com</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">(</span><span class="n">ones</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">indices</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Center of mass of grain {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    expected   = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">com_ref</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    actual     = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">com</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">com</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">(</span><span class="n">ones</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">indices</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Center of mass of grain </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    expected   = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">com_ref</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    actual     = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">com</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Center of mass of grain 42
+<div class="highlight"><pre><span></span><code>Center of mass of grain 42
     expected   = [  4.92069987 191.41597291 103.69183011]
     actual     = [  4.92069987 191.41597291 103.69183011]
-</pre></div>
-
+</code></pre></div>
 
 <p>Finally, the second moments are seen as the following sum</p>
 <p>$$J_{ij}=\sum_\text{Grain}(x_i-X_i)(x_j-X_j)=\sum_\text{Grain}x_ix_j-VX_iX_j,$$</p>
@@ -260,7 +242,7 @@ function.</p>
 theorem</a>. Implementation
 of this formulation is straightforward, starting from the construction of the
 array of voxel coordinates <code>coords</code>.</p>
-<div class="highlight"><pre><span></span><span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[[</span><span class="nb">slice</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">]]</span>
+<div class="highlight"><pre><span></span><code><span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[[</span><span class="nb">slice</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">]]</span>
 <span class="n">moments2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">indices</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
@@ -268,20 +250,18 @@ array of voxel coordinates <code>coords</code>.</p>
         <span class="n">xi</span><span class="p">,</span> <span class="n">xj</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="p">:]</span>
         <span class="n">moments2</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">xi</span><span class="o">*</span><span class="n">xj</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span> <span class="o">-</span>
                              <span class="n">vol</span><span class="o">*</span><span class="n">com</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">com</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><strong>Nota:</strong> I could not find a pythonic way to get rid of this uggly nested loop…</p>
 <p>We can again check that the result is correct for grain 42.</p>
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Second moments of grain {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    expected =&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">moments2_ref</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;    actual =&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">moments2</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Second moments of grain </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    expected =&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moments2_ref</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    actual =&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moments2</span><span class="p">[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Second moments of grain 42
+<div class="highlight"><pre><span></span><code>Second moments of grain 42
     expected =
 [[ 71603.43332863 -45107.22322562 -71060.19147735]
  [-45107.22322562 426435.7118668  181708.48483138]
@@ -290,41 +270,36 @@ array of voxel coordinates <code>coords</code>.</p>
 [[ 71603.43332863 -45107.22322562 -71060.19147735]
  [-45107.22322562 426435.7118668  181708.48483139]
  [-71060.19147735 181708.48483139 880736.95696346]]
-</pre></div>
-
+</code></pre></div>
 
 <p>That's it! We have computed the second moments of each grain. See how this <code>sum</code>
 function is convenient? We are now ready to compute the orientation of each
 grain, as well as the radii of the equivalent ellipsoid. We first compute the
 eigenvalues and eigenvectors of the tensors of second moments.</p>
-<div class="highlight"><pre><span></span><span class="n">moments2_eigvals</span><span class="p">,</span> <span class="n">moments2_eigvecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">moments2</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">moments2_eigvals</span><span class="p">,</span> <span class="n">moments2_eigvecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">moments2</span><span class="p">)</span>
+</code></pre></div>
 
 <p>The <em>orientation</em> $\vec n$ of the grain is defined as the eigenvector associated
 with the largest principal second moment.</p>
-<div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">moments2_eigvals</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">moments2_eigvals</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="n">moments2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">moments2_eigvecs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">rows</span><span class="p">),</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>[[ 0.01955891  0.05286465 -0.99841012]
+<div class="highlight"><pre><span></span><code>[[ 0.01955891  0.05286465 -0.99841012]
  [-0.17300079 -0.67355818 -0.71860288]
  [-0.49498664 -0.84077194  0.21929608]
  ...
  [-0.14766036  0.2963219  -0.94360466]
  [ 0.          1.          0.        ]
  [-0.1722074   0.98321974  0.06019601]]
-</pre></div>
-
+</code></pre></div>
 
 <p>The following code snippet computes the radii of each grain, and sorts them in
 ascending order.</p>
-<div class="highlight"><pre><span></span><span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">moments2_eigvals</span><span class="o">/</span><span class="n">vol</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]))</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">moments2_eigvals</span><span class="o">/</span><span class="n">vol</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]))</span>
+</code></pre></div>
 
 <p>We can now proceed with the analysis of the results. This will be done more
 thoroughly in the next instalment of this series. The present post will be
@@ -336,20 +311,18 @@ with h5py.File(filename, 'r+') as f:
     f['orientation'] = n</p>
 <h2>Analysis of the results</h2>
 <h3>Volume of grains</h3>
-<div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;V (vox³)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">vol</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12000</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./volume_histogram.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./volume_histogram.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
+<div class="highlight"><pre><span></span><code>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
   warnings.warn(&quot;tight_layout : falling back to Agg renderer&quot;)
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="Volume" class="figure" src="https://sbrisard.github.io/posts/20160219-Orientation_correlations_among_rice_grains-07/volume_histogram.png">
 Most grains have a volume comprised between 6000 and 8000 vox³. It is observed
@@ -366,13 +339,13 @@ be to filter out those grains that are too small in the subsequent analysis. We
 will not go into such degree of refinment.</p>
 <h3>Size of the grains</h3>
 <p>In this section we visualize the radii of the equivalent ellipsoids</p>
-<div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">radius</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;a (vox)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;radius_a_histogram.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;radius_a_histogram.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -380,14 +353,12 @@ will not go into such degree of refinment.</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;b, c (vox)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;radii_b_c_histogram.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;radii_b_c_histogram.png&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
+<div class="highlight"><pre><span></span><code>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
   warnings.warn(&quot;tight_layout : falling back to Agg renderer&quot;)
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="Radius a" src="https://sbrisard.github.io/posts/20160219-Orientation_correlations_among_rice_grains-07/radius_a_histogram.png"><img alt="Radius b, c" src="https://sbrisard.github.io/posts/20160219-Orientation_correlations_among_rice_grains-07/radii_b_c_histogram.png">
 The length of most grains is about 2×27=54 pixels (about 6.5 mm). Also, the
@@ -407,17 +378,15 @@ this tensor is diagonal</p>
 \end{bmatrix}.$$</p>
 <p>Any deviation from this diagonal tensor indicates anisotropy (the converse is
 <em>not</em> true!). Computation of this orientation tensor is easy</p>
-<div class="highlight"><pre><span></span><span class="n">nn</span> <span class="o">=</span> <span class="n">n</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="n">n</span><span class="p">[:,</span> <span class="p">:,</span> <span class="bp">None</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">nn</span> <span class="o">=</span> <span class="n">n</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="n">n</span><span class="p">[:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
 <span class="n">nn_avg</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">nn_avg</span><span class="p">)</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="n">nn_avg</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>[[ 0.27082401  0.02535001 -0.02444013]
+<div class="highlight"><pre><span></span><code>[[ 0.27082401  0.02535001 -0.02444013]
  [ 0.02535001  0.34864242 -0.00637534]
  [-0.02444013 -0.00637534  0.38053357]]
-</pre></div>
-
+</code></pre></div>
 
 <p>Which shows that the distribution of grains is <em>not</em> isotropic. Analysis
 of the eigenvalues of the orientation tensor would show that the

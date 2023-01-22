@@ -101,7 +101,7 @@ time linear operators are to be invoked. We will assume C-ordering in the
 implementation below. We first create the base class <code>ImageLinearOperator</code>, that
 defines linear operators for images, the shape of which is stored in the
 class. This class will be used below to implement the operators $Q_1$ and $Q$.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageLinearOperator</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinearOperator</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ImageLinearOperator</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinearOperator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Linear operator that operate on images.</span>
 
 <span class="sd">    This class defines a linear operator (in the SciPy sense) that</span>
@@ -145,7 +145,7 @@ class. This class will be used below to implement the operators $Q_1$ and $Q$.</
         <span class="bp">self</span><span class="o">.</span><span class="n">_apply</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">y</span>
 
-    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Apply this operator on the input image x.</span>
 
 <span class="sd">        The shape of x must be self.img_shape. The returned array has</span>
@@ -156,8 +156,7 @@ class. This class will be used below to implement the operators $Q_1$ and $Q$.</
 <span class="sd">        returned.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><a name="Q1"></a></p>
 <h2>Implementation of the $Q_1$ operator</h2>
@@ -169,7 +168,7 @@ as the following sum: $Q_1=Q_1^\mathrm h+Q_1^\mathrm v$, with</p>
 <p>$$\tfrac12(Q_1^\mathrm v\cdot u)_{ij}=\left\{\begin{array}{ll}u_{0, j}-u_{m-1, j} &amp; \text{if }i=0,\\u_{m-1, j}-u_{0, j} &amp; \text{if }i=m-1,\\0 &amp; \text{otherwise}\end{array}\right.$$</p>
 <p>Implementation is fairly simple; note that $Q_1$ is symmetric: the <code>_adjoint()</code>
 method simply returns <code>self</code>.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OperatorQ1</span><span class="p">(</span><span class="n">ImageLinearOperator</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">OperatorQ1</span><span class="p">(</span><span class="n">ImageLinearOperator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Implementation of Q1 as a ImageLinearOperator.</span>
 
 <span class="sd">    Q1 is defined by Eq. (9) of Moisan (2011)</span>
@@ -192,8 +191,8 @@ method simply returns <code>self</code>.</p>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">OperatorQ1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">img_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
         <span class="n">dx</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -208,8 +207,7 @@ method simply returns <code>self</code>.</p>
 
     <span class="k">def</span> <span class="nf">_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><a name="Q"></a></p>
 <h2 id="Q">Implementation of the $Q$ operator</h2>
@@ -230,7 +228,7 @@ periodic convolution of $u$ with the following kernel</p>
 \end{bmatrix}.$$</p>
 <p>Operator $Q$ is then readily implemented. Observe again that $Q$ being
 symmetric, <code>_adjoint()</code> returns <code>self</code>.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OperatorQ</span><span class="p">(</span><span class="n">ImageLinearOperator</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">OperatorQ</span><span class="p">(</span><span class="n">ImageLinearOperator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Implementation of Q = Q1+Q2 as a ImageLinearOperator.</span>
 
 <span class="sd">    Q1 and Q2 are defined by Eq. (9) of Moisan (2011)</span>
@@ -256,8 +254,8 @@ symmetric, <code>_adjoint()</code> returns <code>self</code>.</p>
                                 <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
                                 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
         <span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wrap&#39;</span><span class="p">)</span>
@@ -265,8 +263,7 @@ symmetric, <code>_adjoint()</code> returns <code>self</code>.</p>
 
     <span class="k">def</span> <span class="nf">_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Note that in the above implementation, attention is paid to the definition of
 the kernel, which is of the same <code>dtype</code> as the images to which the operator is
@@ -278,12 +275,12 @@ to be applied. This allows for <em>exact</em> computations on integer images.</p
 <p>where the energy $E$ was implemented in <a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html#implementation">part
 2</a>
 of this series.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">img_shapes</span><span class="p">():</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">img_shapes</span><span class="p">():</span>
     <span class="n">sizes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)</span>
 
 
-<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;shape&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">img_shapes</span><span class="p">()))</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;shape&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">img_shapes</span><span class="p">()))</span>
 <span class="k">def</span> <span class="nf">test_OperatorQ</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">20180125</span><span class="p">)</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">moisan2011</span><span class="o">.</span><span class="n">OperatorQ</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
@@ -297,7 +294,7 @@ of this series.</p>
     <span class="n">assert_array_equal</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
 
 
-<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;shape&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">img_shapes</span><span class="p">()))</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;shape&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">img_shapes</span><span class="p">()))</span>
 <span class="k">def</span> <span class="nf">test_OperatorQ1</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">20180125</span><span class="p">)</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">moisan2011</span><span class="o">.</span><span class="n">OperatorQ1</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
@@ -306,8 +303,7 @@ of this series.</p>
     <span class="n">expected</span> <span class="o">=</span> <span class="n">moisan2011</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">actual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">matvec</span><span class="p">(</span><span class="n">p1</span><span class="p">),</span> <span class="n">p1</span><span class="p">)</span>
     <span class="n">assert_array_equal</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The above code snippet calls for several remarks</p>
 <ol>
@@ -325,9 +321,7 @@ image. This will be done in the <a href="https://sbrisard.github.io/posts/201803
 instalment</a>
 of this series</p>
 <!-- Local Variables: -->
-
 <!-- fill-column: 80 -->
-
 <!-- End: -->
   </div><!-- /.entry-content -->
 </section>

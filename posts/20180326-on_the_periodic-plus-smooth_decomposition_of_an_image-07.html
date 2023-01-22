@@ -105,7 +105,7 @@ $\bigl(u_{i, n-1}-u_{i, 0}\bigr)_{i=0,\ldots, m-1}$.</p>
 <p>This leads to the following implementation of function <code>per</code> (compare
 with the implementation of <code>_per</code> in the <a href="https://sbrisard.github.io/posts/20180319-on_the_periodic-plus-smooth_decomposition_of_an_image-06.html#implementation">previous
 post</a>).</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute the periodic component of the 2D image u.</span>
 
 <span class="sd">    This function returns the periodic-plus-smooth decomposition of</span>
@@ -128,21 +128,21 @@ post</a>).</p>
 
     <span class="n">arg</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
     <span class="n">cos_m</span><span class="p">,</span> <span class="n">sin_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-    <span class="n">one_minus_exp_m</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">cos_m</span><span class="o">-</span><span class="mi">1j</span><span class="o">*</span><span class="n">sin_m</span>
+    <span class="n">one_minus_exp_m</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">cos_m</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">sin_m</span>
 
     <span class="n">arg</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
     <span class="n">cos_n</span><span class="p">,</span> <span class="n">sin_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-    <span class="n">one_minus_exp_n</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">cos_n</span><span class="o">-</span><span class="mi">1j</span><span class="o">*</span><span class="n">sin_n</span>
+    <span class="n">one_minus_exp_n</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">cos_n</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">sin_n</span>
 
     <span class="n">w1</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="n">w1_dft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span>
-    <span class="n">v_dft</span> <span class="o">=</span> <span class="n">w1_dft</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="n">one_minus_exp_n</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">v_dft</span> <span class="o">=</span> <span class="n">w1_dft</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">one_minus_exp_n</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
 
     <span class="n">w2</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
     <span class="n">w2_dft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">w2</span><span class="p">)</span>
-    <span class="n">v_dft</span> <span class="o">+=</span> <span class="n">one_minus_exp_m</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="n">w2_dft</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">v_dft</span> <span class="o">+=</span> <span class="n">one_minus_exp_m</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">w2_dft</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
 
-    <span class="n">denom</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">cos_m</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">+</span><span class="n">cos_n</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">cos_m</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">+</span><span class="n">cos_n</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
     <span class="n">denom</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
     <span class="n">s_dft</span> <span class="o">=</span> <span class="n">v_dft</span><span class="o">/</span><span class="n">denom</span>
     <span class="n">s_dft</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -153,37 +153,34 @@ post</a>).</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">u_dft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">u_dft</span><span class="o">-</span><span class="n">s_dft</span><span class="p">,</span> <span class="n">s_dft</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We can test the new implementation.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span><span class="p">,</span> <span class="n">imsave</span>
 
 <span class="n">u</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="o">+</span><span class="s1">&#39;hut-648x364.png&#39;</span><span class="p">)</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-<span class="n">p_exp</span><span class="p">,</span> <span class="n">s_exp</span> <span class="o">=</span> <span class="n">_per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">p_act</span><span class="p">,</span> <span class="n">s_act</span> <span class="o">=</span> <span class="n">per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
+<span class="n">p_exp</span><span class="p">,</span> <span class="n">s_exp</span> <span class="o">=</span> <span class="n">_per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">p_act</span><span class="p">,</span> <span class="n">s_act</span> <span class="o">=</span> <span class="n">per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in L2-norm:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on p: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on s: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum absolute error&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on p: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on s: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum relative error&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on p: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">p_act</span><span class="o">+</span><span class="n">p_exp</span><span class="p">)))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on s: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s_act</span><span class="o">+</span><span class="n">s_exp</span><span class="p">)))))</span>
+</code></pre></div>
 
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Error in L2-norm:&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on p: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on s: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Maximum absolute error&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on p: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">))))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on s: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">))))</span>
-<span class="k">print</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Maximum relative error&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on p: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">p_act</span><span class="o">+</span><span class="n">p_exp</span><span class="p">)))))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on s: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s_act</span><span class="o">+</span><span class="n">s_exp</span><span class="p">)))))</span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>Error in L2-norm:
+<div class="highlight"><pre><span></span><code>Error in L2-norm:
   - on p: 5.806665557170608e-10
   - on s: 5.806574416763999e-10
 
@@ -194,29 +191,26 @@ Maximum absolute error
 Maximum relative error
   - on p: 8.610429016084161e-11
   - on s: 7.129469799120442e-08
-</pre></div>
-
+</code></pre></div>
 
 <p>Which validates this new implementation. Let us check how much we
 gained, speed-wise.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">timeit</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">timeit</span>
 <span class="n">t1</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;p, s = _per(u, inverse_dft=True)&#39;</span><span class="p">,</span>
                    <span class="n">number</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">())</span>
 <span class="n">t2</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;p, s = per(u, inverse_dft=True)&#39;</span><span class="p">,</span>
                    <span class="n">number</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Timings:&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - _per  : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - per   : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - ratio : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="o">/</span><span class="n">t2</span><span class="p">))</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Timings:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - _per  : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - per   : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - ratio : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="o">/</span><span class="n">t2</span><span class="p">))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Timings:
+<div class="highlight"><pre><span></span><code>Timings:
   - _per  : 4.946549984680452
   - per   : 3.9524611252226656
   - ratio : 1.2515113565859002
-</pre></div>
-
+</code></pre></div>
 
 <p>So the new implementation is about 1.3× faster than the old one! Do
 you think we can do better? Wait and see!</p>
@@ -228,7 +222,7 @@ the <code>numpy.fft.rfft2</code> function
 rather than <code>numpy.fft.fft2</code>
 (<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fft2.html#numpy.fft.fft2">documentation</a>).
 This is what is done below.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rper</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">rper</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute the periodic component of the 2D, real image u.</span>
 
 <span class="sd">    This function returns the periodic-plus-smooth decomposition of</span>
@@ -250,22 +244,22 @@ This is what is done below.</p>
 
     <span class="n">arg</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
     <span class="n">cos_m</span><span class="p">,</span> <span class="n">sin_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-    <span class="n">one_minus_exp_m</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">cos_m</span><span class="o">-</span><span class="mi">1j</span><span class="o">*</span><span class="n">sin_m</span>
+    <span class="n">one_minus_exp_m</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">cos_m</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">sin_m</span>
 
     <span class="n">arg</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
     <span class="n">cos_n</span><span class="p">,</span> <span class="n">sin_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-    <span class="n">one_minus_exp_n</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">cos_n</span><span class="o">-</span><span class="mi">1j</span><span class="o">*</span><span class="n">sin_n</span>
+    <span class="n">one_minus_exp_n</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">cos_n</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">sin_n</span>
 
     <span class="n">w1</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="n">w1_dft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span>
     <span class="c1"># Use complex fft because irfft2 needs all modes in the first direction</span>
-    <span class="n">v1_dft</span> <span class="o">=</span> <span class="n">w1_dft</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="n">one_minus_exp_n</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">v1_dft</span> <span class="o">=</span> <span class="n">w1_dft</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">one_minus_exp_n</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
 
     <span class="n">w2</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
     <span class="n">w2_dft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">w2</span><span class="p">)</span>
-    <span class="n">v2_dft</span> <span class="o">=</span> <span class="n">one_minus_exp_m</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="n">w2_dft</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">v2_dft</span> <span class="o">=</span> <span class="n">one_minus_exp_m</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">w2_dft</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
 
-    <span class="n">k_dft</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">cos_m</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">+</span><span class="n">cos_n</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">k_dft</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">cos_m</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">+</span><span class="n">cos_n</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
     <span class="n">k_dft</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
     <span class="n">s_dft</span> <span class="o">=</span> <span class="p">(</span><span class="n">v1_dft</span><span class="o">+</span><span class="n">v2_dft</span><span class="p">)</span><span class="o">/</span><span class="n">k_dft</span>
     <span class="n">s_dft</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -276,27 +270,25 @@ This is what is done below.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">u_dft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft2</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">u_dft</span><span class="o">-</span><span class="n">s_dft</span><span class="p">,</span> <span class="n">s_dft</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>And we can again test this new implementation</p>
-<div class="highlight"><pre><span></span><span class="n">p_act</span><span class="p">,</span> <span class="n">s_act</span> <span class="o">=</span> <span class="n">rper</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">p_act</span><span class="p">,</span> <span class="n">s_act</span> <span class="o">=</span> <span class="n">rper</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Error in L2-norm:&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on p: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on s: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Maximum absolute error&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on p: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">))))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on s: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">))))</span>
-<span class="k">print</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Maximum relative error&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on p: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">p_act</span><span class="o">+</span><span class="n">p_exp</span><span class="p">)))))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - on s: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s_act</span><span class="o">+</span><span class="n">s_exp</span><span class="p">)))))</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in L2-norm:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on p: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on s: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum absolute error&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on p: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on s: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum relative error&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on p: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">p_act</span><span class="o">-</span><span class="n">p_exp</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">p_act</span><span class="o">+</span><span class="n">p_exp</span><span class="p">)))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - on s: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s_act</span><span class="o">+</span><span class="n">s_exp</span><span class="p">)))))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Error in L2-norm:
+<div class="highlight"><pre><span></span><code>Error in L2-norm:
   - on p: 5.810100441650991e-10
   - on s: 5.809921679853175e-10
 
@@ -307,31 +299,28 @@ Maximum absolute error
 Maximum relative error
   - on p: 8.68682621178305e-11
   - on s: 7.30527816192651e-08
-</pre></div>
-
+</code></pre></div>
 
 <p>Which is again quite satisfactory! Let us time the new implementation.</p>
-<div class="highlight"><pre><span></span><span class="n">t3</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;p, s = rper(u, inverse_dft=True)&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">t3</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;p, s = rper(u, inverse_dft=True)&#39;</span><span class="p">,</span>
 <span class="n">number</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Timings:&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - _per : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - per  : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - rper : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t3</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ratios:&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - _per/per  : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="o">/</span><span class="n">t2</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - _per/rper : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="o">/</span><span class="n">t3</span><span class="p">))</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Timings:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - _per : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - per  : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - rper : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ratios:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - _per/per  : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="o">/</span><span class="n">t2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - _per/rper : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t1</span><span class="o">/</span><span class="n">t3</span><span class="p">))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Timings:
+<div class="highlight"><pre><span></span><code>Timings:
   - _per : 4.946549984680452
   - per  : 3.9524611252226656
   - rper : 2.1560062129698423
 Ratios:
   - _per/per  : 1.2515113565859002
   - _per/rper : 2.2943115631687854
-</pre></div>
-
+</code></pre></div>
 
 <p>… and we are now about 2.3× faster!</p>
 <h2>Conclusion</h2>
@@ -342,9 +331,7 @@ did not lose in clarity.</p>
 to the <a href="https://github.com/sbrisard/moisan2011">GitHub</a> repository of
 the <code>moisan2011</code> Python module!</p>
 <!-- Local Variables: -->
-
 <!-- fill-column: 80 -->
-
 <!-- End: -->
   </div><!-- /.entry-content -->
 </section>

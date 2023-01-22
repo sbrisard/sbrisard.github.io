@@ -55,42 +55,39 @@
 <p>We consider a simplified case, where the mesh is square and vertical and horizontal springs have equal stiffnesses. We use the same symbols an in the <a href="https://sbrisard.github.io/posts/20210509-what_is_homogenization-05.html">previous post</a>. In particular, the stiffness of the diagonal springs is $k$, while the stiffness of the horizontal and vertical springs is $\chi k$ ($\chi$: dimensionless parameter).</p>
 <p>To compute the solution to this problem, we use a displacement-based approach relying on the minimization of the total potential energy, $\Pi$. This energy is the difference between the strain energy, $\mathcal U$ and the potential of external forces, $\mathcal V$. Both $\mathcal U$ and $\mathcal V$ are functions of the nodal displacements, that must satisfy the essential boundary conditions. The numerous symmetries will also allow us to reduce the number of unknowns.</p>
 <p>The derivation is carried out with the <a href="https://www.sympy.org">Sympy</a> library, that we first import. Note that we will also use the <a href="https://numpy.org/">NumPy</a> library to build arrays of Sympy expressions and use vectorized operations.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">sympy</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We define a few common symbols, to be used in all subsequent derivations.</p>
-<div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>  <span class="c1"># intensity of the nodal forces</span>
+<div class="highlight"><pre><span></span><code><span class="n">Q</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>  <span class="c1"># intensity of the nodal forces</span>
 
-<span class="err">χ</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;chi&quot;</span><span class="p">)</span>
-<span class="err">χ</span><span class="n">x</span> <span class="o">=</span> <span class="err">χ</span>  <span class="c1"># relative stiffness of the horizontal springs</span>
-<span class="err">χ</span><span class="n">y</span> <span class="o">=</span> <span class="err">χ</span>  <span class="c1"># relative stiffness of the vertical springs</span>
+<span class="n">χ</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;chi&quot;</span><span class="p">)</span>
+<span class="n">χx</span> <span class="o">=</span> <span class="n">χ</span>  <span class="c1"># relative stiffness of the horizontal springs</span>
+<span class="n">χy</span> <span class="o">=</span> <span class="n">χ</span>  <span class="c1"># relative stiffness of the vertical springs</span>
 
 <span class="n">k</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>  <span class="c1"># stiffness of diagonal springs</span>
-<span class="n">kx</span> <span class="o">=</span> <span class="err">χ</span><span class="n">x</span> <span class="o">*</span> <span class="n">k</span>  <span class="c1"># stiffness of the horizontal springs</span>
-<span class="n">ky</span> <span class="o">=</span> <span class="err">χ</span><span class="n">y</span> <span class="o">*</span> <span class="n">k</span>  <span class="c1"># stiffness of the vertical springs</span>
-</pre></div>
-
+<span class="n">kx</span> <span class="o">=</span> <span class="n">χx</span> <span class="o">*</span> <span class="n">k</span>  <span class="c1"># stiffness of the horizontal springs</span>
+<span class="n">ky</span> <span class="o">=</span> <span class="n">χy</span> <span class="o">*</span> <span class="n">k</span>  <span class="c1"># stiffness of the vertical springs</span>
+</code></pre></div>
 
 <p>We also define the unit vectors that give the directions of each spring.</p>
-<div class="highlight"><pre><span></span><span class="err">θ</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span>
+<div class="highlight"><pre><span></span><code><span class="n">θ</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span>
 <span class="n">one</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">zero</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">e1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">one</span><span class="p">,</span> <span class="n">zero</span><span class="p">])</span>  <span class="c1"># direction of horizontal springs</span>
 <span class="n">e2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">zero</span><span class="p">,</span> <span class="n">one</span><span class="p">])</span>  <span class="c1"># direction of vertical springs</span>
-<span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="err">θ</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="err">θ</span><span class="p">)])</span>  <span class="c1"># direction of diagonal springs (/)</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="err">θ</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="err">θ</span><span class="p">)])</span>  <span class="c1"># direction of diagonal springs (\)</span>
-</pre></div>
-
+<span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)])</span>  <span class="c1"># direction of diagonal springs (/)</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)])</span>  <span class="c1"># direction of diagonal springs (\)</span>
+</code></pre></div>
 
 <p>We now define a few general functions to evaluate the potential energy of the system. These functions take an array <code>u</code> of nodal displacements as an input. More precisely, <code>u[i, j, 0]</code> and <code>u[i, j, 1]</code> are the horizontal and vertical components of the displacement of the node that is located at <code>(x = i⋅Δx, y = j⋅Δy)</code>.</p>
 <h3>Strain energy</h3>
 <p>In a previous post, we derived <a href="https://sbrisard.github.io/posts/20201125-on_the_stiffness_matrix_of_a_linear_spring.html">the stiffness matrix of a linear spring</a>. This expression is used in the present post to evaluate the strain energy $\mathcal U$ as the sum of the contributions of all springs</p>
 <p>$$\mathcal U=\sum_{i, j, k, l}\tfrac12k_{ij,kl}\bigl[\bigl(\vec u_{ij}-\vec u_{kl}\bigr)\cdot\vec n_{ij,kl}\bigr]^2,$$</p>
 <p>where the sum runs over all pairs of nodes $(i, j)$ and $(k, l)$ that are connected by a spring, $k_{ij, kl}$ is the stiffness of the spring that connects node $(i, j)$ to node $(k, l)$ and $\vec n_{ij, kl}$ is its direction (unit vector). Finally, $\vec u_{ij}$ and $\vec u_{kl}$ are the nodal displacements. The above formula is implemented as follows.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">strain_energy</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">strain_energy</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">U</span> <span class="o">=</span> <span class="n">zero</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -105,8 +102,7 @@
                 <span class="n">U</span> <span class="o">+=</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">d1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]))</span> <span class="o">**</span> <span class="mi">2</span>
                 <span class="n">U</span> <span class="o">+=</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">d2</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">]))</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="k">return</span> <span class="n">U</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Potential of external forces</h3>
 <p>The potential of external forces is the following sum</p>
@@ -114,24 +110,22 @@
 <p>where the sum runs over all nodes $(i, j)$ that are loaded and $\vec Q_{ij}$ is the applied nodal force. In the present case, only nodes on the left and right boundaries are loaded</p>
 <p>$$\mathcal V=\sum_{j=0}^{\mathcal N_y}w_jQ\vec e_x\cdot\bigl(\vec u_{N_x, j}-\vec u_{0, j}\bigr),$$</p>
 <p>where $w_0=w_{\mathcal N_y}=\frac12$ and $w_1=\cdots=w_{\mathcal N_y-1}=1$.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">potential_external_forces</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">potential_external_forces</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">V</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
         <span class="n">V</span> <span class="o">+=</span> <span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="n">V</span> <span class="o">*=</span> <span class="n">Q</span>
     <span class="k">return</span> <span class="n">V</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Potential energy</h3>
 <p>Minimization of the potential energy $\Pi=\mathcal U-\mathcal V$ with respect to the unknown nodal displacements then delivers the solution.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">potential_energy</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">potential_energy</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
     <span class="n">U</span> <span class="o">=</span> <span class="n">strain_energy</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
     <span class="n">V</span> <span class="o">=</span> <span class="n">potential_external_forces</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">U</span> <span class="o">-</span> <span class="n">V</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Apparent stiffness</h3>
 <p>The apparent stiffness was defined in the post that introduced <a href="https://sbrisard.github.io/posts/20201208-what_is_homogenization-04.html">the representative volume element</a>. It is computed as the following ratio
@@ -146,11 +140,10 @@ where the macroscopic strain $\langle\varepsilon_{xx}\rangle$ reads</p>
 <p>$$\tilde{A}_x^\text{app}
 =\mathcal N_x\mathcal N_y\frac{\Delta x}{\Delta y}\frac{Q^2}{\mathcal V}
 =\frac{\mathcal N_x\mathcal N_y}{\tan\theta}\frac{Q^2}{\mathcal V}.$$</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apparent_stiffness</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">apparent_stiffness</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
     <span class="n">Nx</span><span class="p">,</span> <span class="n">Ny</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">Nx</span> <span class="o">*</span> <span class="n">Ny</span> <span class="o">/</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="err">θ</span><span class="p">)</span> <span class="o">*</span> <span class="n">Q</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">potential_external_forces</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-</pre></div>
-
+    <span class="k">return</span> <span class="n">Nx</span> <span class="o">*</span> <span class="n">Ny</span> <span class="o">/</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">*</span> <span class="n">Q</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">potential_external_forces</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+</code></pre></div>
 
 <p>The above functions are used in the sections below to compute the solution for 1×1, 2×2 and 3×3 systems.</p>
 <h2>The case of a 1×1 system</h2>
@@ -162,57 +155,51 @@ $$u_{A_2} = -u_A,\quad v_{A_2}=-v_A,$$
 $$u_{A_3} = u_A,\quad v_{A_3}=-v_A,$$</p>
 <p>where $u_M$ (resp. $v_M$) denotes the horizontal (resp. vertical) displacement of node $M$.</p>
 <p>The main unknowns are therefore $u_A$ and $v_A$.</p>
-<div class="highlight"><pre><span></span><span class="n">uA</span><span class="p">,</span> <span class="n">vA</span> <span class="o">=</span> <span class="n">dofs</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;u_A, v_A&quot;</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">uA</span><span class="p">,</span> <span class="n">vA</span> <span class="o">=</span> <span class="n">dofs</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;u_A, v_A&quot;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>The array of all nodal displacements is populated accordingly.</p>
-<div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">uA</span><span class="p">,</span> <span class="o">-</span><span class="n">vA</span>  <span class="c1"># Node A₂</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">uA</span><span class="p">,</span> <span class="o">-</span><span class="n">vA</span>  <span class="c1"># Node A₃</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">uA</span><span class="p">,</span> <span class="n">vA</span>  <span class="c1"># Node A₁</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">uA</span><span class="p">,</span> <span class="n">vA</span>  <span class="c1"># Node A</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We find the following expression of the potential energy.</p>
-<div class="highlight"><pre><span></span><span class="n">U1</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">strain_energy</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">U1</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">strain_energy</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
 <span class="n">V1</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">potential_external_forces</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
-<span class="err">Π</span><span class="mi">1</span> <span class="o">=</span> <span class="n">U1</span> <span class="o">-</span> <span class="n">V1</span>
-<span class="err">Π</span><span class="mi">1</span>
-</pre></div>
-
+<span class="n">Π1</span> <span class="o">=</span> <span class="n">U1</span> <span class="o">-</span> <span class="n">V1</span>
+<span class="n">Π1</span>
+</code></pre></div>
 
 <p>$\displaystyle - 2 Q u_{A} + 4 \chi k u_{A}^{2} + 4 \chi k v_{A}^{2} + 2 k u_{A}^{2} + 4 k u_{A} v_{A} + 2 k v_{A}^{2}$</p>
 <p>The potential energy is stationary at equilibrium: this leads to the following equations</p>
-<div class="highlight"><pre><span></span><span class="n">eqs</span> <span class="o">=</span> <span class="p">[</span><span class="err">Π</span><span class="mf">1.</span><span class="n">diff</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span> <span class="k">for</span> <span class="n">dof</span> <span class="ow">in</span> <span class="n">dofs</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">eqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Π1</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span> <span class="k">for</span> <span class="n">dof</span> <span class="ow">in</span> <span class="n">dofs</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">eqs</span><span class="p">:</span>
     <span class="n">display</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">zero</span><span class="p">))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>$\displaystyle - 2 Q + 8 \chi k u_{A} + 4 k u_{A} + 4 k v_{A} = 0$</p>
 <p>$\displaystyle 8 \chi k v_{A} + 4 k u_{A} + 4 k v_{A} = 0$</p>
 <p>The solution to the above linear system is found below.</p>
-<div class="highlight"><pre><span></span><span class="n">sol</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eqs</span><span class="p">,</span> <span class="n">dofs</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">sol</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eqs</span><span class="p">,</span> <span class="n">dofs</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sol</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">display</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">factor</span><span class="p">()))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>$\displaystyle u_{A} = \frac{Q \left(2 \chi + 1\right)}{8 \chi k \left(\chi + 1\right)}$</p>
 <p>$\displaystyle v_{A} = - \frac{Q}{8 \chi k \left(\chi + 1\right)}$</p>
 <p>And we find the apparent stiffness</p>
-<div class="highlight"><pre><span></span><span class="n">apparent_stiffness</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">apparent_stiffness</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
+</code></pre></div>
 
 <p>$\displaystyle \frac{4 \chi k \left(\chi + 1\right)}{2 \chi + 1}$</p>
 <h2>The case of a 2×2 system</h2>
 <p>We again exploit the symmetries of the system, assuming that the center node does not move. The displacements of all nodes is fully defined from that of node $A$, $B$ (that only moves vertically) and $C$ (that only moves horizontally).</p>
 <p><img alt="The 2×2 system" class="fig60p100" src="https://sbrisard.github.io/posts/What_is_homogenization/uniaxial_tension-2x2.png"></p>
 <p>The main unknowns are therefore $u_A$ and $v_A$, $v_B$ and $u_C$ and the array of nodal displacements can be populated.</p>
-<div class="highlight"><pre><span></span><span class="n">uA</span><span class="p">,</span> <span class="n">vA</span><span class="p">,</span> <span class="n">vB</span><span class="p">,</span> <span class="n">uC</span> <span class="o">=</span> <span class="n">dofs</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;u_A v_A v_B u_C&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">uA</span><span class="p">,</span> <span class="n">vA</span><span class="p">,</span> <span class="n">vB</span><span class="p">,</span> <span class="n">uC</span> <span class="o">=</span> <span class="n">dofs</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;u_A v_A v_B u_C&quot;</span><span class="p">)</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">uA</span><span class="p">,</span> <span class="o">-</span><span class="n">vA</span>  <span class="c1"># A₂</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">zero</span><span class="p">,</span> <span class="o">-</span><span class="n">vB</span>  <span class="c1"># B₁</span>
@@ -223,51 +210,46 @@ $$u_{A_3} = u_A,\quad v_{A_3}=-v_A,$$</p>
 <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">uA</span><span class="p">,</span> <span class="n">vA</span>  <span class="c1"># A₁</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">zero</span><span class="p">,</span> <span class="n">vB</span>  <span class="c1"># B</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">uA</span><span class="p">,</span> <span class="n">vA</span>  <span class="c1"># A</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We again compute the potential energy.</p>
-<div class="highlight"><pre><span></span><span class="n">U2</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">strain_energy</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">U2</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">strain_energy</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
 <span class="n">V2</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">potential_external_forces</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
-<span class="err">Π</span><span class="mi">2</span> <span class="o">=</span> <span class="n">U2</span> <span class="o">-</span> <span class="n">V2</span>
-<span class="err">Π</span><span class="mi">2</span>
-</pre></div>
-
+<span class="n">Π2</span> <span class="o">=</span> <span class="n">U2</span> <span class="o">-</span> <span class="n">V2</span>
+<span class="n">Π2</span>
+</code></pre></div>
 
 <p>$\displaystyle - 2 Q u_{A} - 2 Q u_{C} + 2 \chi k u_{A}^{2} + \chi k u_{C}^{2} + 2 \chi k v_{A}^{2} + \chi k v_{B}^{2} + k u_{A}^{2} + 2 k u_{A} v_{A} + k u_{C}^{2} + 2 k u_{C} v_{B} + k v_{A}^{2} + k v_{B}^{2}$</p>
 <p>Stationarity of the potential energy leads to the following equations.</p>
-<div class="highlight"><pre><span></span><span class="n">eqs</span> <span class="o">=</span> <span class="p">[</span><span class="err">Π</span><span class="mf">2.</span><span class="n">diff</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span> <span class="k">for</span> <span class="n">dof</span> <span class="ow">in</span> <span class="n">dofs</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">eqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Π2</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span> <span class="k">for</span> <span class="n">dof</span> <span class="ow">in</span> <span class="n">dofs</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">eqs</span><span class="p">:</span>
     <span class="n">display</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">zero</span><span class="p">))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>$\displaystyle - 2 Q + 4 \chi k u_{A} + 2 k u_{A} + 2 k v_{A} = 0$</p>
 <p>$\displaystyle 4 \chi k v_{A} + 2 k u_{A} + 2 k v_{A} = 0$</p>
 <p>$\displaystyle 2 \chi k v_{B} + 2 k u_{C} + 2 k v_{B} = 0$</p>
 <p>$\displaystyle - 2 Q + 2 \chi k u_{C} + 2 k u_{C} + 2 k v_{B} = 0$</p>
 <p>The solution to the above linear system is displayed below.</p>
-<div class="highlight"><pre><span></span><span class="n">sol</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eqs</span><span class="p">,</span> <span class="n">dofs</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">sol</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eqs</span><span class="p">,</span> <span class="n">dofs</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sol</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">display</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">factor</span><span class="p">()))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>$\displaystyle u_{A} = \frac{Q \left(2 \chi + 1\right)}{4 \chi k \left(\chi + 1\right)}$</p>
 <p>$\displaystyle v_{A} = - \frac{Q}{4 \chi k \left(\chi + 1\right)}$</p>
 <p>$\displaystyle v_{B} = - \frac{Q}{\chi k \left(\chi + 2\right)}$</p>
 <p>$\displaystyle u_{C} = \frac{Q \left(\chi + 1\right)}{\chi k \left(\chi + 2\right)}$</p>
 <p>Finally, we get the apparent stiffness.</p>
-<div class="highlight"><pre><span></span><span class="n">apparent_stiffness</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">apparent_stiffness</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
+</code></pre></div>
 
 <p>$\displaystyle \frac{8 \chi k \left(\chi + 1\right) \left(\chi + 2\right)}{\left(2 \chi + 3\right) \left(3 \chi + 2\right)}$</p>
 <h2>The case of a 3×3 system</h2>
 <p>For 3×3 systems, the displacements of all nodes are fully defined from the displacements of nodes $A$, $B$, $C$ and $D$.</p>
 <p><img alt="The 3×3 system" class="fig60p100" src="https://sbrisard.github.io/posts/What_is_homogenization/uniaxial_tension-3x3.png"></p>
 <p>The main unknowns are therefore $u_A$, $v_A$, $u_B$, $v_B$, $u_C$, $v_C$, $u_D$ and $v_D$.</p>
-<div class="highlight"><pre><span></span><span class="n">uA</span><span class="p">,</span> <span class="n">vA</span><span class="p">,</span> <span class="n">uB</span><span class="p">,</span> <span class="n">vB</span><span class="p">,</span> <span class="n">uC</span><span class="p">,</span> <span class="n">vC</span><span class="p">,</span> <span class="n">uD</span><span class="p">,</span> <span class="n">vD</span> <span class="o">=</span> <span class="n">dofs</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;u_A v_A u_B v_B u_C v_C u_D v_D&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">uA</span><span class="p">,</span> <span class="n">vA</span><span class="p">,</span> <span class="n">uB</span><span class="p">,</span> <span class="n">vB</span><span class="p">,</span> <span class="n">uC</span><span class="p">,</span> <span class="n">vC</span><span class="p">,</span> <span class="n">uD</span><span class="p">,</span> <span class="n">vD</span> <span class="o">=</span> <span class="n">dofs</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;u_A v_A u_B v_B u_C v_C u_D v_D&quot;</span><span class="p">)</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
 
 <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">uA</span><span class="p">,</span> <span class="o">-</span><span class="n">vA</span>  <span class="c1"># A₂</span>
@@ -289,24 +271,21 @@ $$u_{A_3} = u_A,\quad v_{A_3}=-v_A,$$</p>
 <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">uB</span><span class="p">,</span> <span class="n">vB</span>  <span class="c1"># B₁</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">uB</span><span class="p">,</span> <span class="n">vB</span>  <span class="c1"># B</span>
 <span class="n">u</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">uA</span><span class="p">,</span> <span class="n">vA</span>  <span class="c1"># A</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We find the potential energy</p>
-<div class="highlight"><pre><span></span><span class="n">U3</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">strain_energy</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">U3</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">strain_energy</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
 <span class="n">V3</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">potential_external_forces</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
-<span class="err">Π</span><span class="mi">3</span> <span class="o">=</span> <span class="n">U3</span> <span class="o">-</span> <span class="n">V3</span>
-<span class="err">Π</span><span class="mi">3</span>
-</pre></div>
-
+<span class="n">Π3</span> <span class="o">=</span> <span class="n">U3</span> <span class="o">-</span> <span class="n">V3</span>
+<span class="n">Π3</span>
+</code></pre></div>
 
 <p>$\displaystyle - 2 Q u_{A} - 4 Q u_{C} + 2 \chi k u_{A}^{2} - 4 \chi k u_{A} u_{B} + 6 \chi k u_{B}^{2} + 2 \chi k u_{C}^{2} - 4 \chi k u_{C} u_{D} + 6 \chi k u_{D}^{2} + 2 \chi k v_{A}^{2} - 4 \chi k v_{A} v_{C} + 2 \chi k v_{B}^{2} - 4 \chi k v_{B} v_{D} + 6 \chi k v_{C}^{2} + 6 \chi k v_{D}^{2} + k u_{A}^{2} - 2 k u_{A} u_{D} + 2 k u_{A} v_{A} - 2 k u_{A} v_{D} + 2 k u_{B}^{2} - 2 k u_{B} u_{C} + 2 k u_{B} u_{D} + 2 k u_{B} v_{C} - 2 k u_{B} v_{D} + 2 k u_{C}^{2} - 2 k u_{C} u_{D} + 2 k u_{C} v_{B} + 2 k u_{C} v_{D} + 5 k u_{D}^{2} - 2 k u_{D} v_{A} + 2 k u_{D} v_{B} - 2 k u_{D} v_{C} + 2 k u_{D} v_{D} + k v_{A}^{2} - 2 k v_{A} v_{D} + 2 k v_{B}^{2} - 2 k v_{B} v_{C} - 2 k v_{B} v_{D} + 2 k v_{C}^{2} + 2 k v_{C} v_{D} + 5 k v_{D}^{2}$</p>
 <p>the equations</p>
-<div class="highlight"><pre><span></span><span class="n">eqs</span> <span class="o">=</span> <span class="p">[</span><span class="err">Π</span><span class="mf">3.</span><span class="n">diff</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span> <span class="k">for</span> <span class="n">dof</span> <span class="ow">in</span> <span class="n">dofs</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">eqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Π3</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">dof</span><span class="p">)</span> <span class="k">for</span> <span class="n">dof</span> <span class="ow">in</span> <span class="n">dofs</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">eqs</span><span class="p">:</span>
     <span class="n">display</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">zero</span><span class="p">))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>$\displaystyle - 2 Q + 4 \chi k u_{A} - 4 \chi k u_{B} + 2 k u_{A} - 2 k u_{D} + 2 k v_{A} - 2 k v_{D} = 0$</p>
 <p>$\displaystyle 4 \chi k v_{A} - 4 \chi k v_{C} + 2 k u_{A} - 2 k u_{D} + 2 k v_{A} - 2 k v_{D} = 0$</p>
@@ -317,11 +296,10 @@ $$u_{A_3} = u_A,\quad v_{A_3}=-v_A,$$</p>
 <p>$\displaystyle - 4 \chi k u_{C} + 12 \chi k u_{D} - 2 k u_{A} + 2 k u_{B} - 2 k u_{C} + 10 k u_{D} - 2 k v_{A} + 2 k v_{B} - 2 k v_{C} + 2 k v_{D} = 0$</p>
 <p>$\displaystyle - 4 \chi k v_{B} + 12 \chi k v_{D} - 2 k u_{A} - 2 k u_{B} + 2 k u_{C} + 2 k u_{D} - 2 k v_{A} - 2 k v_{B} + 2 k v_{C} + 10 k v_{D} = 0$</p>
 <p>and the nodal displacements</p>
-<div class="highlight"><pre><span></span><span class="n">sol</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eqs</span><span class="p">,</span> <span class="n">dofs</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">sol</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eqs</span><span class="p">,</span> <span class="n">dofs</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sol</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">display</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">factor</span><span class="p">()))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>$\displaystyle u_{A} = \frac{Q \left(96 \chi^{5} + 664 \chi^{4} + 1320 \chi^{3} + 1109 \chi^{2} + 408 \chi + 52\right)}{32 \chi k \left(\chi + 1\right) \left(4 \chi^{4} + 24 \chi^{3} + 41 \chi^{2} + 24 \chi + 4\right)}$</p>
 <p>$\displaystyle v_{A} = - \frac{Q \left(16 \chi^{4} + 288 \chi^{3} + 533 \chi^{2} + 312 \chi + 52\right)}{32 \chi k \left(\chi + 1\right) \left(4 \chi^{4} + 24 \chi^{3} + 41 \chi^{2} + 24 \chi + 4\right)}$</p>
@@ -332,9 +310,8 @@ $$u_{A_3} = u_A,\quad v_{A_3}=-v_A,$$</p>
 <p>$\displaystyle u_{D} = \frac{Q \left(64 \chi^{5} + 360 \chi^{4} + 724 \chi^{3} + 657 \chi^{2} + 264 \chi + 36\right)}{32 \chi k \left(\chi + 1\right) \left(4 \chi^{4} + 24 \chi^{3} + 41 \chi^{2} + 24 \chi + 4\right)}$</p>
 <p>$\displaystyle v_{D} = - \frac{Q \left(96 \chi^{4} + 364 \chi^{3} + 465 \chi^{2} + 232 \chi + 36\right)}{32 \chi k \left(\chi + 1\right) \left(4 \chi^{4} + 24 \chi^{3} + 41 \chi^{2} + 24 \chi + 4\right)}$</p>
 <p>Finally, we get the apparent stiffness.</p>
-<div class="highlight"><pre><span></span><span class="n">apparent_stiffness</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">apparent_stiffness</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
+</code></pre></div>
 
 <p>$\displaystyle \frac{144 \chi k \left(\chi + 1\right) \left(4 \chi^{4} + 24 \chi^{3} + 41 \chi^{2} + 24 \chi + 4\right)}{480 \chi^{5} + 2888 \chi^{4} + 5616 \chi^{3} + 4771 \chi^{2} + 1800 \chi + 236}$</p>
   </div><!-- /.entry-content -->

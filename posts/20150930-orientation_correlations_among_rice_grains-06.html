@@ -79,32 +79,31 @@ file. I am by no means an expert on this great file format (see
 converts the binary <code>*.tif</code> images into a single <code>*.hdf5</code> file. It uses the
 <a href="http://www.h5py.org/">h5py</a> library; <a href="http://www.pytables.org/">PyTables</a> is
 another option.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os.path</span>
 
 <span class="kn">import</span> <span class="nn">h5py</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">skimage.io</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">root</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;sebastien&#39;</span><span class="p">,</span> <span class="s1">&#39;experimental_data&#39;</span><span class="p">,</span> <span class="s1">&#39;navier&#39;</span><span class="p">,</span>
                          <span class="s1">&#39;riz&#39;</span><span class="p">)</span>
     <span class="n">input_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;bin_4x4x4-otsu&#39;</span><span class="p">,</span>
-                              <span class="s1">&#39;rice-bin_4x4x4-otsu_126-{0:03d}.tif&#39;</span><span class="p">)</span>
+                              <span class="s1">&#39;rice-bin_4x4x4-otsu_126-</span><span class="si">{0:03d}</span><span class="s1">.tif&#39;</span><span class="p">)</span>
     <span class="n">output_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;rice-bin_4x4x4.hdf5&#39;</span><span class="p">)</span>
     <span class="n">num_slices</span> <span class="o">=</span> <span class="mi">172</span>
 
-    <span class="n">binary</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">binary</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_slices</span><span class="p">):</span>
         <span class="n">slc</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">input_name</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">binary</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">binary</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">binary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_slices</span><span class="p">,)</span><span class="o">+</span><span class="n">slc</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">slc</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
         <span class="n">binary</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">slc</span>
 
     <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">dset</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;binary&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">binary</span><span class="p">)</span>
         <span class="n">dset</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">string_</span><span class="p">(</span><span class="s1">&#39;Otsu threshold 126&#39;</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Now, on to segmentation!</p>
 <h2>Detecting connected components</h2>
@@ -118,7 +117,6 @@ our 3D image is no exception to this rule!
 <figcaption>Figure 1: A slice of the binary image. Clearly, some rice grains are
 connected. In other words, detecting connected components is not a suitable
 strategy for the segmentation of rice grains.</figcaption>
-
 <p>So, we should expect no miracle from this approach. However, it is interesting
 to show how easy it is to identify the connected components of an image, using
 the <code>scipy.ndimage</code> module
@@ -127,10 +125,10 @@ particular the <code>scipy.ndimage.label</code> function
 (<a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.measurements.label.html#scipy-ndimage-measurements-label">documentation</a>).
 Note the use of <code>np.ones((3, 3, 3))</code> as a structuring element, meaning
 26-connectivity.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os.path</span>
 
 <span class="kn">import</span> <span class="nn">h5py</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span> <span class="k">as</span> <span class="n">ndi</span>
 <span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imsave</span>
@@ -141,10 +139,10 @@ Note the use of <code>np.ones((3, 3, 3))</code> as a structuring element, meanin
     <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;rice-bin_4x4x4.hdf5&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">binary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;binary&#39;</span><span class="p">])</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Selecting markers from distance local maxima...&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Selecting markers from distance local maxima...&#39;</span><span class="p">)</span>
     <span class="n">labels</span><span class="p">,</span> <span class="n">num_labels</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">binary</span><span class="p">,</span>
                                    <span class="n">structure</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;    ... found {} connected components&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_labels</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    ... found </span><span class="si">{}</span><span class="s1"> connected components&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_labels</span><span class="p">))</span>
 
     <span class="n">index</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">20150928</span><span class="p">)</span>
@@ -152,8 +150,7 @@ Note the use of <code>np.ones((3, 3, 3))</code> as a structuring element, meanin
     <span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 
     <span class="n">imsave</span><span class="p">(</span><span class="s1">&#39;connected_components.png&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">index</span><span class="p">]])</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The above code snippet
 (<a href="https://sbrisard.github.io/posts/20150930-Orientation_correlations_among_rice_grains-06/connected_components.py">download</a>)
@@ -163,7 +160,6 @@ on this slice, and we have produced a very poor segmentation indeed!
 <a name="fig02"></a>
 <img alt="Connected components" class="figure" src="https://sbrisard.github.io/posts/20150930-Orientation_correlations_among_rice_grains-06/connected_components.png"></p>
 <figcaption>Figure&nbsp;2:&nbsp;All rice grains of the slice shown on <a href="#fig01">Fig.&nbsp;1</a> are connected!</figcaption>
-
 <p>To close this section, it should be noted that the last lines of the above
 script produce a color image where each label receives a random color. Standard
 color maps are indeed ill-suited to visualization of labelled images. Indeed,
@@ -201,20 +197,20 @@ below does
 It draws heavily on the example from the
 <a href="http://scikit-image.org/docs/dev/api/skimage.morphology.html#watershed">scikit-image</a>
 documentation.</p>
-<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Watershed using local maxima of the distance map as seeds.&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Watershed using local maxima of the distance map as seeds.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os.path</span>
 
 <span class="kn">import</span> <span class="nn">h5py</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span> <span class="k">as</span> <span class="n">ndi</span>
 <span class="kn">from</span> <span class="nn">skimage.feature</span> <span class="kn">import</span> <span class="n">peak_local_max</span>
 <span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span><span class="p">,</span> <span class="n">imsave</span><span class="p">,</span> <span class="n">imshow</span>
 <span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="n">watershed</span>
 
-<span class="k">def</span> <span class="nf">markers_from_distance_local_max</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">min_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">markers_from_distance_local_max</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">distance</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="k">return</span>
 
@@ -224,18 +220,18 @@ documentation.</p>
     <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;rice-bin_4x4x4.hdf5&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">binary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;binary&#39;</span><span class="p">])</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Computing distance transform&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing distance transform&#39;</span><span class="p">)</span>
     <span class="n">distance</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Selecting markers from distance local maxima...&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Selecting markers from distance local maxima...&#39;</span><span class="p">)</span>
     <span class="n">local_maxi</span> <span class="o">=</span> <span class="n">peak_local_max</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">binary</span><span class="p">,</span>
                                 <span class="n">min_distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-                                <span class="n">indices</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                                <span class="n">indices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">markers</span><span class="p">,</span> <span class="n">num_seeds</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">local_maxi</span><span class="p">,</span>
                                    <span class="n">structure</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;    ... found {} seeds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_seeds</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    ... found </span><span class="si">{}</span><span class="s1"> seeds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_seeds</span><span class="p">))</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Computing watershed transform&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing watershed transform&#39;</span><span class="p">)</span>
     <span class="n">labels</span> <span class="o">=</span> <span class="n">watershed</span><span class="p">(</span><span class="o">-</span><span class="n">distance</span><span class="p">,</span> <span class="n">markers</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">binary</span><span class="p">)</span>
 
     <span class="n">index</span> <span class="o">=</span> <span class="mi">100</span>
@@ -245,8 +241,7 @@ documentation.</p>
 
     <span class="n">imsave</span><span class="p">(</span><span class="s1">&#39;distance.png&#39;</span><span class="p">,</span> <span class="n">distance</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">/</span><span class="n">distance</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
     <span class="n">imsave</span><span class="p">(</span><span class="s1">&#39;watershed-distance_local_max.png&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">index</span><span class="p">]])</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The result of this operation is shown on <a href="#fig03">Fig. 3</a>, where
 over-segmentation is observed. The reason for this is very simple, and typical
@@ -258,12 +253,10 @@ segmentation" class="figure" src="https://sbrisard.github.io/posts/20150930-Orie
 <figcaption>Figure 3: The result of watershed segmentation using local maxima of
 the map of the distance to the background as seeds. Clearly, over-segmentation
 occurs, which is typical with elongated objects.</figcaption>
-
 <p><a name="fig04"></a>
 <img alt="Distance map" class="figure" src="https://sbrisard.github.io/posts/20150930-Orientation_correlations_among_rice_grains-06/distance.png"></p>
 <figcaption>Figure 4: The map of the distance to the background. There are
 several local maxima in each grain.</figcaption>
-
 <p>One possible response would be to use so-called <em>vertical filters</em> (<a href="https://doi.org/10.5566/ias.v27.p23-28">Tariel et
 al., 2008</a>). I used here a more
 intuitive approach by providing a <code>min_distance</code> parameter to the
@@ -307,12 +300,12 @@ grain.</p>
 </ol>
 <p>The resulting script is very simple
 (<a href="https://sbrisard.github.io/posts/20150930-Orientation_correlations_among_rice_grains-06/watershed-directional_erosion.py">download</a>).</p>
-<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Watershed using directional erosions.&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;Watershed using directional erosions.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os.path</span>
 
 <span class="kn">import</span> <span class="nn">h5py</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span> <span class="k">as</span> <span class="n">ndi</span>
 <span class="kn">from</span> <span class="nn">skimage.feature</span> <span class="kn">import</span> <span class="n">peak_local_max</span>
@@ -346,12 +339,12 @@ grain.</p>
     <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;rice-bin_4x4x4.hdf5&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">binary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;binary&#39;</span><span class="p">])</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Computing distance transform&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing distance transform&#39;</span><span class="p">)</span>
         <span class="n">distance</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
         <span class="n">dset</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">distance</span><span class="p">)</span>
         <span class="n">dset</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">string_</span><span class="p">(</span><span class="s1">&#39;distance transform of `binary`&#39;</span><span class="p">)</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Selecting markers from directional erosion...&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Selecting markers from directional erosion...&#39;</span><span class="p">)</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">9.5</span>
         <span class="n">vertices</span>  <span class="o">=</span> <span class="n">icosahedron</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">eroded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">binary</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
@@ -366,13 +359,13 @@ grain.</p>
                                                           <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">))</span>
         <span class="n">dset</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">markers</span><span class="p">)</span>
         <span class="n">descr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;`binary` image was eroded with 20 spheroids &#39;</span><span class="o">+</span>
-                 <span class="s1">&#39;(a={}, c={}) &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">+</span>
+                 <span class="s1">&#39;(a=</span><span class="si">{}</span><span class="s1">, c=</span><span class="si">{}</span><span class="s1">) &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">+</span>
                  <span class="s1">&#39;using the vertices of a icosahedron as orientations. This&#39;</span><span class="o">+</span>
                  <span class="s1">&#39;image is the logical OR of all 20 eroded images.&#39;</span><span class="p">)</span>
         <span class="n">dset</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">string_</span><span class="p">(</span><span class="n">descr</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;    ... found {} seeds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_seeds</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    ... found </span><span class="si">{}</span><span class="s1"> seeds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_seeds</span><span class="p">))</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Computing watershed transform&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing watershed transform&#39;</span><span class="p">)</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="n">watershed</span><span class="p">(</span><span class="o">-</span><span class="n">distance</span><span class="p">,</span> <span class="n">markers</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">binary</span><span class="p">)</span>
         <span class="n">dset</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
         <span class="n">descr</span> <span class="o">=</span> <span class="s1">&#39;watershed using `markers` and the opposite of `distance`.&#39;</span>
@@ -386,8 +379,7 @@ grain.</p>
     <span class="n">imsave</span><span class="p">(</span><span class="s1">&#39;distance.png&#39;</span><span class="p">,</span> <span class="n">distance</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">/</span><span class="n">distance</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
     <span class="n">imsave</span><span class="p">(</span><span class="s1">&#39;makers-directional_erosion.png&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="n">markers</span><span class="p">[</span><span class="n">index</span><span class="p">]])</span>
     <span class="n">imsave</span><span class="p">(</span><span class="s1">&#39;watershed-directional_erosion.png&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">index</span><span class="p">]])</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>It identifies 2362 seeds (instead of 2672 in the previous approach). The
 resulting segmentation is shown in <a href="#fig05">Fig. 5</a>. It can be seen that we
@@ -395,7 +387,6 @@ almost got rid of over-segmentation.
 <a name="fig05"></a>
 <img alt="Directional erosion" class="figure" src="https://sbrisard.github.io/posts/20150930-Orientation_correlations_among_rice_grains-06/watershed-directional_erosion.png"></p>
 <figcaption>Figure 5: The result of watershed segmentation using directional erosions of the map of the distance to the background as seeds. Very little over-segmentation is observed.</figcaption>
-
 <h2>Conclusion</h2>
 <p>In an image analysis pipeline, segmentation is notoriously the critical step of
 the process.

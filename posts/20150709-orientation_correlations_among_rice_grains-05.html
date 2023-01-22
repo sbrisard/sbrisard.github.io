@@ -73,11 +73,11 @@ instalment</a>
 to be a circle centered at <code>(219, 217)</code>, with radius <code>208</code>. The following Python
 code computes and saves the histogram as a SVG file, which is displayed in
 <a href="#fig02">Fig. 2</a>.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os.path</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">skimage.draw</span> <span class="kn">import</span> <span class="n">circle</span>
 <span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span>
@@ -99,14 +99,12 @@ code computes and saves the histogram as a SVG file, which is displayed in
 <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_minor_locator</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">AutoMinorLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;rice-bin_4x4x4-hist-099.svg&#39;</span><span class="p">),</span>
-            <span class="n">transparent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
+            <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
+<div class="highlight"><pre><span></span><code>/usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
   warnings.warn(&quot;tight_layout : falling back to Agg renderer&quot;)
-</pre></div>
-
+</code></pre></div>
 
 <p><a name="fig02"></a>
 <img alt="Histogram of the original image" class="figure" src="https://sbrisard.github.io/posts/20150709-Orientation_correlations_among_rice_grains-05/rice-bin_4x4x4-hist-099.svg"></p>
@@ -245,9 +243,9 @@ for each slice, the analysis must be restricted to a circular ROI.</p>
 <p>We first load all binned slices, and recover the parameters of the circular
 boundaries of each ROI, from the <a href="https://sbrisard.github.io/posts/20150529-orientation_correlations_among_rice_grains-04.html">previous
 instalment</a>.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os.path</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">skimage.draw</span> <span class="kn">import</span> <span class="n">circle</span>
 <span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">threshold_otsu</span>
@@ -260,58 +258,51 @@ instalment</a>.</p>
 
 <span class="n">num_slices</span> <span class="o">=</span> <span class="n">circle_params</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">root</span> <span class="o">=</span> <span class="s2">&quot;/media/sf_sbrisard/Documents/tmp&quot;</span>
-<span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;bin_4x4x4&#39;</span><span class="p">,</span> <span class="s1">&#39;rice-bin_4x4x4-{0:03d}.tif&#39;</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;bin_4x4x4&#39;</span><span class="p">,</span> <span class="s1">&#39;rice-bin_4x4x4-</span><span class="si">{0:03d}</span><span class="s1">.tif&#39;</span><span class="p">)</span>
 <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">imread</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_slices</span><span class="p">)]</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Loaded {} images.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)))</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loaded </span><span class="si">{}</span><span class="s1"> images.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Loaded 172 images.
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>Loaded 172 images.
+</code></pre></div>
 
 <p>We then concatenate in <code>pixel_values</code> the gray levels of all pixels
 located inside the relevant ROI.</p>
-<div class="highlight"><pre><span></span><span class="n">pixel_values</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight"><pre><span></span><code><span class="n">pixel_values</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">circle_params</span><span class="p">):</span>
     <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">circle</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
     <span class="n">pixel_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
 
 <span class="n">pixel_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">pixel_values</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Concatenated {} pixel values.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pixel_values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Concatenated </span><span class="si">{}</span><span class="s1"> pixel values.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pixel_values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Concatenated 23342700 pixel values.
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>Concatenated 23342700 pixel values.
+</code></pre></div>
 
 <p>This concatenated array is then passed to <code>threshold_otsu</code> to compute the
 threshold.</p>
-<div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">pixel_values</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Otsu&#39;s threshold = {}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threshold</span><span class="p">))</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">pixel_values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Otsu&#39;s threshold = </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threshold</span><span class="p">))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Otsu&#39;s threshold = 126.
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>Otsu&#39;s threshold = 126.
+</code></pre></div>
 
 <p>Finally, the images are thresholded and saved</p>
-<div class="highlight"><pre><span></span><span class="n">basename</span> <span class="o">=</span> <span class="s1">&#39;rice-bin_4x4x4-otsu_{0}-{1:03d}.tif&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="n">basename</span> <span class="o">=</span> <span class="s1">&#39;rice-bin_4x4x4-otsu_</span><span class="si">{0}</span><span class="s1">-</span><span class="si">{1:03d}</span><span class="s1">.tif&#39;</span>
 <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;bin_4x4x4-otsu&#39;</span><span class="p">,</span> <span class="n">basename</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_slices</span><span class="p">)]</span>
 
 <span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">circle_params</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
     <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">circle</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
-    <span class="n">mask</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">mask</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">binary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">img</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
     <span class="n">imsave</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">img_as_ubyte</span><span class="p">(</span><span class="n">binary</span><span class="p">))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The above script produces a series of binary images called
 <code>rice-bin_4x4x4-otsu_XXX-YYY.tif</code>, where <code>XXX</code> denotes the threshold, and <code>YYY</code>

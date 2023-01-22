@@ -156,7 +156,7 @@ be used for steps 2 and 4.</p>
 <h2>A first implementation of Moisan's algorithm</h2>
 <p>Reference implementation of Moisan's algorithm results directly from
 the above analysis.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute the periodic component of the 2D image u.</span>
 
 <span class="sd">    This function returns the periodic-plus-smooth decomposition of</span>
@@ -190,7 +190,7 @@ the above analysis.</p>
     <span class="n">cos_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
     <span class="n">cos_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
 
-    <span class="n">k_dft</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">cos_m</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">+</span><span class="n">cos_n</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">k_dft</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="p">(</span><span class="n">cos_m</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">+</span><span class="n">cos_n</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
     <span class="n">k_dft</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
     <span class="n">s_dft</span> <span class="o">=</span> <span class="n">v_dft</span><span class="o">/</span><span class="n">k_dft</span>
     <span class="n">s_dft</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -201,27 +201,24 @@ the above analysis.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">u_dft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">u_dft</span><span class="o">-</span><span class="n">s_dft</span><span class="p">,</span> <span class="n">s_dft</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Which can be applied to the following image.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span><span class="p">,</span> <span class="n">imsave</span>
 
 <span class="n">u</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="o">+</span><span class="s1">&#39;hut-648x364.png&#39;</span><span class="p">)</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="Initial image" class="figure" src="https://sbrisard.github.io/posts/On_the_periodic-plus-smooth_decomposition_of_an_image/hut-648x364.png"></p>
 <p>The periodic-plus-smooth decomposition is then computed as follows.</p>
-<div class="highlight"><pre><span></span><span class="n">p</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">_per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">p</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">_per</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">inverse_dft</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">imsave</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="o">+</span><span class="s1">&#39;hut-648x364-periodic-_per-fftshift.png&#39;</span><span class="p">,</span>
        <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">real</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Which results in the following image ($p$ has been FFT-shifted, in
 order to demonstrate the effect of periodization).</p>
@@ -230,23 +227,20 @@ order to demonstrate the effect of periodization).</p>
 <em>complex</em> images (since we used the complex DFT to perform the
 decomposition). We ought to check that the imaginary parts of $p$ and
 $s$ are indeed nearly null</p>
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Imaginary part of&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  p: min = {}, max = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">imag</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">p</span><span class="o">.</span><span class="n">imag</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  s: min = {}, max = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">imag</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">s</span><span class="o">.</span><span class="n">imag</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Imaginary part of&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  p: min = </span><span class="si">{}</span><span class="s1">, max = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">imag</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">p</span><span class="o">.</span><span class="n">imag</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  s: min = </span><span class="si">{}</span><span class="s1">, max = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">imag</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">s</span><span class="o">.</span><span class="n">imag</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Imaginary part of
+<div class="highlight"><pre><span></span><code>Imaginary part of
   p: min = -2.6931883320843306e-12, max = 4.161745834921434e-12
   s: min = -4.161745834921434e-12, max = 2.6931883320843306e-12
-</pre></div>
-
+</code></pre></div>
 
 <p>We can then readily set $p$ and $s$ to their real parts</p>
-<div class="highlight"><pre><span></span><span class="n">p_act</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">real</span>
+<div class="highlight"><pre><span></span><code><span class="n">p_act</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">real</span>
 <span class="n">s_act</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">real</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><a name="testing"></a></p>
 <h2>Testing our implementation</h2>
@@ -255,54 +249,48 @@ instalment</a>
 of this series, we computed a reference periodic-plus-smooth
 decomposition by means of the conjugate gradient method. Let's do that
 again.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="kn">import</span> <span class="n">cg</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="kn">import</span> <span class="n">cg</span>
 
 <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-8</span>
 <span class="n">Q1</span> <span class="o">=</span> <span class="n">OperatorQ1</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">Q</span> <span class="o">=</span> <span class="n">OperatorQ</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">Q1</span><span class="nd">@u.reshape</span><span class="p">((</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">,))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Q1</span><span class="nd">@u</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">,))</span>
 <span class="n">x_exp</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">cg</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">info</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
     <span class="n">res_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">Q</span><span class="nd">@x_exp</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Residual: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">res_exp</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Residual: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">res_exp</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
 <span class="n">s_exp</span> <span class="o">=</span> <span class="n">x_exp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">p_exp</span> <span class="o">=</span> <span class="n">u</span><span class="o">-</span><span class="n">s_exp</span>
-</pre></div>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Residual: 3.9422689362828e-05
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>Residual: 3.9422689362828e-05
+</code></pre></div>
 
 <p>We can then compute the norm of the difference</p>
-<div class="highlight"><pre><span></span><span class="n">abs_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">abs_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">s_act</span><span class="o">-</span><span class="n">s_exp</span><span class="p">)</span>
 <span class="n">rel_err</span> <span class="o">=</span> <span class="n">abs_err</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">s_act</span><span class="o">+</span><span class="n">s_exp</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Error in L2-norm:&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - absolute: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">abs_err</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  - relative: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rel_err</span><span class="p">))</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in L2-norm:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - absolute: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">abs_err</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  - relative: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rel_err</span><span class="p">))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Error in L2-norm:
+<div class="highlight"><pre><span></span><code>Error in L2-norm:
   - absolute: 0.004504952971826568
   - relative: 1.3139651711483983e-06
-</pre></div>
-
+</code></pre></div>
 
 <p>This is already quite satisfactory. We can also compute the residual
 with the value of $s$ found through the DFT approach</p>
-<div class="highlight"><pre><span></span><span class="n">x_act</span> <span class="o">=</span> <span class="n">s_act</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">,))</span>
+<div class="highlight"><pre><span></span><code><span class="n">x_act</span> <span class="o">=</span> <span class="n">s_act</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">,))</span>
 <span class="n">res_act</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">Q</span><span class="nd">@x_act</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Residual: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">res_act</span><span class="p">))</span>
-</pre></div>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Residual: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">res_act</span><span class="p">))</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span>Residual: 1.8964547594731774e-11
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>Residual: 1.8964547594731774e-11
+</code></pre></div>
 
 <p>Which is much smaller than the residual obtained through conjugate
 gradient iterations! Surely, our implementation delivers the correct
