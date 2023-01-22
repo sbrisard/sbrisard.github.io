@@ -61,7 +61,7 @@ $$E = \frac{\mu(3\lambda+2\mu)}{\lambda+\mu}.\tag{3}$$
 
 The expression of the transverse strains is again derived using Eq. [(2)](#eq02)
 
-$$\varepsilon_{11} = \varepsilon_{22} = -\frac{\lambda}{2\mu(3\lambda+2\mu)}$$
+$$\varepsilon_{11} = \varepsilon_{22} = -\frac{\lambda}{2\mu(3\lambda+2\mu)}\sigma$$
 
 and by definition, Poisson's ratio is the oposite of the transverse to
 longitudinal strain ratio
@@ -84,7 +84,7 @@ Eq. [(1)](#eq01), we find that the strain tensor is also isotropic
 <a name="eq06"></a>
 $$\varepsilon_{ij} = -\frac{p\delta_{ij}}{3\lambda+2\mu}.\tag{6}$$
 
-It is recalled that $\varepsilon_\text v=\varepsilon_{kk} / 3$ denotes the
+It is recalled that $\varepsilon_\text v=\varepsilon_{kk}$ denotes the
 relative volume change of the material. Then, from Eq. [(6)](#eq06)
 
 $$\varepsilon_\text v = -\frac p{\kappa_\text{3D}},$$
@@ -132,6 +132,12 @@ modulus, Poisson's ratio, as well as the (3D) bulk modulus.  Expressions
 relating these various constants have also been derived. In the [next
 instalment]({filename}20131229-Elastic_constants_of_an_isotropic_material-02.md)
 of this series, we will discuss the case of 2D (plane strain elasticity).
+
+## Notes
+
+- 2023/01/22 – I would like to acknowledge Antonio Rodriguez Ferran from
+  [UPC-BarcelonaTech](https://www.upc.edu/en) for finding out two typos in this
+  post. Do send your comments and corrections!
 
 <!-- Local Variables: -->
 <!-- mode: markdown -->
