@@ -1,0 +1,20 @@
+project:
+  type: website
+
+website:
+  title: "Sébastien Brisard's blog"
+  site-url: https://sbrisard.github.io
+  description: "A great sample blog"
+  navbar:
+    right:
+      - text: About this blog
+        file: about.qmd
+      - text: About Me
+        href: https://cv.archives-ouvertes.fr/sbrisard
+      - text: GitHub
+        href: https://github.com/sbrisard
+
+format:
+  html:
+    theme: superhero # spacelab, superhero
+    css: styles.css
