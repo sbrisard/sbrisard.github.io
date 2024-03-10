@@ -8,7 +8,7 @@ Most of my research activities deal with upscaling the mechanical
 properties of heterogeneous materials. This is also known as
 homogenization. So what *is* homogenization? This series explores this
 question; it is largely based on the introduction to my [Habilitation
-defense](file:./20171117-Announcing_the_defense_of_my_habilitation.org).
+defense](../20171117-Announcing_the_defense_of_my_habilitation/index.qmd).
 
 In order to introduce homogenization, we will draw inspiration from
 the publishing industry. The following photograph[^1] was published
@@ -16,12 +16,12 @@ in *Le Journal* (a french daily newspaper) from thursday, may
 30<sup>th</sup>, 1935. It illustrates the first cruise of the ocean
 liner [Normandie](https://en.wikipedia.org/wiki/SS_Normandie).
 
-![The first cruise of the ocean liner Normandie.](Normandie.jpg)
+![The first cruise of the ocean liner Normandie.](../What_is_homogenization-files/Normandie.jpg)
 
 From where you sit, water exhibits nice shades of gray. However, let
 us take a closer look at the prow:
 
-![Close-up of the prow](Normandie-400x300.png)
+![Close-up of the prow](../What_is_homogenization-files/Normandie-400x300.png)
 
 It turns out that the sea has a *dotted* structure, which is inherent
 to the so-called [halftoning](https://en.wikipedia.org/wiki/Halftone)
@@ -64,7 +64,7 @@ graphical analogy. We explained that the key ingredient for
 homogenization to be valid is separation of scales.
 
 In the [next
-instalment]({filename}20200408-What_is_homogenization-02.md) of this
+instalment](../20200408-What_is_homogenization-02/index.qmd) of this
 series, we will discuss two strategies to carry out homogenization:
 the bottom-up and top-down approaches.
 

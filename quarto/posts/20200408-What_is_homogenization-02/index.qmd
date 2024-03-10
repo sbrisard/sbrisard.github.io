@@ -1,10 +1,12 @@
-Title: What is homogenization? Part 2: experimental vs. theoretical homogenization
-Date: 2020-04-08
-Category: Homogenization
-UseKaTeX: True
+---
+title: "What is homogenization? Part 2: experimental vs. theoretical homogenization"
+author: "Sébastien Brisard"
+date: "2020-04-08"
+image: "../What_is_homogenization-files/experimental_homogenization.png"
+---
 
 In the [previous
-instalment]({filename}20200402-What_is_homogenization-01.md) of this
+instalment](../20200402-What_is_homogenization-01/index.qmd) of this
 series, we introduced homogenization and the separation of scales. In
 the present post, we will discuss two strategies to carry out
 homogenization: the experimental and the theoretical approaches. To do
@@ -13,16 +15,16 @@ so, we will again use the analogy with the halftoning technique.
 Remember that we considered the following picture, reproduced from *Le
 Journal* (thursday, may 30<sup>th</sup>, 1935).
 
-![The first cruise of the ocean liner Normandie.]({static}What_is_homogenization/Normandie.jpg){.figure}
+![The first cruise of the ocean liner Normandie.](../What_is_homogenization-files/Normandie.jpg)
 
 Taking a closer look at the prow:
 
-![Close-up of the prow]({static}What_is_homogenization/Normandie-400x300.png){.figure}
+![Close-up of the prow](../What_is_homogenization-files/Normandie-400x300.png)
 
 we realized that what *looked like* shades of gray in the photograph
 was actually a *dotted* structure. This dotted structure will be
 called the *microstructure*; its typical length-scale is the
-*microscopic* length-scale $L\_\mu$ that was introduced before.
+*microscopic* length-scale $L_μ$ that was introduced before.
 
 Now, let us imagine what happened when this photograph was actually
 printed alongside the article about the launch of the ocean liner
@@ -35,7 +37,7 @@ pattern to the resulting shade of gray.
 This is what homogenization is really about: **homogenization provides a
 mapping from the _microstructure_ to the _effective properties_**.
 
-![Experimental homogenization]({static}What_is_homogenization/experimental_homogenization.png){.fig30p100}
+![Experimental homogenization](../What_is_homogenization-files/experimental_homogenization.png){width=30%}
 
 Our friend the printer first performed the required homogenization
 step *experimentally*. As the problem at hand is about human
@@ -62,24 +64,28 @@ dot pattern is *periodic*: it is the result of paving the plane with a
 single *unit-cell*, a hexagon in the present case (see figure below,
 where the unit-cell is shown in gray).
 
-![The unit-cell]({static}What_is_homogenization/unit-cell.png){.fig30p100}
+![The unit-cell](../What_is_homogenization-files/unit-cell.png){width=30%}
 
 The total surface area of the unit-cell is $A$, and the surface area
 covered by the black dot(s) is $A_{\mathrm{b}}$. The surface area
-$A\_{\mathrm{w}}=A-A\_{\mathrm{b}}$ remains white. Then, the upscaling
+$A_{\mathrm{w}} = A - A_{\mathrm{b}}$ remains white. Then, the upscaling
 rule reads
 
-$$G^{\mathrm{eff}} = \frac{A\_{\mathrm{w}}}{A},$$
+$$
+G^{\mathrm{eff}} = \frac{A_{\mathrm{w}}}{A},
+$$
 
-where $0\leq G^{\mathrm{eff}}\leq 1$ denotes the *effective* gray
+where $0 ≤ G^{\mathrm{eff}} ≤ 1$ denotes the *effective* gray
 level ($G^{\mathrm{eff}}=0$: black; $G^{\mathrm{eff}}=1$: white). The
 above upscaling rule can be seen as a form of [rule of
 mixtures](https://en.wikipedia.org/wiki/Rule_of_mixtures). Indeed, let
-$G\_{\mathrm{b}}=0$ and $G\_{\mathrm{w}}=1$ denote the gray levels of
+$G_{\mathrm{b}} = 0$ and $G_{\mathrm{w}}=1$ denote the gray levels of
 black and white, respectively. Then, the effective gray level is
 expressed as the following weighted average of the local gray levels
 
-$$G = \frac{A\_{\mathrm{b}}}{A} G\_{\mathrm{b}}+\frac{A\_{\mathrm{w}}}{A} G\_{\mathrm{w}},$$
+$$
+G = \frac{A_{\mathrm{b}}}{A} G_{\mathrm{b}} + \frac{A_{\mathrm{w}}}{A} G_{\mathrm{w}},
+$$
 
 where the weights are the surface fractions. This is in fact a rare
 example where the rule of mixtures gives the correct answer! It is
@@ -111,7 +117,7 @@ of unsaturated porous media, where we need to account for all menisci.
 
 In my research, I preferably resort to theoretical homogenization, to
 which the remainder of this series will be devoted. In the [next
-instalment]({filename}20200421-What_is_homogenization-03.md), we will
+instalment](../20200421-What_is_homogenization-03/index.qmd), we will
 discuss periodic vs. random homogenization.
 
 <!-- -*- coding: utf-8; fill-column: 80 -*- -->
