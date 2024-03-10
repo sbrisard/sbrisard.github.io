@@ -1,6 +1,8 @@
-Title: New paper on the effect of two-point correlations on the effective properties
-Date: 2021-08-05
-Category: Publications
+---
+title: "New paper on the effect of two-point correlations on the effective properties"
+author: "Sébastien Brisard"
+date: "2021-08-05"
+---
 
 Together with our post-doctoral fellow Othmane Zerhouni, my colleague
 [Kostas Danas](http://kostasdanas.com/)
