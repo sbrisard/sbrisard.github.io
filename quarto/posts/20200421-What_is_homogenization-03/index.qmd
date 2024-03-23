@@ -1,9 +1,11 @@
-Title: What is homogenization? Part 3: ensemble averages vs. volume averages
-Date: 2020-04-21
-Category: Homogenization
-UseKaTeX: True
+---
+title: "What is homogenization? Part 3: ensemble averages vs. volume averages"
+author: "Sébastien Brisard"
+date: "2020-04-21"
+image: "../What_is_homogenization-files/sponge.png"
+---
 
-In the [previous instalment]({filename}20200408-What_is_homogenization-02.md) of
+In the [previous instalment](../20200408-What_is_homogenization-02/index.qmd) of
 this series on homogenization, we discussed homogenization of a distribution of
 black dots on a white background to a uniform shade of gray. In that example,
 homogenization boils down to evaluating the fraction of the total area occupied
@@ -15,17 +17,19 @@ volume fractions in the present post, where we will introduce *periodic* and
 *random* homogenization.
 
 In the halftoning example that we used
-[previously]({filename}20200408-What_is_homogenization-02.md), computing the
+[previously](../20200408-What_is_homogenization-02/index.qmd), computing the
 effective gray-level was fairly easy owing to the fact that the dots were
 regularly spaced. The pattern is in fact periodic: the whole plane (or space)
 can be paved with one single *unit-cell* (a hexagon in the present case).
 
-![The unit-cell]({static}What_is_homogenization/unit-cell.png){.fig30p100}
+![The unit-cell](../What_is_homogenization-files/unit-cell.png){width=30%}
 
 Once the unit-cell had been identified, the effective gray-level was computed as
 the following surface fraction
 
-$$\text{effective gray level} = \frac{\text{surface area of white region}}{\text{surface area of unit-cell}}.$$
+$$
+\text{effective gray level} = \frac{\text{surface area of white region}}{\text{surface area of unit-cell}}.
+$$
 
 This is an example of what is called *periodic homogenization*, meaning that the
 heterogeneities are laid out in a periodic pattern. Homogenization in the
@@ -48,7 +52,7 @@ pattern considered above. They are in fact *disordered*. For example, the
 distribution of holes (pores) in the following (manufactured) sponge does not
 follow a regular pattern.
 
-![An example of a disordered material]({static}What_is_homogenization/sponge.png){.fig50p100}
+![An example of a disordered material](../What_is_homogenization-files/sponge.png){width=50%}
 
 So, how do we move from the simple, periodic case to the more realistic,
 disordered case? The keyword is: “random process”. We *assume* that the material
@@ -92,12 +96,16 @@ $\vec x$, you measure $\chi(\vec x, \omega_1), \ldots, \chi(\vec x, \omega_N)$,
 where $\omega_1,\ldots, \omega_N$ denote the sponges under scrutiny. The
 empirical probability that point $\vec x$ belongs to the solid phase is
 
-$$P[\chi(\vec x, \omega)=1]=\frac1N\sum_{i=1}^N\chi(\vec x, \omega_i).$$
+$$
+P[\chi(\vec x, \omega)=1]=\frac1N\sum_{i=1}^N\chi(\vec x, \omega_i).
+$$
 
 The above probability can also be seen as the expectation of $\chi(\vec x,
 \omega)$, for fixed observation point $\vec x$
 
-$$\mathbb{E}(\chi)(\vec x)=0\times P[\chi(\vec x, \omega)=0]+1\times P[\chi(\vec x, \omega)=1],$$
+$$
+\mathbb{E}(\chi)(\vec x)=0\times P[\chi(\vec x, \omega)=0]+1\times P[\chi(\vec x, \omega)=1],
+$$
 
 and it results from the above discussion that $\mathbb E(\chi)(\vec x)$ is the
 “frequency of occurence” of the solid phase at point $\vec x$. Note that this
@@ -110,7 +118,7 @@ equivalent (they carry the “same randomness”). For statistically homogeneous
 materials, we will write $\mathbb E(\chi)$ rather than $\mathbb E(\chi)(\vec
 x)$, since the observation point $\vec x$ is irrelevant.
 
-[^1]: The material is homogeneous if *all* its correlation functions of any order $n$ are translation invariant, that is $\mathbb E[\chi(\vec x_1+\vec r)\cdots\chi(\vec x_n+\vec r)]=\mathbb E[\chi(\vec x_1)\cdots\chi(\vec x_n)]$ for all observation points $\vec x_1, \ldots, \vec x_n$ and translation $\vec r$.
+[^1]: The material is homogeneous if *all* its correlation functions of any order $n$ are translation invariant, that is $\mathbb E[\chi(\vec x_1+\vec r)\cdots\chi(\vec x_n+\vec r)]=\mathbb E[\chi(\vec x_1)\cdots\chi(\vec x_n)]$ for all observation points $\vec x_1, \ldots, \vec x_n$ and translations $\vec r$.
 
 The ensemble average $\mathbb E(\chi)$ was obtained above by freezing the first
 variable $\vec x$ in $\chi(\vec x, \omega)$. We now freeze the second variable,
@@ -126,13 +134,13 @@ $$\frac 1N\sum_{i=1}^N\chi(\vec x_i, \omega)$$
 is an estimate of the fraction of points that are located in the solid phase. In
 the limit of very dense 3D grids, the above sum converges to an integral
 
-$$\frac 1N\sum_{i=1}^N\chi(\vec x_i, \omega)\to\frac 1V\int_{\Omega}\chi(\vec x, \omega)\,\D V,$$
+$$\frac 1N\sum_{i=1}^N\chi(\vec x_i, \omega)\to\frac 1V\int_{\Omega}\chi(\vec x, \omega)\,\mathrm{d} V,$$
 
 where $\Omega$ denotes the domain occupied by the sponge, and $V$ its
 volume. This quantity is the *volume average* $\langle\chi\rangle(\omega)$ of
 $\chi$
 
-$$\langle\chi\rangle(\omega)=\frac1V\int_{\Omega}\chi(\vec x, \omega)\,\D V.$$
+$$\langle\chi\rangle(\omega)=\frac1V\int_{\Omega}\chi(\vec x, \omega)\,\mathrm{d} V.$$
 
 The volume average depends on the realization $\omega$: in other words, the
 volume fraction of solid may vary from one sponge to another. However, we do
@@ -141,7 +149,7 @@ fact *not* depend on the realization. This property is not universal, though. It
 characterizes so-called *ergodic* materials. Very roughly speaking, for ergodic
 materials, volume averages over large domains converge to the ensemble average
 
-$$\lim_{V\to+\infty}\frac1V\int_{\Omega}\chi(\vec x, \omega)\,\D V\to\mathbb E(\chi).$$
+$$\lim_{V\to+\infty}\frac1V\int_{\Omega}\chi(\vec x, \omega)\,\mathrm{d} V\to\mathbb E(\chi).$$
 
 This limit is sometimes called the *thermodynamic limit*. It will always be
 assumed in this series that the materials considered are ergodic.
@@ -159,7 +167,7 @@ statistically homogeneous materials, the ensemble average does not depend on the
 observation point. Furthermore, for ergodic materials, the volume average over a
 large domain coincides with the ensemble average.
 
-In the [next post]({filename}20201208-What_is_homogenization-04.md), we will
+In the [next post](../20201208-What_is_homogenization-04/index.qmd), we will
 consider our first homogenization example.
 
 <!-- Local Variables: -->
