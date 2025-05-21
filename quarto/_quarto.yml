@@ -20,4 +20,5 @@ format:
     css: styles.css
 
 crossref:
+  eq-prefix: ""
   fig-prefix: ""
