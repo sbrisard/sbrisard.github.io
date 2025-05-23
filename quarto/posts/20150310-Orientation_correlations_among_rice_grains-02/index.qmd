@@ -1,9 +1,10 @@
-Title: Orientation correlations among rice grains, part 2: acquisition of tomography images
-Date: 2015-03-10
-Category: Image analysis
+---
+title: "Orientation correlations among rice grains, part 2: acquisition of tomography images"
+date: 2015-03-10
+---
 
 In the
-[first]({filename}20150223-Orientation_correlations_among_rice_grains-01.md)
+[first](../20150223-Orientation_correlations_among_rice_grains-01.md)
 instalment of this series, I briefly introduced orientational order in
 assemblies of anisotropic particles, and proposed an illustration based on
 synthetic microstructures. But what I really intend to do in this series is to
@@ -21,7 +22,7 @@ the grains is about 6.5mm as the image analysis to come will show. Therefore,
 strong boundary effects are to be expected.  This is no big issue for the
 present study, which is carried out for illustrative purposes only.
 
-![Sample]({static}20150310-Orientation_correlations_among_rice_grains-02/rice-sample-medium.png){.figure}
+![](files/rice-sample-medium.png)
 
 Two X-ray sources are available at Laboratoire Navier. For the present
 experiment, we used the [Hamamatsu
@@ -35,7 +36,7 @@ imager frame-rate of 6 images per second. To reduce noise, 12 radiographs were
 averaged to produce one projection; the total number of projections was 1440
 (see below a typical projection).
 
-![Projection]({static}20150310-Orientation_correlations_among_rice_grains-02/rice-proj0000-medium.png){.figure}
+![](files/rice-proj0000-medium.png)
 
 3D reconstruction was carried out using standard tools developed by [RX
 Solutions France](http://www.rxsolutions.fr/). Contrast, resolution and
@@ -43,7 +44,7 @@ signal-to-noise ratio were all excellent, so that the most basic reconstruction
 procedure resulted in very high quality 3D images (see three orthogonal slices
 below).
 
-![Slices]({static}20150310-Orientation_correlations_among_rice_grains-02/rice-orthoslices.png){.figure}
+![](files/rice-orthoslices.png)
 
 The reconstruction is highly contrasted, so that simple thresholding should
 produce a very convincing segmentation. This will be the topic of the next
