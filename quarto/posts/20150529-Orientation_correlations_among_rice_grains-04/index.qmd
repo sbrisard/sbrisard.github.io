@@ -1,12 +1,14 @@
-Title: Orientation correlations among rice grains, part 4: defining the ROI
-Date: 2015-05-29
-UseKaTeX: True
-In the [previous instalment]({filename}20150330-Orientation_correlations_among_rice_grains-03.md) of this series, we obtained binned slices of the sample. [Fig.&nbsp;1](#fig01) below displays a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within the Region Of Interest (ROI) thus defined.
-<figure id="fig01">
-![Typical binned slice]({static}20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-099.png){.figure}
-<figcaption>Figure 1&nbsp;&ndash;&nbsp;A typical slice of the 3D reconstruction of the sample. The original image has been reduced by 4×4×4 binning; the size of each binned slice is 436×437.</figcaption>
-</figure>
-## The circle Hough Transform
+---
+title: "Orientation correlations among rice grains, part 4: defining the ROI"
+date: "2015-05-29"
+---
+
+In the [previous instalment](../20150330-Orientation_correlations_among_rice_grains-03) of this series, we obtained binned slices of the sample. Fig. @fig-01 below displays a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of the sample container are visible on the 3D image. In this post, I will show how we can locate these walls. Then, any subsequent analysis will be performed within the Region Of Interest (ROI) thus defined.
+
+![A typical slice of the 3D reconstruction of the sample. The original image has been reduced by 4×4×4 binning; the size of each binned slice is 436×437.](files/rice-bin_4x4x4-099.png){#fig-01}
+
+
+# The circle Hough Transform
 
 The sample container is cylindrical; since it was nearly vertical during the tomography experiment, its trace is a circular ring on each slice. We are going to use the [Circle Hough Transform](http://en.wikipedia.org/wiki/Circle_Hough_Transform) in order to locate the inner and outer circular boundaries which define this ring. To do so, we will use [python](https://www.python.org/), [numpy](http://www.numpy.org/) and [scikit-image](http://scikit-image.org/docs/dev/api/skimage.html). We first import these modules, and load the image
 
@@ -42,11 +44,10 @@ imsave(os.path.join(root, 'rice-bin_4x4x4-edges-099.png'),
        img_as_ubyte(edges))
 ```
 
-The resulting image is shown in [Fig.&nbsp;2](#fig02). It should be noted that due to the preliminary binning (which is nothing but a mean filter), the input image exhibits very little noise. Therefore, `sigma=0.0` in the above call to `skimage.feature.canny`.
-<figure id="fig02">
-![Canny edge detection]({static}20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-edges-099.png){.figure}
-<figcaption>Figure 2&nbsp;&ndash;&nbsp;Canny edge detection performed on the initial image shown in <a href="#fig01">Fig.&nbsp;1</a>.</figcaption>
-</figure>
+The resulting image is shown in Fig. @fig-02. It should be noted that due to the preliminary binning (which is nothing but a mean filter), the input image exhibits very little noise. Therefore, `sigma=0.0` in the above call to `skimage.feature.canny`.
+
+![Canny edge detection performed on the initial image shown in Fig. @fig-01.](files/rice-bin_4x4x4-edges-099.png){#fig-02}
+
 We are now ready to compute the Circle Hough Transform. This transform aims at finding circles within an image. It was proposed by Duda and Hart ([1971](https://doi.org/10.1145/361237.361242)) (see also [Wikipedia](http://en.wikipedia.org/wiki/Hough_transform)). It should be understood as a histogram in parameter space. More precisely, a point $(x, y)$ belongs to the circle centered at $(c_x, c_y)$ and of radius $r$ if, and only if
 
 $$(x-c_x)^2+(y-c_y)^2=r^2.$$
@@ -62,7 +63,7 @@ How is this representation in parameter space to be used? We consider a binary (
 $$\mathcal H(c_x, c_y, r)=\sum_i\mathcal H_i(c_x, c_y, r).$$
 
 $\mathcal H$ should really be understood as a *histogram*. Indeed, a peak in $\mathcal H$ indicates that the cones corresponding to many pixels intersect at the same point in parameter space. In other words, many pixels in the original image belong to the *same* circle. Finding circles in the original image therefore reduces to finding peaks in its Hough transform. That is what we are going to do presently. We must first compute the Hough transform. In order to reduce the CPU cost, we
-will only consider these circles whose radius is close to that of the sample container. We saw in [part 2]({filename}20150310-Orientation_correlations_among_rice_grains-02.md) of this series that the radius of the sample container is 25 mm, while the voxel size is approximately 0.03 mm; after binning, the voxel size is therefore 0.12 mm, and the radius of the sample container is approx. 25 / 0.12 = 208 px. In the following code, we ask for the circle Hough transform for circles with radii between 190 and 220 px.
+will only consider these circles whose radius is close to that of the sample container. We saw in [part 2](../20150310-Orientation_correlations_among_rice_grains-02) of this series that the radius of the sample container is 25 mm, while the voxel size is approximately 0.03 mm; after binning, the voxel size is therefore 0.12 mm, and the radius of the sample container is approx. 25 / 0.12 = 208 px. In the following code, we ask for the circle Hough transform for circles with radii between 190 and 220 px.
 
 We first tell Python to ignore all warnings. This is extremely poor practice, but otherwise `skimage.io.imsave` will complain about low-contrast images (and my version of `skimage` does not implement the `check_contrast` keyword argument).
 
@@ -82,11 +83,11 @@ for i, radius in enumerate(radii):
            h[i, ...])
 ```
 
-The above code snippet saves a series of images, which is displayed below in 3D as an animated GIF (see [Fig.&nbsp;3](#fig03)). The two bright spots indicate the location of the inner and outer boundaries in the parameter space. We will use a very crude procedure to locate these two peaks (a more elaborate method is not required as we do not seek sub-pixel accuracy).
+The above code snippet saves a series of images, which is displayed below in 3D as an animated GIF (see Fig. @fig-03). The two bright spots indicate the location of the inner and outer boundaries in the parameter space. We will use a very crude procedure to locate these two peaks (a more elaborate method is not required as we do not seek sub-pixel accuracy).
 <figure id="fig03">
-![Hough transform as a histogram]({static}20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-hough-3D_rot-099.gif){.figure}
-<figcaption>Figure 3&nbsp;&ndash;&nbsp;3D view of the Hough transform. The two bright spots correspond to the inner and outer boundaries of the sample container.</figcaption>
-</figure>
+
+![3D view of the Hough transform. The two bright spots correspond to the inner and outer boundaries of the sample container.](files/rice-bin_4x4x4-hough-3D_rot-099.gif){#fig-03}
+
 The code snippet below finds the two highest values of the Hough transform. The correct peak (inner boundary) corresponds to the *smallest* radius. Then, the coordinates of the center of the corresponding circle are found.
 
 
@@ -116,19 +117,19 @@ img_rgb[rows, cols] = (255, 0, 0)
 imsave(os.path.join(root, 'rice-bin_4x4x4-boundary-099.png'), img_rgb)
 ```
 
-Which produces the following image (see [Fig.&nbsp;4](#fig04)).
-<figure id="fig04">
-![Boundary]({static}20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-boundary-099.png){.figure}
-<figcaption>Figure 4&nbsp;&ndash;&nbsp;The original image overlaid with the identified boundary.</figcaption>
-</figure>
-A closer look (see [Fig.&nbsp;5](#fig05)) shows that we roughly achieved pixel accuracy, which will be sufficient for the analysis to come.
-<figure id="fig05">
-![Boundary]({static}20150529-Orientation_correlations_among_rice_grains-04/rice-bin_4x4x4-roi_64x64+10+110-boundary-resized-099.png){.figure}
-<figcaption>Figure 5&nbsp;&ndash;&nbsp;Close-up of [Fig.&nbsp;4](#fig04); pixel accuracy was approximately achieved.</figcaption>
-</figure>
-## Analysis of the whole stack
+Which produces the following image (see Fig. @fig-04).
+
+![The original image overlaid with the identified boundary.](files/rice-bin_4x4x4-boundary-099.png){#fig-04}
+
+A closer look (see Fig. @fig-05) shows that we roughly achieved pixel accuracy, which will be sufficient for the analysis to come.
+
+![Close-up of Fig. @fig04; pixel accuracy was approximately achieved.](files/rice-bin_4x4x4-roi_64x64+10+110-boundary-resized-099.png){#fig-05}
+
+
+# Analysis of the whole stack
 
 We are now ready to carry out the above analysis on all 172 images of the stack. This is what the script below does ([download]({static}20150529-Orientation_correlations_among_rice_grains-04/find_boundary.py)); in order to check that nothing went wrong, each image with overlaid boundary is saved for visual inspection.
+
 ```python
 import os.path
 import numpy as np
@@ -193,13 +194,15 @@ print('avg = {}\nstd = {}'.format(a.mean(axis=0), a.std(axis=0)))
 
 Which shows that there is very little variation of the circle parameters across the slices.
 
-## Closing words
 
-In this post, we saw how to define the (cylindrical) ROI on our stack of images. To do so, we used the Circle Hough Transform to find circular edges in the slices. In the [next]({filename}20150709-Orientation_correlations_among_rice_grains-05.md) instalment of this series, I will start discussing segmentation *per se*.
+# Closing words
 
-## Side-note: how to produce animated GIFs
+In this post, we saw how to define the (cylindrical) ROI on our stack of images. To do so, we used the Circle Hough Transform to find circular edges in the slices. In the [next](../20150709-Orientation_correlations_among_rice_grains-05) instalment of this series, I will start discussing segmentation *per se*.
 
-The animated GIF in [Fig.&nbsp;3](#fig03) was produced with [ImageJ](http://imagej.nih.gov/ij/). The procedure is
+
+# Side-note: how to produce animated GIFs
+
+The animated GIF in Fig. @fig-03 was produced with [ImageJ](http://imagej.nih.gov/ij/). The procedure is
 
 1. Import the image sequence (`File → Import → Image Sequence…`) called
    `rice-bin_4x4x4-hough-099-*.tif`,
