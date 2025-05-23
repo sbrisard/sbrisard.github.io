@@ -1,6 +1,7 @@
-Title: Orientation correlations among rice grains, part 1: introduction
-Date: 2015-02-23
-Category: Image analysis
+---
+title: "Orientation correlations among rice grains, part 1: introduction"
+date: "2015-02-23"
+---
 
 In this series, I will explore the notion of orientational order in random
 packings of anisotropic (flat or elongated), hard particles. By orientational
@@ -31,7 +32,7 @@ that particles with similar colors have similar orientations.
 
 |   |   |   |
 |---|---|---|
-| ![40%]({static}20150223-Orientation_correlations_among_rice_grains-01/spheroids_40p100.png){.figure} | ![50%]({static}20150223-Orientation_correlations_among_rice_grains-01/spheroids_50p100.png){.figure} | ![60%]({static}20150223-Orientation_correlations_among_rice_grains-01/spheroids_60p100.png){.figure} |
+| ![40%](files/spheroids_40p100.png) | ![50%](files/spheroids_50p100.png){.figure} | ![60%](files/spheroids_60p100.png){.figure} |
 
 It should be mentioned that generating such compact assemblies is no trivial
 task. The event-driven molecular dynamics algorithm proposed by Donev, Torquato
@@ -52,8 +53,7 @@ exhibit long-range correlations. In the next instalments of this series, I will
 show how these correlations can be quantified, both on synthetic and
 \"real-life\" samples.
 
-See [part
-2]({filename}20150310-Orientation_correlations_among_rice_grains-02.md) of this
+See [part 2](../20150310-Orientation_correlations_among_rice_grains-02) of this
 series.
 
 <!-- Local Variables: -->
