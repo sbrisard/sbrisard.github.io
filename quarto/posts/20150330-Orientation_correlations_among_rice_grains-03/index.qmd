@@ -1,23 +1,30 @@
-Title: Orientation correlations among rice grains, part 3: intermezzo – Binning images
-Date: 2015-03-30
-The full reconstructed image resulting from the tomography experiment described in the [second]({filename}20150310-Orientation_correlations_among_rice_grains-02.md) instalment of this series is a 1747×1751×688 stack. The voxel size is about 0.030 mm. This is far too much for the purpose of the present study, since all we are interested in is the determination of the location (coordinates of the centroid) and orientation (principal axes of inertia) of the rice grains. In order to reduce the computation time, the images will first be *binned*, that is each set of (say) 4×4×4 voxels will be replaced with a unique voxel, with average gray value (see below for an illustration). 3D binning would usually require three uggly nested loops. There is, however, a much more pythonic way. This is the topic of the present post.
-![original vs. binned]({static}20150330-Orientation_correlations_among_rice_grains-03/original_vs_binned.png){.figure}
-## Zen of NumPy
+---
+title: "Orientation correlations among rice grains, part 3: intermezzo – Binning images"
+date: "2015-03-30"
+---
+
+The full reconstructed image resulting from the tomography experiment described in the [second](../20150310-Orientation_correlations_among_rice_grains-02) instalment of this series is a 1747×1751×688 stack. The voxel size is about 0.030 mm. This is far too much for the purpose of the present study, since all we are interested in is the determination of the location (coordinates of the centroid) and orientation (principal axes of inertia) of the rice grains. In order to reduce the computation time, the images will first be *binned*, that is each set of (say) 4×4×4 voxels will be replaced with a unique voxel, with average gray value (see below for an illustration). 3D binning would usually require three uggly nested loops. There is, however, a much more pythonic way. This is the topic of the present post.
+
+![](files/original_vs_binned.png)
+
+
+# Zen of NumPy
 
 You probably have all heard of Tim Peters' *Zen of Python*, which you can display in the Python console through the command `import this`. A few years ago, [Travis Oliphant](https://plus.google.com/111231464998965388525/about), who is the author of NumPy (but also CEO of [Continuum Analytics](http://www.continuum.io/), which provides [Anaconda](https://store.continuum.io/cshop/anaconda/)), wrote a post called *[Zen of NumPy](http://technicaldiscovery.blogspot.fr/2010/11/zen-of-numpy.html)*, in which he came up with the following points
 
-Strided is better than scattered<br />
-Contiguous is better than strided<br />
-Descriptive is better than imperative (use data-types)<br />
-Array-oriented is often better than object-oriented<br />
-Broadcasting is a great idea -- use where possible<br />
-Vectorized is better than an explicit loop<br />
-Unless it's complicated --- then use numexpr, weave, or Cython<br />
-Think in higher dimensions<br />
+| Strided is better than scattered
+| Contiguous is better than strided
+| Descriptive is better than imperative (use data-types)
+| Array-oriented is often better than object-oriented
+| Broadcasting is a great idea -- use where possible
+| Vectorized is better than an explicit loop
+| Unless it's complicated --- then use numexpr, weave, or Cython
+| Think in higher dimensions
 
 We will be particularly interested in the last point: “think in higher dimensions”; this, and the `numpy.lib.stride_tricks.as_strided()` function are the crux of the present post.
 
-## Binning a 2D array: using loops
+
+# Binning a 2D array: using loops
 
 We eventually want to perform binning on a 3D array (a stack of 2D slices). But, for the sake of illustration, the method will be demonstrated on a 2D array. We must first generate the data.
 
@@ -113,7 +120,9 @@ np.linalg.norm(binned2 - binned1)
 
 
 OK, that's fine. But this solution is even worse than the previous one, since we are now left with *four* nested loops! However, the above code snippet suggests that we could consider `a2` as a four-dimensional array, where all cells are grouped in 4×4 *macro-cells*, as shown below.
-![binning]({static}20150330-Orientation_correlations_among_rice_grains-03/binning.svg){.figure}
+
+![](files/binning.svg)
+
 In other words, if we introduced the auxiliary array `a4` defined as follows
 
 <a name="eq01"></a>
@@ -129,7 +138,8 @@ binned3 = np.mean(a4, axis=(-1, -2))
 
 In the next section, we will show that creation of `a4` with NumPy is actually straightforward, and entails no data copy.
 
-## Stride tricks
+
+# Stride tricks
 
 The present approach works only for strided arrays. In the above example, the data of array `a2` is actually stored in a 1D array (let's call it `data`), and the [offset](http://en.wikipedia.org/wiki/Offset_%28computer_science%29) of element `(i0, i1)` is given by `s0*i0 + s1*i1`, where `(s0, s1)` are the strides (as returned by `a2.strides`) of the n-dimensional array. In other words, we have for all `i0` and `i1`
 
@@ -140,14 +150,14 @@ The present approach works only for strided arrays. In the above example, the da
 
 Now, going back to the construction of the four-dimensional array `a4`. We want to enforce [(1)](#eq01); using [(2)](#eq02), we find that
 
-``` {.example}
+```
 a4[j0, j1, j2, j3] = data[s0*(j0*bin_size + j2) + s1*(j1*bin_size + j3)]
                    = data[s0*j0 + s1*j1 + s0*bin_size*j2 + s1*bin_size*j3]
 ```
 
 Therefore, `a4` can be built as a strided array, using the *same* data array as a2, with strides `(s0, s1, s0*bin_size, s1*bin_size)`. The NumPy function `numpy.lib.stride_tricks.as_strided` does just that:
 
-``` {.example}
+```
 numpy.lib.stride_tricks.as_strided(x, shape=None, strides=None)
 
 Make an ndarray from the given array with the given shape and strides.
@@ -192,7 +202,8 @@ np.linalg.norm(binned3 - binned1)
 
 Which shows that the above approach is correct. Thinking in higher dimensions allowed us to replace all Python loops with low-level, C loops. This approach is therefore way faster than the previous ones. However, it should be noted that re-striding `a2` leads to a computation of the binned array by means of *four* (instead of two) nested loops. Given that these loops are implemented in C, the overhead is probably acceptable.
 
-## Putting it all together
+
+# Putting it all together
 
 The script which allowed the binning of the whole 3D image is presented below. Is is slightly more complex than the previous example, because the 3D image is actually stored as a series of 2D images (in separate files). Image files must therefore be loaded 4 at a time and summed. The resulting 2D array is then binned. Also, the images are converted to 8 bits, and the histogram is adjusted accordingly.
 ```python
@@ -253,6 +264,7 @@ if __name__ == '__main__':
         write_slice(i, out[i])
 
 ```
-## Conclusion
 
-In this post, we took a slight detour on our way towards segmentation and analysis of our 3D images. Still, I hope you enjoyed this post and found it useful. In the [next instalment]({filename}20150529-Orientation_correlations_among_rice_grains-04.md), we will be back on track, as I will discuss the segmentation of the cylindrical sample container.
+# Conclusion
+
+In this post, we took a slight detour on our way towards segmentation and analysis of our 3D images. Still, I hope you enjoyed this post and found it useful. In the [next instalment](../20150529-Orientation_correlations_among_rice_grains-04), we will be back on track, as I will discuss the segmentation of the cylindrical sample container.
