@@ -1,10 +1,12 @@
-Title: Orientation correlations among rice grains, part 6: segmentation
-Date: 2015-09-30
-Category: Image analysis
+---
+title: "Orientation correlations among rice grains, part 6: segmentation"
+date: "2015-09-30"
+---
+
 In the [previous
-instalment]({filename}20150709-Orientation_correlations_among_rice_grains-05.md)
-of this series, I showed that a convincing binary image could be produced from
-the gray level 3D reconstruction of the assembly of rice grains, using Otsu's
+instalment](../20150709-Orientation_correlations_among_rice_grains-05) of this
+series, I showed that a convincing binary image could be produced from the gray
+level 3D reconstruction of the assembly of rice grains, using Otsu's
 threshold. However, I intend to carry out statistical analyses of the *grains*
 themselves in the subsequent instalments. Therefore, instead of a binary image
 of the rice grains, what is really needed is a *labelled* image, where all
@@ -66,19 +68,19 @@ if __name__ == '__main__':
 
 Now, on to segmentation!
 
-## Detecting connected components
+# Detecting connected components
 
 This is probably the most simple segmentation technique. In this approach, a
 *feature* is defined as a connected component of the image. Let's be honnest: it
 rarely works on real-life images, because most of the times, distinct objects
-usually touch, and therefore appear as connected. [Fig. 1](#fig01) shows that
+usually touch, and therefore appear as connected. Fig. @fig-01 shows that
 our 3D image is no exception to this rule!
-<a name="fig01"></a>
-![Connected components of the assembly of rice grains]({static}20150930-Orientation_correlations_among_rice_grains-06/binary.png){.figure}
 
-<figcaption>Figure 1: A slice of the binary image. Clearly, some rice grains are
-connected. In other words, detecting connected components is not a suitable
-strategy for the segmentation of rice grains.</figcaption>
+![A slice of the binary image. Clearly, some rice grains are
+connected. In other words, detecting connected components is not a
+suitable strategy for the segmentation of rice
+grains.](files/binary.png){#fig-01}
+
 So, we should expect no miracle from this approach. However, it is interesting
 to show how easy it is to identify the connected components of an image, using
 the `scipy.ndimage` module
@@ -115,15 +117,16 @@ if __name__ == '__main__':
     imsave('connected_components.png', colors[labels[index]])
 
 ```
+
 The above code snippet
 ([download]({static}20150930-Orientation_correlations_among_rice_grains-06/connected_components.py))
-detects 117 connected components, and produces the following colored image (one
-color per label), see [Fig. 2](#fig02). Unsurprisingly, all grains are connected
-on this slice, and we have produced a very poor segmentation indeed!
-<a name="fig02"></a>
-![Connected components]({static}20150930-Orientation_correlations_among_rice_grains-06/connected_components.png){.figure}
+detects 117 connected components, and produces the following colored
+image (one color per label), see Fig. @fig-02. Unsurprisingly, all
+grains are connected on this slice, and we have produced a very poor
+segmentation indeed!
 
-<figcaption>Figure&nbsp;2:&nbsp;All rice grains of the slice shown on <a href="#fig01">Fig.&nbsp;1</a> are connected!</figcaption>
+![All rice grains of the slice shown on Fig. @fig-01 are connected!](files/connected_components.png){#fig-02}
+
 To close this section, it should be noted that the last lines of the above
 script produce a color image where each label receives a random color. Standard
 color maps are indeed ill-suited to visualization of labelled images. Indeed,
@@ -135,28 +138,30 @@ Also note the use of [advanced
 indexing](http://docs.scipy.org/doc/numpy/reference/arrays.indexing.html#indexing)
 of the Numpy arrays (`colors[labels[index]]`)... Python and Numpy rock!
 
-<a name="watershed_blind"></a>
-## Watershed segmentation, blind application
 
-The watershed segmentation is a very popular technique to segment overlapping
-objects. Describing this technique is out of the scope of this post. Suffice it
-to say that watershed segmentation is a three-step process
+# Watershed segmentation, blind application
+
+The watershed segmentation is a very popular technique to segment
+overlapping objects. Describing this technique is out of the scope of
+this post. Suffice it to say that watershed segmentation is a
+three-step process
 
 1. compute the *topography* of the image (usually, a gradient map or the
    opposite of the distance map to the background),
 2. select seeds,
 3. grow connected region from seeds.
 
-The second step is the critical one, since each seed results in exactly one
-feature in the segmented image. Too many seeds result in an oversegmented image
-(grains are split), while too little seeds result in an under-segmented image
-(grains are merged).
+The second step is the critical one, since each seed results in
+exactly one feature in the segmented image. Too many seeds result in
+an oversegmented image (grains are split), while too little seeds
+result in an under-segmented image (grains are merged).
 
-While tedious, manual seeding is probably your best choice (as argued by
-[Emmanuelle
+While tedious, manual seeding is probably your best choice (as argued
+by [Emmanuelle
 Gouillart](http://emmanuelle.github.io/a-tutorial-on-segmentation.html#semi-supervised-approach-segmenting-the-image-from-user-defined-markers)).
-There are about 2000 rice grains in the 3D image we are working with, so this
-semi-supervised approach is unfortunately not an option for us.
+There are about 2000 rice grains in the 3D image we are working with,
+so this semi-supervised approach is unfortunately not an option for
+us.
 
 The standard unsupervised seeding technique consists in selecting the local
 maxima of the map of the distance to the background. The opposite of the
@@ -213,21 +218,20 @@ if __name__ == '__main__':
     imsave('watershed-distance_local_max.png', colors[labels[index]])
 
 ```
-The result of this operation is shown on [Fig. 3](#fig03), where
-over-segmentation is observed. The reason for this is very simple, and typical
-of elongated objects: there are several local maxima of the distance map in each
-grain (see [Fig. 4](#fig04)), resulting in too many seeds.
-<a name="fig03"></a>
-![Watershed
-segmentation]({static}20150930-Orientation_correlations_among_rice_grains-06/watershed-distance_local_max.png){.figure}
 
-<figcaption>Figure 3: The result of watershed segmentation using local maxima of
+The result of this operation is shown on Fig. @fig-03, where
+over-segmentation is observed. The reason for this is very simple, and
+typical of elongated objects: there are several local maxima of the
+distance map in each grain (see Fig. @fig-04), resulting in too many
+seeds.
+
+![The result of watershed segmentation using local maxima of
 the map of the distance to the background as seeds. Clearly, over-segmentation
-occurs, which is typical with elongated objects.</figcaption><a name="fig04"></a>
-![Distance map]({static}20150930-Orientation_correlations_among_rice_grains-06/distance.png){.figure}
+occurs, which is typical with elongated objects.](files/watershed-distance_local_max.png){#fig-03}
 
-<figcaption>Figure 4: The map of the distance to the background. There are
-several local maxima in each grain.</figcaption>
+![The map of the distance to the background. There are several local
+maxima in each grain.](files/distance.png){#fig-04}
+
 One possible response would be to use so-called *vertical filters* ([Tariel et
 al., 2008](https://doi.org/10.5566/ias.v27.p23-28)). I used here a more
 intuitive approach by providing a `min_distance` parameter to the
@@ -241,8 +245,8 @@ completely.
 In the next section, we will see how a problem dependent solution can be
 proposed.
 
-<a name="watershed-directional_erosion"></a>
-## Watershed segmentation with directional erosion
+
+# Watershed segmentation with directional erosion
 
 In the [previous section](#watershed_blind), over-segmentation occured because
 of the anisotropy of the objects. In other words, had the grains been nearly
@@ -359,12 +363,14 @@ if __name__ == '__main__':
 
 ```
 It identifies 2362 seeds (instead of 2672 in the previous approach). The
-resulting segmentation is shown in [Fig. 5](#fig05). It can be seen that we
+resulting segmentation is shown in [Fig. 5](#fig-05). It can be seen that we
 almost got rid of over-segmentation.
-<a name="fig05"></a>
-![Directional erosion]({static}20150930-Orientation_correlations_among_rice_grains-06/watershed-directional_erosion.png){.figure}
 
-<figcaption>Figure 5: The result of watershed segmentation using directional erosions of the map of the distance to the background as seeds. Very little over-segmentation is observed.</figcaption>
+![The result of watershed segmentation using directional erosions of
+the map of the distance to the background as seeds. Very little
+over-segmentation is
+observed.](files/watershed-directional_erosion.png){#fig-05}
+
 ## Conclusion
 
 In an image analysis pipeline, segmentation is notoriously the critical step of
@@ -380,6 +386,6 @@ nearly spheroidal. In other words, correctly seeding the watershed process is
 highly problem dependent!
 
 In the [next
-instalment]({filename}20160219-Orientation_correlations_among_rice_grains-07.md)
-of this series, I will show how to analyse the shape and orientation of each
-individual grain.
+instalment](../20160219-Orientation_correlations_among_rice_grains-07)
+of this series, I will show how to analyse the shape and orientation
+of each individual grain.
