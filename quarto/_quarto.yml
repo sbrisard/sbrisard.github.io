@@ -16,7 +16,7 @@ website:
 
 format:
   html:
-    theme: superhero # spacelab, superhero
+    theme: default # spacelab, superhero
     css: styles.css
 
 crossref:
