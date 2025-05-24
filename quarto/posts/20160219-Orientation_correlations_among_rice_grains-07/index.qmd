@@ -1,71 +1,72 @@
-Title: Orientation correlations among rice grains, part 7: analysis of the shape of the grains
-Date: 2016-02-19
-Category: Image analysis
-UseKaTeX: True
-$\newcommand{\tens}{\mathbf}\newcommand{\D}{\mathrm{d}}$
+---
+title: "Orientation correlations among rice grains, part 7: analysis of the shape of the grains"
+date: "2016-02-19"
+---
 
 In the [previous
-instalment]({filename}20150930-Orientation_correlations_among_rice_grains-06.md)
-of this series, we have segmented the 3D image of the assembly of rice
-grains. In other words, each voxel of the image is attributed the label of the
-grain to which it belongs. Remember the [initial
-goal]({filename}20150223-Orientation_correlations_among_rice_grains-01.md) of
-this series: we want to quantify orientation *correlations* between grains. To
-do so, we must analyse the orientation of each individual grain. This is the
-topic of the present post.
+instalment](../20150930-Orientation_correlations_among_rice_grains-06) of this
+series, we have segmented the 3D image of the assembly of rice grains. In other
+words, each voxel of the image is attributed the label of the grain to which it
+belongs. Remember the [initial
+goal](../20150223-Orientation_correlations_among_rice_grains-01) of this series:
+we want to quantify orientation *correlations* between grains. To do so, we must
+analyse the orientation of each individual grain. This is the topic of the
+present post.
 
 It is customary to define the orientation of an elongated object by means of the
 eigenvectors of the tensor of second moments, defined as follows
-
-<a name="eq01"></a>
-$$J_{ij} = \int_\text{Grain}\bigl(x_i-X_i\bigr)\bigl(x_j-X_j\bigr)\D x_1\,\D x_2\,\D x_3,\tag{1}$$
-
+$$
+J_{ij} = \int_\text{Grain}\bigl(x_i-X_i\bigr)\bigl(x_j-X_j\bigr)\mathrm{d} x_1\,\mathrm{d} x_2\,\mathrm{d} x_3,
+$$ {#eq-01}
 where the integral is carried out over the grain, and $X_i$ denotes the $i$-th
 coordinate of the grain's center of mass
-
-$$X_i = \frac1V\int_\text{Grain}x_i\,\D x_1\,\D x_2\,\D x_3$$
-
-($V$: volume of the grain). In coordinate-free form, Eq. [(1)](#eq01) reads
-
-$$\tens J=\int_\text{Grain}\bigl(\vec x-\vec X\bigr)\otimes\bigl(\vec x-\vec X\bigr)\D x_1\,\D x_2\,\D x_3.$$
+$$
+X_i = \frac1V\int_\text{Grain}x_i\,\mathrm{d} x_1\,\mathrm{d}x_2\,\mathrm{d}x_3
+$$
+($V$: volume of the grain). In coordinate-free form, Eq. (@eq-01) reads
+$$
+\mathbf{J}=\int_\text{Grain}\bigl(\vec x-\vec X\bigr)\otimes\bigl(\vec x-\vec X\bigr)\mathrm{d}^3\vec{x}.
+$$
 
 The above defined tensor of second moments is related to the [inertia
 tensor](https://en.wikipedia.org/wiki/Moment_of_inertia#The_inertia_tensor)
-$\tens I$
+$\mathbf{I}$
+$$
+\mathbf{I}=\operatorname{tr}\mathbf{J}\,\boldsymbol{\delta}-\mathbf{J},
+$$ {#eq-02}
+where $\mathbf{I}$ is defined as follows
+$$
+\mathbf{I}=\int_\text{Grain}\bigl[\bigl(\vec x-\vec X\bigr)\cdot\bigl(\vec x-\vec X\bigr)\boldsymbol{\delta}-\bigl(\vec x-\vec X\bigr)\otimes\bigl(\vec x-\vec X\bigr)\bigr]\mathrm{d}^3\vec{x}.
+$$
 
-<a name="eq02"></a>
-$$\tens I=\operatorname{tr}\tens J\,\tens\delta-\tens J,\tag{2}$$
-
-where $\tens I$ is defined as follows
-
-$$\tens I=\int_\text{Grain}\bigl[\bigl(\vec x-\vec X\bigr)\cdot\bigl(\vec x-\vec X\bigr)\tens\delta-\bigl(\vec x-\vec X\bigr)\otimes\bigl(\vec x-\vec X\bigr)\bigr]\D x_1\,\D x_2\,\D x_3.$$
-
-Being symmetric, the tensor $\tens J$ of second moments is diagonalizable, and
-we compute its eigenvalues $J_a$, $J_b$ and $J_c$, and the associated
+Being symmetric, the tensor $\mathbf{J}$ of second moments is diagonalizable,
+and we compute its eigenvalues $J_a$, $J_b$ and $J_c$, and the associated
 eigenvectors $\vec v_a$, $\vec v_b$ and $\vec v_c$
-
-$$\tens J\cdot\vec v_\alpha=J_\alpha\vec v_\alpha,$$
-
+$$
+\mathbf{J}\cdot\vec v_\alpha=J_\alpha\vec v_\alpha,
+$$
 where $\alpha=a, b, c$. In the present post, we define the orientation of the
 grain as the eigenvector associated to the *largest* eigenvalue.  We can further
 define the equivalent ellipsoid as the ellipsoid with same volume and principal
 second moments. It can readily be verified that the volume and principal second
 moments of an ellipsoid are
-
-$$V=\frac{4\pi}3 abc,\quad J_a=\frac{Va^2}5,\quad J_b=\frac{Vb^2}5,\quad J_c=\frac{Vc^2}5,$$
-
+$$
+V=\frac{4\pi}3 abc,\quad J_a=\frac{Va^2}5,\quad J_b=\frac{Vb^2}5,\quad J_c=\frac{Vc^2}5,
+$$
 where $a$, $b$ and $c$ are the radii of the ellipsoid. The above expressions can
 be retrieved from
 [Wikipedia](https://en.wikipedia.org/wiki/Ellipsoid#Dynamical_properties) and
-Eq. [(2)](#eq02). For example
-
-$$J_a = \frac12\bigl(I_b+I_c-I_a\bigr).$$
+Eq. [(2)](@eq-02). For example
+$$
+J_a = \frac12\bigl(I_b+I_c-I_a\bigr).
+$$
 
 Then, the radii of the equivalent ellipsoid are retrieved as follows from the
 volume $V$ and the principal second moments $J_a$, $J_b$ and $J_c$ of the
 grain
-
-$$a=\sqrt{\frac{5I_a}V},\quad b=\sqrt{\frac{5I_b}V},\quad c=\sqrt{\frac{5I_c}V}.$$
+$$
+a=\sqrt{\frac{5I_a}V},\quad b=\sqrt{\frac{5I_b}V},\quad c=\sqrt{\frac{5I_c}V}.
+$$
 
 The radii of the equivalent ellipsoid can be used to characterize the size of
 the grains. In the present post, we [compute for each
@@ -100,15 +101,14 @@ indices = np.unique(labels)
 indices = indices[1:]
 ```
 
-<a name="morphological_description"></a>
-## Morphological description of the grains
 
-<a name="direct_computation"></a>
-### Direct computation of the morphological parameters of grain 42
+# Morphological description of the grains
+
+## Direct computation of the morphological parameters of grain 42
 
 The direct (naive) approach presented in this section will serve as a reference
-for a [better approach](#using_sum) presented in the next section. It will be
-illustrated on one grain only (namely grain
+for a better approach presented in the next section. It will be illustrated on
+one grain only (namely grain
 [42](https://en.wikipedia.org/wiki/42_%2528number%2529#The_Hitchhiker.27s_Guide_to_the_Galaxy)),
 which we first locate. The remainder of the analysis is then restricted to a ROI
 surrounding the selected grain.
@@ -205,14 +205,13 @@ grains in order to carry out the analysis for all grains. Comes the wonderful
 [scipy.ndimage.sum](http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html)
 function to the rescue!
 
-<a name="using_sum"></a>
-### Using the `scipy.ndimage.sum` function
+## Using the `scipy.ndimage.sum` function
 
 This function will allow us to carry out the analysis over all grains
 simultaneously. We start with the volume, which is seen as
-
-$$V=\sum_\text{Grain} 1,$$
-
+$$
+V=\sum_\text{Grain} 1,
+$$
 where the sum is carried over all voxels of each grain.
 
 
@@ -255,9 +254,9 @@ print('    actual     = {}'.format(com[index-1]))
 
 
 Finally, the second moments are seen as the following sum
-
-$$J_{ij}=\sum_\text{Grain}(x_i-X_i)(x_j-X_j)=\sum_\text{Grain}x_ix_j-VX_iX_j,$$
-
+$$
+J_{ij}=\sum_\text{Grain}(x_i-X_i)(x_j-X_j)=\sum_\text{Grain}x_ix_j-VX_iX_j,
+$$
 where the last identity is known as the [parallel axis
 theorem](https://en.wikipedia.org/wiki/Parallel_axis_theorem). Implementation
 of this formulation is straightforward, starting from the construction of the
@@ -340,14 +339,18 @@ radius = np.sort(np.sqrt(5*moments2_eigvals/vol[:, None]))
 We can now proceed with the analysis of the results. This will be done more
 thoroughly in the next instalment of this series. The present post will be
 restricted to basic analyses. But first of all, it is time to save our results!
+
+```python
 with h5py.File(filename, 'r+') as f:
     f['volume'] = vol
     f['center_of_mass'] = com
     f['radii'] = radius
     f['orientation'] = n
-## Analysis of the results
+```
 
-### Volume of grains
+# Analysis of the results
+
+## Volume of grains
 
 
 ```python
@@ -360,10 +363,8 @@ fig.tight_layout()
 fig.savefig('./volume_histogram.png', transparent=True)
 ```
 
-    /usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
-      warnings.warn("tight_layout : falling back to Agg renderer")
+![Volume of grains](files/volume_histogram.png)
 
-![Volume]({static}20160219-Orientation_correlations_among_rice_grains-07/volume_histogram.png){.figure}
 Most grains have a volume comprised between 6000 and 8000 vox³. It is observed
 that a significant number of grains are very small. There are two possible
 explanations for this
@@ -377,7 +378,7 @@ My guess is that it is in fact a little bit of both. One possible remedy would
 be to filter out those grains that are too small in the subsequent analysis. We
 will not go into such degree of refinment.
 
-### Size of the grains
+## Size of the grains
 
 In this section we visualize the radii of the equivalent ellipsoids
 
@@ -400,28 +401,30 @@ fig.tight_layout()
 fig.savefig('radii_b_c_histogram.png', transparent=True)
 ```
 
-    /usr/lib/python3/dist-packages/matplotlib/tight_layout.py:231: UserWarning: tight_layout : falling back to Agg renderer
-      warnings.warn("tight_layout : falling back to Agg renderer")
 
-![Radius a]({static}20160219-Orientation_correlations_among_rice_grains-07/radius_a_histogram.png)![Radius b, c]({static}20160219-Orientation_correlations_among_rice_grains-07/radii_b_c_histogram.png)
+![](files/radius_a_histogram.png)
+
+![](files/radii_b_c_histogram.png)
+
 The length of most grains is about 2×27=54 pixels (about 6.5 mm). Also, the
 grains are *not* spheroids: indeed $b\neq c$.
 
-### Orientation of grains
+## Orientation of grains
 
 This will be the topic of the next instalment of this series. We will only check
 for possible anisotropy by analysing the following second-order orientation
 tensor: $\langle\vec n\otimes\vec n\rangle$, where angle brackets stand for
 ensemble average. It can readily be verified that for isotropic distributions,
 this tensor is diagonal
-
-$$\langle\vec n\otimes\vec n\rangle=
+$$
+\langle\vec n\otimes\vec n\rangle=
 \frac 13
 \begin{bmatrix}
-1 & 0 & 0\\\\
-0 & 1 & 0\\\\
+1 & 0 & 0\\
+0 & 1 & 0\\
 0 & 0 & 1
-\end{bmatrix}.$$
+\end{bmatrix}.
+$$
 
 Any deviation from this diagonal tensor indicates anisotropy (the converse is
 *not* true!). Computation of this orientation tensor is easy
@@ -443,10 +446,11 @@ of the eigenvalues of the orientation tensor would show that the
 vertical direction is in fact a direction of anisotropy (which should
 not come as a surprise)… but we will leave it like that for now!
 
-## Conclusion
+
+# Conclusion
 
 In this post, we have analysed the orientation of each grain. The orientation
 was defined as the orientation of the major axis of the equivalent ellipsoid. We
 are now ready to analyse orientation correlations among rice grains, which will
 be the topic of the [next
-instalment]({filename}20160627-Orientation_correlations_among_rice_grains-08.md).
+instalment](../20160627-Orientation_correlations_among_rice_grains-08).
