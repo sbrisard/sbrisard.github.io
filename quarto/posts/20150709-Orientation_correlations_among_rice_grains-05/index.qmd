@@ -335,15 +335,15 @@ Fig. @fig-01 (right).
 In this post, we have used Otsu's method to threshold the 3D image of the rice
 grains. This is only the first step towards segmentation of this image, though,
 as we would like to label all rice grains. This will be the topic of the [next
-post]({filename}../20150930-Orientation_correlations_among_rice_grains-06).
+post](../20150930-Orientation_correlations_among_rice_grains-06).
 
 In the present post, I also presented an alternative derivation of Otsu's
 method. I believe this derivation is original, but I might be wrong. So please,
 do leave a comment to let me know what you think about this presentation.
 
-## Appendix
+# Appendix
 
-### Proof of assertion (@eq-01) {#sec-01}
+## Proof of assertion (@eq-01) {#sec-01}
 
 This assertion is proved by contradiction. Let us assume that there exists two
 pixels $x$ and $y$ ($x\neq y$) with same value in the original image
@@ -376,7 +376,7 @@ From Eq. (@eq-17), we then find $d(f,\tilde g)^2 < d(f,g)^2$, which leads to a
 contradiction, since $g$ optimizes the distance to $f$. Thus, assertion (@eq-01)
 is proved.
 
-### Proof of assertion (@eq-02) {#sec-02}
+## Proof of assertion (@eq-02) {#sec-02}
 
 This assertion is again proved by contradiction. Let us assume that there exists
 $x, y\in E$ such that $f(x) < f(y)$ and $g(x) > g(y)$.  Then, simple algebra

@@ -165,9 +165,6 @@ for i in range(num_grains):
     inner_sum[i] = scipy.ndimage.mean(p2_cos_theta[i], labels[i], r)
 ```
 
-    /usr/lib/python3/dist-packages/scipy/ndimage/measurements.py:639: RuntimeWarning: invalid value encountered in true_divide
-      return sum / numpy.asanyarray(count).astype(numpy.float)
-
 
 Then, the outer sum in Eq. (@eq-02) is a simple mean (ignoring NaNs).
 

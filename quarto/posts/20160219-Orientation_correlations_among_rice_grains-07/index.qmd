@@ -69,15 +69,14 @@ a=\sqrt{\frac{5I_a}V},\quad b=\sqrt{\frac{5I_b}V},\quad c=\sqrt{\frac{5I_c}V}.
 $$
 
 The radii of the equivalent ellipsoid can be used to characterize the size of
-the grains. In the present post, we [compute for each
-grain](#morphological_description): the volume, the center of mass, the tensor
-of second moments, the orientation and the radii of the equivalent ellipsoid. We
-will then perform rudimentary analysis of these morphological parameters.
+the grains. In the present post, we compute for each grain: the volume, the
+center of mass, the tensor of second moments, the orientation and the radii of
+the equivalent ellipsoid. We will then perform rudimentary analysis of these
+morphological parameters.
 
 As usual, we will use Python to carry out the dirty work. We will start with a
-[very naive approach](#direct_computation) and present a nearly [loop-free
-approach](#using_sum) using the clever `scipy.ndimage.sum` function. We start
-with loading the segmented images.
+very naive approach and present a nearly loop-free approach using the clever
+`scipy.ndimage.sum` function. We start with loading the segmented images.
 
 
 ```python

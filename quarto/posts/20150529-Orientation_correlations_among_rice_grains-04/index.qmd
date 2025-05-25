@@ -123,7 +123,7 @@ Which produces the following image (see Fig. @fig-04).
 
 A closer look (see Fig. @fig-05) shows that we roughly achieved pixel accuracy, which will be sufficient for the analysis to come.
 
-![Close-up of Fig. @fig04; pixel accuracy was approximately achieved.](files/rice-bin_4x4x4-roi_64x64+10+110-boundary-resized-099.png){#fig-05}
+![Close-up of Fig. @fig-04; pixel accuracy was approximately achieved.](files/rice-bin_4x4x4-roi_64x64+10+110-boundary-resized-099.png){#fig-05}
 
 
 # Analysis of the whole stack

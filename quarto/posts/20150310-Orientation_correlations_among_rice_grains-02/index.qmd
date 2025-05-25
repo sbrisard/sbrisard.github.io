@@ -4,7 +4,7 @@ date: 2015-03-10
 ---
 
 In the
-[first](../20150223-Orientation_correlations_among_rice_grains-01.md)
+[first](../20150223-Orientation_correlations_among_rice_grains-01)
 instalment of this series, I briefly introduced orientational order in
 assemblies of anisotropic particles, and proposed an illustration based on
 synthetic microstructures. But what I really intend to do in this series is to
@@ -49,7 +49,7 @@ below).
 The reconstruction is highly contrasted, so that simple thresholding should
 produce a very convincing segmentation. This will be the topic of the next
 instalments. But we first take a break to discuss [binning of the
-images]({filename}20150330-Orientation_correlations_among_rice_grains-03.md).
+images](../20150330-Orientation_correlations_among_rice_grains-03).
 
 ## Acknowledgements
 
