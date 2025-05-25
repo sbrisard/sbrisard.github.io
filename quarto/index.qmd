@@ -13,7 +13,7 @@ title-block-banner: true
 
 You’ve reached the blog of Sébastien Brisard. My most recent posts are listed
 below. If you are wondering why this blog is relatively “low-tech”, read the
-[“About this blog” ]({filename}/pages/about.md) section.
+[“About this blog” ](about.qmd) section.
 
 Please also visit the documentation of some of my projects
 
