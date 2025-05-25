@@ -1,0 +1,163 @@
+---
+title: "On the double dot product"
+date: "2014-02-19"
+---
+
+The double dot product of two tensors is the contraction of these tensors with
+respect to the last two indices of the first one, and the first two indices of
+the second one. Whether or not this contraction is performed on the *closest*
+indices is a matter of convention. In this post, I will show that this choice
+has some important implications.
+
+Let $\mathbf a$ and $\mathbf b$ be two second-rank tensors. The following two
+alternative definitions might be adopted for the double dot product $\mathbf
+a:\mathbf b$
+
+::: {#def-01}
+$\mathbf a:\mathbf b=a_{ij}\,b_{ji}$ (contraction on the closest indices).
+:::
+
+::: {#def-02}
+$\mathbf a:\mathbf b=a_{ij}\,b_{ij}$.
+:::
+
+In continuum mechanics, most second-rank tensors (strain, stress) are symmetric,
+so that both definitions coincide. In the general case of asymmetric tensors
+however, it is important to check which convention is adopted by the author. In
+the present post, we examine both definitions in turn, and how they affect the
+expression of the transpose of fourth-rank tensors, the definition of which is
+first recalled.
+
+# Transpose of a fourth-rank tensor
+
+Let $\mathbf A$ be a fourth-rank tensor. Then the linear mapping $\mathbf
+x\mapsto\mathbf A:\mathbf x$ ($\mathbf x$: second-rank tensor) is an
+endomorphism over the space of second-rank tensors. As such, it is possible to
+define its transpose $\mathbf A^{\mathsf T}$, provided that the space of
+second-rank tensors is equipped with a scalar product
+$\langle\cdot,\cdot\rangle$. Then, by definition
+$$
+\langle\mathbf A^{\mathsf T}:\mathbf x,\mathbf y\rangle=\langle\mathbf x, \mathbf A:\mathbf y\rangle.
+$$ {#eq-01}
+
+How is the scalar product of two second-rank tensors defined? The most obvious
+choice is
+$$
+\langle\mathbf x,\mathbf y\rangle=x_{ij}\,y_{ij},
+$$ {#eq-02}
+so that the scalar product of two second-rank tensors is closely related to
+either definition of their double dot product. In the next sections, it is shown
+that each definition of the double dot product induces a different definition of
+the transpose.
+
+## Definition 1
+
+In this section, @def-01 of the double dot product is examined
+$$
+\mathbf x:\mathbf y=x_{ij}\,y_{ji},
+$$ {#eq-03}
+where $\mathbf x$ and $\mathbf y$ are second-rank tensors. Then $\langle\mathbf
+x,\mathbf y\rangle=\mathbf x^{\mathsf T}:\mathbf y$. Let $\mathbf A$ be a
+fourth-rank tensor. Eqs. (@eq-01) and (@eq-02) are used in conjunction with
+Eq. (@eq-03) to find the components of $\mathbf A^{\mathsf T}$
+$$
+\langle\mathbf x, \mathbf A:\mathbf y\rangle
+=\mathbf x^{\mathsf T}:\bigl(\mathbf A:\mathbf y\bigr)
+=\bigl(\mathbf x^{\mathsf T}\bigr)_{ji}\bigl(\mathbf A:\mathbf y\bigr)_{ij}
+=x_{ij}\,A_{ijkl}\,y_{lk}.
+$$
+
+Introducing the fourth-rank tensor $\mathbf A'$ defined component-wise by
+$A_{ijkl}'=A_{lkji}$, the above identity reads
+$$
+\langle\mathbf x, \mathbf A:\mathbf y\rangle
+=y_{lk}\,A_{lkji}'\,x_{ij}
+=\bigl(\mathbf y^{\mathsf T}\bigr)_{kl}\bigl(\mathbf A':\mathbf x\bigr)_{lk}
+=\mathbf y^{\mathsf T}:\bigl(\mathbf A':\mathbf x\bigr)
+=\langle\mathbf A':\mathbf x,\mathbf y\rangle,
+$$
+
+which proves that $\mathbf A'$ is the transpose of $\mathbf A$. In other words,
+if @def-01 is adopted for the double dot product, then the components of the
+transpose of any fourth-rank tensor $\mathbf A$ read
+$$
+\bigl(\mathbf A^{\mathsf T}\bigr)_{ijkl}=A_{lkji}.
+$$ {#eq-04}
+
+
+# Definition 2
+
+We now examine @def-02 of the double dot product
+$$
+\mathbf x:\mathbf y=x_{ij}\,y_{ij},
+$$ {#eq-05}
+where $\mathbf x$ and $\mathbf y$ are second-rank tensors. Then $\langle\mathbf
+x,\mathbf y\rangle=\mathbf x:\mathbf y$. Let $\mathbf A$ be a fourth-rank
+tensor. Eqs. (@eq-01) and (@eq-02) are again used in conjunction with
+Eq. (@eq-05) to find the components of $\mathbf A^{\mathsf T}$
+$$
+\langle\mathbf x, \mathbf A:\mathbf y\rangle
+=\mathbf x:\bigl(\mathbf A:\mathbf y\bigr)
+=x_{ij}\,\bigl(\mathbf A:\mathbf y\bigr)_{ij}
+=x_{ij}\,A_{ijkl}\,y_{kl}.
+$$
+
+Introducing the fourth-rank tensor $\mathbf A''$ defined component-wise by
+$A_{ijkl}''=A_{klij}$, the above identity reads
+$$
+\langle\mathbf x, \mathbf A:\mathbf y\rangle
+=y_{kl}\,A_{klij}''\,x_{ij}
+=y_{kl}\,\bigl(\mathbf A'':\mathbf x\bigr)_{kl}
+=\mathbf y:\bigl(\mathbf A'':\mathbf x\bigr)
+=\langle\mathbf A'':\mathbf x,\mathbf y\rangle,$$
+
+which proves that $\mathbf A''$ is the transpose of $\mathbf A$. In other words, if
+[definition 2](#def-02) is adopted for the double dot product, then the
+components of the transpose of a fourth-rank tensor $\mathbf A$ read
+$$
+\bigl(\mathbf A^{\mathsf T}\bigr)_{ijkl}=A_{klij}.
+$$ {#eq-06}
+
+
+# Which definition to adopt?
+
+… is a pure matter of taste. For aesthetic reasons, I tend to prefer
+Eq. (@eq-06) over Eq. (@eq-04). Besides, @def-02 of the double dot product
+directly defines a scalar product over the space of second-rank
+tensors. Therefore, @def-02 \[see Eq. (@eq-05)\] *will be adopted in this
+blog*. In other words, given two tensors $\mathbf T$ and $\mathbf U$ of
+arbitrary rank (≥ 2), the product $\mathbf T:\mathbf U$ is defined as follows
+$$
+\mathbf T:\mathbf U=T_{\ldots ij}\,U_{ij\ldots}.
+$$ {#eq-07}
+
+With this definition of the double dot product, the components of the transpose
+of a fourth-rank tensor $\mathbf A$ are found from Eq. (@eq-06). Furthermore,
+Eq. (@eq-07) can readily be specialized to the case of a tensor $\mathbf T$ of
+arbitrary rank and a decomposed, second-rank tensor $\vec u\otimes\vec v$ ($\vec
+u$, $\vec v$: vectors)
+$$
+\mathbf T:\bigl(\vec u\otimes\vec v\bigr)=\bigl(\mathbf T\cdot\vec v\bigr)\cdot\vec u
+$$
+and
+$$
+\bigl(\vec u\otimes\vec v\bigr):\mathbf T=\vec v\cdot\bigl(\vec u\cdot\mathbf T\bigr).
+$$
+
+Finally, for a second-rank tensor $\mathbf a$ and a decomposed, second-rank tensor
+$\vec u\otimes\vec v$ ($\vec u$, $\vec v$: vectors)
+$$
+\mathbf a:\bigl(\vec u\otimes\vec v\bigr)
+=\bigl(\vec u\otimes\vec v\bigr):\mathbf a
+=\vec u\cdot\mathbf a\cdot\vec v.
+$$
+
+To conclude, two definitions of the double dot product are possible, and one
+should always check which is adopted. It should be kept in mind that, while
+arbitrary, this choice has many consequences, including on the definition of the
+transpose of fourth-rank tensors.
+
+<!-- Local Variables: -->
+<!-- mode: markdown -->
+<!-- fill-column: 80 -->
+<!-- End: -->
