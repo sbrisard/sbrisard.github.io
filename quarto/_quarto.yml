@@ -7,16 +7,16 @@ website:
   description: "A great sample blog"
   navbar:
     right:
-      - text: About this blog
-        file: about.qmd
-      - text: About Me
+      - text: About the author
         href: https://cv.archives-ouvertes.fr/sbrisard
       - text: GitHub
         href: https://github.com/sbrisard
-
+  page-footer:
+    center: "Except where otherwise noted, content on this blog by Sébastien Brisard is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/)"
+    right: "📧​ sebastien [dot] brisard [at] univ [dash] amu [dot] fr"
 format:
   html:
-    theme: default # spacelab, superhero
+    theme: cosmo # cosmo, spacelab, superhero
     css: styles.css
 
 crossref:

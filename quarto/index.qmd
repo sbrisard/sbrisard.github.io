@@ -1,5 +1,6 @@
 ---
 title: "Welcome!"
+image: banner.jpg
 listing:
   contents: posts
   sort: "date desc"
@@ -8,12 +9,11 @@ listing:
   sort-ui: false
   filter-ui: false
 page-layout: full
-title-block-banner: true
+title-block-banner: false
 ---
 
 You’ve reached the blog of Sébastien Brisard. My most recent posts are listed
-below. If you are wondering why this blog is relatively “low-tech”, read the
-[“About this blog” ](about.qmd) section.
+below.
 
 Please also visit the documentation of some of my projects
 
