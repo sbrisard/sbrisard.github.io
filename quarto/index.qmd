@@ -1,0 +1,28 @@
+---
+title: "Welcome!"
+image: banner.jpg
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: false
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: false
+---
+
+You’ve reached the blog of Sébastien Brisard. My most recent posts are listed
+below.
+
+Please also visit the documentation of some of my projects
+
+- <https://sbrisard.github.io/janus>: the documentation of the `Janus` library,
+- <https://sbrisard.github.io/pw85>: the documentation of the `PW85` library.
+
+as well as some recent (work in progress) open books
+
+- [An introduction to Lippmann–Schwinger solvers](https://github.com/sbrisard/LS-intro)
+- [Notes on the Lyapunov–Schmidt–Koiter asymptotic method](https://sbrisard.github.io/LSK)
+
+Enjoy reading!

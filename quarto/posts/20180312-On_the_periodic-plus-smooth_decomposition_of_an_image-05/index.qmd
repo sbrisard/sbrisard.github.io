@@ -1,0 +1,120 @@
+---
+title: "On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way"
+date: "2018-03-12"
+---
+
+In this post, we will compute Moisan's
+([2011](https://doi.org/10.1007/s10851-010-0227-1)) periodic-plus-smooth
+decomposition of an image by direct minimization of the energy introduced in the
+[second
+instalment](../20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02)
+of this series. More precisely, $u$ being a $m\times n$ image, we will minimize
+the function $F(v, u)$ over the space of $m\times n$ images $v$. The minimizer,
+$s$, is the smooth component of $u$, while its complement $p=u-s$ is the
+periodic component of $u$. This post is the fifth instalment of a series in
+seven parts:
+
+1. [Introduction](../20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01)
+2. [Defining the decomposition](../20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02)
+3. [The energy as a quadratic form](../20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03)
+4. [Implementing the linear operators](../20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04)
+5. [Minimizing the energy, the clumsy way](../20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05)
+6. [Minimizing the energy, the clever way](../20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06)
+7. [Improved implementation of Moisan's algorithm](../20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07)
+
+The code discussed in this series is available as a Python module on [GitHub](https://github.com/sbrisard/moisan2011).
+
+We showed in [part 3](../20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03) that $F$ was in fact a quadratic form, and expressed the
+underlying linear operators, which were subsequently implemented in [part 4](../20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04). It
+is recalled (see [part 3](../20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03)) that
+
+$$F(v, u)=\langle v, Q\cdot v\rangle-2\langle v, Q_1\cdot u\rangle+\langle u, Q_1\cdot u\rangle,$$
+
+where $Q$ and $Q_1$ are symmetric, positive linear operators. Minimizing $F$
+with respect to $v$ therefore amounts to solving the linear system: $Q\cdot
+s=Q_1\cdot u$. It can in fact be shown that $Q$ is positive definite, therefore
+the solution to this linear system is unique: $s=Q^{-1}\cdot Q_1\cdot u$. It can
+be computed by means of the [conjugate gradient
+method](https://en.wikipedia.org/wiki/Conjugate_gradient_method), as illustrated
+below.
+
+Let us start by loading up some modules and the input image to be periodized
+(see Fig. @fig-01).
+
+```python
+import numpy as np
+
+from scipy.sparse.linalg import cg
+from skimage.io import imread, imsave
+
+u = imread(DATA_DIR+'hut-648x364.png')
+u = u.astype(np.float64)
+```
+
+![The initial image to be periodized.](../On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364.png){#fig-01}
+
+We then create the operators $Q_1$ and $Q$ that were implemented in the
+*previous instalment* of this series.
+
+```python
+Q1 = OperatorQ1(u.shape)
+Q = OperatorQ(u.shape)
+```
+
+We then compute the right-hand side of the system, namely $Q_1\cdot
+u$. Attention must be paid to the fact that $u$ must be flattened to a 1D array.
+
+```python
+m, n = u.shape
+Q1u = Q1@u.reshape((m*n,))
+```
+
+We then use the `scipy.sparse.linalg.cg` function (see
+[documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.cg.html#scipy.sparse.linalg.cg))
+to solve the linear system
+
+```python
+x, info = cg(Q, Q1u)
+if info == 0:
+    print('success!')
+else:
+    print(info)
+s = x.reshape(u.shape)
+p = u-s
+```
+
+We can now save the results (for future reference).
+
+```python
+def to_uint8(v):
+    m, n = v.shape
+    v_min = v.min()
+    v_max = v.max()
+    return (255.0*(v-v_min)/(v_max-v_min)).astype(np.uint8)
+
+imsave(DATA_DIR+'hut-648x364-smooth-cg.png', to_uint8(s))
+imsave(DATA_DIR+'hut-648x364-periodic-cg.png', to_uint8(p))
+imsave(DATA_DIR+'hut-648x364-periodic-cg-fftshift.png',
+       to_uint8(np.fft.fftshift(p)))
+```
+
+Again, periodization is best observed by swapping the quadrants (see
+Fig. @fig-02).
+
+![The periodic component of the initial image shown in Fig. @fig-01, resulting from conjugate gradient minimization of [Moisan’s](href="https://doi.org/10.1007/s10851-010-0227-1") energy.](../On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364-periodic-cg-fftshift.png){#fig-02}
+
+Et voilà…
+
+In this fairly quick post, we derived a reference periodic-plus-smooth
+decomposition of a specific image. The conjugate gradient iterations are highly
+inefficient, and we will show in the [next
+instalment](../20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06)
+of this series that a very efficient alternative, based on the fast Fourier
+transform, was proposed by Moisan
+([2011](https://doi.org/10.1007/s10851-010-0227-1)). The decomposition that we
+obtained in the present post will then be used as a reference for testing our
+implementation of Moisan's algorithm.
+
+<!-- Local Variables: -->
+<!-- fill-column: 80 -->
+<!-- End: -->

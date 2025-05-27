@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2014-02-26">
+
+<title>Sébastien Brisard’s blog - Decomposition of transverse isotropic, fourth-rank tensors</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Sébastien Brisard’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://cv.archives-ouvertes.fr/sbrisard"> 
+<span class="menu-text">About the author</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/sbrisard"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Decomposition of transverse isotropic, fourth-rank tensors</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 26, 2014</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>In <a href="../20140112-Elastic_constants_of_an_isotropic_material-03">a previous post</a>, I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors; in other words, the space of isotropic fourth-rank tensors (with minor and major symmetries) is of dimension 2. Similarly, it can be shown (<a href="https://doi.org/10.1098/rspa.1984.0008">Walpole, 1984</a>) that the space of three-dimensional, <em>transverse isotropic</em> fourth-rank tensors (with minor and major symmetries) is of dimension 6. Furthermore; it is possible to produce a convenient basis of this space. This is the topic of the present post, which is mostly based on the paper by Walpole (<a href="https://doi.org/10.1098/rspa.1984.0008">1984</a>).</p>
+<section id="two-second-rank-projection-tensors" class="level1">
+<h1>Two second-rank projection tensors</h1>
+<p>It is recalled that transverse isotropy is defined by one single preferred direction. In the present post, <span class="math inline">\(\vec n\)</span> denotes the unit vector which indicates this preferred direction. Then, <span class="math inline">\(\mathbf p\)</span> and <span class="math inline">\(\mathbf q\)</span> are the following projectors <span id="eq-01"><span class="math display">\[
+\mathbf p=\vec n\otimes\vec n,\quad\mathbf q=\boldsymbol{\delta}-\mathbf p.
+\tag{1}\]</span></span></p>
+<p><span class="math inline">\(\mathbf p\)</span> is the projector onto the direction of anisotropy <span class="math inline">\(\vec n\)</span>, while <span class="math inline">\(\mathbf q\)</span> is the projection onto the plane of isotropy (orthogonal to <span class="math inline">\(\vec n\)</span>). It can readily be verified that <span class="math display">\[
+\mathbf p\cdot\mathbf p=\mathbf p,\quad
+\mathbf q\cdot\mathbf q=\mathbf q,\quad
+\mathbf p\cdot\mathbf q=\mathbf q\cdot\mathbf p=\mathbf 0
+\]</span> and <span class="math display">\[
+\mathbf p:\mathbf p=1,\quad
+\mathbf q:\mathbf q=2,\quad
+\mathbf p:\mathbf q=\mathbf q:\mathbf p=0.
+\]</span></p>
+</section>
+<section id="tensor-product-of-linear-transformations" class="level1">
+<h1>Tensor product of linear transformations</h1>
+<p>It will be convenient to introduce a new, Kronecker-like product of two second-rank tensors, which Del Piero (<a href="https://doi.org/10.1007/BF00041097">1979</a>) named <em>tensor product of linear transformations</em>, and which will be denoted <span class="math inline">\(\boxtimes{}\)</span>.</p>
+<p>As a preliminary note, it should be observed that any fourth-rank tensor <span class="math inline">\(\mathbf
+A\)</span> can be viewed as a endomorphism over the space of second-rank tensors, since <span class="math inline">\(\mathbf x\mapsto\mathbf A:\mathbf x\)</span> is a linear mapping (the convention adopted in this blog for the double dot product has been specified in a <a href="{filename}20140219-On_the_double_dot_product.md">previous post</a>). Therefore, the fourth-rank tensor <span class="math inline">\(\mathbf a\boxtimes\mathbf b\)</span> (<span class="math inline">\(\mathbf a, \mathbf b\)</span>: second-rank tensors) can be defined by how it operates on second-rank tensors <span class="math inline">\(\mathbf x\)</span> <span id="eq-02"><span class="math display">\[
+\bigl(\mathbf a\boxtimes\mathbf b\bigr):\mathbf x=\mathbf a\cdot\mathbf x\cdot\mathbf b^{\mathsf{T}}.
+\tag{2}\]</span></span></p>
+<p>Writing the above definition in terms of the components of <span class="math inline">\(\mathbf a\)</span>, <span class="math inline">\(\mathbf b\)</span> and <span class="math inline">\(\mathbf x\)</span>, it is found that <span class="math inline">\(\bigl(\mathbf a\boxtimes\mathbf b\bigr):\mathbf
+x=a_{ik}\,x_{kl}\,b_{jl}\,\vec e_i\otimes\vec e_j\)</span>, which shows that the components of <span class="math inline">\(\mathbf a\boxtimes\mathbf b\)</span> are <span id="eq-03"><span class="math display">\[
+\bigl(\mathbf a\boxtimes\mathbf b\bigr)_{ijkl}=a_{ik}\,b_{jl},
+\tag{3}\]</span></span> from which it results <span class="math display">\[
+\bigl(\mathbf a\boxtimes\mathbf b\bigr)^{\mathsf{T}}=\mathbf a^{\mathsf{T}}\boxtimes\mathbf b^{\mathsf{T}}.
+\]</span></p>
+<p>Given four second-rank tensors <span class="math inline">\(\mathbf a\)</span>, <span class="math inline">\(\mathbf b\)</span>, <span class="math inline">\(\mathbf c\)</span> and <span class="math inline">\(\mathbf d\)</span>, the following identity holds <span id="eq-04"><span class="math display">\[
+\bigl(\mathbf a\boxtimes\mathbf b\bigr):\bigl(\mathbf c\boxtimes\mathbf d\bigr)
+=\bigl(\mathbf a\cdot\mathbf c\bigr)\boxtimes\bigl(\mathbf b\cdot\mathbf d\bigr).
+\tag{4}\]</span></span></p>
+<p>Indeed, let <span class="math inline">\(\mathbf x\)</span> be a second-rank tensor. Then, from Eq.&nbsp;(<a href="#eq-02" class="quarto-xref">2</a>) <span class="math display">\[
+\begin{aligned}
+\bigl(\mathbf a\boxtimes\mathbf b\bigr):\bigl(\mathbf c\boxtimes\mathbf d\bigr):\mathbf x
+&amp;=\bigl(\mathbf a\boxtimes\mathbf b\bigr):\bigl(\mathbf c\cdot\mathbf x\cdot\mathbf d^{\mathsf{T}}\bigr)=\mathbf a\cdot\bigl(\mathbf c\cdot\mathbf x\cdot\mathbf d^{\mathsf{T}}\bigr)\cdot\mathbf b^{\mathsf{T}}\\
+&amp;=\bigl(\mathbf a\cdot\mathbf c\bigr)\cdot\mathbf x\cdot\bigl(\mathbf d^{\mathsf{T}}\cdot\mathbf b^{\mathsf{T}}\bigr)=\bigl(\mathbf a\cdot\mathbf c\bigr)\cdot\mathbf x\cdot\bigl(\mathbf b\cdot\mathbf d\bigr)^{\mathsf{T}}\\
+&amp;=\bigl[\bigl(\mathbf a\cdot\mathbf c\bigr)\boxtimes\bigl(\mathbf b\cdot\mathbf d\bigr)\bigr]:\mathbf x.
+\end{aligned}
+\]</span></p>
+<p>Eq.&nbsp;(<a href="#eq-03" class="quarto-xref">3</a>) shows that even if <span class="math inline">\(\mathbf a\)</span> and <span class="math inline">\(\mathbf b\)</span> are symmetric, the tensor product <span class="math inline">\(\mathbf a\boxtimes\mathbf b\)</span> does not necessarily have the minor symmetries. It will therefore be convenient to define <span class="math inline">\(\mathbf a\overset{\mathrm
+s}{\boxtimes}\mathbf b\)</span>, as the tensor <span class="math inline">\(\mathbf a\boxtimes\mathbf b\)</span>, <em>symmetrized with respect to the last two indices</em> <span class="math display">\[
+\bigl(\mathbf a\overset{\mathrm s}{\boxtimes}\mathbf b\bigr)_{ijkl}=\frac12\bigl(a_{ik}\,b_{jl}+a_{il}\,b_{jk}\bigr),
+\]</span> or, in intrinsic form (<span class="math inline">\(\mathbf x\)</span>: second-rank tensor) <span id="eq-05"><span class="math display">\[
+\bigl(\mathbf a\overset{\mathrm s}{\boxtimes}\mathbf b\bigr):\mathbf x
+=\frac12\bigl(\mathbf a\boxtimes\mathbf b\bigr):\bigl(\mathbf x+\mathbf x^{\mathsf T}\bigr)
+=\frac12\mathbf a\cdot\bigl(\mathbf x+\mathbf x^{\mathsf T}\bigr)\cdot\mathbf b^{\mathsf T}.
+\tag{5}\]</span></span></p>
+<p>An identity similar to Eq.&nbsp;(<a href="#eq-04" class="quarto-xref">4</a>) can then be derived with <span class="math inline">\(\overset{\mathrm
+s}{\boxtimes}\)</span> <span id="eq-06"><span class="math display">\[
+\bigl(\mathbf a\overset{\mathrm s}{\boxtimes}\mathbf b\bigr):\bigl(\mathbf c\overset{\mathrm s}{\boxtimes}\mathbf d\bigr)
+=\frac12\bigl[
+\bigl(\mathbf a\cdot\mathbf c\bigr)\overset{\mathrm s}{\boxtimes}\bigl(\mathbf b\cdot\mathbf d\bigr)
++\bigl(\mathbf a\cdot\mathbf d\bigr)\overset{\mathrm s}{\boxtimes}\bigl(\mathbf b\cdot\mathbf c\bigr)
+\bigr].
+\tag{6}\]</span></span></p>
+<p>The following identities, involving the second-rank projectors <span class="math inline">\(\mathbf p\)</span> and <span class="math inline">\(\mathbf q\)</span> [see Eq.&nbsp;(<a href="#eq-01" class="quarto-xref">1</a>)], readily follow from Eq.&nbsp;(<a href="#eq-03" class="quarto-xref">3</a>) <span class="math display">\[
+\begin{align}
+\bigl(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf p\bigr):\mathbf p&amp;=\mathbf p,&amp;\bigl(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf p\bigr):\mathbf q&amp;=\mathbf 0,\\
+\bigl(\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf q\bigr):\mathbf p&amp;=\mathbf 0,&amp;\bigl(\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf q\bigr):\mathbf q&amp;=\mathbf q,
+\end{align}
+\]</span> and <span class="math display">\[\bigl(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf q\bigr):\mathbf p=\bigl(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf q\bigr):\mathbf q=\bigl(\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf p\bigr):\mathbf p=\bigl(\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf p\bigr):\mathbf q=\mathbf 0.\]</span></p>
+<p>Besides, the following multiplication table results from Eq.&nbsp;(<a href="#eq-06" class="quarto-xref">6</a>)</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 29%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(:\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf p\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf p\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf q\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf p\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf q\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf q\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>To conclude, it is observed that the fourth-rank tensor <span class="math inline">\(\mathbf{I}=\boldsymbol{\delta}\overset{\mathrm
+s}{\boxtimes}\boldsymbol{\delta}\)</span> maps any second-rank tensor to its symmetric part: it reduces to the identity tensor over the space of second-rank, symmetric tensors.</p>
+</section>
+<section id="walpoles-basis-for-transverse-isotropic-tensors" class="level1">
+<h1>Walpole's basis for transverse isotropic tensors</h1>
+<p>Walpole (<a href="https://doi.org/10.1098/rspa.1984.0008">1984</a>) shows that any transverse isotropic tensor is a linear combination of the six fourth-rank tensors <span class="math inline">\(\mathbf E_1\)</span>, <span class="math inline">\(\mathbf E_2\)</span>, <span class="math inline">\(\mathbf E_3\)</span>, <span class="math inline">\(\mathbf E_4\)</span>, <span class="math inline">\(\mathbf F\)</span> and <span class="math inline">\(\mathbf G\)</span> defined as follows <span class="math display">\[\mathbf E_1=\mathbf p\otimes\mathbf p,\quad\mathbf E_2=\frac12\mathbf q\otimes\mathbf q,\quad\mathbf E_3=\frac1{\sqrt2}\mathbf p\otimes\mathbf q,\quad\mathbf E_4=\frac1{\sqrt2}\mathbf q\otimes\mathbf p\]</span> <span class="math display">\[\mathbf F=\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf q-\frac12\mathbf q\otimes\mathbf q,\quad\mathbf G=\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf q+\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf p.\]</span></p>
+<p>Multiplication (in the sense of the double product) of these tensors is fairly easy, as shown by the table below.</p>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(:\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf E_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf E_2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf E_3\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf E_4\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf F\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathbf G\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf E_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mathbf F\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf F\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\mathbf G\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf 0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbf G\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The above table must be read as: “row double dot column equals cell”. For example, <span class="math inline">\(\mathbf E_1:\mathbf E_3=\mathbf E_3\)</span> and <span class="math inline">\(\mathbf E_3:\mathbf E_1=\mathbf 0\)</span>.</p>
+<section id="a-convenient-representation-of-transverse-isotropic-fourth-rank-tensors" class="level2">
+<h2 class="anchored" data-anchor-id="a-convenient-representation-of-transverse-isotropic-fourth-rank-tensors">A convenient representation of transverse isotropic, fourth-rank tensors</h2>
+<p>Walpole (<a href="https://doi.org/10.1098/rspa.1984.0008">1984</a>) proposes a convenient representation of any transverse isotropic tensor <span class="math inline">\(\mathbf T\)</span>, as the triplet <span class="math inline">\((A,
+f, g)\)</span> where <span class="math inline">\(A\)</span> is a 2×2 matrix and <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are two scalars. This representation should be understood as <span class="math display">\[
+\mathbf T=a_{11}\,\mathbf E_1+a_{22}\,\mathbf E_2+a_{12}\,\mathbf E_3+a_{21}\,\mathbf E_4+f\,\mathbf F+g\,\mathbf G,
+\]</span> where <span class="math inline">\(a_{ij}\)</span> are the coefficients of <span class="math inline">\(A\)</span>. The condensed notation <span class="math inline">\(\mathbf T=(A,
+f, g)\)</span> shall be adopted. Using the above multiplication table, it can readily be verified that if <span class="math inline">\(\mathbf T=(A, f, g)\)</span> and <span class="math inline">\(\mathbf T'=(A', f', g')\)</span>, then <span class="math display">\[
+\mathbf T:\mathbf T'=(A\cdot A', ff', gg').
+\]</span> This representation is particularly convenient when it comes to inverting transverse isotropic tensors. Indeed, <span class="math display">\[\mathbf T^{-1}=(A^{-1}, 1/f, 1/g).
+\]</span> Transposition is also straightforward <span class="math display">\[
+\mathbf T^{\mathsf T}=(A^{\mathsf T}, f, g).
+\]</span></p>
+</section>
+</section>
+<section id="decomposition-of-fourth-rank-isotropic-tensors-in-walpoles-basis" class="level1">
+<h1>Decomposition of fourth-rank, isotropic tensors in Walpole’s basis</h1>
+<p>The isotropic tensors <span class="math inline">\(\mathbf{I}\)</span>, <span class="math inline">\(\mathbf{J}\)</span> and <span class="math inline">\(\mathbf{K}\)</span> introduced <a href="../20140112-Elastic_constants_of_an_isotropic_material-03">previously</a> can be considered as transverse isotropic tensors. As such, they can be decomposed in Walpole’s basis. First, the identity tensor <span class="math inline">\(\mathbf{I}\)</span> decomposes as follows <span class="math display">\[
+\begin{aligned}
+\mathbf{I}&amp;=\boldsymbol{\delta}\overset{\mathrm s}{\boxtimes}\boldsymbol{\delta}\\
+&amp;=\bigl(\mathbf p+\mathbf q\bigr)\overset{\mathrm s}{\boxtimes}\bigl(\mathbf p+\mathbf q\bigr)\\
+&amp;=\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf p+\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf q+\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf p+\mathbf q\overset{\mathrm s}{\boxtimes}\mathbf q\\
+&amp;=\mathbf E_1+\mathbf G+\mathbf F+\mathbf E_2.
+\end{aligned}
+\]</span> where the identity <span class="math inline">\(\mathbf p\overset{\mathrm s}{\boxtimes}\mathbf p=\mathbf
+p\otimes\mathbf p=\mathbf E_1\)</span> has been used. Now, the decomposition of <span class="math inline">\(\mathbf{J}\)</span> is readily derived from its definition <span class="math display">\[
+\begin{aligned}
+3\mathbf{J}&amp;=\boldsymbol{\delta}\otimes\boldsymbol{\delta}=\bigl(\mathbf p+\mathbf q\bigr)\otimes\bigl(\mathbf p+\mathbf q\bigr)\\
+&amp;=\mathbf p\otimes\mathbf p+\mathbf p\otimes\mathbf q+\mathbf q\otimes\mathbf p+\mathbf q\otimes\mathbf q\\
+&amp;=\mathbf E_1+\sqrt2\mathbf E_3+\sqrt2\mathbf E_4+2\mathbf E_2.
+\end{aligned}
+\]</span></p>
+<p>Finally, the decomposition of the deviatoric projection tensor <span class="math inline">\(\mathbf{K}\)</span> is found from the definition <span class="math inline">\(\mathbf{K}=\mathbf{I}-\mathbf{J}\)</span>. To sum up <span class="math display">\[
+\begin{gather}
+\mathbf{I}=\bigl(\bigl[\begin{smallmatrix}1&amp;0\\ 0&amp;1\end{smallmatrix}\bigr], 1, 1\bigr),\\
+\mathbf{J}=\bigl(\tfrac13\bigl[\begin{smallmatrix}1&amp;\sqrt2\\\sqrt2&amp;2\end{smallmatrix}\bigr], 0, 0\bigr),\\
+\mathbf{K}=\bigl(\tfrac13\bigl[\begin{smallmatrix}2&amp;-\sqrt2\\-\sqrt2&amp;1\end{smallmatrix}\bigr], 1, 1\bigr).
+\end{gather}
+\]</span></p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In the present post, a convenient decomposition of three-dimensional, fourth-rank, transverse isotropic tensors as a linear combination of six basis tensors has been proposed. Multiplication (in the sense of the <a href="../20140219-On_the_double_dot_product">double dot product</a>) of these basis tensors is straightforward. Besides, representing transverse isotropic tensors as a (matrix, scalar, scalar) triplet eases their multiplication and inversion. Walpole’s basis turns out to be very handy in many situations (including the derivation of the Green operator for strains).</p>
+<!-- Local Variables: -->
+<!-- mode: markdown -->
+<!-- fill-column: 80 -->
+<!-- End: -->
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Except where otherwise noted, content on this blog by Sébastien Brisard is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></p>
+</div>
+    <div class="nav-footer-right">
+<p>📧​ sebastien [dot] brisard [at] univ [dash] amu [dot] fr</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2015-07-06">
+
+<title>Sébastien Brisard’s blog - When a thin shell is not so thin, part&nbsp;3: the thick shell solution</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Sébastien Brisard’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://cv.archives-ouvertes.fr/sbrisard"> 
+<span class="menu-text">About the author</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/sbrisard"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">When a thin shell is not so thin, part&nbsp;3: the thick shell solution</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 6, 2015</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Finding the stress resultant and stress couple in a spherical pressure vessel seems easy enough. Well, this apparently simple problem allows us to highlight subtle thickness effects within shells. It should be emphasized again that these thickness effects have nothing to do with shear corrections. Indeed, shear stresses are null at any point of the spherical pressure vessel. Rather, the thickness effects we are discussing in this series are due to curvature.</p>
+<p>In the <a href="../20150608-When_a_thin_shell_is_not_so_thin-01">first instalment</a> of this series, I showed that using Koiter’s thin shell solution leads to a non-null stress couple, which came as quite a surprise. In the <a href="../20150701-When_a_thin_shell_is_not_so_thin-02">second instalment</a>, I used the exact, 3D solution to derive reference values of the stress couple and stress resultant through integration over the thickness of the shell. In particular, I showed that thickness corrections <em>had</em> to be incorporated.</p>
+<p>This still does not settle the matter, since the results obtained within the framework of Koiter’s thin shell theory (see <a href="../20150608-When_a_thin_shell_is_not_so_thin-01">first instalment</a>) are inconsistent with the reference, 3D elasticity values (see <a href="../20150701-When_a_thin_shell_is_not_so_thin-02">second instalment</a>). To reconcile both approaches (3D elasticity vs.&nbsp;shell theory), we need to use a <em>thick</em> shell theory, as illustrated below.</p>
+<section id="strain-distribution-in-the-spherical-pressure-vessel" class="level1">
+<h1>Strain distribution in the spherical pressure vessel</h1>
+<p>The fundamental assumption of all shell theories is that displacement of any point of the shell is completely defined by the rigid body motion (translation and rotation) of its projection onto the base surface. In the present case, owing to the symmetries of the problem, points of the base surface move along the normal <span class="math inline">\(\mathbf n\)</span> <span id="eq-01"><span class="math display">\[
+\mathbf u = w\mathbf n,
+\tag{1}\]</span></span> where <span class="math inline">\(w\)</span> is the normal displacement, which is constant over the base surface. Since the rotation is null, all points (across the thickness of the shell) have the same normal displacement. Therefore, Eq.&nbsp;(<a href="#eq-01" class="quarto-xref">1</a>) defines the 3D displacement field within the shell, seen as a 3D continuum. From this 3D displacement field, we can readily derive the corresponding strain field. We will use a simplified, geometric approach, rather than the general formulas in spherical coordinates. This is possible because there are so many symmetries in the problem at hand!</p>
+<p>The in-plane strain <span class="math inline">\(\epsilon\)</span> at the distance <span class="math inline">\(r\)</span> of the center is given by the relative change of length of the equator <span id="eq-02"><span class="math display">\[
+\epsilon=\frac{2\pi\bigl(r+w\bigr)-2\pi r}{2\pi r}=\frac wr.
+\tag{2}\]</span></span></p>
+<p>In the <a href="../20150608-When_a_thin_shell_is_not_so_thin-01">first instalment</a>, we found <span class="math inline">\(\epsilon=w/R\)</span>, where <span class="math inline">\(R\)</span> is the radius of the midsurface. Eq.&nbsp;(<a href="#eq-02" class="quarto-xref">2</a>) therefore incorporates thickness corrections which we previously overlooked.</p>
+</section>
+<section id="stress-distribution-in-the-spherical-pressure-vessel" class="level1">
+<h1>Stress distribution in the spherical pressure vessel</h1>
+<p>Stresses in the spherical pressure vessel are derived from the strains [see Eq.&nbsp;(<a href="#eq-02" class="quarto-xref">2</a>)], within the framework of plane stress elasticity <span id="eq-03"><span class="math display">\[
+\sigma\_{\theta\theta}=\frac E{1-\nu^2}\bigl(\epsilon\_{\theta\theta}+\nu\epsilon\_{\phi\phi}\bigr)
+\tag{3}\]</span></span> <span id="eq-04"><span class="math display">\[
+\sigma\_{\phi\phi}=\frac E{1-\nu^2}\bigl(\epsilon\_{\phi\phi}+\nu\epsilon\_{\theta\theta}\bigr).
+\tag{4}\]</span></span></p>
+<p>Since the solution is isotropic (<span class="math inline">\(\epsilon\_{\theta\theta}=\epsilon\_{\phi\phi}=\epsilon\)</span> and <span class="math inline">\(\sigma\_{\theta\theta}=\sigma\_{\phi\phi}=\sigma\)</span>), Eqs.&nbsp;(<a href="#eq-03" class="quarto-xref">3</a>) and (<a href="#eq-04" class="quarto-xref">4</a>) lead to <span id="eq-05"><span class="math display">\[
+\sigma=\frac E{1-\nu}\epsilon=\frac E{1-\nu}\frac wr.
+\tag{5}\]</span></span></p>
+</section>
+<section id="stress-resultant-and-stress-couple" class="level1">
+<h1>Stress resultant and stress couple</h1>
+<p>Eq.&nbsp;(<a href="#eq-05" class="quarto-xref">5</a>) is finally integrated over the thickness of the shell to obtain the stress resultant and stress couple. Integration must include thickness corrections, which amount to a <span class="math inline">\(r/R\)</span> factor within the integral (see <a href="../20150701-When_a_thin_shell_is_not_so_thin-02">previous instalment</a> of this series).</p>
+<p><span id="eq-06"><span class="math display">\[
+N=\int\_{R\_\mathrm{int}}^{R\_\mathrm{ext}}\sigma(r)\,\frac rR\,\mathrm{d}r=\frac{Eh}{1-\nu}\frac wR,
+\tag{6}\]</span></span> <span id="eq-07"><span class="math display">\[
+M=\int\_{R\_\mathrm{int}}^{R\_\mathrm{ext}}-\bigl(r-R\bigr)\sigma(r)\,\frac rR\,\mathrm{d}r=0.
+\tag{7}\]</span></span></p>
+<p>Now, things start getting really interesting! Indeed, in the thick shell approach, the stress couple is (as expected) rigorously null! Since <span class="math inline">\(M=0\)</span>, it can readily be deduced that <span class="math display">\[
+N=\frac{pR}2.
+\]</span> {eq-08}</p>
+<p>In other words, the classical formula is retrieved (see <a href="http://en.wikipedia.org/wiki/Pressure_vessel#Stress_in_thin-walled_pressure_vessels">Wikipedia</a>).</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In the present post, we finally resolved all contradictions regarding the computation of stress resultant and stress couple within a spherical pressure vessel. In the discussion below, <span class="math inline">\(\eta\)</span> denotes the slenderness of the shell, <span class="math inline">\(\eta=h/R\)</span>. Besides, by “k-th order terms”, we mean terms of order <span class="math inline">\(\eta^k\)</span>.</p>
+<p>Four difference approaches can be followed to analyse the equilibrium of a spherical pressure vessel (see table below). In the classical membrane approach, stress couples are overlooked, and the classical formula <span class="math inline">\(N=pR/2\)</span> is obtained.</p>
+<p>In the thin shell approach, the stress resultant deviates slightly from this classical value (by second order terms) and the stress couple is <em>not</em> null (rather, it is of second order).</p>
+<p>In the thick shell approach, the stress couple is rigorously null and the classical formula is retrieved for the stress resultant. Thickness corrections appear in two different places</p>
+<ol type="1">
+<li>in the strain distribution across the thickness of the shell <a href="#eq-02" class="quarto-xref">see Eq.&nbsp;(&nbsp;2</a>: the distribution is hyperbolic with respect to the thickness coordinate,</li>
+<li>in the stress-stress resultant and stress-stress couple integral relations <a href="#eq-06" class="quarto-xref">see Eqs.&nbsp;(&nbsp;6</a>.</li>
+</ol>
+<p>In the 3D approach, the true stress resultant differs from <span class="math inline">\(N=pR/2\)</span> by second order terms, while the true stress couple is of fourth order.</p>
+<p>What should we deduce from this study? Obviously, beware thin shell theories! Fortunately, I believe that most FE codes implement the thick shell theory. More fundamentally, I am still trying to understand what these results really imply. Does that mean that the asymptotic convergence (as the thickness tends to zero) of thick shell models is faster than that of thin shell models? That is something I am going to investigate.</p>
+<p>This closes our series on thick shells. I hope you enjoyed reading it… and maybe learned something! Should you want to dig deeper into various thick shell theories, do start with Leissa (<a href="https://ntrs.nasa.gov/search.jsp?R=19730018197">1973</a>), who gives a good overview.</p>
+<table class="table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 17%">
+<col style="width: 19%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Exact 3D theory</th>
+<th style="text-align: center;">Thin shell theory</th>
+<th style="text-align: center;">Thick shell theory</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Stress resultant (deviation from <span class="math inline">\(pR/2\)</span>)</td>
+<td style="text-align: center;"><span class="math inline">\(\eta^2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\eta^2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Stress couple</td>
+<td style="text-align: center;"><span class="math inline">\(\eta^4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\eta^2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<!-- Local Variables: -->
+<!-- fill-column: 80 -->
+<!-- End: -->
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Except where otherwise noted, content on this blog by Sébastien Brisard is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></p>
+</div>
+    <div class="nav-footer-right">
+<p>📧​ sebastien [dot] brisard [at] univ [dash] amu [dot] fr</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

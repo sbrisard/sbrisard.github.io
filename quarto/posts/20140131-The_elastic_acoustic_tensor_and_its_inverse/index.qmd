@@ -1,0 +1,119 @@
+---
+title: "The elastic acoustic tensor and its inverse"
+date: "2014-01-31"
+---
+
+In this post, I will introduce the acoustic tensor of linearly elastic
+materials. Closed-form expressions of the inverse of this tensor can be derived
+in the case of *isotropic* materials. This will later come in handy to derive
+closed-form expressions of the periodic Green operator for strains.
+
+We consider a linearly elastic material with stiffness $\mathbf C$. For any
+wave-vector $\vec k$, the elastic acoustic tensor $\mathbf A(\vec k)$ is defined
+as follows
+$$
+\mathbf A(\vec k)
+=\vec k\cdot\mathbf C\cdot\vec k
+=k^2\,\vec n\cdot\mathbf C\cdot\vec n,
+$$ {#eq-01}
+where $k$ is the amplitude of the wave-vector $\vec k$, $k=\sqrt{\vec k\cdot\vec
+k}$, and $\vec n$ is its direction ($\vec k=k\,\vec n$). The acoustic tensor is
+used to assess material stability (Bigoni and Zaccaria, *European Journal of
+Mechanics- A/Solids* **13(5)**, pp. 621–638, 1994) and study the propagation of
+waves ([Gentile and Straughan,
+2013](https://doi.org/10.1016/j.ijengsci.2013.07.006)). As far as we are
+concerned, the derivation of the periodic Green operator for strains will
+require the expressions of the inverse of the acoustic tensor. This is the topic
+of the present post, which is restricted to isotropic materials: the stiffness
+tensor $\mathbf C$ of isotropic materials is therefore a linear combination of the
+[isotropic projection
+tensors](../20140112-Elastic_constants_of_an_isotropic_material-03)
+$\mathbf J$, and $\mathbf K$
+$$
+\mathbf C=d\,\kappa\,\mathbf J+2\mu\,\mathbf K.
+$$ {#eq-02}
+
+To compute the elastic acoustic tensor, we therefore need to find the
+expressions of $\vec n\cdot\mathbf J\cdot\vec n$ and $\vec n\cdot\mathbf K\cdot\vec
+n$, for any unit vector $\vec n$. We start with the computation of $\vec
+n\cdot\mathbf I\cdot\vec n$, where $\mathbf I$ denotes the fourth-rank identity
+tensor. We have
+$$
+\bigl(\vec n\cdot\mathbf I\cdot\vec n\bigr)_{jk}
+=n_i\,I_{ijkl}\,n_l
+=n_i\,n_l\,\frac12\bigl(\delta_{il}\,\delta_{jk}+\delta_{jl}\,\delta_{ik}\bigr)
+=\frac12\bigl(n_i\,n_i\delta_{jk}+n_j\,n_k\bigr).
+$$
+
+Since $\vec n$ is a unit vector, we have $n_i\,n_i=1$, and
+$$
+\vec n\cdot\mathbf I\cdot\vec n=\frac12\bigl(\boldsymbol\delta+\vec n\otimes\vec n\bigr),
+$$
+where $\boldsymbol\delta$ denotes the second-rank identity tensor. It will be
+convenient to introduce the projectors $\mathbf p$ and $\mathbf q$, defined as
+follows
+$$
+\mathbf p=\vec n\otimes\vec n
+\quad\text{and}\quad
+\mathbf q=\boldsymbol\delta-\mathbf p,
+$$
+or, using indices
+$$
+p_{ij}=n_i\,n_j
+\quad\text{and}\quad
+q_{ij}=\delta_{ij}-n_i\,n_j.
+$$
+
+It can readily be verified that
+$$
+\mathbf p\cdot\mathbf p=\mathbf p,\quad
+\mathbf q\cdot\mathbf q=\mathbf q
+\quad\text{and}\quad
+\mathbf p\cdot\mathbf q=\mathbf q\cdot\mathbf p=\mathbf0,
+$$ {#eq-03}
+and
+$$
+\vec n\cdot\mathbf I\cdot\vec n=\mathbf p+\frac12\mathbf q.
+$$ {#eq-04}
+
+Similarly
+$$
+\vec n\cdot\mathbf J\cdot\vec n
+=\frac1d\,\vec n\cdot\bigl(\mathbf\delta\otimes\mathbf\delta\bigr)\cdot\vec n
+=\frac1d\,\vec n\otimes\vec n
+=\frac1d\,\mathbf p.
+$$ {#eq-05}
+
+Finally, combining identity $\mathbf K=\mathbf I-\mathbf J$ with Eqs. (@eq-04)
+and (@eq-05)
+$$
+\vec n\cdot\mathbf K\cdot\vec n=\frac{d-1}d\mathbf p+\frac12\mathbf q.
+$$ {#eq-06}
+
+The acoustic tensor of an elastic, linear, isotropic material is obtained from
+Eqs. (@eq-01), (@eq-02), (@eq-05) and (@eq-06)
+$$
+\mathbf A(\vec n)=\Bigl(\kappa+2\mu\frac{d-1}d\Bigr)\mathbf p+\mu\,\mathbf q.
+$$
+
+From [this post](../20140112-Elastic_constants_of_an_isotropic_material-03), it
+can readily be verified that
+$$
+\kappa+2\mu\frac{d-1}d=2\mu\frac{1-\nu}{1-2\nu},
+$$
+this identity being true in both 3D and plane strain elasticity. The acoustic
+tensor therefore reads
+$$
+\mathbf A(\vec k)=k^2\mu\Bigl[\frac{2\bigl(1-\nu\bigr)}{1-2\nu}\mathbf p+\mathbf q\Bigr].
+$$
+
+Finally, using the properties of the projectors $\mathbf p$ and $\mathbf q$ \[see
+Eq. (@eq-03)\], the *inverse* of the acoustic tensor can be derived
+$$
+\mathbf A^{-1}(\vec k)=\frac1{k^2\mu}\Bigl[\frac{1-2\nu}{2\bigl(1-\nu\bigr)}\mathbf p+\mathbf q\Bigr].
+$$
+
+<!-- Local Variables: -->
+<!-- mode: markdown -->
+<!-- fill-column: 80 -->
+<!-- End: -->

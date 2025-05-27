@@ -1,0 +1,152 @@
+---
+title: "Elastic constants of an isotropic material, part 3: putting it all together"
+date: "2014-01-12"
+---
+
+In the previous instalments of this series (see [Part
+1](../20131205-Elastic_constants_of_an_isotropic_material-01) and [Part
+2](../20131229-Elastic_constants_of_an_isotropic_material-02)), I have shown
+that regardless of the dimensionality (3D or plane strain elasticity), the
+constitutive law of an isotropically elastic material reads
+$$
+\sigma_{ij}=\kappa\,\varepsilon_{kk}\,\delta_{ij}+2\mu\,\left(\varepsilon_{ij}-\frac{\varepsilon_{kk}}d\,\delta_{ij}\right),
+$$ {#eq-01}
+where $d$ is the dimension of the physical space ($d=3$ for 3D elasticity, $d=2$
+for plane strain elasticity), $\mu$ is the shear modulus, and $\kappa$ is the
+bulk modulus, whose expression depends on $d$
+$$
+\kappa=\frac23\frac{1+\nu}{1-2\nu}\,\mu\qquad(d=3),
+$$ {#eq-02}
+$$
+\kappa=\frac\mu{1-2\nu}\qquad(d=2).
+$$ {#eq-03}
+
+In this instalment, I am going to introduce some classical isotropic,
+fourth-rank tensors which will prove extremely useful and will allow us to cast
+Eq. [(1)](@eq-01) in an intrinsic (component-free) form. It should be noted that
+the following developments are restricted to fourth-rank tensors $\mathbf T$ with
+both *minor symmetries*
+$$
+T_{ijkl}=T_{jikl}=T_{ijlk},
+$$
+and *major symmetry*
+$$
+T_{ijkl}=T_{klij}.
+$$
+
+
+# Spherical and deviatoric projection tensors
+
+In the present section, I am going to introduce the fourth-rank identity,
+spherical and deviatoric projection tensors.
+
+## Fourth-rank identity tensor
+
+The fourth-rank identity tensor $\mathbf{I}$ maps any second-rank, symmetric
+tensor $\mathbf u$ onto itself
+$$
+\mathbf I:\mathbf u=\mathbf u.
+$$
+
+It is straightforward to work out the components of $\mathbf I$ (accounting for
+minor symmetries)
+$$
+I_{ijkl}=\frac12\left(\delta_{ik}\,\delta_{jl}+\delta_{il}\,\delta_{jk}\right).
+$$
+
+## Fourth-rank spherical projection tensor
+
+The fourth-rank spherical projection tensor $\mathbf J$ extracts the spherical
+part of any symmetric, second-rank tensor $\mathbf u$
+$$
+\mathbf J:\mathbf u=\frac1d\operatorname{tr}(\mathbf u)\,\boldsymbol\delta,
+$$
+where $\boldsymbol\delta$ is the second-rank identity tensor (with components
+$\delta_{ij}$). In particular, $\mathbf
+J:\boldsymbol\delta=\boldsymbol\delta$. In intrinsic form, $\mathbf J$ reads
+$$
+\mathbf J=\frac1d\mathbf\delta\otimes\mathbf\delta,
+$$
+where $\otimes$ denotes the [tensor
+product](http://en.wikipedia.org/wiki/Tensor_product). The components of
+$\mathbf J$ are
+$$
+J_{ijkl} = \frac1d\,\delta_{ij}\,\delta_{kl}.
+$$
+
+## Fourth-rank deviatoric projection tensor
+
+The fourth-rank deviatoric projection tensor $\mathbf K$ extracts the deviatoric
+part of any symmetric, second-rank tensor $\mathbf u$
+$$
+\mathbf K:\mathbf u=\mathbf u-\frac1d\,\operatorname{tr}(\mathbf u)\,\boldsymbol{\delta}
+=\mathbf u-\mathbf J:\mathbf u,
+$$
+from which it results that
+$$
+\mathbf K=\mathbf I-\mathbf J.
+$$
+
+# Stiffness tensor
+
+Going back the constitutive law of the linearly elastic, isotropic material
+given by Eq. (@eq-01), it is found that
+$$
+\mathbf\sigma=d\,\kappa\,\mathbf J:\mathbf\varepsilon+2\mu\,\mathbf K:\mathbf\varepsilon=\mathbf C:\mathbf\varepsilon,
+$$
+where $\mathbf C$ is the fourth-rank stiffness tensor of the material
+$$
+\mathbf C=d\,\kappa\,\mathbf J+2\mu\,\mathbf K.
+$$
+
+In isotropic elasticity, the stiffness tensor is a linear combination of the two
+tensors $\mathbf J$ and $\mathbf K$. This is in fact a general result, which is
+heavily used in materials science: any *isotropic* fourth-rank tensor with minor
+and major symmetries is a linear combination of $\mathbf J$ and $\mathbf K$. In
+other words, $\mathbf J$ and $\mathbf K$ form a *basis* of the space of fourth-rank
+isotropic tensors with minor and major symmetries. Why this is useful will
+become obvious in the next section, where I will show that algebra in this basis
+is dead simple.
+
+## Algebra of the $\mathbf{J}$ and $\mathbf{K}$ tensors
+
+It can readily be verified that
+$$
+\mathbf J:\mathbf J=\mathbf J,\quad
+\mathbf K:\mathbf K=\mathbf K
+\quad\text{and}\quad
+\mathbf K:\mathbf J=\mathbf J:\mathbf K=\mathbf0.
+$$
+
+Therefore, multiplication of two isotropic tensors
+$\mathbf T_i=a_i\,\mathbf{J}+b_i\,\mathbf{K}$ ($i=1,2$) is trivial
+$$
+\mathbf T_1:\mathbf T_2=a_1\,a_2\,\mathbf J+b_1\,b_2\,\mathbf K.
+$$
+
+Also, inversion of an isotropic tensor $\mathbf T=a\,\mathbf{J}+b\,\mathbf{K}$ is
+straightforward
+$$
+\mathbf T^{-1}=\frac1a\,\mathbf J+\frac1b\,\mathbf K.
+$$
+
+All these expressions will prove extremely useful in due time.
+
+
+# Conclusion
+
+This is the end of this series on the elastic constants of isotropic
+materials. I have shown that (regardless of the dimension $d$ of the physical
+space), such materials are characterized by two constants. The shear modulus
+$\mu$, the Poisson ratio $\nu$ and Young's modulus $E$ do not depend on $d$,
+while the plane strains expression of the bulk modulus $\kappa$ differs from its
+3D expression \[see Eqs. (@eq-02) and (@eq-03)\].
+
+This series was also a good opportunity to introduce the tensors $\mathbf J$ and
+$\mathbf K$, which form a basis for the isotropic, fourth-rank tensors. Using this
+basis is very convenient, as algebra within this basis is extremely simple.
+
+<!-- Local Variables: -->
+<!-- mode: markdown -->
+<!-- fill-column: 80 -->
+<!-- End: -->
