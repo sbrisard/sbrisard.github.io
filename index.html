@@ -1,37 +1,201 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Sébastien Brisard's blog</title>
-    <link rel="stylesheet" href="https://sbrisard.github.io/theme/css/main.css" />
-    <meta charset="utf-8" />
-    <link href="https://sbrisard.github.io/feed.xml" type="application/rss+xml" rel="alternate" title="Sébastien Brisard's blog Full RSS Feed" />
-  </head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-  <body id="index" class="home">
-    <header id="siteheader">
-      <img id="sitebanner" src="https://sbrisard.github.io/theme/images/banner.jpg"/>
-      <div id="sitename"><a href="https://sbrisard.github.io/">Sébastien Brisard's blog <strong></strong></a></div>
-      <nav id="sitemenu">
-	<ul>
-          <li><a href="/pages/about.html" title="About this blog">About this blog</a></li>
-          <li><a href="https://cv.archives-ouvertes.fr/sbrisard" title="About me">About me</a></li>
-          <li><a href="/archives.html" title="Archives">Archives</a></li>
-          <li><a href="https://github.com/sbrisard" title="GitHub">GitHub</a></li>
-          <li><a href="https://twitter.com/SebBrisard" title="Twitter">Twitter</a></li>
-          <li><a href="feed.xml" title="RSS">RSS</a></li>
-	</ul>
-      </nav>
-    </header>
-<section id="content">
-<h1>Welcome!</h1>
-<p>You’ve reached the blog of Sébastien Brisard. My most recent posts are listed
-below. A full list of posts can be found in the <a href="archives.html">“Archives”</a>
-section. If you are wondering why this blog is relatively “low-tech”, read the
-<a href="https://sbrisard.github.io/pages/about.html">“About this blog” </a> section.</p>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Sébastien Brisard’s blog - Welcome!</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Sébastien Brisard’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://cv.archives-ouvertes.fr/sbrisard"> 
+<span class="menu-text">About the author</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/sbrisard"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Welcome!</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>You’ve reached the blog of Sébastien Brisard. My most recent posts are listed below.</p>
 <p>Please also visit the documentation of some of my projects</p>
 <ul>
-<li><a href="https://sbrisard.github.io/janus">https://sbrisard.github.io/janus</a>: the documentation of the <code>Janus</code> library,</li>
-<li><a href="https://sbrisard.github.io/pw85">https://sbrisard.github.io/pw85</a>: the documentation of the <code>PW85</code> library.</li>
+<li><a href="https://sbrisard.github.io/janus" class="uri">https://sbrisard.github.io/janus</a>: the documentation of the <code>Janus</code> library,</li>
+<li><a href="https://sbrisard.github.io/pw85" class="uri">https://sbrisard.github.io/pw85</a>: the documentation of the <code>PW85</code> library.</li>
 </ul>
 <p>as well as some recent (work in progress) open books</p>
 <ul>
@@ -40,910 +204,1246 @@ section. If you are wondering why this blog is relatively “low-tech”, read t
 </ul>
 <p>Enjoy reading!</p>
 
-<div id="post-list">
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20230122-new_year_resolutions.html"
-	 rel="bookmark"
-	 title="Permalink to New Year Resolutions!"
-	 datetime="2023-01-22T00:00:00+01:00">
-	22 January 2023&nbsp;&mdash;&nbsp;New Year Resolutions!
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>So it is again this time of year where you make a few pledges that you soon
-forget about. I am no exception to this rule, and formed three New Year
-Resolutions to date.</p>
-<h1>New Year Resolution #1: make more of my work public</h1>
-<p>This blog is of course a …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20210805-new_paper_on_two-point_correlations.html"
-	 rel="bookmark"
-	 title="Permalink to New paper on the effect of two-point correlations on the effective properties"
-	 datetime="2021-08-05T00:00:00+02:00">
-	05 August 2021&nbsp;&mdash;&nbsp;New paper on the effect of two-point correlations on the effective properties
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Together with our post-doctoral fellow Othmane Zerhouni, my colleague
-<a href="http://kostasdanas.com/">Kostas Danas</a>
-(<a href="https://portail.polytechnique.edu/lms/en">LMS</a>, <a href="https://www.polytechnique.edu/en">École
-polytechnique</a>) and I have recently
-published a new paper in <em>International Journal of Engineering
-Science</em>. The paper is titled “Quantifying the effect of two-point
-correlations on the effective elasticity of specific classes of random
-porous materials with …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20210513-numerical_analysis_of_a_spring_mesh.html"
-	 rel="bookmark"
-	 title="Permalink to Numerical analysis of a spring mesh"
-	 datetime="2021-05-13T00:00:00+02:00">
-	13 May 2021&nbsp;&mdash;&nbsp;Numerical analysis of a spring mesh
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In this post, we compute numeric values of the apparent stiffness introduced in <a href="https://sbrisard.github.io/posts/20210509-what_is_homogenization-05.html">this post</a>. Our goal is to find the solution to the general problem depicted below.</p>
-<p><img alt="The problem considered here" class="fig60p100" src="https://sbrisard.github.io/posts/What_is_homogenization/uniaxial_tension.png"></p>
-<p>We use a numeric approach that is akin to the finite element method. More precisely, we minimize the total potential energy of …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20210512-symbolic_analysis_of_a_spring_mesh.html"
-	 rel="bookmark"
-	 title="Permalink to Symbolic analysis of a spring mesh"
-	 datetime="2021-05-12T00:00:00+02:00">
-	12 May 2021&nbsp;&mdash;&nbsp;Symbolic analysis of a spring mesh
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In this post, we compute symbolic expressions of the apparent stiffness introduced in <a href="https://sbrisard.github.io/posts/20210509-what_is_homogenization-05.html">this post</a>. Our goal is to find the solution to the general problem depicted below.</p>
-<p><img alt="The problem considered here" class="fig60p100" src="https://sbrisard.github.io/posts/What_is_homogenization/uniaxial_tension.png"></p>
-<h2>Outline of the derivation</h2>
-<p>We consider a simplified case, where the mesh is square and vertical and horizontal springs have equal stiffnesses …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20210509-what_is_homogenization-05.html"
-	 rel="bookmark"
-	 title="Permalink to What is homogenization? Part 5: introducing the representative volume element"
-	 datetime="2021-05-09T00:00:00+02:00">
-	09 May 2021&nbsp;&mdash;&nbsp;What is homogenization? Part 5: introducing the representative volume element
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20201208-what_is_homogenization-04.html">previous instalment</a> of
-this series on homogenization, we derived the homogenized properties of a
-rectangular spring mesh. Our goal in this post is to analyse the “convergence”
-towards the homogenized stiffness; meanwhile, we will discuss the size of the
-so-called representative volume element (RVE).</p>
-<h2>In the previous episode …</h2>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20201208-what_is_homogenization-04.html"
-	 rel="bookmark"
-	 title="Permalink to What is homogenization? Part 4: a first example"
-	 datetime="2020-12-08T00:00:00+01:00">
-	08 December 2020&nbsp;&mdash;&nbsp;What is homogenization? Part 4: a first example
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20200421-what_is_homogenization-03.html">previous instalment</a> of
-this series on homogenization, we discussed volume and ensemble averages for
-random heterogeneous materials. In view of introducing <em>statistical</em> and
-<em>representative</em> volume elements, we will introduce in this post our first
-homogenization example, namely a two-dimensional, rectangular mesh of springs
-that is loaded in its …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20201125-on_the_stiffness_matrix_of_a_linear_spring.html"
-	 rel="bookmark"
-	 title="Permalink to On the stiffness matrix of a linear spring"
-	 datetime="2020-11-25T00:00:00+01:00">
-	25 November 2020&nbsp;&mdash;&nbsp;On the stiffness matrix of a linear spring
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>This post is not going to be the most exciting I have ever written. We will
-derive the expression of the elastic energy of a linear spring as a function of
-the displacement of its two end-points. I will need this expression in my series
-on <a href="{filename}">“What is homogenization”</a>. Having …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20200421-what_is_homogenization-03.html"
-	 rel="bookmark"
-	 title="Permalink to What is homogenization? Part 3: ensemble averages vs. volume averages"
-	 datetime="2020-04-21T00:00:00+02:00">
-	21 April 2020&nbsp;&mdash;&nbsp;What is homogenization? Part 3: ensemble averages vs. volume averages
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20200408-what_is_homogenization-02.html">previous instalment</a> of
-this series on homogenization, we discussed homogenization of a distribution of
-black dots on a white background to a uniform shade of gray. In that example,
-homogenization boils down to evaluating the fraction of the total area occupied
-by the dots: this is the so-called …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20200408-what_is_homogenization-02.html"
-	 rel="bookmark"
-	 title="Permalink to What is homogenization? Part 2: experimental vs. theoretical homogenization"
-	 datetime="2020-04-08T00:00:00+02:00">
-	08 April 2020&nbsp;&mdash;&nbsp;What is homogenization? Part 2: experimental vs. theoretical homogenization
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20200402-what_is_homogenization-01.html">previous
-instalment</a> of this
-series, we introduced homogenization and the separation of scales. In
-the present post, we will discuss two strategies to carry out
-homogenization: the experimental and the theoretical approaches. To do
-so, we will again use the analogy with the halftoning technique.</p>
-<p>Remember that we …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20200402-what_is_homogenization-01.html"
-	 rel="bookmark"
-	 title="Permalink to What is homogenization? Part 1: on the separation of scales"
-	 datetime="2020-04-02T00:00:00+02:00">
-	02 April 2020&nbsp;&mdash;&nbsp;What is homogenization? Part 1: on the separation of scales
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Most of my research activities deal with upscaling the mechanical
-properties of heterogeneous materials. This is also known as
-homogenization. So what <em>is</em> homogenization? This series explores this
-question; it is largely based on the introduction to my <a href="file:./20171117-Announcing_the_defense_of_my_habilitation.org">Habilitation
-defense</a>.</p>
-<p>In order to introduce homogenization, we will draw inspiration from …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20180326-on_the_periodic-plus-smooth_decomposition_of_an_image-07.html"
-	 rel="bookmark"
-	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan's algorithm"
-	 datetime="2018-03-26T00:00:00+02:00">
-	26 March 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan's algorithm
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20180319-on_the_periodic-plus-smooth_decomposition_of_an_image-06.html">previous
-instalment</a>
-of this series, we implemented Moisan's
-(<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) efficient
-algorithm to compute the periodic-plus-smooth decomposition of an
-image. This algorithm relies heavily on the discrete Fourier
-transform, and already improves quite a lot over our previous
-conjugate gradient-based implementation. In the present post, we will
-show that …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20180319-on_the_periodic-plus-smooth_decomposition_of_an_image-06.html"
-	 rel="bookmark"
-	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way"
-	 datetime="2018-03-19T00:00:00+01:00">
-	19 March 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20180312-on_the_periodic-plus-smooth_decomposition_of_an_image-05.html">previous
-instalment</a>
-of this series, we computed Moisan's
-(<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>)
-periodic-plus-smooth decomposition of an image by means of the
-<a href="https://en.wikipedia.org/wiki/Conjugate_gradient_method">conjugate gradient
-method</a>. This
-worked like a charm, but was fairly inefficient, owing to the
-iterative nature of the method. Moisan actually showed that the whole
-decomposition could be computed …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20180312-on_the_periodic-plus-smooth_decomposition_of_an_image-05.html"
-	 rel="bookmark"
-	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way"
-	 datetime="2018-03-12T00:00:00+01:00">
-	12 March 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In this post, we will compute Moisan's
-(<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) periodic-plus-smooth
-decomposition of an image by direct minimization of the energy introduced in the
-<a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">second
-instalment</a>
-of this series. More precisely, $u$ being a $m\times n$ image, we will minimize
-the function $F(v, u)$ over the space of $m\times …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20180305-on_the_periodic-plus-smooth_decomposition_of_an_image-04.html"
-	 rel="bookmark"
-	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators"
-	 datetime="2018-03-05T00:00:00+01:00">
-	05 March 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html">previous
-instalment</a>
-of this series, we introduced the linear operators $Q_1$ and $Q$ that allow to
-define Moisan's (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>)
-periodic-plus-smooth decomposition $(p, s)$ of an image $u$ as follows</p>
-<p>$$s=\operatorname*{arg\,min}_v F(v, u)\quad\text{and}\quad p=u-s,$$</p>
-<p>with</p>
-<p>$$F(v, u …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20180226-on_the_periodic-plus-smooth_decomposition_of_an_image-03.html"
-	 rel="bookmark"
-	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form"
-	 datetime="2018-02-26T00:00:00+01:00">
-	26 February 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html">previous
-instalment</a>
-of this series, we introduced the periodic-plus-smooth decomposition of an image
-as a pair of images which minimizes an energy functional. Observing that this
-energy is a quadratic form, the purpose of this post is to derive closed form
-expressions of the underlying linear operators. These …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20180219-on_the_periodic-plus-smooth_decomposition_of_an_image-02.html"
-	 rel="bookmark"
-	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition"
-	 datetime="2018-02-19T00:00:00+01:00">
-	19 February 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20180212-on_the_periodic-plus-smooth_decomposition_of_an_image-01.html">previous
-instalment</a>
-of this series, we discussed the need for periodic images. Although not all
-images are periodic, some image analysis techniques are best performed in
-Fourier space (using the fast Fourier transform). Applying Fourier-based
-techniques to images that are <em>not</em> periodic (as is often the case) generates …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20180212-on_the_periodic-plus-smooth_decomposition_of_an_image-01.html"
-	 rel="bookmark"
-	 title="Permalink to On the periodic-plus-smooth decomposition of an image, part 1: introduction"
-	 datetime="2018-02-12T00:00:00+01:00">
-	12 February 2018&nbsp;&mdash;&nbsp;On the periodic-plus-smooth decomposition of an image, part 1: introduction
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In this new series, we will explore the so-called <em>periodic-plus-smooth</em>
-decomposition of an image, introduced by Moisan in 2011. This series is largely
-based on Moisan's paper, called <a href="https://doi.org/10.1007/s10851-010-0227-1">Periodic plus Smooth Image
-Decomposition</a> (the author's version
-can be found on <a href="https://hal.archives-ouvertes.fr/hal-00388020">HAL</a>). Besides
-introducing a quite smart technique (that I do …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20171117-announcing_the_defense_of_my_habilitation.html"
-	 rel="bookmark"
-	 title="Permalink to Announcing the defense of my “Habilitation à Diriger des Recherches”"
-	 datetime="2017-11-17T00:00:00+01:00">
-	17 November 2017&nbsp;&mdash;&nbsp;Announcing the defense of my “Habilitation à Diriger des Recherches”
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>On monday 20th, november 2017 (at 13:30), I will be defending my
-<a href="https://en.wikipedia.org/wiki/Habilitation#France">"Habilitation à Diriger des Recherches"</a> at
-<a href="http://www.enpc.fr/">École des Ponts ParisTech</a> in front of the
-following jury</p>
-<ul>
-<li><a href="http://www.dalembert.upmc.fr/home/brenner/">Renald Brenner</a>
-    (Sorbonne Universités, UPMC Univ Paris 06, CNRS, UMR 7190, <a href="http://www.dalembert.upmc.fr/">Institut
-    Jean le Rond d\'Alembert</a>, F-75005,
-    Paris, France),</li>
-<li><a href="http://matperso.mines-paristech.fr/People/samuel.forest/">Samuel …</a></li></ul>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20170807-new_conference_paper_on_variational_estimates_of_poroelastic_coefficients.html"
-	 rel="bookmark"
-	 title="Permalink to New conference paper on variational estimates of poroelastic coefficients"
-	 datetime="2017-08-07T00:00:00+02:00">
-	07 August 2017&nbsp;&mdash;&nbsp;New conference paper on variational estimates of poroelastic coefficients
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>I recently had the pleasure to give a talk on “Variational estimates
-of the poroelastic coefficients” at the 6th Biot Conference on
-Poromechanics that took place at École des Ponts ParisTech on July
-9-13, 2017. This is joint work with my colleague <a href="http://navier.enpc.fr/GHABEZLOO-Siavash">Siavash
-GHABEZLOO</a>. It has been
-ongoing for years …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20170531-scrapy-ing_the_nist_x-ray_attenuation_databases.html"
-	 rel="bookmark"
-	 title="Permalink to Scrapy-ing the NIST X-ray Attenuation Databases"
-	 datetime="2017-05-31T00:00:00+02:00">
-	31 May 2017&nbsp;&mdash;&nbsp;Scrapy-ing the NIST X-ray Attenuation Databases
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>I am currently preparing with two other colleagues a review paper on X-ray
-tomography of cementitious materials, for which I need to retrieve tabulated
-values of the <a href="https://en.wikipedia.org/wiki/Mass_attenuation_coefficient#Mass_attenuation_coefficients_for_X-rays">X-ray mass attenuation
-coefficients</a>
-of all elements. NIST provides such data (see <a href="https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients">X-Ray Mass Attenuation
-Coefficients</a> by
-J. H. Hubbell and S. M …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20170428-new_paper_on_one-dimensional_compression_of_granular_materials.html"
-	 rel="bookmark"
-	 title="Permalink to New paper on one-dimensional compression of granular materials"
-	 datetime="2017-04-28T00:00:00+02:00">
-	28 April 2017&nbsp;&mdash;&nbsp;New paper on one-dimensional compression of granular materials
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>My student Mohamed Hassan Khalili has recently had one of his papers
-published in <em>Physical Review E</em>. The paper is called “A numerical study
-of one-dimensional compression of granular materials”. I have only been
-very marginally involved in this DEM study, which is divided in two
-parts.</p>
-<p>Part I is …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20170426-new_paper_on_discrete_digital_projections_correlation.html"
-	 rel="bookmark"
-	 title="Permalink to New paper on Discrete Digital Projections Correlation"
-	 datetime="2017-04-26T00:00:00+02:00">
-	26 April 2017&nbsp;&mdash;&nbsp;New paper on Discrete Digital Projections Correlation
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Our paper “Discrete Digital Projections Correlation: a
-reconstruction-free method to quantify local kinematics in granular
-media by X-ray tomography” has recently been published in <em>Experimental
-Mechanics</em>. The abstract is reproduced below</p>
-<blockquote>
-<p>We propose a new method to measure the translations and rotations of
-each individual grain in a granular material …</p></blockquote>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20170223-new_paper_out.html"
-	 rel="bookmark"
-	 title="Permalink to New paper out!"
-	 datetime="2017-02-23T00:00:00+01:00">
-	23 February 2017&nbsp;&mdash;&nbsp;New paper out!
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>My paper “Towards improved Hashin--Shtrikman bounds on the effective
-moduli of random composites” has recently been published in <em>Mechanics &amp;
-Industry</em>. The abstract is reproduced below</p>
-<blockquote>
-<p>The celebrated bounds of Hashin and Shtrikman on the effective
-properties of composites are valid for a very wide class of materials.
-However, they incorporate …</p></blockquote>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20160627-orientation_correlations_among_rice_grains-08.html"
-	 rel="bookmark"
-	 title="Permalink to Orientation correlations among rice grains, part 8: estimating the correlations"
-	 datetime="2016-06-27T00:00:00+02:00">
-	27 June 2016&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 8: estimating the correlations
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20160219-orientation_correlations_among_rice_grains-07.html">previous
-instalment</a>
-of this series, we have analyzed the morphology of the rice grains. In
-particular, we have defined their <em>orientation</em> as that of the major axis of
-inertia. We are now in a position to quantify the statistics of the
-orientations. We will first discuss <a href="#S1">one-point statistics …</a></p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20160613-new_paper.html"
-	 rel="bookmark"
-	 title="Permalink to New paper"
-	 datetime="2016-06-13T00:00:00+02:00">
-	13 June 2016&nbsp;&mdash;&nbsp;New paper
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>My paper “Reconstructing displacements from the solution to the periodic
-Lippmann--Schwinger equation discretized on a uniform grid” has recently
-been published in <em>International Journal of Numerical Methods in
-Engineering</em>. The abstract is reproduced below</p>
-<blockquote>
-<p>Uniform grid solvers of the periodic Lippmann--Schwinger equation have
-been introduced by Moulinec and Suquet for …</p></blockquote>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20160219-orientation_correlations_among_rice_grains-07.html"
-	 rel="bookmark"
-	 title="Permalink to Orientation correlations among rice grains, part 7: analysis of the shape of the grains"
-	 datetime="2016-02-19T00:00:00+01:00">
-	19 February 2016&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 7: analysis of the shape of the grains
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>$\newcommand{\tens}{\mathbf}\newcommand{\D}{\mathrm{d}}$</p>
-<p>In the <a href="https://sbrisard.github.io/posts/20150930-orientation_correlations_among_rice_grains-06.html">previous
-instalment</a>
-of this series, we have segmented the 3D image of the assembly of rice
-grains. In other words, each voxel of the image is attributed the label of the
-grain to which it belongs. Remember the <a href="https://sbrisard.github.io/posts/20150223-orientation_correlations_among_rice_grains-01.html">initial
-goal</a> of …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20151208-new_paper_published.html"
-	 rel="bookmark"
-	 title="Permalink to New paper published"
-	 datetime="2015-12-08T00:00:00+01:00">
-	08 December 2015&nbsp;&mdash;&nbsp;New paper published
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>My student Vinh Phuc Tran has recently had one of his papers published
-in <em>Mechanics of Materials</em>. The paper is called <em>Stochastic modeling of
-mesoscopic elasticity random field</em>. The abstract is reproduced below</p>
-<blockquote>
-<p>In the homogenization setting, the effective properties of a
-heterogeneous material can be retrieved from the solution …</p></blockquote>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20150930-orientation_correlations_among_rice_grains-06.html"
-	 rel="bookmark"
-	 title="Permalink to Orientation correlations among rice grains, part 6: segmentation"
-	 datetime="2015-09-30T00:00:00+02:00">
-	30 September 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 6: segmentation
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20150709-orientation_correlations_among_rice_grains-05.html">previous
-instalment</a>
-of this series, I showed that a convincing binary image could be produced from
-the gray level 3D reconstruction of the assembly of rice grains, using Otsu's
-threshold. However, I intend to carry out statistical analyses of the <em>grains</em>
-themselves in the subsequent instalments. Therefore, instead …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20150709-orientation_correlations_among_rice_grains-05.html"
-	 rel="bookmark"
-	 title="Permalink to Orientation correlations among rice grains, part 5: thresholding"
-	 datetime="2015-07-09T00:00:00+02:00">
-	09 July 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 5: thresholding
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20150529-orientation_correlations_among_rice_grains-04.html">previous
-instalment</a>
-of this series, we used the circle Hough transform to find the boundary of the
-sample and define the circular ROI. Within this ROI, we now need to segment the
-rice grains. In other words, starting from a gray-level image (<a href="#fig01">Fig. 1</a>,
-left), we want to …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20150706-when_a_thin_shell_is_not_so_thin-03.html"
-	 rel="bookmark"
-	 title="Permalink to When a thin shell is not so thin, part 3: the thick shell solution"
-	 datetime="2015-07-06T00:00:00+02:00">
-	06 July 2015&nbsp;&mdash;&nbsp;When a thin shell is not so thin, part 3: the thick shell solution
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Finding the stress resultant and stress couple in a spherical pressure vessel
-seems easy enough. Well, this apparently simple problem allows us to highlight
-subtle thickness effects within shells. It should be emphasized again that these
-thickness effects have nothing to do with shear corrections. Indeed, shear
-stresses are null …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20150701-when_a_thin_shell_is_not_so_thin-02.html"
-	 rel="bookmark"
-	 title="Permalink to When a thin shell is not so thin, part 2: the 3D, exact solution"
-	 datetime="2015-07-01T00:00:00+02:00">
-	01 July 2015&nbsp;&mdash;&nbsp;When a thin shell is not so thin, part 2: the 3D, exact solution
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20150608-when_a_thin_shell_is_not_so_thin-01.html">previous
-instalment</a> of this
-series, we analysed a spherical pressure vessel by means of Koiter's linear
-theory of thin shells. We found the somewhat unexpected result that the stress
-couple was not null. Besides, we also found that the stress resultant was
-slightly different from the well-known value …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20150608-when_a_thin_shell_is_not_so_thin-01.html"
-	 rel="bookmark"
-	 title="Permalink to When a thin shell is not so thin, part 1: Koiter's linear theory"
-	 datetime="2015-06-08T00:00:00+02:00">
-	08 June 2015&nbsp;&mdash;&nbsp;When a thin shell is not so thin, part 1: Koiter's linear theory
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In structural analysis, thick beams (resp. plates) usually refer to shear
-deformability, and the <a href="http://en.wikipedia.org/wiki/Timoshenko_beam_theory">Timoshenko beam
-theory</a> (resp.
-<a href="http://en.wikipedia.org/wiki/Mindlin%E2%80%93Reissner_plate_theory">Mindlin–Reissner plate
-theory</a>).
-With curved elements however (e.g. curved beams or shells), the situation is
-more subtle, as thickness corrections may be necessary even in shells <em>where the
-shear stress …</em></p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20150529-orientation_correlations_among_rice_grains-04.html"
-	 rel="bookmark"
-	 title="Permalink to Orientation correlations among rice grains, part 4: defining the ROI"
-	 datetime="2015-05-29T00:00:00+02:00">
-	29 May 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 4: defining the ROI
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20150330-orientation_correlations_among_rice_grains-03.html">previous instalment</a> of this series, we obtained binned slices of the sample. <a href="#fig01">Fig.&nbsp;1</a> below displays a typical example of these binned slices. We now want to segment the rice grains. However, the analysis (in particular, Otsu thresholding) might be perturbed by the fact that the walls of …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20150330-orientation_correlations_among_rice_grains-03.html"
-	 rel="bookmark"
-	 title="Permalink to Orientation correlations among rice grains, part 3: intermezzo – Binning images"
-	 datetime="2015-03-30T00:00:00+02:00">
-	30 March 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 3: intermezzo – Binning images
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>The full reconstructed image resulting from the tomography experiment described in the <a href="https://sbrisard.github.io/posts/20150310-orientation_correlations_among_rice_grains-02.html">second</a> instalment of this series is a 1747×1751×688 stack. The voxel size is about 0.030 mm. This is far too much for the purpose of the present study, since all we are interested in is the determination …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20150310-orientation_correlations_among_rice_grains-02.html"
-	 rel="bookmark"
-	 title="Permalink to Orientation correlations among rice grains, part 2: acquisition of tomography images"
-	 datetime="2015-03-10T00:00:00+01:00">
-	10 March 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 2: acquisition of tomography images
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the
-<a href="https://sbrisard.github.io/posts/20150223-orientation_correlations_among_rice_grains-01.html">first</a>
-instalment of this series, I briefly introduced orientational order in
-assemblies of anisotropic particles, and proposed an illustration based on
-synthetic microstructures. But what I really intend to do in this series is to
-show how orientational order can be quantified in a “real-life” sample, namely a …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20150223-orientation_correlations_among_rice_grains-01.html"
-	 rel="bookmark"
-	 title="Permalink to Orientation correlations among rice grains, part 1: introduction"
-	 datetime="2015-02-23T00:00:00+01:00">
-	23 February 2015&nbsp;&mdash;&nbsp;Orientation correlations among rice grains, part 1: introduction
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In this series, I will explore the notion of orientational order in random
-packings of anisotropic (flat or elongated), hard particles. By orientational
-order, I mean that particles which are close to each other tend to adopt the
-same orientation. This leads to strong <em>local</em> anisotropy, while the packing may …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20140226-decomposition_of_transverse_isotropic_fourth-rank_tensors.html"
-	 rel="bookmark"
-	 title="Permalink to Decomposition of transverse isotropic, fourth-rank tensors"
-	 datetime="2014-02-26T00:00:00+01:00">
-	26 February 2014&nbsp;&mdash;&nbsp;Decomposition of transverse isotropic, fourth-rank tensors
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In <a href="https://sbrisard.github.io/posts/20140112-elastic_constants_of_an_isotropic_material-03.html">a previous
-post</a>, I
-introduced the fourth-rank spherical and deviatoric projection tensors. Any
-isotropic fourth-rank tensor is a linear combination of these two tensors; in
-other words, the space of isotropic fourth-rank tensors (with minor and major
-symmetries) is of dimension 2. Similarly, it can be shown (<a href="https://doi.org/10.1098/rspa.1984.0008">Walpole,
-1984 …</a></p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20140219-on_the_double_dot_product.html"
-	 rel="bookmark"
-	 title="Permalink to On the double dot product"
-	 datetime="2014-02-19T00:00:00+01:00">
-	19 February 2014&nbsp;&mdash;&nbsp;On the double dot product
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>The double dot product of two tensors is the contraction of these tensors with
-respect to the last two indices of the first one, and the first two indices of
-the second one. Whether or not this contraction is performed on the <em>closest</em>
-indices is a matter of convention. In …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20140131-the_elastic_acoustic_tensor_and_its_inverse.html"
-	 rel="bookmark"
-	 title="Permalink to The elastic acoustic tensor and its inverse"
-	 datetime="2014-01-31T00:00:00+01:00">
-	31 January 2014&nbsp;&mdash;&nbsp;The elastic acoustic tensor and its inverse
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In this post, I will introduce the acoustic tensor of linearly elastic
-materials. Closed-form expressions of the inverse of this tensor can be derived
-in the case of <em>isotropic</em> materials. This will later come in handy to derive
-closed-form expressions of the periodic Green operator for strains.</p>
-<p>We consider a …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20140112-elastic_constants_of_an_isotropic_material-03.html"
-	 rel="bookmark"
-	 title="Permalink to Elastic constants of an isotropic material, part 3: putting it all together"
-	 datetime="2014-01-12T00:00:00+01:00">
-	12 January 2014&nbsp;&mdash;&nbsp;Elastic constants of an isotropic material, part 3: putting it all together
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the previous instalments of this series (see <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html">Part
-1</a> and
-<a href="https://sbrisard.github.io/posts/20131229-elastic_constants_of_an_isotropic_material-02.html">Part 2</a>),
-I have shown that regardless of the dimensionality (3D or plane strain
-elasticity), the constitutive law of an isotropically elastic material reads</p>
-<p><a name="eq01"></a>
-$$\sigma_{ij}=\kappa\varepsilon_{kk}\delta_{ij}+2\mu\left(\varepsilon_{ij}-\frac{\varepsilon_{kk …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20140102-extract_images_from_pdf_files.html"
-	 rel="bookmark"
-	 title="Permalink to Extract images from PDF files"
-	 datetime="2014-01-02T00:00:00+01:00">
-	02 January 2014&nbsp;&mdash;&nbsp;Extract images from PDF files
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>I recently scanned a document as a PDF file, and I wanted to retrieve
-the embedded images. I really mean <em>extract</em> the images, and not
-convert the pages of the document to images (which would entail loss
-of data). There is a nice command-line tool to do that: <code>pdfimages</code>,
-which …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20131229-elastic_constants_of_an_isotropic_material-02.html"
-	 rel="bookmark"
-	 title="Permalink to Elastic constants of an isotropic material, part 2: plane strain elasticity"
-	 datetime="2013-12-29T00:00:00+01:00">
-	29 December 2013&nbsp;&mdash;&nbsp;Elastic constants of an isotropic material, part 2: plane strain elasticity
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In the <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html">previous
-instalment</a>
-of this series, I introduced the constitutive law of an isotropically elastic
-material, and the related material constants, within the framework of 3D
-elasticity. I will now address the case of plane strain elasticity.</p>
-<p>Problems of plane strain elasticity are defined as problems where the following …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20131205-elastic_constants_of_an_isotropic_material-01.html"
-	 rel="bookmark"
-	 title="Permalink to Elastic constants of an isotropic material, part 1: 3D elasticity"
-	 datetime="2013-12-05T00:00:00+01:00">
-	05 December 2013&nbsp;&mdash;&nbsp;Elastic constants of an isotropic material, part 1: 3D elasticity
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Among all classes of materials, the class of linearly elastic and isotropic
-materials is probably the simplest. Such materials are defined by two elastic
-constants: for example, Young\'s modulus $E$ and Poisson\'s ratio
-$\nu$. However, depending on the situation, this pair of constants might not be
-the most …</p>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20131105-new_accepted_manuscript.html"
-	 rel="bookmark"
-	 title="Permalink to New accepted manuscript"
-	 datetime="2013-11-05T00:00:00+01:00">
-	05 November 2013&nbsp;&mdash;&nbsp;New accepted manuscript
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>One of my manuscripts has just been accepted for publication in the
-International Journal of Solids and Structures. It is called <em>A
-variational form of the equivalent inclusion method for numerical
-homogenization</em>. The abstract is reproduced below</p>
-<blockquote>
-<p>Due to its relatively low computational cost, the equivalent inclusion
-method is an …</p></blockquote>
-  </div><!-- /.entry-content -->
-</article>
-<article class="hentry">
-  <header>
-    <h2 class="entry-title">
-      <a href="https://sbrisard.github.io/posts/20130831-new_accepted_manuscript.html"
-	 rel="bookmark"
-	 title="Permalink to New accepted manuscript"
-	 datetime="2013-08-31T00:00:00+02:00">
-	31 August 2013&nbsp;&mdash;&nbsp;New accepted manuscript
-      </a>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>It is my pleasure to announce that one of my papers has recently been
-accepted for publication in the Journal of the Mechanics and Physics of
-Solids. It's called <em>New boundary conditions for the computation of the
-apparent stiffness of statistical volume elements</em>.</p>
-<p>It introduces a new set of boundary …</p>
-  </div><!-- /.entry-content -->
-</article>
-</div><!-- /#posts-list -->
-</section><!-- /#content -->
-    <footer id="contentinfo" class="body">
-      <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/" ><img alt="Creative Commons License" style="float:left;margin-right:5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>Except where otherwise noted, content on this blog by <a href="https://cv.archives-ouvertes.fr/sbrisard">Sébastien Brisard</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>&nbsp;&mdash;&nbsp;This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>&nbsp;&mdash;&nbsp;This blog uses <a href="https://www.nordtheme.com/">Nord</a>, an arctic north-bluish color palette.</p>
-    </footer>
-  </body>
-</html>
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1620856800000" data-listing-file-modified-sort="1747766674355" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="279">
+<div class="thumbnail">
+<p><a href="./posts/20210513-Numerical_analysis_of_a_spring_mesh/index.html" class="no-external"></a></p><a href="./posts/20210513-Numerical_analysis_of_a_spring_mesh/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/What_is_homogenization-files/uniaxial_tension.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20210513-Numerical_analysis_of_a_spring_mesh/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20210513-Numerical_analysis_of_a_spring_mesh/index.html" class="no-external">Numerical analysis of a spring mesh</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20210513-Numerical_analysis_of_a_spring_mesh/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20210513-Numerical_analysis_of_a_spring_mesh/index.html" class="no-external">In this post, we compute numeric values of the apparent stiffness introduced in this post. Our goal is to find the solution to the general problem depicted below.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20210513-Numerical_analysis_of_a_spring_mesh/index.html" class="no-external">
+<div class="listing-date">
+May 13, 2021
+</div>
+<div class="listing-author">
+Sébastien Brisard
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1620856800000" data-listing-file-modified-sort="1747766549065" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="841">
+<div class="thumbnail">
+<p><a href="./posts/20210512-Symbolic_analysis_of_a_spring_mesh/index.html" class="no-external"></a></p><a href="./posts/20210512-Symbolic_analysis_of_a_spring_mesh/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/What_is_homogenization-files/uniaxial_tension-1x1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20210512-Symbolic_analysis_of_a_spring_mesh/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20210512-Symbolic_analysis_of_a_spring_mesh/index.html" class="no-external">Symbolic analysis of a spring mesh</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20210512-Symbolic_analysis_of_a_spring_mesh/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20210512-Symbolic_analysis_of_a_spring_mesh/index.html" class="no-external">In this post, we compute symbolic expressions of the apparent stiffness introduced in this post. Our goal is to find the solution to the general problem depicted below.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20210512-Symbolic_analysis_of_a_spring_mesh/index.html" class="no-external">
+<div class="listing-date">
+May 13, 2021
+</div>
+<div class="listing-author">
+Sébastien Brisard
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1620511200000" data-listing-file-modified-sort="1714811109078" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="912">
+<div class="thumbnail">
+<p><a href="./posts/20210509-What_is_homogenization-05/index.html" class="no-external"></a></p><a href="./posts/20210509-What_is_homogenization-05/index.html" class="no-external">
+<p><img src="./posts/What_is_homogenization-files/apparent_stiffness_vs_number_of_cells.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/20210509-What_is_homogenization-05/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20210509-What_is_homogenization-05/index.html" class="no-external">What is homogenization? Part 5: introducing the representative volume element</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20210509-What_is_homogenization-05/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20210509-What_is_homogenization-05/index.html" class="no-external">In the previous instalment of this series on homogenization, we derived the homogenized properties of a rectangular spring mesh. Our goal in this post is to analyse the…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20210509-What_is_homogenization-05/index.html" class="no-external">
+<div class="listing-date">
+May 9, 2021
+</div>
+<div class="listing-author">
+Sébastien Brisard
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1607382000000" data-listing-file-modified-sort="1711200795132" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1383">
+<div class="thumbnail">
+<p><a href="./posts/20201208-What_is_homogenization-04/index.html" class="no-external"></a></p><a href="./posts/20201208-What_is_homogenization-04/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/What_is_homogenization-files/spring_mesh.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20201208-What_is_homogenization-04/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20201208-What_is_homogenization-04/index.html" class="no-external">What is homogenization? Part 4: a first example</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20201208-What_is_homogenization-04/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20201208-What_is_homogenization-04/index.html" class="no-external">In the previous instalment of this series on homogenization, we discussed volume and ensemble averages for random heterogeneous materials. In view of introducing <em>statistical</em> …<em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20201208-What_is_homogenization-04/index.html" class="no-external">
+<div class="listing-date">
+Dec 8, 2020
+</div>
+<div class="listing-author">
+Sébastien Brisard
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1606258800000" data-listing-file-modified-sort="1716269757248" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="677">
+<div class="thumbnail">
+<p><a href="./posts/20201125-On_the_stiffness_matrix_of_a_linear_spring/index.html" class="no-external"></a></p><a href="./posts/20201125-On_the_stiffness_matrix_of_a_linear_spring/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/20201125-On_the_stiffness_matrix_of_a_linear_spring/spring.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20201125-On_the_stiffness_matrix_of_a_linear_spring/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20201125-On_the_stiffness_matrix_of_a_linear_spring/index.html" class="no-external">On the stiffness matrix of a linear spring</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20201125-On_the_stiffness_matrix_of_a_linear_spring/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20201125-On_the_stiffness_matrix_of_a_linear_spring/index.html" class="no-external">This post is not going to be the most exciting I have ever written. We will derive the expression of the elastic energy of a linear spring as a function of the displacement…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20201125-On_the_stiffness_matrix_of_a_linear_spring/index.html" class="no-external">
+<div class="listing-date">
+Nov 25, 2020
+</div>
+<div class="listing-author">
+Sébastien Brisard
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1587420000000" data-listing-file-modified-sort="1711199203238" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1229">
+<div class="thumbnail">
+<p><a href="./posts/20200421-What_is_homogenization-03/index.html" class="no-external"></a></p><a href="./posts/20200421-What_is_homogenization-03/index.html" class="no-external">
+<p><img src="./posts/What_is_homogenization-files/sponge.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/20200421-What_is_homogenization-03/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20200421-What_is_homogenization-03/index.html" class="no-external">What is homogenization? Part 3: ensemble averages vs.&nbsp;volume averages</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20200421-What_is_homogenization-03/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20200421-What_is_homogenization-03/index.html" class="no-external">In the previous instalment of this series on homogenization, we discussed homogenization of a distribution of black dots on a white background to a uniform shade of gray. In…<em></em><em></em><em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20200421-What_is_homogenization-03/index.html" class="no-external">
+<div class="listing-date">
+Apr 21, 2020
+</div>
+<div class="listing-author">
+Sébastien Brisard
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1586296800000" data-listing-file-modified-sort="1710091593295" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="703">
+<div class="thumbnail">
+<p><a href="./posts/20200408-What_is_homogenization-02/index.html" class="no-external"></a></p><a href="./posts/20200408-What_is_homogenization-02/index.html" class="no-external">
+<p><img src="./posts/What_is_homogenization-files/experimental_homogenization.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/20200408-What_is_homogenization-02/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20200408-What_is_homogenization-02/index.html" class="no-external">What is homogenization? Part 2: experimental vs.&nbsp;theoretical homogenization</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20200408-What_is_homogenization-02/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20200408-What_is_homogenization-02/index.html" class="no-external">In the previous instalment of this series, we introduced homogenization and the separation of scales. In the present post, we will discuss two strategies to carry out…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20200408-What_is_homogenization-02/index.html" class="no-external">
+<div class="listing-date">
+Apr 8, 2020
+</div>
+<div class="listing-author">
+Sébastien Brisard
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1585778400000" data-listing-file-modified-sort="1710091432267" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="410">
+<div class="thumbnail">
+<p><a href="./posts/20200402-What_is_homogenization-01/index.html" class="no-external"></a></p><a href="./posts/20200402-What_is_homogenization-01/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/What_is_homogenization-files/Normandie.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20200402-What_is_homogenization-01/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20200402-What_is_homogenization-01/index.html" class="no-external">What is homogenization? Part 1: on the separation of scales</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20200402-What_is_homogenization-01/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20200402-What_is_homogenization-01/index.html" class="no-external">Most of my research activities deal with upscaling the mechanical properties of heterogeneous materials. This is also known as homogenization. So what <em>is</em> homogenization?…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20200402-What_is_homogenization-01/index.html" class="no-external">
+<div class="listing-date">
+Apr 2, 2020
+</div>
+<div class="listing-author">
+Sébastien Brisard
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1522015200000" data-listing-file-modified-sort="1747939250998" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1307">
+<div class="thumbnail">
+<p><a href="./posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07/index.html" class="no-external"></a></p><a href="./posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07/index.html" class="no-external">On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan’s algorithm</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07/index.html" class="no-external">In the previous instalment of this series, we implemented Moisan’s (2011) efficient algorithm to compute the periodic-plus-smooth decomposition of an image. This algorithm…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07/index.html" class="no-external">
+<div class="listing-date">
+Mar 26, 2018
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1521414000000" data-listing-file-modified-sort="1747938893298" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1028">
+<div class="thumbnail">
+<p><a href="./posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06/index.html" class="no-external"></a></p><a href="./posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06/index.html" class="no-external">On the periodic-plus-smooth decomposition of an image, part 6: minimizing the energy, the clever way</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06/index.html" class="no-external">In the previous instalment of this series, we computed Moisan’s (2011) periodic-plus-smooth decomposition of an image by means of the conjugate gradient method. This worked…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2018
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1520809200000" data-listing-file-modified-sort="1747937338865" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="462">
+<div class="thumbnail">
+<p><a href="./posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05/index.html" class="no-external"></a></p><a href="./posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05/index.html" class="no-external">On the periodic-plus-smooth decomposition of an image, part 5: minimizing the energy, the clumsy way</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05/index.html" class="no-external">In this post, we will compute Moisan’s (2011) periodic-plus-smooth decomposition of an image by direct minimization of the energy introduced in the second instalment of this…<span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05/index.html" class="no-external">
+<div class="listing-date">
+Mar 12, 2018
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-listing-date-sort="1520204400000" data-listing-file-modified-sort="1747891929904" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1844">
+<div class="thumbnail">
+<p><a href="./posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04/index.html" class="no-external"></a></p><a href="./posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04/index.html" class="no-external">On the periodic-plus-smooth decomposition of an image, part 4: implementing the linear operators</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04/index.html" class="no-external">In the previous instalment of this series, we introduced the linear operators <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q\)</span> that allow to define Moisan’s (2011) periodic-plus-smooth decomposition <span class="math inline">\((p…</span><span class="math inline"></span></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04/index.html" class="no-external">
+<div class="listing-date">
+Mar 5, 2018
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="12" data-listing-date-sort="1519599600000" data-listing-file-modified-sort="1747852904159" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="793">
+<div class="thumbnail">
+<p><a href="./posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03/index.html" class="no-external"></a></p><a href="./posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03/index.html" class="no-external">On the periodic-plus-smooth decomposition of an image, part 3: the energy as a quadratic form</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03/index.html" class="no-external">In the previous instalment of this series, we introduced the periodic-plus-smooth decomposition of an image as a pair of images which minimizes an energy functional.…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03/index.html" class="no-external">
+<div class="listing-date">
+Feb 26, 2018
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="13" data-listing-date-sort="1518994800000" data-listing-file-modified-sort="1747851431725" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1156">
+<div class="thumbnail">
+<p><a href="./posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02/index.html" class="no-external"></a></p><a href="./posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364-periodic-plus-smooth.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02/index.html" class="no-external">On the periodic-plus-smooth decomposition of an image, part 2: defining the decomposition</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02/index.html" class="no-external">In the previous instalment of this series, we discussed the need for periodic images. Although not all images are periodic, some image analysis techniques are best performed…<em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02/index.html" class="no-external">
+<div class="listing-date">
+Feb 19, 2018
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="14" data-listing-date-sort="1518390000000" data-listing-file-modified-sort="1747802609992" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="782">
+<div class="thumbnail">
+<p><a href="./posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01/index.html" class="no-external"></a></p><a href="./posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01/index.html" class="no-external">On the periodic-plus-smooth decomposition of an image, part 1: introduction</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01/index.html" class="no-external">In this new series, we will explore the so-called <em>periodic-plus-smooth</em> decomposition of an image, introduced by Moisan in 2011. This series is largely based on Moisan’s…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01/index.html" class="no-external">
+<div class="listing-date">
+Feb 12, 2018
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="15" data-listing-date-sort="1466978400000" data-listing-file-modified-sort="1748174258461" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1407">
+<div class="thumbnail">
+<p><a href="./posts/20160627-Orientation_correlations_among_rice_grains-08/index.html" class="no-external"></a></p><a href="./posts/20160627-Orientation_correlations_among_rice_grains-08/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/20160627-Orientation_correlations_among_rice_grains-08/files/S2.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20160627-Orientation_correlations_among_rice_grains-08/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20160627-Orientation_correlations_among_rice_grains-08/index.html" class="no-external">Orientation correlations among rice grains, part 8: estimating the correlations</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20160627-Orientation_correlations_among_rice_grains-08/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20160627-Orientation_correlations_among_rice_grains-08/index.html" class="no-external">In the previous instalment of this series, we have analyzed the morphology of the rice grains. In particular, we have defined their <em>orientation</em> as that of the major axis of…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20160627-Orientation_correlations_among_rice_grains-08/index.html" class="no-external">
+<div class="listing-date">
+Jun 27, 2016
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="16" data-listing-date-sort="1455836400000" data-listing-file-modified-sort="1748174167471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1781">
+<div class="thumbnail">
+<p><a href="./posts/20160219-Orientation_correlations_among_rice_grains-07/index.html" class="no-external"></a></p><a href="./posts/20160219-Orientation_correlations_among_rice_grains-07/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/20160219-Orientation_correlations_among_rice_grains-07/files/volume_histogram.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20160219-Orientation_correlations_among_rice_grains-07/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20160219-Orientation_correlations_among_rice_grains-07/index.html" class="no-external">Orientation correlations among rice grains, part 7: analysis of the shape of the grains</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20160219-Orientation_correlations_among_rice_grains-07/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20160219-Orientation_correlations_among_rice_grains-07/index.html" class="no-external">In the previous instalment of this series, we have segmented the 3D image of the assembly of rice grains. In other words, each voxel of the image is attributed the label of…<em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20160219-Orientation_correlations_among_rice_grains-07/index.html" class="no-external">
+<div class="listing-date">
+Feb 19, 2016
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="17" data-listing-date-sort="1443564000000" data-listing-file-modified-sort="1748174040589" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2938">
+<div class="thumbnail">
+<p><a href="./posts/20150930-Orientation_correlations_among_rice_grains-06/index.html" class="no-external"></a></p><a href="./posts/20150930-Orientation_correlations_among_rice_grains-06/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/20150930-Orientation_correlations_among_rice_grains-06/files/binary.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20150930-Orientation_correlations_among_rice_grains-06/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20150930-Orientation_correlations_among_rice_grains-06/index.html" class="no-external">Orientation correlations among rice grains, part 6: segmentation</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20150930-Orientation_correlations_among_rice_grains-06/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20150930-Orientation_correlations_among_rice_grains-06/index.html" class="no-external">In the previous instalment of this series, I showed that a convincing binary image could be produced from the gray level 3D reconstruction of the assembly of rice grains…<em></em><em></em><em></em><em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20150930-Orientation_correlations_among_rice_grains-06/index.html" class="no-external">
+<div class="listing-date">
+Sep 30, 2015
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="18" data-listing-date-sort="1436392800000" data-listing-file-modified-sort="1748167636976" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1577">
+<div class="thumbnail">
+<p><a href="./posts/20150709-Orientation_correlations_among_rice_grains-05/index.html" class="no-external"></a></p><a href="./posts/20150709-Orientation_correlations_among_rice_grains-05/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/20150709-Orientation_correlations_among_rice_grains-05/files/rice-bin_4x4x4-initial_vs_thresholded-099.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20150709-Orientation_correlations_among_rice_grains-05/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20150709-Orientation_correlations_among_rice_grains-05/index.html" class="no-external">Orientation correlations among rice grains, part 5: thresholding</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20150709-Orientation_correlations_among_rice_grains-05/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20150709-Orientation_correlations_among_rice_grains-05/index.html" class="no-external">In the previous instalment of this series, we used the circle Hough transform to find the boundary of the sample and define the circular ROI. Within this ROI, we now need to…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20150709-Orientation_correlations_among_rice_grains-05/index.html" class="no-external">
+<div class="listing-date">
+Jul 9, 2015
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="19" data-listing-date-sort="1436133600000" data-listing-file-modified-sort="1748026202164" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="935">
+<div class="thumbnail">
+<p><a href="./posts/20150706-When_a_thin_shell_is_not_so_thin-03/index.html" class="no-external"></a></p><a href="./posts/20150706-When_a_thin_shell_is_not_so_thin-03/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20150706-When_a_thin_shell_is_not_so_thin-03/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20150706-When_a_thin_shell_is_not_so_thin-03/index.html" class="no-external">When a thin shell is not so thin, part&nbsp;3: the thick shell solution</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20150706-When_a_thin_shell_is_not_so_thin-03/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20150706-When_a_thin_shell_is_not_so_thin-03/index.html" class="no-external">Finding the stress resultant and stress couple in a spherical pressure vessel seems easy enough. Well, this apparently simple problem allows us to highlight subtle thickness…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20150706-When_a_thin_shell_is_not_so_thin-03/index.html" class="no-external">
+<div class="listing-date">
+Jul 6, 2015
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="20" data-listing-date-sort="1435701600000" data-listing-file-modified-sort="1748025551519" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1067">
+<div class="thumbnail">
+<p><a href="./posts/20150701-When_a_thin_shell_is_not_so_thin-02/index.html" class="no-external"></a></p><a href="./posts/20150701-When_a_thin_shell_is_not_so_thin-02/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/20150701-When_a_thin_shell_is_not_so_thin-02/files/fig01.svg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20150701-When_a_thin_shell_is_not_so_thin-02/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20150701-When_a_thin_shell_is_not_so_thin-02/index.html" class="no-external">When a thin shell is not so thin, part&nbsp;2: the 3D, exact solution</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20150701-When_a_thin_shell_is_not_so_thin-02/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20150701-When_a_thin_shell_is_not_so_thin-02/index.html" class="no-external">In the previous instalment of this series, we analysed a spherical pressure vessel by means of Koiter’s linear theory of thin shells. We found the somewhat unexpected result…<span class="math inline"></span></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20150701-When_a_thin_shell_is_not_so_thin-02/index.html" class="no-external">
+<div class="listing-date">
+Jul 1, 2015
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="21" data-listing-date-sort="1433714400000" data-listing-file-modified-sort="1748018896672" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="573">
+<div class="thumbnail">
+<p><a href="./posts/20150608-When_a_thin_shell_is_not_so_thin-01/index.html" class="no-external"></a></p><a href="./posts/20150608-When_a_thin_shell_is_not_so_thin-01/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20150608-When_a_thin_shell_is_not_so_thin-01/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20150608-When_a_thin_shell_is_not_so_thin-01/index.html" class="no-external">When a thin shell is not so thin, part&nbsp;1: Koiter’s linear theory</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20150608-When_a_thin_shell_is_not_so_thin-01/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20150608-When_a_thin_shell_is_not_so_thin-01/index.html" class="no-external">In structural analysis, thick beams (resp. plates) usually refer to shear deformability, and the Timoshenko beam theory (resp. Mindlin–Reissner plate theory). With curved…<em></em><span class="math inline"></span><span class="math inline"></span></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20150608-When_a_thin_shell_is_not_so_thin-01/index.html" class="no-external">
+<div class="listing-date">
+Jun 8, 2015
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="22" data-listing-date-sort="1432850400000" data-listing-file-modified-sort="1748167478004" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1456">
+<div class="thumbnail">
+<p><a href="./posts/20150529-Orientation_correlations_among_rice_grains-04/index.html" class="no-external"></a></p><a href="./posts/20150529-Orientation_correlations_among_rice_grains-04/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/20150529-Orientation_correlations_among_rice_grains-04/files/rice-bin_4x4x4-099.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20150529-Orientation_correlations_among_rice_grains-04/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20150529-Orientation_correlations_among_rice_grains-04/index.html" class="no-external">Orientation correlations among rice grains, part 4: defining the ROI</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20150529-Orientation_correlations_among_rice_grains-04/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20150529-Orientation_correlations_among_rice_grains-04/index.html" class="no-external">In the previous instalment of this series, we obtained binned slices of the sample. Fig.&nbsp;1 below displays a typical example of these binned slices. We now want to segment…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20150529-Orientation_correlations_among_rice_grains-04/index.html" class="no-external">
+<div class="listing-date">
+May 29, 2015
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="23" data-listing-date-sort="1427666400000" data-listing-file-modified-sort="1748027534225" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1682">
+<div class="thumbnail">
+<p><a href="./posts/20150330-Orientation_correlations_among_rice_grains-03/index.html" class="no-external"></a></p><a href="./posts/20150330-Orientation_correlations_among_rice_grains-03/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/20150330-Orientation_correlations_among_rice_grains-03/files/original_vs_binned.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20150330-Orientation_correlations_among_rice_grains-03/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20150330-Orientation_correlations_among_rice_grains-03/index.html" class="no-external">Orientation correlations among rice grains, part 3: intermezzo&nbsp;–&nbsp;Binning images</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20150330-Orientation_correlations_among_rice_grains-03/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20150330-Orientation_correlations_among_rice_grains-03/index.html" class="no-external">The full reconstructed image resulting from the tomography experiment described in the second instalment of this series is a 1747×1751×688 stack. The voxel size is about…<em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20150330-Orientation_correlations_among_rice_grains-03/index.html" class="no-external">
+<div class="listing-date">
+Mar 30, 2015
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="24" data-listing-date-sort="1425942000000" data-listing-file-modified-sort="1748167345289" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="389">
+<div class="thumbnail">
+<p><a href="./posts/20150310-Orientation_correlations_among_rice_grains-02/index.html" class="no-external"></a></p><a href="./posts/20150310-Orientation_correlations_among_rice_grains-02/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/20150310-Orientation_correlations_among_rice_grains-02/files/rice-sample-medium.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20150310-Orientation_correlations_among_rice_grains-02/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20150310-Orientation_correlations_among_rice_grains-02/index.html" class="no-external">Orientation correlations among rice grains, part 2: acquisition of tomography images</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20150310-Orientation_correlations_among_rice_grains-02/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20150310-Orientation_correlations_among_rice_grains-02/index.html" class="no-external">In the first instalment of this series, I briefly introduced orientational order in assemblies of anisotropic particles, and proposed an illustration based on synthetic…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20150310-Orientation_correlations_among_rice_grains-02/index.html" class="no-external">
+<div class="listing-date">
+Mar 10, 2015
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="25" data-listing-date-sort="1424646000000" data-listing-file-modified-sort="1748026569612" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="402">
+<div class="thumbnail">
+<p><a href="./posts/20150223-Orientation_correlations_among_rice_grains-01/index.html" class="no-external"></a></p><a href="./posts/20150223-Orientation_correlations_among_rice_grains-01/index.html" class="no-external">
+<p class="card-img-top"><img data-src="posts/20150223-Orientation_correlations_among_rice_grains-01/files/spheroids_40p100.png" alt="40%"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/20150223-Orientation_correlations_among_rice_grains-01/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20150223-Orientation_correlations_among_rice_grains-01/index.html" class="no-external">Orientation correlations among rice grains, part 1: introduction</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20150223-Orientation_correlations_among_rice_grains-01/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20150223-Orientation_correlations_among_rice_grains-01/index.html" class="no-external">In this series, I will explore the notion of orientational order in random packings of anisotropic (flat or elongated), hard particles. By orientational order, I mean that…<em></em><em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20150223-Orientation_correlations_among_rice_grains-01/index.html" class="no-external">
+<div class="listing-date">
+Feb 23, 2015
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="26" data-listing-date-sort="1393369200000" data-listing-file-modified-sort="1748176364720" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1386">
+<div class="thumbnail">
+<p><a href="./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors/index.html" class="no-external"></a></p><a href="./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors/index.html" class="no-external">Decomposition of transverse isotropic, fourth-rank tensors</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors/index.html" class="no-external">In a previous post, I introduced the fourth-rank spherical and deviatoric projection tensors. Any isotropic fourth-rank tensor is a linear combination of these two tensors;…<em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20140226-Decomposition_of_transverse_isotropic_fourth-rank_tensors/index.html" class="no-external">
+<div class="listing-date">
+Feb 26, 2014
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="27" data-listing-date-sort="1392764400000" data-listing-file-modified-sort="1748177319686" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="718">
+<div class="thumbnail">
+<p><a href="./posts/20140219-On_the_double_dot_product/index.html" class="no-external"></a></p><a href="./posts/20140219-On_the_double_dot_product/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20140219-On_the_double_dot_product/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20140219-On_the_double_dot_product/index.html" class="no-external">On the double dot product</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20140219-On_the_double_dot_product/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20140219-On_the_double_dot_product/index.html" class="no-external">The double dot product of two tensors is the contraction of these tensors with respect to the last two indices of the first one, and the first two indices of the second one.…<em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20140219-On_the_double_dot_product/index.html" class="no-external">
+<div class="listing-date">
+Feb 19, 2014
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="28" data-listing-date-sort="1391122800000" data-listing-file-modified-sort="1748178034062" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="398">
+<div class="thumbnail">
+<p><a href="./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse/index.html" class="no-external"></a></p><a href="./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse/index.html" class="no-external">The elastic acoustic tensor and its inverse</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse/index.html" class="no-external">In this post, I will introduce the acoustic tensor of linearly elastic materials. Closed-form expressions of the inverse of this tensor can be derived in the case of <em>isotropic</em>…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20140131-The_elastic_acoustic_tensor_and_its_inverse/index.html" class="no-external">
+<div class="listing-date">
+Jan 31, 2014
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="29" data-listing-date-sort="1389481200000" data-listing-file-modified-sort="1748180129668" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="534">
+<div class="thumbnail">
+<p><a href="./posts/20140112-Elastic_constants_of_an_isotropic_material-03/index.html" class="no-external"></a></p><a href="./posts/20140112-Elastic_constants_of_an_isotropic_material-03/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20140112-Elastic_constants_of_an_isotropic_material-03/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20140112-Elastic_constants_of_an_isotropic_material-03/index.html" class="no-external">Elastic constants of an isotropic material, part 3: putting it all together</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20140112-Elastic_constants_of_an_isotropic_material-03/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20140112-Elastic_constants_of_an_isotropic_material-03/index.html" class="no-external">In the previous instalments of this series (see Part 1 and Part 2), I have shown that regardless of the dimensionality (3D or plane strain elasticity), the constitutive law…<span id="eq-01"><span class="math display"></span></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span id="eq-02"><span class="math display"></span></span><span id="eq-03"><span class="math display"></span></span></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20140112-Elastic_constants_of_an_isotropic_material-03/index.html" class="no-external">
+<div class="listing-date">
+Jan 12, 2014
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="30" data-listing-date-sort="1388271600000" data-listing-file-modified-sort="1748179446724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="377">
+<div class="thumbnail">
+<p><a href="./posts/20131229-Elastic_constants_of_an_isotropic_material-02/index.html" class="no-external"></a></p><a href="./posts/20131229-Elastic_constants_of_an_isotropic_material-02/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20131229-Elastic_constants_of_an_isotropic_material-02/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20131229-Elastic_constants_of_an_isotropic_material-02/index.html" class="no-external">Elastic constants of an isotropic material, part 2: plane strain elasticity</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20131229-Elastic_constants_of_an_isotropic_material-02/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20131229-Elastic_constants_of_an_isotropic_material-02/index.html" class="no-external">In the previous instalment of this series, I introduced the constitutive law of an isotropically elastic material, and the related material constants, within the framework…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20131229-Elastic_constants_of_an_isotropic_material-02/index.html" class="no-external">
+<div class="listing-date">
+Dec 29, 2013
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="31" data-listing-date-sort="1386198000000" data-listing-file-modified-sort="1748178836345" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="611">
+<div class="thumbnail">
+<p><a href="./posts/20131205-Elastic_constants_of_an_isotropic_material-01/index.html" class="no-external"></a></p><a href="./posts/20131205-Elastic_constants_of_an_isotropic_material-01/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/20131205-Elastic_constants_of_an_isotropic_material-01/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/20131205-Elastic_constants_of_an_isotropic_material-01/index.html" class="no-external">Elastic constants of an isotropic material, part 1: 3D elasticity</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/20131205-Elastic_constants_of_an_isotropic_material-01/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/20131205-Elastic_constants_of_an_isotropic_material-01/index.html" class="no-external">Among all classes of materials, the class of linearly elastic and isotropic materials is the simplest. Such materials are defined by two elastic constants: for example…<span class="math inline"></span><span class="math inline"></span></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/20131205-Elastic_constants_of_an_isotropic_material-01/index.html" class="no-external">
+<div class="listing-date">
+Dec 5, 2013
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
+</div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Except where otherwise noted, content on this blog by Sébastien Brisard is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></p>
+</div>
+    <div class="nav-footer-right">
+<p>📧​ sebastien [dot] brisard [at] univ [dash] amu [dot] fr</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

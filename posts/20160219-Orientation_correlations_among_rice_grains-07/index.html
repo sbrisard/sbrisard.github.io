@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2016-02-19">
+
+<title>Sébastien Brisard’s blog - Orientation correlations among rice grains, part 7: analysis of the shape of the grains</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Sébastien Brisard’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://cv.archives-ouvertes.fr/sbrisard"> 
+<span class="menu-text">About the author</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/sbrisard"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Orientation correlations among rice grains, part 7: analysis of the shape of the grains</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 19, 2016</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>In the <a href="../20150930-Orientation_correlations_among_rice_grains-06">previous instalment</a> of this series, we have segmented the 3D image of the assembly of rice grains. In other words, each voxel of the image is attributed the label of the grain to which it belongs. Remember the <a href="../20150223-Orientation_correlations_among_rice_grains-01">initial goal</a> of this series: we want to quantify orientation <em>correlations</em> between grains. To do so, we must analyse the orientation of each individual grain. This is the topic of the present post.</p>
+<p>It is customary to define the orientation of an elongated object by means of the eigenvectors of the tensor of second moments, defined as follows <span id="eq-01"><span class="math display">\[
+J_{ij} = \int_\text{Grain}\bigl(x_i-X_i\bigr)\bigl(x_j-X_j\bigr)\mathrm{d} x_1\,\mathrm{d} x_2\,\mathrm{d} x_3,
+\tag{1}\]</span></span> where the integral is carried out over the grain, and <span class="math inline">\(X_i\)</span> denotes the <span class="math inline">\(i\)</span>-th coordinate of the grain’s center of mass <span class="math display">\[
+X_i = \frac1V\int_\text{Grain}x_i\,\mathrm{d} x_1\,\mathrm{d}x_2\,\mathrm{d}x_3
+\]</span> (<span class="math inline">\(V\)</span>: volume of the grain). In coordinate-free form, Eq.&nbsp;(<a href="#eq-01" class="quarto-xref">1</a>) reads <span class="math display">\[
+\mathbf{J}=\int_\text{Grain}\bigl(\vec x-\vec X\bigr)\otimes\bigl(\vec x-\vec X\bigr)\mathrm{d}^3\vec{x}.
+\]</span></p>
+<p>The above defined tensor of second moments is related to the <a href="https://en.wikipedia.org/wiki/Moment_of_inertia#The_inertia_tensor">inertia tensor</a> <span class="math inline">\(\mathbf{I}\)</span> <span id="eq-02"><span class="math display">\[
+\mathbf{I}=\operatorname{tr}\mathbf{J}\,\boldsymbol{\delta}-\mathbf{J},
+\tag{2}\]</span></span> where <span class="math inline">\(\mathbf{I}\)</span> is defined as follows <span class="math display">\[
+\mathbf{I}=\int_\text{Grain}\bigl[\bigl(\vec x-\vec X\bigr)\cdot\bigl(\vec x-\vec X\bigr)\boldsymbol{\delta}-\bigl(\vec x-\vec X\bigr)\otimes\bigl(\vec x-\vec X\bigr)\bigr]\mathrm{d}^3\vec{x}.
+\]</span></p>
+<p>Being symmetric, the tensor <span class="math inline">\(\mathbf{J}\)</span> of second moments is diagonalizable, and we compute its eigenvalues <span class="math inline">\(J_a\)</span>, <span class="math inline">\(J_b\)</span> and <span class="math inline">\(J_c\)</span>, and the associated eigenvectors <span class="math inline">\(\vec v_a\)</span>, <span class="math inline">\(\vec v_b\)</span> and <span class="math inline">\(\vec v_c\)</span> <span class="math display">\[
+\mathbf{J}\cdot\vec v_\alpha=J_\alpha\vec v_\alpha,
+\]</span> where <span class="math inline">\(\alpha=a, b, c\)</span>. In the present post, we define the orientation of the grain as the eigenvector associated to the <em>largest</em> eigenvalue. We can further define the equivalent ellipsoid as the ellipsoid with same volume and principal second moments. It can readily be verified that the volume and principal second moments of an ellipsoid are <span class="math display">\[
+V=\frac{4\pi}3 abc,\quad J_a=\frac{Va^2}5,\quad J_b=\frac{Vb^2}5,\quad J_c=\frac{Vc^2}5,
+\]</span> where <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> are the radii of the ellipsoid. The above expressions can be retrieved from <a href="https://en.wikipedia.org/wiki/Ellipsoid#Dynamical_properties">Wikipedia</a> and Eq.&nbsp;<a href="@eq-02">(2)</a>. For example <span class="math display">\[
+J_a = \frac12\bigl(I_b+I_c-I_a\bigr).
+\]</span></p>
+<p>Then, the radii of the equivalent ellipsoid are retrieved as follows from the volume <span class="math inline">\(V\)</span> and the principal second moments <span class="math inline">\(J_a\)</span>, <span class="math inline">\(J_b\)</span> and <span class="math inline">\(J_c\)</span> of the grain <span class="math display">\[
+a=\sqrt{\frac{5I_a}V},\quad b=\sqrt{\frac{5I_b}V},\quad c=\sqrt{\frac{5I_c}V}.
+\]</span></p>
+<p>The radii of the equivalent ellipsoid can be used to characterize the size of the grains. In the present post, we compute for each grain: the volume, the center of mass, the tensor of second moments, the orientation and the radii of the equivalent ellipsoid. We will then perform rudimentary analysis of these morphological parameters.</p>
+<p>As usual, we will use Python to carry out the dirty work. We will start with a very naive approach and present a nearly loop-free approach using the clever <code>scipy.ndimage.sum</code> function. We start with loading the segmented images.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os.path</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.figure</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.ndimage</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.style.use('../include/zenburn-light.mplstyle')</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> os.path.join(<span class="st">"/media/sf_sbrisard/Documents/tmp/rice-bin_4x4x4.hdf5"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5py.File(filename, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> np.asarray(f[<span class="st">"labels"</span>])</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.unique(labels)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Discard index 0, which is the background</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> indices[<span class="dv">1</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="morphological-description-of-the-grains" class="level1">
+<h1>Morphological description of the grains</h1>
+<section id="direct-computation-of-the-morphological-parameters-of-grain-42" class="level2">
+<h2 class="anchored" data-anchor-id="direct-computation-of-the-morphological-parameters-of-grain-42">Direct computation of the morphological parameters of grain 42</h2>
+<p>The direct (naive) approach presented in this section will serve as a reference for a better approach presented in the next section. It will be illustrated on one grain only (namely grain <a href="https://en.wikipedia.org/wiki/42_%2528number%2529#The_Hitchhiker.27s_Guide_to_the_Galaxy">42</a>), which we first locate. The remainder of the analysis is then restricted to a ROI surrounding the selected grain.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>slices <span class="op">=</span> scipy.ndimage.find_objects(labels)[index<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>roi <span class="op">=</span> labels[slices]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The grain shape is then defined by <code>mask</code>, an array of booleans, where all voxels of the ROI that belong to the grain are set to <code>True</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> roi <span class="op">==</span> index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The volume (in voxels) of the grain is the sum of the above array</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>vol_ref <span class="op">=</span> mask.<span class="bu">sum</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Volume of grain </span><span class="sc">{}</span><span class="st"> = </span><span class="sc">{}</span><span class="st"> vox^3.'</span>.<span class="bu">format</span>(index, vol_ref))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Volume of grain 42 = 7087 vox^3.</code></pre>
+<p>To compute the center of mass and inertia of the grain, we must define the coordinates of each voxel of the grain. To do so, we use the <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.mgrid.html">mgrid</a> function</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>coords <span class="op">=</span> np.mgrid[slices].astype(np.float64)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The center of mass of the grain is the sum of these coordinates divided by the total volume</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>com_ref <span class="op">=</span> np.<span class="bu">sum</span>(mask<span class="op">*</span>coords, axis<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>))<span class="op">/</span>vol_ref</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Center of mass of grain </span><span class="sc">{}</span><span class="st"> = </span><span class="sc">{}</span><span class="st"> vox'</span>.<span class="bu">format</span>(index, com_ref))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Center of mass of grain 42 = [  4.92069987 191.41597291 103.69183011] vox</code></pre>
+<p>Note that we pre-multiplied <code>coords</code> by <code>mask</code> in order to keep only those voxels that belong to the grain. To compute the inertia of the grain, we first subtract the coordinates of the center of mass from the voxel coordinates.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>coords <span class="op">-=</span> com_ref[:, <span class="va">None</span>, <span class="va">None</span>, <span class="va">None</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We then compute the array of coordinates cross-products <code>coords_xprod</code> defined as follows</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>coords_xprod[m, n, i, j, k] <span class="op">=</span> coords[m, i, j, k]<span class="op">*</span>coords[n, i, j, k]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(<code>i, j, k</code>: voxel indices; <code>m, n</code>: coordinates indices). The <code>coords_xprod</code> array is produced by the following line of code</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>coords_xprod <span class="op">=</span> coords[<span class="va">None</span>, ...]<span class="op">*</span>coords[:, <span class="va">None</span>, ...]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and we find</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>moments2_ref <span class="op">=</span> np.<span class="bu">sum</span>(mask<span class="op">*</span>coords_xprod, axis<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">3</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Moments of inertia of grain </span><span class="sc">{}</span><span class="st"> (vox^5)'</span>.<span class="bu">format</span>(index))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(moments2_ref)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Moments of inertia of grain 42 (vox^5)
+[[ 71603.43332863 -45107.22322562 -71060.19147735]
+ [-45107.22322562 426435.7118668  181708.48483138]
+ [-71060.19147735 181708.48483138 880736.95696345]]</code></pre>
+<p>This is a bit tedious, isn’t it? Besides, we should normally loop over the grains in order to carry out the analysis for all grains. Comes the wonderful <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html">scipy.ndimage.sum</a> function to the rescue!</p>
+</section>
+<section id="using-the-scipy.ndimage.sum-function" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-scipy.ndimage.sum-function">Using the <code>scipy.ndimage.sum</code> function</h2>
+<p>This function will allow us to carry out the analysis over all grains simultaneously. We start with the volume, which is seen as <span class="math display">\[
+V=\sum_\text{Grain} 1,
+\]</span> where the sum is carried over all voxels of each grain.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ones <span class="op">=</span> np.ones_like(labels, dtype<span class="op">=</span>np.float64)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>vol <span class="op">=</span> scipy.ndimage.<span class="bu">sum</span>(ones, labels, indices)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And we can check that the value we found for grain 42 is correct</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Volume of grain </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(index))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'    expected   = </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(vol_ref))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'    actual     = </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(vol[index<span class="op">-</span><span class="dv">1</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Volume of grain 42
+    expected   = 7087
+    actual     = 7087.0</code></pre>
+<p>For the center of mass, we will use the <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.center_of_mass.html">center_of_mass</a> function rather than the <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sum.html">sum</a> function.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>com <span class="op">=</span> np.asarray(scipy.ndimage.center_of_mass(ones, labels, indices))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Center of mass of grain </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(index))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'    expected   = </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(com_ref))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'    actual     = </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(com[index<span class="op">-</span><span class="dv">1</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Center of mass of grain 42
+    expected   = [  4.92069987 191.41597291 103.69183011]
+    actual     = [  4.92069987 191.41597291 103.69183011]</code></pre>
+<p>Finally, the second moments are seen as the following sum <span class="math display">\[
+J_{ij}=\sum_\text{Grain}(x_i-X_i)(x_j-X_j)=\sum_\text{Grain}x_ix_j-VX_iX_j,
+\]</span> where the last identity is known as the <a href="https://en.wikipedia.org/wiki/Parallel_axis_theorem">parallel axis theorem</a>. Implementation of this formulation is straightforward, starting from the construction of the array of voxel coordinates <code>coords</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>coords <span class="op">=</span> np.mgrid[[<span class="bu">slice</span>(n) <span class="cf">for</span> n <span class="kw">in</span> labels.shape]]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>moments2 <span class="op">=</span> np.empty((indices.size, <span class="dv">3</span>, <span class="dv">3</span>), dtype<span class="op">=</span>np.float64)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        xi, xj <span class="op">=</span> coords[(i, j), :]</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        moments2[:, i, j] <span class="op">=</span> (scipy.ndimage.<span class="bu">sum</span>(xi<span class="op">*</span>xj, labels, indices) <span class="op">-</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                             vol<span class="op">*</span>com[:, i]<span class="op">*</span>com[:, j])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Nota:</strong> I could not find a pythonic way to get rid of this uggly nested loop…</p>
+<p>We can again check that the result is correct for grain 42.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Second moments of grain </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(index))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'    expected ='</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(moments2_ref)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'    actual ='</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(moments2[index<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Second moments of grain 42
+    expected =
+[[ 71603.43332863 -45107.22322562 -71060.19147735]
+ [-45107.22322562 426435.7118668  181708.48483138]
+ [-71060.19147735 181708.48483138 880736.95696345]]
+    actual =
+[[ 71603.43332863 -45107.22322562 -71060.19147735]
+ [-45107.22322562 426435.7118668  181708.48483139]
+ [-71060.19147735 181708.48483139 880736.95696346]]</code></pre>
+<p>That’s it! We have computed the second moments of each grain. See how this <code>sum</code> function is convenient? We are now ready to compute the orientation of each grain, as well as the radii of the equivalent ellipsoid. We first compute the eigenvalues and eigenvectors of the tensors of second moments.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>moments2_eigvals, moments2_eigvecs <span class="op">=</span> np.linalg.eig(moments2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <em>orientation</em> <span class="math inline">\(\vec n\)</span> of the grain is defined as the eigenvector associated with the largest principal second moment.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> np.argmax(moments2_eigvals, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> moments2.shape[<span class="dv">0</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> moments2_eigvecs[np.arange(rows), <span class="dv">0</span>:<span class="dv">3</span>, i]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[[ 0.01955891  0.05286465 -0.99841012]
+ [-0.17300079 -0.67355818 -0.71860288]
+ [-0.49498664 -0.84077194  0.21929608]
+ ...
+ [-0.14766036  0.2963219  -0.94360466]
+ [ 0.          1.          0.        ]
+ [-0.1722074   0.98321974  0.06019601]]</code></pre>
+<p>The following code snippet computes the radii of each grain, and sorts them in ascending order.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>radius <span class="op">=</span> np.sort(np.sqrt(<span class="dv">5</span><span class="op">*</span>moments2_eigvals<span class="op">/</span>vol[:, <span class="va">None</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can now proceed with the analysis of the results. This will be done more thoroughly in the next instalment of this series. The present post will be restricted to basic analyses. But first of all, it is time to save our results!</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5py.File(filename, <span class="st">'r+'</span>) <span class="im">as</span> f:</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    f[<span class="st">'volume'</span>] <span class="op">=</span> vol</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    f[<span class="st">'center_of_mass'</span>] <span class="op">=</span> com</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    f[<span class="st">'radii'</span>] <span class="op">=</span> radius</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    f[<span class="st">'orientation'</span>] <span class="op">=</span> n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="analysis-of-the-results" class="level1">
+<h1>Analysis of the results</h1>
+<section id="volume-of-grains" class="level2">
+<h2 class="anchored" data-anchor-id="volume-of-grains">Volume of grains</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> mpl.figure.Figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">u'V (vox³)'</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number'</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>ax.hist(vol, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">12000</span>), bins<span class="op">=</span><span class="dv">30</span>, linewidth<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">'./volume_histogram.png'</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/volume_histogram.png" class="img-fluid figure-img"></p>
+<figcaption>Volume of grains</figcaption>
+</figure>
+</div>
+<p>Most grains have a volume comprised between 6000 and 8000 vox³. It is observed that a significant number of grains are very small. There are two possible explanations for this</p>
+<ol type="1">
+<li>some grains where broken in smaller pieces,</li>
+<li>our <a href="20150930-Orientation_correlations_among_rice_grains-06.org">segmentation</a> was not perfect (over-segmentation might have occured).</li>
+</ol>
+<p>My guess is that it is in fact a little bit of both. One possible remedy would be to filter out those grains that are too small in the subsequent analysis. We will not go into such degree of refinment.</p>
+</section>
+<section id="size-of-the-grains" class="level2">
+<h2 class="anchored" data-anchor-id="size-of-the-grains">Size of the grains</h2>
+<p>In this section we visualize the radii of the equivalent ellipsoids</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> mpl.figure.Figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>ax.hist(radius[:, <span class="op">-</span><span class="dv">1</span>], <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">40</span>), bins<span class="op">=</span><span class="dv">40</span>, linewidth<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'a (vox)'</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number'</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">'radius_a_histogram.png'</span>, transparent<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> mpl.figure.Figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>ax.hist((radius[:, <span class="op">-</span><span class="dv">2</span>], radius[:<span class="op">-</span><span class="dv">1</span>]), <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">20</span>), bins<span class="op">=</span><span class="dv">20</span>, linewidth<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'b, c (vox)'</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number'</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">'radii_b_c_histogram.png'</span>, transparent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="files/radius_a_histogram.png" class="img-fluid"></p>
+<p><img src="files/radii_b_c_histogram.png" class="img-fluid"></p>
+<p>The length of most grains is about 2×27=54 pixels (about 6.5 mm). Also, the grains are <em>not</em> spheroids: indeed <span class="math inline">\(b\neq c\)</span>.</p>
+</section>
+<section id="orientation-of-grains" class="level2">
+<h2 class="anchored" data-anchor-id="orientation-of-grains">Orientation of grains</h2>
+<p>This will be the topic of the next instalment of this series. We will only check for possible anisotropy by analysing the following second-order orientation tensor: <span class="math inline">\(\langle\vec n\otimes\vec n\rangle\)</span>, where angle brackets stand for ensemble average. It can readily be verified that for isotropic distributions, this tensor is diagonal <span class="math display">\[
+\langle\vec n\otimes\vec n\rangle=
+\frac 13
+\begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}.
+\]</span></p>
+<p>Any deviation from this diagonal tensor indicates anisotropy (the converse is <em>not</em> true!). Computation of this orientation tensor is easy</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>nn <span class="op">=</span> n[:, <span class="va">None</span>, :]<span class="op">*</span>n[:, :, <span class="va">None</span>]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>nn_avg <span class="op">=</span> nn.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nn_avg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[[ 0.27082401  0.02535001 -0.02444013]
+ [ 0.02535001  0.34864242 -0.00637534]
+ [-0.02444013 -0.00637534  0.38053357]]</code></pre>
+<p>Which shows that the distribution of grains is <em>not</em> isotropic. Analysis of the eigenvalues of the orientation tensor would show that the vertical direction is in fact a direction of anisotropy (which should not come as a surprise)… but we will leave it like that for now!</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this post, we have analysed the orientation of each grain. The orientation was defined as the orientation of the major axis of the equivalent ellipsoid. We are now ready to analyse orientation correlations among rice grains, which will be the topic of the <a href="../20160627-Orientation_correlations_among_rice_grains-08">next instalment</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Except where otherwise noted, content on this blog by Sébastien Brisard is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></p>
+</div>
+    <div class="nav-footer-right">
+<p>📧​ sebastien [dot] brisard [at] univ [dash] amu [dot] fr</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

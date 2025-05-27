@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2018-03-26">
+
+<title>Sébastien Brisard’s blog - On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan’s algorithm</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Sébastien Brisard’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://cv.archives-ouvertes.fr/sbrisard"> 
+<span class="menu-text">About the author</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/sbrisard"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">On the periodic-plus-smooth decomposition of an image, part 7: improved implementation of Moisan’s algorithm</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 26, 2018</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>In the <a href="../20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06">previous instalment</a> of this series, we implemented Moisan’s (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) efficient algorithm to compute the periodic-plus-smooth decomposition of an image. This algorithm relies heavily on the discrete Fourier transform, and already improves quite a lot over our previous conjugate gradient-based implementation. In the present post, we will show that performance of the implementation can be slightly improved with very little effort. This post is the seventh in a series in seven parts:</p>
+<ol type="1">
+<li><a href="../20180212-On_the_periodic-plus-smooth_decomposition_of_an_image-01">Introduction</a></li>
+<li><a href="../20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02">Defining the decomposition</a></li>
+<li><a href="../20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03">The energy as a quadratic form</a></li>
+<li><a href="../20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04">Implementing the linear operators</a></li>
+<li><a href="../20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05">Minimizing the energy, the clumsy way</a></li>
+<li><a href="../20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06">Minimizing the energy, the clever way</a></li>
+<li><a href="../20180326-On_the_periodic-plus-smooth_decomposition_of_an_image-07">Improved implementation of Moisan’s algorithm</a></li>
+</ol>
+<p>The code discussed in this series is available as a Python module on <a href="https://github.com/sbrisard/moisan2011">GitHub</a>.</p>
+<section id="computing-the-dft-of-the-intensity-gaps" class="level1">
+<h1>Computing the DFT of the intensity gaps</h1>
+<p>In the <a href="../20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06">previous instalment</a> of this series, we showed that the DFT <span class="math inline">\(\hat{s}\)</span> of the smooth component <span class="math inline">\(s\)</span> of a <span class="math inline">\(m\times n\)</span> image <span class="math inline">\(u\)</span> can be deduced from the DFT <span class="math inline">\(\hat{v}\)</span> of the image <span class="math inline">\(v\)</span> which, according to Moisan (<a href="https://doi.org/10.1007/s10851-010-0227-1">2011</a>) “captures the intensity gaps of <span class="math inline">\(u\)</span> across its borders”: <span class="math inline">\(v=v^\mathrm
+h+v^\mathrm v\)</span>, with <span class="math display">\[
+v^\mathrm h_{ij}=
+\begin{cases}
+u_{i, n-1}-u_{i, 0} &amp; \text{if }j=0,\\
+u_{i, 0}-u_{i, n-1} &amp; \text{if }j=n-1,\\
+0                   &amp; \text{otherwise},
+\end{cases}
+\]</span> and <span class="math display">\[
+v^\mathrm v_{ij}=
+\begin{cases}
+u_{m-1, j}-u_{0, j} &amp; \text{if }i=0,\\
+u_{0, j}-u_{m-1, j} &amp; \text{if }i=m-1,\\
+0                   &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>In our first implementation of Moisan’s algorigthm, we computed <span class="math inline">\(\hat{v}\)</span> as a <em>two-dimensional</em> DFT. While correct and simple to implement, this is unnecessarily expensive. Indeed, we readily find that <span class="math display">\[
+\begin{aligned}
+\hat{v}_{\alpha\beta}^\mathrm h&amp;=\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}v_{ij}\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta j}n\Bigr)\Bigr]\\
+&amp;=\sum_{i=0}^{m-1}\bigl(u_{i, n-1}-u_{i, 0}\bigr)\Bigl\{\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m\Bigr)\Bigr]-\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m+\frac{\beta(n-1)}n\Bigr)\Bigr]\Bigr\}\\
+&amp;=\Bigl(1-\exp\frac{2\pi\mathrm i\beta}n\Bigr)\sum_{i=0}^{m-1}\bigl(u_{i, n-1}-u_{i, 0}\bigr)\exp\Bigl[-2\pi\mathrm i\Bigl(\frac{\alpha i}m\Bigr)\Bigr],
+\end{aligned}
+\]</span> and the sum turns out to be the one-dimensional DFT of the <span class="math inline">\(\bigl(u_{i, n-1}-u_{i, 0}\bigr)_{i=0,\ldots, m-1}\)</span>.</p>
+<p>This leads to the following implementation of function <code>per</code> (compare with the implementation of <code>_per</code> in the <a href="../20180319-On_the_periodic-plus-smooth_decomposition_of_an_image-06">previous post</a>).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> per(u, inverse_dft<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Compute the periodic component of the 2D image u.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">    This function returns the periodic-plus-smooth decomposition of</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    the 2D array-like u.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    If inverse_dft is True, then the pair (p, s) is returned</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    (p: periodic component; s: smooth component).</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    If inverse_dft is False, then the pair</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">        (numpy.fft.fft2(p), numpy.fft.fft2(s))</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    is returned.</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    This function implements Algorithm 1.</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.asarray(u, dtype<span class="op">=</span>np.float64)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    m, n <span class="op">=</span> u.shape</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    arg <span class="op">=</span> <span class="fl">2.</span><span class="op">*</span>np.pi<span class="op">*</span>np.fft.fftfreq(m, <span class="fl">1.</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    cos_m, sin_m <span class="op">=</span> np.cos(arg), np.sin(arg)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    one_minus_exp_m <span class="op">=</span> <span class="fl">1.0</span><span class="op">-</span>cos_m<span class="op">-</span><span class="ot">1j</span><span class="op">*</span>sin_m</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    arg <span class="op">=</span> <span class="fl">2.</span><span class="op">*</span>np.pi<span class="op">*</span>np.fft.fftfreq(n, <span class="fl">1.</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    cos_n, sin_n <span class="op">=</span> np.cos(arg), np.sin(arg)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    one_minus_exp_n <span class="op">=</span> <span class="fl">1.0</span><span class="op">-</span>cos_n<span class="op">-</span><span class="ot">1j</span><span class="op">*</span>sin_n</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    w1 <span class="op">=</span> u[:, <span class="op">-</span><span class="dv">1</span>]<span class="op">-</span>u[:, <span class="dv">0</span>]</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    w1_dft <span class="op">=</span> np.fft.fft(w1)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    v_dft <span class="op">=</span> w1_dft[:, <span class="va">None</span>]<span class="op">*</span>one_minus_exp_n[<span class="va">None</span>, :]</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    w2 <span class="op">=</span> u[<span class="op">-</span><span class="dv">1</span>, :]<span class="op">-</span>u[<span class="dv">0</span>, :]</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    w2_dft <span class="op">=</span> np.fft.fft(w2)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    v_dft <span class="op">+=</span> one_minus_exp_m[:, <span class="va">None</span>]<span class="op">*</span>w2_dft[<span class="va">None</span>, :]</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    denom <span class="op">=</span> <span class="fl">2.0</span><span class="op">*</span>(cos_m[:, <span class="va">None</span>]<span class="op">+</span>cos_n[<span class="va">None</span>, :]<span class="op">-</span><span class="fl">2.0</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    denom[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    s_dft <span class="op">=</span> v_dft<span class="op">/</span>denom</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    s_dft[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> inverse_dft:</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> np.fft.ifft2(s_dft)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> u<span class="op">-</span>s, s</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        u_dft <span class="op">=</span> np.fft.fft2(u)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> u_dft<span class="op">-</span>s_dft, s_dft</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can test the new implementation.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.io <span class="im">import</span> imread, imsave</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> imread(DATA_DIR<span class="op">+</span><span class="st">'hut-648x364.png'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> u.astype(np.float64)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>p_exp, s_exp <span class="op">=</span> _per(u, inverse_dft<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>p_act, s_act <span class="op">=</span> per(u, inverse_dft<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Error in L2-norm:'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on p: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.linalg.norm(p_act<span class="op">-</span>p_exp)))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on s: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.linalg.norm(s_act<span class="op">-</span>s_exp)))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Maximum absolute error'</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on p: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.<span class="bu">max</span>(np.<span class="bu">abs</span>(p_act<span class="op">-</span>p_exp))))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on s: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.<span class="bu">max</span>(np.<span class="bu">abs</span>(s_act<span class="op">-</span>s_exp))))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Maximum relative error'</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on p: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.<span class="bu">max</span>(np.<span class="bu">abs</span>(<span class="dv">2</span><span class="op">*</span>(p_act<span class="op">-</span>p_exp)<span class="op">/</span>(p_act<span class="op">+</span>p_exp)))))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on s: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.<span class="bu">max</span>(np.<span class="bu">abs</span>(<span class="dv">2</span><span class="op">*</span>(s_act<span class="op">-</span>s_exp)<span class="op">/</span>(s_act<span class="op">+</span>s_exp)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Error in L2-norm:
+  - on p: 5.806665557170608e-10
+  - on s: 5.806574416763999e-10
+
+Maximum absolute error
+  - on p: 4.272036107027685e-12
+  - on s: 4.272491077379704e-12
+
+Maximum relative error
+  - on p: 8.610429016084161e-11
+  - on s: 7.129469799120442e-08</code></pre>
+<p>Which validates this new implementation. Let us check how much we gained, speed-wise.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> timeit</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> timeit.timeit(<span class="st">'p, s = _per(u, inverse_dft=True)'</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                   number<span class="op">=</span><span class="dv">100</span>, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>())</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> timeit.timeit(<span class="st">'p, s = per(u, inverse_dft=True)'</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                   number<span class="op">=</span><span class="dv">100</span>, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>())</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Timings:'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - _per  : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(t1))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - per   : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(t2))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - ratio : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(t1<span class="op">/</span>t2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Timings:
+  - _per  : 4.946549984680452
+  - per   : 3.9524611252226656
+  - ratio : 1.2515113565859002</code></pre>
+<p>So the new implementation is about 1.3× faster than the old one! Do you think we can do better? Wait and see!</p>
+<section id="moisanss-algorithm-for-real-images" class="level2">
+<h2 class="anchored" data-anchor-id="moisanss-algorithm-for-real-images">Moisans’s algorithm for <em>real</em> images</h2>
+<p>In our previous implementation, we have overlooked an important fact: <span class="math inline">\(u\)</span> is (often) a <em>real</em> image. Its DFT ought to be computed through the <code>numpy.fft.rfft2</code> function (<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.rfft2.html#numpy.fft.rfft2">documentation</a>) rather than <code>numpy.fft.fft2</code> (<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fft2.html#numpy.fft.fft2">documentation</a>). This is what is done below.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rper(u, inverse_dft<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Compute the periodic component of the 2D, real image u.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">    This function returns the periodic-plus-smooth decomposition of</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">    the 2D array-like u. The image must be real.</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">    If inverse_dft is True, then the pair (p, s) is returned</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">    (p: periodic component; s: smooth component).</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">    If inverse_dft is False, then the pair</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">        (numpy.fft.rfft2(p), numpy.fft.rfft2(s))</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">    is returned.</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">    This function implements Algorithm 1.</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.asarray(u, dtype<span class="op">=</span>np.float64)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    m, n <span class="op">=</span> u.shape</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    arg <span class="op">=</span> <span class="fl">2.</span><span class="op">*</span>np.pi<span class="op">*</span>np.fft.fftfreq(m, <span class="fl">1.</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    cos_m, sin_m <span class="op">=</span> np.cos(arg), np.sin(arg)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    one_minus_exp_m <span class="op">=</span> <span class="fl">1.0</span><span class="op">-</span>cos_m<span class="op">-</span><span class="ot">1j</span><span class="op">*</span>sin_m</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    arg <span class="op">=</span> <span class="fl">2.</span><span class="op">*</span>np.pi<span class="op">*</span>np.fft.rfftfreq(n, <span class="fl">1.</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    cos_n, sin_n <span class="op">=</span> np.cos(arg), np.sin(arg)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    one_minus_exp_n <span class="op">=</span> <span class="fl">1.0</span><span class="op">-</span>cos_n<span class="op">-</span><span class="ot">1j</span><span class="op">*</span>sin_n</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    w1 <span class="op">=</span> u[:, <span class="op">-</span><span class="dv">1</span>]<span class="op">-</span>u[:, <span class="dv">0</span>]</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    w1_dft <span class="op">=</span> np.fft.fft(w1)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use complex fft because irfft2 needs all modes in the first direction</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    v1_dft <span class="op">=</span> w1_dft[:, <span class="va">None</span>]<span class="op">*</span>one_minus_exp_n[<span class="va">None</span>, :]</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    w2 <span class="op">=</span> u[<span class="op">-</span><span class="dv">1</span>, :]<span class="op">-</span>u[<span class="dv">0</span>, :]</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    w2_dft <span class="op">=</span> np.fft.rfft(w2)</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    v2_dft <span class="op">=</span> one_minus_exp_m[:, <span class="va">None</span>]<span class="op">*</span>w2_dft[<span class="va">None</span>, :]</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    k_dft <span class="op">=</span> <span class="fl">2.0</span><span class="op">*</span>(cos_m[:, <span class="va">None</span>]<span class="op">+</span>cos_n[<span class="va">None</span>, :]<span class="op">-</span><span class="fl">2.0</span>)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    k_dft[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    s_dft <span class="op">=</span> (v1_dft<span class="op">+</span>v2_dft)<span class="op">/</span>k_dft</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    s_dft[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> inverse_dft:</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> np.fft.irfft2(s_dft, u.shape)</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> u<span class="op">-</span>s, s</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>        u_dft <span class="op">=</span> np.fft.rfft2(u)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> u_dft<span class="op">-</span>s_dft, s_dft</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And we can again test this new implementation</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_act, s_act <span class="op">=</span> rper(u, inverse_dft<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Error in L2-norm:'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on p: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.linalg.norm(p_act<span class="op">-</span>p_exp)))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on s: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.linalg.norm(s_act<span class="op">-</span>s_exp)))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Maximum absolute error'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on p: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.<span class="bu">max</span>(np.<span class="bu">abs</span>(p_act<span class="op">-</span>p_exp))))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on s: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.<span class="bu">max</span>(np.<span class="bu">abs</span>(s_act<span class="op">-</span>s_exp))))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Maximum relative error'</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on p: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.<span class="bu">max</span>(np.<span class="bu">abs</span>(<span class="dv">2</span><span class="op">*</span>(p_act<span class="op">-</span>p_exp)<span class="op">/</span>(p_act<span class="op">+</span>p_exp)))))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - on s: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(np.<span class="bu">max</span>(np.<span class="bu">abs</span>(<span class="dv">2</span><span class="op">*</span>(s_act<span class="op">-</span>s_exp)<span class="op">/</span>(s_act<span class="op">+</span>s_exp)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Error in L2-norm:
+  - on p: 5.810100441650991e-10
+  - on s: 5.809921679853175e-10
+
+Maximum absolute error
+  - on p: 4.1807243312143156e-12
+  - on s: 4.181406578613701e-12
+
+Maximum relative error
+  - on p: 8.68682621178305e-11
+  - on s: 7.30527816192651e-08</code></pre>
+<p>Which is again quite satisfactory! Let us time the new implementation.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>t3 <span class="op">=</span> timeit.timeit(<span class="st">'p, s = rper(u, inverse_dft=True)'</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>number<span class="op">=</span><span class="dv">100</span>, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>())</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Timings:'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - _per : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(t1))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - per  : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(t2))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - rper : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(t3))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Ratios:'</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - _per/per  : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(t1<span class="op">/</span>t2))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  - _per/rper : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(t1<span class="op">/</span>t3))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Timings:
+  - _per : 4.946549984680452
+  - per  : 3.9524611252226656
+  - rper : 2.1560062129698423
+Ratios:
+  - _per/per  : 1.2515113565859002
+  - _per/rper : 2.2943115631687854</code></pre>
+<p>… and we are now about 2.3× faster!</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This is the end of the story. We now have a good implementation of Moisan’s algorithm. We have optimized its implementation, but the code did not lose in clarity.</p>
+<p>If you are interested by my implementation of Moisan’s algorithm, go to the <a href="https://github.com/sbrisard/moisan2011">GitHub</a> repository of the <code>moisan2011</code> Python module!</p>
+<!-- Local Variables: -->
+<!-- fill-column: 80 -->
+<!-- End: -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Except where otherwise noted, content on this blog by Sébastien Brisard is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></p>
+</div>
+    <div class="nav-footer-right">
+<p>📧​ sebastien [dot] brisard [at] univ [dash] amu [dot] fr</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
