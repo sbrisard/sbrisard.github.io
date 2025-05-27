@@ -2,12 +2,7 @@
 
 This is the repository for my personal blog.
 
-The source files for the new version ([Pelican](http://getpelican.com/)) can be
-found in the `src` directory.
-
-The source files for the old version ([Org-mode](http://orgmode.org/)) can be
-found in the `deprecated` directory.
-
+[Quarto](https://quarto.org/) source files are located in the `quarto` folder.
 
 <!-- Local Variables: -->
 <!-- fill-column: 80 -->
