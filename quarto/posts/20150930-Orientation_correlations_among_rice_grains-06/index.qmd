@@ -31,9 +31,8 @@ file. I am by no means an expert on this great file format (see
 3.  several arrays can be stored in the *same* file,
 4.  comments can be attached to a dataset.
 
-The following code snippet
-([download]({static}20150930-Orientation_correlations_among_rice_grains-06/tif2hdf5.py))
-converts the binary `*.tif` images into a single `*.hdf5` file. It uses the
+The following code snippet ([download](./files/tif2hdf5.py)) converts the binary
+`*.tif` images into a single `*.hdf5` file. It uses the
 [h5py](http://www.h5py.org/) library; [PyTables](http://www.pytables.org/) is
 another option.
 
@@ -78,7 +77,7 @@ our 3D image is no exception to this rule!
 ![A slice of the binary image. Clearly, some rice grains are
 connected. In other words, detecting connected components is not a
 suitable strategy for the segmentation of rice
-grains.](files/binary.png){#fig-01}
+grains.](./files/binary.png){#fig-01}
 
 So, we should expect no miracle from this approach. However, it is interesting
 to show how easy it is to identify the connected components of an image, using
@@ -117,14 +116,12 @@ if __name__ == '__main__':
 
 ```
 
-The above code snippet
-([download]({static}20150930-Orientation_correlations_among_rice_grains-06/connected_components.py))
-detects 117 connected components, and produces the following colored
-image (one color per label), see Fig. @fig-02. Unsurprisingly, all
-grains are connected on this slice, and we have produced a very poor
-segmentation indeed!
+The above code snippet ([download](./files/connected_components.py)) detects 117
+connected components, and produces the following colored image (one color per
+label), see Fig. @fig-02. Unsurprisingly, all grains are connected on this
+slice, and we have produced a very poor segmentation indeed!
 
-![All rice grains of the slice shown on Fig. @fig-01 are connected!](files/connected_components.png){#fig-02}
+![All rice grains of the slice shown on Fig. @fig-01 are connected!](./files/connected_components.png){#fig-02}
 
 To close this section, it should be noted that the last lines of the above
 script produce a color image where each label receives a random color. Standard
@@ -165,11 +162,11 @@ us.
 The standard unsupervised seeding technique consists in selecting the local
 maxima of the map of the distance to the background. The opposite of the
 distance map is then used as topography. This is essentially what the script
-below does
-([download]({static}20150930-Orientation_correlations_among_rice_grains-06/watershed-distance_local_max.py)).
-It draws heavily on the example from the
+below does ([download](./files/watershed-distance_local_max.py)). It draws
+heavily on the example from the
 [scikit-image](http://scikit-image.org/docs/dev/api/skimage.morphology.html#watershed)
 documentation.
+
 ```python
 """Watershed using local maxima of the distance map as seeds."""
 

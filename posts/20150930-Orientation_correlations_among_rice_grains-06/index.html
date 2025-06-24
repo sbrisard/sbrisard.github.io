@@ -180,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>several arrays can be stored in the <em>same</em> file,</li>
 <li>comments can be attached to a dataset.</li>
 </ol>
-<p>The following code snippet (<a href="{static}20150930-Orientation_correlations_among_rice_grains-06/tif2hdf5.py">download</a>) converts the binary <code>*.tif</code> images into a single <code>*.hdf5</code> file. It uses the <a href="http://www.h5py.org/">h5py</a> library; <a href="http://www.pytables.org/">PyTables</a> is another option.</p>
+<p>The following code snippet (<a href="./files/tif2hdf5.py">download</a>) converts the binary <code>*.tif</code> images into a single <code>*.hdf5</code> file. It uses the <a href="http://www.h5py.org/">h5py</a> library; <a href="http://www.pytables.org/">PyTables</a> is another option.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os.path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py</span>
@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-01" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="files/binary.png" class="img-fluid figure-img">
+<img src="./files/binary.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: A slice of the binary image. Clearly, some rice grains are connected. In other words, detecting connected components is not a suitable strategy for the segmentation of rice grains.
@@ -245,11 +245,11 @@ Figure&nbsp;1: A slice of the binary image. Clearly, some rice grains are connec
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    colors[<span class="dv">0</span>] <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    imsave(<span class="st">'connected_components.png'</span>, colors[labels[index]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The above code snippet (<a href="{static}20150930-Orientation_correlations_among_rice_grains-06/connected_components.py">download</a>) detects 117 connected components, and produces the following colored image (one color per label), see Fig.&nbsp;<a href="#fig-02" class="quarto-xref">2</a>. Unsurprisingly, all grains are connected on this slice, and we have produced a very poor segmentation indeed!</p>
+<p>The above code snippet (<a href="./files/connected_components.py">download</a>) detects 117 connected components, and produces the following colored image (one color per label), see Fig.&nbsp;<a href="#fig-02" class="quarto-xref">2</a>. Unsurprisingly, all grains are connected on this slice, and we have produced a very poor segmentation indeed!</p>
 <div id="fig-02" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="files/connected_components.png" class="img-fluid figure-img">
+<img src="./files/connected_components.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: All rice grains of the slice shown on Fig.&nbsp;<a href="#fig-01" class="quarto-xref">1</a> are connected!
@@ -269,7 +269,7 @@ Figure&nbsp;2: All rice grains of the slice shown on Fig.&nbsp;<a href="#fig-01"
 </ol>
 <p>The second step is the critical one, since each seed results in exactly one feature in the segmented image. Too many seeds result in an oversegmented image (grains are split), while too little seeds result in an under-segmented image (grains are merged).</p>
 <p>While tedious, manual seeding is probably your best choice (as argued by <a href="http://emmanuelle.github.io/a-tutorial-on-segmentation.html#semi-supervised-approach-segmenting-the-image-from-user-defined-markers">Emmanuelle Gouillart</a>). There are about 2000 rice grains in the 3D image we are working with, so this semi-supervised approach is unfortunately not an option for us.</p>
-<p>The standard unsupervised seeding technique consists in selecting the local maxima of the map of the distance to the background. The opposite of the distance map is then used as topography. This is essentially what the script below does (<a href="{static}20150930-Orientation_correlations_among_rice_grains-06/watershed-distance_local_max.py">download</a>). It draws heavily on the example from the <a href="http://scikit-image.org/docs/dev/api/skimage.morphology.html#watershed">scikit-image</a> documentation.</p>
+<p>The standard unsupervised seeding technique consists in selecting the local maxima of the map of the distance to the background. The opposite of the distance map is then used as topography. This is essentially what the script below does (<a href="./files/watershed-distance_local_max.py">download</a>). It draws heavily on the example from the <a href="http://scikit-image.org/docs/dev/api/skimage.morphology.html#watershed">scikit-image</a> documentation.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Watershed using local maxima of the distance map as seeds."""</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os.path</span>
