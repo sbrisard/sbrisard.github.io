@@ -58,7 +58,7 @@ $$ {#eq-01}
 where $Q$ and $Q_1$ are symmetric, positive linear operators defined
 in *part 3* of this series ($Q$ is actually positive definite). As
 observed in [part
-4](../20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.md)
+4](../20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04)
 of this series, operator $Q$ is in fact the sum of the periodic
 convolution operator with the following kernel
 $$
@@ -89,7 +89,7 @@ $${#eq-03}
 where we have introduced $v=-\frac12Q_1\cdot u$. Since
 $\operatorname{mean}s=0$, we also have $\hat{s}_{00}=0$. From the
 definition of $Q_1$ (see [part
-3](../20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.md#Q1)
+3](../20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03/)
 of this series), we have $v=v^\mathrm h+v^\mathrm v$, with
 $$
 v^\mathrm h_{ij}=

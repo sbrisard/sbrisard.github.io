@@ -53,7 +53,7 @@ As a preliminary note, it should be observed that any fourth-rank tensor $\mathb
 A$ can be viewed as a endomorphism over the space of second-rank tensors, since
 $\mathbf x\mapsto\mathbf A:\mathbf x$ is a linear mapping (the convention
 adopted in this blog for the double dot product has been specified in a
-[previous post]({filename}20140219-On_the_double_dot_product.md)). Therefore,
+[previous post](../20140219-On_the_double_dot_product)). Therefore,
 the fourth-rank tensor $\mathbf a\boxtimes\mathbf b$ ($\mathbf a, \mathbf b$:
 second-rank tensors) can be defined by how it operates on second-rank tensors
 $\mathbf x$

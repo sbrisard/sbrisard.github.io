@@ -393,7 +393,7 @@ u_{i, -1}=u_{i, n-1}, \quad u_{i, n}=u_{0, n}, \quad u_{-1, j}=u_{m-1, j}\quad\t
 <h1>Testing the implementation</h1>
 <p>For any image <span class="math inline">\(v\)</span>, we should have <span class="math display">\[
 \langle v, Q_1\cdot v\rangle=E(v, 0)\quad\text{and}\quad\langle v, Q\cdot v\rangle=E(v, 0)+E(0, v)+(\operatorname{mean} v)^2,
-\]</span> where the energy <span class="math inline">\(E\)</span> was implemented in <a href="../20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.md#implementation">part 2</a> of this series.</p>
+\]</span> where the energy <span class="math inline">\(E\)</span> was implemented in <a href="../20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02/">part 2</a> of this series.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> img_shapes():</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    sizes <span class="op">=</span> (<span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">32</span>, <span class="dv">33</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> itertools.product(sizes, sizes)</span>

@@ -128,7 +128,7 @@ A closer look (see Fig. @fig-05) shows that we roughly achieved pixel accuracy,
 
 # Analysis of the whole stack
 
-We are now ready to carry out the above analysis on all 172 images of the stack. This is what the script below does ([download]({static}20150529-Orientation_correlations_among_rice_grains-04/find_boundary.py)); in order to check that nothing went wrong, each image with overlaid boundary is saved for visual inspection.
+We are now ready to carry out the above analysis on all 172 images of the stack. This is what the script below does ([download](./files/find_boundary.py)); in order to check that nothing went wrong, each image with overlaid boundary is saved for visual inspection.
 
 ```python
 import os.path

@@ -222,7 +222,7 @@ u_{ij}=\frac1{mn}\sum_{\alpha=0}^{m-1}\sum_{\beta=0}^{n-1}\hat{u}_{\alpha\beta}\
 <h1>Moisan’s algorithm</h1>
 <p>It is recalled (see <a href="../20180312-On_the_periodic-plus-smooth_decomposition_of_an_image-05">previous post</a>) that the smooth component <span class="math inline">\(s\)</span> of a <span class="math inline">\(m\times n\)</span> image <span class="math inline">\(u\)</span> is found from the solution to the following linear system <span id="eq-01"><span class="math display">\[
 Q\cdot s=Q_1\cdot u,
-\tag{1}\]</span></span> where <span class="math inline">\(Q\)</span> and <span class="math inline">\(Q_1\)</span> are symmetric, positive linear operators defined in <em>part 3</em> of this series (<span class="math inline">\(Q\)</span> is actually positive definite). As observed in <a href="../20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04.md">part 4</a> of this series, operator <span class="math inline">\(Q\)</span> is in fact the sum of the periodic convolution operator with the following kernel <span class="math display">\[
+\tag{1}\]</span></span> where <span class="math inline">\(Q\)</span> and <span class="math inline">\(Q_1\)</span> are symmetric, positive linear operators defined in <em>part 3</em> of this series (<span class="math inline">\(Q\)</span> is actually positive definite). As observed in <a href="../20180305-On_the_periodic-plus-smooth_decomposition_of_an_image-04">part 4</a> of this series, operator <span class="math inline">\(Q\)</span> is in fact the sum of the periodic convolution operator with the following kernel <span class="math display">\[
 \begin{bmatrix}
 0 &amp; -2 &amp; 0\\
 -2 &amp; 8 &amp; -2\\
@@ -237,7 +237,7 @@ m^{-2}n^{-2}\hat{s}_{00} &amp; \text{if }(\alpha, \beta) = (0, 0),\\
 \tag{2}\]</span></span></p>
 <p>Combining Eqs.&nbsp;(<a href="#eq-01" class="quarto-xref">1</a>) and (<a href="#eq-02" class="quarto-xref">2</a>), we find the following expression of the discrete Fourier transform of the smooth component <span class="math inline">\(s\)</span> <span id="eq-03"><span class="math display">\[
 \hat{s}_{\alpha\beta}=\frac{\hat{v}_{\alpha\beta}}{2\cos\frac{2\pi\alpha}m+2\cos\frac{2\pi\beta}n-4}\quad\text{for}\quad(\alpha, \beta)\neq(0, 0),
-\tag{3}\]</span></span> where we have introduced <span class="math inline">\(v=-\frac12Q_1\cdot u\)</span>. Since <span class="math inline">\(\operatorname{mean}s=0\)</span>, we also have <span class="math inline">\(\hat{s}_{00}=0\)</span>. From the definition of <span class="math inline">\(Q_1\)</span> (see <a href="../20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03.md#Q1">part 3</a> of this series), we have <span class="math inline">\(v=v^\mathrm h+v^\mathrm v\)</span>, with <span id="eq-04"><span class="math display">\[
+\tag{3}\]</span></span> where we have introduced <span class="math inline">\(v=-\frac12Q_1\cdot u\)</span>. Since <span class="math inline">\(\operatorname{mean}s=0\)</span>, we also have <span class="math inline">\(\hat{s}_{00}=0\)</span>. From the definition of <span class="math inline">\(Q_1\)</span> (see <a href="../20180226-On_the_periodic-plus-smooth_decomposition_of_an_image-03/">part 3</a> of this series), we have <span class="math inline">\(v=v^\mathrm h+v^\mathrm v\)</span>, with <span id="eq-04"><span class="math display">\[
 v^\mathrm h_{ij}=
 \begin{cases}
 u_{i, n-1}-u_{i, 0} &amp; \text{if }j=0,\\

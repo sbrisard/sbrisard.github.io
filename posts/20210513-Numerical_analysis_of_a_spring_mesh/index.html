@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">apply_bc!</span>(K, F, <span class="fl">2</span>n2<span class="op">-</span><span class="fl">1</span>, mesh)</span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Finally, the apparent stiffness is computed according to <a href="{filename}20210509-What_is_homogenization-05.md">this post</a>.</p>
+<p>Finally, the apparent stiffness is computed according to <a href="../20210509-What_is_homogenization-05">this post</a>.</p>
 <div id="baecdaa7" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">apparent_stiffness</span>(mesh)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    K <span class="op">=</span> <span class="fu">global_stiffness_matrix</span>(mesh)</span>
@@ -362,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">1</span>. <span class="op">/</span> elongation</span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We use the symbolic expressions derived in <a href="{filename}20210512-Symbolic_analysis_of_a_spring_mesh.md">this post</a> to test our implementation.</p>
+<p>We use the symbolic expressions derived in <a href="../20210512-Symbolic_analysis_of_a_spring_mesh">this post</a> to test our implementation.</p>
 <div id="909e68a0-69d5-4a79-8a88-cd34d0b9f11a" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">actual_stiffness</span>(χ, n) <span class="op">=</span> <span class="fu">apparent_stiffness</span>(<span class="fu">SpringMesh</span>(χ, χ, <span class="cn">π</span><span class="op">/</span><span class="fl">4</span>, n))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>

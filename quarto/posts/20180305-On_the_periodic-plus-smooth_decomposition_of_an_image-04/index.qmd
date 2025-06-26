@@ -266,7 +266,7 @@ $$
 \langle v, Q_1\cdot v\rangle=E(v, 0)\quad\text{and}\quad\langle v, Q\cdot v\rangle=E(v, 0)+E(0, v)+(\operatorname{mean} v)^2,
 $$
 where the energy $E$ was implemented in [part
-2](../20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02.md#implementation)
+2](../20180219-On_the_periodic-plus-smooth_decomposition_of_an_image-02/)
 of this series.
 
 ```python

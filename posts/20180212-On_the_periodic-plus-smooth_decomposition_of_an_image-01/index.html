@@ -243,7 +243,7 @@ Figure&nbsp;3: The power spectrum of the image shown in Fig.&nbsp;<a href="#fig-
 </section>
 <section id="periodization-by-symmetrization" class="level1">
 <h1>Periodization by symmetrization</h1>
-<p>Of course, it is possible to enforce periodicity by tiling together 4 mirror images of the same initial image as follows (see Fig.&nbsp;<strong>?@fig-04</strong>)</p>
+<p>Of course, it is possible to enforce periodicity by tiling together 4 mirror images of the same initial image as follows (see Fig.&nbsp;<a href="#fig-04" class="quarto-xref">4</a>)</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m, n <span class="op">=</span> u.shape</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>left, right <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">0</span>, m), <span class="bu">slice</span>(<span class="dv">2</span><span class="op">*</span>m<span class="op">-</span><span class="dv">1</span>, m<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>top, bottom <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">0</span>, n), <span class="bu">slice</span>(<span class="dv">2</span><span class="op">*</span>n<span class="op">-</span><span class="dv">1</span>, n<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
@@ -253,8 +253,17 @@ Figure&nbsp;3: The power spectrum of the image shown in Fig.&nbsp;<a href="#fig-
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>u_mirrored[left, top] <span class="op">=</span> u</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>u_mirrored[right, top] <span class="op">=</span> u</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>imsave(DATA_DIR<span class="op">+</span><span class="st">'hut-648x364-mirrored.png'</span>, u_mirrored)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a name="fig04"></a> <img src="../On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364-mirrored.png" id="fig-04" class="img-fluid" alt="Periodization by symmetrization of the image shown in Fig.&nbsp;1."></p>
-<p>The resulting power spectrum (computed with the code snippet below) is shown in Fig.&nbsp;<strong>?@fig-05</strong>. It is observed that symmetrization does not remove entirely the cross at the center of the power spectrum. Worse, “it makes the DFT symmetric and real-valued, which can be dramatic if the phase component of the Fourier transform has to be analyzed, or if orientation issues are concerned” (<a href="https://doi.org/10.1007/s10851-010-0227-1">Moisan, 2011</a>). This led Moisan to introduce the <em>periodic-plus-smooth</em> decomposition.</p>
+<div id="fig-04" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364-mirrored.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Periodization by symmetrization of the image shown in Fig.&nbsp;<a href="#fig-01" class="quarto-xref">1</a>.
+</figcaption>
+</figure>
+</div>
+<p>The resulting power spectrum (computed with the code snippet below) is shown in Fig.&nbsp;<a href="#fig-05" class="quarto-xref">5</a>. It is observed that symmetrization does not remove entirely the cross at the center of the power spectrum. Worse, “it makes the DFT symmetric and real-valued, which can be dramatic if the phase component of the Fourier transform has to be analyzed, or if orientation issues are concerned” (<a href="https://doi.org/10.1007/s10851-010-0227-1">Moisan, 2011</a>). This led Moisan to introduce the <em>periodic-plus-smooth</em> decomposition.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.<span class="bu">abs</span>(np.fft.fftshift(np.fft.fft2(u_mirrored)))<span class="op">**</span><span class="dv">2</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>a[a<span class="op">==</span><span class="fl">0.0</span>]<span class="op">=</span><span class="fl">1.0</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.log10(a)</span>
@@ -262,7 +271,16 @@ Figure&nbsp;3: The power spectrum of the image shown in Fig.&nbsp;<a href="#fig-
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">255</span><span class="op">*</span>(a<span class="op">-</span>a_min)<span class="op">/</span>(a_max<span class="op">-</span>a_min)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>imsave(DATA_DIR<span class="op">+</span><span class="st">'hut-648x364-mirrored-power_spectrum.png'</span>, a.astype(np.uint8))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a name="fig05"></a> <img src="../On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364-mirrored-power_spectrum.png" id="fig-05" class="img-fluid" alt="The power spectrum of the image shown in Fig.&nbsp;?@fig-04"></p>
+<div id="fig-05" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-05-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364-mirrored-power_spectrum.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-05-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: The power spectrum of the image shown in Fig.&nbsp;<a href="#fig-04" class="quarto-xref">4</a>
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>

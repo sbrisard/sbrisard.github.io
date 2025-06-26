@@ -51,7 +51,7 @@ $$
 
 Our strategy relies on the approximation of the elastic energy of the spring
 mesh. It is recalled that the [elastic energy of a
-spring]({filename}20201125-On_the_stiffness_matrix_of_a_linear_spring.md) is
+spring](../20201125-On_the_stiffness_matrix_of_a_linear_spring) is
 fully defined by the displacements of the end-points. In the present case, the
 end-points are the vertices $\vec x_{ij}$ of the grid, with displacement $\vec
 u_{ij}$. Our aim is to replace the discrete set of springs with a continuous

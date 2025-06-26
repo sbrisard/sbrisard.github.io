@@ -129,7 +129,7 @@ u_mirrored[left, top] = u
 u_mirrored[right, top] = u
 imsave(DATA_DIR+'hut-648x364-mirrored.png', u_mirrored)
 ```
-<a name="fig04"></a>
+
 ![Periodization by symmetrization of the image shown in Fig. @fig-01.](../On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364-mirrored.png){#fig-04}
 
 The resulting power spectrum (computed with the code snippet below) is shown in
@@ -151,7 +151,6 @@ a = 255*(a-a_min)/(a_max-a_min)
 imsave(DATA_DIR+'hut-648x364-mirrored-power_spectrum.png', a.astype(np.uint8))
 ```
 
-<a name="fig05"></a>
 ![The power spectrum of the image shown in Fig. @fig-04](../On_the_periodic-plus-smooth_decomposition_of_an_image-files/hut-648x364-mirrored-power_spectrum.png){#fig-05}
 
 
