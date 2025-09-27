@@ -1,0 +1,70 @@
+---
+title: "Hermite elements are exact! Part 4: finally, the proof!"
+author: "Sébastien Brisard"
+date: "2025-09-27"
+---
+
+In the [previous instalment](../20250923-Hermite_elements_are_exact-03) of this post, we laid the ground for the proof that we complete below. Considering that the previous post was rather lengthy, you might find the actual proof disappointingly short and simple. You would be right, but do pay attention to the fact that, from one line to the next, the changes might be subtle (as in $V$ *vs.* $V_{\mathrm{H}}$) but the consequences are **huge**!
+
+
+# Previously, on this blog
+
+For the structure under consideration, we defined the true deflection $v$ as the solution to the following variational problem
+$$
+(\mathcal{P}) \qquad \text{Find } v \in V \quad \text{such that} \quad a(v, w) = \int_0^L p(x) \, w(x) \, \mathrm{d} x \quad \text{for all} \quad w \in V.
+$$ {#eq-20250927184328}
+
+We also defined the finite element (Hermite) approximation $v_{\mathrm{H}}$ of $v$ as the solution to the discretized variational problem
+$$
+(\mathcal{P}_{\mathrm{H}}) \qquad \text{Find } v_{\mathrm{H}} \in V_{\mathrm{H}} \quad \text{such that} \quad a(v_{\mathrm{H}}, w_{\mathrm{H}}) = \sum_k F_k \, w_{\mathrm{H}}(x_k) + \sum_k T_k \, w_{\mathrm{H}}'(x_k) \quad \text{for all} \quad w_{\mathrm{H}} \in V_{\mathrm{H}},
+$$ {#eq-20250927184702}
+where $F_k$ and $T_k$ are the equivalent nodal loads, such that
+$$
+\sum_k F_k \, w_{\mathrm{H}}(x_k) + \sum_k T_k \, w_{\mathrm{H}}'(x_k) = \int_0^L p(x) \, w_{\mathrm{H}}(x) \, \mathrm{d} x \quad \text{for all} \quad
+w_{\mathrm{H}} \in V_{\mathrm{H}}.
+$$ {#eq-20250927184359}
+
+In this post, we will prove that the following equalities hold
+$$
+v(x_k) = v_{\mathrm{H}}(x_k) \quad \text{and} \quad v'(x_k) = v_{\mathrm{H}}'(x_k), \quad \text{for all} \quad k = 1, \ldots, N.
+$$
+
+
+# Fun with test functions
+
+We take a fixed value of $k = 1, \ldots, N$ and first prove that $v(x_k) = v_{\mathrm{H}}(x_k)$. To do so, we consider the solution $\overline{v}_{\mathrm{H}} \in V_{\mathrm{H}}$ to the following variational problem
+$$
+a(\overline{v}_{\mathrm{H}}, w_{\mathrm{H}}) = w_{\mathrm{H}}(x_k) \quad \text{for all} \quad w_{\mathrm{H}} \in V_{\mathrm{H}}.
+$$
+
+In other words, $\overline{v}_{\mathrm{H}}$ is the **true** deflection of the structure subjected to a unique point load, located at node $x_k$. As discussed in the [previous post](../20250923-Hermite_elements_are_exact-03), the above identity also holds for all test functions $w \in V$
+$$
+a(\overline{v}_{\mathrm{H}}, w) = w(x_k) \quad \text{for all} \quad w \in V.
+$$
+
+In particular, we have for both $v$ and $v_{\mathrm{H}}$
+$$
+a(\overline{v}_{\mathrm{H}}, v) = v(x_k) \quad \text{and} \quad a(\overline{v}_{\mathrm{H}}, v_{\mathrm{H}}) = v_{\mathrm{H}}(x_k)
+$$ {#eq-20250927184859}
+and the proof will be complete if we can prove that $a(\overline{v}_{\mathrm{H}}, v) = a(\overline{v}_{\mathrm{H}}, v_{\mathrm{H}})$. To do so, we use the symmetry of the bilinear form $a$. We first consider $a(\overline{v}_{\mathrm{H}}, v)$ and use Eqs. (@eq-20250927184328) and (@eq-20250927184359)
+$$
+a(\overline{v}_{\mathrm{H}}, v) = a(v, \overline{v}_{\mathrm{H}}) = \int_0^L p(x) \, \overline{v}_\mathrm{H}(x) \, \mathrm{d} x = \sum_k F_k \, \overline{v}_{\mathrm{H}}(x_k) + \sum_k T_k \, \overline{v}_{\mathrm{H}}'(x_k)
+$$ {#eq-20250927184749}
+
+We then consider $a(\overline{v}_{\mathrm{H}}, v_{\mathrm{H}})$ and use Eq. (@eq-20250927184702)
+$$
+a(\overline{v}_{\mathrm{H}}, v_{\mathrm{H}}) = a(v_{\mathrm{H}}, \overline{v}_{\mathrm{H}}) = \sum_k F_k \, \overline{v}_{\mathrm{H}}(x_k) + \sum_k T_k \, \overline{v}_{\mathrm{H}}'(x_k)
+$$ {#eq-20250927184818}
+
+It results from Eqs. (@eq-20250927184749) and (@eq-20250927184818) that $a(\overline{v}_{\mathrm{H}}, v) = a(\overline{v}_{\mathrm{H}}, v_{\mathrm{H}})$. Eq. (@eq-20250927184859) then shows that $v(x_k) = v_{\mathrm{H}}(x_k)$ and the proof is complete.
+
+Similarly, to prove that $v'(x_k) = v_{\mathrm{H}}'(x_k)$, we would need to consider the solution $\tilde{v}_{\mathrm{H}}$ to the variational problem
+$$
+a(\tilde{v}_{\mathrm{H}}, w_{\mathrm{H}}) = w_{\mathrm{H}}'(x_k) \quad \text{for all} \quad w_{\mathrm{H}} \in V_{\mathrm{H}},
+$$
+this is left as an exercise to the reader!
+
+
+# Conclusion
+
+What a ride! We finally can claim that Hermite elements are exact for all types of loads, in the sense that the nodal displacements (translations and rotations) are exact. This often overlooked result marks in my view the difference between a general purpose FE software and a structural analysis software. Both derive the same FE solution, but the difference lies in how this solution is **post-processed**. This will be the topic of the next, and last, post in this series.

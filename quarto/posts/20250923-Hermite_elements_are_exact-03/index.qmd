@@ -1,0 +1,108 @@
+---
+title: "Hermite elements are exact! Part 3: not quite the proof, yet!"
+author: "Sébastien Brisard"
+date: "2025-09-23"
+---
+
+In the [previous instalment](../20250701-Hermite_elements_are_exact-02) of this series, I showed that in a finite element analysis, it is crucial for the loads to be applied to the structure in a consistent way. I introduced **equivalent nodal loads** and claimed that, if properly evaluated, these loads produce **exact nodal displacements**. In the present post, we set the stage for the actual proof of this claim. The proof itself will be presented in the [next post](../20250927-Hermite_elements_are_exact-04/).
+
+For an arbitrary structure, the proof is quite technical because we must handle longitudinal and transverse displacements and their continuity at each node, as well as bending, tension/compression and possibly torsion energies. In the remainder of this post, we will therefore focus on a restricted case. From this particular case to the most general case, the proof remains essentially unchanged (you have my word!), but gets considerably more intricate…
+
+
+# A simplified, variational setting
+
+We consider a structure made of an assembly of beam elements that are connected at the **nodes** of the structure. An essential assumption is that the elastic properties of the beam elements (axial stiffness $EA$, bending stiffness $EI$) are **constant between each node**. The problem of elastic equilibrium of the structure is analyzed with Hermite elements in a Galerkin setting. We will prove that the nodal displacements are exact under the following assumptions.
+
+**Assumption 1.** *The structure is rectilinear.* In other words, the structure is essentially some sort of continuous beam. The total length of the structure is $L$, and the abscissa $0 \leq x \leq L$ is measured from its left end. The nodes of the structure are located at $x_1 = 0 < x_2 < \cdots < x_N = L$ ($N$: total number of nodes).
+
+**Assumption 2.** *The structure is subjected to transverse loads only, all located in the same plane.* The distributed load has density $p(x)$, which might be a generalized function (to the effect that transverse point loads are allowed).
+
+As a result of the geometry and the loading, the structure will undergo **transverse displacements** (deflections) only. Let $v(x)$ be the deflection of point $x$ of the structure. In order to be **admissible**, the mapping $x \mapsto v(x)$ must have $\mathrm{C}^1$ continuity and meet all essential boundary conditions. These requirements define the space $V$ of admissible deflections. In particular, the **true** deflection $v$ belongs to this space: $v \in V$.
+
+**Assumption 3.** *The space $V$ of amissible deflections has the structure of a **vector space**.* In general, the space $V$ has an **affine structure**; the present assumption will hold if non-zero displacements (**inhomogeneous** Dirichlet boundary conditions) are **excluded**.
+
+In order to define the Galerkin approximation to the problem of the equilibrium of the structure $\mathcal{S}$, we need to introduce a variational setting. At equilibrium, the structure wants to minimize its total potential energy $Π$. Under the above assumptions, we have
+$$
+\Pi[v] = \underbrace{\int_0^L \tfrac{1}{2} \, EI(x) \, \bigl[ v''(x) \bigr]^2 \, \mathrm{d} x}_{\text{strain energy}}
+- \underbrace{\int_0^L p(x) \, v(x) \, \mathrm{d} x}_{\substack{\text{potential of} \\ \text{external forces}}}.
+$$
+where $x \mapsto EI(x)$ is the (local) bending stiffness of the structure. Since $EI$ is constant between two adjacent nodes, we write
+$$
+\Pi[v] = \sum_{k = 1}^{N - 1} \int_{x_k}^{x_{k+1}} \tfrac{1}{2} \, EI_k \, \bigl[ v''(x) \bigr]^2 \, \mathrm{d} x - \int_0^L p(x) \, v(x) \, \mathrm{d} x,
+$$
+where $EI_k$ denotes the bending stiffness of beam element number $k$, located between nodes $x_k$ and $x_{k+1}$. The true deflection $v \in V$ of the structure is such that
+$$
+\Pi[v] \leq \Pi[w] \quad \text{for all} \quad w \in V.
+$$
+
+It is a classical application of the [calculus of variations](https://en.wikipedia.org/wiki/Calculus_of_variations) to show that, under mild assumptions, minimizing the total potential energy $\Pi$ is equivalent to solving the following problem
+$$
+(\mathcal{P}) \qquad \text{Find } v \in V \quad \text{such that} \quad a(v, w) = \int_0^L p(x) \, w(x) \, \mathrm{d} x \quad \text{for all} \quad w \in V
+$$
+where $a$ is defined as follows
+$$
+a(v, w) = \sum_{k=1}^{N-1} \int_{x_k}^{x_{k+1}} EI_k \, v''(x) \, w''(x) \, \mathrm{d} x.
+$$
+
+The precise expression of $a$ does not really matter; what really matters is that $a$ is a **bilinear, symmetric form**. Problem $(\mathcal{P})$ defines a **variational problem** ; in the next section, we define a Galerkin approximation to the solution of this problem.
+
+
+# The subspace of Hermite deflections
+
+The idea behind Galerkin discretization is very simple: the initial variational problem $(\mathcal{P})$ requires the full exploration of the (infinite-dimensional) space $V$. This is in general not possible! Rather, we will consider a **finite-dimensional subspace $V_{\mathrm{H}}$** and solve the following variational problem
+$$
+(\mathcal{P}_{\mathrm{H}}) \qquad \text{Find } v_{\mathrm{H}} \in V_{\mathrm{H}} \quad \text{such that} \quad a(v_{\mathrm{H}}, w_{\mathrm{H}}) = \int_0^L p(x) \, w_{\mathrm{H}}(x) \, \mathrm{d} x \quad \text{for all} \quad w_{\mathrm{H}} \in V_{\mathrm{H}}.
+$$
+
+The solution $v_{\mathrm{H}}$ to problem $(\mathcal{P}_{\mathrm{H}})$ defines the Galerkin approximation to the solution $w$ of the initial problem $(\mathcal{P})$. Now that we know how we are to derive an approximate solution to our structural problem, we need to define the subspace $V_{\mathrm{H}}$. Of course, we will choose Hermite shape functions (hence the “H” subscript!).
+
+More precisely, $V_{\mathrm{H}}$ is the space of functions $w_{\mathrm{H}}\colon (0, L) \longrightarrow \mathbb{R}$ such that
+
+- $w_{\mathrm{H}} \in V_{\mathrm{H}}$: in other words, $w_{\mathrm{H}}$ has $\mathrm{C}^1$ continuity and satisfies all essential boundary conditions,
+- $w_{\mathrm{H}}$ is a cubic polynomial between two successive nodes.
+
+Hermite shape functions were introduced in the [first part](../20250622-Hermite_elements_are_exact-01/) of this series, where it was shown in particular that the deflection of a single beam element was fully defined by the deflection and rotation of its end nodes. The same holds for a full structure: any $w_{\mathrm{H}} \in V_{\mathrm{H}}$ is fully defined by the nodal deflections $w_{\mathrm{H}}(x_k)$ and nodal rotations $w_{\mathrm{H}}'(x_k)$. Therefore, $V_{\mathrm{H}}$ is at most $2N$-dimensional subspace of $V$. I wrote “at most” because boundary conditions will certainly reduce the dimensionality of $V_{\mathrm{H}}$. Any $w_{\mathrm{H}} \in V_{\mathrm{H}}$ can therefore be decomposed uniquely as the following linear combination
+$$
+w_{\mathrm{H}}(x) = \sum_k w_{\mathrm{H}}(x_k) \, \Phi_k(x) + \sum_k w_{\mathrm{H}}'(x_k) \, \Psi_k(x),
+$$ {#eq-20250927172513}
+where the sums run over all unconstrained nodes, and $\Phi_k$, $\Psi_k$ are the global **shape functions**.
+
+
+# What are these equivalent nodal loads anyway?
+
+We are now in a position to state a mathematical definition of the equivalent nodal loads. The equivalent nodal forces $F_k$ and torques $T_k$ are defined as follows
+$$
+F_k = \int_0^L p(x) \, \Phi_k(x) \, \mathrm{d} x \quad \text{and} \quad T_k = \int_0^L p(x) \, \Phi_k(x) \, \mathrm{d} x.
+$$
+
+It results from the decomposition (@eq-20250927172513) of any $w_{\mathrm{H}} \in V_{\mathrm{H}}$ that
+$$
+\int_0^L p(x) \, w_{\mathrm{H}}(x) \, \mathrm{d} x = \sum_k F_k \, w_{\mathrm{H}}(x_k) + \sum_k T_k \, w_{\mathrm{H}}'(x_k).
+$$
+
+In other words, for Hermite displacements, the equivalent nodal loads produce the **same work** as the true loads and the discretized problem $(\mathcal{P}_{\mathrm{H}})$ reads
+$$
+(\mathcal{P}_{\mathrm{H}}) \qquad \text{Find } v_{\mathrm{H}} \in V_{\mathrm{H}} \quad \text{such that} \quad a(v_{\mathrm{H}}, w_{\mathrm{H}}) = \sum_k F_k \, w_{\mathrm{H}}(x_k) + \sum_k T_k \, w_{\mathrm{H}}'(x_k) \quad \text{for all} \quad w_{\mathrm{H}} \in V_{\mathrm{H}}.
+$$
+
+
+# Hermite elements are exact -- The trivial case
+
+Let us assume for a moment that the true loads are applied to the nodes only. Then, between two successive nodes, the bending equation reads
+$$
+x_k \leq x \leq x_{k+1}: \quad EI_k \, \frac{d^4 v}{dx^4} = 0,
+$$
+where $v$ denotes the true deflection of the structure. Upon integration, it is found that $v$ is a cubic polynomial over $(x_k, x_{k+1})$. Since $v$ is an admissible deflection, it belongs to $V_{\mathrm{H}}$.
+
+In other words, when loads are concentrated at the nodes of the structure, the true solution happens to belong to the subspace $V_{\mathrm{H}}$. Therefore, the discretized problem $(\mathcal{P}_{\mathrm{H}})$  delivers the **exact solution** to the initial problem $(\mathcal{P})$.
+
+An interesting consequence is the following result: if $v_{\mathrm{H}} \in V_{\mathrm{H}}$ is such that
+$$
+a(v_{\mathrm{H}}, w_{\mathrm{H}}) = \sum_k F_k \, w_{\mathrm{H}}(x_k) + \sum_k T_k \, w_{\mathrm{H}}'(x_k) \quad \text{for all} \quad w_{\mathrm{H}} \in V_{\mathrm{H}},
+$$
+then it is true that
+$$
+a(v_{\mathrm{H}}, w) = \sum_k F_k \, w(x_k) + \sum_k T_k \, w'(x_k) \quad \text{for all} \quad w \in V.
+$$
+
+The only difference between these two assertions is the space to which the test function belongs ($V_{\mathrm{H}}$ *vs.* $V$). This will in fact make a huge difference in the [next instalment](../20250927-Hermite_elements_are_exact-04/) of this series.
