@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sébastien Brisard">
+<meta name="dcterms.date" content="2025-09-23">
+
+<title>Sébastien Brisard’s blog - Hermite elements are exact! Part 3: not quite the proof, yet!</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Sébastien Brisard’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://cv.archives-ouvertes.fr/sbrisard"> 
+<span class="menu-text">About the author</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/sbrisard"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Hermite elements are exact! Part 3: not quite the proof, yet!</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Sébastien Brisard </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 23, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>In the <a href="../20250701-Hermite_elements_are_exact-02">previous instalment</a> of this series, I showed that in a finite element analysis, it is crucial for the loads to be applied to the structure in a consistent way. I introduced <strong>equivalent nodal loads</strong> and claimed that, if properly evaluated, these loads produce <strong>exact nodal displacements</strong>. In the present post, we set the stage for the actual proof of this claim. The proof itself will be presented in the <a href="../20250927-Hermite_elements_are_exact-04/">next post</a>.</p>
+<p>For an arbitrary structure, the proof is quite technical because we must handle longitudinal and transverse displacements and their continuity at each node, as well as bending, tension/compression and possibly torsion energies. In the remainder of this post, we will therefore focus on a restricted case. From this particular case to the most general case, the proof remains essentially unchanged (you have my word!), but gets considerably more intricate…</p>
+<section id="a-simplified-variational-setting" class="level1">
+<h1>A simplified, variational setting</h1>
+<p>We consider a structure made of an assembly of beam elements that are connected at the <strong>nodes</strong> of the structure. An essential assumption is that the elastic properties of the beam elements (axial stiffness <span class="math inline">\(EA\)</span>, bending stiffness <span class="math inline">\(EI\)</span>) are <strong>constant between each node</strong>. The problem of elastic equilibrium of the structure is analyzed with Hermite elements in a Galerkin setting. We will prove that the nodal displacements are exact under the following assumptions.</p>
+<p><strong>Assumption 1.</strong> <em>The structure is rectilinear.</em> In other words, the structure is essentially some sort of continuous beam. The total length of the structure is <span class="math inline">\(L\)</span>, and the abscissa <span class="math inline">\(0 \leq x \leq L\)</span> is measured from its left end. The nodes of the structure are located at <span class="math inline">\(x_1 = 0 &lt; x_2 &lt; \cdots &lt; x_N = L\)</span> (<span class="math inline">\(N\)</span>: total number of nodes).</p>
+<p><strong>Assumption 2.</strong> <em>The structure is subjected to transverse loads only, all located in the same plane.</em> The distributed load has density <span class="math inline">\(p(x)\)</span>, which might be a generalized function (to the effect that transverse point loads are allowed).</p>
+<p>As a result of the geometry and the loading, the structure will undergo <strong>transverse displacements</strong> (deflections) only. Let <span class="math inline">\(v(x)\)</span> be the deflection of point <span class="math inline">\(x\)</span> of the structure. In order to be <strong>admissible</strong>, the mapping <span class="math inline">\(x \mapsto v(x)\)</span> must have <span class="math inline">\(\mathrm{C}^1\)</span> continuity and meet all essential boundary conditions. These requirements define the space <span class="math inline">\(V\)</span> of admissible deflections. In particular, the <strong>true</strong> deflection <span class="math inline">\(v\)</span> belongs to this space: <span class="math inline">\(v \in V\)</span>.</p>
+<p><strong>Assumption 3.</strong> <em>The space <span class="math inline">\(V\)</span> of amissible deflections has the structure of a <strong>vector space</strong>.</em> In general, the space <span class="math inline">\(V\)</span> has an <strong>affine structure</strong>; the present assumption will hold if non-zero displacements (<strong>inhomogeneous</strong> Dirichlet boundary conditions) are <strong>excluded</strong>.</p>
+<p>In order to define the Galerkin approximation to the problem of the equilibrium of the structure <span class="math inline">\(\mathcal{S}\)</span>, we need to introduce a variational setting. At equilibrium, the structure wants to minimize its total potential energy <span class="math inline">\(Π\)</span>. Under the above assumptions, we have <span class="math display">\[
+\Pi[v] = \underbrace{\int_0^L \tfrac{1}{2} \, EI(x) \, \bigl[ v''(x) \bigr]^2 \, \mathrm{d} x}_{\text{strain energy}}
+- \underbrace{\int_0^L p(x) \, v(x) \, \mathrm{d} x}_{\substack{\text{potential of} \\ \text{external forces}}}.
+\]</span> where <span class="math inline">\(x \mapsto EI(x)\)</span> is the (local) bending stiffness of the structure. Since <span class="math inline">\(EI\)</span> is constant between two adjacent nodes, we write <span class="math display">\[
+\Pi[v] = \sum_{k = 1}^{N - 1} \int_{x_k}^{x_{k+1}} \tfrac{1}{2} \, EI_k \, \bigl[ v''(x) \bigr]^2 \, \mathrm{d} x - \int_0^L p(x) \, v(x) \, \mathrm{d} x,
+\]</span> where <span class="math inline">\(EI_k\)</span> denotes the bending stiffness of beam element number <span class="math inline">\(k\)</span>, located between nodes <span class="math inline">\(x_k\)</span> and <span class="math inline">\(x_{k+1}\)</span>. The true deflection <span class="math inline">\(v \in V\)</span> of the structure is such that <span class="math display">\[
+\Pi[v] \leq \Pi[w] \quad \text{for all} \quad w \in V.
+\]</span></p>
+<p>It is a classical application of the <a href="https://en.wikipedia.org/wiki/Calculus_of_variations">calculus of variations</a> to show that, under mild assumptions, minimizing the total potential energy <span class="math inline">\(\Pi\)</span> is equivalent to solving the following problem <span class="math display">\[
+(\mathcal{P}) \qquad \text{Find } v \in V \quad \text{such that} \quad a(v, w) = \int_0^L p(x) \, w(x) \, \mathrm{d} x \quad \text{for all} \quad w \in V
+\]</span> where <span class="math inline">\(a\)</span> is defined as follows <span class="math display">\[
+a(v, w) = \sum_{k=1}^{N-1} \int_{x_k}^{x_{k+1}} EI_k \, v''(x) \, w''(x) \, \mathrm{d} x.
+\]</span></p>
+<p>The precise expression of <span class="math inline">\(a\)</span> does not really matter; what really matters is that <span class="math inline">\(a\)</span> is a <strong>bilinear, symmetric form</strong>. Problem <span class="math inline">\((\mathcal{P})\)</span> defines a <strong>variational problem</strong>&nbsp;; in the next section, we define a Galerkin approximation to the solution of this problem.</p>
+</section>
+<section id="the-subspace-of-hermite-deflections" class="level1">
+<h1>The subspace of Hermite deflections</h1>
+<p>The idea behind Galerkin discretization is very simple: the initial variational problem <span class="math inline">\((\mathcal{P})\)</span> requires the full exploration of the (infinite-dimensional) space <span class="math inline">\(V\)</span>. This is in general not possible! Rather, we will consider a <strong>finite-dimensional subspace <span class="math inline">\(V_{\mathrm{H}}\)</span></strong> and solve the following variational problem <span class="math display">\[
+(\mathcal{P}_{\mathrm{H}}) \qquad \text{Find } v_{\mathrm{H}} \in V_{\mathrm{H}} \quad \text{such that} \quad a(v_{\mathrm{H}}, w_{\mathrm{H}}) = \int_0^L p(x) \, w_{\mathrm{H}}(x) \, \mathrm{d} x \quad \text{for all} \quad w_{\mathrm{H}} \in V_{\mathrm{H}}.
+\]</span></p>
+<p>The solution <span class="math inline">\(v_{\mathrm{H}}\)</span> to problem <span class="math inline">\((\mathcal{P}_{\mathrm{H}})\)</span> defines the Galerkin approximation to the solution <span class="math inline">\(w\)</span> of the initial problem <span class="math inline">\((\mathcal{P})\)</span>. Now that we know how we are to derive an approximate solution to our structural problem, we need to define the subspace <span class="math inline">\(V_{\mathrm{H}}\)</span>. Of course, we will choose Hermite shape functions (hence the “H” subscript!).</p>
+<p>More precisely, <span class="math inline">\(V_{\mathrm{H}}\)</span> is the space of functions <span class="math inline">\(w_{\mathrm{H}}\colon (0, L) \longrightarrow \mathbb{R}\)</span> such that</p>
+<ul>
+<li><span class="math inline">\(w_{\mathrm{H}} \in V_{\mathrm{H}}\)</span>: in other words, <span class="math inline">\(w_{\mathrm{H}}\)</span> has <span class="math inline">\(\mathrm{C}^1\)</span> continuity and satisfies all essential boundary conditions,</li>
+<li><span class="math inline">\(w_{\mathrm{H}}\)</span> is a cubic polynomial between two successive nodes.</li>
+</ul>
+<p>Hermite shape functions were introduced in the <a href="../20250622-Hermite_elements_are_exact-01/">first part</a> of this series, where it was shown in particular that the deflection of a single beam element was fully defined by the deflection and rotation of its end nodes. The same holds for a full structure: any <span class="math inline">\(w_{\mathrm{H}} \in V_{\mathrm{H}}\)</span> is fully defined by the nodal deflections <span class="math inline">\(w_{\mathrm{H}}(x_k)\)</span> and nodal rotations <span class="math inline">\(w_{\mathrm{H}}'(x_k)\)</span>. Therefore, <span class="math inline">\(V_{\mathrm{H}}\)</span> is at most <span class="math inline">\(2N\)</span>-dimensional subspace of <span class="math inline">\(V\)</span>. I wrote “at most” because boundary conditions will certainly reduce the dimensionality of <span class="math inline">\(V_{\mathrm{H}}\)</span>. Any <span class="math inline">\(w_{\mathrm{H}} \in V_{\mathrm{H}}\)</span> can therefore be decomposed uniquely as the following linear combination <span id="eq-20250927172513"><span class="math display">\[
+w_{\mathrm{H}}(x) = \sum_k w_{\mathrm{H}}(x_k) \, \Phi_k(x) + \sum_k w_{\mathrm{H}}'(x_k) \, \Psi_k(x),
+\tag{1}\]</span></span> where the sums run over all unconstrained nodes, and <span class="math inline">\(\Phi_k\)</span>, <span class="math inline">\(\Psi_k\)</span> are the global <strong>shape functions</strong>.</p>
+</section>
+<section id="what-are-these-equivalent-nodal-loads-anyway" class="level1">
+<h1>What are these equivalent nodal loads anyway?</h1>
+<p>We are now in a position to state a mathematical definition of the equivalent nodal loads. The equivalent nodal forces <span class="math inline">\(F_k\)</span> and torques <span class="math inline">\(T_k\)</span> are defined as follows <span class="math display">\[
+F_k = \int_0^L p(x) \, \Phi_k(x) \, \mathrm{d} x \quad \text{and} \quad T_k = \int_0^L p(x) \, \Phi_k(x) \, \mathrm{d} x.
+\]</span></p>
+<p>It results from the decomposition&nbsp;(<a href="#eq-20250927172513" class="quarto-xref">1</a>) of any <span class="math inline">\(w_{\mathrm{H}} \in V_{\mathrm{H}}\)</span> that <span class="math display">\[
+\int_0^L p(x) \, w_{\mathrm{H}}(x) \, \mathrm{d} x = \sum_k F_k \, w_{\mathrm{H}}(x_k) + \sum_k T_k \, w_{\mathrm{H}}'(x_k).
+\]</span></p>
+<p>In other words, for Hermite displacements, the equivalent nodal loads produce the <strong>same work</strong> as the true loads and the discretized problem <span class="math inline">\((\mathcal{P}_{\mathrm{H}})\)</span> reads <span class="math display">\[
+(\mathcal{P}_{\mathrm{H}}) \qquad \text{Find } v_{\mathrm{H}} \in V_{\mathrm{H}} \quad \text{such that} \quad a(v_{\mathrm{H}}, w_{\mathrm{H}}) = \sum_k F_k \, w_{\mathrm{H}}(x_k) + \sum_k T_k \, w_{\mathrm{H}}'(x_k) \quad \text{for all} \quad w_{\mathrm{H}} \in V_{\mathrm{H}}.
+\]</span></p>
+</section>
+<section id="hermite-elements-are-exact-the-trivial-case" class="level1">
+<h1>Hermite elements are exact – The trivial case</h1>
+<p>Let us assume for a moment that the true loads are applied to the nodes only. Then, between two successive nodes, the bending equation reads <span class="math display">\[
+x_k \leq x \leq x_{k+1}: \quad EI_k \, \frac{d^4 v}{dx^4} = 0,
+\]</span> where <span class="math inline">\(v\)</span> denotes the true deflection of the structure. Upon integration, it is found that <span class="math inline">\(v\)</span> is a cubic polynomial over <span class="math inline">\((x_k, x_{k+1})\)</span>. Since <span class="math inline">\(v\)</span> is an admissible deflection, it belongs to <span class="math inline">\(V_{\mathrm{H}}\)</span>.</p>
+<p>In other words, when loads are concentrated at the nodes of the structure, the true solution happens to belong to the subspace <span class="math inline">\(V_{\mathrm{H}}\)</span>. Therefore, the discretized problem <span class="math inline">\((\mathcal{P}_{\mathrm{H}})\)</span> delivers the <strong>exact solution</strong> to the initial problem <span class="math inline">\((\mathcal{P})\)</span>.</p>
+<p>An interesting consequence is the following result: if <span class="math inline">\(v_{\mathrm{H}} \in V_{\mathrm{H}}\)</span> is such that <span class="math display">\[
+a(v_{\mathrm{H}}, w_{\mathrm{H}}) = \sum_k F_k \, w_{\mathrm{H}}(x_k) + \sum_k T_k \, w_{\mathrm{H}}'(x_k) \quad \text{for all} \quad w_{\mathrm{H}} \in V_{\mathrm{H}},
+\]</span> then it is true that <span class="math display">\[
+a(v_{\mathrm{H}}, w) = \sum_k F_k \, w(x_k) + \sum_k T_k \, w'(x_k) \quad \text{for all} \quad w \in V.
+\]</span></p>
+<p>The only difference between these two assertions is the space to which the test function belongs (<span class="math inline">\(V_{\mathrm{H}}\)</span> <em>vs.</em> <span class="math inline">\(V\)</span>). This will in fact make a huge difference in the <a href="../20250927-Hermite_elements_are_exact-04/">next instalment</a> of this series.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Except where otherwise noted, content on this blog by Sébastien Brisard is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></p>
+</div>
+    <div class="nav-footer-right">
+<p>📧​ sebastien [dot] brisard [at] univ [dash] amu [dot] fr</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
