@@ -8,7 +8,7 @@ The [previous instalment](../20250622-Hermite_elements_are_exact-01)
 of this series closed with the assertion that Hermite elements deliver
 exact nodal displacements, **provided that the potential of external
 forces is evaluated consistently**. Before we turn to the actual proof
-of this statement, we will discuss ni the present post what
+of this statement, we will discuss in the present post what
 “consistent evaluation of the potential of external forces” actually
 means.
 
@@ -89,7 +89,7 @@ previous section) was not sufficient. In the present section, we will
 define equivalence in terms of mechanical work.
 
 We first observe that mechanical work can be used to characterize
-**strict equality** between two systems of loads. Indeed[^1]
+**strict equality** between two systems of loads. Indeed
 $$
 \begin{multline}
 p_1(x) = p_2(x) \quad \text{for all} \quad 0 \leq x \leq L\\
@@ -100,12 +100,9 @@ p_1(x) = p_2(x) \quad \text{for all} \quad 0 \leq x \leq L\\
 \end{multline}
 $$
 
-[^1]: There are quite a few “almost everywhere” missing in this
-    statement…
-
 In other words, two systems of loads are equal if they produce the
 same mechanical work for **all possible displacements** of the
-structure.  In finite element analysis, the structure is only tested
+structure. In finite element analysis, the structure is only tested
 agains **some** possible displacements (the so-called **test
 functions**). This suggests that two systems of loads should be
 considered as equivalent, FE-wise, if **they produce the same work for
@@ -130,7 +127,7 @@ $$
 $$
 
 In the case of beam elements, the test functions are Hermite
-polynomials (which is nothing but a clever decompsition of cubic
+polynomials (which is nothing but a clever decomposition of cubic
 polynomials). It is therefore sufficient to write the above condition
 for the following virtual displacements: $\hat{v}(x) = 1, x, x^2$ and
 $x^3$, which delivers… **four** equations as expected! For $\hat{v}(x)
@@ -180,7 +177,7 @@ instalment](../20250622-Hermite_elements_are_exact-01).
 
 # The case of a simply supported beam subjected to a UDL
 
-For a uniformly distributed load ($p = \text{const.}$), we find (see also Fig. fig-20250701085741)
+For a uniformly distributed load ($p = \text{const.}$), we find (see also Fig. @fig-20250701085741)
 $$
 F_0 = F_L = \frac{p \, L}{2}
 \quad \text{and} \quad
@@ -228,5 +225,5 @@ observed that these equivalent nodal loads produce the **exact nodal
 displacements** (note that displacements **between nodes** are not
 necessarily exact).
 
-In the next instalment of this series, we will actually prove this
+In the [next instalment](../20250923-Hermite_elements_are_exact-03) of this series, we will actually prove this
 property.

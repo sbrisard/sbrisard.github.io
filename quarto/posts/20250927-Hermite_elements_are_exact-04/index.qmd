@@ -64,6 +64,8 @@ a(\tilde{v}_{\mathrm{H}}, w_{\mathrm{H}}) = w_{\mathrm{H}}'(x_k) \quad \text{for
 $$
 this is left as an exercise to the reader!
 
+Before I close this section, I would like to emphasize that, in order to invoke the symmetry of the bilinear form $a$, we implicitly used our previous assumption that $V$ had the structure of a vector space (not an affine space). In that case, trial functions can be considered as test functions and vice-versa. When non-homogeneous Dirichlet boundary conditions are involved, the proof becomes a bit more intricate.
+
 
 # Conclusion
 

@@ -174,7 +174,7 @@ window.Quarto = {
 
 
 
-<p>The <a href="../20250622-Hermite_elements_are_exact-01">previous instalment</a> of this series closed with the assertion that Hermite elements deliver exact nodal displacements, <strong>provided that the potential of external forces is evaluated consistently</strong>. Before we turn to the actual proof of this statement, we will discuss ni the present post what “consistent evaluation of the potential of external forces” actually means.</p>
+<p>The <a href="../20250622-Hermite_elements_are_exact-01">previous instalment</a> of this series closed with the assertion that Hermite elements deliver exact nodal displacements, <strong>provided that the potential of external forces is evaluated consistently</strong>. Before we turn to the actual proof of this statement, we will discuss in the present post what “consistent evaluation of the potential of external forces” actually means.</p>
 <section id="the-problem-of-sharing-loads-between-nodes" class="level1">
 <h1>The problem of sharing loads between nodes</h1>
 <p>Finite element models arguably know only of <strong>nodal forces and moments</strong>: distributed loads applied to the real structure must be replaced by concentrated forces and moments applied to the nodes of the finite element model.</p>
@@ -221,7 +221,7 @@ Figure&nbsp;2: Under the true (distributed) load, the beam ends rotate. If only 
 <section id="its-all-about-work" class="level1">
 <h1>It’s all about work</h1>
 <p>So, ignoring the nodal torques was not such a good idea in the end. In fact, if we want the previous simply supported beam example to work, we <strong>need</strong> to apply end torques to the finite element model. To quantify these end torques, static equivalence (as defined in the previous section) was not sufficient. In the present section, we will define equivalence in terms of mechanical work.</p>
-<p>We first observe that mechanical work can be used to characterize <strong>strict equality</strong> between two systems of loads. Indeed<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[
+<p>We first observe that mechanical work can be used to characterize <strong>strict equality</strong> between two systems of loads. Indeed <span class="math display">\[
 \begin{multline}
 p_1(x) = p_2(x) \quad \text{for all} \quad 0 \leq x \leq L\\
 \iff \quad
@@ -243,7 +243,7 @@ p_1 \equiv p_2
 + F_L \, \hat{v}(L) + T_L \, \hat{v}'(L)
 \quad \text{for all test functions } \hat{v}.
 \]</span></p>
-<p>In the case of beam elements, the test functions are Hermite polynomials (which is nothing but a clever decompsition of cubic polynomials). It is therefore sufficient to write the above condition for the following virtual displacements: <span class="math inline">\(\hat{v}(x) = 1, x, x^2\)</span> and <span class="math inline">\(x^3\)</span>, which delivers… <strong>four</strong> equations as expected! For <span class="math inline">\(\hat{v}(x)
+<p>In the case of beam elements, the test functions are Hermite polynomials (which is nothing but a clever decomposition of cubic polynomials). It is therefore sufficient to write the above condition for the following virtual displacements: <span class="math inline">\(\hat{v}(x) = 1, x, x^2\)</span> and <span class="math inline">\(x^3\)</span>, which delivers… <strong>four</strong> equations as expected! For <span class="math inline">\(\hat{v}(x)
 = 1\)</span> and <span class="math inline">\(\hat{v}(x) = x\)</span>, we find the following equations <span id="eq-20250629160320"><span class="math display">\[
 \int_0^L p(x) \, \mathrm{d} x = F_0 + F_L,
 \tag{3}\]</span></span> <span id="eq-20250629160326"><span class="math display">\[
@@ -269,7 +269,7 @@ F_L = \int_0^L \biggl( 3 \frac{x^2}{L^2} - 2 \frac{x^3}{L^3} \biggr) \, p(x) \, 
 </section>
 <section id="the-case-of-a-simply-supported-beam-subjected-to-a-udl" class="level1">
 <h1>The case of a simply supported beam subjected to a UDL</h1>
-<p>For a uniformly distributed load (<span class="math inline">\(p = \text{const.}\)</span>), we find (see also Fig.&nbsp;fig-20250701085741) <span class="math display">\[
+<p>For a uniformly distributed load (<span class="math inline">\(p = \text{const.}\)</span>), we find (see also Fig.&nbsp;<a href="#fig-20250701085741" class="quarto-xref">3</a>) <span class="math display">\[
 F_0 = F_L = \frac{p \, L}{2}
 \quad \text{and} \quad
 T_0 = -T_L = \frac{p \, L^2}{12}.
@@ -304,18 +304,12 @@ L\)</span>) are correct: Hermite elements are exact! Note that displacements <st
 <h1>Conclusion</h1>
 <p>In the present instalment of this series, we have introduced a consistent method to replace <strong>any</strong> system of loads with an <strong>equivalent</strong> system of nodal forces and torques.</p>
 <p>In the particular case of a simply supported beam, we have again observed that these equivalent nodal loads produce the <strong>exact nodal displacements</strong> (note that displacements <strong>between nodes</strong> are not necessarily exact).</p>
-<p>In the next instalment of this series, we will actually prove this property.</p>
+<p>In the <a href="../20250923-Hermite_elements_are_exact-03">next instalment</a> of this series, we will actually prove this property.</p>
 
 
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>There are quite a few “almost everywhere” missing in this statement…<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

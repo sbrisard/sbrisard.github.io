@@ -72,7 +72,7 @@ where the sums run over all unconstrained nodes, and $\Phi_k$, $\Psi_k$ are the 
 
 We are now in a position to state a mathematical definition of the equivalent nodal loads. The equivalent nodal forces $F_k$ and torques $T_k$ are defined as follows
 $$
-F_k = \int_0^L p(x) \, \Phi_k(x) \, \mathrm{d} x \quad \text{and} \quad T_k = \int_0^L p(x) \, \Phi_k(x) \, \mathrm{d} x.
+F_k = \int_0^L p(x) \, \Phi_k(x) \, \mathrm{d} x \quad \text{and} \quad T_k = \int_0^L p(x) \, \Psi_k(x) \, \mathrm{d} x.
 $$
 
 It results from the decomposition (@eq-20250927172513) of any $w_{\mathrm{H}} \in V_{\mathrm{H}}$ that

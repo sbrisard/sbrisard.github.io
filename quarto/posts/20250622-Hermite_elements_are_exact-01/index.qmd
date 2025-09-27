@@ -160,4 +160,4 @@ loads), the resulting approximate solution differs significantly from
 the true solution. However, the **nodal displacements** (deflection
 and rotation) are always exact, **provided that the potential of
 external forces is evaluated consistently**. This requirement will be
-discussed in the next instalment of this series.
+discussed in the [next instalment](../20250701-Hermite_elements_are_exact-02) of this series.
